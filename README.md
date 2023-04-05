@@ -7,9 +7,10 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 
 **Table of Contents**
 
-[TOCM]
-
-[TOC]
+* [How to install:](#how-to-install)
+* [Tips](#tips)
+* [Features](#features)
+* [End Notes](#end-notes)
 
 ## How to install:
 - Download the extension files and save them to a location on your computer.
