@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>NeoBuyer Item History</title>
+        <link rel="stylesheet" type="text/css" href="../../js/chart.css" />
+        <link rel="stylesheet" type="text/css" href="history.css" />
+        <script src="../../js/jquery.js"></script>
+        <script src="../../js/sortable.js"></script>
+        <script src="../../js/chart.js"></script>
+    </head>
+
+    <body>
+        <img class="logo" src="../../icons/logo.svg">
+        <div class="center">
+            <div id="PAYMENT_LINK" class="payment-page-link">Add, View or Cancel Subscription</div>
+            <div class="enter-info">NeoBuyer Item History</div>
+            <div class="autosaved">(please keep in mind that if you uninstall and re-install NeoBuyer that your puchase history will be deleted)</div>
+            <div class="donate">
+                <a href="../options/index.html">Options</a>
+                <br><br>
+                <a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">Feedback? Bugs?</a>
+                <br><br>
+                <a target="_blank" href="https://docs.google.com/document/d/e/2PACX-1vQ1bYmz2o92LG4sVq7CIO7tgCVl-lVreJxpIuDjd9TmFuXX166UZlqQdTWkt7VUyRkF33DvWD8ldVS8/pub">FAQ</a>
+                <br><br>
+                <a target="_blank" href="https://chrome.google.com/webstore/detail/neobuyer-main-shop-autobu/gcoedojijoejlngkneocccmnjkbbbfmd">Neobuyer on Chrome Store</a>
+            </div>
+            <br>
+            <div><span class="sub">Total estimated profit: </span><span id="total-profit">-</span> <span class="sub">Total attempted value: </span><span id="total-value">-</span></div>
+            <div class="tab">
+                <button class="tablinks" id="table">Table</button>
+                <button class="tablinks" id="analytics">Analytics <sup>beta</sup></button>
+            </div>
+            <hr>
+            <center>
+                <!-- Table -->
+                <div id="table-container" class="tabcontent"></div>
+                <!-- Analytics -->
+                <div id="analytics-container" display="none" class="tabcontent">
+                    <br>
+                    <div class="chart-label">Profit by store name:</div>
+                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="profit-by-store"></div>
+                    <div class="chart-label">Profit by account:</div>
+                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="profit-by-account"></div>
+                    <div class="chart-label">Most commonly attempted items:</div>
+                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="most-common-items"></div>
+                    <div class="chart-label">Items which have made you the most estimated profit:</div>
+                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="best-items"></div>
+                    <div class="chart-label">Monthly profit timeline:</div>
+                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="timeline"></div>
+                    <div class="chart-label">Profit & attempted value by hour of the day:</div>
+                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="hourly"></div>
+                    <div class="chart-label">Profit/attempted value ratio by hour of the day:<br>
+                        <span class="sub">(Consider restocking in your most profitable hours)</span></div>
+                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="hourly-percent"></div>
+                    <div class="chart-label">Total profit vs attempted value:<br>
+                        <span class="sub">(Anything over 8% is considered a great ratio)</span></div>
+                    <div class="ct-chart ct-golden-section ct-double-octave" id="ratio"></div>
+                    <br>
+                    <span class="sub">If you liked these analytics, please <a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">let us know</a>! We would love to hear your thoughts.</span>
+                </div>
+            </center>
+            <hr><br>
+            <button id="reset" class="button">Clear Purchase History</button>
+            <br><br><br>
+        </div>
+        <script src="../common/item_db.js"></script>
+        <script src="../../js/ExtPay.js"></script>
+        <script src="history.js"></script>
+    </body>
+
+</html>

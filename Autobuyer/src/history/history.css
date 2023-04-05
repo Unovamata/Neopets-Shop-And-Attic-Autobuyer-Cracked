@@ -1,0 +1,189 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Trebuchet MS', sans-serif;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: white;
+}
+
+sup {
+    font-size: .5em;
+}
+
+.center {
+    width: 80%;
+    height: calc(100% - 50px);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    align-items: center;
+    font-size: 18px;
+    overflow: auto;
+}
+
+.enter-info {
+    font-size: 50px;
+    text-decoration: bold;
+}
+
+.autosaved,
+.donate {
+    font-size: 14px;
+    text-decoration: italic;
+    margin: 10px;
+}
+
+table {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+tr,
+th {
+    text-align: left;
+}
+
+th {
+    cursor: pointer;
+}
+
+.logo {
+    width: 110px;
+    height: auto;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.feedback {
+    color: darkgrey;
+    font-size: 21px;
+}
+
+a,
+a:visited,
+a:hover,
+.payment-page-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.button {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button:disabled,
+button[disabled] {
+    background-color: lightgrey;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: not-allowed;
+}
+
+.sub {
+    color: grey;
+    font-size: 14px;
+}
+
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    margin-top: 16px;
+    margin-bottom: -4px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: #d4d4d4;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 4px 40px;
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #7b7b7b;
+    color: white;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: black;
+    color: white;
+}
+
+/* Use this selector to override the line style on a given series */
+.ct-chart .ct-series-a .ct-bar {
+    /* Set the colour of this series line */
+    stroke: #8DCBFB;
+    /* Control the thikness of your lines */
+}
+
+/* Pie charts consist of solid slices where you can use this selector to override the default style. */
+.ct-chart .ct-series-a .ct-slice-donut {
+    /* give your pie slices some outline or separate them visually by using the background color here */
+    stroke: #8DCBFB;
+}
+
+/* Pie charts consist of solid slices where you can use this selector to override the default style. */
+.ct-chart .ct-series-b .ct-slice-donut {
+    /* give your pie slices some outline or separate them visually by using the background color here */
+    stroke: #D4D4D4;
+}
+
+/* Use this selector to override the line style on a given series */
+.ct-series-a .ct-line {
+    stroke: #8DCBFB;
+}
+
+.ct-series-a .ct-point {
+    stroke: #0090FF;
+}
+
+.ct-series-b .ct-line {
+    stroke: #D4D4D4;
+}
+
+.ct-series-b .ct-point {
+    stroke: grey;
+}
+
+.chart-label {
+    color: grey;
+    text-align: left;
+    margin-left: 50px;
+    margin-bottom: 8px;
+}

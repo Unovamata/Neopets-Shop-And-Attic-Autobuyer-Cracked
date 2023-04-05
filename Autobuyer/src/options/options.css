@@ -1,0 +1,193 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Trebuchet MS', sans-serif;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: white;
+}
+
+.subdued {
+    color: grey;
+    font-size: 14px;
+}
+
+.center {
+    width: 100%;
+    height: calc(100% - 50px);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    align-items: center;
+    font-size: 18px;
+    overflow: auto;
+}
+
+.enter-info {
+    font-size: 50px;
+    text-decoration: bold;
+}
+
+.autosaved,
+.donate {
+    font-size: 14px;
+    text-decoration: italic;
+    margin: 10px;
+}
+
+.row {
+    margin-top: 10px;
+}
+
+table {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+td {
+    width: 450px;
+}
+
+td:first-child {
+    text-align: right;
+    width: 550px;
+}
+
+input,
+select {
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo {
+    width: 110px;
+    height: auto;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(19px);
+    -ms-transform: translateX(19px);
+    transform: translateX(19px);
+}
+
+td .tooltiptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: darkgrey;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+td:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 26px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.feedback {
+    color: darkgrey;
+    font-size: 21px;
+}
+
+.settings-header {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+a,
+a:visited,
+a:hover,
+.payment-page-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.button {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
