@@ -19,6 +19,7 @@ function topLevelTurbo() {
                 }("Captcha page detected! Stopping."), n()
         } catch (e) {}
     }
+	
     function o() {
         var e = window.location.href.indexOf("neopets.com/halloween/garage") > -1,
             a = document.body.innerText.indexOf("Almost Abandoned Attic") > 0,

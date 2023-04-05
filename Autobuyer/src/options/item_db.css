@@ -57,10 +57,32 @@ th {
 .logo {
     width: 110px;
     height: auto;
-    padding: 20px;
     position: absolute;
     top: 0;
     left: 0;
+}
+
+/* Set the background color of the top bar */
+.banner {
+  background-color: #03a9f4;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+/* Make the text bold and white */
+.banner a {
+  text-decoration: none;
+  color: white !important;
+}
+
+/* Make the top bar always stay at the top of the page */
+.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
 }
 
 .feedback {
@@ -73,7 +95,6 @@ a:visited,
 a:hover,
 .payment-page-link {
     color: blue;
-    text-decoration: underline;
     cursor: pointer;
 }
 

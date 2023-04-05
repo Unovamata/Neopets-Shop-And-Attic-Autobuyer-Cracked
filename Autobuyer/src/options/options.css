@@ -1,7 +1,6 @@
 html,
 body {
     margin: 0;
-    padding: 0;
     width: 100%;
     height: 100%;
     font-family: 'Trebuchet MS', sans-serif;
@@ -16,6 +15,7 @@ body {
 }
 
 .center {
+	padding: 0;
     width: 100%;
     height: calc(100% - 50px);
     position: absolute;
@@ -33,8 +33,11 @@ body {
 }
 
 .enter-info {
-    font-size: 50px;
-    text-decoration: bold;
+	margin-top: 20px;
+	margin-bottom: 50px;
+    font-size: 40px;
+	font-weight: bold;
+	color: black;
 }
 
 .autosaved,
@@ -76,10 +79,54 @@ img {
 .logo {
     width: 110px;
     height: auto;
-    padding: 20px;
     position: absolute;
     top: 0;
     left: 0;
+}
+
+/* Set the background color of the top bar */
+.toolbar {
+  background-color: #03a9f4;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+/* Make the text bold and white */
+.toolbar a {
+  text-decoration: none;
+  color: white !important;
+}
+
+/* Make the top bar always stay at the top of the page */
+.toolbar {
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.banner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 125px;
+	overflow: hidden;
+}
+
+.banner img {
+	height: 400%;
+	width: auto;
+	max-width: 100%;
+	object-fit: contain;
+	filter: brightness(70%) blur(4px) saturate(80%);
+}
+
+.banner h1 {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
 }
 
 .switch {
@@ -175,7 +222,6 @@ a:visited,
 a:hover,
 .payment-page-link {
     color: blue;
-    text-decoration: underline;
     cursor: pointer;
 }
 
