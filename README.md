@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/icons/logo.png?token=GHSAT0AAAAAACAUYMBK76ELWSSJUMV6UYCQZBM2YYQ)
+![alt text](https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/icons/logo.png)
 
 # [Neopets Shop & Attic Highlighter & Autobuyer Crack](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "Neopets Shop & Attic Highlighter & Autobuyer")
 > Code optimized and adapted by: [Unovamata](https://github.com/Unovamata "Unovamata"). Original developer: autobuyerneopers.
