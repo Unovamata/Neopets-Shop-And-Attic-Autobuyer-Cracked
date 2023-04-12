@@ -1,7 +1,7 @@
 ![alt text](https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/icons/logo.png)
 
 # [Neopets Shop & Attic Highlighter & Autobuyer Crack](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "Neopets Shop & Attic Highlighter & Autobuyer")
-> Code optimized and adapted by: [Unovamata](https://github.com/Unovamata "Unovamata"). Original developer: autobuyerneopers.
+> Code optimized and adapted by: [Unovamata](https://github.com/Unovamata "Unovamata"). Original developer: autobuyerneopets.
 
 I have been using this Auto-Buyer tool since its release. It supports lists and specific shops to snipe and outperforms the Neocodex Auto-buyer. I removed the pay-wall needed, making it available to all. I will continue to optimize the speed and buy-times offered by the extension.
 
