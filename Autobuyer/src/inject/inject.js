@@ -1,11 +1,13 @@
 function topLevelTurbo() {
     var e = performance.now(),
         a = new Audio("data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU=");
-    function n() {
+    
+        function n() {
         try {
             a.play()
         } catch (e) {}
     }
+
     function t() {
         try {
             n(),
@@ -20,29 +22,47 @@ function topLevelTurbo() {
         } catch (e) {}
     }
 	
-    function o() {
-        var e = window.location.href.indexOf("neopets.com/halloween/garage") > -1,
-            a = document.body.innerText.indexOf("Almost Abandoned Attic") > 0,
-            n = document.body.innerText.indexOf("I am very happy to have a visitor") > 0;
-        return !!e && (!(!a || !n) || (t(), !1))
+    //Check if the player is inside the Igloo Garage or the Abandoned Attic;
+    function IsInAbandonedAttic() {
+        var isInGarage = window.location.href.indexOf("neopets.com/halloween/garage") > -1,
+            bodyHasAtticName = document.body.innerText.indexOf("Almost Abandoned Attic") > 0,
+            bodyHasGreeting = document.body.innerText.indexOf("I am very happy to have a visitor") > 0,
+
+            isInAtticOrGarage = isInGarage && ((bodyHasAtticName || bodyHasGreeting) ||  (SpeakCaptchaMessage(), false))
+
+        return isInAtticOrGarage
     }
-    function c() {
-        var e = window.location.href.indexOf("neopets.com/haggle.phtml") > -1,
-            a = document.body.innerText.indexOf("Haggle for") > 0;
-        return !!e && (!!a || (t(), !1))
+    
+    //Check if the player is in the haggling page;
+    function IsHaggling() {
+        var isHaggling = window.location.href.indexOf("neopets.com/haggle.phtml") > -1,
+            haggleForItemElement = document.body.innerText.indexOf("Haggle for") > 0;
+            
+        return isHaggling && (haggleForItemElement || (SpeakCaptchaMessage(), !1))
     }
-    function r() {
-        return window.location.href.indexOf("neopets.com/objects.phtml") > -1 && (!!(document.body.innerText.indexOf("Neopian Inflation") > 0) || (t(), !1))
+    
+    //Check if the player is inside a shop, it doesn't matters what shop, it only looks for one shop;
+    function IsInShop() {
+        var isInCity = window.location.href.indexOf("neopets.com/objects.phtml") > -1;
+        hasNeopianInflationElement = document.body.innerText.indexOf("Neopian Inflation") > 0;
+        isInsideShop = isInCity && (hasNeopianInflationElement || (t(), !1));
+
+        return isInsideShop
     }
-    function i() {
-        return c() || r()
+
+    //Is the user in a haggling shop page?
+    function IsHagglingInShop() {
+        return IsHaggling() || IsInShop()
     }
-    function s() {
-        return o() || i()
+
+    function IsHagglingInAttic() {
+        return IsInAbandonedAttic() || IsHagglingInShop()
     }
+    
     function M() {
         var n, t, M, d, _, u, l, m, p, L, A, b, h, f, z, y, T, Y, O, D, k, g, N, W, q, S, w, v, X, B, E, H, P, C, R, j, x, I, F, U, G, J, K, V, Q, Z, $, ee;
-        chrome.storage.local.get({
+
+        const defaultSettings = {
             BUY_UNKNOWN_ITEMS_PROFIT: 1e5,
             ITEM_DB_MIN_RARITY: 1,
             USE_BLACKLIST: !1,
@@ -91,18 +111,19 @@ function topLevelTurbo() {
             ATTIC_SHOULD_REFRESH: !1,
             ATTIC_LAST_REFRESH_MS: -1,
             ATTIC_PREV_NUM_ITEMS: -1
-        }, (function(ae) {
+        }
+
+        chrome.storage.local.get(defaultSettings, (function(ae) {
             Q = ae.BUY_UNKNOWN_ITEMS_PROFIT, Z = ae.ITEM_DB_MIN_RARITY, $ = ae.USE_BLACKLIST, ee = ae.BLACKLIST, n = ae.ENABLED, X = ae.USE_ITEM_DB, B = ae.ITEM_DB_MIN_PROFIT_NPS, E = ae.ITEM_DB_MIN_PROFIT_PERCENT, t = ae.HIGHLIGHT, M = ae.CLICK_ITEM, d = ae.CLICK_CONFIRM, _ = ae.SHOULD_SHOW_BANNER, u = ae.SHOULD_CLICK_NEOPET, l = ae.SHOULD_ANNOTATE_IMAGE, m = ae.SHOULD_SOUND_ALERTS, p = ae.SHOULD_ENTER_OFFER, L = ae.SHOULD_SEND_EMAIL, A = ae.SHOULD_GO_FOR_SECOND_MOST_VALUABLE, b = ae.STORES_TO_CYCLE_THROUGH_WHEN_STOCKED, h = ae.RUN_BETWEEN_HOURS, f = ae.MIN_REFRESH, z = ae.MAX_REFRESH, y = ae.ITEMS_TO_CONSIDER_STOCKED, T = ae.MIN_REFRESH_STOCKED, Y = ae.MAX_REFRESH_STOCKED, O = ae.MIN_CLICK_ITEM_IMAGE, D = ae.MAX_CLICK_ITEM_IMAGE, k = ae.MIN_CLICK_CONFIRM, g = ae.MAX_CLICK_CONFIRM, N = ae.MIN_OCR_PAGE, W = ae.MAX_OCR_PAGE, q = ae.EMAIL_TEMPLATE, S = ae.EMAIL_USER_ID, w = ae.EMAIL_SERVICE_ID, v = ae.RESTOCK_LIST, H = ae.ATTIC_ENABLED, P = ae.ATTIC_HIGHLIGHT, C = ae.ATTIC_CLICK_ITEM, R = ae.ATTIC_ITEM_DB_MIN_PROFIT_NPS, j = ae.ATTIC_ITEM_DB_MIN_PROFIT_PERCENT, x = ae.ATTIC_MIN_BUY_TIME, I = ae.ATTIC_MAX_BUY_TIME, F = ae.ATTIC_RUN_BETWEEN_HOURS, U = ae.ATTIC_MIN_REFRESH, G = ae.ATTIC_MAX_REFRESH, J = ae.ATTIC_SHOULD_REFRESH, K = ae.ATTIC_LAST_REFRESH_MS, V = ae.ATTIC_PREV_NUM_ITEMS;
             var ne, te = "Attic",
-                oe = "qpkzsoynerzxsqw",
+                bannerElementId = "AutobuyerBanner",
                 ce = [0, 60],
-                re = 4400,
                 ie = N / 2,
                 se = W / 2,
                 Me = !1,
                 de = !1;
             function _e() {
-                if (c()) we(), De() ? Ye() : Te() ? Ae() : (document.documentElement.textContent || document.documentElement.innerText)
+                if (IsHaggling()) we(), De() ? Ye() : Te() ? Ae() : (document.documentElement.textContent || document.documentElement.innerText)
                     .indexOf("You don't have that kind of money") > -1 ? (Ee("You do not have enough neopoints to purchase " + (n = document.querySelector("h2")
                         .innerText.replaceAll("Haggle for ", "")) + ". Program will pause now."), be({
                         status: "missed",
@@ -192,7 +213,7 @@ function topLevelTurbo() {
                             }), a.width, a.height);
                         var a, n
                     }());
-                else if (r())
+                else if (IsInShop())
                     if (we(), De()) Ye();
                     else if (Te()) Ae();
                 else {
@@ -284,7 +305,7 @@ function topLevelTurbo() {
                                 }), 50)
                             }
                         }()
-                } else o() > -1 && function() {
+                } else IsInAbandonedAttic() > -1 && function() {
                     if (we(), function() {
                             var e = "I have placed it in your inventory";
                             return document.body.innerText.indexOf(e) > -1
@@ -427,7 +448,9 @@ function topLevelTurbo() {
                     Oe()
                 }), a);
                 else if (Te()) {
-                    ve("Waiting " + he(a = 100 * Math.random() + re) + " to reload page..."), setTimeout((function() {
+                    var refreshTimerMinimum = 4400;
+                    
+                    ve("Waiting " + he(a = 100 * Math.random() + refreshTimerMinimum) + " to reload page..."), setTimeout((function() {
                         Oe()
                     }), a)
                 } else if (e = Array.from(document.querySelectorAll(".item-img"))
@@ -545,17 +568,17 @@ function topLevelTurbo() {
                 return null == a || (null == a.Rarity || parseInt(a.Rarity) >= Z)
             }
             function Se() {
-                o() ? Xe("#" + oe + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 0;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ") : Xe("#" + oe + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 68px;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ")
+                IsInAbandonedAttic() ? Xe("#" + bannerElementId + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 0;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ") : Xe("#" + bannerElementId + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 68px;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ")
             }
             function we() {
                 if (_ && !de) {
                     de = !0;
                     var e = document.createElement("div");
-                    e.innerText = "CRACKED Autobuyer Running", e.id = oe, document.body.appendChild(e), Se()
+                    e.innerText = "CRACKED Autobuyer Running", e.id = bannerElementId, document.body.appendChild(e), Se()
                 }
             }
             function ve(e) {
-                de && (document.getElementById(oe)
+                de && (document.getElementById(bannerElementId)
                     .innerText = "CRACKED Autobuyer Running: " + e)
             }
             function Xe(e) {
@@ -599,7 +622,7 @@ function topLevelTurbo() {
                     s: o,
                     l: i
                 }
-            }(o() && H || i() && n) && chrome.storage.local.get({
+            }(IsInAbandonedAttic() && H || IsHagglingInShop() && n) && chrome.storage.local.get({
                 EXT_P_S: !1
             }, (function(e) {
 				_e();
@@ -1060,7 +1083,7 @@ function topLevelTurbo() {
         }, {}, [4, 2])(4)
     }));
     var d = setInterval((function() {
-        "complete" === document.readyState && (clearInterval(d), s() && M())
+        "complete" === document.readyState && (clearInterval(d), IsHagglingInAttic() && M())
     }), 20);
     ! function(e, a) {
         "object" == typeof exports && "undefined" != typeof module ? module.exports = a() : "function" == typeof define && define.amd ? define(a) : e.moment = a()
