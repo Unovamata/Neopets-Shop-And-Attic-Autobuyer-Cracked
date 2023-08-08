@@ -54,14 +54,6 @@ th {
     cursor: pointer;
 }
 
-.logo {
-    width: 110px;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 /* Set the background color of the top bar */
 .banner {
   background-color: #03a9f4;

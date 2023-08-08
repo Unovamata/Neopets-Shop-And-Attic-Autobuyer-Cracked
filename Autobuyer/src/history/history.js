@@ -41,7 +41,7 @@ function wrapper() {
             t("table", "table-container")
         }, document.getElementById("analytics")
         .onclick = function(e) {
-            t("analytics", "analytics-container"), N(!0)
+            t("analytics", "analytics-container"), A(!0)
         }, t("table", "table-container"), $("#PAYMENT_LINK")
         .bind("click", (function() {
             ExtPay("restock-highligher-autobuyer")
@@ -61,20 +61,20 @@ function wrapper() {
         e.length > 0 ? (document.getElementById("table-container")
             .innerHTML = "", document.getElementById("table-container")
             .appendChild(function(e) {
-                for (var t = p.cloneNode(!1), r = h.cloneNode(!1), n = function(e, t) {
-                        for (var r = [], n = y.cloneNode(!1), a = 0, o = e.length; a < o; a++)
+                for (var t = v.cloneNode(!1), r = y.cloneNode(!1), n = function(e, t) {
+                        for (var r = [], n = b.cloneNode(!1), a = 0, o = e.length; a < o; a++)
                             for (var l in e[a])
                                 if (e[a].hasOwnProperty(l) && -1 === r.indexOf(l)) {
                                     r.push(l);
-                                    var s = b.cloneNode(!1);
+                                    var s = g.cloneNode(!1);
                                     s.appendChild(document.createTextNode(l)), n.appendChild(s)
-                                } var i = v.cloneNode(!1);
+                                } var i = h.cloneNode(!1);
                         return i.appendChild(n), t.appendChild(i), r
                     }(e, t), a = 0, o = e.length; a < o; ++a) {
-                    var l = y.cloneNode(!1);
+                    var l = b.cloneNode(!1);
                     l.classList.add("item");
                     for (var s = 0, i = n.length; s < i; ++s) {
-                        var c = g.cloneNode(!1);
+                        var c = I.cloneNode(!1);
                         if (cellValue = e[a][n[s]] || "", "Item Name" == n[s]) {
                             var u = document.createElement("a");
                             u.href = "https://items.jellyneo.net/search/?name=" + cellValue + "&name_type=3", u.innerText = cellValue, u.setAttribute("target", "_blank"), c.appendChild(u)
@@ -97,14 +97,15 @@ function wrapper() {
             location.reload()
         }))
     };
-    function i(t, r, n) {
+    var i = 20;
+    function c(t, r, n) {
         var a = "No analytics are available yet. Check back after some more successful purchases!";
         t.length > 10 && r > 5e5 && n > 5e5 && document.getElementById("analytics-container")
             .innerHTML != a ? (function(t) {
                 var r = function(e) {
                     var t = new Map;
                     for (var r of e) t.set(r["Shop Name"], 0);
-                    for (var r of e) t.set(r["Shop Name"], t.get(r["Shop Name"]) + d(r["Est. Profit"]));
+                    for (var r of e) t.set(r["Shop Name"], t.get(r["Shop Name"]) + p(r["Est. Profit"]));
                     return t = new Map([...t.entries()].sort(((e, t) => t[1] - e[1]))), t
                 }(t);
                 new Chartist.Bar("#profit-by-store", {
@@ -128,7 +129,7 @@ function wrapper() {
                     var t = new Map;
                     for (var r of e) t.set(r["Item Name"], 0);
                     for (var r of e) t.set(r["Item Name"], t.get(r["Item Name"]) + 1);
-                    for (var n = new Map, a = 0; a < 20; a++) {
+                    for (var n = new Map, a = 0; a < i; a++) {
                         var o = [...t.entries()].reduce(((e, t) => t[1] > e[1] ? t : e));
                         if (o[1] <= 0) break;
                         n.set(o[0], o[1]), t.set(o[0], -1)
@@ -155,8 +156,8 @@ function wrapper() {
                 var r = function(e) {
                     var t = new Map;
                     for (var r of e) t.set(r["Item Name"], 0);
-                    for (var r of e) t.set(r["Item Name"], t.get(r["Item Name"]) + d(r["Est. Profit"]));
-                    for (var n = new Map, a = 0; a < 20; a++) {
+                    for (var r of e) t.set(r["Item Name"], t.get(r["Item Name"]) + p(r["Est. Profit"]));
+                    for (var n = new Map, a = 0; a < i; a++) {
                         var o = [...t.entries()].reduce(((e, t) => t[1] > e[1] ? t : e));
                         if (o[1] <= 0) break;
                         n.set(o[0], o[1]), t.set(o[0], -1)
@@ -183,7 +184,7 @@ function wrapper() {
                 var r = function(e) {
                     var t = new Map;
                     for (var r of e) t.set(r.Account, 0);
-                    for (var r of e) t.set(r.Account, t.get(r.Account) + d(r["Est. Profit"]));
+                    for (var r of e) t.set(r.Account, t.get(r.Account) + p(r["Est. Profit"]));
                     return t = new Map([...t.entries()].sort(((e, t) => t[1] - e[1]))), t
                 }(t);
                 new Chartist.Bar("#profit-by-account", {
@@ -206,12 +207,12 @@ function wrapper() {
                 var r = function(e) {
                     var t = new Map;
                     for (var r of e) {
-                        var n = m(r["Date & Time"]);
+                        var n = d(r["Date & Time"]);
                         t.set(n, 0)
                     }
                     for (var r of e) {
-                        n = m(r["Date & Time"]);
-                        t.set(n, t.get(n) + d(r["Est. Profit"]))
+                        n = d(r["Date & Time"]);
+                        t.set(n, t.get(n) + p(r["Est. Profit"]))
                     }
                     return t = new Map([...t.entries()].reverse()), t
                 }(t);
@@ -245,8 +246,8 @@ function wrapper() {
                     }
                 })
             }(r, n), function(t) {
-                var r = c(t),
-                    n = u(t);
+                var r = u(t),
+                    n = f(t);
                 new Chartist.Line("#hourly", {
                     labels: Array.from(n.keys()),
                     series: [Array.from(r.values()), Array.from(n.values())]
@@ -267,7 +268,7 @@ function wrapper() {
                     }
                 })
             }(t), function(e) {
-                for (var t = c(e), r = u(e), n = [], a = 0; a < Array.from(t.values())
+                for (var t = u(e), r = f(e), n = [], a = 0; a < Array.from(t.values())
                     .length; a++) n.push(Number(Array.from(t.values())[a]) / Number(Array.from(r.values())[a]));
                 new Chartist.Line("#hourly-percent", {
                     labels: Array.from(r.keys()),
@@ -293,58 +294,58 @@ function wrapper() {
                 .innerHTML = "", $("#analytics-container")
                 .text(a))
     }
-    function c(e) {
-        var t = new Map;
-        for (var r of e) {
-            var n = f(r["Date & Time"]);
-            t.set(n, 0)
-        }
-        for (var r of e) {
-            n = f(r["Date & Time"]);
-            t.set(n, t.get(n) + d(r["Est. Profit"]))
-        }
-        return t = new Map([...t.entries()].sort(((e, t) => e[0].includes("A") && !t[0].includes("A") ? -1 : !e[0].includes("A") && t[0].includes("A") ? 1 : (e = Number(e[0].match(/(\d+)/)[0]), t = Number(t[0].match(/(\d+)/)[0]), 12 == e ? -1 : 12 == t ? 1 : e - t))))
-    }
     function u(e) {
         var t = new Map;
         for (var r of e) {
-            var n = f(r["Date & Time"]);
+            var n = m(r["Date & Time"]);
             t.set(n, 0)
         }
         for (var r of e) {
-            n = f(r["Date & Time"]);
-            t.set(n, t.get(n) + d(r["Est. Value"]))
+            n = m(r["Date & Time"]);
+            t.set(n, t.get(n) + p(r["Est. Profit"]))
         }
         return t = new Map([...t.entries()].sort(((e, t) => e[0].includes("A") && !t[0].includes("A") ? -1 : !e[0].includes("A") && t[0].includes("A") ? 1 : (e = Number(e[0].match(/(\d+)/)[0]), t = Number(t[0].match(/(\d+)/)[0]), 12 == e ? -1 : 12 == t ? 1 : e - t))))
     }
     function f(e) {
+        var t = new Map;
+        for (var r of e) {
+            var n = m(r["Date & Time"]);
+            t.set(n, 0)
+        }
+        for (var r of e) {
+            n = m(r["Date & Time"]);
+            t.set(n, t.get(n) + p(r["Est. Value"]))
+        }
+        return t = new Map([...t.entries()].sort(((e, t) => e[0].includes("A") && !t[0].includes("A") ? -1 : !e[0].includes("A") && t[0].includes("A") ? 1 : (e = Number(e[0].match(/(\d+)/)[0]), t = Number(t[0].match(/(\d+)/)[0]), 12 == e ? -1 : 12 == t ? 1 : e - t))))
+    }
+    function m(e) {
         var t = e.split(" ");
         return t[1].split(":")[0] + t[2]
     }
-    function m(e) {
+    function d(e) {
         var t = e.split(" ")[0].split("/");
         return t[0] + "/" + t[2].replace(",", "")
             .substring(2)
     }
-    function d(e) {
+    function p(e) {
         return isNaN(Number(e.replaceAll(",", ""))) ? 0 : Number(e.replaceAll(",", ""))
     }
-    var p = document.createElement("table"),
-        v = document.createElement("thead"),
-        h = document.createElement("tbody"),
-        y = document.createElement("tr"),
-        b = document.createElement("th"),
-        g = document.createElement("td");
-    var I = -1;
-    function N(e) {
+    var v = document.createElement("table"),
+        h = document.createElement("thead"),
+        y = document.createElement("tbody"),
+        b = document.createElement("tr"),
+        g = document.createElement("th"),
+        I = document.createElement("td");
+    var N = -1;
+    function A(e) {
         chrome.storage.local.get({
             ITEM_HISTORY: [],
             REVIEW_ACK: !1
         }, (function(t) {
             var n = t.ITEM_HISTORY.length;
-            if (e || n != I) {
-                I = n;
-                var c, u, f, m = function(e) {
+            if (e || n != N) {
+                N = n;
+                var i, u, f, m = function(e) {
                         for (var t of e) t.Price = ("" + t.Price)
                             .replace(",", "")
                             .trim();
@@ -378,8 +379,8 @@ function wrapper() {
                         }
                         return t
                     }(m);
-                s(m), i(m, d, p), c = a(d), u = a(p), document.getElementById("total-profit")
-                    .innerText = c, document.getElementById("total-value")
+                s(m), c(m, d, p), i = a(d), u = a(p), document.getElementById("total-profit")
+                    .innerText = i, document.getElementById("total-value")
                     .innerText = u, d > 5e7 && !t.REVIEW_ACK && (f = !0, chrome.storage.local.set({
                         REVIEW_ACK: f
                     }, (function() {})), chrome.tabs.create({
@@ -388,8 +389,8 @@ function wrapper() {
             }
         }))
     }
-    N(!1), setInterval((function() {
-        N(!1)
+    A(!1), setInterval((function() {
+        A(!1)
     }), 5e3)
 }
 wrapper();

@@ -72,39 +72,6 @@ select {
     font-size: 18px;
 }
 
-img {
-    max-width: 100%;
-}
-
-.logo {
-    width: 110px;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* Set the background color of the top bar */
-.toolbar {
-  background-color: #03a9f4;
-  text-align: center;
-  font-weight: bold;
-  padding: 10px 0;
-}
-
-/* Make the text bold and white */
-.toolbar a {
-  text-decoration: none;
-  color: white !important;
-}
-
-/* Make the top bar always stay at the top of the page */
-.toolbar {
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
 .banner {
 	display: flex;
 	align-items: center;

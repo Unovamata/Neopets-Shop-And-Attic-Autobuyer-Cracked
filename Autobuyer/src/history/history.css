@@ -10,6 +10,8 @@ body {
     background-color: white;
 }
 
+
+
 sup {
     font-size: .5em;
 }
@@ -58,15 +60,6 @@ th {
     cursor: pointer;
 }
 
-.logo {
-    width: 110px;
-    height: auto;
-    padding: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 .feedback {
     color: darkgrey;
     font-size: 21px;
@@ -77,7 +70,7 @@ a:visited,
 a:hover,
 .payment-page-link {
     color: blue;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
 }
 
