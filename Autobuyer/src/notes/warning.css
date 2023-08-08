@@ -12,11 +12,10 @@ body {
 
 .center {
     width: 80%;
-    height: calc(100% - 50px);
-    position: absolute;
-    left: 0;
     right: 0;
-    top: 50px;
+    top: 25%;
+    left: 0;
+    position: absolute;
     bottom: 0;
     margin: auto;
     max-width: 100%;
@@ -28,7 +27,7 @@ body {
 }
 
 .enter-info {
-    font-size: 50px;
+    font-size: 40px;
     text-decoration: bold;
 }
 
@@ -54,15 +53,6 @@ th {
     cursor: pointer;
 }
 
-.logo {
-    width: 110px;
-    height: auto;
-    padding: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 .feedback {
     color: darkgrey;
     font-size: 21px;
@@ -70,6 +60,7 @@ th {
 
 .big {
     font-size: 1.2em;
+    text-align: justify;
 }
 
 button {
