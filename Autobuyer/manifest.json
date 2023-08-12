@@ -33,7 +33,6 @@
             "https://*.neopets.com/*"
         ],
         "js": [
-            "js/ExtPay.js",
             "src/common/default_items.js",
             "src/common/item_db.js",
             "src/inject/inject.js"
