@@ -9,7 +9,8 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 
 * [How to install:](#how-to-install)
 * [Tips](#tips)
-* [Features](#features)
+* [New Features](#new-features)
+* [Included Features](#included-features)
 * [End Notes](#end-notes)
 
 ## How to install:
@@ -34,8 +35,13 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 - Before activating the ABer, make sure to check all your options carefully. Most of the options are set in milliseconds, so it's best to be cautious while setting them up.
 - To search for items that you want to buy from specific shops and create your own custom item sniping list, you can use Neocodex or JellyNeo item databases. While Neocodex is currently down, it has an excellent database that you can use.
 
+## New Features
 
-## Features
+- Cleaner interfaces with better navigation.
+- [Neon](https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm "Neon") extension integration for quicker SW searches.
+
+
+## Included Features
 
 Based on the original developer:
 
@@ -51,6 +57,8 @@ Based on the original developer:
 - Ability to view current item database
 - Minimum profit percentage and NPS threshold for purchasing items
 - Email notification for purchased items
+
+
 
 ## End Notes
 
