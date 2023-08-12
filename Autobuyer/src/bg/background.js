@@ -1,7 +1,5 @@
 importScripts("../../js/ExtPay.js");
 
-var extpay = ExtPay("restock-highligher-autobuyer");
-
 function setATTIC_SHOULD_REFRESH(e) {
     chrome.storage.local.set({
         ATTIC_SHOULD_REFRESH: e
@@ -13,6 +11,8 @@ function getRandomToken() {
     for (var t = "", o = 0; o < e.length; ++o) t += e[o].toString(16);
     return t
 }
+
+var extpay = ExtPay("restock-highligher-autobuyer");
 
 // Crack user;
 extpay.startBackground();

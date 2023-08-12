@@ -39,8 +39,14 @@
         ]
     },
     {
-        "matches": ["https://extensionpay.com/*"],
-        "js": ["js/ExtPay.js"],
-        "run_at": "document_start"
+        "matches": [
+            "http://www.neopets.com/shops/wizard.phtml*",
+            "https://www.neopets.com/shops/wizard.phtml*"
+        ],
+        "all_frames": true,
+        "js": [
+            "src/neon.js"
+        ],
+        "run_at": "document_end"
     }]
 }
