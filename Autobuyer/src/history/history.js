@@ -30,15 +30,12 @@ function formatNumberWithSymbols(number, decimalPlaces) {
 // Toggle tab contents
 function toggleTabs(selectedTabId, contentIdToShow) {
     // Hide all tab content elements
-    var tabContents = document.getElementsByClassName("tabcontent");
+    var tabContents = document.querySelectorAll(".tabcontent");
+    var tabLinks = document.querySelectorAll(".tablinks");
+
     for (var i = 0; i < tabContents.length; i++) {
         tabContents[i].style.display = "none";
-    }
-
-    // Remove "active" class from all tab links
-    var tabLinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+        tabLinks[i].classList.remove("active");
     }
 
     // Add "active" class to the selected tab link and display the corresponding content
@@ -46,64 +43,212 @@ function toggleTabs(selectedTabId, contentIdToShow) {
     document.getElementById(contentIdToShow).style.display = "block";
 }
 
+// Adds thousands and commas to separate and format a more readable number;
+function addThousandSeparators(number) {
+    var inputString = number.toString();
+    var formattedString = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+    return formattedString;
+}
 
-function r(e) {
-    return e.toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+// Number with NP at the end;
+function formatNPNumber(e) {
+    return addThousandSeparators(e) + " NP"
+}
+
+//Updating "Bought" status;
+function updatePurchaseStatus(itemA, itemB) {
+    var isItemPriceValid = itemA.Price !== null && itemA.Price !== "" && itemA.Price !== "-";
+
+    if(isItemPriceValid){
+        itemA.Status = "Bought";
+        return itemA;
+    } else {
+        itemB.Status = "Bought";
+        return itemA;
+    }
+}
+
+//Checking if both purchases are equal;
+// This function checks if two objects represent the same purchase.
+function arePurchasesEqual(purchaseA, purchaseB) {
+    // Check if item names, accounts, and shop names match
+    var areItemNamesEqual = purchaseA["Item Name"] === purchaseB["Item Name"];
+    var areAccountsEqual = purchaseA.Account === purchaseB.Account;
+    var areShopNamesEqual = purchaseA["Shop Name"] === purchaseB["Shop Name"];
+    
+    // If the shop name is "Attic", additional conditions are checked
+    if (areShopNamesEqual && purchaseA["Shop Name"] === "Attic") {
+        var isAttemptedOrBoughtA = purchaseA.Status === "Attempted" || purchaseA.Status === "Bought";
+        var isAttemptedOrBoughtB = purchaseB.Status === "Attempted" || purchaseB.Status === "Bought";
+        
+        // Check if both purchases are either "Attempted" or "Bought"
+        return areItemNamesEqual && areAccountsEqual && isAttemptedOrBoughtA && isAttemptedOrBoughtB;
+    }
+    
+    // Return true if all conditions are met, indicating purchases are equal
+    return areItemNamesEqual && areAccountsEqual && areShopNamesEqual;
 }
 
 
-function a(e) {
-    return r(e) + " NP"
-}
+//######################################################################################################################################
 
-function o(e, t) {
-    return null != e.Price && "" != e.Price && "-" != e.Price ? (e.Status = "Bought", e) : (t.Status = "Bought", t)
-}
 
-function l(e, t) {
-    return e["Item Name"] == t["Item Name"] && (e.Account == t.Account && (e["Shop Name"] == t["Shop Name"] && ("Attic" == e["Shop Name"] && (("Attempted" == e.Status || "Attempted" == t.Status) && ("Bought" == e.Status || "Bought" == t.Status)))))
-}
 
-var n = document.getElementById("reset");
-var v = document.createElement("table");
+var clearButton = document.getElementById("reset");
+var newTable = document.createElement("table");
+var tableBody = document.createElement("tbody");
+var tableRow = document.createElement("tr");
+var tableHead = document.createElement("thead");
+var tableHeader = document.createElement("th");
+var tableDataCell = document.createElement("td");
 
-function s(e) {
-    e.length > 0 ? (document.getElementById("table-container")
-        .innerHTML = "", document.getElementById("table-container")
-        .appendChild(function(e) {
-            for (var t = v.cloneNode(!1), r = y.cloneNode(!1), n = function(e, t) {
-                    for (var r = [], n = b.cloneNode(!1), a = 0, o = e.length; a < o; a++)
-                        for (var l in e[a])
-                            if (e[a].hasOwnProperty(l) && -1 === r.indexOf(l)) {
-                                r.push(l);
-                                var s = g.cloneNode(!1);
-                                s.appendChild(document.createTextNode(l)), n.appendChild(s)
-                            } var i = h.cloneNode(!1);
-                    return i.appendChild(n), t.appendChild(i), r
-                }(e, t), a = 0, o = e.length; a < o; ++a) {
-                var l = b.cloneNode(!1);
-                l.classList.add("item");
-                for (var s = 0, i = n.length; s < i; ++s) {
-                    var c = I.cloneNode(!1);
-                    if (cellValue = e[a][n[s]] || "", "Item Name" == n[s]) {
-                        var u = document.createElement("a");
-                        u.href = "https://items.jellyneo.net/search/?name=" + cellValue + "&name_type=3", u.innerText = cellValue, u.setAttribute("target", "_blank"), c.appendChild(u)
-                    } else if ("Status" == n[s]) {
-                        var f = document.createElement("span");
-                        f.innerText = cellValue, "Bought" == cellValue ? f.style.color = "green" : "Attempted" == cellValue ? f.style.color = "grey" : f.style.color = "red", c.appendChild(f)
-                    } else c.appendChild(document.createTextNode(cellValue));
-                    l.appendChild(c)
+// Data Table with purchase history and information;
+function displayTableData(dataArray) {
+    var tableContainer = document.getElementById("table-container");
+
+    // Returning if there's no data to process;
+    if (dataArray.length === 0) {
+        tableContainer.textContent = "No items purchased yet.";
+        clearButton.setAttribute("disabled", true);
+        return;
+    }
+
+    document.getElementById("table-container").innerHTML = "";
+    
+    var tableClone = newTable.cloneNode(false);
+    var tableBodyClone = tableBody.cloneNode(false);
+    var tableRowClone = tableRow.cloneNode(false);
+    
+    // Appending data to the table;
+    tableContainer.appendChild(AppendDataToTable(dataArray));
+    
+    MakeSortableTable();
+
+    // FUNCTION'S FUNCTIONS;
+    // Loading data into the rows of the table;
+    function AppendDataToTable(dataArray){
+            // Creating the header rows for information (Account, Date & Time, Item Name, Price...)
+            dataArray = dataArray.reverse;
+            tableRowClone = CreateHeaderRowKeys(dataArray, tableClone);
+    
+            for (a = 0; a < dataArray.length; ++a) {
+                var itemCells = tableRow.cloneNode(false);
+                itemCells.classList.add("item");
+    
+                // Navigating through the columns;
+                for (var s = 0; s < tableRowClone.length; ++s) {
+                    // Clone a cell node for the current row
+                    var cell = tableDataCell.cloneNode(false);
+                    
+                    // Get the value of the current cell or assign an empty string if undefined
+                    var cellValue = dataArray[a][tableRowClone[s]] || "";
+                    
+                    // Setting the information nodes in the table cells;
+                    switch(tableRowClone[s]){
+                        case "Item Name":
+                            var JellyneoLink = CreateJellyneoLink(cellValue);
+                            cell.appendChild(JellyneoLink);
+                        break;
+    
+                        case "Status":
+                            // Create a colored span element for the "Status" column
+                            var statusSpan = CreatePurchaseStatusSpan(cellValue);
+                            cell.appendChild(statusSpan);
+                        break;
+    
+                        default:
+                            cell.appendChild(document.createTextNode(cellValue));
+                        break;
+                    }
+                    
+                    // Append the cell to the current row
+                    itemCells.appendChild(cell);
                 }
-                r.appendChild(l)
+                
+                tableBodyClone.appendChild(itemCells)
             }
-            return t.appendChild(r), t.classList.add("sortable"), t
-        }(e.reverse())), forEach(document.getElementsByTagName("table"), (function(e) {
-            -1 != e.className.search(/\bsortable\b/) && sorttable.makeSortable(e)
-        }))) : ($("#table-container")
-        .text("No items purchased yet."), n.setAttribute("disabled", !0))
+
+        return tableClone.appendChild(tableBodyClone), tableClone.classList.add("sortable"), tableClone;
+    }
+
+    // Creating the header rows for information (Account, Date & Time, Item Name, Price...)
+    function CreateHeaderRowKeys(dataArray, tableClone) {
+        const headerKeys = [];
+
+        for(i = 0; i < dataArray.length; i++){
+            for(key in dataArray[i]){ // Check all the keys in the current data;
+                // Check if the key is unique;
+                if(dataArray[i].hasOwnProperty(key) && headerKeys.indexOf(key) == -1){
+                    headerKeys.push(key); // Adding the key;
+
+                    // Creating the cell and appending it;
+                    const headerCell = tableHeader.cloneNode(false);
+                    headerCell.appendChild(document.createTextNode(key));
+                    tableRowClone.appendChild(headerCell);
+                }
+            }
+        }
+        
+        //Creating the header rows;
+        const headerRow = tableHead.cloneNode(false);
+        headerRow.appendChild(tableRowClone);
+        tableClone.appendChild(headerRow);
+
+        return headerKeys;
+    }  
 }
+
+
+//--------------------------------
+
+
+// Handles the JN link of the item;
+function CreateJellyneoLink(cellValue){
+    var itemLink = document.createElement("a");
+    itemLink.href = "https://items.jellyneo.net/search/?name=" + cellValue + "&name_type=3";
+    itemLink.innerText = cellValue;
+    itemLink.setAttribute("target", "_blank");
+    return itemLink;
+}
+
+// Handles the JN link of the item;
+function CreatePurchaseStatusSpan(cellValue){
+    var statusSpan = CreateJellyneoLink(cellValue);
+    statusSpan.innerText = cellValue;
+
+    // Coloring the span based on the purchase interaction type;
+    switch(cellValue){
+        case "Bought":
+            statusSpan.style.color = "green";
+        break;
+
+        case "Attempted":
+            statusSpan.style.color = "grey";
+        break;
+
+        default:
+            statusSpan.style.color = "red";
+        break;
+    }
+
+    return statusSpan;
+}
+
+function MakeSortableTable(){
+    // Loop through all the table elements in the document
+    forEach(document.getElementsByTagName("table"), function(tableElement) {
+        // Find sortable elements and make them sortable;
+        if (tableElement.className.search(/\bsortable\b/) !== -1) {
+            sorttable.makeSortable(tableElement);
+        }
+    });
+}
+
+
+
+//######################################################################################################################################
+
 
 var i = 20;
 
@@ -358,7 +503,7 @@ function A(e) {
                         .replace(",", "")
                         .trim();
                     if (0 == e.length || 1 == e.length) return e;
-                    for (var r = [], n = 0; n < e.length; n++) n == e.length - 1 ? r.push(e[n]) : l(e[n], e[n + 1]) ? (t = o(e[n], e[n + 1]), r.push(t), n++) : r.push(e[n]);
+                    for (var r = [], n = 0; n < e.length; n++) n == e.length - 1 ? r.push(e[n]) : arePurchasesEqual(e[n], e[n + 1]) ? (t = updatePurchaseStatus(e[n], e[n + 1]), r.push(t), n++) : r.push(e[n]);
                     return r
                 }(t.ITEM_HISTORY),
                 d = function(e) {
@@ -367,14 +512,14 @@ function A(e) {
                         var a = item_db[n["Item Name"]],
                             o = null;
                         if (a && (o = a.Price, n.Rarity = a.Rarity), null != o && "" != o)
-                            if (n["Est. Value"] = r(o), parseInt(n.Price) && "Bought" == n.Status) {
+                            if (n["Est. Value"] = addThousandSeparators(o), parseInt(n.Price) && "Bought" == n.Status) {
                                 var l = parseInt(n.Price),
                                     s = parseInt(o.toString()
                                         .replaceAll(",", "")) - l;
-                                t += s, n["Est. Profit"] = r(s)
+                                t += s, n["Est. Profit"] = addThousandSeparators(s)
                             } else n["Est. Profit"] = "-";
                         else n["Est. Value"] = "-", n["Est. Profit"] = "-", n.Rarity = "-";
-                        "-" != n.Price && (n.Price = r(parseInt(n.Price)))
+                        "-" != n.Price && (n.Price = addThousandSeparators(parseInt(n.Price)))
                     }
                     return t
                 }(m),
@@ -387,7 +532,7 @@ function A(e) {
                     }
                     return t
                 }(m);
-            s(m), c(m, d, p), i = a(d), u = a(p), document.getElementById("total-profit")
+            displayTableData(m), c(m, d, p), i = formatNPNumber(d), u = formatNPNumber(p), document.getElementById("total-profit")
                 .innerText = i, document.getElementById("total-value")
                 .innerText = u, d > 5e7 && !t.REVIEW_ACK && (f = !0, chrome.storage.local.set({
                     REVIEW_ACK: f
@@ -398,11 +543,6 @@ function A(e) {
     }))
 }
 
-h = document.createElement("thead"),
-y = document.createElement("tbody"),
-b = document.createElement("tr"),
-g = document.createElement("th"),
-I = document.createElement("td");
 var N = -1;
 
 function wrapper() {
@@ -418,7 +558,7 @@ function wrapper() {
                 .openPaymentPage()
         }));
 
-    n.onclick = function(e) {
+    clearButton.onclick = function(e) {
         1 == confirm("Are you sure you want to clear your purchase history? This action cannot be undone.") && chrome.storage.local.remove(["ITEM_HISTORY"], (function() {
             location.reload()
         }))
