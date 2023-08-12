@@ -396,8 +396,8 @@ function c(t, r, n) {
                 }
             })
         }(r, n), function(t) {
-            var r = u(t),
-                n = f(t);
+            var r = CalculateProfitsByTime(t, "Est. Profit"),
+                n = CalculateProfitsByTime(t, "Est. Value");
             new Chartist.Line("#hourly", {
                 labels: Array.from(n.keys()),
                 series: [Array.from(r.values()), Array.from(n.values())]
@@ -418,7 +418,7 @@ function c(t, r, n) {
                 }
             })
         }(t), function(e) {
-            for (var t = u(e), r = f(e), n = [], a = 0; a < Array.from(t.values())
+            for (var t = CalculateProfitsByTime(e, "Est. Profit"), r = CalculateProfitsByTime(e, "Est. Value"), n = [], a = 0; a < Array.from(t.values())
                 .length; a++) n.push(Number(Array.from(t.values())[a]) / Number(Array.from(r.values())[a]));
             new Chartist.Line("#hourly-percent", {
                 labels: Array.from(r.keys()),
@@ -445,18 +445,64 @@ function c(t, r, n) {
             .text(a))
 }
 
-function u(e) {
-    var t = new Map;
-    for (var r of e) {
-        var n = m(r["Date & Time"]);
-        t.set(n, 0)
+
+//--------------------------------
+
+
+// Calculates profits by time by sorting them;
+function CalculateProfitsByTime(entries, entryType) {
+    const timeProfitMap = new Map;
+
+    // Add profits by time;
+    for(const entry of entries){
+        const time = GetTimeFromEntry(entry["Date & Time"]);
+        // Set to 0 non existant entries, update profits for a specific timeframe;
+        timeProfitMap.set(time, (timeProfitMap.get(time) || 0) + CalculateEstimatedProfit(entry[entryType]));
     }
-    for (var r of e) {
-        n = m(r["Date & Time"]);
-        t.set(n, t.get(n) + p(r["Est. Profit"]))
-    }
-    return t = new Map([...t.entries()].sort(((e, t) => e[0].includes("A") && !t[0].includes("A") ? -1 : !e[0].includes("A") && t[0].includes("A") ? 1 : (e = Number(e[0].match(/(\d+)/)[0]), t = Number(t[0].match(/(\d+)/)[0]), 12 == e ? -1 : 12 == t ? 1 : e - t))))
+
+    // Creating the sorted graph;
+    const sortedTimeProfitMap = new Map([...timeProfitMap.entries()].sort((entryA, entryB) => {
+        const timeA = entryA[0];
+        const timeB = entryB[0];
+
+        // Checking profits between AM and PM times;
+        if(timeA.includes("A") && !timeB.includes("A")){
+            return -1;
+        } else if(!timeA.includes("A") && timeB.includes("A")){
+            return 1;
+        } else{
+            //Extracting numeric hours;
+            const regex = /(\d+)/;
+            const numericTimeA = Number(timeA.match(regex)[0]);
+            const numericTimeB = Number(timeB.match(regex)[0]);
+
+            if(numericTimeA === 12){
+                return -1;
+            } else if(numericTimeB === 12){
+                return 1;
+            } else {
+                return numericTimeA - numericTimeB;
+            }
+        }
+    }));
+
+    return sortedTimeProfitMap;
 }
+
+// Extract the date and time from a string;
+function GetTimeFromEntry(dateTime){
+    return dateTime.split(" ")[1].split(":")[0] + dateTime.split(" ")[2];
+}
+
+// Calculate profit from string;
+function CalculateEstimatedProfit(profit){
+    const numericProfit = Number(profit.replaceAll(",", ""));
+    return isNaN(numericProfit) ? 0 : numericProfit;
+}
+
+
+//--------------------------------
+
 
 function f(e) {
     var t = new Map;
@@ -470,6 +516,8 @@ function f(e) {
     }
     return t = new Map([...t.entries()].sort(((e, t) => e[0].includes("A") && !t[0].includes("A") ? -1 : !e[0].includes("A") && t[0].includes("A") ? 1 : (e = Number(e[0].match(/(\d+)/)[0]), t = Number(t[0].match(/(\d+)/)[0]), 12 == e ? -1 : 12 == t ? 1 : e - t))))
 }
+
+//--------------------------------
 
 function m(e) {
     var t = e.split(" ");
