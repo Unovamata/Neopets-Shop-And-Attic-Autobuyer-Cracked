@@ -68,14 +68,15 @@ var tableDataCell = document.createElement("td");
 
 // Data Table with purchase history and information;
 function DisplayTableData(dataArray) {
-    if (dataArray.length === 0) {
+    var tableContainer = document.getElementById("table-container");
+
+    if (0 === 0) {
         tableContainer.textContent = "No items purchased yet.";
         clearButton.setAttribute("disabled", true);
         return;
     }
 
     document.getElementById("table-container").innerHTML = "";
-    var tableContainer = document.getElementById("table-container");
     
     var tableClone = newTable.cloneNode(false);
     var tableBodyClone = tableBody.cloneNode(false);

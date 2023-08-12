@@ -326,6 +326,13 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>Pause extra time after successful purchase:
+                                <span class="tooltiptext">How long the program should pause after a main shop successful purchase. In milliseconds. For example, 30 minutes = 30*60*1000 = 1800000.
+                                </span>
+                            </td>
+                            <td><input type="number" id="PAUSE_AFTER_BUY_MS"></input></td>
+                        </tr>
+                        <tr>
                             <td>Use item database value estimates:
                                 <span class="tooltiptext">This will smartly purchase profitable items without the need for a restock list. Every restockable item is in the database with an up-to-date price from JellyNeo or the trading post/shop wizard. This database is automatically updated periodically with fresh value estimates for every item.</span>
                             </td>
@@ -359,6 +366,19 @@
                 </table>
                 <div class="settings-header">General Settings (Affects Both Attic and Main Shops)</div>
                 <table align="left" class="box">
+                    <tr>
+                        <td>Send bought items to SDB:
+                            <span class="tooltiptext">
+                                If enabled, purchased items will be sent to your safety deposit box.
+                            </span>
+                        </td>
+                        <td>
+                            <label class="switch">
+                                <input id="SEND_TO_SDB_AFTER_PURCHASE" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                    </tr>
                     <tr class="">
                         <td>
                             Estimated profit of items not in item DB:
@@ -389,6 +409,32 @@
                             <span class="tooltiptext">This list will supercede all other settings. If an item is in this list, it will never be clicked on by the Autobuyer. This is useful if you find that the item DB has an incorrect or out of date price estimate. Enter one item per line only.</span>
                         </td>
                         <td><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Attempt to refresh through page load failures:
+                            <span class="tooltiptext">
+                                When the page fails to load because Neopet's server rejected the request, which happens sometimes, this setting will refresh the page anyways instead of stopping on the failed page.
+                            </span>
+                        </td>
+                        <td>
+                            <label class="switch">
+                                <input id="SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Show Chrome notifications:
+                            <span class="tooltiptext">
+                                Chrome notifications will appear when important events occur.
+                            </span>
+                        </td>
+                        <td>
+                            <label class="switch">
+                                <input id="SHOULD_SHOW_CHROME_NOTIFICATIONS" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
                     </tr>
                     <tr>
                         <td>Sound alerts:
