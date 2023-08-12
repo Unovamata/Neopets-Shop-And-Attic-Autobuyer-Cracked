@@ -105,9 +105,6 @@ var tableDataCell = document.createElement("td");
 
 // Data Table with purchase history and information;
 function displayTableData(dataArray) {
-    var tableContainer = document.getElementById("table-container");
-
-    // Returning if there's no data to process;
     if (dataArray.length === 0) {
         tableContainer.textContent = "No items purchased yet.";
         clearButton.setAttribute("disabled", true);
@@ -115,60 +112,59 @@ function displayTableData(dataArray) {
     }
 
     document.getElementById("table-container").innerHTML = "";
+    var tableContainer = document.getElementById("table-container");
     
     var tableClone = newTable.cloneNode(false);
     var tableBodyClone = tableBody.cloneNode(false);
     var tableRowClone = tableRow.cloneNode(false);
     
     // Appending data to the table;
-    tableContainer.appendChild(AppendDataToTable(dataArray));
+    tableContainer.appendChild(AppendDataToTable(dataArray.reverse()));
     
     MakeSortableTable();
 
+
     // FUNCTION'S FUNCTIONS;
-    // Loading data into the rows of the table;
+    // Creating the header rows for information (Account, Date & Time, Item Name, Price...)
     function AppendDataToTable(dataArray){
-            // Creating the header rows for information (Account, Date & Time, Item Name, Price...)
-            dataArray = dataArray.reverse;
-            tableRowClone = CreateHeaderRowKeys(dataArray, tableClone);
-    
-            for (a = 0; a < dataArray.length; ++a) {
-                var itemCells = tableRow.cloneNode(false);
-                itemCells.classList.add("item");
-    
-                // Navigating through the columns;
-                for (var s = 0; s < tableRowClone.length; ++s) {
-                    // Clone a cell node for the current row
-                    var cell = tableDataCell.cloneNode(false);
-                    
-                    // Get the value of the current cell or assign an empty string if undefined
-                    var cellValue = dataArray[a][tableRowClone[s]] || "";
-                    
-                    // Setting the information nodes in the table cells;
-                    switch(tableRowClone[s]){
-                        case "Item Name":
-                            var JellyneoLink = CreateJellyneoLink(cellValue);
-                            cell.appendChild(JellyneoLink);
-                        break;
-    
-                        case "Status":
-                            // Create a colored span element for the "Status" column
-                            var statusSpan = CreatePurchaseStatusSpan(cellValue);
-                            cell.appendChild(statusSpan);
-                        break;
-    
-                        default:
-                            cell.appendChild(document.createTextNode(cellValue));
-                        break;
-                    }
-                    
-                    // Append the cell to the current row
-                    itemCells.appendChild(cell);
+        tableRowClone = CreateHeaderRowKeys(dataArray, tableClone);
+
+        for (a = 0; a < dataArray.length; ++a) {
+            var itemCells = tableRow.cloneNode(false);
+            itemCells.classList.add("item");
+
+            // Navigating through the columns;
+            for (var s = 0; s < tableRowClone.length; ++s) {
+                // Clone a cell node for the current row
+                var cell = tableDataCell.cloneNode(false);
+                
+                // Get the value of the current cell or assign an empty string if undefined
+                var cellValue = dataArray[a][tableRowClone[s]] || "";
+                
+                // Setting the information nodes in the table cells;
+                switch(tableRowClone[s]){
+                    case "Item Name":
+                        var JellyneoLink = CreateJellyneoLink(cellValue);
+                        cell.appendChild(JellyneoLink);
+                    break;
+
+                    case "Status":
+                        // Create a colored span element for the "Status" column
+                        var statusSpan = CreatePurchaseStatusSpan(cellValue);
+                        cell.appendChild(statusSpan);
+                    break;
+
+                    default:
+                        cell.appendChild(document.createTextNode(cellValue));
+                    break;
                 }
                 
-                tableBodyClone.appendChild(itemCells)
+                // Append the cell to the current row
+                itemCells.appendChild(cell);
             }
-
+            
+            tableBodyClone.appendChild(itemCells)
+        }
         return tableClone.appendChild(tableBodyClone), tableClone.classList.add("sortable"), tableClone;
     }
 
