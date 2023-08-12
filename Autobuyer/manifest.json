@@ -27,10 +27,8 @@
     "content_scripts": [
     {
         "matches": [
-            "http://neopets.com/*",
-            "http://*.neopets.com/*",
-            "https://neopets.com/*",
-            "https://*.neopets.com/*"
+            "https://www.neopets.com/halloween/garage.phtml",
+            "https://www.neopets.com/objects.phtml?type=shop&obj_type=*"
         ],
         "js": [
             "src/common/default_items.js",
