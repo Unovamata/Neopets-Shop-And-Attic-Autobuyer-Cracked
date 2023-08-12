@@ -3,4 +3,4 @@ function getParameterByName(e, n) {
     var r = new RegExp("[?&]" + e + "(=([^&#]*)|&|#|$)")
         .exec(n);
     return r ? r[2] ? decodeURIComponent(r[2].replace(/\+/g, " ")) : "" : null
-}}
+}

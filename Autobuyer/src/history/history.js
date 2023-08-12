@@ -1,5 +1,5 @@
 // Number formatting
-function formatNumberWithSymbols(number, decimalPlaces) {
+function FormatNumberWithSymbols(number, decimalPlaces) {
     // Mapping of value thresholds to symbols
     const symbolMap = [
         { value: 1e12, symbol: "t" },
@@ -20,7 +20,7 @@ function formatNumberWithSymbols(number, decimalPlaces) {
         var numberToFixed = numberValue.toFixed(decimalPlaces);
         var formattedNumber = numberToFixed.replace(/\.0+$|(\.[0-9]*[1-9])0+$/, "$1") + matchedSymbol.symbol;
 
-        return (regexNumber);
+        return (formattedNumber);
     } else {
         return "0";
     }
@@ -28,7 +28,7 @@ function formatNumberWithSymbols(number, decimalPlaces) {
 
 
 // Toggle tab contents
-function toggleTabs(selectedTabId, contentIdToShow) {
+function ToggleTabs(selectedTabId, contentIdToShow) {
     // Hide all tab content elements
     var tabContents = document.querySelectorAll(".tabcontent");
     var tabLinks = document.querySelectorAll(".tablinks");
@@ -44,50 +44,13 @@ function toggleTabs(selectedTabId, contentIdToShow) {
 }
 
 // Adds thousands and commas to separate and format a more readable number;
-function addThousandSeparators(number) {
-    var inputString = number.toString();
-    var formattedString = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    return formattedString;
+function AddThousandSeparators(number) {
+    return number.toLocaleString();
 }
 
 // Number with NP at the end;
-function formatNPNumber(e) {
-    return addThousandSeparators(e) + " NP"
-}
-
-//Updating "Bought" status;
-function updatePurchaseStatus(itemA, itemB) {
-    var isItemPriceValid = itemA.Price !== null && itemA.Price !== "" && itemA.Price !== "-";
-
-    if(isItemPriceValid){
-        itemA.Status = "Bought";
-        return itemA;
-    } else {
-        itemB.Status = "Bought";
-        return itemA;
-    }
-}
-
-//Checking if both purchases are equal;
-// This function checks if two objects represent the same purchase.
-function arePurchasesEqual(purchaseA, purchaseB) {
-    // Check if item names, accounts, and shop names match
-    var areItemNamesEqual = purchaseA["Item Name"] === purchaseB["Item Name"];
-    var areAccountsEqual = purchaseA.Account === purchaseB.Account;
-    var areShopNamesEqual = purchaseA["Shop Name"] === purchaseB["Shop Name"];
-    
-    // If the shop name is "Attic", additional conditions are checked
-    if (areShopNamesEqual && purchaseA["Shop Name"] === "Attic") {
-        var isAttemptedOrBoughtA = purchaseA.Status === "Attempted" || purchaseA.Status === "Bought";
-        var isAttemptedOrBoughtB = purchaseB.Status === "Attempted" || purchaseB.Status === "Bought";
-        
-        // Check if both purchases are either "Attempted" or "Bought"
-        return areItemNamesEqual && areAccountsEqual && isAttemptedOrBoughtA && isAttemptedOrBoughtB;
-    }
-    
-    // Return true if all conditions are met, indicating purchases are equal
-    return areItemNamesEqual && areAccountsEqual && areShopNamesEqual;
+function FormatNPNumber(input) {
+    return AddThousandSeparators(input) + " NP"
 }
 
 
@@ -104,7 +67,7 @@ var tableHeader = document.createElement("th");
 var tableDataCell = document.createElement("td");
 
 // Data Table with purchase history and information;
-function displayTableData(dataArray) {
+function DisplayTableData(dataArray) {
     if (dataArray.length === 0) {
         tableContainer.textContent = "No items purchased yet.";
         clearButton.setAttribute("disabled", true);
@@ -152,6 +115,12 @@ function displayTableData(dataArray) {
                         // Create a colored span element for the "Status" column
                         var statusSpan = CreatePurchaseStatusSpan(cellValue);
                         cell.appendChild(statusSpan);
+                    break;
+
+                    case "Price":
+                        var priceValue = parseInt(cellValue);
+                        var priceSpan = CheckIsNaNDisplay(priceValue, "-", FormatNPNumber(priceValue));
+                        cell.appendChild(document.createTextNode(priceSpan));
                     break;
 
                     default:
@@ -241,6 +210,90 @@ function MakeSortableTable(){
     });
 }
 
+//######################################################################################################################################
+
+var currentHistorySize = -1;
+
+function ProcessPurchaseHistory(forceUpdateHistory) {
+    //Getting the item history from the cache;
+    var chromeItemHistory = chrome.storage.local.get({ ITEM_HISTORY: [] });
+
+    chrome.storage.local.get({
+        ITEM_HISTORY: [],
+    }, (function(t) {
+        const historySize = t.ITEM_HISTORY.length;
+        var purchaseManager = ManagePurchases(t.ITEM_HISTORY)
+        var itemData = ProcessItemData(purchaseManager);
+
+        if (forceUpdateHistory || currentHistorySize != historySize) {
+            currentHistorySize = historySize;
+            DisplayTableData(purchaseManager);
+            Analytics(purchaseManager, itemData, totalProfit)
+        }
+    }))
+}
+
+//--------------------------------
+
+function ManagePurchases(purchases){
+    if(purchases.length <= 1) return purchases;
+
+    const optimizedPurchases = [];
+
+    //Optimized purchases;
+    for(var purchase of purchases){
+        optimizedPurchases.push(purchase);
+    }
+
+    return optimizedPurchases;
+}
+
+//--------------------------------
+
+var totalProfit = 0, totalValue = 0;
+
+// Processes and formats the item data in the table;
+function ProcessItemData(itemArray){
+    totalProfit = 0;
+    totalValue = 0;
+
+    for(var item of itemArray){
+        const itemInfo = item_db[item["Item Name"]];
+
+        // If the item info exists, update price and rarity
+        item.Rarity = itemInfo.Rarity;
+
+        const boughtPrice = parseInt(item.Price);
+        const itemValue = parseInt(itemInfo.Price);
+        
+        // Measuring the value of the purchase
+        var value = itemValue;
+        item["Est. Value"] = CheckIsNaNDisplay(value, "-", FormatNPNumber(value));
+        if(!isNaN(value)) totalValue += value;
+
+        // Measuring the profit from the purchase;
+        var profit = itemValue - boughtPrice;
+        item["Est. Profit"] = CheckIsNaNDisplay(profit, "-", FormatNPNumber(profit));
+        var totalProfitLabel = document.getElementById("total-profit"); 
+        var totalValueLabel = document.getElementById("total-value");
+
+        if(!isNaN(profit)) totalProfit += profit;
+
+        item["Price"] = CheckIsNaNDisplay(boughtPrice, "-", boughtPrice);
+    }
+
+    document.getElementById("total-profit").innerText = FormatNPNumber(totalProfit);
+    document.getElementById("total-value").innerText = FormatNPNumber(totalValue);
+
+    return totalProfit;
+}
+
+//--------------------------------
+
+//If a value is NaN or not, then it'll display one option or the other;
+function CheckIsNaNDisplay(input, outputTrue, outputFalse){
+    return isNaN(input) ? outputTrue : outputFalse;
+}
 
 
 //######################################################################################################################################
@@ -248,14 +301,14 @@ function MakeSortableTable(){
 
 var i = 20;
 
-function c(t, r, n) {
+function Analytics(t, r, n) {
     var a = "No analytics are available yet. Check back after some more successful purchases!";
     t.length > 10 && r > 5e5 && n > 5e5 && document.getElementById("analytics-container")
         .innerHTML != a ? (function(t) {
             var r = function(e) {
                 var t = new Map;
                 for (var r of e) t.set(r["Shop Name"], 0);
-                for (var r of e) t.set(r["Shop Name"], t.get(r["Shop Name"]) + p(r["Est. Profit"]));
+                for (var r of e) t.set(r["Shop Name"], t.get(r["Shop Name"]) + ParseNumericString(r["Est. Profit"]));
                 return t = new Map([...t.entries()].sort(((e, t) => t[1] - e[1]))), t
             }(t);
             new Chartist.Bar("#profit-by-store", {
@@ -270,7 +323,7 @@ function c(t, r, n) {
                 axisY: {
                     offset: 100,
                     labelInterpolationFnc: function(t) {
-                        return formatNumberWithSymbols(t) + " NP"
+                        return FormatNumberWithSymbols(t) + " NP"
                     }
                 }
             })
@@ -298,7 +351,7 @@ function c(t, r, n) {
                 axisY: {
                     offset: 100,
                     labelInterpolationFnc: function(t) {
-                        return formatNumberWithSymbols(t)
+                        return FormatNumberWithSymbols(t)
                     }
                 }
             })
@@ -306,7 +359,7 @@ function c(t, r, n) {
             var r = function(e) {
                 var t = new Map;
                 for (var r of e) t.set(r["Item Name"], 0);
-                for (var r of e) t.set(r["Item Name"], t.get(r["Item Name"]) + p(r["Est. Profit"]));
+                for (var r of e) t.set(r["Item Name"], t.get(r["Item Name"]) + ParseNumericString(r["Est. Profit"]));
                 for (var n = new Map, a = 0; a < i; a++) {
                     var o = [...t.entries()].reduce(((e, t) => t[1] > e[1] ? t : e));
                     if (o[1] <= 0) break;
@@ -326,7 +379,7 @@ function c(t, r, n) {
                 axisY: {
                     offset: 100,
                     labelInterpolationFnc: function(t) {
-                        return formatNumberWithSymbols(t)
+                        return FormatNumberWithSymbols(t)
                     }
                 }
             })
@@ -334,7 +387,7 @@ function c(t, r, n) {
             var r = function(e) {
                 var t = new Map;
                 for (var r of e) t.set(r.Account, 0);
-                for (var r of e) t.set(r.Account, t.get(r.Account) + p(r["Est. Profit"]));
+                for (var r of e) t.set(r.Account, t.get(r.Account) + ParseNumericString(r["Est. Profit"]));
                 return t = new Map([...t.entries()].sort(((e, t) => t[1] - e[1]))), t
             }(t);
             new Chartist.Bar("#profit-by-account", {
@@ -349,7 +402,7 @@ function c(t, r, n) {
                 axisY: {
                     offset: 100,
                     labelInterpolationFnc: function(t) {
-                        return formatNumberWithSymbols(t) + " NP"
+                        return FormatNumberWithSymbols(t) + " NP"
                     }
                 }
             })
@@ -357,12 +410,12 @@ function c(t, r, n) {
             var r = function(e) {
                 var t = new Map;
                 for (var r of e) {
-                    var n = d(r["Date & Time"]);
+                    var n = FormatDate(r["Date & Time"]);
                     t.set(n, 0)
                 }
                 for (var r of e) {
-                    n = d(r["Date & Time"]);
-                    t.set(n, t.get(n) + p(r["Est. Profit"]))
+                    n = FormatDate(r["Date & Time"]);
+                    t.set(n, t.get(n) + ParseNumericString(r["Est. Profit"]))
                 }
                 return t = new Map([...t.entries()].reverse()), t
             }(t);
@@ -378,7 +431,7 @@ function c(t, r, n) {
                 axisY: {
                     offset: 100,
                     labelInterpolationFnc: function(t) {
-                        return formatNumberWithSymbols(t)
+                        return FormatNumberWithSymbols(t)
                     }
                 }
             })
@@ -413,7 +466,7 @@ function c(t, r, n) {
                 axisY: {
                     offset: 100,
                     labelInterpolationFnc: function(t) {
-                        return formatNumberWithSymbols(t)
+                        return FormatNumberWithSymbols(t)
                     }
                 }
             })
@@ -445,9 +498,7 @@ function c(t, r, n) {
             .text(a))
 }
 
-
 //--------------------------------
-
 
 // Calculates profits by time by sorting them;
 function CalculateProfitsByTime(entries, entryType) {
@@ -500,116 +551,53 @@ function CalculateEstimatedProfit(profit){
     return isNaN(numericProfit) ? 0 : numericProfit;
 }
 
+// Parses a date to a specific format;
+function FormatDate(dateString) {
+    const dateComponents = dateString.split("/");
 
-//--------------------------------
+    const month = dateComponents[0];
+    const year = dateComponents[2];
 
+    // Keeping the last two digits from the year;
+    const formattedYear = year.replace(",", "".substring(2));
 
-function f(e) {
-    var t = new Map;
-    for (var r of e) {
-        var n = m(r["Date & Time"]);
-        t.set(n, 0)
-    }
-    for (var r of e) {
-        n = m(r["Date & Time"]);
-        t.set(n, t.get(n) + p(r["Est. Value"]))
-    }
-    return t = new Map([...t.entries()].sort(((e, t) => e[0].includes("A") && !t[0].includes("A") ? -1 : !e[0].includes("A") && t[0].includes("A") ? 1 : (e = Number(e[0].match(/(\d+)/)[0]), t = Number(t[0].match(/(\d+)/)[0]), 12 == e ? -1 : 12 == t ? 1 : e - t))))
+    return month + "/" + formattedYear;
 }
 
-//--------------------------------
-
-function m(e) {
-    var t = e.split(" ");
-    return t[1].split(":")[0] + t[2]
+function ParseNumericString(inputString) {
+    const numbersOnly = inputString.replace(",", "");
+    const number = isNaN(Number(numbersOnly)) ? 0 : Number(numbersOnly);
+    return number;
 }
 
-function d(e) {
-    var t = e.split(" ")[0].split("/");
-    return t[0] + "/" + t[2].replace(",", "")
-        .substring(2)
-}
 
-function p(e) {
-    return isNaN(Number(e.replaceAll(",", ""))) ? 0 : Number(e.replaceAll(",", ""))
-}
+//######################################################################################################################################
 
-function A(e) {
-    chrome.storage.local.get({
-        ITEM_HISTORY: [],
-        REVIEW_ACK: !1
-    }, (function(t) {
-        var n = t.ITEM_HISTORY.length;
-        if (e || n != N) {
-            N = n;
-            var i, u, f, m = function(e) {
-                    for (var t of e) t.Price = ("" + t.Price)
-                        .replace(",", "")
-                        .trim();
-                    if (0 == e.length || 1 == e.length) return e;
-                    for (var r = [], n = 0; n < e.length; n++) n == e.length - 1 ? r.push(e[n]) : arePurchasesEqual(e[n], e[n + 1]) ? (t = updatePurchaseStatus(e[n], e[n + 1]), r.push(t), n++) : r.push(e[n]);
-                    return r
-                }(t.ITEM_HISTORY),
-                d = function(e) {
-                    var t = 0;
-                    for (var n of e) {
-                        var a = item_db[n["Item Name"]],
-                            o = null;
-                        if (a && (o = a.Price, n.Rarity = a.Rarity), null != o && "" != o)
-                            if (n["Est. Value"] = addThousandSeparators(o), parseInt(n.Price) && "Bought" == n.Status) {
-                                var l = parseInt(n.Price),
-                                    s = parseInt(o.toString()
-                                        .replaceAll(",", "")) - l;
-                                t += s, n["Est. Profit"] = addThousandSeparators(s)
-                            } else n["Est. Profit"] = "-";
-                        else n["Est. Value"] = "-", n["Est. Profit"] = "-", n.Rarity = "-";
-                        "-" != n.Price && (n.Price = addThousandSeparators(parseInt(n.Price)))
-                    }
-                    return t
-                }(m),
-                p = function(e) {
-                    var t = 0;
-                    for (var r of e) {
-                        var n = item_db[r["Item Name"]],
-                            a = null;
-                        n && (a = n.Price), null != a && "" != a && (t += a)
-                    }
-                    return t
-                }(m);
-            displayTableData(m), c(m, d, p), i = formatNPNumber(d), u = formatNPNumber(p), document.getElementById("total-profit")
-                .innerText = i, document.getElementById("total-value")
-                .innerText = u, d > 5e7 && !t.REVIEW_ACK && (f = !0, chrome.storage.local.set({
-                    REVIEW_ACK: f
-                }, (function() {})), chrome.tabs.create({
-                    url: "../../src/notes/review.html"
-                }))
-        }
-    }))
-}
-
-var N = -1;
 
 function wrapper() {
-    document.getElementById("table")
-        .onclick = function(e) {
-            toggleTabs("table", "table-container")
-        }, document.getElementById("analytics")
-        .onclick = function(e) {
-            toggleTabs("analytics", "analytics-container"), A(!0)
-        }, toggleTabs("table", "table-container"), $("#PAYMENT_LINK")
-        .bind("click", (function() {
-            ExtPay("restock-highligher-autobuyer")
-                .openPaymentPage()
-        }));
+    //On click, toggle tabs and its containers;
+    document.getElementById("table").onclick = function(e) {
+        ToggleTabs("table", "table-container")
+    } 
+    
+    //On click, toggle analytics and its containers;
+    document.getElementById("analytics").onclick = function(e) {
+        ToggleTabs("analytics", "analytics-container"), ProcessPurchaseHistory(true)
+    }
+    
+    //Toggling the main tab;
+    ToggleTabs("table", "table-container");
 
+    //Clearing purchase history;
     clearButton.onclick = function(e) {
         1 == confirm("Are you sure you want to clear your purchase history? This action cannot be undone.") && chrome.storage.local.remove(["ITEM_HISTORY"], (function() {
             location.reload()
         }))
     };
     
-    A(!1), setInterval((function() {
-        A(!1)
+    //Update the history data every 5 seconds;
+    ProcessPurchaseHistory(false), setInterval((function() {
+        ProcessPurchaseHistory(false)
     }), 5e3)
 }
 
