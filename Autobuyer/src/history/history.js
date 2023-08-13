@@ -70,7 +70,7 @@ var tableDataCell = document.createElement("td");
 function DisplayTableData(dataArray) {
     var tableContainer = document.getElementById("table-container");
 
-    if (0 === 0) {
+    if (dataArray.length === 0) {
         tableContainer.textContent = "No items purchased yet.";
         clearButton.setAttribute("disabled", true);
         return;
