@@ -30,8 +30,9 @@
     "content_scripts": [
     {
         "matches": [
-            "https://www.neopets.com/halloween/garage.phtml",
-            "https://www.neopets.com/objects.phtml?type=shop&obj_type=*"
+            "https://www.neopets.com/halloween/garage.phtml*",
+            "https://www.neopets.com/objects.phtml*",
+			"https://www.neopets.com/haggle.phtml*"
         ],
         "js": [
             "src/common/default_items.js",

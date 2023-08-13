@@ -24,7 +24,7 @@ extpay.getUser().then(user => {
 	
 // Attic Captcha Warning after 3 seconds;
 setTimeout(() => {
-	chrome.storage.local.get({WARNING_ACK: false, EXT_P_S: false}, data => {
+	chrome.storage.local.get({WARNING_ACK: false, EXT_P_S: true}, data => {
 		if(!data.WARNING_ACK && data.EXT_P_S){
 			setATTIC_SHOULD_REFRESH(false);
 			chrome.tabs.create({ url: "../../src/notes/warning.html" });
@@ -39,7 +39,9 @@ chrome.action.onClicked.addListener(() => {
 
 chrome.runtime.onInstalled.addListener(function(e) {
 	"install" == e.reason || e.reason
-}), chrome.runtime.onMessage.addListener((function(e, t, o) {
+})
+
+chrome.runtime.onMessage.addListener((function(e, t, o) {
 	t.url.indexOf("neopets.com") < 0 || "NeoBuyer" === e.neobuyer && ("Notification" != e.type ? "OpenQuickstockPage" != e.type ? "Beep" != e.type ? console.error("Received message with unknown purpose:", JSON.stringify(e)) : chrome.storage.local.get({
 		SHOULD_SOUND_ALERTS: !0
 	}, (function(e) {
@@ -56,7 +58,9 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			rate: 1.15
 		})
 	})))
-})), chrome.webNavigation.onErrorOccurred.addListener((function(e) {
+}))
+
+chrome.webNavigation.onErrorOccurred.addListener((function(e) {
 	chrome.storage.local.get({
 		SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES: !0
 	}, (function(t) {
