@@ -22,7 +22,10 @@
     },
     "options_page": "src/options/index.html",
     "permissions": [
-        "storage"
+        "storage",
+        "webNavigation",
+        "notifications",
+        "tts"
     ],
     "content_scripts": [
     {
