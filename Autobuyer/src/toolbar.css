@@ -1,4 +1,9 @@
 /*CUSTOM CSS*/
+@font-face {
+    font-family: 'Cafeteria';
+    src: local('Cafeteria'), url('../fonts/Cafeteria Bold.otf') format('truetype');
+}
+
 img {
     max-width: 100%;
 }
@@ -6,6 +11,7 @@ img {
 /* Set the background color of the top bar */
 .toolbar {
     background-color: #03a9f4;
+    background-image: url(../icons/pattern-basic.svg);
     text-align: center;
     font-weight: bold;
     padding: 10px 0;
@@ -13,28 +19,42 @@ img {
     top: 0;
     left: 0;
     right: 0;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* Make the text bold and white */
-.toolbar-text a {
+.toolbar a {
+    font-size: 20px;
     text-decoration: none;
     color: white !important;
+    margin: 0 10px;
+    font-family: 'Cafeteria', sans-serif;
+}
+
+.toolbar-text {
+    display: inline-block;
+}
+
+.toolbar-text img {
+    max-width: 24px;
+    height: auto;
+    margin: 0 2px;
+    vertical-align: middle;
 }
 
 .logo {
-    width: 110px;
-    height: auto;
     position: absolute;
+    vertical-align: middle;
     top: 0;
     left: 0;
+    height: 100%;
+    width: auto;
+    padding-right: 30px;
 }
 
 
 .github-btn {
-    position: fixed;
-    top: 0.5%;
-    right: 0.8%;
-    transform: translate(0, 0);
+    top: 50%;
 }
 
 .gh-btn{
