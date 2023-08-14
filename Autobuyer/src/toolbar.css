@@ -4,10 +4,6 @@
     src: local('Cafeteria'), url('../fonts/Cafeteria Bold.otf') format('truetype');
 }
 
-img {
-    max-width: 100%;
-}
-
 /* Set the background color of the top bar */
 .toolbar {
     background-color: #03a9f4;
@@ -42,6 +38,27 @@ img {
     vertical-align: middle;
 }
 
+/* Set the background color of the top bar */
+.toolbar-bottom {
+    background-color: #03a9f4;
+    background-image: url(../icons/pattern-basic.svg);
+    text-align: center;
+    font-weight: bold;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notice-text {
+    font-size: 10px;
+    color: white;
+    font-family: "MuseoSansRounded700", 'Arial Bold', sans-serif;
+}
+
 .logo {
     position: absolute;
     vertical-align: middle;
@@ -51,7 +68,6 @@ img {
     width: auto;
     padding-right: 30px;
 }
-
 
 .github-btn {
     top: 50%;
