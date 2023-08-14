@@ -185,14 +185,6 @@ td:hover .tooltiptext {
     text-decoration: underline;
 }
 
-a,
-a:visited,
-a:hover,
-.payment-page-link {
-    color: blue;
-    cursor: pointer;
-}
-
 .button {
     background-color: #555555;
     border: none;
@@ -204,10 +196,4 @@ a:hover,
     font-size: 14px;
     margin: 4px 2px;
     cursor: pointer;
-}
-
-.toolbar-frame{
-    width: 100%;
-    height: 100%;
-    z-index: 9999; /* Set a higher z-index value */
 }

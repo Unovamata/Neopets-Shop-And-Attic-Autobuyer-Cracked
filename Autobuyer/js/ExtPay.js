@@ -1082,3 +1082,7 @@ You can copy and paste this to your manifest.json file to fix this error:
             }
         }
 }()
+
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { action: 'clearIframe' });
+});
