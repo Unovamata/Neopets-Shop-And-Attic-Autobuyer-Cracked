@@ -1,72 +1,147 @@
-function numberWithCommas(e) {
+/*function populateTable() {
+    $("#itemcount").text(item_db_array.length)
+    loadTableData(item_db_array);
+    
+    var e = document.createElement("script");
+
+    e.setAttribute("src", "../../js/sortable.js"), document.head.append(e)
+    
+    $("#loading").hide();
+}*/
+
+$("#itemcount").text(item_db_array.length)
+
+const tableContainer = document.getElementById("table-container");
+tableContainer.innerHTML = ""; // Clear existing content
+
+const table = document.createElement("table");
+const tbody = document.createElement("tbody");
+const thead = document.createElement("thead");
+
+const data = item_db_array;
+const chunkSize = 500;
+var currentPage = 1;
+
+
+function NumberWithCommas(e) {
     return e.toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
-function populateTable() {
-    $("#itemcount")
-        .text(item_db_array.length), document.getElementById("table-container")
-        .appendChild(buildHtmlTable(item_db_array));
-    var e = document.createElement("script");
-    e.setAttribute("src", "../../js/sortable.js"), document.head.append(e), $("#loading")
-        .hide()
+
+
+
+
+
+// Calculate the total number of pages
+const totalPages = Math.ceil(data.length / chunkSize);
+
+// Function to load data for the current page
+function LoadCurrentPage() {
+    LoadTableData(data, chunkSize, currentPage);
+
+    // Update navigation
+    UpdateNavigation();
 }
-function hideTable() {
-    $("#loading")
-        .hide(), $("#subscribe")
-        .show()
-}
-var _table_ = document.createElement("table"),
-    _thead_ = document.createElement("thead"),
-    _tbody_ = document.createElement("tbody"),
-    _tr_ = document.createElement("tr"),
-    _th_ = document.createElement("th"),
-    _td_ = document.createElement("td");
-function buildHtmlTable(e) {
-    for (var t = _table_.cloneNode(!1), a = _tbody_.cloneNode(!1), n = addAllColumnHeaders(e, t), l = 0, r = e.length; l < r; ++l) {
-        var o = _tr_.cloneNode(!1);
-        o.classList.add("item");
-        for (var d = 0, i = n.length; d < i; ++d) {
-            var c = _td_.cloneNode(!1);
-            if (cellValue = e[l][n[d]] || "", "Name" == n[d]) {
-                var h = document.createElement("a");
-                h.href = "https://items.jellyneo.net/search/?name=" + cellValue + "&name_type=3", h.innerText = cellValue, h.setAttribute("target", "_blank"), c.appendChild(h)
-            } else if ("Status" == n[d]) {
-                var p = document.createElement("span");
-                p.innerText = cellValue, "Bought" == cellValue ? p.style.color = "green" : p.style.color = "red", c.appendChild(p)
-            } else c.appendChild(document.createTextNode(numberWithCommas(cellValue)));
-            o.appendChild(c)
+
+function LoadTableData(data, chunkSize, currentPage){
+    table.innerHTML = "";
+    thead.innerHTML = "";
+    tbody.innerHTML = "";
+    const headers = [];
+
+    const headerRow = document.createElement("tr");
+    for (const row of data) {
+        for (const key in row) {
+            if (row.hasOwnProperty(key) && headers.indexOf(key) === -1) {
+                headers.push(key);
+                const headerCell = document.createElement("th");
+                headerCell.textContent = key;
+                headerRow.appendChild(headerCell);
+            }
         }
-        a.appendChild(o)
     }
-    return t.appendChild(a), t.classList.add("sortable"), t
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    table.appendChild(tbody);
+    table.classList.add("sortable");
+    tableContainer.appendChild(table);
+
+    LoadChunksOfData(data, chunkSize, currentPage, headers);
 }
-function addAllColumnHeaders(e, t) {
-    for (var a = [], n = _tr_.cloneNode(!1), l = 0, r = e.length; l < r; l++)
-        for (var o in e[l])
-            if (e[l].hasOwnProperty(o) && -1 === a.indexOf(o)) {
-                a.push(o);
-                var d = _th_.cloneNode(!1);
-                d.appendChild(document.createTextNode(o)), n.appendChild(d)
-            } var i = _thead_.cloneNode(!1);
-    return i.appendChild(n), t.appendChild(i), a
+
+function LoadChunksOfData(data, chunkSize, currentPage, headers){
+    var e = document.createElement("script");
+    e.setAttribute("src", "../../js/sortable.js"), document.head.append(e)
+    
+    const startIndex = (currentPage - 1) * chunkSize;
+    const endIndex = startIndex + chunkSize;
+    const dataChunk = data.slice(startIndex, endIndex);
+
+    for (var i = 0; i < chunkSize && dataChunk[i] != null; i++) {
+        const row = dataChunk[i];
+        const rowElement = document.createElement("tr");
+        rowElement.classList.add("item");
+
+        for (const header of headers) {
+            const cell = document.createElement("td");
+            let cellValue = row[header] || "";
+
+            switch (header) {
+                case "Name":
+                    const link = document.createElement("a");
+                    link.href = `https://items.jellyneo.net/search/?name=${cellValue}&name_type=3`;
+                    link.innerText = cellValue;
+                    link.setAttribute("target", "_blank");
+                    cell.appendChild(link);
+                    break;
+
+                default:
+                    cell.textContent = NumberWithCommas(cellValue);
+                    break;
+            }
+
+            rowElement.appendChild(cell);
+        }
+
+        tbody.appendChild(rowElement);
+    }
+
+    table.appendChild(tbody);
+    table.classList.add("sortable");
+    tableContainer.appendChild(table);
 }
-function openPaymentPage() {
-    ExtPay("restock-highligher-autobuyer")
-        .openPaymentPage()
+
+// Function to update navigation buttons and page indicator
+function UpdateNavigation() {
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    const pageIndicator = document.getElementById("page-indicator");
+
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages;
+
+    pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
 }
-$("#PAYMENT_LINK")
-    .bind("click", function() {
-        openPaymentPage()
-    });
-var extpay = ExtPay("restock-highligher-autobuyer");
-extpay.getUser()
-    .then(user => {
-        const paid = user.paid;
-        chrome.storage.local.set({
-            EXT_P_S: paid
-        }, function() {});
-        populateTable();
-    })
-    .catch(error => {
-        window.alert("It looks like you are not connected to the internet, please try again.");
-    });
+
+// Event listener for previous button
+document.getElementById("prev-button").addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+    }
+
+    LoadCurrentPage();
+});
+
+// Event listener for next button
+document.getElementById("next-button").addEventListener("click", () => {
+    if (currentPage < totalPages) {
+        currentPage++;
+
+    }
+
+    LoadCurrentPage();
+});
+
+// Initial load
+LoadCurrentPage();

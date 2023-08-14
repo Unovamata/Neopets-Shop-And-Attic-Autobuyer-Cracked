@@ -858,7 +858,7 @@ var ExtPay = function() {
                                 }
                             }, wrapObject(extensionAPIs, staticWrappers, apiMetadata)
                         };
-                    if ("object" != typeof chrome || !chrome || !chrome.runtime || !chrome.runtime.id) throw new Error("This script should only be loaded in a browser extension.");
+                    //if ("object" != typeof chrome || !chrome || !chrome.runtime || !chrome.runtime.id) throw new Error("This script should only be loaded in a browser extension.");
                     module.exports = wrapAPIs(chrome)
                 } else module.exports = browser
             })
@@ -1082,7 +1082,3 @@ You can copy and paste this to your manifest.json file to fix this error:
             }
         }
 }()
-
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { action: 'clearIframe' });
-});

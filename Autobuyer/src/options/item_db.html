@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <title>NeoBuyer Item Database</title>
         <link rel="stylesheet" type="text/css" href="../toolbar.css" />
+        <link rel="stylesheet" type="text/css" href="options.css" />
         <link rel="stylesheet" type="text/css" href="item_db.css" />
         <script src="../../js/jquery.js"></script>
     </head>
@@ -55,8 +57,11 @@
 
     <body>
         <div class="center">
-            <div class="enter-info">NeoBuyer Item Databse</div>
+            <div class="enter-info">NeoBuyer Item Database</div>
             <div class="autosaved">(read-only, r1-100, automatically updated periodically)</div>
+            <button id="prev-button">Previous</button>
+            <button id="next-button">Next</button>
+            <span id="page-indicator"></span>
             <div class="autosaved"><span id="itemcount">Loading...</span> current items, updated March 2023</div>
 
             <hr>

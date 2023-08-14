@@ -1,3 +1,9 @@
+/*CUSTOM CSS*/
+@font-face {
+    font-family: 'Cafeteria';
+    src: local('Cafeteria'), url('../../fonts/Cafeteria Bold.otf') format('truetype');
+}
+
 html,
 body {
     margin: 0;
@@ -30,6 +36,7 @@ body {
 .enter-info {
     font-size: 50px;
     text-decoration: bold;
+    font-family: 'Cafeteria', sans-serif;
 }
 
 .autosaved,
