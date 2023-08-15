@@ -2,8 +2,8 @@
 <html>
     <head>
 		<title>NeoBuyer Options</title>
-        <link rel="stylesheet" type="text/css" href="../toolbar.css" />
-        <link rel="stylesheet" type="text/css" href="options.css" />
+        <link rel="stylesheet" type="text/css" href="../../toolbar.css" />
+        <link rel="stylesheet" type="text/css" href="../options.css" />
     </head>
 
     <div class="toolbar">
@@ -15,36 +15,36 @@
             </a>
         </span>
 
-        <img class="logo" src="../logo.png"><a href="../options/index.html"></a></img>
+        <img class="logo" src="../../logo.png"><a href="../../options/index.html"></a></img>
 
         <div class = "toolbar-text">
-            <a href="../options/autobuyer.html">
-                <img  class = "toolbar-icon" src="../../icons/shop-icon.svg" alt="Info Icon"> 
+            <a href="autobuyer.html">
+                <img  class = "toolbar-icon" src="../../../icons/shop-icon.svg" alt="Info Icon"> 
             AutoBuyer </a>
 
-            <a href="../options/attic.html">
-                <img  class = "toolbar-icon" src="../../icons/mypets-icon.svg" alt="Info Icon"> 
+            <a href="../../options/attic.html">
+                <img  class = "toolbar-icon" src="../../../icons/mypets-icon.svg" alt="Info Icon"> 
             Attic </a>
 
-            <a href="../options/autopricer.html">
-                <img  class = "toolbar-icon" src="../../icons/np-icon.svg" alt="Info Icon"> 
+            <a href="../../options/autopricer.html">
+                <img  class = "toolbar-icon" src="../../../icons/np-icon.svg" alt="Info Icon"> 
             AutoPricer </a>
 
-            <a href="../options/autosdb.html">
-                <img  class = "toolbar-icon" src="../../icons/safetydeposit-icon.svg" alt="Info Icon"> 
+            <a href="../../options/autosdb.html">
+                <img  class = "toolbar-icon" src="../../../icons/safetydeposit-icon.svg" alt="Info Icon"> 
             AutoSDB </a>
 
 
-            <a href="../history/history.html">
-                <img  class = "toolbar-icon" src="../../icons/transferlog-icon.svg" alt="Info Icon"> 
+            <a href="../../history/history.html">
+                <img  class = "toolbar-icon" src="../../../icons/transferlog-icon.svg" alt="Info Icon"> 
             History </a>
 
-            <a href="../options/item_db.html">
-                <img  class = "toolbar-icon" src="../../icons/settings-icon.svg" alt="Info Icon"> 
+            <a href="../../options/item_db.html">
+                <img  class = "toolbar-icon" src="../../../icons/settings-icon.svg" alt="Info Icon"> 
             Database </a>
 
-            <a href="../options/info.html">
-                <img  class = "toolbar-icon" src="../../icons/search-icon.svg" alt="Info Icon"> 
+            <a href="../../options/info.html">
+                <img  class = "toolbar-icon" src="../../../icons/search-icon.svg" alt="Info Icon"> 
             Info </a>
             <!--<a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">Bug Reporting | </a>
             <a target="_blank" href="https://docs.google.com/document/d/e/2PACX-1vQ1bYmz2o92LG4sVq7CIO7tgCVl-lVreJxpIuDjd9TmFuXX166UZlqQdTWkt7VUyRkF33DvWD8ldVS8/pub">Author's FAQ | </a>
@@ -56,115 +56,17 @@
         <div class="center">
             <div class="enter-info">NeoBuyer Options</div>
             <center>
-                <div class="settings-header">Attic Settings</div>
-                <table align="left" class="box">
-                    <tr>
-                        <td>Attic autobuyer enabled:
-                            <span class="tooltiptext">Disabling will turn off all features for the attic buyer.</span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="ATTIC_ENABLED" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tbody class="attic-settings">
-                        <tr>
-                            <td>Highlight desired attic items:
-                                <span class="tooltiptext">
-                                    The best item will be colored orange, any other items meeting the buying criterion will be green.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="ATTIC_HIGHLIGHT" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td>
-                                Minimum profit in neopoints:
-                                <span class="tooltiptext">For instance, if the item is worth an estimated 30,000 NPS and it costs 10,000 NPS, then the autobuyer will purchase it if this field is 20,000 or less. Both this condition and the below minimum profit percentage must both be true in order for the autobuyer to click the item.</span>
-                            </td>
-                            <td><input type="number" id="ATTIC_ITEM_DB_MIN_PROFIT_NPS"></input></td>
-                        </tr>
-                        <tr class="">
-                            <td>Minimum profit percentage:
-                                <span class="tooltiptext">For instance, if the item is worth an estimated 15,000 NPS and it costs 10,000 NPS, then the autobuyer will purchase it if this field is 50% (0.5) or less. It is recommened that you leave this at 1.0 or less. Both this condition and the above minimum profit in NPS must both be true in order for the autobuyer to click the item.</span>
-                            </td>
-                            <td><input type="number" id="ATTIC_ITEM_DB_MIN_PROFIT_PERCENT"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Auto-click item to buy:</td>
-                            <td>
-                                <label class="switch">
-                                    <input id="ATTIC_CLICK_ITEM" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class=" attic-click-hide">
-                            <td>Min buy time (milliseconds):
-                                <span class="tooltiptext">This is the minimum of how fast the autobuyer will click the desired item to purchase after page load (if enabled). In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="ATTIC_MIN_BUY_TIME"></input></td>
-                        </tr>
-                        <tr class=" attic-click-hide">
-                            <td>Max buy time (milliseconds):
-                                <span class="tooltiptext">This is the maximum of how fast the autobuyer will click the desired item to purchase after page load (if enabled). In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="ATTIC_MAX_BUY_TIME"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Should refresh automatically:
-                                <span class="tooltiptext">This will have the attic buyer refresh itself automatically. You can disable this to refresh the page yourself. Since the attic has special refresh rules (every 7 minutes + 0-15 seconds there is a chance of restock), this is usually preferable for now. In the future, a more sophisticated auto-refresh may come in an update.</span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="ATTIC_SHOULD_REFRESH" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="attic-refresh-hide">
-                            <td>Only refresh between (e.g. 11am to 4pm = [11,16]):
-                                <span class="tooltiptext">
-                                    This limits the times that the autobuyer will refresh in the Attic. If you want to run between 8am and 5pm, then you would put here [8,17]. If you want to run at all times when enabled, you would put [0,23].
-                                </span>
-                            </td>
-                            <td><input type="text" id="ATTIC_RUN_BETWEEN_HOURS"></input></td>
-                        </tr>
-                        <tr class="attic-refresh-hide">
-                            <td>Last restock time <b>in NST</b> <span class="subdued">(usually found <a target="_blank" href="http://www.neopets.com/neoboards/boardlist.phtml?board=23">here</a>)</span>:
-                                <span class="tooltiptext">
-                                    This is the last known time (NST) that the attic restocked. With this filled out, the autobuyer can refresh more intelligently so that you do not get banned as quickly. When not present, it will refresh much more often which leads to a quicker refresh ban. You can usually find the time on a board titled "Attic Antics" or similar.
-                                </span>
-                            </td>
-                            <td>
-                                <input id="ATTIC_LAST_REFRESH_DATE" type="date" /><input id="ATTIC_LAST_REFRESH_TIME" type="time" step="1" /> NST
-                            </td>
-                        </tr>
-                        <tr class=" attic-refresh-hide">
-                            <td>Minimum refresh:
-                                <span class="tooltiptext">In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="ATTIC_MIN_REFRESH"></input></td>
-                        </tr>
-                        <tr class=" attic-refresh-hide">
-                            <td>Maximum refresh:
-                                <span class="tooltiptext">In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="ATTIC_MAX_REFRESH"></input></td>
-                        </tr>
-                    </tbody>
+
+                <table id="shop-table">
+                    <thead>
+                    </thead>
+                    <tbody id="shop-list"></tbody>
                 </table>
+
+                <script src="shop-checkboxes.js"></script>
                 <div class="settings-header">Main Shop Buyer Settings</div>
+
+                
                 <table align="left" class="box">
                     <tr>
                         <td>Main shop autobuyer enabled:
@@ -391,6 +293,7 @@
                         </tr>
                     </tbody>
                 </table>
+
                 <div class="settings-header">General Settings (Affects Both Attic and Main Shops)</div>
                 <table align="left" class="box">
                     <tr>

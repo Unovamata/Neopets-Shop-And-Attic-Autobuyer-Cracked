@@ -10,6 +10,11 @@ var item_db_array = [
         "Price": 550000000
     },
     {
+        "Name": "Snowbunny Stamp",
+        "Rarity": 99,
+        "Price": 399000000
+    },
+    {
         "Name": "King Altador Stamp",
         "Rarity": 99,
         "Price": 300000000
@@ -55,6 +60,26 @@ var item_db_array = [
         "Price": 125000000
     },
     {
+        "Name": "Igneot Stamp",
+        "Rarity": 99,
+        "Price": 124775000
+    },
+    {
+        "Name": "Holographic Coltzans Shrine Stamp",
+        "Rarity": 99,
+        "Price": 120000000
+    },
+    {
+        "Name": "Queen Fyora Stamp",
+        "Rarity": 99,
+        "Price": 115000000
+    },
+    {
+        "Name": "Darigan Spectre Stamp",
+        "Rarity": 99,
+        "Price": 112500000
+    },
+    {
         "Name": "King Jazan Stamp",
         "Rarity": 99,
         "Price": 110000000
@@ -85,14 +110,84 @@ var item_db_array = [
         "Price": 100000000
     },
     {
+        "Name": "Floral Maractite Coin",
+        "Rarity": 99,
+        "Price": 100000000
+    },
+    {
+        "Name": "Money Tree Coin",
+        "Rarity": 99,
+        "Price": 100000000
+    },
+    {
         "Name": "Choker of the Deep",
         "Rarity": 99,
         "Price": 90000000
     },
     {
+        "Name": "ARGH!!!! DONNA STAMP",
+        "Rarity": 99,
+        "Price": 90000000
+    },
+    {
+        "Name": "Foil Slorg Stamp",
+        "Rarity": 99,
+        "Price": 85000000
+    },
+    {
+        "Name": "Glittery Scorchstone",
+        "Rarity": 100,
+        "Price": 85000000
+    },
+    {
+        "Name": "Leaded Elemental Vial",
+        "Rarity": 99,
+        "Price": 85000000
+    },
+    {
         "Name": "Lord Kass Stamp",
         "Rarity": 99,
         "Price": 80000000
+    },
+    {
+        "Name": "Elephante Lamp Collectable Charm",
+        "Rarity": 99,
+        "Price": 80000000
+    },
+    {
+        "Name": "8-bit Power-Up Potion",
+        "Rarity": 99,
+        "Price": 80000000
+    },
+    {
+        "Name": "Terask Stamp",
+        "Rarity": 99,
+        "Price": 75000000
+    },
+    {
+        "Name": "Water Faerie Doll",
+        "Rarity": 99,
+        "Price": 75000000
+    },
+    {
+        "Name": "Strale",
+        "Rarity": 99,
+        "Price": 75000000
+    },
+    {
+        "Name": "Anklet of the Deep",
+        "Rarity": 98,
+        "Price": 75000000
+    },
+    {
+        "Name": "Stealthy Lutari Morphing Potion",
+        "Rarity": 99,
+        "Price": 75000000
+    },
+    {
+        "Name": "Fire Faerie Doll",
+        "Rarity": 99,
+        "Price": 74900000
     },
     {
         "Name": "Kadoatie",
@@ -102,7 +197,12 @@ var item_db_array = [
     {
         "Name": "Taiko Standing Drum Collectable Charm",
         "Rarity": 98,
-        "Price": 60000000
+        "Price": 65000000
+    },
+    {
+        "Name": "Captain Scarblade Stamp",
+        "Rarity": 99,
+        "Price": 58000000
     },
     {
         "Name": "One Hundred Million Neopoint Stamp",
@@ -130,9 +230,39 @@ var item_db_array = [
         "Price": 50000000
     },
     {
+        "Name": "King Kelpbeard Stamp",
+        "Rarity": 99,
+        "Price": 50000000
+    },
+    {
+        "Name": "Dragonfly Nymph",
+        "Rarity": 99,
+        "Price": 49980000
+    },
+    {
+        "Name": "Snowickle",
+        "Rarity": 99,
+        "Price": 49980000
+    },
+    {
+        "Name": "Unidentified Petpetpet",
+        "Rarity": 99,
+        "Price": 49950000
+    },
+    {
+        "Name": "Mastermind Plushie",
+        "Rarity": 100,
+        "Price": 48000000
+    },
+    {
         "Name": "Soup Faerie Doll",
         "Rarity": 99,
         "Price": 46500000
+    },
+    {
+        "Name": "Mummified Hot Dog",
+        "Rarity": 100,
+        "Price": 45000000
     },
     {
         "Name": "Neopian Times Coin",
@@ -143,6 +273,21 @@ var item_db_array = [
         "Name": "Sloth Collectable Charm",
         "Rarity": 96,
         "Price": 35000000
+    },
+    {
+        "Name": "Upside Down Island Acara Stamp",
+        "Rarity": 99,
+        "Price": 35000000
+    },
+    {
+        "Name": "Techo Statue Collectable Charm",
+        "Rarity": 97,
+        "Price": 34920000
+    },
+    {
+        "Name": "Holographic Magax Stamp",
+        "Rarity": 99,
+        "Price": 32500000
     },
     {
         "Name": "Glyme",
@@ -161,6 +306,31 @@ var item_db_array = [
     },
     {
         "Name": "Space Faerie Doll",
+        "Rarity": 99,
+        "Price": 30000000
+    },
+    {
+        "Name": "Air Faerie Doll",
+        "Rarity": 99,
+        "Price": 30000000
+    },
+    {
+        "Name": "Foil Food Shop Stamp",
+        "Rarity": 99,
+        "Price": 30000000
+    },
+    {
+        "Name": "Little Timmy",
+        "Rarity": 100,
+        "Price": 30000000
+    },
+    {
+        "Name": "Xantan Stamp",
+        "Rarity": 99,
+        "Price": 30000000
+    },
+    {
+        "Name": "Floral Jelly",
         "Rarity": 99,
         "Price": 30000000
     },
@@ -188,6 +358,46 @@ var item_db_array = [
         "Name": "Triple Turbo Dryer",
         "Rarity": 99,
         "Price": 25000000
+    },
+    {
+        "Name": "Darkest Faerie Plushie",
+        "Rarity": 99,
+        "Price": 25000000
+    },
+    {
+        "Name": "Double Printed Evil Fuzzle Stamp",
+        "Rarity": 99,
+        "Price": 25000000
+    },
+    {
+        "Name": "Rainbow Cybunny Negg",
+        "Rarity": 99,
+        "Price": 25000000
+    },
+    {
+        "Name": "Vanity Doll",
+        "Rarity": 99,
+        "Price": 25000000
+    },
+    {
+        "Name": "Negg Faerie Doll",
+        "Rarity": 99,
+        "Price": 25000000
+    },
+    {
+        "Name": "Morguss Stamp",
+        "Rarity": 98,
+        "Price": 25000000
+    },
+    {
+        "Name": "Neoquest Gatekeeper Plushie",
+        "Rarity": 99,
+        "Price": 25000000
+    },
+    {
+        "Name": "Sidney Plushie",
+        "Rarity": 99,
+        "Price": 24938000
     },
     {
         "Name": "The Voodoo Techo",
@@ -250,12 +460,102 @@ var item_db_array = [
         "Price": 20000000
     },
     {
+        "Name": "Advanced Kreludan Physics",
+        "Rarity": 100,
+        "Price": 20000000
+    },
+    {
+        "Name": "Dusk Kougra Plushie",
+        "Rarity": 99,
+        "Price": 20000000
+    },
+    {
+        "Name": "Illusens Diary",
+        "Rarity": 99,
+        "Price": 20000000
+    },
+    {
+        "Name": "Koya Korbat Huntress",
+        "Rarity": 100,
+        "Price": 20000000
+    },
+    {
+        "Name": "Mega Sandwich",
+        "Rarity": 99,
+        "Price": 20000000
+    },
+    {
+        "Name": "Misaligned Printer Stamp",
+        "Rarity": 99,
+        "Price": 20000000
+    },
+    {
+        "Name": "Scenic Kreludan Views",
+        "Rarity": 100,
+        "Price": 20000000
+    },
+    {
+        "Name": "Ice Hissi Morphing Potion",
+        "Rarity": 99,
+        "Price": 20000000
+    },
+    {
+        "Name": "Count Von Roo Stamp",
+        "Rarity": 98,
+        "Price": 20000000
+    },
+    {
+        "Name": "Magical Pea Chia Pop",
+        "Rarity": 99,
+        "Price": 20000000
+    },
+    {
+        "Name": "Pofew",
+        "Rarity": 99,
+        "Price": 19998000
+    },
+    {
+        "Name": "Maraquan Krawk Morphing Potion",
+        "Rarity": 99,
+        "Price": 19980000
+    },
+    {
+        "Name": "Mega U-Bend",
+        "Rarity": 99,
+        "Price": 19950000
+    },
+    {
+        "Name": "Rainbow Scorchstone",
+        "Rarity": 99,
+        "Price": 19950000
+    },
+    {
+        "Name": "Zombie Draik Egg",
+        "Rarity": 99,
+        "Price": 19950000
+    },
+    {
+        "Name": "Aboogala",
+        "Rarity": 99,
+        "Price": 19936001
+    },
+    {
         "Name": "Brain Trees Brainiac",
         "Rarity": 99,
         "Price": 19000000
     },
     {
+        "Name": "Lord Kass Card",
+        "Rarity": 99,
+        "Price": 19000000
+    },
+    {
         "Name": "Super Secret Guide to the Defenders of Neopia Headquarters",
+        "Rarity": 99,
+        "Price": 18000000
+    },
+    {
+        "Name": "Nibbled Cooking Pot Stamp",
         "Rarity": 99,
         "Price": 18000000
     },
@@ -340,6 +640,36 @@ var item_db_array = [
         "Price": 15000000
     },
     {
+        "Name": "Gilly the Usul",
+        "Rarity": 99,
+        "Price": 15000000
+    },
+    {
+        "Name": "Modern Lupe Magazine",
+        "Rarity": 99,
+        "Price": 15000000
+    },
+    {
+        "Name": "Need a Better Printer Stamp",
+        "Rarity": 99,
+        "Price": 15000000
+    },
+    {
+        "Name": "The Shadow Usul",
+        "Rarity": 99,
+        "Price": 15000000
+    },
+    {
+        "Name": "Battle Uni Stamp",
+        "Rarity": 97,
+        "Price": 14982000
+    },
+    {
+        "Name": "Royal Boy Kyrii Morphing Potion",
+        "Rarity": 99,
+        "Price": 14976000
+    },
+    {
         "Name": "Green Picnic Hamper",
         "Rarity": 99,
         "Price": 14500000
@@ -355,6 +685,11 @@ var item_db_array = [
         "Price": 12500000
     },
     {
+        "Name": "Meepit Muffins",
+        "Rarity": 99,
+        "Price": 12500000
+    },
+    {
         "Name": "Mootix",
         "Rarity": 99,
         "Price": 12000000
@@ -363,6 +698,46 @@ var item_db_array = [
         "Name": "Razul Plushie",
         "Rarity": 99,
         "Price": 12000000
+    },
+    {
+        "Name": "Captain Xelqued",
+        "Rarity": 99,
+        "Price": 12000000
+    },
+    {
+        "Name": "Khan the Unstoppable",
+        "Rarity": 99,
+        "Price": 12000000
+    },
+    {
+        "Name": "Luxury Faerie Festival Snowglobe",
+        "Rarity": 99,
+        "Price": 12000000
+    },
+    {
+        "Name": "Sergeant Brexis",
+        "Rarity": 99,
+        "Price": 12000000
+    },
+    {
+        "Name": "Swamp Ghoul",
+        "Rarity": 99,
+        "Price": 12000000
+    },
+    {
+        "Name": "Skuffler",
+        "Rarity": 99,
+        "Price": 12000000
+    },
+    {
+        "Name": "Stealthy Krawk Morphing Potion",
+        "Rarity": 99,
+        "Price": 12000000
+    },
+    {
+        "Name": "Kacheek Flour",
+        "Rarity": 99,
+        "Price": 11970000
     },
     {
         "Name": "Desert Lutari Morphing Potion",
@@ -460,6 +835,126 @@ var item_db_array = [
         "Price": 10000000
     },
     {
+        "Name": "Archmagus of Roo Plushie",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Blackberry Eyrie Cookie",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Chain of Onions",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Cheerleader Quiguki Doll",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Keeper Of Time Plushie",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Magical Cloud Lenny Plushie",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Mini Giant Jelly",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Moltenore",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Cheesy Carrots",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Kauvara",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Official Usuki Battle Set",
+        "Rarity": 99,
+        "Price": 10000000
+    },
+    {
+        "Name": "Cooty",
+        "Rarity": 99,
+        "Price": 9999000
+    },
+    {
+        "Name": "Lucky Coin Stamp",
+        "Rarity": 92,
+        "Price": 9992500
+    },
+    {
+        "Name": "Ramtor Stamp",
+        "Rarity": 98,
+        "Price": 9990000
+    },
+    {
+        "Name": "Dazzling Blue Mussel Shell",
+        "Rarity": 91,
+        "Price": 9990000
+    },
+    {
+        "Name": "Magical Green Wocky Plushie",
+        "Rarity": 99,
+        "Price": 9990000
+    },
+    {
+        "Name": "Nightsteed Stamp",
+        "Rarity": 98,
+        "Price": 9990000
+    },
+    {
+        "Name": "Black and Yellow Collectable Scarab",
+        "Rarity": 94,
+        "Price": 9990000
+    },
+    {
+        "Name": "Blood Mole Plant",
+        "Rarity": 99,
+        "Price": 9990000
+    },
+    {
+        "Name": "Book of Flames",
+        "Rarity": 99,
+        "Price": 9990000
+    },
+    {
+        "Name": "Heavy Blue Tunic",
+        "Rarity": 99,
+        "Price": 9984000
+    },
+    {
+        "Name": "Jahbal Stamp",
+        "Rarity": 98,
+        "Price": 9975000
+    },
+    {
+        "Name": "Master Vex",
+        "Rarity": 98,
+        "Price": 9500000
+    },
+    {
+        "Name": "Scoach",
+        "Rarity": 99,
+        "Price": 9480000
+    },
+    {
         "Name": "Blushing Bride Quiguki Doll",
         "Rarity": 99,
         "Price": 9000000
@@ -485,7 +980,22 @@ var item_db_array = [
         "Price": 9000000
     },
     {
+        "Name": "Big Gulp Neocola",
+        "Rarity": 99,
+        "Price": 9000000
+    },
+    {
+        "Name": "Egg and Tomato Sandwich",
+        "Rarity": 99,
+        "Price": 9000000
+    },
+    {
         "Name": "Mighty Steakwich",
+        "Rarity": 99,
+        "Price": 8500000
+    },
+    {
+        "Name": "Shadow Kougra Plushie",
         "Rarity": 99,
         "Price": 8500000
     },
@@ -512,11 +1022,6 @@ var item_db_array = [
     {
         "Name": "Faerie Grundo Morphing Potion",
         "Rarity": 99,
-        "Price": 8000000
-    },
-    {
-        "Name": "Faerie Lutari Morphing Potion",
-        "Rarity": 98,
         "Price": 8000000
     },
     {
@@ -580,6 +1085,141 @@ var item_db_array = [
         "Price": 8000000
     },
     {
+        "Name": "Cloud Lenny Plushie",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "King Skarl Quiguki",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Kyrii Sorceror",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Leirobas Plushie",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Minty Eyrie Cookie",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Olivetato",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Sniddberry Meerca Gobstopper",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Chocolate Cream Biscuit",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Cyodrake Collectable Charm",
+        "Rarity": 95,
+        "Price": 8000000
+    },
+    {
+        "Name": "Darigan Draik Egg",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Gallion Collectable Charm",
+        "Rarity": 96,
+        "Price": 8000000
+    },
+    {
+        "Name": "Magical Yellow Yurble Plushie",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Graduate Usuki",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Roast Pork",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Space Prom Date Usuki Reject",
+        "Rarity": 99,
+        "Price": 8000000
+    },
+    {
+        "Name": "Usuki Doll Stamp",
+        "Rarity": 96,
+        "Price": 8000000
+    },
+    {
+        "Name": "Apple Lantern",
+        "Rarity": 99,
+        "Price": 7999992
+    },
+    {
+        "Name": "Space Faerie Lunch Box",
+        "Rarity": 99,
+        "Price": 7999851
+    },
+    {
+        "Name": "Sledge Shield",
+        "Rarity": 99,
+        "Price": 7999200
+    },
+    {
+        "Name": "Disco Bruce Plushie",
+        "Rarity": 99,
+        "Price": 7998000
+    },
+    {
+        "Name": "Elixir of the Pirate",
+        "Rarity": 99,
+        "Price": 7992601
+    },
+    {
+        "Name": "Magical Ummagine Chia Pop",
+        "Rarity": 99,
+        "Price": 7992000
+    },
+    {
+        "Name": "Maraquan Draik Maractite Coin",
+        "Rarity": 93,
+        "Price": 7990000
+    },
+    {
+        "Name": "Snailien",
+        "Rarity": 99,
+        "Price": 7990000
+    },
+    {
+        "Name": "Magical Red Usul Plushie",
+        "Rarity": 99,
+        "Price": 7987500
+    },
+    {
+        "Name": "Ice Draik Egg",
+        "Rarity": 98,
+        "Price": 7980000
+    },
+    {
+        "Name": "Faerie Lutari Morphing Potion",
+        "Rarity": 98,
+        "Price": 7500000
+    },
+    {
         "Name": "Grey Draik Morphing Potion",
         "Rarity": 98,
         "Price": 7500000
@@ -587,6 +1227,31 @@ var item_db_array = [
     {
         "Name": "Island Lutari Morphing Potion",
         "Rarity": 98,
+        "Price": 7500000
+    },
+    {
+        "Name": "Magical Rainbow Cybunny Plushie",
+        "Rarity": 99,
+        "Price": 7500000
+    },
+    {
+        "Name": "Onion and Mustard Pie",
+        "Rarity": 99,
+        "Price": 7500000
+    },
+    {
+        "Name": "Rainbow Carrot",
+        "Rarity": 99,
+        "Price": 7500000
+    },
+    {
+        "Name": "Rainbow Tuskaninny Plushie",
+        "Rarity": 99,
+        "Price": 7500000
+    },
+    {
+        "Name": "Wrawk the Merciless Plushie",
+        "Rarity": 99,
         "Price": 7500000
     },
     {
@@ -645,6 +1310,51 @@ var item_db_array = [
         "Price": 7000000
     },
     {
+        "Name": "Boraxis Plushie",
+        "Rarity": 99,
+        "Price": 7000000
+    },
+    {
+        "Name": "Buttered Juppie Waffle",
+        "Rarity": 99,
+        "Price": 7000000
+    },
+    {
+        "Name": "Chocolate Chip Eyrie Cookie",
+        "Rarity": 99,
+        "Price": 7000000
+    },
+    {
+        "Name": "Duel Bazuka",
+        "Rarity": 99,
+        "Price": 7000000
+    },
+    {
+        "Name": "Fleaf",
+        "Rarity": 99,
+        "Price": 7000000
+    },
+    {
+        "Name": "Mega Honeyplume Smoothie",
+        "Rarity": 99,
+        "Price": 7000000
+    },
+    {
+        "Name": "Desert Blumaroo Morphing Potion",
+        "Rarity": 99,
+        "Price": 6990000
+    },
+    {
+        "Name": "Baby Scorchio Morphing Potion",
+        "Rarity": 99,
+        "Price": 6990000
+    },
+    {
+        "Name": "Sakhmetian Spear",
+        "Rarity": 99,
+        "Price": 6544000
+    },
+    {
         "Name": "Faerie Draik Morphing Potion",
         "Rarity": 98,
         "Price": 6500000
@@ -658,6 +1368,26 @@ var item_db_array = [
         "Name": "Sword Of Apocalypse Stamp",
         "Rarity": 98,
         "Price": 6500000
+    },
+    {
+        "Name": "Chia Cake",
+        "Rarity": 99,
+        "Price": 6500000
+    },
+    {
+        "Name": "Magical Spotted Blumaroo Plushie",
+        "Rarity": 99,
+        "Price": 6500000
+    },
+    {
+        "Name": "Mutant Korbat Plushie",
+        "Rarity": 99,
+        "Price": 6500000
+    },
+    {
+        "Name": "Maraquan Kacheek Morphing Potion",
+        "Rarity": 99,
+        "Price": 6300000
     },
     {
         "Name": "Aromatic Candle",
@@ -740,6 +1470,151 @@ var item_db_array = [
         "Price": 6000000
     },
     {
+        "Name": "Baby Techo Bobblehead",
+        "Rarity": 98,
+        "Price": 6000000
+    },
+    {
+        "Name": "Ballerina Quiguki",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Bowe Plushie",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Chaos Giant Plushie",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Chocolate Coated Cheese Strings",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Chrysolite Dervish Plushie",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Desert Lupe Plushie",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Draconus Maximus",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Electro Lizard Plushie",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Fish Negg Plushie",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Gloom Kougra Plushie",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Guardian of Fire Magic Plushie",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Lost Desert Quiguki",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Quiguki Mermaid",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "The Tax Beast",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Triple Choco-Strawberry Cake",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Plushie Kau Morphing Potion",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Plushie Kiko Morphing Potion",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Plushie Grundo Morphing Potion",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Flankin",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Quilin",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Rock",
+        "Rarity": 98,
+        "Price": 6000000
+    },
+    {
+        "Name": "Plum",
+        "Rarity": 99,
+        "Price": 6000000
+    },
+    {
+        "Name": "Rainbow JubJub Plushie",
+        "Rarity": 98,
+        "Price": 5998600
+    },
+    {
+        "Name": "Darigan Ixi Morphing Potion",
+        "Rarity": 99,
+        "Price": 5994000
+    },
+    {
+        "Name": "Disco Bruce Morphing Potion",
+        "Rarity": 99,
+        "Price": 5993350
+    },
+    {
+        "Name": "Magical Onion Chia Pop",
+        "Rarity": 99,
+        "Price": 5992000
+    },
+    {
+        "Name": "Faerie Ixi Morphing Potion",
+        "Rarity": 99,
+        "Price": 5984000
+    },
+    {
+        "Name": "Plushie Grarrl Morphing Potion",
+        "Rarity": 99,
+        "Price": 5984000
+    },
+    {
         "Name": "Pink Lutari Morphing Potion",
         "Rarity": 98,
         "Price": 5700000
@@ -758,6 +1633,16 @@ var item_db_array = [
         "Name": "Strange Potion",
         "Rarity": 99,
         "Price": 5500000
+    },
+    {
+        "Name": "Starry Draik Plushie",
+        "Rarity": 99,
+        "Price": 5500000
+    },
+    {
+        "Name": "Desert Elephante Morphing Potion",
+        "Rarity": 99,
+        "Price": 5499550
     },
     {
         "Name": "A Grey Faerie Doll",
@@ -920,6 +1805,301 @@ var item_db_array = [
         "Price": 5000000
     },
     {
+        "Name": "Bruces Guide to Combat Eating",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Chocolate Coated Blue Cheese",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Dargil Meat Mince Pie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Forbidden Zafara",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Gifts for your Enemies",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Grapefruit Cake",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Halloween Draik Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Light Faerie Backpack",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Luxury Castle Petpet Bed",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Magical Blue Kacheek Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Magical Blue Yurble Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Magical Ghost Marshmallows Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Magical Green Krawk Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Magical Red Koi Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Malice Doll",
+        "Rarity": 98,
+        "Price": 5000000
+    },
+    {
+        "Name": "Marillis Harbane",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Nimmo Battle Cry",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Petfolio",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Polka Carrot",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Professor Kachevski",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Puzzle Fruit",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Reject Yellow Acara Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Serpentine Dervish Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Snot Slingshot",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Speckled Nimmo Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Stack It High Cake",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Uni Myths",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Alchemy Lessons",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Breebly",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Chokato Bean Bag",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Faerie Pteri Morphing Potion",
+        "Rarity": 98,
+        "Price": 5000000
+    },
+    {
+        "Name": "Invisible Wocky Morphing Potion",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Jhuidah Snowglobe",
+        "Rarity": 98,
+        "Price": 5000000
+    },
+    {
+        "Name": "Lady Blurg",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Magical Cloud Gelert Plushie",
+        "Rarity": 99,
+        "Price": 5000000
+    },
+    {
+        "Name": "Rainbow Apple",
+        "Rarity": 94,
+        "Price": 5000000
+    },
+    {
+        "Name": "Rainbow Pool Coin",
+        "Rarity": 98,
+        "Price": 5000000
+    },
+    {
+        "Name": "Zeirn the Electric Kougra",
+        "Rarity": 98,
+        "Price": 5000000
+    },
+    {
+        "Name": "Iskha Lightbringer",
+        "Rarity": 96,
+        "Price": 4999995
+    },
+    {
+        "Name": "Rock Golem Neoquest Plushie",
+        "Rarity": 98,
+        "Price": 4999995
+    },
+    {
+        "Name": "Under and Overripe Avocado Bombs",
+        "Rarity": 99,
+        "Price": 4999995
+    },
+    {
+        "Name": "Winged Shoyru Amulet",
+        "Rarity": 99,
+        "Price": 4999995
+    },
+    {
+        "Name": "Stealthy Kyrii Morphing Potion",
+        "Rarity": 99,
+        "Price": 4998000
+    },
+    {
+        "Name": "Golden Dubloon Stamp",
+        "Rarity": 96,
+        "Price": 4998000
+    },
+    {
+        "Name": "Jiggybug",
+        "Rarity": 99,
+        "Price": 4998000
+    },
+    {
+        "Name": "Island Kiko Morphing Potion",
+        "Rarity": 99,
+        "Price": 4998000
+    },
+    {
+        "Name": "Wocky Slingshot",
+        "Rarity": 99,
+        "Price": 4998000
+    },
+    {
+        "Name": "Halloween Xweetok Morphing Potion",
+        "Rarity": 98,
+        "Price": 4995600
+    },
+    {
+        "Name": "Grape Jelly Sword",
+        "Rarity": 99,
+        "Price": 4995600
+    },
+    {
+        "Name": "Zygorax",
+        "Rarity": 97,
+        "Price": 4995000
+    },
+    {
+        "Name": "Fire Bori Morphing Potion",
+        "Rarity": 99,
+        "Price": 4995000
+    },
+    {
+        "Name": "Purple Draik Morphing Potion",
+        "Rarity": 99,
+        "Price": 4995000
+    },
+    {
+        "Name": "Woolypapith",
+        "Rarity": 99,
+        "Price": 4994900
+    },
+    {
+        "Name": "Staff of Ultranova",
+        "Rarity": 99,
+        "Price": 4994600
+    },
+    {
+        "Name": "Shadow Ruki Morphing Potion",
+        "Rarity": 99,
+        "Price": 4992900
+    },
+    {
+        "Name": "Moach",
+        "Rarity": 99,
+        "Price": 4992000
+    },
+    {
+        "Name": "Darigan Grarrl Morphing Potion",
+        "Rarity": 99,
+        "Price": 4992000
+    },
+    {
+        "Name": "Grotson",
+        "Rarity": 96,
+        "Price": 4992000
+    },
+    {
+        "Name": "Plushie Chomby Morphing Potion",
+        "Rarity": 99,
+        "Price": 4987500
+    },
+    {
         "Name": "A Chia Story",
         "Rarity": 99,
         "Price": 4950000
@@ -933,6 +2113,16 @@ var item_db_array = [
         "Name": "Faerie Ruki Morphing Potion",
         "Rarity": 99,
         "Price": 4750000
+    },
+    {
+        "Name": "Spotted Gelert Plushie",
+        "Rarity": 99,
+        "Price": 4750000
+    },
+    {
+        "Name": "The Bad Skeith",
+        "Rarity": 99,
+        "Price": 4600000
     },
     {
         "Name": "Crystal Kauvara Coin",
@@ -993,6 +2183,36 @@ var item_db_array = [
         "Name": "Stealthy Blumaroo Morphing Potion",
         "Rarity": 99,
         "Price": 4500000
+    },
+    {
+        "Name": "Magical Rainbow Aisha Plushie",
+        "Rarity": 99,
+        "Price": 4500000
+    },
+    {
+        "Name": "Mokti Plushie",
+        "Rarity": 99,
+        "Price": 4500000
+    },
+    {
+        "Name": "Punchbag Bob",
+        "Rarity": 99,
+        "Price": 4500000
+    },
+    {
+        "Name": "Steel Golem Neoquest Plushie",
+        "Rarity": 99,
+        "Price": 4500000
+    },
+    {
+        "Name": "Meridell Usuki",
+        "Rarity": 99,
+        "Price": 4500000
+    },
+    {
+        "Name": "Springabee",
+        "Rarity": 99,
+        "Price": 4400000
     },
     {
         "Name": "Red Striped Collectable Scarab",
@@ -1135,7 +2355,192 @@ var item_db_array = [
         "Price": 4000000
     },
     {
+        "Name": "A History of Chias",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Chokato Deluxe Aisha Cake",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Cures for Bad Breath",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Dr Sloth Backpack",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Fishy Delight Grarrl Gobstopper",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Floppy Turtum Plushie",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Lenny Cookbook",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Magical Green Kiko Plushie",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Magical Purple Koi Plushie",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Magical Red Skeith Plushie",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Monoceraptor Plushie",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Princess Vyssas Diary",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Rainbow Evil Fuzzle",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Shock Lizard Plushie",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Siona",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Faerie Birdhouse",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Greevix",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Grundo Warehouse Stamp",
+        "Rarity": 97,
+        "Price": 4000000
+    },
+    {
+        "Name": "Pretty Pink Easter Negg",
+        "Rarity": 100,
+        "Price": 4000000
+    },
+    {
+        "Name": "Mozito",
+        "Rarity": 99,
+        "Price": 4000000
+    },
+    {
+        "Name": "Apple Jelly Club",
+        "Rarity": 99,
+        "Price": 3999996
+    },
+    {
+        "Name": "Jhudora the Dark Faerie",
+        "Rarity": 96,
+        "Price": 3999996
+    },
+    {
+        "Name": "Pootato",
+        "Rarity": 99,
+        "Price": 3999650
+    },
+    {
+        "Name": "Bone Sword",
+        "Rarity": 99,
+        "Price": 3999600
+    },
+    {
+        "Name": "Shadow Axe",
+        "Rarity": 99,
+        "Price": 3998401
+    },
+    {
+        "Name": "Shuriken",
+        "Rarity": 99,
+        "Price": 3996000
+    },
+    {
+        "Name": "Desert Kacheek Morphing Potion",
+        "Rarity": 98,
+        "Price": 3996000
+    },
+    {
+        "Name": "Grey Lenny Morphing Potion",
+        "Rarity": 99,
+        "Price": 3996000
+    },
+    {
+        "Name": "Striped Kau Morphing Potion",
+        "Rarity": 99,
+        "Price": 3996000
+    },
+    {
+        "Name": "Bread Wreath",
+        "Rarity": 99,
+        "Price": 3996000
+    },
+    {
+        "Name": "Scriblet",
+        "Rarity": 99,
+        "Price": 3993000
+    },
+    {
+        "Name": "Tower Shield",
+        "Rarity": 99,
+        "Price": 3991000
+    },
+    {
+        "Name": "Darigan Moehog Stamp",
+        "Rarity": 97,
+        "Price": 3990000
+    },
+    {
+        "Name": "Secrets of Tombola",
+        "Rarity": 99,
+        "Price": 3990000
+    },
+    {
+        "Name": "Squippit",
+        "Rarity": 99,
+        "Price": 3990000
+    },
+    {
         "Name": "Plushie Korbat Morphing Potion",
+        "Rarity": 99,
+        "Price": 3900000
+    },
+    {
+        "Name": "Candy Cane Chocolate Advent Calendar",
+        "Rarity": 99,
+        "Price": 3900000
+    },
+    {
+        "Name": "Itchi",
         "Rarity": 99,
         "Price": 3900000
     },
@@ -1160,9 +2565,39 @@ var item_db_array = [
         "Price": 3800000
     },
     {
+        "Name": "Woodland Uni Morphing Potion",
+        "Rarity": 98,
+        "Price": 3800000
+    },
+    {
         "Name": "Zebie",
         "Rarity": 99,
         "Price": 3800000
+    },
+    {
+        "Name": "Borovan Layered Cake",
+        "Rarity": 99,
+        "Price": 3800000
+    },
+    {
+        "Name": "Halloween Aisha Morphing Potion",
+        "Rarity": 99,
+        "Price": 3800000
+    },
+    {
+        "Name": "Skidget",
+        "Rarity": 99,
+        "Price": 3794000
+    },
+    {
+        "Name": "Sakhmetian Shield",
+        "Rarity": 99,
+        "Price": 3705000
+    },
+    {
+        "Name": "Maraquan Grarrl Morphing Potion",
+        "Rarity": 99,
+        "Price": 3700000
     },
     {
         "Name": "Plushie Bori Morphing Potion",
@@ -1172,6 +2607,11 @@ var item_db_array = [
     {
         "Name": "Pastel Xweetok Morphing Potion",
         "Rarity": 98,
+        "Price": 3600000
+    },
+    {
+        "Name": "BLT Croissant",
+        "Rarity": 99,
         "Price": 3600000
     },
     {
@@ -1225,6 +2665,11 @@ var item_db_array = [
         "Price": 3500000
     },
     {
+        "Name": "Rainbow Cybunny Morphing Potion",
+        "Rarity": 98,
+        "Price": 3500000
+    },
+    {
         "Name": "Red Moltite Popsicle",
         "Rarity": 99,
         "Price": 3500000
@@ -1245,6 +2690,41 @@ var item_db_array = [
         "Price": 3500000
     },
     {
+        "Name": "Golden Caviar",
+        "Rarity": 99,
+        "Price": 3500000
+    },
+    {
+        "Name": "Inferno Lizard Plushie",
+        "Rarity": 99,
+        "Price": 3500000
+    },
+    {
+        "Name": "Magical Red Grarrl Plushie",
+        "Rarity": 99,
+        "Price": 3500000
+    },
+    {
+        "Name": "The Shop Wizard",
+        "Rarity": 96,
+        "Price": 3498750
+    },
+    {
+        "Name": "White Chomby Morphing Potion",
+        "Rarity": 99,
+        "Price": 3496900
+    },
+    {
+        "Name": "Blechy",
+        "Rarity": 99,
+        "Price": 3492000
+    },
+    {
+        "Name": "Northern Watch Tower Stamp",
+        "Rarity": 96,
+        "Price": 3492000
+    },
+    {
         "Name": "Desert Krawk Morphing Potion",
         "Rarity": 98,
         "Price": 3400000
@@ -1252,6 +2732,11 @@ var item_db_array = [
     {
         "Name": "Rainbow Sticky Hand Stamp",
         "Rarity": 96,
+        "Price": 3400000
+    },
+    {
+        "Name": "Ghost Fuzzle",
+        "Rarity": 99,
         "Price": 3400000
     },
     {
@@ -1285,9 +2770,24 @@ var item_db_array = [
         "Price": 3200000
     },
     {
-        "Name": "Woodland Uni Morphing Potion",
-        "Rarity": 98,
+        "Name": "Magical Red Kiko Plushie",
+        "Rarity": 99,
         "Price": 3200000
+    },
+    {
+        "Name": "Polkadot Tonu Morphing Potion",
+        "Rarity": 99,
+        "Price": 3199997
+    },
+    {
+        "Name": "Desert Chomby Morphing Potion",
+        "Rarity": 99,
+        "Price": 3196800
+    },
+    {
+        "Name": "Purple Scorchstone",
+        "Rarity": 98,
+        "Price": 3192000
     },
     {
         "Name": "Halloween Blumaroo Morphing Potion",
@@ -1545,6 +3045,171 @@ var item_db_array = [
         "Price": 3000000
     },
     {
+        "Name": "All Seeing Tree",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Feather Bow and Arrow",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Glaring Pumpkin",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Halloween JubJub Plushie",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Hilarious Pumpkin",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "King Skarl Plushie",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Lord Kass Gnome",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Magical Green Koi Plushie",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Magical Rainbow Blumaroo Plushie",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Magical Red Yurble Plushie",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Magical Yellow Wocky Plushie",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Mist Kougra Plushie",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Quiguki Prom Queen",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Sophie, A Biography",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Speckled Bruce Plushie",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Pinchit",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Baby Lupe Morphing Potion",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Magical Carrot Chia Pop",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Marafalop",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Luxury Chocolate Easter Negg",
+        "Rarity": 100,
+        "Price": 3000000
+    },
+    {
+        "Name": "Magical Strawberry Chia Pop",
+        "Rarity": 99,
+        "Price": 3000000
+    },
+    {
+        "Name": "Chia Mites",
+        "Rarity": 99,
+        "Price": 2999997
+    },
+    {
+        "Name": "Fire Xweetok Morphing Potion",
+        "Rarity": 99,
+        "Price": 2998800
+    },
+    {
+        "Name": "Shadow Blumaroo Morphing Potion",
+        "Rarity": 99,
+        "Price": 2998800
+    },
+    {
+        "Name": "Amulet of the Unblinking Eye",
+        "Rarity": 99,
+        "Price": 2997000
+    },
+    {
+        "Name": "Halloween Meerca Morphing Potion",
+        "Rarity": 99,
+        "Price": 2996000
+    },
+    {
+        "Name": "Culture and History of Faerieland",
+        "Rarity": 99,
+        "Price": 2996000
+    },
+    {
+        "Name": "Doughnutfruit",
+        "Rarity": 99,
+        "Price": 2994750
+    },
+    {
+        "Name": "Plushie Pteri Morphing Potion",
+        "Rarity": 98,
+        "Price": 2994600
+    },
+    {
+        "Name": "Vile Curse of Pestilence",
+        "Rarity": 99,
+        "Price": 2993900
+    },
+    {
+        "Name": "Insane Evil Fuzzle",
+        "Rarity": 98,
+        "Price": 2993250
+    },
+    {
+        "Name": "Plushie Tonu Morphing Potion",
+        "Rarity": 98,
+        "Price": 2993250
+    },
+    {
+        "Name": "Eventide Gelert Morphing Potion",
+        "Rarity": 98,
+        "Price": 2990000
+    },
+    {
         "Name": "Parts on a Pizza",
         "Rarity": 99,
         "Price": 2900000
@@ -1590,9 +3255,24 @@ var item_db_array = [
         "Price": 2800000
     },
     {
+        "Name": "Rainbow Uni Plushie",
+        "Rarity": 99,
+        "Price": 2800000
+    },
+    {
+        "Name": "Island Ixi Morphing Potion",
+        "Rarity": 99,
+        "Price": 2799998
+    },
+    {
         "Name": "Mipsy Stamp",
         "Rarity": 92,
         "Price": 2750000
+    },
+    {
+        "Name": "Pinanna Plus",
+        "Rarity": 99,
+        "Price": 2749998
     },
     {
         "Name": "Darigan Wocky Morphing Potion",
@@ -1638,6 +3318,21 @@ var item_db_array = [
         "Name": "Spotted Gelert Morphing Potion",
         "Rarity": 99,
         "Price": 2600000
+    },
+    {
+        "Name": "Magical Blue Kiko Plushie",
+        "Rarity": 99,
+        "Price": 2600000
+    },
+    {
+        "Name": "Snot Helmet",
+        "Rarity": 99,
+        "Price": 2598960
+    },
+    {
+        "Name": "Kacheek Pyjama Gown",
+        "Rarity": 92,
+        "Price": 2594150
     },
     {
         "Name": "Apple Chia Morphing Potion",
@@ -1800,11 +3495,6 @@ var item_db_array = [
         "Price": 2500000
     },
     {
-        "Name": "Rainbow Cybunny Morphing Potion",
-        "Rarity": 98,
-        "Price": 2500000
-    },
-    {
         "Name": "Rainbow Sticky Hand",
         "Rarity": 99,
         "Price": 2500000
@@ -1843,6 +3533,51 @@ var item_db_array = [
         "Name": "Yellow Cybunny Morphing Potion",
         "Rarity": 96,
         "Price": 2500000
+    },
+    {
+        "Name": "Cloud Draik Plushie",
+        "Rarity": 99,
+        "Price": 2500000
+    },
+    {
+        "Name": "Fyora Apple",
+        "Rarity": 99,
+        "Price": 2500000
+    },
+    {
+        "Name": "Hannah Plushie",
+        "Rarity": 99,
+        "Price": 2500000
+    },
+    {
+        "Name": "Magical Red Wocky Plushie",
+        "Rarity": 99,
+        "Price": 2500000
+    },
+    {
+        "Name": "Skunk Mynci Plushie",
+        "Rarity": 99,
+        "Price": 2500000
+    },
+    {
+        "Name": "Spotted Koi Plushie",
+        "Rarity": 99,
+        "Price": 2500000
+    },
+    {
+        "Name": "The Magic Staff",
+        "Rarity": 99,
+        "Price": 2500000
+    },
+    {
+        "Name": "Zibblifruit",
+        "Rarity": 99,
+        "Price": 2500000
+    },
+    {
+        "Name": "Pirate Spear",
+        "Rarity": 99,
+        "Price": 2496000
     },
     {
         "Name": "Anubits Stamp",
@@ -1910,6 +3645,11 @@ var item_db_array = [
         "Price": 2300000
     },
     {
+        "Name": "Magical Yellow Skeith Plushie",
+        "Rarity": 99,
+        "Price": 2300000
+    },
+    {
         "Name": "Faerie Kau Morphing Potion",
         "Rarity": 98,
         "Price": 2200000
@@ -1921,6 +3661,16 @@ var item_db_array = [
     },
     {
         "Name": "Woodland Cybunny Morphing Potion",
+        "Rarity": 98,
+        "Price": 2200000
+    },
+    {
+        "Name": "Best Friends",
+        "Rarity": 99,
+        "Price": 2200000
+    },
+    {
+        "Name": "Magical Red Cybunny Plushie",
         "Rarity": 98,
         "Price": 2200000
     },
@@ -2212,6 +3962,11 @@ var item_db_array = [
     {
         "Name": "Finding Illusen",
         "Rarity": 98,
+        "Price": 2000000
+    },
+    {
+        "Name": "Fire Draik Morphing Potion",
+        "Rarity": 99,
         "Price": 2000000
     },
     {
@@ -2840,6 +4595,491 @@ var item_db_array = [
         "Price": 2000000
     },
     {
+        "Name": "Black Wadjet Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Borovan Hot Chocolate Bomb",
+        "Rarity": 97,
+        "Price": 2000000
+    },
+    {
+        "Name": "Brown Wadjet Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Carved Watermelon",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Chocolate Moltenore",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Chomby Mysteries",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Frosted Babaa Cookies",
+        "Rarity": 98,
+        "Price": 2000000
+    },
+    {
+        "Name": "Fun in the Sun Usuki Reject",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Ghost Evil Fuzzle",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Jolly Pumpkin",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "King Hagan Quiguki",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Lenny Witchcraft",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Magical Blue Nimmo Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Magical Green Cybunny Plushie",
+        "Rarity": 98,
+        "Price": 2000000
+    },
+    {
+        "Name": "Magical Green Gelert Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Magical Green Yurble Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Magical Red Blumaroo Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Magical Red Gelert Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Magical Red Lenny Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Magical Yellow Lenny Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Melatite Dervish Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Mutant Shoyru Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Olde Zafara",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Rainbow Bath Tub",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Reject Red Acara Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Stone Bedside Table",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "The Three Poster",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Thunder Lizard Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Traditional Welsh Quiguki",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Tyrannian Techo Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "White Draik Plushie",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Zafara Double Agent",
+        "Rarity": 98,
+        "Price": 2000000
+    },
+    {
+        "Name": "Wormoeba",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Christmas Pattern Negg",
+        "Rarity": 97,
+        "Price": 2000000
+    },
+    {
+        "Name": "The Pyramid Tablets",
+        "Rarity": 99,
+        "Price": 2000000
+    },
+    {
+        "Name": "Anshu Fishing Stamp",
+        "Rarity": 96,
+        "Price": 2000000
+    },
+    {
+        "Name": "Chia Statue",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Conquer the Dark",
+        "Rarity": 98,
+        "Price": 1999998
+    },
+    {
+        "Name": "Cutout Violin",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Dark Nova Table",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Fire Chia Morphing Potion",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Golden Coltzan Statue",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Luxury Dark and Earth Faerie Snowglobe",
+        "Rarity": 97,
+        "Price": 1999998
+    },
+    {
+        "Name": "Mega Tuna Sandwich",
+        "Rarity": 98,
+        "Price": 1999998
+    },
+    {
+        "Name": "My Life As A Lenny",
+        "Rarity": 98,
+        "Price": 1999998
+    },
+    {
+        "Name": "Pirate Kougra Morphing Potion",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Plushie Techo Morphing Potion",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Woodland Tonu Morphing Potion",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Youve Been Hexed!",
+        "Rarity": 99,
+        "Price": 1999998
+    },
+    {
+        "Name": "Darigan Eyrie Plushie",
+        "Rarity": 98,
+        "Price": 1999950
+    },
+    {
+        "Name": "White Chia Morphing Potion",
+        "Rarity": 99,
+        "Price": 1999800
+    },
+    {
+        "Name": "Ugly Pinanna",
+        "Rarity": 99,
+        "Price": 1999800
+    },
+    {
+        "Name": "Evil Pinanna",
+        "Rarity": 99,
+        "Price": 1999551
+    },
+    {
+        "Name": "Red Krawk Morphing Potion",
+        "Rarity": 98,
+        "Price": 1999500
+    },
+    {
+        "Name": "Capn Threelegs Cutlass Crusade",
+        "Rarity": 100,
+        "Price": 1999200
+    },
+    {
+        "Name": "Earth Faerie Token",
+        "Rarity": 99,
+        "Price": 1998800
+    },
+    {
+        "Name": "Woodland Skeith Morphing Potion",
+        "Rarity": 99,
+        "Price": 1998800
+    },
+    {
+        "Name": "Island Mynci Morphing Potion",
+        "Rarity": 99,
+        "Price": 1998800
+    },
+    {
+        "Name": "Gathow",
+        "Rarity": 98,
+        "Price": 1998750
+    },
+    {
+        "Name": "Tigersquash Spectacular",
+        "Rarity": 99,
+        "Price": 1998361
+    },
+    {
+        "Name": "Care of Koi",
+        "Rarity": 99,
+        "Price": 1998200
+    },
+    {
+        "Name": "Xweetok Boots Of Speed",
+        "Rarity": 99,
+        "Price": 1998001
+    },
+    {
+        "Name": "Grey Faerie Usuki Doll",
+        "Rarity": 98,
+        "Price": 1998000
+    },
+    {
+        "Name": "Cauliflower Shake",
+        "Rarity": 99,
+        "Price": 1998000
+    },
+    {
+        "Name": "Green Zafara Morphing Potion",
+        "Rarity": 99,
+        "Price": 1997600
+    },
+    {
+        "Name": "Magical Lime Chia Pop",
+        "Rarity": 99,
+        "Price": 1997551
+    },
+    {
+        "Name": "Snow Chia Morphing Potion",
+        "Rarity": 99,
+        "Price": 1997551
+    },
+    {
+        "Name": "Charcoal",
+        "Rarity": 99,
+        "Price": 1997500
+    },
+    {
+        "Name": "Loretta Fontaines Perfect Pizza",
+        "Rarity": 100,
+        "Price": 1997500
+    },
+    {
+        "Name": "Vira Pencil Holder",
+        "Rarity": 99,
+        "Price": 1997500
+    },
+    {
+        "Name": "Plushie JubJub Morphing Potion",
+        "Rarity": 98,
+        "Price": 1997100
+    },
+    {
+        "Name": "Desert Flotsam Morphing Potion",
+        "Rarity": 99,
+        "Price": 1996800
+    },
+    {
+        "Name": "Fire Faerie Usuki Set",
+        "Rarity": 99,
+        "Price": 1996800
+    },
+    {
+        "Name": "Dark Faerie Token",
+        "Rarity": 99,
+        "Price": 1996800
+    },
+    {
+        "Name": "Yellow Kookith T-Shirt",
+        "Rarity": 99,
+        "Price": 1996650
+    },
+    {
+        "Name": "I Love Tenna T-Shirt",
+        "Rarity": 99,
+        "Price": 1996600
+    },
+    {
+        "Name": "Rainbow Koi Morphing Potion",
+        "Rarity": 99,
+        "Price": 1996600
+    },
+    {
+        "Name": "Baby Kiko Morphing Potion",
+        "Rarity": 98,
+        "Price": 1995250
+    },
+    {
+        "Name": "Christmas Zafara Morphing Potion",
+        "Rarity": 98,
+        "Price": 1995001
+    },
+    {
+        "Name": "Green Krawk Morphing Potion",
+        "Rarity": 99,
+        "Price": 1995000
+    },
+    {
+        "Name": "Shadow Chomby Morphing Potion",
+        "Rarity": 99,
+        "Price": 1995000
+    },
+    {
+        "Name": "Cornupepper",
+        "Rarity": 99,
+        "Price": 1995000
+    },
+    {
+        "Name": "Yellow Zebba T-Shirt",
+        "Rarity": 99,
+        "Price": 1995000
+    },
+    {
+        "Name": "Murky Green",
+        "Rarity": 99,
+        "Price": 1994700
+    },
+    {
+        "Name": "Mega Lemon Blitz Smoothie",
+        "Rarity": 99,
+        "Price": 1994650
+    },
+    {
+        "Name": "Bubbling Lupe Potion",
+        "Rarity": 99,
+        "Price": 1994400
+    },
+    {
+        "Name": "You Will Get Verrucas!",
+        "Rarity": 99,
+        "Price": 1994201
+    },
+    {
+        "Name": "Vacumatic 9000",
+        "Rarity": 99,
+        "Price": 1994200
+    },
+    {
+        "Name": "Magical Starry Lupe Plushie",
+        "Rarity": 98,
+        "Price": 1993900
+    },
+    {
+        "Name": "Mouldy Cheese",
+        "Rarity": 99,
+        "Price": 1993750
+    },
+    {
+        "Name": "Rainbow Flotsam Morphing Potion",
+        "Rarity": 99,
+        "Price": 1993200
+    },
+    {
+        "Name": "Chocolate Coated Cheese",
+        "Rarity": 98,
+        "Price": 1992800
+    },
+    {
+        "Name": "Blugthak Stamp",
+        "Rarity": 96,
+        "Price": 1992600
+    },
+    {
+        "Name": "Desert Ixi Morphing Potion",
+        "Rarity": 99,
+        "Price": 1992600
+    },
+    {
+        "Name": "Magical Lemon Chia Pop",
+        "Rarity": 99,
+        "Price": 1992300
+    },
+    {
+        "Name": "Wraith Pteri Morphing Potion",
+        "Rarity": 99,
+        "Price": 1992300
+    },
+    {
+        "Name": "Cheeseburger Slushie",
+        "Rarity": 99,
+        "Price": 1991250
+    },
+    {
         "Name": "Mayor Thumburt Usuki",
         "Rarity": 99,
         "Price": 1950000
@@ -2965,6 +5205,21 @@ var item_db_array = [
         "Price": 1900000
     },
     {
+        "Name": "Swamp Lupe Neoquest Plushie",
+        "Rarity": 99,
+        "Price": 1900000
+    },
+    {
+        "Name": "Altador Travel Stamp",
+        "Rarity": 95,
+        "Price": 1898950
+    },
+    {
+        "Name": "Magical Purple Blumaroo Plushie",
+        "Rarity": 99,
+        "Price": 1860000
+    },
+    {
         "Name": "Halloween Bori Morphing Potion",
         "Rarity": 98,
         "Price": 1850000
@@ -2973,6 +5228,11 @@ var item_db_array = [
         "Name": "Starry Cupcake",
         "Rarity": 94,
         "Price": 1850000
+    },
+    {
+        "Name": "Gallery Of Toast",
+        "Rarity": 97,
+        "Price": 1848000
     },
     {
         "Name": "Baby Acara Morphing Potion",
@@ -3140,13 +5400,68 @@ var item_db_array = [
         "Price": 1800000
     },
     {
+        "Name": "Chia Art History",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Frozen Lizard Plushie",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Hannah Quiguki",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Jeran Quiguki",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Long Glowing Drawer",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Magical Blue Tonu Plushie",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Reject Green Acara Plushie",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Rikti Plushie",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "I Love Splyke T-Shirt",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Snowflake Pendant",
+        "Rarity": 99,
+        "Price": 1800000
+    },
+    {
+        "Name": "Yellow Chia Morphing Potion",
+        "Rarity": 99,
+        "Price": 1797800
+    },
+    {
         "Name": "Asparagus Pen",
         "Rarity": 99,
         "Price": 1750000
     },
     {
-        "Name": "Illusens Family Recipe Cake",
-        "Rarity": 93,
+        "Name": "Gruslens Galore",
+        "Rarity": 98,
         "Price": 1750000
     },
     {
@@ -3161,6 +5476,11 @@ var item_db_array = [
     },
     {
         "Name": "Yellow Gelert Morphing Potion",
+        "Rarity": 99,
+        "Price": 1750000
+    },
+    {
+        "Name": "Plushie Bruce Morphing Potion",
         "Rarity": 99,
         "Price": 1750000
     },
@@ -3260,6 +5580,11 @@ var item_db_array = [
         "Price": 1700000
     },
     {
+        "Name": "Uni Charm",
+        "Rarity": 99,
+        "Price": 1700000
+    },
+    {
         "Name": "Capn Threelegs Stamp",
         "Rarity": 95,
         "Price": 1600000
@@ -3290,8 +5615,8 @@ var item_db_array = [
         "Price": 1600000
     },
     {
-        "Name": "Gruslens Galore",
-        "Rarity": 98,
+        "Name": "Illusens Family Recipe Cake",
+        "Rarity": 93,
         "Price": 1600000
     },
     {
@@ -3347,6 +5672,11 @@ var item_db_array = [
     {
         "Name": "Wing of Korbat",
         "Rarity": 99,
+        "Price": 1600000
+    },
+    {
+        "Name": "Woodland Draik Morphing Potion",
+        "Rarity": 98,
         "Price": 1600000
     },
     {
@@ -3560,11 +5890,6 @@ var item_db_array = [
         "Price": 1500000
     },
     {
-        "Name": "Grey Kacheek Plushie",
-        "Rarity": 98,
-        "Price": 1500000
-    },
-    {
         "Name": "Halloween Eyrie Morphing Potion",
         "Rarity": 98,
         "Price": 1500000
@@ -3765,6 +6090,11 @@ var item_db_array = [
         "Price": 1500000
     },
     {
+        "Name": "Usuki Artist Set",
+        "Rarity": 99,
+        "Price": 1500000
+    },
+    {
         "Name": "Veespa",
         "Rarity": 99,
         "Price": 1500000
@@ -3805,6 +6135,81 @@ var item_db_array = [
         "Price": 1500000
     },
     {
+        "Name": "Blue Doglefox Plushie",
+        "Rarity": 99,
+        "Price": 1500000
+    },
+    {
+        "Name": "Disco Print Bed",
+        "Rarity": 99,
+        "Price": 1500000
+    },
+    {
+        "Name": "French Onion Soup",
+        "Rarity": 99,
+        "Price": 1500000
+    },
+    {
+        "Name": "Pop Star Quiguki",
+        "Rarity": 99,
+        "Price": 1500000
+    },
+    {
+        "Name": "Robo Blumaroo",
+        "Rarity": 99,
+        "Price": 1500000
+    },
+    {
+        "Name": "Year 9 Quiguki",
+        "Rarity": 99,
+        "Price": 1500000
+    },
+    {
+        "Name": "Blue Acara Slingshot",
+        "Rarity": 99,
+        "Price": 1500000
+    },
+    {
+        "Name": "Rohane Plushie",
+        "Rarity": 97,
+        "Price": 1499840
+    },
+    {
+        "Name": "Roe Sushi",
+        "Rarity": 99,
+        "Price": 1499240
+    },
+    {
+        "Name": "Usuki Buzzer Set",
+        "Rarity": 99,
+        "Price": 1499100
+    },
+    {
+        "Name": "Ruby Krawk Shield",
+        "Rarity": 99,
+        "Price": 1498770
+    },
+    {
+        "Name": "I Love Hornsby T-Shirt",
+        "Rarity": 99,
+        "Price": 1498000
+    },
+    {
+        "Name": "Tigersquash",
+        "Rarity": 99,
+        "Price": 1496950
+    },
+    {
+        "Name": "Skunk Draik Morphing Potion",
+        "Rarity": 98,
+        "Price": 1496250
+    },
+    {
+        "Name": "Rainbow Chomby Morphing Potion",
+        "Rarity": 99,
+        "Price": 1494250
+    },
+    {
         "Name": "Darigan Kyrii Morphing Potion",
         "Rarity": 99,
         "Price": 1475000
@@ -3835,11 +6240,6 @@ var item_db_array = [
         "Price": 1400000
     },
     {
-        "Name": "Fire Draik Morphing Potion",
-        "Rarity": 99,
-        "Price": 1400000
-    },
-    {
         "Name": "Ghost Draik Morphing Potion",
         "Rarity": 99,
         "Price": 1400000
@@ -3850,6 +6250,11 @@ var item_db_array = [
         "Price": 1400000
     },
     {
+        "Name": "Grey Kacheek Plushie",
+        "Rarity": 98,
+        "Price": 1400000
+    },
+    {
         "Name": "Grundo Tales",
         "Rarity": 99,
         "Price": 1400000
@@ -3857,6 +6262,11 @@ var item_db_array = [
     {
         "Name": "Headless Horsefish",
         "Rarity": 100,
+        "Price": 1400000
+    },
+    {
+        "Name": "Illusens Hip Blade",
+        "Rarity": 99,
         "Price": 1400000
     },
     {
@@ -3945,6 +6355,16 @@ var item_db_array = [
         "Price": 1400000
     },
     {
+        "Name": "Negg Faerie Snowglobe",
+        "Rarity": 98,
+        "Price": 1400000
+    },
+    {
+        "Name": "Pyramid Strawberry",
+        "Rarity": 99,
+        "Price": 1400000
+    },
+    {
         "Name": "Aethia Stamp",
         "Rarity": 95,
         "Price": 1350000
@@ -3990,11 +6410,6 @@ var item_db_array = [
         "Price": 1300000
     },
     {
-        "Name": "Darigan Grarrl Morphing Potion",
-        "Rarity": 99,
-        "Price": 1300000
-    },
-    {
         "Name": "Faerie Aisha Morphing Potion",
         "Rarity": 98,
         "Price": 1300000
@@ -4021,11 +6436,6 @@ var item_db_array = [
     },
     {
         "Name": "Grundo Backpack",
-        "Rarity": 99,
-        "Price": 1300000
-    },
-    {
-        "Name": "Illusens Hip Blade",
         "Rarity": 99,
         "Price": 1300000
     },
@@ -4086,6 +6496,11 @@ var item_db_array = [
     },
     {
         "Name": "Transparent Elephante Morphing Potion",
+        "Rarity": 99,
+        "Price": 1300000
+    },
+    {
+        "Name": "Artichoke and Onion Surprise",
         "Rarity": 99,
         "Price": 1300000
     },
@@ -4230,11 +6645,6 @@ var item_db_array = [
         "Price": 1200000
     },
     {
-        "Name": "Woodland Draik Morphing Potion",
-        "Rarity": 98,
-        "Price": 1200000
-    },
-    {
         "Name": "Yellow Lupe Morphing Potion",
         "Rarity": 99,
         "Price": 1200000
@@ -4242,6 +6652,11 @@ var item_db_array = [
     {
         "Name": "Zafara Double Agent Stamp",
         "Rarity": 96,
+        "Price": 1200000
+    },
+    {
+        "Name": "Tomato Kebab",
+        "Rarity": 99,
         "Price": 1200000
     },
     {
@@ -4267,6 +6682,11 @@ var item_db_array = [
     {
         "Name": "Magical Orange Chia Pop",
         "Rarity": 99,
+        "Price": 1000000
+    },
+    {
+        "Name": "Faerie Secrets",
+        "Rarity": 98,
         "Price": 1000000
     },
     {
@@ -4540,6 +6960,196 @@ var item_db_array = [
         "Price": 999999
     },
     {
+        "Name": "Blade of Ultranova",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Cheese Chair",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "I Love Chezzoom T-Shirt",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Magical Yellow Tonu Plushie",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Moehog Matching",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Orange Jelly Guitar",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Orange Lightmite Lollypop",
+        "Rarity": 98,
+        "Price": 999999
+    },
+    {
+        "Name": "Ornate Ivory Love Spoon",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Pink Walein T-Shirt",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Red Wocky Balloon",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Stealthy Pencil Case",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Nova Blade",
+        "Rarity": 99,
+        "Price": 999999
+    },
+    {
+        "Name": "Cherry Mootix Lollypop",
+        "Rarity": 97,
+        "Price": 999999
+    },
+    {
+        "Name": "King Altador Kite",
+        "Rarity": 98,
+        "Price": 999990
+    },
+    {
+        "Name": "Gruundo Fan Usuki",
+        "Rarity": 98,
+        "Price": 999765
+    },
+    {
+        "Name": "Glyme Plushie",
+        "Rarity": 92,
+        "Price": 999707
+    },
+    {
+        "Name": "Hanso Lunchbox",
+        "Rarity": 98,
+        "Price": 999666
+    },
+    {
+        "Name": "Xweetok Popstar Earrings",
+        "Rarity": 90,
+        "Price": 999600
+    },
+    {
+        "Name": "Medieval Armour",
+        "Rarity": 90,
+        "Price": 999490
+    },
+    {
+        "Name": "Fire Quiggle Morphing Potion",
+        "Rarity": 99,
+        "Price": 999460
+    },
+    {
+        "Name": "Strength Serum",
+        "Rarity": 95,
+        "Price": 999400
+    },
+    {
+        "Name": "Exploring Kreludor Background",
+        "Rarity": 88,
+        "Price": 999400
+    },
+    {
+        "Name": "Forbidden Plunder",
+        "Rarity": 100,
+        "Price": 999351
+    },
+    {
+        "Name": "Tylix Plushie",
+        "Rarity": 98,
+        "Price": 999190
+    },
+    {
+        "Name": "Christmas Blumaroo Morphing Potion",
+        "Rarity": 99,
+        "Price": 999000
+    },
+    {
+        "Name": "I Love Khamette T-Shirt",
+        "Rarity": 99,
+        "Price": 999000
+    },
+    {
+        "Name": "Flotsam Chestplate of the Champion",
+        "Rarity": 99,
+        "Price": 999000
+    },
+    {
+        "Name": "Meepit",
+        "Rarity": 98,
+        "Price": 998800
+    },
+    {
+        "Name": "Full Acara Armour",
+        "Rarity": 99,
+        "Price": 998760
+    },
+    {
+        "Name": "Full Mynci Armour",
+        "Rarity": 99,
+        "Price": 998640
+    },
+    {
+        "Name": "Christmas Peophin Morphing Potion",
+        "Rarity": 98,
+        "Price": 998400
+    },
+    {
+        "Name": "Spirkle",
+        "Rarity": 99,
+        "Price": 998400
+    },
+    {
+        "Name": "Yellow Draik Egg",
+        "Rarity": 97,
+        "Price": 998300
+    },
+    {
+        "Name": "Grey Peophin Plushie",
+        "Rarity": 98,
+        "Price": 998000
+    },
+    {
+        "Name": "Fiery Throwing Marble",
+        "Rarity": 99,
+        "Price": 997200
+    },
+    {
+        "Name": "Chomby Lucky Charm Bracelet",
+        "Rarity": 99,
+        "Price": 997150
+    },
+    {
+        "Name": "Black Bearog Plushie",
+        "Rarity": 98,
+        "Price": 997100
+    },
+    {
+        "Name": "Scroll of the Ancients",
+        "Rarity": 98,
+        "Price": 996001
+    },
+    {
         "Name": "Blue Blumaroo Morphing Potion",
         "Rarity": 99,
         "Price": 995000
@@ -4570,6 +7180,16 @@ var item_db_array = [
         "Price": 995000
     },
     {
+        "Name": "Last Avocado Bomb",
+        "Rarity": 99,
+        "Price": 994500
+    },
+    {
+        "Name": "Christmas Grundo Morphing Potion",
+        "Rarity": 99,
+        "Price": 994051
+    },
+    {
         "Name": "Archie Kiko Shirt",
         "Rarity": 82,
         "Price": 990000
@@ -4595,6 +7215,11 @@ var item_db_array = [
         "Price": 990000
     },
     {
+        "Name": "Neopian Atlas",
+        "Rarity": 97,
+        "Price": 990000
+    },
+    {
         "Name": "Peophin Power!",
         "Rarity": 96,
         "Price": 990000
@@ -4603,6 +7228,31 @@ var item_db_array = [
         "Name": "Tyrannian Ixi Morphing Potion",
         "Rarity": 98,
         "Price": 990000
+    },
+    {
+        "Name": "Tyrannian Concert Hall Background",
+        "Rarity": 95,
+        "Price": 990000
+    },
+    {
+        "Name": "Staff of Dark Nova",
+        "Rarity": 98,
+        "Price": 990000
+    },
+    {
+        "Name": "King Roo Plushie",
+        "Rarity": 97,
+        "Price": 989920
+    },
+    {
+        "Name": "Altador Golf Club",
+        "Rarity": 98,
+        "Price": 989870
+    },
+    {
+        "Name": "Shadow Ogrin Morphing Potion",
+        "Rarity": 99,
+        "Price": 989400
     },
     {
         "Name": "Blade of the Battle Faerie",
@@ -4615,6 +7265,21 @@ var item_db_array = [
         "Price": 985000
     },
     {
+        "Name": "Cheese Mat",
+        "Rarity": 99,
+        "Price": 985000
+    },
+    {
+        "Name": "Scorchio Calculator",
+        "Rarity": 99,
+        "Price": 985000
+    },
+    {
+        "Name": "Greater Elemental Potion",
+        "Rarity": 99,
+        "Price": 984900
+    },
+    {
         "Name": "Deciphering Your Dreams",
         "Rarity": 96,
         "Price": 980000
@@ -4623,6 +7288,36 @@ var item_db_array = [
         "Name": "I Love Scarabug T-Shirt",
         "Rarity": 99,
         "Price": 980000
+    },
+    {
+        "Name": "Baby Gnorbu Morphing Potion",
+        "Rarity": 99,
+        "Price": 980000
+    },
+    {
+        "Name": "I Love Kadoatie T-Shirt",
+        "Rarity": 99,
+        "Price": 980000
+    },
+    {
+        "Name": "Kougra Classics",
+        "Rarity": 99,
+        "Price": 980000
+    },
+    {
+        "Name": "Secret Faerie Diary",
+        "Rarity": 98,
+        "Price": 979650
+    },
+    {
+        "Name": "Royal Boy Ixi Plushie",
+        "Rarity": 98,
+        "Price": 979200
+    },
+    {
+        "Name": "Ornate Buzz Stinger",
+        "Rarity": 99,
+        "Price": 976800
     },
     {
         "Name": "Barnacle Bills Belt Busting Burger",
@@ -4660,6 +7355,41 @@ var item_db_array = [
         "Price": 975000
     },
     {
+        "Name": "Mutant Golf Club",
+        "Rarity": 99,
+        "Price": 975000
+    },
+    {
+        "Name": "Snot Blocks",
+        "Rarity": 99,
+        "Price": 975000
+    },
+    {
+        "Name": "On the Go Cybunny Makeup",
+        "Rarity": 95,
+        "Price": 975000
+    },
+    {
+        "Name": "Princess Sankara",
+        "Rarity": 93,
+        "Price": 975000
+    },
+    {
+        "Name": "Meepit Eyes Slap Bracelet",
+        "Rarity": 98,
+        "Price": 974830
+    },
+    {
+        "Name": "C430 Autobot",
+        "Rarity": 99,
+        "Price": 974160
+    },
+    {
+        "Name": "Thornberry",
+        "Rarity": 99,
+        "Price": 973500
+    },
+    {
         "Name": "Hogshead",
         "Rarity": 100,
         "Price": 970000
@@ -4680,6 +7410,31 @@ var item_db_array = [
         "Price": 970000
     },
     {
+        "Name": "Faerie Korbat Plushie",
+        "Rarity": 99,
+        "Price": 970000
+    },
+    {
+        "Name": "Mechanoid Warrior",
+        "Rarity": 96,
+        "Price": 970000
+    },
+    {
+        "Name": "Camouflage Lenny Morphing Potion",
+        "Rarity": 98,
+        "Price": 969400
+    },
+    {
+        "Name": "Darigan Globe",
+        "Rarity": 99,
+        "Price": 969000
+    },
+    {
+        "Name": "Dimensional Kougra Morphing Potion",
+        "Rarity": 98,
+        "Price": 966350
+    },
+    {
         "Name": "Chocolate Stuffed Pastry",
         "Rarity": 98,
         "Price": 965000
@@ -4695,6 +7450,11 @@ var item_db_array = [
         "Price": 965000
     },
     {
+        "Name": "Erisim T-Shirt",
+        "Rarity": 99,
+        "Price": 965000
+    },
+    {
         "Name": "Chocolate Joy Fun Pop",
         "Rarity": 100,
         "Price": 960000
@@ -4703,6 +7463,11 @@ var item_db_array = [
         "Name": "Light Faerie Mushroom",
         "Rarity": 98,
         "Price": 960000
+    },
+    {
+        "Name": "Sack of Garlic Powder",
+        "Rarity": 99,
+        "Price": 959001
     },
     {
         "Name": "Baby Ixi Death Blue Aura",
@@ -4765,6 +7530,46 @@ var item_db_array = [
         "Price": 950000
     },
     {
+        "Name": "Illusen Plushie",
+        "Rarity": 96,
+        "Price": 950000
+    },
+    {
+        "Name": "Fiery Spine of Death",
+        "Rarity": 99,
+        "Price": 949980
+    },
+    {
+        "Name": "Green Quiggle Morphing Potion",
+        "Rarity": 99,
+        "Price": 949440
+    },
+    {
+        "Name": "Island Peophin Plushie",
+        "Rarity": 98,
+        "Price": 949091
+    },
+    {
+        "Name": "Asparagus Chia Plushie",
+        "Rarity": 92,
+        "Price": 948720
+    },
+    {
+        "Name": "Rainbow Pencil",
+        "Rarity": 99,
+        "Price": 948690
+    },
+    {
+        "Name": "Rainbow Uni Morphing Potion",
+        "Rarity": 98,
+        "Price": 948550
+    },
+    {
+        "Name": "Yellow Blumaroo Morphing Potion",
+        "Rarity": 99,
+        "Price": 948500
+    },
+    {
         "Name": "Blueberry and Oyster Ice Cream",
         "Rarity": 100,
         "Price": 945000
@@ -4795,14 +7600,19 @@ var item_db_array = [
         "Price": 940000
     },
     {
-        "Name": "Chocolate Coated Cheese",
+        "Name": "Red Ruki Morphing Potion",
         "Rarity": 98,
         "Price": 940000
     },
     {
-        "Name": "Red Ruki Morphing Potion",
-        "Rarity": 98,
-        "Price": 940000
+        "Name": "Green Techo Bow",
+        "Rarity": 99,
+        "Price": 938830
+    },
+    {
+        "Name": "Mr. Chuckles",
+        "Rarity": 96,
+        "Price": 937500
     },
     {
         "Name": "Green Ixi Morphing Potion",
@@ -4820,6 +7630,21 @@ var item_db_array = [
         "Price": 935000
     },
     {
+        "Name": "Teenage Usuki Reject",
+        "Rarity": 99,
+        "Price": 935000
+    },
+    {
+        "Name": "Year 8 Usuki",
+        "Rarity": 99,
+        "Price": 935000
+    },
+    {
+        "Name": "Mistletoe Potion",
+        "Rarity": 99,
+        "Price": 933180
+    },
+    {
         "Name": "Blue Picnic Hamper",
         "Rarity": 97,
         "Price": 930000
@@ -4828,6 +7653,16 @@ var item_db_array = [
         "Name": "Pteri Dagger",
         "Rarity": 99,
         "Price": 930000
+    },
+    {
+        "Name": "Slimy Tree",
+        "Rarity": 99,
+        "Price": 930000
+    },
+    {
+        "Name": "Therapeutic Swamp Water",
+        "Rarity": 98,
+        "Price": 928800
     },
     {
         "Name": "12 Angry Myncies",
@@ -4920,6 +7755,11 @@ var item_db_array = [
         "Price": 905000
     },
     {
+        "Name": "Zafara Lore",
+        "Rarity": 98,
+        "Price": 905000
+    },
+    {
         "Name": "Aisha Space Suit",
         "Rarity": 94,
         "Price": 900000
@@ -4973,6 +7813,66 @@ var item_db_array = [
         "Name": "The Joys of Cooking with Magma",
         "Rarity": 97,
         "Price": 900000
+    },
+    {
+        "Name": "White Ixi Plushie",
+        "Rarity": 99,
+        "Price": 900000
+    },
+    {
+        "Name": "Blue Acara Morphing Potion",
+        "Rarity": 99,
+        "Price": 900000
+    },
+    {
+        "Name": "Cone-Shaped Lemon",
+        "Rarity": 98,
+        "Price": 900000
+    },
+    {
+        "Name": "Purple Aisha Morphing Potion",
+        "Rarity": 98,
+        "Price": 899970
+    },
+    {
+        "Name": "Evil Twin Yellow Chia Plushie",
+        "Rarity": 98,
+        "Price": 899910
+    },
+    {
+        "Name": "Leaded Water Vial",
+        "Rarity": 99,
+        "Price": 899600
+    },
+    {
+        "Name": "Fire JubJub Plushie",
+        "Rarity": 96,
+        "Price": 899600
+    },
+    {
+        "Name": "Yellow Lenny Morphing Potion",
+        "Rarity": 99,
+        "Price": 899361
+    },
+    {
+        "Name": "Scary Spider",
+        "Rarity": 99,
+        "Price": 899000
+    },
+    {
+        "Name": "Mini Throwing Toasts",
+        "Rarity": 99,
+        "Price": 898720
+    },
+    {
+        "Name": "Cloud Lenny Morphing Potion",
+        "Rarity": 99,
+        "Price": 898220
+    },
+    {
+        "Name": "Magical Hair Usuki Reject",
+        "Rarity": 99,
+        "Price": 897600
     },
     {
         "Name": "Book of Fake Scratchcards",
@@ -5045,6 +7945,21 @@ var item_db_array = [
         "Price": 890000
     },
     {
+        "Name": "Ghost Ixi Plushie",
+        "Rarity": 97,
+        "Price": 890000
+    },
+    {
+        "Name": "Wooden Krawk Shield",
+        "Rarity": 99,
+        "Price": 889440
+    },
+    {
+        "Name": "Armin Plushie",
+        "Rarity": 98,
+        "Price": 889000
+    },
+    {
         "Name": "Baby Grundo Morphing Potion",
         "Rarity": 98,
         "Price": 885000
@@ -5070,9 +7985,39 @@ var item_db_array = [
         "Price": 885000
     },
     {
+        "Name": "Lutari Aristocrat Shoes",
+        "Rarity": 96,
+        "Price": 884846
+    },
+    {
+        "Name": "Christmas Uni Morphing Potion",
+        "Rarity": 99,
+        "Price": 884511
+    },
+    {
         "Name": "Ixi Forest Cape",
         "Rarity": 96,
         "Price": 880000
+    },
+    {
+        "Name": "Lenny Salad",
+        "Rarity": 97,
+        "Price": 880000
+    },
+    {
+        "Name": "Kougra Wool Bomb",
+        "Rarity": 99,
+        "Price": 879360
+    },
+    {
+        "Name": "Maraquan Pop-Up Book",
+        "Rarity": 90,
+        "Price": 878900
+    },
+    {
+        "Name": "Treasure Seekers",
+        "Rarity": 97,
+        "Price": 877250
     },
     {
         "Name": "Acara Ice Cream Surprise",
@@ -5100,6 +8045,26 @@ var item_db_array = [
         "Price": 875000
     },
     {
+        "Name": "Jungle Aisha Hat",
+        "Rarity": 96,
+        "Price": 874500
+    },
+    {
+        "Name": "King Roo",
+        "Rarity": 97,
+        "Price": 874170
+    },
+    {
+        "Name": "Virtublaster 5000",
+        "Rarity": 99,
+        "Price": 873740
+    },
+    {
+        "Name": "The Magic of The Healing Springs",
+        "Rarity": 98,
+        "Price": 873600
+    },
+    {
         "Name": "3D Glasses",
         "Rarity": 98,
         "Price": 870000
@@ -5107,6 +8072,11 @@ var item_db_array = [
     {
         "Name": "Big Beefy Hot Dog",
         "Rarity": 99,
+        "Price": 870000
+    },
+    {
+        "Name": "Illusen Wings",
+        "Rarity": 87,
         "Price": 870000
     },
     {
@@ -5121,6 +8091,11 @@ var item_db_array = [
     },
     {
         "Name": "Potato Potion",
+        "Rarity": 99,
+        "Price": 870000
+    },
+    {
+        "Name": "Staff of Garlicness",
         "Rarity": 99,
         "Price": 870000
     },
@@ -5143,6 +8118,11 @@ var item_db_array = [
         "Name": "Peophin Seadragon Fruit Body",
         "Rarity": 87,
         "Price": 865000
+    },
+    {
+        "Name": "Milk Maid Kau Blouse",
+        "Rarity": 96,
+        "Price": 864270
     },
     {
         "Name": "Disco Acara Morphing Potion",
@@ -5215,9 +8195,29 @@ var item_db_array = [
         "Price": 850000
     },
     {
-        "Name": "Usuki Artist Set",
-        "Rarity": 99,
+        "Name": "Jake Plushie",
+        "Rarity": 96,
         "Price": 850000
+    },
+    {
+        "Name": "Doctor Plushie",
+        "Rarity": 98,
+        "Price": 849870
+    },
+    {
+        "Name": "Kau Waffles",
+        "Rarity": 92,
+        "Price": 849850
+    },
+    {
+        "Name": "Keel Haul",
+        "Rarity": 100,
+        "Price": 849420
+    },
+    {
+        "Name": "Red Eyrie Morphing Potion",
+        "Rarity": 99,
+        "Price": 849150
     },
     {
         "Name": "Faerie Tuskaninny Morphing Potion",
@@ -5235,13 +8235,13 @@ var item_db_array = [
         "Price": 845000
     },
     {
-        "Name": "Island Peophin Morphing Potion",
+        "Name": "Magical Yellow Nimmo Plushie",
         "Rarity": 99,
-        "Price": 840000
+        "Price": 845000
     },
     {
-        "Name": "Uni Neon Tail Accessory",
-        "Rarity": 87,
+        "Name": "Island Peophin Morphing Potion",
+        "Rarity": 99,
         "Price": 840000
     },
     {
@@ -5250,9 +8250,9 @@ var item_db_array = [
         "Price": 840000
     },
     {
-        "Name": "Elegant Lutari Gloves",
-        "Rarity": 98,
-        "Price": 835000
+        "Name": "Light Faerie Dust",
+        "Rarity": 99,
+        "Price": 839790
     },
     {
         "Name": "Potion of Doldrums",
@@ -5270,14 +8270,14 @@ var item_db_array = [
         "Price": 830000
     },
     {
-        "Name": "Uni Neon Hair Accessory",
-        "Rarity": 87,
-        "Price": 830000
-    },
-    {
         "Name": "Walk The Plank",
         "Rarity": 100,
         "Price": 830000
+    },
+    {
+        "Name": "Lupe Grabber Jaw",
+        "Rarity": 99,
+        "Price": 829480
     },
     {
         "Name": "Carrot Crown",
@@ -5300,6 +8300,21 @@ var item_db_array = [
         "Price": 825000
     },
     {
+        "Name": "Uni Neon Hair Accessory",
+        "Rarity": 87,
+        "Price": 825000
+    },
+    {
+        "Name": "Magical Yellow Kyrii Plushie",
+        "Rarity": 98,
+        "Price": 824670
+    },
+    {
+        "Name": "Jahbal",
+        "Rarity": 94,
+        "Price": 824600
+    },
+    {
         "Name": "Archie Kiko Gloves",
         "Rarity": 82,
         "Price": 820000
@@ -5307,6 +8322,11 @@ var item_db_array = [
     {
         "Name": "Cake Recipes for All Occasions",
         "Rarity": 97,
+        "Price": 820000
+    },
+    {
+        "Name": "Christmas Chomby Morphing Potion",
+        "Rarity": 98,
         "Price": 820000
     },
     {
@@ -5325,6 +8345,26 @@ var item_db_array = [
         "Price": 820000
     },
     {
+        "Name": "Illusen Fan Grarrl Plushie",
+        "Rarity": 94,
+        "Price": 820000
+    },
+    {
+        "Name": "Meridell Toy Box",
+        "Rarity": 99,
+        "Price": 819999
+    },
+    {
+        "Name": "Gothic Kougra Wig",
+        "Rarity": 94,
+        "Price": 819360
+    },
+    {
+        "Name": "Magical Yellow Flotsam Plushie",
+        "Rarity": 98,
+        "Price": 817600
+    },
+    {
         "Name": "Pirate Chomby Morphing Potion",
         "Rarity": 98,
         "Price": 815000
@@ -5338,6 +8378,11 @@ var item_db_array = [
         "Name": "Starry Usul Morphing Potion",
         "Rarity": 97,
         "Price": 810000
+    },
+    {
+        "Name": "Cloak of Night",
+        "Rarity": 99,
+        "Price": 808520
     },
     {
         "Name": "Dark Faerie Bow",
@@ -5415,6 +8460,51 @@ var item_db_array = [
         "Price": 800000
     },
     {
+        "Name": "Glowing Mirror",
+        "Rarity": 99,
+        "Price": 800000
+    },
+    {
+        "Name": "Magical Red Kyrii Plushie",
+        "Rarity": 98,
+        "Price": 799900
+    },
+    {
+        "Name": "Diadem of the Deep",
+        "Rarity": 88,
+        "Price": 799821
+    },
+    {
+        "Name": "Extreme Potato Counting Shower",
+        "Rarity": 97,
+        "Price": 799680
+    },
+    {
+        "Name": "Yellow Kougra Morphing Potion",
+        "Rarity": 98,
+        "Price": 799470
+    },
+    {
+        "Name": "Green Poogle Morphing Potion",
+        "Rarity": 99,
+        "Price": 799450
+    },
+    {
+        "Name": "The Soup Faerie",
+        "Rarity": 96,
+        "Price": 799220
+    },
+    {
+        "Name": "Krawk Wizard Beard",
+        "Rarity": 96,
+        "Price": 799200
+    },
+    {
+        "Name": "Striped Korbat Plushie",
+        "Rarity": 98,
+        "Price": 797500
+    },
+    {
         "Name": "Baby Poogle Morphing Potion",
         "Rarity": 98,
         "Price": 795000
@@ -5440,8 +8530,33 @@ var item_db_array = [
         "Price": 795000
     },
     {
+        "Name": "Uni Neon Tail Accessory",
+        "Rarity": 87,
+        "Price": 795000
+    },
+    {
+        "Name": "Blue Khonsu T-Shirt",
+        "Rarity": 99,
+        "Price": 795000
+    },
+    {
+        "Name": "Khonsu",
+        "Rarity": 99,
+        "Price": 795000
+    },
+    {
+        "Name": "Skunk Eyrie Morphing Potion",
+        "Rarity": 99,
+        "Price": 795000
+    },
+    {
         "Name": "Bilge Rat Madeira",
         "Rarity": 100,
+        "Price": 790000
+    },
+    {
+        "Name": "Blue Hissi Morphing Potion",
+        "Rarity": 96,
         "Price": 790000
     },
     {
@@ -5460,6 +8575,11 @@ var item_db_array = [
         "Price": 790000
     },
     {
+        "Name": "Green Chomby Morphing Potion",
+        "Rarity": 98,
+        "Price": 790000
+    },
+    {
         "Name": "Island Poogle Morphing Potion",
         "Rarity": 99,
         "Price": 790000
@@ -5468,6 +8588,16 @@ var item_db_array = [
         "Name": "Yellow Acara Morphing Potion",
         "Rarity": 99,
         "Price": 790000
+    },
+    {
+        "Name": "Faleinn Plushie",
+        "Rarity": 99,
+        "Price": 790000
+    },
+    {
+        "Name": "Buttered Croissant",
+        "Rarity": 78,
+        "Price": 789875
     },
     {
         "Name": "Blue PaintBrush Cookie",
@@ -5490,13 +8620,13 @@ var item_db_array = [
         "Price": 785000
     },
     {
-        "Name": "Chomby Poems",
-        "Rarity": 96,
-        "Price": 780000
+        "Name": "Super Sand Grain",
+        "Rarity": 99,
+        "Price": 783001
     },
     {
-        "Name": "Fire Faerie Usuki Set",
-        "Rarity": 99,
+        "Name": "Chomby Poems",
+        "Rarity": 96,
         "Price": 780000
     },
     {
@@ -5513,6 +8643,16 @@ var item_db_array = [
         "Name": "Yellow Moltenore T-Shirt",
         "Rarity": 99,
         "Price": 780000
+    },
+    {
+        "Name": "Essence of Mortog",
+        "Rarity": 97,
+        "Price": 779880
+    },
+    {
+        "Name": "Clockwork Nimmo",
+        "Rarity": 99,
+        "Price": 779650
     },
     {
         "Name": "Irate Zafara Claw",
@@ -5533,6 +8673,11 @@ var item_db_array = [
         "Name": "Hasee T-Shirt",
         "Rarity": 99,
         "Price": 770000
+    },
+    {
+        "Name": "Blue Acara Bow",
+        "Rarity": 99,
+        "Price": 768500
     },
     {
         "Name": "Blue Draik Egg",
@@ -5565,11 +8710,6 @@ var item_db_array = [
         "Price": 760000
     },
     {
-        "Name": "Illusen Wings",
-        "Rarity": 87,
-        "Price": 760000
-    },
-    {
         "Name": "Kiko Throwing Plasters",
         "Rarity": 99,
         "Price": 760000
@@ -5578,6 +8718,16 @@ var item_db_array = [
         "Name": "Green Ruki Morphing Potion",
         "Rarity": 98,
         "Price": 755000
+    },
+    {
+        "Name": "Ghost Kiko Morphing Potion",
+        "Rarity": 99,
+        "Price": 755000
+    },
+    {
+        "Name": "Silver Shoyru Morphing Potion",
+        "Rarity": 97,
+        "Price": 754200
     },
     {
         "Name": "Faerie Skeith Morphing Potion",
@@ -5600,11 +8750,6 @@ var item_db_array = [
         "Price": 750000
     },
     {
-        "Name": "Neopian Atlas",
-        "Rarity": 97,
-        "Price": 750000
-    },
-    {
         "Name": "Plushie Mynci Morphing Potion",
         "Rarity": 98,
         "Price": 750000
@@ -5615,6 +8760,76 @@ var item_db_array = [
         "Price": 750000
     },
     {
+        "Name": "Purple Cybunny Negg",
+        "Rarity": 89,
+        "Price": 750000
+    },
+    {
+        "Name": "Kaylas Chemistry Set",
+        "Rarity": 96,
+        "Price": 749760
+    },
+    {
+        "Name": "Maraquan Draik Cloak",
+        "Rarity": 99,
+        "Price": 749700
+    },
+    {
+        "Name": "Sharpened Hook",
+        "Rarity": 99,
+        "Price": 749700
+    },
+    {
+        "Name": "Babyca",
+        "Rarity": 97,
+        "Price": 749420
+    },
+    {
+        "Name": "Cleaning Technology",
+        "Rarity": 89,
+        "Price": 749300
+    },
+    {
+        "Name": "Full Shoyru Armour",
+        "Rarity": 99,
+        "Price": 749250
+    },
+    {
+        "Name": "Full Moehog Armour",
+        "Rarity": 99,
+        "Price": 748800
+    },
+    {
+        "Name": "Obliteratoes",
+        "Rarity": 98,
+        "Price": 748800
+    },
+    {
+        "Name": "Eventide Korbat Morphing Potion",
+        "Rarity": 98,
+        "Price": 748670
+    },
+    {
+        "Name": "Purple Tonu Morphing Potion",
+        "Rarity": 99,
+        "Price": 748200
+    },
+    {
+        "Name": "Lavaberry",
+        "Rarity": 99,
+        "Price": 748000
+    },
+    {
+        "Name": "Island Korbat Morphing Potion",
+        "Rarity": 99,
+        "Price": 747900
+    },
+    {
+        "Name": "Elegant Lutari Gloves",
+        "Rarity": 98,
+        "Price": 745000
+    },
+    {
         "Name": "Magical Red Flotsam Plushie",
         "Rarity": 98,
         "Price": 745000
@@ -5623,6 +8838,21 @@ var item_db_array = [
         "Name": "Tyrannian Usul Morphing Potion",
         "Rarity": 98,
         "Price": 745000
+    },
+    {
+        "Name": "The Pant Devil",
+        "Rarity": 96,
+        "Price": 744950
+    },
+    {
+        "Name": "Peophin Emblazoned Maractite Shield",
+        "Rarity": 99,
+        "Price": 744000
+    },
+    {
+        "Name": "Garrox5 The Grundo Trooper",
+        "Rarity": 97,
+        "Price": 743400
     },
     {
         "Name": "Cybunny Day Canape",
@@ -5653,6 +8883,16 @@ var item_db_array = [
         "Name": "Yurble Forest Blade",
         "Rarity": 99,
         "Price": 740000
+    },
+    {
+        "Name": "Collectable Usuki Enthusiast Usuki",
+        "Rarity": 98,
+        "Price": 739900
+    },
+    {
+        "Name": "Meerca Speed Potion",
+        "Rarity": 99,
+        "Price": 739750
     },
     {
         "Name": "Cybunny Care",
@@ -5765,6 +9005,11 @@ var item_db_array = [
         "Price": 715000
     },
     {
+        "Name": "Sugar Tonu Skull",
+        "Rarity": 97,
+        "Price": 715000
+    },
+    {
         "Name": "Full Grarrl Armour",
         "Rarity": 99,
         "Price": 710000
@@ -5870,6 +9115,31 @@ var item_db_array = [
         "Price": 700000
     },
     {
+        "Name": "Dr Sloth Pond",
+        "Rarity": 98,
+        "Price": 699867
+    },
+    {
+        "Name": "Black Long Sleeved Cape",
+        "Rarity": 99,
+        "Price": 699840
+    },
+    {
+        "Name": "Blue Nimmo Boots",
+        "Rarity": 99,
+        "Price": 699819
+    },
+    {
+        "Name": "Grey Lupe Neoquest Plushie",
+        "Rarity": 96,
+        "Price": 699720
+    },
+    {
+        "Name": "Christmas Korbat Morphing Potion",
+        "Rarity": 99,
+        "Price": 699300
+    },
+    {
         "Name": "Lupe Legends",
         "Rarity": 96,
         "Price": 695000
@@ -5888,6 +9158,11 @@ var item_db_array = [
         "Name": "Turtum Coin",
         "Rarity": 97,
         "Price": 695000
+    },
+    {
+        "Name": "Dirt Golem Neoquest Plushie",
+        "Rarity": 95,
+        "Price": 694950
     },
     {
         "Name": "Blue Kiko Morphing Potion",
@@ -5918,6 +9193,11 @@ var item_db_array = [
         "Name": "Woodland Grundo Morphing Potion",
         "Rarity": 98,
         "Price": 685000
+    },
+    {
+        "Name": "Vinyl Darigan Cybunny Toy",
+        "Rarity": 98,
+        "Price": 684981
     },
     {
         "Name": "Black Caviar",
@@ -5970,11 +9250,6 @@ var item_db_array = [
         "Price": 670000
     },
     {
-        "Name": "Coltzan Book",
-        "Rarity": 82,
-        "Price": 670000
-    },
-    {
         "Name": "Cylara Usuki",
         "Rarity": 98,
         "Price": 670000
@@ -6013,6 +9288,11 @@ var item_db_array = [
         "Name": "Usuki Poetry Set",
         "Rarity": 99,
         "Price": 670000
+    },
+    {
+        "Name": "Pink Pteri Morphing Potion",
+        "Rarity": 98,
+        "Price": 669300
     },
     {
         "Name": "Gelert Smoke Claws",
@@ -6110,6 +9390,21 @@ var item_db_array = [
         "Price": 650000
     },
     {
+        "Name": "Sloth Wrap",
+        "Rarity": 99,
+        "Price": 650000
+    },
+    {
+        "Name": "Kiko Helm of Intellect",
+        "Rarity": 99,
+        "Price": 649020
+    },
+    {
+        "Name": "Speckled Shoyru Morphing Potion",
+        "Rarity": 98,
+        "Price": 648130
+    },
+    {
         "Name": "Blue Ruki Morphing Potion",
         "Rarity": 98,
         "Price": 645000
@@ -6148,6 +9443,21 @@ var item_db_array = [
         "Name": "Valentine Kougra Plushie",
         "Rarity": 85,
         "Price": 645000
+    },
+    {
+        "Name": "Zoomik",
+        "Rarity": 99,
+        "Price": 645000
+    },
+    {
+        "Name": "Rollatron",
+        "Rarity": 99,
+        "Price": 644930
+    },
+    {
+        "Name": "Ornate Violet Cloak",
+        "Rarity": 99,
+        "Price": 644760
     },
     {
         "Name": "Flotsam Shell Sword",
@@ -6200,6 +9510,11 @@ var item_db_array = [
         "Price": 635000
     },
     {
+        "Name": "Wibreth Comb",
+        "Rarity": 99,
+        "Price": 635000
+    },
+    {
         "Name": "I Love Selket T-Shirt",
         "Rarity": 99,
         "Price": 630000
@@ -6240,9 +9555,9 @@ var item_db_array = [
         "Price": 625000
     },
     {
-        "Name": "Blue Hissi Morphing Potion",
-        "Rarity": 96,
-        "Price": 620000
+        "Name": "Ticking Eyrie Bomb",
+        "Rarity": 99,
+        "Price": 623450
     },
     {
         "Name": "Highland Chia Battle Shield",
@@ -6370,6 +9685,46 @@ var item_db_array = [
         "Price": 600000
     },
     {
+        "Name": "Staff of Supernova",
+        "Rarity": 99,
+        "Price": 600000
+    },
+    {
+        "Name": "Draik Sorceress Cloak",
+        "Rarity": 94,
+        "Price": 600000
+    },
+    {
+        "Name": "Jalapeno Kacheek Cheese",
+        "Rarity": 93,
+        "Price": 599980
+    },
+    {
+        "Name": "Desert Ixi Plushie",
+        "Rarity": 98,
+        "Price": 599760
+    },
+    {
+        "Name": "Starry Koi Plushie",
+        "Rarity": 98,
+        "Price": 599760
+    },
+    {
+        "Name": "Cloud Pteri Morphing Potion",
+        "Rarity": 98,
+        "Price": 599400
+    },
+    {
+        "Name": "Phear",
+        "Rarity": 99,
+        "Price": 599200
+    },
+    {
+        "Name": "Darblat",
+        "Rarity": 98,
+        "Price": 598500
+    },
+    {
         "Name": "Baby Peophin Morphing Potion",
         "Rarity": 98,
         "Price": 595000
@@ -6405,6 +9760,11 @@ var item_db_array = [
         "Price": 595000
     },
     {
+        "Name": "Golden Peophin Harp",
+        "Rarity": 99,
+        "Price": 595000
+    },
+    {
         "Name": "Chianatomy",
         "Rarity": 97,
         "Price": 590000
@@ -6435,9 +9795,9 @@ var item_db_array = [
         "Price": 590000
     },
     {
-        "Name": "Christmas Chomby Morphing Potion",
-        "Rarity": 98,
-        "Price": 585000
+        "Name": "Electric Moehog Morphing Potion",
+        "Rarity": 99,
+        "Price": 588960
     },
     {
         "Name": "Land Lubber",
@@ -6448,6 +9808,11 @@ var item_db_array = [
         "Name": "Mysterious Draik Trousers",
         "Rarity": 96,
         "Price": 585000
+    },
+    {
+        "Name": "Yellow Koi Morphing Potion",
+        "Rarity": 99,
+        "Price": 584641
     },
     {
         "Name": "Blue Draik Plushie",
@@ -6485,6 +9850,21 @@ var item_db_array = [
         "Price": 580000
     },
     {
+        "Name": "Red Grarrl Morphing Potion",
+        "Rarity": 99,
+        "Price": 579740
+    },
+    {
+        "Name": "Handcrafted Illusen Plushie",
+        "Rarity": 97,
+        "Price": 579280
+    },
+    {
+        "Name": "Green Kougra Morphing Potion",
+        "Rarity": 99,
+        "Price": 577920
+    },
+    {
         "Name": "Beepallite",
         "Rarity": 99,
         "Price": 575000
@@ -6515,14 +9895,14 @@ var item_db_array = [
         "Price": 570000
     },
     {
-        "Name": "Kadoatie Usuki Set",
+        "Name": "Secret Laboratory Map",
         "Rarity": 99,
         "Price": 570000
     },
     {
-        "Name": "Secret Laboratory Map",
+        "Name": "Sticky Snowflake Stamp",
         "Rarity": 99,
-        "Price": 570000
+        "Price": 569701
     },
     {
         "Name": "Enchanted Ixi Wand",
@@ -6558,6 +9938,11 @@ var item_db_array = [
         "Name": "Steak Surprise",
         "Rarity": 97,
         "Price": 555000
+    },
+    {
+        "Name": "Yellow Moehog Morphing Potion",
+        "Rarity": 99,
+        "Price": 554200
     },
     {
         "Name": "Caramel and Custard Drops",
@@ -6625,6 +10010,36 @@ var item_db_array = [
         "Price": 550000
     },
     {
+        "Name": "Ornate Usuki",
+        "Rarity": 99,
+        "Price": 550000
+    },
+    {
+        "Name": "Yurble Forest Cloak",
+        "Rarity": 99,
+        "Price": 549980
+    },
+    {
+        "Name": "Woodland Brew",
+        "Rarity": 99,
+        "Price": 549720
+    },
+    {
+        "Name": "Uni Cycles",
+        "Rarity": 90,
+        "Price": 549668
+    },
+    {
+        "Name": "Candy Cane Negg",
+        "Rarity": 89,
+        "Price": 549550
+    },
+    {
+        "Name": "Pink Korbat Morphing Potion",
+        "Rarity": 98,
+        "Price": 549400
+    },
+    {
         "Name": "Assorted Vandagyre Approved Nuts",
         "Rarity": 96,
         "Price": 545000
@@ -6642,6 +10057,11 @@ var item_db_array = [
     {
         "Name": "Wooden Krawk Staff",
         "Rarity": 99,
+        "Price": 545000
+    },
+    {
+        "Name": "Tooth Faerie Snowglobe",
+        "Rarity": 96,
         "Price": 545000
     },
     {
@@ -6770,6 +10190,11 @@ var item_db_array = [
         "Price": 525000
     },
     {
+        "Name": "Strong Berry",
+        "Rarity": 99,
+        "Price": 525000
+    },
+    {
         "Name": "Fiery Wand",
         "Rarity": 99,
         "Price": 520000
@@ -6805,6 +10230,11 @@ var item_db_array = [
         "Price": 510000
     },
     {
+        "Name": "Kadoatie Usuki Set",
+        "Rarity": 99,
+        "Price": 510000
+    },
+    {
         "Name": "Moehog Bristle Dagger",
         "Rarity": 99,
         "Price": 510000
@@ -6816,6 +10246,11 @@ var item_db_array = [
     },
     {
         "Name": "Red Wocky Morphing Potion",
+        "Rarity": 99,
+        "Price": 510000
+    },
+    {
+        "Name": "Gelupepper",
         "Rarity": 99,
         "Price": 510000
     },
@@ -6857,6 +10292,11 @@ var item_db_array = [
     {
         "Name": "Zero-G Scout Pack",
         "Rarity": 99,
+        "Price": 505000
+    },
+    {
+        "Name": "The Eyrie Guard",
+        "Rarity": 97,
         "Price": 505000
     },
     {
@@ -6935,11 +10375,6 @@ var item_db_array = [
         "Price": 500000
     },
     {
-        "Name": "Un-Valentines Skeith Plushie",
-        "Rarity": 96,
-        "Price": 500000
-    },
-    {
         "Name": "Valentine Armour Shield",
         "Rarity": 89,
         "Price": 500000
@@ -6948,6 +10383,61 @@ var item_db_array = [
         "Name": "Yellow Avabot T-Shirt",
         "Rarity": 99,
         "Price": 500000
+    },
+    {
+        "Name": "Twisted Potion of Strength",
+        "Rarity": 97,
+        "Price": 500000
+    },
+    {
+        "Name": "Illusens Forest Essence",
+        "Rarity": 95,
+        "Price": 499950
+    },
+    {
+        "Name": "The Masked Intruder Plushie",
+        "Rarity": 97,
+        "Price": 499905
+    },
+    {
+        "Name": "White Linen Tunic",
+        "Rarity": 99,
+        "Price": 499800
+    },
+    {
+        "Name": "Mutant Kiko Plushie",
+        "Rarity": 98,
+        "Price": 499680
+    },
+    {
+        "Name": "Draik King Terask Arms",
+        "Rarity": 87,
+        "Price": 499551
+    },
+    {
+        "Name": "White Kyrii Morphing Potion",
+        "Rarity": 98,
+        "Price": 499260
+    },
+    {
+        "Name": "Chomby Staff",
+        "Rarity": 99,
+        "Price": 499200
+    },
+    {
+        "Name": "Dua",
+        "Rarity": 99,
+        "Price": 498960
+    },
+    {
+        "Name": "Striped Korbat Morphing Potion",
+        "Rarity": 98,
+        "Price": 498551
+    },
+    {
+        "Name": "Sakhmetian Dagger",
+        "Rarity": 99,
+        "Price": 498480
     },
     {
         "Name": "Full Hissi Armour",
@@ -6980,6 +10470,16 @@ var item_db_array = [
         "Price": 495000
     },
     {
+        "Name": "Skeith Destructo Horn",
+        "Rarity": 99,
+        "Price": 495000
+    },
+    {
+        "Name": "Snow Eyrie Morphing Potion",
+        "Rarity": 99,
+        "Price": 494320
+    },
+    {
         "Name": "Cannon Fodder",
         "Rarity": 100,
         "Price": 490000
@@ -7005,6 +10505,16 @@ var item_db_array = [
         "Price": 490000
     },
     {
+        "Name": "Bottled Uni Essence",
+        "Rarity": 99,
+        "Price": 490000
+    },
+    {
+        "Name": "Sakhmetian Axe",
+        "Rarity": 99,
+        "Price": 489720
+    },
+    {
         "Name": "Aisha Feathered Charm",
         "Rarity": 99,
         "Price": 485000
@@ -7022,11 +10532,6 @@ var item_db_array = [
     {
         "Name": "Ghost Grarrl Morphing Potion",
         "Rarity": 99,
-        "Price": 485000
-    },
-    {
-        "Name": "Green Chomby Morphing Potion",
-        "Rarity": 98,
         "Price": 485000
     },
     {
@@ -7080,6 +10585,16 @@ var item_db_array = [
         "Price": 480000
     },
     {
+        "Name": "Rainbow Ruki Plushie",
+        "Rarity": 96,
+        "Price": 480000
+    },
+    {
+        "Name": "Red Scorchio Morphing Potion",
+        "Rarity": 98,
+        "Price": 479600
+    },
+    {
         "Name": "Full Gnorbu Armour",
         "Rarity": 99,
         "Price": 475000
@@ -7108,6 +10623,11 @@ var item_db_array = [
         "Name": "Streaked Maractite Coin",
         "Rarity": 96,
         "Price": 475000
+    },
+    {
+        "Name": "Roberta Plushie",
+        "Rarity": 98,
+        "Price": 474320
     },
     {
         "Name": "Christmas Aisha Morphing Potion",
@@ -7160,6 +10680,11 @@ var item_db_array = [
         "Price": 465000
     },
     {
+        "Name": "Poogle Ballet Shoes",
+        "Rarity": 96,
+        "Price": 464355
+    },
+    {
         "Name": "Desert Grundo Morphing Potion",
         "Rarity": 98,
         "Price": 460000
@@ -7183,6 +10708,11 @@ var item_db_array = [
         "Name": "Woodland Pteri Morphing Potion",
         "Rarity": 99,
         "Price": 460000
+    },
+    {
+        "Name": "Forest Sage Ruki Staff",
+        "Rarity": 94,
+        "Price": 459964
     },
     {
         "Name": "Blue Tuskaninny Morphing Potion",
@@ -7255,6 +10785,41 @@ var item_db_array = [
         "Price": 450000
     },
     {
+        "Name": "Moth Queen Aisha Headdress",
+        "Rarity": 92,
+        "Price": 450000
+    },
+    {
+        "Name": "Yellow Sunutek T-Shirt",
+        "Rarity": 99,
+        "Price": 450000
+    },
+    {
+        "Name": "Furry Lupe Staff",
+        "Rarity": 99,
+        "Price": 450000
+    },
+    {
+        "Name": "Ugly Bruno Plushie",
+        "Rarity": 95,
+        "Price": 450000
+    },
+    {
+        "Name": "Shadow Usul Plushie",
+        "Rarity": 99,
+        "Price": 449570
+    },
+    {
+        "Name": "Cherlops, Protector of Garn",
+        "Rarity": 95,
+        "Price": 449280
+    },
+    {
+        "Name": "Emerald Krawk Jacket",
+        "Rarity": 99,
+        "Price": 448921
+    },
+    {
         "Name": "Blumaroo Pepper Shaker",
         "Rarity": 99,
         "Price": 445000
@@ -7293,6 +10858,16 @@ var item_db_array = [
         "Name": "Skootle Bug",
         "Rarity": 99,
         "Price": 445000
+    },
+    {
+        "Name": "Bow of the Light Faerie",
+        "Rarity": 99,
+        "Price": 445000
+    },
+    {
+        "Name": "Malkus Vile Plushie",
+        "Rarity": 96,
+        "Price": 444850
     },
     {
         "Name": "Checkered Poogle Morphing Potion",
@@ -7340,6 +10915,16 @@ var item_db_array = [
         "Price": 440000
     },
     {
+        "Name": "Usuki Knight",
+        "Rarity": 98,
+        "Price": 439680
+    },
+    {
+        "Name": "Spotted Pteri Morphing Potion",
+        "Rarity": 99,
+        "Price": 439350
+    },
+    {
         "Name": "Baby Cybunny Plushie",
         "Rarity": 95,
         "Price": 435000
@@ -7361,6 +10946,11 @@ var item_db_array = [
     },
     {
         "Name": "Wooden Krawk Bow",
+        "Rarity": 99,
+        "Price": 435000
+    },
+    {
+        "Name": "JubJub Foot Hardening Lotion",
         "Rarity": 99,
         "Price": 435000
     },
@@ -7425,6 +11015,11 @@ var item_db_array = [
         "Price": 425000
     },
     {
+        "Name": "Mime Quiguki",
+        "Rarity": 99,
+        "Price": 425000
+    },
+    {
         "Name": "Cyberpunk Draik Helmet",
         "Rarity": 88,
         "Price": 420000
@@ -7448,6 +11043,11 @@ var item_db_array = [
         "Name": "Roxton Quiguki",
         "Rarity": 98,
         "Price": 420000
+    },
+    {
+        "Name": "Turned Tooth",
+        "Rarity": 83,
+        "Price": 419510
     },
     {
         "Name": "Cloud Grarrl Morphing Potion",
@@ -7493,6 +11093,11 @@ var item_db_array = [
         "Name": "Scroll of Freezing",
         "Rarity": 99,
         "Price": 415000
+    },
+    {
+        "Name": "Green Bruce Morphing Potion",
+        "Rarity": 98,
+        "Price": 410000
     },
     {
         "Name": "Ornate Jetsam Bow",
@@ -7575,8 +11180,68 @@ var item_db_array = [
         "Price": 400000
     },
     {
+        "Name": "Fresh Lobster Tail",
+        "Rarity": 99,
+        "Price": 400000
+    },
+    {
+        "Name": "ErgyFruit",
+        "Rarity": 99,
+        "Price": 400000
+    },
+    {
+        "Name": "Faerie Meerca Plushie",
+        "Rarity": 96,
+        "Price": 400000
+    },
+    {
+        "Name": "Money Tree Ghost Quiggle Leg Wraps",
+        "Rarity": 94,
+        "Price": 399987
+    },
+    {
+        "Name": "Red Yurble Boots",
+        "Rarity": 99,
+        "Price": 399960
+    },
+    {
+        "Name": "Female Wanderer Koi Crystal Ball",
+        "Rarity": 95,
+        "Price": 399895
+    },
+    {
+        "Name": "Full Kiko Armour",
+        "Rarity": 99,
+        "Price": 399840
+    },
+    {
+        "Name": "Bori Rainbow Dress",
+        "Rarity": 95,
+        "Price": 399610
+    },
+    {
+        "Name": "Green Blumaroo Morphing Potion",
+        "Rarity": 99,
+        "Price": 399320
+    },
+    {
+        "Name": "Wind Up Hannah",
+        "Rarity": 98,
+        "Price": 399245
+    },
+    {
+        "Name": "Cocoa Juppie Mocha",
+        "Rarity": 99,
+        "Price": 399100
+    },
+    {
         "Name": "Cloud Bori Morphing Potion",
         "Rarity": 99,
+        "Price": 395000
+    },
+    {
+        "Name": "Coltzan Book",
+        "Rarity": 82,
         "Price": 395000
     },
     {
@@ -7670,6 +11335,16 @@ var item_db_array = [
         "Price": 390000
     },
     {
+        "Name": "Taelias Snowball",
+        "Rarity": 99,
+        "Price": 390000
+    },
+    {
+        "Name": "Angel Chia Plushie",
+        "Rarity": 96,
+        "Price": 389400
+    },
+    {
         "Name": "Blue Grundo Morphing Potion",
         "Rarity": 98,
         "Price": 385000
@@ -7705,6 +11380,16 @@ var item_db_array = [
         "Price": 385000
     },
     {
+        "Name": "Enchanted Butterfly Book",
+        "Rarity": 90,
+        "Price": 385000
+    },
+    {
+        "Name": "Pumpkin Club",
+        "Rarity": 99,
+        "Price": 385000
+    },
+    {
         "Name": "Dreamy Pink Hearts Background",
         "Rarity": 86,
         "Price": 380000
@@ -7732,6 +11417,11 @@ var item_db_array = [
     {
         "Name": "Striped Aisha Morphing Potion",
         "Rarity": 98,
+        "Price": 380000
+    },
+    {
+        "Name": "Blue Bogie T-Shirt",
+        "Rarity": 99,
         "Price": 380000
     },
     {
@@ -7788,6 +11478,16 @@ var item_db_array = [
         "Name": "Zombie Eyrie Morphing Potion",
         "Rarity": 99,
         "Price": 375000
+    },
+    {
+        "Name": "Purple Techo Morphing Potion",
+        "Rarity": 99,
+        "Price": 374661
+    },
+    {
+        "Name": "Strawberry Pteri Morphing Potion",
+        "Rarity": 98,
+        "Price": 374300
     },
     {
         "Name": "Banana Split Chia Pop",
@@ -7870,11 +11570,6 @@ var item_db_array = [
         "Price": 360000
     },
     {
-        "Name": "Stormy Cloud Gnorbu Hair",
-        "Rarity": 87,
-        "Price": 360000
-    },
-    {
         "Name": "Usuki Reaper",
         "Rarity": 98,
         "Price": 360000
@@ -7885,13 +11580,13 @@ var item_db_array = [
         "Price": 360000
     },
     {
-        "Name": "Book Coin",
-        "Rarity": 96,
-        "Price": 355000
+        "Name": "Ultra Eyrie Eye Mask",
+        "Rarity": 99,
+        "Price": 359551
     },
     {
-        "Name": "Electric Fuzzle",
-        "Rarity": 98,
+        "Name": "Book Coin",
+        "Rarity": 96,
         "Price": 355000
     },
     {
@@ -7980,6 +11675,16 @@ var item_db_array = [
         "Price": 350000
     },
     {
+        "Name": "Exquisite Peophin Ring of the Deep",
+        "Rarity": 95,
+        "Price": 350000
+    },
+    {
+        "Name": "JubJub Detective Trench Coat",
+        "Rarity": 96,
+        "Price": 349325
+    },
+    {
         "Name": "Full Uni Armour",
         "Rarity": 99,
         "Price": 345000
@@ -8008,6 +11713,16 @@ var item_db_array = [
         "Name": "Striped Meerca Morphing Potion",
         "Rarity": 98,
         "Price": 345000
+    },
+    {
+        "Name": "Purple Hissi Wig",
+        "Rarity": 94,
+        "Price": 344960
+    },
+    {
+        "Name": "Fire Ball Staff",
+        "Rarity": 99,
+        "Price": 344250
     },
     {
         "Name": "Forgotten Shore Stamp",
@@ -8058,6 +11773,11 @@ var item_db_array = [
         "Name": "Spotted Grundo Morphing Potion",
         "Rarity": 98,
         "Price": 340000
+    },
+    {
+        "Name": "Piece of a treasure map",
+        "Rarity": 96,
+        "Price": 339900
     },
     {
         "Name": "Acara Gladiator Boots",
@@ -8165,6 +11885,16 @@ var item_db_array = [
         "Price": 330000
     },
     {
+        "Name": "Bruce Icicle Spear",
+        "Rarity": 99,
+        "Price": 329904
+    },
+    {
+        "Name": "Wanderers Cloak",
+        "Rarity": 97,
+        "Price": 329630
+    },
+    {
         "Name": "Blue Koi Morphing Potion",
         "Rarity": 99,
         "Price": 325000
@@ -8228,6 +11958,26 @@ var item_db_array = [
         "Name": "Wind Up Rainbow Draik",
         "Rarity": 98,
         "Price": 325000
+    },
+    {
+        "Name": "Blue Grarrl Morphing Potion",
+        "Rarity": 99,
+        "Price": 325000
+    },
+    {
+        "Name": "Super Nova Coin",
+        "Rarity": 95,
+        "Price": 325000
+    },
+    {
+        "Name": "Fire Koi Plushie",
+        "Rarity": 96,
+        "Price": 324900
+    },
+    {
+        "Name": "Proper Lady Ogrin Dress",
+        "Rarity": 96,
+        "Price": 324849
     },
     {
         "Name": "Faerie Eyrie Morphing Potion",
@@ -8298,6 +12048,11 @@ var item_db_array = [
         "Name": "Water Faerie Usuki Doll",
         "Rarity": 98,
         "Price": 320000
+    },
+    {
+        "Name": "Edna Plushie",
+        "Rarity": 98,
+        "Price": 319920
     },
     {
         "Name": "Bat Thing Gnome",
@@ -8470,6 +12225,11 @@ var item_db_array = [
         "Price": 305000
     },
     {
+        "Name": "Darigan Uni Plushie",
+        "Rarity": 95,
+        "Price": 304842
+    },
+    {
         "Name": "Chocolate Peach",
         "Rarity": 96,
         "Price": 300000
@@ -8543,6 +12303,36 @@ var item_db_array = [
         "Name": "Yellow Nimmo Morphing Potion",
         "Rarity": 99,
         "Price": 300000
+    },
+    {
+        "Name": "Padded Bruce Jacket",
+        "Rarity": 99,
+        "Price": 299950
+    },
+    {
+        "Name": "Groovy Koi Workout Shirt",
+        "Rarity": 93,
+        "Price": 299896
+    },
+    {
+        "Name": "Dark Uni Armoured Shirt",
+        "Rarity": 93,
+        "Price": 299880
+    },
+    {
+        "Name": "Slorg Sea Sculpture",
+        "Rarity": 97,
+        "Price": 299630
+    },
+    {
+        "Name": "Tiki Tack Man Usuki",
+        "Rarity": 98,
+        "Price": 299450
+    },
+    {
+        "Name": "Heavy Robe of Thievery",
+        "Rarity": 95,
+        "Price": 299000
     },
     {
         "Name": "Blue Korbat Morphing Potion",
@@ -8630,6 +12420,16 @@ var item_db_array = [
         "Price": 295000
     },
     {
+        "Name": "Baby Elephante Milk Bottle",
+        "Rarity": 93,
+        "Price": 294786
+    },
+    {
+        "Name": "Cloud Bruce Morphing Potion",
+        "Rarity": 99,
+        "Price": 290000
+    },
+    {
         "Name": "Elegant Punk Guitar",
         "Rarity": 98,
         "Price": 290000
@@ -8667,6 +12467,11 @@ var item_db_array = [
     {
         "Name": "Tyrannia Snowglobe",
         "Rarity": 96,
+        "Price": 290000
+    },
+    {
+        "Name": "Decorative Towel Folding",
+        "Rarity": 90,
         "Price": 290000
     },
     {
@@ -8770,6 +12575,11 @@ var item_db_array = [
         "Price": 280000
     },
     {
+        "Name": "Feathered Bruce Helm",
+        "Rarity": 99,
+        "Price": 279750
+    },
+    {
         "Name": "Acara Twin Blade",
         "Rarity": 99,
         "Price": 275000
@@ -8845,6 +12655,11 @@ var item_db_array = [
         "Price": 270000
     },
     {
+        "Name": "Snotty Sword",
+        "Rarity": 99,
+        "Price": 270000
+    },
+    {
         "Name": "Green Tuskaninny Morphing Potion",
         "Rarity": 99,
         "Price": 265000
@@ -8875,6 +12690,11 @@ var item_db_array = [
         "Price": 265000
     },
     {
+        "Name": "Stormy Cloud Gnorbu Hair",
+        "Rarity": 87,
+        "Price": 265000
+    },
+    {
         "Name": "Tar Slushie",
         "Rarity": 99,
         "Price": 265000
@@ -8895,12 +12715,12 @@ var item_db_array = [
         "Price": 260000
     },
     {
-        "Name": "Fire Moehog Morphing Potion",
-        "Rarity": 99,
+        "Name": "Electric Fuzzle",
+        "Rarity": 98,
         "Price": 260000
     },
     {
-        "Name": "Green Bori Morphing Potion",
+        "Name": "Fire Moehog Morphing Potion",
         "Rarity": 99,
         "Price": 260000
     },
@@ -8911,6 +12731,11 @@ var item_db_array = [
     },
     {
         "Name": "Toast Shield",
+        "Rarity": 99,
+        "Price": 260000
+    },
+    {
+        "Name": "Pink Blooky T-Shirt",
         "Rarity": 99,
         "Price": 260000
     },
@@ -9015,8 +12840,38 @@ var item_db_array = [
         "Price": 250000
     },
     {
+        "Name": "Grey Eggs and Bacon",
+        "Rarity": 95,
+        "Price": 250000
+    },
+    {
+        "Name": "Black Frost Cannon",
+        "Rarity": 99,
+        "Price": 249900
+    },
+    {
+        "Name": "Delightful Poogle Hat",
+        "Rarity": 95,
+        "Price": 249830
+    },
+    {
+        "Name": "Cybunny Balloon Animal",
+        "Rarity": 96,
+        "Price": 249570
+    },
+    {
+        "Name": "Snotty Hammer",
+        "Rarity": 99,
+        "Price": 249000
+    },
+    {
         "Name": "Tuskaninny Battle Trumpet",
         "Rarity": 99,
+        "Price": 248000
+    },
+    {
+        "Name": "Un-Valentines Skeith Plushie",
+        "Rarity": 96,
         "Price": 248000
     },
     {
@@ -9055,6 +12910,16 @@ var item_db_array = [
         "Price": 245000
     },
     {
+        "Name": "Red Buzz Morphing Potion",
+        "Rarity": 99,
+        "Price": 244860
+    },
+    {
+        "Name": "Full Bruce Armour",
+        "Rarity": 99,
+        "Price": 244800
+    },
+    {
         "Name": "Eyrie Pocket Catapult",
         "Rarity": 99,
         "Price": 244000
@@ -9075,6 +12940,11 @@ var item_db_array = [
         "Price": 244000
     },
     {
+        "Name": "Lennies in Space",
+        "Rarity": 94,
+        "Price": 243931
+    },
+    {
         "Name": "Halloween Mynci Plushie",
         "Rarity": 96,
         "Price": 243000
@@ -9090,6 +12960,11 @@ var item_db_array = [
         "Price": 242000
     },
     {
+        "Name": "Spider Grundo Plushie",
+        "Rarity": 95,
+        "Price": 240750
+    },
+    {
         "Name": "Scorchio Molten Tail Guard",
         "Rarity": 99,
         "Price": 240000
@@ -9103,6 +12978,16 @@ var item_db_array = [
         "Name": "Tuskaninny Personal Cannon",
         "Rarity": 99,
         "Price": 240000
+    },
+    {
+        "Name": "Pirate Krawk Plushie",
+        "Rarity": 99,
+        "Price": 239951
+    },
+    {
+        "Name": "Green Bori Morphing Potion",
+        "Rarity": 99,
+        "Price": 239000
     },
     {
         "Name": "Mutant Elephante Plushie",
@@ -9230,6 +13115,11 @@ var item_db_array = [
         "Price": 230000
     },
     {
+        "Name": "Gold Balloon",
+        "Rarity": 99,
+        "Price": 229770
+    },
+    {
         "Name": "Brown Clockwork Grundo",
         "Rarity": 99,
         "Price": 229000
@@ -9255,6 +13145,11 @@ var item_db_array = [
         "Price": 229000
     },
     {
+        "Name": "Blue Buzz Morphing Potion",
+        "Rarity": 99,
+        "Price": 228990
+    },
+    {
         "Name": "Blue Poogle Morphing Potion",
         "Rarity": 98,
         "Price": 228000
@@ -9275,6 +13170,11 @@ var item_db_array = [
         "Price": 227000
     },
     {
+        "Name": "Poogle Wizard Hat",
+        "Rarity": 98,
+        "Price": 227000
+    },
+    {
         "Name": "Purple Juppie Slurpbowl",
         "Rarity": 98,
         "Price": 226000
@@ -9287,11 +13187,6 @@ var item_db_array = [
     {
         "Name": "Full Grundo Armour",
         "Rarity": 99,
-        "Price": 225000
-    },
-    {
-        "Name": "Poogle Wizard Hat",
-        "Rarity": 98,
         "Price": 225000
     },
     {
@@ -9485,6 +13380,11 @@ var item_db_array = [
         "Price": 212000
     },
     {
+        "Name": "Quiggle Tea Party Shoes",
+        "Rarity": 98,
+        "Price": 211896
+    },
+    {
         "Name": "Fire Flail",
         "Rarity": 99,
         "Price": 210000
@@ -9503,6 +13403,11 @@ var item_db_array = [
         "Name": "Trendy Aisha Shirt and Trousers",
         "Rarity": 96,
         "Price": 210000
+    },
+    {
+        "Name": "Robot Kau Plushie",
+        "Rarity": 91,
+        "Price": 209840
     },
     {
         "Name": "Checkered Bori Morphing Potion",
@@ -9695,6 +13600,26 @@ var item_db_array = [
         "Price": 200000
     },
     {
+        "Name": "Green Meerca Morphing Potion",
+        "Rarity": 99,
+        "Price": 199875
+    },
+    {
+        "Name": "Punk Kiko Shirt",
+        "Rarity": 96,
+        "Price": 199836
+    },
+    {
+        "Name": "Ghostkerfish",
+        "Rarity": 98,
+        "Price": 199805
+    },
+    {
+        "Name": "Rainbow Scorchio Plushie",
+        "Rarity": 95,
+        "Price": 199650
+    },
+    {
         "Name": "Dehydration Potion",
         "Rarity": 99,
         "Price": 199000
@@ -9702,6 +13627,11 @@ var item_db_array = [
     {
         "Name": "Ornate Jetsam Battle Helmet",
         "Rarity": 99,
+        "Price": 199000
+    },
+    {
+        "Name": "Poogle Day Ideas",
+        "Rarity": 95,
         "Price": 199000
     },
     {
@@ -9740,13 +13670,13 @@ var item_db_array = [
         "Price": 198000
     },
     {
-        "Name": "Poogle Day Ideas",
-        "Rarity": 95,
+        "Name": "Swirling Seaweed Orb",
+        "Rarity": 99,
         "Price": 198000
     },
     {
-        "Name": "Swirling Seaweed Orb",
-        "Rarity": 99,
+        "Name": "Phoenix Pteri Talons",
+        "Rarity": 92,
         "Price": 198000
     },
     {
@@ -9855,6 +13785,11 @@ var item_db_array = [
         "Price": 192000
     },
     {
+        "Name": "Curved Wocky Sabre",
+        "Rarity": 99,
+        "Price": 192000
+    },
+    {
         "Name": "Chocolate Chip Nerkmid Biscuit",
         "Rarity": 94,
         "Price": 191000
@@ -9873,11 +13808,6 @@ var item_db_array = [
         "Name": "Zombified Heroes Stamp",
         "Rarity": 93,
         "Price": 191000
-    },
-    {
-        "Name": "Elemental Kougra Water Mane",
-        "Rarity": 95,
-        "Price": 190000
     },
     {
         "Name": "Pteri Battle Whistle",
@@ -9960,11 +13890,6 @@ var item_db_array = [
         "Price": 186000
     },
     {
-        "Name": "Cloud Bruce Morphing Potion",
-        "Rarity": 99,
-        "Price": 185000
-    },
-    {
         "Name": "Mutant Leather Armour",
         "Rarity": 86,
         "Price": 185000
@@ -9988,6 +13913,11 @@ var item_db_array = [
         "Name": "Yurble Forest Shield",
         "Rarity": 99,
         "Price": 185000
+    },
+    {
+        "Name": "Xandra Xweetok Cape",
+        "Rarity": 88,
+        "Price": 184860
     },
     {
         "Name": "Darigan Gelert Plushie",
@@ -10015,6 +13945,11 @@ var item_db_array = [
         "Price": 184000
     },
     {
+        "Name": "Kacheek Extinguisher",
+        "Rarity": 99,
+        "Price": 183808
+    },
+    {
         "Name": "The Chomby Secret",
         "Rarity": 95,
         "Price": 183000
@@ -10023,6 +13958,11 @@ var item_db_array = [
         "Name": "Ultra Nerkmid",
         "Rarity": 100,
         "Price": 182000
+    },
+    {
+        "Name": "Fancy Uni Bracelets",
+        "Rarity": 94,
+        "Price": 181721
     },
     {
         "Name": "Super Nerkmid",
@@ -10097,6 +14037,11 @@ var item_db_array = [
     {
         "Name": "Ultimate Nerkmid",
         "Rarity": 100,
+        "Price": 180000
+    },
+    {
+        "Name": "Kacheek Pyjama Slippers",
+        "Rarity": 91,
         "Price": 180000
     },
     {
@@ -10215,6 +14160,11 @@ var item_db_array = [
         "Price": 175000
     },
     {
+        "Name": "Sword of Trumpeting",
+        "Rarity": 99,
+        "Price": 174573
+    },
+    {
         "Name": "Blue Bruce Morphing Potion",
         "Rarity": 98,
         "Price": 174000
@@ -10247,11 +14197,6 @@ var item_db_array = [
     {
         "Name": "Padded Cybunny Claw",
         "Rarity": 99,
-        "Price": 173000
-    },
-    {
-        "Name": "Red Aisha Morphing Potion",
-        "Rarity": 98,
         "Price": 173000
     },
     {
@@ -10378,16 +14323,6 @@ var item_db_array = [
         "Name": "Queen Amira Aisha Pants",
         "Rarity": 88,
         "Price": 167000
-    },
-    {
-        "Name": "Elegant Lutari Wig",
-        "Rarity": 96,
-        "Price": 166000
-    },
-    {
-        "Name": "Green Bruce Morphing Potion",
-        "Rarity": 98,
-        "Price": 166000
     },
     {
         "Name": "Emerald Hissi Shield",
@@ -10555,6 +14490,11 @@ var item_db_array = [
         "Price": 157000
     },
     {
+        "Name": "Snow PaintBrush Coin",
+        "Rarity": 96,
+        "Price": 157000
+    },
+    {
         "Name": "Camouflage JubJub Morphing Potion",
         "Rarity": 98,
         "Price": 156000
@@ -10642,6 +14582,11 @@ var item_db_array = [
     {
         "Name": "Yellow Yurble Morphing Potion",
         "Rarity": 98,
+        "Price": 152000
+    },
+    {
+        "Name": "Full Draik Armour",
+        "Rarity": 99,
         "Price": 152000
     },
     {
@@ -10820,6 +14765,11 @@ var item_db_array = [
         "Price": 144000
     },
     {
+        "Name": "Elegant Lutari Wig",
+        "Rarity": 96,
+        "Price": 144000
+    },
+    {
         "Name": "Fire Gnorbu Morphing Potion",
         "Rarity": 98,
         "Price": 144000
@@ -10835,8 +14785,18 @@ var item_db_array = [
         "Price": 144000
     },
     {
+        "Name": "Pretty Kau Cloud Dress",
+        "Rarity": 94,
+        "Price": 143961
+    },
+    {
         "Name": "Golden Candy Cane Sword",
         "Rarity": 99,
+        "Price": 142000
+    },
+    {
+        "Name": "Red Aisha Morphing Potion",
+        "Rarity": 98,
         "Price": 142000
     },
     {
@@ -10970,6 +14930,11 @@ var item_db_array = [
         "Price": 134000
     },
     {
+        "Name": "Large Maractite Coin",
+        "Rarity": 95,
+        "Price": 134000
+    },
+    {
         "Name": "Pretty Fish Bowl",
         "Rarity": 95,
         "Price": 134000
@@ -11002,11 +14967,6 @@ var item_db_array = [
     {
         "Name": "Calculation Device",
         "Rarity": 99,
-        "Price": 131000
-    },
-    {
-        "Name": "On the Go Cybunny Wig",
-        "Rarity": 93,
         "Price": 131000
     },
     {
@@ -11235,19 +15195,9 @@ var item_db_array = [
         "Price": 118000
     },
     {
-        "Name": "Large Maractite Coin",
-        "Rarity": 95,
-        "Price": 118000
-    },
-    {
         "Name": "Starry Wocky Morphing Potion",
         "Rarity": 98,
         "Price": 118000
-    },
-    {
-        "Name": "Christmas Gnorbu Morphing Potion",
-        "Rarity": 98,
-        "Price": 117000
     },
     {
         "Name": "Green JubJub Morphing Potion",
@@ -11395,6 +15345,11 @@ var item_db_array = [
         "Price": 110000
     },
     {
+        "Name": "Elegant Lutari Necklace",
+        "Rarity": 97,
+        "Price": 110000
+    },
+    {
         "Name": "Elephante Bard Cape",
         "Rarity": 96,
         "Price": 110000
@@ -11460,11 +15415,6 @@ var item_db_array = [
         "Price": 107000
     },
     {
-        "Name": "Midnight Smuggler Kougra Pants",
-        "Rarity": 87,
-        "Price": 107000
-    },
-    {
         "Name": "Scroll of Hunger",
         "Rarity": 98,
         "Price": 107000
@@ -11510,6 +15460,11 @@ var item_db_array = [
         "Price": 106000
     },
     {
+        "Name": "Acnefruit",
+        "Rarity": 97,
+        "Price": 105000
+    },
+    {
         "Name": "Dark Faerie Stamp",
         "Rarity": 92,
         "Price": 105000
@@ -11535,6 +15490,11 @@ var item_db_array = [
         "Price": 105000
     },
     {
+        "Name": "On the Go Cybunny Wig",
+        "Rarity": 93,
+        "Price": 105000
+    },
+    {
         "Name": "Highland Gelert Kilt",
         "Rarity": 96,
         "Price": 104000
@@ -11547,11 +15507,6 @@ var item_db_array = [
     {
         "Name": "Ruki Wanderer Shoes",
         "Rarity": 80,
-        "Price": 104000
-    },
-    {
-        "Name": "Snow PaintBrush Coin",
-        "Rarity": 96,
         "Price": 104000
     },
     {
@@ -11583,11 +15538,6 @@ var item_db_array = [
         "Name": "Watermelon Jetsam",
         "Rarity": 93,
         "Price": 103000
-    },
-    {
-        "Name": "Acnefruit",
-        "Rarity": 97,
-        "Price": 102000
     },
     {
         "Name": "Magic Sparkle Wand",
@@ -11690,6 +15640,16 @@ var item_db_array = [
         "Price": 100000
     },
     {
+        "Name": "Strale Eraser",
+        "Rarity": 98,
+        "Price": 99840
+    },
+    {
+        "Name": "Maraquan Warrior Peophin Chest Armour",
+        "Rarity": 94,
+        "Price": 99840
+    },
+    {
         "Name": "Coltzan Candy",
         "Rarity": 80,
         "Price": 99500
@@ -11715,11 +15675,6 @@ var item_db_array = [
         "Price": 99000
     },
     {
-        "Name": "Red Vandagyre Morphing Potion",
-        "Rarity": 96,
-        "Price": 99000
-    },
-    {
         "Name": "Sparkling Acara Shield",
         "Rarity": 99,
         "Price": 99000
@@ -11737,6 +15692,11 @@ var item_db_array = [
     {
         "Name": "Bubbling Fungus",
         "Rarity": 81,
+        "Price": 98500
+    },
+    {
+        "Name": "Elemental Kougra Water Mane",
+        "Rarity": 95,
         "Price": 98500
     },
     {
@@ -11788,6 +15748,11 @@ var item_db_array = [
         "Name": "Yellow Vandagyre Morphing Potion",
         "Rarity": 97,
         "Price": 97500
+    },
+    {
+        "Name": "Carassa Gnome",
+        "Rarity": 95,
+        "Price": 97394
     },
     {
         "Name": "Fleurbik",
@@ -11868,6 +15833,11 @@ var item_db_array = [
         "Name": "Tangors Autobiography",
         "Rarity": 98,
         "Price": 95000
+    },
+    {
+        "Name": "Chomby Flower Child Rose Glasses",
+        "Rarity": 93,
+        "Price": 94860
     },
     {
         "Name": "Rainbow Anubis Plushie",
@@ -11965,6 +15935,11 @@ var item_db_array = [
         "Price": 90000
     },
     {
+        "Name": "Camouflage Tuskaninny Morphing Potion",
+        "Rarity": 98,
+        "Price": 90000
+    },
+    {
         "Name": "Desert Gnorbu Morphing Potion",
         "Rarity": 98,
         "Price": 90000
@@ -12020,6 +15995,26 @@ var item_db_array = [
         "Price": 90000
     },
     {
+        "Name": "Loving Kadoatie",
+        "Rarity": 85,
+        "Price": 90000
+    },
+    {
+        "Name": "Pirates Chest",
+        "Rarity": 99,
+        "Price": 89950
+    },
+    {
+        "Name": "Razul Crayons",
+        "Rarity": 98,
+        "Price": 89920
+    },
+    {
+        "Name": "Rainbow Fruit Tree",
+        "Rarity": 97,
+        "Price": 89895
+    },
+    {
         "Name": "Fancy Aisha Mirror",
         "Rarity": 96,
         "Price": 89000
@@ -12033,6 +16028,11 @@ var item_db_array = [
         "Name": "Pirate Meerca Morphing Potion",
         "Rarity": 98,
         "Price": 89000
+    },
+    {
+        "Name": "King Kelpbeard Plushie",
+        "Rarity": 96,
+        "Price": 88852
     },
     {
         "Name": "Battle Hammer",
@@ -12050,8 +16050,18 @@ var item_db_array = [
         "Price": 88500
     },
     {
+        "Name": "The Future of Fire",
+        "Rarity": 98,
+        "Price": 88500
+    },
+    {
         "Name": "Baby JubJub Cloth Book",
         "Rarity": 92,
+        "Price": 88000
+    },
+    {
+        "Name": "Bag of Peanuts",
+        "Rarity": 79,
         "Price": 88000
     },
     {
@@ -12087,6 +16097,11 @@ var item_db_array = [
     {
         "Name": "Rainbow Grarrl Morphing Potion",
         "Rarity": 98,
+        "Price": 88000
+    },
+    {
+        "Name": "Red Vandagyre Morphing Potion",
+        "Rarity": 96,
         "Price": 88000
     },
     {
@@ -12205,16 +16220,6 @@ var item_db_array = [
         "Price": 84500
     },
     {
-        "Name": "The Future of Fire",
-        "Rarity": 98,
-        "Price": 84500
-    },
-    {
-        "Name": "Bag of Peanuts",
-        "Rarity": 79,
-        "Price": 84000
-    },
-    {
         "Name": "Bori Gnome Beard",
         "Rarity": 97,
         "Price": 84000
@@ -12230,8 +16235,18 @@ var item_db_array = [
         "Price": 84000
     },
     {
+        "Name": "Halloween Kougra Plushie",
+        "Rarity": 92,
+        "Price": 83850
+    },
+    {
         "Name": "Draik Tales",
         "Rarity": 94,
+        "Price": 83500
+    },
+    {
+        "Name": "Pink Scorchio Plushie",
+        "Rarity": 95,
         "Price": 83500
     },
     {
@@ -12270,11 +16285,6 @@ var item_db_array = [
         "Price": 82000
     },
     {
-        "Name": "Draik Sorceress Skirt",
-        "Rarity": 95,
-        "Price": 81500
-    },
-    {
         "Name": "Hissi Swordsman Coat",
         "Rarity": 94,
         "Price": 81500
@@ -12310,8 +16320,8 @@ var item_db_array = [
         "Price": 80000
     },
     {
-        "Name": "Elegant Lutari Dress",
-        "Rarity": 97,
+        "Name": "Draik Sorceress Skirt",
+        "Rarity": 95,
         "Price": 80000
     },
     {
@@ -12335,6 +16345,11 @@ var item_db_array = [
         "Price": 80000
     },
     {
+        "Name": "Snot Bomb",
+        "Rarity": 98,
+        "Price": 80000
+    },
+    {
         "Name": "Wand of the Moon",
         "Rarity": 98,
         "Price": 80000
@@ -12350,6 +16365,16 @@ var item_db_array = [
         "Price": 80000
     },
     {
+        "Name": "Cybunny Shield",
+        "Rarity": 99,
+        "Price": 79922
+    },
+    {
+        "Name": "Adorable Chomby Trousers",
+        "Rarity": 96,
+        "Price": 79856
+    },
+    {
         "Name": "Pirate Moehog Plushie",
         "Rarity": 96,
         "Price": 79500
@@ -12358,6 +16383,11 @@ var item_db_array = [
         "Name": "Winter Ranger Kougra Trousers",
         "Rarity": 95,
         "Price": 79500
+    },
+    {
+        "Name": "Elegant Lutari Dress",
+        "Rarity": 97,
+        "Price": 79000
     },
     {
         "Name": "A Faerie Beautiful Day",
@@ -12420,6 +16450,11 @@ var item_db_array = [
         "Price": 77500
     },
     {
+        "Name": "Midnight Smuggler Kougra Shirt",
+        "Rarity": 87,
+        "Price": 77274
+    },
+    {
         "Name": "Colourful Blumaroo Dancer Dress",
         "Rarity": 95,
         "Price": 77000
@@ -12460,16 +16495,6 @@ var item_db_array = [
         "Price": 76000
     },
     {
-        "Name": "Shenkuu Altador Cup Media Book",
-        "Rarity": 94,
-        "Price": 76000
-    },
-    {
-        "Name": "The Legend of Scordrax",
-        "Rarity": 94,
-        "Price": 76000
-    },
-    {
         "Name": "Light Faerie Usuki Doll",
         "Rarity": 97,
         "Price": 75500
@@ -12482,6 +16507,11 @@ var item_db_array = [
     {
         "Name": "Plushie Wocky Plushie",
         "Rarity": 95,
+        "Price": 75500
+    },
+    {
+        "Name": "Shenkuu Altador Cup Media Book",
+        "Rarity": 94,
         "Price": 75500
     },
     {
@@ -12570,6 +16600,11 @@ var item_db_array = [
         "Price": 73500
     },
     {
+        "Name": "Christmas Gnorbu Morphing Potion",
+        "Rarity": 98,
+        "Price": 73000
+    },
+    {
         "Name": "Elegant Kacheek Warrior Cape",
         "Rarity": 94,
         "Price": 73000
@@ -12582,6 +16617,11 @@ var item_db_array = [
     {
         "Name": "Snow Faerie Keyring",
         "Rarity": 97,
+        "Price": 73000
+    },
+    {
+        "Name": "The Legend of Scordrax",
+        "Rarity": 94,
         "Price": 73000
     },
     {
@@ -12663,6 +16703,11 @@ var item_db_array = [
         "Name": "Warm Yurble Shoes",
         "Rarity": 98,
         "Price": 71000
+    },
+    {
+        "Name": "Sunflower Kau Collar",
+        "Rarity": 86,
+        "Price": 70920
     },
     {
         "Name": "Big Book of Facts",
@@ -12850,11 +16895,6 @@ var item_db_array = [
         "Price": 66000
     },
     {
-        "Name": "Electric Tuskaninny Morphing Potion",
-        "Rarity": 98,
-        "Price": 66000
-    },
-    {
         "Name": "Gnarled Stump",
         "Rarity": 98,
         "Price": 66000
@@ -12912,6 +16952,11 @@ var item_db_array = [
     {
         "Name": "Destruction of Faerieland Stamp",
         "Rarity": 91,
+        "Price": 65000
+    },
+    {
+        "Name": "Electric Tuskaninny Morphing Potion",
+        "Rarity": 98,
         "Price": 65000
     },
     {
@@ -13110,11 +17155,6 @@ var item_db_array = [
         "Price": 62000
     },
     {
-        "Name": "Elegant Lutari Necklace",
-        "Rarity": 97,
-        "Price": 61500
-    },
-    {
         "Name": "Outback Usuki",
         "Rarity": 98,
         "Price": 61500
@@ -13133,11 +17173,6 @@ var item_db_array = [
         "Name": "Shadow Usul Stories",
         "Rarity": 99,
         "Price": 61500
-    },
-    {
-        "Name": "Camouflage Tuskaninny Morphing Potion",
-        "Rarity": 98,
-        "Price": 61000
     },
     {
         "Name": "Cloak of the Moon",
@@ -13305,6 +17340,11 @@ var item_db_array = [
         "Price": 59000
     },
     {
+        "Name": "Lutari Sweet Little Sailor Dress",
+        "Rarity": 96,
+        "Price": 58975
+    },
+    {
         "Name": "Beach Day Kacheek Tank Top",
         "Rarity": 89,
         "Price": 58500
@@ -13460,6 +17500,11 @@ var item_db_array = [
         "Price": 57000
     },
     {
+        "Name": "Wolfsbane Mutant Shorts",
+        "Rarity": 88,
+        "Price": 57000
+    },
+    {
         "Name": "Chokato Plushie",
         "Rarity": 96,
         "Price": 56500
@@ -13577,11 +17622,6 @@ var item_db_array = [
     {
         "Name": "Highland Gelert Sword",
         "Rarity": 95,
-        "Price": 53500
-    },
-    {
-        "Name": "Lord Kass Eyrie Earrings",
-        "Rarity": 87,
         "Price": 53500
     },
     {
@@ -13795,13 +17835,13 @@ var item_db_array = [
         "Price": 50000
     },
     {
-        "Name": "Camouflage Mynci Morphing Potion",
-        "Rarity": 98,
+        "Name": "Enchanted Kiko Shield",
+        "Rarity": 99,
         "Price": 50000
     },
     {
-        "Name": "Enchanted Kiko Shield",
-        "Rarity": 99,
+        "Name": "Hot Dog Hero Stamp",
+        "Rarity": 92,
         "Price": 50000
     },
     {
@@ -13872,6 +17912,11 @@ var item_db_array = [
     {
         "Name": "Country Kau Dress",
         "Rarity": 89,
+        "Price": 49500
+    },
+    {
+        "Name": "Elegant Lutari Shoes",
+        "Rarity": 97,
         "Price": 49500
     },
     {
@@ -13995,18 +18040,13 @@ var item_db_array = [
         "Price": 48200
     },
     {
-        "Name": "Hot Dog Hero Stamp",
-        "Rarity": 92,
-        "Price": 48200
+        "Name": "Midnight Smuggler Kougra Pants",
+        "Rarity": 87,
+        "Price": 48100
     },
     {
         "Name": "Acara Mermaid Tail",
         "Rarity": 90,
-        "Price": 48000
-    },
-    {
-        "Name": "Elegant Draik Dress",
-        "Rarity": 92,
         "Price": 48000
     },
     {
@@ -14028,11 +18068,6 @@ var item_db_array = [
         "Name": "Winter Zafara Parka",
         "Rarity": 96,
         "Price": 47900
-    },
-    {
-        "Name": "Elegant Lutari Shoes",
-        "Rarity": 97,
-        "Price": 47700
     },
     {
         "Name": "Jazan Shield",
@@ -14113,6 +18148,11 @@ var item_db_array = [
         "Name": "Gnorbu Snow Coat",
         "Rarity": 95,
         "Price": 46600
+    },
+    {
+        "Name": "Camouflage Mynci Morphing Potion",
+        "Rarity": 98,
+        "Price": 46500
     },
     {
         "Name": "Faeries of Winter",
@@ -14327,6 +18367,11 @@ var item_db_array = [
     {
         "Name": "Proper Peophin Lady Rose",
         "Rarity": 94,
+        "Price": 44000
+    },
+    {
+        "Name": "Secret Sloth Slushie",
+        "Rarity": 97,
         "Price": 44000
     },
     {
@@ -14570,6 +18615,11 @@ var item_db_array = [
         "Price": 41100
     },
     {
+        "Name": "Lord Kass Eyrie Earrings",
+        "Rarity": 87,
+        "Price": 41100
+    },
+    {
         "Name": "Chomby Grave Digger Shirt",
         "Rarity": 98,
         "Price": 41000
@@ -14620,11 +18670,6 @@ var item_db_array = [
         "Price": 40500
     },
     {
-        "Name": "Dapper Poogle Monocle",
-        "Rarity": 95,
-        "Price": 40400
-    },
-    {
         "Name": "Flower Cello",
         "Rarity": 97,
         "Price": 40400
@@ -14652,6 +18697,11 @@ var item_db_array = [
     {
         "Name": "Bree Usuki Doll",
         "Rarity": 97,
+        "Price": 40000
+    },
+    {
+        "Name": "Elegant Draik Dress",
+        "Rarity": 92,
         "Price": 40000
     },
     {
@@ -14760,6 +18810,11 @@ var item_db_array = [
         "Price": 39900
     },
     {
+        "Name": "Rattle Hissi Teeth",
+        "Rarity": 94,
+        "Price": 39900
+    },
+    {
         "Name": "Dark Faerie Sofa",
         "Rarity": 98,
         "Price": 39800
@@ -14840,11 +18895,6 @@ var item_db_array = [
         "Price": 39300
     },
     {
-        "Name": "Draik Sorceress Shoes",
-        "Rarity": 95,
-        "Price": 39300
-    },
-    {
         "Name": "Kau Defender of Neopia Plushie",
         "Rarity": 97,
         "Price": 39300
@@ -14872,11 +18922,6 @@ var item_db_array = [
     {
         "Name": "Bonju Plushie",
         "Rarity": 96,
-        "Price": 39000
-    },
-    {
-        "Name": "Peophin Maractite Helm",
-        "Rarity": 95,
         "Price": 39000
     },
     {
@@ -14983,6 +19028,11 @@ var item_db_array = [
         "Name": "The Hot Scorchio Cook Book",
         "Rarity": 93,
         "Price": 37800
+    },
+    {
+        "Name": "Peophin Maractite Helm",
+        "Rarity": 95,
+        "Price": 37600
     },
     {
         "Name": "Tooth Necklace",
@@ -15135,11 +19185,6 @@ var item_db_array = [
         "Price": 36300
     },
     {
-        "Name": "Eyrie Magician Jacket",
-        "Rarity": 96,
-        "Price": 36300
-    },
-    {
         "Name": "Elephante Barbarian Armour",
         "Rarity": 98,
         "Price": 36200
@@ -15162,11 +19207,6 @@ var item_db_array = [
     {
         "Name": "Purple Hooded Robe",
         "Rarity": 98,
-        "Price": 36000
-    },
-    {
-        "Name": "Spring Time Male Krawk Trousers",
-        "Rarity": 96,
         "Price": 36000
     },
     {
@@ -15285,11 +19325,6 @@ var item_db_array = [
         "Price": 35000
     },
     {
-        "Name": "Secret Sloth Slushie",
-        "Rarity": 97,
-        "Price": 35000
-    },
-    {
         "Name": "Tablet of the Vampire",
         "Rarity": 97,
         "Price": 35000
@@ -15387,11 +19422,6 @@ var item_db_array = [
     {
         "Name": "Chomby Rainbow Bow",
         "Rarity": 92,
-        "Price": 34300
-    },
-    {
-        "Name": "Trilo Shield",
-        "Rarity": 91,
         "Price": 34300
     },
     {
@@ -15585,11 +19615,6 @@ var item_db_array = [
         "Price": 32800
     },
     {
-        "Name": "Rejuvenating Negg Serum",
-        "Rarity": 98,
-        "Price": 32800
-    },
-    {
         "Name": "Beekadoodle",
         "Rarity": 95,
         "Price": 32700
@@ -15775,6 +19800,11 @@ var item_db_array = [
         "Price": 31700
     },
     {
+        "Name": "Trilo Shield",
+        "Rarity": 91,
+        "Price": 31700
+    },
+    {
         "Name": "Blackened Hand Painted Scimitar",
         "Rarity": 98,
         "Price": 31600
@@ -15797,6 +19827,11 @@ var item_db_array = [
     {
         "Name": "Evening Draik Dress",
         "Rarity": 89,
+        "Price": 31500
+    },
+    {
+        "Name": "Rejuvenating Negg Serum",
+        "Rarity": 98,
         "Price": 31500
     },
     {
@@ -15940,6 +19975,11 @@ var item_db_array = [
         "Price": 30100
     },
     {
+        "Name": "Draik Sorceress Shoes",
+        "Rarity": 95,
+        "Price": 30100
+    },
+    {
         "Name": "A Beginners Guide to Mixing Transmogrification Potions",
         "Rarity": 88,
         "Price": 30000
@@ -16020,13 +20060,8 @@ var item_db_array = [
         "Price": 30000
     },
     {
-        "Name": "Rock Potion",
-        "Rarity": 91,
-        "Price": 30000
-    },
-    {
-        "Name": "Snot Bomb",
-        "Rarity": 98,
+        "Name": "Spring Time Male Krawk Trousers",
+        "Rarity": 96,
         "Price": 30000
     },
     {
@@ -16113,16 +20148,6 @@ var item_db_array = [
         "Name": "Grey Faerie Shield",
         "Rarity": 97,
         "Price": 29700
-    },
-    {
-        "Name": "Glowing Maractite Trident",
-        "Rarity": 93,
-        "Price": 29600
-    },
-    {
-        "Name": "Rattle Hissi Teeth",
-        "Rarity": 94,
-        "Price": 29600
     },
     {
         "Name": "Brown Scorchio Wig",
@@ -16260,6 +20285,11 @@ var item_db_array = [
         "Price": 29000
     },
     {
+        "Name": "Wheelie Bot",
+        "Rarity": 97,
+        "Price": 29000
+    },
+    {
         "Name": "White Bike",
         "Rarity": 96,
         "Price": 29000
@@ -16347,11 +20377,6 @@ var item_db_array = [
     {
         "Name": "Usuki Spring Basket",
         "Rarity": 96,
-        "Price": 28400
-    },
-    {
-        "Name": "Wheelie Bot",
-        "Rarity": 97,
         "Price": 28400
     },
     {
@@ -16545,6 +20570,11 @@ var item_db_array = [
         "Price": 27500
     },
     {
+        "Name": "Lupe Samurai Full Body Armour",
+        "Rarity": 89,
+        "Price": 27500
+    },
+    {
         "Name": "Lupe Shopkeeper Stamp",
         "Rarity": 91,
         "Price": 27500
@@ -16595,6 +20625,11 @@ var item_db_array = [
         "Price": 27400
     },
     {
+        "Name": "Crescent Moon Axe",
+        "Rarity": 98,
+        "Price": 27300
+    },
+    {
         "Name": "Yellow Xweetok Morphing Potion",
         "Rarity": 96,
         "Price": 27300
@@ -16640,6 +20675,11 @@ var item_db_array = [
         "Price": 27000
     },
     {
+        "Name": "Glowing Maractite Trident",
+        "Rarity": 93,
+        "Price": 27000
+    },
+    {
         "Name": "Green Tentacle",
         "Rarity": 97,
         "Price": 27000
@@ -16647,6 +20687,11 @@ var item_db_array = [
     {
         "Name": "Grundo Miner Overalls",
         "Rarity": 97,
+        "Price": 27000
+    },
+    {
+        "Name": "Hiding Valuables",
+        "Rarity": 92,
         "Price": 27000
     },
     {
@@ -16662,6 +20707,11 @@ var item_db_array = [
     {
         "Name": "Rattle Hissi Tail",
         "Rarity": 95,
+        "Price": 27000
+    },
+    {
+        "Name": "Rock Potion",
+        "Rarity": 91,
         "Price": 27000
     },
     {
@@ -16780,11 +20830,6 @@ var item_db_array = [
         "Price": 26400
     },
     {
-        "Name": "Hiding Valuables",
-        "Rarity": 92,
-        "Price": 26400
-    },
-    {
         "Name": "Deluxe Pewter Figurine",
         "Rarity": 98,
         "Price": 26300
@@ -16830,6 +20875,11 @@ var item_db_array = [
         "Price": 26000
     },
     {
+        "Name": "Eyrie Magician Jacket",
+        "Rarity": 96,
+        "Price": 26000
+    },
+    {
         "Name": "Faerie Accordion",
         "Rarity": 98,
         "Price": 26000
@@ -16870,11 +20920,6 @@ var item_db_array = [
         "Price": 26000
     },
     {
-        "Name": "RIP Lucy Stamp",
-        "Rarity": 91,
-        "Price": 25900
-    },
-    {
         "Name": "Sneaky Card Jetsam Trousers",
         "Rarity": 97,
         "Price": 25900
@@ -16888,11 +20933,6 @@ var item_db_array = [
         "Name": "Lupe Grandma Blouse",
         "Rarity": 94,
         "Price": 25800
-    },
-    {
-        "Name": "Crescent Moon Axe",
-        "Rarity": 98,
-        "Price": 25700
     },
     {
         "Name": "Krawk Island Altador Cup Media Book",
@@ -17057,11 +21097,6 @@ var item_db_array = [
     {
         "Name": "Royal Girl Kougra Plushie",
         "Rarity": 94,
-        "Price": 25000
-    },
-    {
-        "Name": "Vegetarian Usul Wrap",
-        "Rarity": 76,
         "Price": 25000
     },
     {
@@ -17490,11 +21525,6 @@ var item_db_array = [
         "Price": 23500
     },
     {
-        "Name": "Lennies in Space",
-        "Rarity": 94,
-        "Price": 23500
-    },
-    {
         "Name": "Magical Poogle Potion",
         "Rarity": 97,
         "Price": 23500
@@ -17545,11 +21575,6 @@ var item_db_array = [
         "Price": 23300
     },
     {
-        "Name": "Common Cures: Revised Edition",
-        "Rarity": 91,
-        "Price": 23200
-    },
-    {
         "Name": "Elegant Qasalan Helmet",
         "Rarity": 90,
         "Price": 23200
@@ -17587,11 +21612,6 @@ var item_db_array = [
     {
         "Name": "Cozy Techo Tights",
         "Rarity": 97,
-        "Price": 23000
-    },
-    {
-        "Name": "Eo Codestone",
-        "Rarity": 40,
         "Price": 23000
     },
     {
@@ -17635,6 +21655,11 @@ var item_db_array = [
         "Price": 23000
     },
     {
+        "Name": "RIP Lucy Stamp",
+        "Rarity": 91,
+        "Price": 23000
+    },
+    {
         "Name": "Shell Clutch",
         "Rarity": 86,
         "Price": 23000
@@ -17670,6 +21695,11 @@ var item_db_array = [
         "Price": 22900
     },
     {
+        "Name": "Eo Codestone",
+        "Rarity": 40,
+        "Price": 22900
+    },
+    {
         "Name": "Gentleman Ogrin Scarf",
         "Rarity": 96,
         "Price": 22900
@@ -17698,6 +21728,11 @@ var item_db_array = [
         "Name": "Traditional Shenkuu Hissi Chest Covering",
         "Rarity": 92,
         "Price": 22900
+    },
+    {
+        "Name": "Patched Magic Hat",
+        "Rarity": 92,
+        "Price": 22800
     },
     {
         "Name": "Chia Chocolatier Jacket",
@@ -17905,6 +21940,11 @@ var item_db_array = [
         "Price": 22000
     },
     {
+        "Name": "Dapper Poogle Monocle",
+        "Rarity": 95,
+        "Price": 22000
+    },
+    {
         "Name": "Dark Faerie Shield",
         "Rarity": 98,
         "Price": 22000
@@ -17912,11 +21952,6 @@ var item_db_array = [
     {
         "Name": "Glowing Book",
         "Rarity": 97,
-        "Price": 22000
-    },
-    {
-        "Name": "Golden Aisha Helmet",
-        "Rarity": 96,
         "Price": 22000
     },
     {
@@ -17942,6 +21977,11 @@ var item_db_array = [
     {
         "Name": "King Coltzan Lupe Crown",
         "Rarity": 87,
+        "Price": 22000
+    },
+    {
+        "Name": "Maraquan Slorg Plushie",
+        "Rarity": 90,
         "Price": 22000
     },
     {
@@ -18145,11 +22185,6 @@ var item_db_array = [
         "Price": 21300
     },
     {
-        "Name": "Trunkard",
-        "Rarity": 95,
-        "Price": 21200
-    },
-    {
         "Name": "Dark Gnorbu Boots",
         "Rarity": 96,
         "Price": 21100
@@ -18242,6 +22277,11 @@ var item_db_array = [
     {
         "Name": "The Hikalakas Pillow",
         "Rarity": 98,
+        "Price": 21000
+    },
+    {
+        "Name": "Trunkard",
+        "Rarity": 95,
         "Price": 21000
     },
     {
@@ -18555,6 +22595,11 @@ var item_db_array = [
         "Price": 20000
     },
     {
+        "Name": "Common Cures: Revised Edition",
+        "Rarity": 91,
+        "Price": 20000
+    },
+    {
         "Name": "Dark Korbat Hero Mask",
         "Rarity": 94,
         "Price": 20000
@@ -18767,11 +22812,6 @@ var item_db_array = [
     {
         "Name": "The Korbat Researcher",
         "Rarity": 92,
-        "Price": 20000
-    },
-    {
-        "Name": "The Pineapple Chia",
-        "Rarity": 90,
         "Price": 20000
     },
     {
@@ -19055,11 +23095,6 @@ var item_db_array = [
         "Price": 19500
     },
     {
-        "Name": "Halloween Kougra Plushie",
-        "Rarity": 92,
-        "Price": 19500
-    },
-    {
         "Name": "Kunai",
         "Rarity": 97,
         "Price": 19500
@@ -19070,8 +23105,8 @@ var item_db_array = [
         "Price": 19500
     },
     {
-        "Name": "Little Timmy Tuskaninny Shirt",
-        "Rarity": 80,
+        "Name": "Lord Korbat Wings",
+        "Rarity": 88,
         "Price": 19500
     },
     {
@@ -19092,11 +23127,6 @@ var item_db_array = [
     {
         "Name": "Maraquan Skeith Maractite Coin",
         "Rarity": 92,
-        "Price": 19500
-    },
-    {
-        "Name": "Maraquan Slorg Plushie",
-        "Rarity": 90,
         "Price": 19500
     },
     {
@@ -19185,11 +23215,6 @@ var item_db_array = [
         "Price": 19400
     },
     {
-        "Name": "King Kelpbeard Plushie",
-        "Rarity": 96,
-        "Price": 19400
-    },
-    {
         "Name": "Lenny Archer Tights",
         "Rarity": 96,
         "Price": 19400
@@ -19265,11 +23290,6 @@ var item_db_array = [
         "Price": 19300
     },
     {
-        "Name": "Pink Scorchio Plushie",
-        "Rarity": 95,
-        "Price": 19300
-    },
-    {
         "Name": "Sculpting with Molten Rock",
         "Rarity": 97,
         "Price": 19300
@@ -19325,6 +23345,11 @@ var item_db_array = [
         "Price": 19200
     },
     {
+        "Name": "Beef Wellington",
+        "Rarity": 90,
+        "Price": 19100
+    },
+    {
         "Name": "Chomby Belle Hat",
         "Rarity": 95,
         "Price": 19100
@@ -19367,6 +23392,11 @@ var item_db_array = [
     {
         "Name": "Christmas JubJub Plushie",
         "Rarity": 93,
+        "Price": 19000
+    },
+    {
+        "Name": "Christmas Scene Stamp",
+        "Rarity": 89,
         "Price": 19000
     },
     {
@@ -19452,11 +23482,6 @@ var item_db_array = [
     {
         "Name": "Pea Pod Backpack",
         "Rarity": 98,
-        "Price": 19000
-    },
-    {
-        "Name": "Petpet Cannonball Stamp",
-        "Rarity": 84,
         "Price": 19000
     },
     {
@@ -19700,6 +23725,11 @@ var item_db_array = [
         "Price": 18700
     },
     {
+        "Name": "The Pineapple Chia",
+        "Rarity": 90,
+        "Price": 18700
+    },
+    {
         "Name": "Chomby Gentleman Shirt and Vest",
         "Rarity": 96,
         "Price": 18600
@@ -19938,6 +23968,16 @@ var item_db_array = [
         "Name": "Starry Yurble Plushie",
         "Rarity": 95,
         "Price": 18200
+    },
+    {
+        "Name": "Taiko Standing Drum",
+        "Rarity": 96,
+        "Price": 18200
+    },
+    {
+        "Name": "Orange Baby Aisha Lollypop",
+        "Rarity": 80,
+        "Price": 18100
     },
     {
         "Name": "Robo Sloth Fist of Power",
@@ -20215,6 +24255,11 @@ var item_db_array = [
         "Price": 17800
     },
     {
+        "Name": "Turkey Dumplings",
+        "Rarity": 80,
+        "Price": 17800
+    },
+    {
         "Name": "Wintery Ogrin Boots",
         "Rarity": 95,
         "Price": 17800
@@ -20337,6 +24382,11 @@ var item_db_array = [
     {
         "Name": "Pea Bubble Bath",
         "Rarity": 96,
+        "Price": 17500
+    },
+    {
+        "Name": "Petpet Cannonball Stamp",
+        "Rarity": 84,
         "Price": 17500
     },
     {
@@ -20485,11 +24535,6 @@ var item_db_array = [
         "Price": 17300
     },
     {
-        "Name": "Nails on a Chalkboard",
-        "Rarity": 97,
-        "Price": 17300
-    },
-    {
         "Name": "Plushie Yurble Chair",
         "Rarity": 95,
         "Price": 17300
@@ -20527,6 +24572,11 @@ var item_db_array = [
     {
         "Name": "Highland Gelert Bracers",
         "Rarity": 95,
+        "Price": 17200
+    },
+    {
+        "Name": "Hissi Thief Belt",
+        "Rarity": 92,
         "Price": 17200
     },
     {
@@ -20612,6 +24662,11 @@ var item_db_array = [
     {
         "Name": "Fuzzy Creature Ruki Head",
         "Rarity": 90,
+        "Price": 17000
+    },
+    {
+        "Name": "Golden Aisha Helmet",
+        "Rarity": 96,
         "Price": 17000
     },
     {
@@ -20770,11 +24825,6 @@ var item_db_array = [
         "Price": 17000
     },
     {
-        "Name": "Xepru",
-        "Rarity": 93,
-        "Price": 17000
-    },
-    {
         "Name": "Fire Blumaroo Plushie",
         "Rarity": 95,
         "Price": 16900
@@ -20910,6 +24960,11 @@ var item_db_array = [
         "Price": 16600
     },
     {
+        "Name": "Coconut Juice Bowl",
+        "Rarity": 96,
+        "Price": 16600
+    },
+    {
         "Name": "Fearless Finnigans Guide to Haunted Eateries",
         "Rarity": 96,
         "Price": 16600
@@ -20947,11 +25002,6 @@ var item_db_array = [
     {
         "Name": "Chomby Flower Child Shirt",
         "Rarity": 95,
-        "Price": 16500
-    },
-    {
-        "Name": "Coconut Juice Bowl",
-        "Rarity": 96,
         "Price": 16500
     },
     {
@@ -21002,11 +25052,6 @@ var item_db_array = [
     {
         "Name": "Noodles for ALL",
         "Rarity": 91,
-        "Price": 16500
-    },
-    {
-        "Name": "Patched Magic Hat",
-        "Rarity": 92,
         "Price": 16500
     },
     {
@@ -21287,11 +25332,6 @@ var item_db_array = [
     {
         "Name": "Chia Ballerina Tutu",
         "Rarity": 95,
-        "Price": 16000
-    },
-    {
-        "Name": "Christmas Scene Stamp",
-        "Rarity": 89,
         "Price": 16000
     },
     {
@@ -21815,11 +25855,6 @@ var item_db_array = [
         "Price": 15500
     },
     {
-        "Name": "Space Grundo Shirt",
-        "Rarity": 93,
-        "Price": 15500
-    },
-    {
         "Name": "Stylish Nimmo Hat",
         "Rarity": 96,
         "Price": 15500
@@ -22135,11 +26170,6 @@ var item_db_array = [
         "Price": 15000
     },
     {
-        "Name": "Cave Painting Background",
-        "Rarity": 85,
-        "Price": 15000
-    },
-    {
         "Name": "Chia Chocolatier Trousers",
         "Rarity": 94,
         "Price": 15000
@@ -22171,6 +26201,11 @@ var item_db_array = [
     },
     {
         "Name": "Dare Devil Elephante Jacket",
+        "Rarity": 95,
+        "Price": 15000
+    },
+    {
+        "Name": "Darigan Carmariller Plushie",
         "Rarity": 95,
         "Price": 15000
     },
@@ -22315,11 +26350,6 @@ var item_db_array = [
         "Price": 15000
     },
     {
-        "Name": "Midnight Smuggler Kougra Gloves",
-        "Rarity": 87,
-        "Price": 15000
-    },
-    {
         "Name": "Milk Maid Techo Milk Jug",
         "Rarity": 96,
         "Price": 15000
@@ -22400,13 +26430,13 @@ var item_db_array = [
         "Price": 15000
     },
     {
-        "Name": "Slorg Slime",
-        "Rarity": 99,
+        "Name": "Snoogy",
+        "Rarity": 78,
         "Price": 15000
     },
     {
-        "Name": "Snoogy",
-        "Rarity": 78,
+        "Name": "Socialite Uni Wig",
+        "Rarity": 89,
         "Price": 15000
     },
     {
@@ -22497,6 +26527,11 @@ var item_db_array = [
     {
         "Name": "Toadstool Quiggle Hat",
         "Rarity": 89,
+        "Price": 14900
+    },
+    {
+        "Name": "Turkey Curry",
+        "Rarity": 80,
         "Price": 14900
     },
     {
@@ -22725,6 +26760,11 @@ var item_db_array = [
         "Price": 14600
     },
     {
+        "Name": "Nails on a Chalkboard",
+        "Rarity": 97,
+        "Price": 14600
+    },
+    {
         "Name": "Red Poogle Morphing Potion",
         "Rarity": 98,
         "Price": 14600
@@ -22767,6 +26807,16 @@ var item_db_array = [
     {
         "Name": "Deserted Fairground Card",
         "Rarity": 90,
+        "Price": 14500
+    },
+    {
+        "Name": "Dirt Ice Cream",
+        "Rarity": 78,
+        "Price": 14500
+    },
+    {
+        "Name": "Fancy Uni Shoes",
+        "Rarity": 94,
         "Price": 14500
     },
     {
@@ -22925,6 +26975,11 @@ var item_db_array = [
         "Price": 14500
     },
     {
+        "Name": "Space Grundo Shirt",
+        "Rarity": 93,
+        "Price": 14500
+    },
+    {
         "Name": "Sprig of Mistletoe",
         "Rarity": 88,
         "Price": 14500
@@ -22937,6 +26992,11 @@ var item_db_array = [
     {
         "Name": "Tigersquash Bed",
         "Rarity": 97,
+        "Price": 14500
+    },
+    {
+        "Name": "Xepru",
+        "Rarity": 93,
         "Price": 14500
     },
     {
@@ -23102,6 +27162,11 @@ var item_db_array = [
     {
         "Name": "Winter Ranger Kougra Sword",
         "Rarity": 93,
+        "Price": 14300
+    },
+    {
+        "Name": "Witch Eyrie Hat",
+        "Rarity": 89,
         "Price": 14300
     },
     {
@@ -23480,11 +27545,6 @@ var item_db_array = [
         "Price": 14000
     },
     {
-        "Name": "Ixi Aviator Trousers",
-        "Rarity": 93,
-        "Price": 14000
-    },
-    {
         "Name": "Jhudora Throne",
         "Rarity": 90,
         "Price": 14000
@@ -23562,6 +27622,11 @@ var item_db_array = [
     {
         "Name": "Origami Rice Balls",
         "Rarity": 94,
+        "Price": 14000
+    },
+    {
+        "Name": "Peophin Leg Shields",
+        "Rarity": 97,
         "Price": 14000
     },
     {
@@ -23710,6 +27775,11 @@ var item_db_array = [
         "Price": 13900
     },
     {
+        "Name": "Ixi Aviator Trousers",
+        "Rarity": 93,
+        "Price": 13900
+    },
+    {
         "Name": "Morris Quiggle Shirt",
         "Rarity": 82,
         "Price": 13900
@@ -23812,11 +27882,6 @@ var item_db_array = [
     {
         "Name": "Miniature Chocolate Chocolate Factory",
         "Rarity": 93,
-        "Price": 13800
-    },
-    {
-        "Name": "Mynci Striped Tail",
-        "Rarity": 89,
         "Price": 13800
     },
     {
@@ -24035,11 +28100,6 @@ var item_db_array = [
         "Price": 13500
     },
     {
-        "Name": "Aisha Balloon Animal",
-        "Rarity": 91,
-        "Price": 13500
-    },
-    {
         "Name": "Aisha Pencil Sharpener",
         "Rarity": 95,
         "Price": 13500
@@ -24250,11 +28310,6 @@ var item_db_array = [
         "Price": 13500
     },
     {
-        "Name": "Taiko Standing Drum",
-        "Rarity": 96,
-        "Price": 13500
-    },
-    {
         "Name": "The Best of Love",
         "Rarity": 88,
         "Price": 13500
@@ -24283,11 +28338,6 @@ var item_db_array = [
         "Name": "Wraith Pteri Chakram",
         "Rarity": 95,
         "Price": 13500
-    },
-    {
-        "Name": "Beef Wellington",
-        "Rarity": 90,
-        "Price": 13400
     },
     {
         "Name": "Chia Barbarian Dagger",
@@ -24910,11 +28960,6 @@ var item_db_array = [
         "Price": 13000
     },
     {
-        "Name": "Treelurkers",
-        "Rarity": 91,
-        "Price": 13000
-    },
-    {
         "Name": "Under the Surface Part I",
         "Rarity": 90,
         "Price": 13000
@@ -24931,11 +28976,6 @@ var item_db_array = [
     },
     {
         "Name": "Vandagyre Librarian Shoes",
-        "Rarity": 87,
-        "Price": 13000
-    },
-    {
-        "Name": "Yurble Raider Belt",
         "Rarity": 87,
         "Price": 13000
     },
@@ -24985,11 +29025,6 @@ var item_db_array = [
         "Price": 12900
     },
     {
-        "Name": "Lord Korbat Wings",
-        "Rarity": 88,
-        "Price": 12900
-    },
-    {
         "Name": "Meerca Worker Boots",
         "Rarity": 97,
         "Price": 12900
@@ -25027,6 +29062,11 @@ var item_db_array = [
     {
         "Name": "Taco Plushie",
         "Rarity": 87,
+        "Price": 12900
+    },
+    {
+        "Name": "Treelurkers",
+        "Rarity": 91,
         "Price": 12900
     },
     {
@@ -25180,18 +29220,8 @@ var item_db_array = [
         "Price": 12700
     },
     {
-        "Name": "Brynn A Biography",
-        "Rarity": 92,
-        "Price": 12700
-    },
-    {
         "Name": "Chocolate Chia Pancakes",
         "Rarity": 91,
-        "Price": 12700
-    },
-    {
-        "Name": "Fancy Uni Shoes",
-        "Rarity": 94,
         "Price": 12700
     },
     {
@@ -26125,6 +30155,11 @@ var item_db_array = [
         "Price": 12000
     },
     {
+        "Name": "Brynn A Biography",
+        "Rarity": 92,
+        "Price": 12000
+    },
+    {
         "Name": "Curvy Kreludan Table",
         "Rarity": 94,
         "Price": 12000
@@ -26202,11 +30237,6 @@ var item_db_array = [
     {
         "Name": "Flotsam Band Leader Trumpet",
         "Rarity": 97,
-        "Price": 12000
-    },
-    {
-        "Name": "Flower Bass",
-        "Rarity": 94,
         "Price": 12000
     },
     {
@@ -26855,11 +30885,6 @@ var item_db_array = [
         "Price": 11800
     },
     {
-        "Name": "Casual Lutari Scarf",
-        "Rarity": 89,
-        "Price": 11800
-    },
-    {
         "Name": "Dusty Meerca Wig",
         "Rarity": 95,
         "Price": 11800
@@ -26962,6 +30987,11 @@ var item_db_array = [
     {
         "Name": "Space Wanderer Xweetok Gloves",
         "Rarity": 94,
+        "Price": 11800
+    },
+    {
+        "Name": "Steamed Gorgroggles",
+        "Rarity": 91,
         "Price": 11800
     },
     {
@@ -27820,6 +31850,11 @@ var item_db_array = [
         "Price": 11300
     },
     {
+        "Name": "Spooky Stories From the Beyond",
+        "Rarity": 94,
+        "Price": 11300
+    },
+    {
         "Name": "Stylish Pteri Cane",
         "Rarity": 92,
         "Price": 11300
@@ -28008,11 +32043,6 @@ var item_db_array = [
         "Name": "Virtupets Altador Cup Media Book",
         "Rarity": 91,
         "Price": 11200
-    },
-    {
-        "Name": "Angelic Usukis",
-        "Rarity": 90,
-        "Price": 11100
     },
     {
         "Name": "Blumaroo Magician Trousers",
@@ -28220,11 +32250,6 @@ var item_db_array = [
         "Price": 11000
     },
     {
-        "Name": "Darigan Carmariller Plushie",
-        "Rarity": 95,
-        "Price": 11000
-    },
-    {
         "Name": "Dark Faerie Rug",
         "Rarity": 95,
         "Price": 11000
@@ -28337,11 +32362,6 @@ var item_db_array = [
     {
         "Name": "Halloween Bruce Plushie",
         "Rarity": 89,
-        "Price": 11000
-    },
-    {
-        "Name": "Harris Tales",
-        "Rarity": 90,
         "Price": 11000
     },
     {
@@ -28675,11 +32695,6 @@ var item_db_array = [
         "Price": 11000
     },
     {
-        "Name": "Turkey Curry",
-        "Rarity": 80,
-        "Price": 11000
-    },
-    {
         "Name": "Turnip Eyrie Souffle",
         "Rarity": 90,
         "Price": 11000
@@ -28827,6 +32842,11 @@ var item_db_array = [
     {
         "Name": "Green Suit Tuskaninny Shirt",
         "Rarity": 95,
+        "Price": 10900
+    },
+    {
+        "Name": "Harris Tales",
+        "Rarity": 90,
         "Price": 10900
     },
     {
@@ -29235,11 +33255,6 @@ var item_db_array = [
         "Price": 10700
     },
     {
-        "Name": "Steamed Gorgroggles",
-        "Rarity": 91,
-        "Price": 10700
-    },
-    {
         "Name": "Stylish Tuskaninny Shoes",
         "Rarity": 94,
         "Price": 10700
@@ -29505,6 +33520,11 @@ var item_db_array = [
         "Price": 10500
     },
     {
+        "Name": "Flower Bass",
+        "Rarity": 94,
+        "Price": 10500
+    },
+    {
         "Name": "Flowing Peophin Wig",
         "Rarity": 89,
         "Price": 10500
@@ -29580,6 +33600,11 @@ var item_db_array = [
         "Price": 10500
     },
     {
+        "Name": "Mynci Striped Tail",
+        "Rarity": 89,
+        "Price": 10500
+    },
+    {
         "Name": "Mystery Island Fruit Pillars",
         "Rarity": 92,
         "Price": 10500
@@ -29640,11 +33665,6 @@ var item_db_array = [
         "Price": 10500
     },
     {
-        "Name": "Shiver Me Shrimp",
-        "Rarity": 100,
-        "Price": 10500
-    },
-    {
         "Name": "Simple Korbat Peasant Hat",
         "Rarity": 95,
         "Price": 10500
@@ -29657,11 +33677,6 @@ var item_db_array = [
     {
         "Name": "Space Grundo Toy Gun",
         "Rarity": 93,
-        "Price": 10500
-    },
-    {
-        "Name": "Spooky Stories From the Beyond",
-        "Rarity": 94,
         "Price": 10500
     },
     {
@@ -29710,6 +33725,11 @@ var item_db_array = [
         "Price": 10500
     },
     {
+        "Name": "Vegetarian Usul Wrap",
+        "Rarity": 76,
+        "Price": 10500
+    },
+    {
         "Name": "Veiled Uni Robe",
         "Rarity": 88,
         "Price": 10500
@@ -29746,6 +33766,11 @@ var item_db_array = [
     },
     {
         "Name": "1001 Recipes for Sand Cake",
+        "Rarity": 91,
+        "Price": 10400
+    },
+    {
+        "Name": "Aisha Balloon Animal",
         "Rarity": 91,
         "Price": 10400
     },
@@ -29892,11 +33917,6 @@ var item_db_array = [
     {
         "Name": "Winged Eyrie Guitar",
         "Rarity": 92,
-        "Price": 10400
-    },
-    {
-        "Name": "Wisdom of the Wise",
-        "Rarity": 93,
         "Price": 10400
     },
     {
@@ -30145,18 +34165,8 @@ var item_db_array = [
         "Price": 10200
     },
     {
-        "Name": "Dark Faerie Tub",
-        "Rarity": 97,
-        "Price": 10200
-    },
-    {
         "Name": "Deluxe Garden Catapult",
         "Rarity": 97,
-        "Price": 10200
-    },
-    {
-        "Name": "Eccentric Cybunny Goatee",
-        "Rarity": 87,
         "Price": 10200
     },
     {
@@ -30375,11 +34385,6 @@ var item_db_array = [
         "Price": 10100
     },
     {
-        "Name": "2 Scoops of Friendship",
-        "Rarity": 78,
-        "Price": 10000
-    },
-    {
         "Name": "Acara Rebel Sunglasses",
         "Rarity": 91,
         "Price": 10000
@@ -30427,6 +34432,11 @@ var item_db_array = [
     {
         "Name": "Ancient Eyrie Longsword",
         "Rarity": 92,
+        "Price": 10000
+    },
+    {
+        "Name": "Angelic Usukis",
+        "Rarity": 90,
         "Price": 10000
     },
     {
@@ -30482,6 +34492,11 @@ var item_db_array = [
     {
         "Name": "Broken Qasalan Pot",
         "Rarity": 95,
+        "Price": 10000
+    },
+    {
+        "Name": "Cave Painting Background",
+        "Rarity": 85,
         "Price": 10000
     },
     {
@@ -30590,6 +34605,11 @@ var item_db_array = [
         "Price": 10000
     },
     {
+        "Name": "Deluxe Angel Usuki",
+        "Rarity": 90,
+        "Price": 10000
+    },
+    {
         "Name": "Doctor Usul Gloves",
         "Rarity": 89,
         "Price": 10000
@@ -30662,11 +34682,6 @@ var item_db_array = [
     {
         "Name": "Gelert Race Cart Driver Shoes",
         "Rarity": 94,
-        "Price": 10000
-    },
-    {
-        "Name": "Giant Shish Kabob",
-        "Rarity": 92,
         "Price": 10000
     },
     {
@@ -30840,6 +34855,11 @@ var item_db_array = [
         "Price": 10000
     },
     {
+        "Name": "Lu Codestone",
+        "Rarity": 40,
+        "Price": 10000
+    },
+    {
         "Name": "Masquerader Xweetok Dress",
         "Rarity": 80,
         "Price": 10000
@@ -30990,6 +35010,11 @@ var item_db_array = [
         "Price": 10000
     },
     {
+        "Name": "Regal Mynci Stars",
+        "Rarity": 95,
+        "Price": 10000
+    },
+    {
         "Name": "Regal Warrior Dress",
         "Rarity": 83,
         "Price": 10000
@@ -31070,6 +35095,11 @@ var item_db_array = [
         "Price": 10000
     },
     {
+        "Name": "Slorg Slime",
+        "Rarity": 99,
+        "Price": 10000
+    },
+    {
         "Name": "Sloth Cone",
         "Rarity": 90,
         "Price": 10000
@@ -31122,6 +35152,11 @@ var item_db_array = [
     {
         "Name": "Suave Pteri Shoes",
         "Rarity": 94,
+        "Price": 10000
+    },
+    {
+        "Name": "Sumi Paintbrush",
+        "Rarity": 91,
         "Price": 10000
     },
     {
@@ -31470,6 +35505,11 @@ var item_db_array = [
         "Price": 9900
     },
     {
+        "Name": "Fur-Trimmed Coat",
+        "Rarity": 84,
+        "Price": 9900
+    },
+    {
         "Name": "Gifn Plushie",
         "Rarity": 92,
         "Price": 9900
@@ -31515,18 +35555,8 @@ var item_db_array = [
         "Price": 9900
     },
     {
-        "Name": "Lupe Samurai Helmet",
-        "Rarity": 89,
-        "Price": 9900
-    },
-    {
         "Name": "Metallic Hissi Head",
         "Rarity": 87,
-        "Price": 9900
-    },
-    {
-        "Name": "Morning Meerca Cap",
-        "Rarity": 93,
         "Price": 9900
     },
     {
@@ -31577,6 +35607,11 @@ var item_db_array = [
     {
         "Name": "Scorchio Princess Dress",
         "Rarity": 85,
+        "Price": 9900
+    },
+    {
+        "Name": "Shiver Me Shrimp",
+        "Rarity": 100,
         "Price": 9900
     },
     {
@@ -31737,11 +35772,6 @@ var item_db_array = [
     {
         "Name": "Nimmo Shenkuu Wig",
         "Rarity": 92,
-        "Price": 9850
-    },
-    {
-        "Name": "Orange Baby Aisha Lollypop",
-        "Rarity": 80,
         "Price": 9850
     },
     {
@@ -31980,11 +36010,6 @@ var item_db_array = [
         "Price": 9800
     },
     {
-        "Name": "Stuffed Penupe",
-        "Rarity": 96,
-        "Price": 9800
-    },
-    {
         "Name": "Stylish Checkered Chia Sceptre",
         "Rarity": 94,
         "Price": 9800
@@ -32127,11 +36152,6 @@ var item_db_array = [
     {
         "Name": "Lenny Gentleman Gloves",
         "Rarity": 91,
-        "Price": 9750
-    },
-    {
-        "Name": "Lu Codestone",
-        "Rarity": 40,
         "Price": 9750
     },
     {
@@ -32410,6 +36430,11 @@ var item_db_array = [
         "Price": 9650
     },
     {
+        "Name": "Giant Shish Kabob",
+        "Rarity": 92,
+        "Price": 9650
+    },
+    {
         "Name": "Kougra Altador Heroine Wig",
         "Rarity": 95,
         "Price": 9650
@@ -32590,11 +36615,6 @@ var item_db_array = [
         "Price": 9550
     },
     {
-        "Name": "Mint Chocolate Chia",
-        "Rarity": 93,
-        "Price": 9550
-    },
-    {
         "Name": "Nettle Tea",
         "Rarity": 92,
         "Price": 9550
@@ -32682,6 +36702,11 @@ var item_db_array = [
     {
         "Name": "Ancient Sakhmetian Bread of Coltzan III",
         "Rarity": 80,
+        "Price": 9500
+    },
+    {
+        "Name": "Armin Bori Shirt and Vest",
+        "Rarity": 87,
         "Price": 9500
     },
     {
@@ -32825,11 +36850,6 @@ var item_db_array = [
         "Price": 9500
     },
     {
-        "Name": "Hippalop",
-        "Rarity": 92,
-        "Price": 9500
-    },
-    {
         "Name": "Icy Stove",
         "Rarity": 96,
         "Price": 9500
@@ -32882,6 +36902,11 @@ var item_db_array = [
     {
         "Name": "Mushroom JubJub Dress",
         "Rarity": 89,
+        "Price": 9500
+    },
+    {
+        "Name": "Mutant Chomby Plushie",
+        "Rarity": 88,
         "Price": 9500
     },
     {
@@ -32970,6 +36995,11 @@ var item_db_array = [
         "Price": 9500
     },
     {
+        "Name": "Seti",
+        "Rarity": 89,
+        "Price": 9500
+    },
+    {
         "Name": "Sir Edmund Ogletree Plushie",
         "Rarity": 93,
         "Price": 9500
@@ -33032,6 +37062,11 @@ var item_db_array = [
     {
         "Name": "Winter Zafara Snow Shoes",
         "Rarity": 91,
+        "Price": 9500
+    },
+    {
+        "Name": "Wisdom of the Wise",
+        "Rarity": 93,
         "Price": 9500
     },
     {
@@ -33415,6 +37450,11 @@ var item_db_array = [
         "Price": 9350
     },
     {
+        "Name": "Lupe Samurai Helmet",
+        "Rarity": 89,
+        "Price": 9350
+    },
+    {
         "Name": "Maraquan Skeith Plushie",
         "Rarity": 93,
         "Price": 9350
@@ -33630,11 +37670,6 @@ var item_db_array = [
         "Price": 9250
     },
     {
-        "Name": "Hissi Thief Belt",
-        "Rarity": 92,
-        "Price": 9250
-    },
-    {
         "Name": "Huggy",
         "Rarity": 80,
         "Price": 9250
@@ -33682,11 +37717,6 @@ var item_db_array = [
     {
         "Name": "Skeith Mountaineer Tail Coat",
         "Rarity": 92,
-        "Price": 9250
-    },
-    {
-        "Name": "Slugawoo",
-        "Rarity": 96,
         "Price": 9250
     },
     {
@@ -33886,6 +37916,11 @@ var item_db_array = [
     },
     {
         "Name": "Cheeseroller Shopkeeper Plushie",
+        "Rarity": 90,
+        "Price": 9150
+    },
+    {
+        "Name": "Chocolate Dipped Madeleines",
         "Rarity": 90,
         "Price": 9150
     },
@@ -34160,6 +38195,11 @@ var item_db_array = [
         "Price": 9050
     },
     {
+        "Name": "2 Scoops of Friendship",
+        "Rarity": 78,
+        "Price": 9000
+    },
+    {
         "Name": "Acara Rebel Trousers",
         "Rarity": 95,
         "Price": 9000
@@ -34290,11 +38330,6 @@ var item_db_array = [
         "Price": 9000
     },
     {
-        "Name": "Dirt Ice Cream",
-        "Rarity": 78,
-        "Price": 9000
-    },
-    {
         "Name": "Disco Print Lamp",
         "Rarity": 97,
         "Price": 9000
@@ -34420,11 +38455,6 @@ var item_db_array = [
         "Price": 9000
     },
     {
-        "Name": "History of Unwise Neopians",
-        "Rarity": 91,
-        "Price": 9000
-    },
-    {
         "Name": "Ixi Aviator Shirt",
         "Rarity": 91,
         "Price": 9000
@@ -34502,11 +38532,6 @@ var item_db_array = [
     {
         "Name": "Moltaran Comb",
         "Rarity": 96,
-        "Price": 9000
-    },
-    {
-        "Name": "Moltaran Fashion Eyrie Wing Plates",
-        "Rarity": 93,
         "Price": 9000
     },
     {
@@ -34920,11 +38945,6 @@ var item_db_array = [
         "Price": 8950
     },
     {
-        "Name": "Tonu Super Hero Pyjama Mask",
-        "Rarity": 94,
-        "Price": 8950
-    },
-    {
         "Name": "Wealthy Bruce Shades",
         "Rarity": 93,
         "Price": 8950
@@ -35002,11 +39022,6 @@ var item_db_array = [
     {
         "Name": "Frozen Cherry Tree",
         "Rarity": 87,
-        "Price": 8900
-    },
-    {
-        "Name": "Fur-Trimmed Coat",
-        "Rarity": 84,
         "Price": 8900
     },
     {
@@ -35245,13 +39260,13 @@ var item_db_array = [
         "Price": 8850
     },
     {
-        "Name": "Jelly Neocola",
-        "Rarity": 78,
+        "Name": "History of Unwise Neopians",
+        "Rarity": 91,
         "Price": 8850
     },
     {
-        "Name": "Kikopop",
-        "Rarity": 90,
+        "Name": "Jelly Neocola",
+        "Rarity": 78,
         "Price": 8850
     },
     {
@@ -35282,6 +39297,11 @@ var item_db_array = [
     {
         "Name": "Lovely Ruki Dress",
         "Rarity": 92,
+        "Price": 8850
+    },
+    {
+        "Name": "Midnight Smuggler Kougra Gloves",
+        "Rarity": 87,
         "Price": 8850
     },
     {
@@ -35660,8 +39680,8 @@ var item_db_array = [
         "Price": 8750
     },
     {
-        "Name": "Soft Rainbow Brush",
-        "Rarity": 90,
+        "Name": "Spice Ruki Biscuit",
+        "Rarity": 79,
         "Price": 8750
     },
     {
@@ -35692,11 +39712,6 @@ var item_db_array = [
     {
         "Name": "Usul Native Shoes",
         "Rarity": 93,
-        "Price": 8750
-    },
-    {
-        "Name": "Usul Sailor Jacket",
-        "Rarity": 91,
         "Price": 8750
     },
     {
@@ -36405,11 +40420,6 @@ var item_db_array = [
         "Price": 8500
     },
     {
-        "Name": "Seti",
-        "Rarity": 89,
-        "Price": 8500
-    },
-    {
         "Name": "Sophies Leave Me Alone Notice",
         "Rarity": 92,
         "Price": 8500
@@ -36472,6 +40482,11 @@ var item_db_array = [
     {
         "Name": "Winter Korbat Warrior Gloves",
         "Rarity": 92,
+        "Price": 8500
+    },
+    {
+        "Name": "Wooden Flail",
+        "Rarity": 95,
         "Price": 8500
     },
     {
@@ -36645,6 +40660,11 @@ var item_db_array = [
         "Price": 8450
     },
     {
+        "Name": "The Wonder Of Toast",
+        "Rarity": 88,
+        "Price": 8450
+    },
+    {
         "Name": "Usul Native Face Paint",
         "Rarity": 91,
         "Price": 8450
@@ -36675,18 +40695,8 @@ var item_db_array = [
         "Price": 8400
     },
     {
-        "Name": "Chic Ixi Bracelet",
-        "Rarity": 81,
-        "Price": 8400
-    },
-    {
         "Name": "Chocolate Chia Statue",
         "Rarity": 96,
-        "Price": 8400
-    },
-    {
-        "Name": "Chocolate Dipped Madeleines",
-        "Rarity": 90,
         "Price": 8400
     },
     {
@@ -36825,6 +40835,11 @@ var item_db_array = [
         "Price": 8400
     },
     {
+        "Name": "Slugawoo",
+        "Rarity": 96,
+        "Price": 8400
+    },
+    {
         "Name": "Summer Landscape Background",
         "Rarity": 82,
         "Price": 8400
@@ -36910,6 +40925,11 @@ var item_db_array = [
         "Price": 8350
     },
     {
+        "Name": "Mint Chocolate Chia",
+        "Rarity": 93,
+        "Price": 8350
+    },
+    {
         "Name": "Painted Pull Along Scarab",
         "Rarity": 94,
         "Price": 8350
@@ -36951,11 +40971,6 @@ var item_db_array = [
     },
     {
         "Name": "Asparagus Wrap",
-        "Rarity": 90,
-        "Price": 8300
-    },
-    {
-        "Name": "Black Satin Cybunny Top Hat",
         "Rarity": 90,
         "Price": 8300
     },
@@ -37172,6 +41187,11 @@ var item_db_array = [
     {
         "Name": "Hand Painted Chimney",
         "Rarity": 95,
+        "Price": 8250
+    },
+    {
+        "Name": "Hippalop",
+        "Rarity": 92,
         "Price": 8250
     },
     {
@@ -37465,6 +41485,11 @@ var item_db_array = [
         "Price": 8200
     },
     {
+        "Name": "Toast With Cheese",
+        "Rarity": 92,
+        "Price": 8200
+    },
+    {
         "Name": "Tranquil Stream Foreground",
         "Rarity": 80,
         "Price": 8200
@@ -37530,11 +41555,6 @@ var item_db_array = [
         "Price": 8150
     },
     {
-        "Name": "How to Roll Cheese",
-        "Rarity": 89,
-        "Price": 8150
-    },
-    {
         "Name": "Jetsam Aviator Trousers",
         "Rarity": 92,
         "Price": 8150
@@ -37562,6 +41582,11 @@ var item_db_array = [
     {
         "Name": "Snazzy Nimmo Shirt with Caravat",
         "Rarity": 92,
+        "Price": 8150
+    },
+    {
+        "Name": "Soft Rainbow Brush",
+        "Rarity": 90,
         "Price": 8150
     },
     {
@@ -38150,6 +42175,11 @@ var item_db_array = [
         "Price": 8000
     },
     {
+        "Name": "Lupe Hero Suit",
+        "Rarity": 93,
+        "Price": 8000
+    },
+    {
         "Name": "Luperus Lupe Head",
         "Rarity": 87,
         "Price": 8000
@@ -38455,6 +42485,11 @@ var item_db_array = [
         "Price": 8000
     },
     {
+        "Name": "Tonu Super Hero Pyjama Mask",
+        "Rarity": 94,
+        "Price": 8000
+    },
+    {
         "Name": "Torpedo Lupe Jacket",
         "Rarity": 83,
         "Price": 8000
@@ -38492,11 +42527,6 @@ var item_db_array = [
     {
         "Name": "Wind Up Scorchio",
         "Rarity": 90,
-        "Price": 8000
-    },
-    {
-        "Name": "Witch Eyrie Hat",
-        "Rarity": 89,
         "Price": 8000
     },
     {
@@ -38625,11 +42655,6 @@ var item_db_array = [
         "Price": 7950
     },
     {
-        "Name": "Lupe Samurai Full Body Armour",
-        "Rarity": 89,
-        "Price": 7950
-    },
-    {
         "Name": "Messenger Shoyru Bag",
         "Rarity": 86,
         "Price": 7950
@@ -38715,11 +42740,6 @@ var item_db_array = [
         "Price": 7950
     },
     {
-        "Name": "Vinyl Darigan JubJub Toy",
-        "Rarity": 98,
-        "Price": 7950
-    },
-    {
         "Name": "Wand of Nova",
         "Rarity": 95,
         "Price": 7950
@@ -38777,6 +42797,11 @@ var item_db_array = [
     {
         "Name": "Cheddar Kacheek Cheese",
         "Rarity": 90,
+        "Price": 7900
+    },
+    {
+        "Name": "Chic Ixi Bracelet",
+        "Rarity": 81,
         "Price": 7900
     },
     {
@@ -38935,6 +42960,11 @@ var item_db_array = [
         "Price": 7900
     },
     {
+        "Name": "The Peophin That Couldnt Swim",
+        "Rarity": 88,
+        "Price": 7900
+    },
+    {
         "Name": "Tigerbuggle Pizza",
         "Rarity": 93,
         "Price": 7900
@@ -38942,11 +42972,6 @@ var item_db_array = [
     {
         "Name": "Tough Eyrie Boots",
         "Rarity": 91,
-        "Price": 7900
-    },
-    {
-        "Name": "Trendy Ruki Jacket",
-        "Rarity": 89,
         "Price": 7900
     },
     {
@@ -38960,18 +42985,13 @@ var item_db_array = [
         "Price": 7900
     },
     {
-        "Name": "Vegetarian Pizza",
-        "Rarity": 86,
-        "Price": 7900
-    },
-    {
         "Name": "Wocky Gadgeteer Trousers",
         "Rarity": 88,
         "Price": 7900
     },
     {
-        "Name": "Adventurous Ixi Wig",
-        "Rarity": 91,
+        "Name": "Aboogala Petpet Cushion",
+        "Rarity": 97,
         "Price": 7850
     },
     {
@@ -39112,11 +43132,6 @@ var item_db_array = [
     {
         "Name": "Brainy Uni Cardigan",
         "Rarity": 92,
-        "Price": 7800
-    },
-    {
-        "Name": "Casual JubJub Cap",
-        "Rarity": 89,
         "Price": 7800
     },
     {
@@ -39495,6 +43510,11 @@ var item_db_array = [
         "Price": 7750
     },
     {
+        "Name": "Stuffed Penupe",
+        "Rarity": 96,
+        "Price": 7750
+    },
+    {
         "Name": "Triangular Maractite Coin",
         "Rarity": 82,
         "Price": 7750
@@ -39515,8 +43535,8 @@ var item_db_array = [
         "Price": 7750
     },
     {
-        "Name": "Aboogala Petpet Cushion",
-        "Rarity": 97,
+        "Name": "Blueberry Gummy Stamp",
+        "Rarity": 91,
         "Price": 7700
     },
     {
@@ -39552,11 +43572,6 @@ var item_db_array = [
     {
         "Name": "Ghost Buzz Morphing Potion",
         "Rarity": 94,
-        "Price": 7700
-    },
-    {
-        "Name": "Ghostkerchief Hammer",
-        "Rarity": 93,
         "Price": 7700
     },
     {
@@ -39635,11 +43650,6 @@ var item_db_array = [
         "Price": 7700
     },
     {
-        "Name": "Tasty Tiki Trees",
-        "Rarity": 73,
-        "Price": 7700
-    },
-    {
         "Name": "Trendy Uni Shirt",
         "Rarity": 92,
         "Price": 7700
@@ -39670,8 +43680,8 @@ var item_db_array = [
         "Price": 7650
     },
     {
-        "Name": "Egg Bomb",
-        "Rarity": 88,
+        "Name": "Dark Faerie Tub",
+        "Rarity": 97,
         "Price": 7650
     },
     {
@@ -39730,13 +43740,23 @@ var item_db_array = [
         "Price": 7650
     },
     {
+        "Name": "Super Deluxe Maraquan Victory Cake",
+        "Rarity": 92,
+        "Price": 7650
+    },
+    {
         "Name": "Sweet Tooth Chomby Scarf",
         "Rarity": 88,
         "Price": 7650
     },
     {
-        "Name": "Usul Sailor Trousers",
-        "Rarity": 93,
+        "Name": "Trendy Ruki Jacket",
+        "Rarity": 89,
+        "Price": 7650
+    },
+    {
+        "Name": "Zomutt Petpet Tunnel",
+        "Rarity": 89,
         "Price": 7650
     },
     {
@@ -39757,11 +43777,6 @@ var item_db_array = [
     {
         "Name": "Chocolate Table",
         "Rarity": 94,
-        "Price": 7600
-    },
-    {
-        "Name": "Coral Delight",
-        "Rarity": 85,
         "Price": 7600
     },
     {
@@ -39910,6 +43925,11 @@ var item_db_array = [
         "Price": 7550
     },
     {
+        "Name": "Casual JubJub Cap",
+        "Rarity": 89,
+        "Price": 7550
+    },
+    {
         "Name": "Checkered Moehog Bow",
         "Rarity": 91,
         "Price": 7550
@@ -40040,11 +44060,6 @@ var item_db_array = [
         "Price": 7500
     },
     {
-        "Name": "Ancient Neopian Decree",
-        "Rarity": 88,
-        "Price": 7500
-    },
-    {
         "Name": "Armoured Ruki Shield",
         "Rarity": 92,
         "Price": 7500
@@ -40100,8 +44115,8 @@ var item_db_array = [
         "Price": 7500
     },
     {
-        "Name": "Deluxe Red Treehouse",
-        "Rarity": 89,
+        "Name": "Desert Days",
+        "Rarity": 90,
         "Price": 7500
     },
     {
@@ -40210,6 +44225,11 @@ var item_db_array = [
         "Price": 7500
     },
     {
+        "Name": "Kikopop",
+        "Rarity": 90,
+        "Price": 7500
+    },
+    {
         "Name": "Kougra Warrior Princess Helm",
         "Rarity": 93,
         "Price": 7500
@@ -40252,6 +44272,11 @@ var item_db_array = [
     {
         "Name": "Patter Feet",
         "Rarity": 90,
+        "Price": 7500
+    },
+    {
+        "Name": "Peanut Shaker",
+        "Rarity": 87,
         "Price": 7500
     },
     {
@@ -40455,6 +44480,11 @@ var item_db_array = [
         "Price": 7450
     },
     {
+        "Name": "Egg Bomb",
+        "Rarity": 88,
+        "Price": 7450
+    },
+    {
         "Name": "Face Pulling Kiko Gnome",
         "Rarity": 93,
         "Price": 7450
@@ -40640,11 +44670,6 @@ var item_db_array = [
         "Price": 7400
     },
     {
-        "Name": "Chocolate Coconut Bars",
-        "Rarity": 90,
-        "Price": 7400
-    },
-    {
         "Name": "Cirrus Wooden Box",
         "Rarity": 90,
         "Price": 7400
@@ -40717,6 +44742,11 @@ var item_db_array = [
     {
         "Name": "Honey Toast",
         "Rarity": 94,
+        "Price": 7400
+    },
+    {
+        "Name": "How to Roll Cheese",
+        "Rarity": 89,
         "Price": 7400
     },
     {
@@ -40805,6 +44835,11 @@ var item_db_array = [
         "Price": 7400
     },
     {
+        "Name": "Tasty Tiki Trees",
+        "Rarity": 73,
+        "Price": 7400
+    },
+    {
         "Name": "Techo Warrior Shoes and Trousers",
         "Rarity": 86,
         "Price": 7400
@@ -40835,13 +44870,13 @@ var item_db_array = [
         "Price": 7400
     },
     {
-        "Name": "Blueberry Gummy Stamp",
-        "Rarity": 91,
+        "Name": "Chocolate Poogle Lolly",
+        "Rarity": 80,
         "Price": 7350
     },
     {
-        "Name": "Chocolate Poogle Lolly",
-        "Rarity": 80,
+        "Name": "Coral Delight",
+        "Rarity": 85,
         "Price": 7350
     },
     {
@@ -41057,11 +45092,6 @@ var item_db_array = [
     {
         "Name": "Luperus Lupe Body",
         "Rarity": 87,
-        "Price": 7300
-    },
-    {
-        "Name": "Meepit Juice Break Marshmallow",
-        "Rarity": 90,
         "Price": 7300
     },
     {
@@ -41365,11 +45395,6 @@ var item_db_array = [
         "Price": 7200
     },
     {
-        "Name": "Famous Lennies",
-        "Rarity": 88,
-        "Price": 7200
-    },
-    {
         "Name": "Farvin III Usuki",
         "Rarity": 93,
         "Price": 7200
@@ -41500,6 +45525,11 @@ var item_db_array = [
         "Price": 7150
     },
     {
+        "Name": "Galactic Water",
+        "Rarity": 94,
+        "Price": 7150
+    },
+    {
         "Name": "Icy Dinner Table",
         "Rarity": 94,
         "Price": 7150
@@ -41575,8 +45605,18 @@ var item_db_array = [
         "Price": 7150
     },
     {
+        "Name": "Undead Hunter Wocky Shirt and Waistcoat",
+        "Rarity": 85,
+        "Price": 7150
+    },
+    {
         "Name": "Blue Goo Techo Cake",
         "Rarity": 80,
+        "Price": 7100
+    },
+    {
+        "Name": "Buzz Intellectual Outfit",
+        "Rarity": 90,
         "Price": 7100
     },
     {
@@ -41710,6 +45750,11 @@ var item_db_array = [
         "Price": 7050
     },
     {
+        "Name": "Chocolate Coconut Bars",
+        "Rarity": 90,
+        "Price": 7050
+    },
+    {
         "Name": "Comfortable Blumaroo Belt",
         "Rarity": 95,
         "Price": 7050
@@ -41785,16 +45830,6 @@ var item_db_array = [
         "Price": 7050
     },
     {
-        "Name": "Yachting Flotsam Jacket",
-        "Rarity": 88,
-        "Price": 7050
-    },
-    {
-        "Name": "10 Things in Mystery Island That Originated Elsewhere",
-        "Rarity": 81,
-        "Price": 7000
-    },
-    {
         "Name": "8-Bit Pink Wings",
         "Rarity": 80,
         "Price": 7000
@@ -41802,6 +45837,11 @@ var item_db_array = [
     {
         "Name": "Acara Shield",
         "Rarity": 95,
+        "Price": 7000
+    },
+    {
+        "Name": "Advanced Magic",
+        "Rarity": 90,
         "Price": 7000
     },
     {
@@ -41880,6 +45920,11 @@ var item_db_array = [
         "Price": 7000
     },
     {
+        "Name": "Casual Kougra Shoes",
+        "Rarity": 86,
+        "Price": 7000
+    },
+    {
         "Name": "Casual Ogrin Hat and Wig",
         "Rarity": 90,
         "Price": 7000
@@ -41947,6 +45992,11 @@ var item_db_array = [
     {
         "Name": "Disco Print L-Shaped Sofa",
         "Rarity": 93,
+        "Price": 7000
+    },
+    {
+        "Name": "Eccentric Cybunny Goatee",
+        "Rarity": 87,
         "Price": 7000
     },
     {
@@ -42415,6 +46465,11 @@ var item_db_array = [
         "Price": 6950
     },
     {
+        "Name": "Jetsam Knight Sandals",
+        "Rarity": 90,
+        "Price": 6950
+    },
+    {
         "Name": "King Altador Usuki Doll",
         "Rarity": 95,
         "Price": 6950
@@ -42460,8 +46515,8 @@ var item_db_array = [
         "Price": 6950
     },
     {
-        "Name": "Mynci Dark Archer Trousers",
-        "Rarity": 88,
+        "Name": "Mysterious Acara Archer Mask",
+        "Rarity": 93,
         "Price": 6950
     },
     {
@@ -42630,6 +46685,11 @@ var item_db_array = [
         "Price": 6900
     },
     {
+        "Name": "Ghostkerchief Hammer",
+        "Rarity": 93,
+        "Price": 6900
+    },
+    {
         "Name": "Golden Aisha Wand",
         "Rarity": 94,
         "Price": 6900
@@ -42705,8 +46765,18 @@ var item_db_array = [
         "Price": 6900
     },
     {
+        "Name": "Morning Meerca Cap",
+        "Rarity": 93,
+        "Price": 6900
+    },
+    {
         "Name": "Mythical Kyriis",
         "Rarity": 88,
+        "Price": 6900
+    },
+    {
+        "Name": "NG Tube with Paw Print Sticker",
+        "Rarity": 73,
         "Price": 6900
     },
     {
@@ -42725,13 +46795,13 @@ var item_db_array = [
         "Price": 6900
     },
     {
-        "Name": "Sandpoint",
-        "Rarity": 86,
+        "Name": "Savage Daffodil",
+        "Rarity": 93,
         "Price": 6900
     },
     {
-        "Name": "Savage Daffodil",
-        "Rarity": 93,
+        "Name": "Scorchio Blacksmith Slacks",
+        "Rarity": 87,
         "Price": 6900
     },
     {
@@ -42795,11 +46865,6 @@ var item_db_array = [
         "Price": 6900
     },
     {
-        "Name": "Zomutt Petpet Tunnel",
-        "Rarity": 89,
-        "Price": 6900
-    },
-    {
         "Name": "Black Cherry Taco",
         "Rarity": 79,
         "Price": 6850
@@ -42835,6 +46900,11 @@ var item_db_array = [
         "Price": 6850
     },
     {
+        "Name": "Grim Reaper Eyrie Dress",
+        "Rarity": 83,
+        "Price": 6850
+    },
+    {
         "Name": "Gwyl Plushie",
         "Rarity": 90,
         "Price": 6850
@@ -42852,6 +46922,11 @@ var item_db_array = [
     {
         "Name": "Lime Skidget Lolly",
         "Rarity": 92,
+        "Price": 6850
+    },
+    {
+        "Name": "Little Timmy Tuskaninny Shirt",
+        "Rarity": 80,
         "Price": 6850
     },
     {
@@ -42897,11 +46972,6 @@ var item_db_array = [
     {
         "Name": "Tough Eyrie Wig",
         "Rarity": 88,
-        "Price": 6850
-    },
-    {
-        "Name": "Turkey Dumplings",
-        "Rarity": 80,
         "Price": 6850
     },
     {
@@ -43070,11 +47140,6 @@ var item_db_array = [
         "Price": 6800
     },
     {
-        "Name": "The Peophin That Couldnt Swim",
-        "Rarity": 88,
-        "Price": 6800
-    },
-    {
         "Name": "Tweed Gnorbu Jacket",
         "Rarity": 94,
         "Price": 6800
@@ -43093,11 +47158,6 @@ var item_db_array = [
         "Name": "Wocky Warrior Armoured Shoes",
         "Rarity": 88,
         "Price": 6800
-    },
-    {
-        "Name": "Advert Attack Guide Book",
-        "Rarity": 90,
-        "Price": 6750
     },
     {
         "Name": "Bone-Chilling Bacon",
@@ -43160,16 +47220,6 @@ var item_db_array = [
         "Price": 6750
     },
     {
-        "Name": "Ice Cream Hot Dog",
-        "Rarity": 76,
-        "Price": 6750
-    },
-    {
-        "Name": "Koi Shell Tiara",
-        "Rarity": 90,
-        "Price": 6750
-    },
-    {
         "Name": "Krawk Terror Mask",
         "Rarity": 95,
         "Price": 6750
@@ -43177,6 +47227,11 @@ var item_db_array = [
     {
         "Name": "Midnight Smuggler Plushie",
         "Rarity": 82,
+        "Price": 6750
+    },
+    {
+        "Name": "Mynci Dark Archer Trousers",
+        "Rarity": 88,
         "Price": 6750
     },
     {
@@ -43202,6 +47257,11 @@ var item_db_array = [
     {
         "Name": "Rainbow Sofa",
         "Rarity": 90,
+        "Price": 6750
+    },
+    {
+        "Name": "Sandpoint",
+        "Rarity": 86,
         "Price": 6750
     },
     {
@@ -43400,6 +47460,11 @@ var item_db_array = [
         "Price": 6700
     },
     {
+        "Name": "Lime Jelly Eyeball",
+        "Rarity": 90,
+        "Price": 6700
+    },
+    {
         "Name": "Loan Shark Jetsam Hat",
         "Rarity": 88,
         "Price": 6700
@@ -43500,11 +47565,6 @@ var item_db_array = [
         "Price": 6700
     },
     {
-        "Name": "Trendy Ruki Wig",
-        "Rarity": 86,
-        "Price": 6700
-    },
-    {
         "Name": "Urban Xweetok Scarf",
         "Rarity": 88,
         "Price": 6700
@@ -43512,11 +47572,6 @@ var item_db_array = [
     {
         "Name": "Urban Xweetok Trousers",
         "Rarity": 88,
-        "Price": 6700
-    },
-    {
-        "Name": "Vibraphone",
-        "Rarity": 93,
         "Price": 6700
     },
     {
@@ -43655,6 +47710,11 @@ var item_db_array = [
         "Price": 6650
     },
     {
+        "Name": "Scorchio Masquerade Mask",
+        "Rarity": 93,
+        "Price": 6650
+    },
+    {
         "Name": "Silver Draik Armour",
         "Rarity": 93,
         "Price": 6650
@@ -43675,11 +47735,6 @@ var item_db_array = [
         "Price": 6650
     },
     {
-        "Name": "Toast With Cheese",
-        "Rarity": 92,
-        "Price": 6650
-    },
-    {
         "Name": "Traditional Hissi Jacket",
         "Rarity": 86,
         "Price": 6650
@@ -43690,14 +47745,19 @@ var item_db_array = [
         "Price": 6650
     },
     {
-        "Name": "Tyrannian Dishes Recipe Book",
-        "Rarity": 81,
-        "Price": 6650
-    },
-    {
         "Name": "Yellow Tonu Sandals",
         "Rarity": 92,
         "Price": 6650
+    },
+    {
+        "Name": "10 Things in Mystery Island That Originated Elsewhere",
+        "Rarity": 81,
+        "Price": 6600
+    },
+    {
+        "Name": "Advert Attack Guide Book",
+        "Rarity": 90,
+        "Price": 6600
     },
     {
         "Name": "Aisha Rock Idol Trousers",
@@ -43707,6 +47767,11 @@ var item_db_array = [
     {
         "Name": "Aisha Wizard Wand",
         "Rarity": 87,
+        "Price": 6600
+    },
+    {
+        "Name": "Baby Draik Plushie",
+        "Rarity": 86,
         "Price": 6600
     },
     {
@@ -43807,6 +47872,11 @@ var item_db_array = [
     {
         "Name": "Mogul Skeith Hat",
         "Rarity": 91,
+        "Price": 6600
+    },
+    {
+        "Name": "Moltaran Fashion Eyrie Wing Plates",
+        "Rarity": 93,
         "Price": 6600
     },
     {
@@ -44025,8 +48095,18 @@ var item_db_array = [
         "Price": 6550
     },
     {
+        "Name": "Usul Sailor Trousers",
+        "Rarity": 93,
+        "Price": 6550
+    },
+    {
         "Name": "Valentine Guitar",
         "Rarity": 90,
+        "Price": 6550
+    },
+    {
+        "Name": "Yachting Flotsam Jacket",
+        "Rarity": 88,
         "Price": 6550
     },
     {
@@ -44062,6 +48142,11 @@ var item_db_array = [
     {
         "Name": "Black Cherry Mooncake",
         "Rarity": 80,
+        "Price": 6500
+    },
+    {
+        "Name": "Black Satin Cybunny Top Hat",
+        "Rarity": 90,
         "Price": 6500
     },
     {
@@ -44230,6 +48315,16 @@ var item_db_array = [
         "Price": 6500
     },
     {
+        "Name": "King Skarl Gnome",
+        "Rarity": 90,
+        "Price": 6500
+    },
+    {
+        "Name": "Koi Shell Tiara",
+        "Rarity": 90,
+        "Price": 6500
+    },
+    {
         "Name": "Krawk Rock Pick",
         "Rarity": 93,
         "Price": 6500
@@ -44390,8 +48485,18 @@ var item_db_array = [
         "Price": 6500
     },
     {
+        "Name": "Tonu Leather Shield",
+        "Rarity": 97,
+        "Price": 6500
+    },
+    {
         "Name": "Vampire Poogle Claws",
         "Rarity": 87,
+        "Price": 6500
+    },
+    {
+        "Name": "Vibraphone",
+        "Rarity": 93,
         "Price": 6500
     },
     {
@@ -44462,11 +48567,6 @@ var item_db_array = [
     {
         "Name": "Clown Kacheek Wig",
         "Rarity": 91,
-        "Price": 6450
-    },
-    {
-        "Name": "Cool Bruce Jacket",
-        "Rarity": 86,
         "Price": 6450
     },
     {
@@ -44685,11 +48785,6 @@ var item_db_array = [
         "Price": 6400
     },
     {
-        "Name": "Deluxe Angel Usuki",
-        "Rarity": 90,
-        "Price": 6400
-    },
-    {
         "Name": "Doglefox Plushie",
         "Rarity": 90,
         "Price": 6400
@@ -44865,11 +48960,6 @@ var item_db_array = [
         "Price": 6400
     },
     {
-        "Name": "Urban Xweetok Shoes",
-        "Rarity": 87,
-        "Price": 6400
-    },
-    {
         "Name": "Variberry Butter Cookie",
         "Rarity": 78,
         "Price": 6400
@@ -44902,6 +48992,11 @@ var item_db_array = [
     {
         "Name": "Cybunny Nobleman Trousers and Shoes",
         "Rarity": 87,
+        "Price": 6350
+    },
+    {
+        "Name": "Djuti",
+        "Rarity": 80,
         "Price": 6350
     },
     {
@@ -44945,6 +49040,11 @@ var item_db_array = [
         "Price": 6350
     },
     {
+        "Name": "Postman Draik Bag",
+        "Rarity": 87,
+        "Price": 6350
+    },
+    {
         "Name": "Pretty Pink Bruce Skirt",
         "Rarity": 93,
         "Price": 6350
@@ -44972,11 +49072,6 @@ var item_db_array = [
     {
         "Name": "Snowy Mansion Background",
         "Rarity": 83,
-        "Price": 6350
-    },
-    {
-        "Name": "Socialite Uni Wig",
-        "Rarity": 89,
         "Price": 6350
     },
     {
@@ -45057,6 +49152,11 @@ var item_db_array = [
     {
         "Name": "Fabulous Ogrin Wig",
         "Rarity": 87,
+        "Price": 6300
+    },
+    {
+        "Name": "Faerie Kau Handbook",
+        "Rarity": 89,
         "Price": 6300
     },
     {
@@ -45142,11 +49242,6 @@ var item_db_array = [
     {
         "Name": "Royalgirl Korbat Plushie",
         "Rarity": 89,
-        "Price": 6300
-    },
-    {
-        "Name": "Shenkuu-Themed Neopets 7th Birthday Cake",
-        "Rarity": 80,
         "Price": 6300
     },
     {
@@ -45300,11 +49395,6 @@ var item_db_array = [
         "Price": 6250
     },
     {
-        "Name": "Noble Ruki Jacket",
-        "Rarity": 86,
-        "Price": 6250
-    },
-    {
         "Name": "Poogle Spaghetti",
         "Rarity": 79,
         "Price": 6250
@@ -45350,11 +49440,6 @@ var item_db_array = [
         "Price": 6250
     },
     {
-        "Name": "Undead Hunter Wocky Shirt and Waistcoat",
-        "Rarity": 85,
-        "Price": 6250
-    },
-    {
         "Name": "Unlucky Zap",
         "Rarity": 88,
         "Price": 6250
@@ -45362,6 +49447,11 @@ var item_db_array = [
     {
         "Name": "Usul Native Headband",
         "Rarity": 92,
+        "Price": 6250
+    },
+    {
+        "Name": "Usul Sailor Jacket",
+        "Rarity": 91,
         "Price": 6250
     },
     {
@@ -45575,13 +49665,18 @@ var item_db_array = [
         "Price": 6200
     },
     {
+        "Name": "Vegetarian Pizza",
+        "Rarity": 86,
+        "Price": 6200
+    },
+    {
         "Name": "Victorian Xweetok Hat",
         "Rarity": 81,
         "Price": 6200
     },
     {
-        "Name": "Advanced Magic",
-        "Rarity": 90,
+        "Name": "Acara Nurse Uniform",
+        "Rarity": 88,
         "Price": 6150
     },
     {
@@ -45592,11 +49687,6 @@ var item_db_array = [
     {
         "Name": "Amulet of Life",
         "Rarity": 89,
-        "Price": 6150
-    },
-    {
-        "Name": "Blue Glazed Bread Basket",
-        "Rarity": 94,
         "Price": 6150
     },
     {
@@ -45632,6 +49722,11 @@ var item_db_array = [
     {
         "Name": "Kougra Sailor Top",
         "Rarity": 91,
+        "Price": 6150
+    },
+    {
+        "Name": "Kung Fu Vandagyre Shoes",
+        "Rarity": 86,
         "Price": 6150
     },
     {
@@ -45697,6 +49792,11 @@ var item_db_array = [
     {
         "Name": "Strawberry JubJub Cake",
         "Rarity": 80,
+        "Price": 6150
+    },
+    {
+        "Name": "Trendy Ruki Scarf",
+        "Rarity": 86,
         "Price": 6150
     },
     {
@@ -45780,11 +49880,6 @@ var item_db_array = [
         "Price": 6100
     },
     {
-        "Name": "Djuti",
-        "Rarity": 80,
-        "Price": 6100
-    },
-    {
         "Name": "Evening Kougra Dress",
         "Rarity": 84,
         "Price": 6100
@@ -45792,11 +49887,6 @@ var item_db_array = [
     {
         "Name": "Extreme Arbourism",
         "Rarity": 87,
-        "Price": 6100
-    },
-    {
-        "Name": "Faerie Kau Handbook",
-        "Rarity": 89,
         "Price": 6100
     },
     {
@@ -45817,6 +49907,11 @@ var item_db_array = [
     {
         "Name": "Magnificent Beard",
         "Rarity": 79,
+        "Price": 6100
+    },
+    {
+        "Name": "Melton",
+        "Rarity": 89,
         "Price": 6100
     },
     {
@@ -45877,11 +49972,6 @@ var item_db_array = [
     {
         "Name": "Star Shaped Cheeseburger",
         "Rarity": 90,
-        "Price": 6100
-    },
-    {
-        "Name": "Super Deluxe Maraquan Victory Cake",
-        "Rarity": 92,
         "Price": 6100
     },
     {
@@ -46035,6 +50125,11 @@ var item_db_array = [
         "Price": 6050
     },
     {
+        "Name": "AAC Device",
+        "Rarity": 75,
+        "Price": 6000
+    },
+    {
         "Name": "Aboogala Food Bowl",
         "Rarity": 93,
         "Price": 6000
@@ -46095,6 +50190,11 @@ var item_db_array = [
         "Price": 6000
     },
     {
+        "Name": "Blumaroo Drawers",
+        "Rarity": 90,
+        "Price": 6000
+    },
+    {
         "Name": "Bone Chandelier",
         "Rarity": 90,
         "Price": 6000
@@ -46117,11 +50217,6 @@ var item_db_array = [
     {
         "Name": "Butterflied Pages",
         "Rarity": 81,
-        "Price": 6000
-    },
-    {
-        "Name": "Buzz Intellectual Outfit",
-        "Rarity": 90,
         "Price": 6000
     },
     {
@@ -46150,6 +50245,11 @@ var item_db_array = [
         "Price": 6000
     },
     {
+        "Name": "Chomby Red Tuxedo Jacket",
+        "Rarity": 88,
+        "Price": 6000
+    },
+    {
         "Name": "Cloud Brush Plushie",
         "Rarity": 86,
         "Price": 6000
@@ -46172,11 +50272,6 @@ var item_db_array = [
     {
         "Name": "Crochet Patterns",
         "Rarity": 88,
-        "Price": 6000
-    },
-    {
-        "Name": "Desert Days",
-        "Rarity": 90,
         "Price": 6000
     },
     {
@@ -46305,16 +50400,6 @@ var item_db_array = [
         "Price": 6000
     },
     {
-        "Name": "Grarrl Enchantress Wig",
-        "Rarity": 86,
-        "Price": 6000
-    },
-    {
-        "Name": "Gummi Worms",
-        "Rarity": 83,
-        "Price": 6000
-    },
-    {
         "Name": "Gummy Dice Chair",
         "Rarity": 90,
         "Price": 6000
@@ -46322,11 +50407,6 @@ var item_db_array = [
     {
         "Name": "Halloween Kau Plushie",
         "Rarity": 90,
-        "Price": 6000
-    },
-    {
-        "Name": "Hand Wrap",
-        "Rarity": 83,
         "Price": 6000
     },
     {
@@ -46347,6 +50427,11 @@ var item_db_array = [
     {
         "Name": "Hubrid Nox Stamp",
         "Rarity": 85,
+        "Price": 6000
+    },
+    {
+        "Name": "Ice Cream Hot Dog",
+        "Rarity": 76,
         "Price": 6000
     },
     {
@@ -46372,11 +50457,6 @@ var item_db_array = [
     {
         "Name": "Jhudoras Quests",
         "Rarity": 90,
-        "Price": 6000
-    },
-    {
-        "Name": "Kepru",
-        "Rarity": 83,
         "Price": 6000
     },
     {
@@ -46430,16 +50510,6 @@ var item_db_array = [
         "Price": 6000
     },
     {
-        "Name": "Lupe Hero Suit",
-        "Rarity": 93,
-        "Price": 6000
-    },
-    {
-        "Name": "Lutari Baker Dress",
-        "Rarity": 86,
-        "Price": 6000
-    },
-    {
         "Name": "Martial Draik Coat",
         "Rarity": 80,
         "Price": 6000
@@ -46452,6 +50522,11 @@ var item_db_array = [
     {
         "Name": "Mutant Ruki Plushie",
         "Rarity": 88,
+        "Price": 6000
+    },
+    {
+        "Name": "Neopia Central Background",
+        "Rarity": 81,
         "Price": 6000
     },
     {
@@ -46547,16 +50622,6 @@ var item_db_array = [
     {
         "Name": "Rugged Kacheek Beard and Wig",
         "Rarity": 87,
-        "Price": 6000
-    },
-    {
-        "Name": "Scorchio Masquerade Mask",
-        "Rarity": 93,
-        "Price": 6000
-    },
-    {
-        "Name": "Scrapbooking for Beginners",
-        "Rarity": 80,
         "Price": 6000
     },
     {
@@ -46775,6 +50840,11 @@ var item_db_array = [
         "Price": 5950
     },
     {
+        "Name": "Cobbled Maractite Path",
+        "Rarity": 88,
+        "Price": 5950
+    },
+    {
         "Name": "Crabula",
         "Rarity": 91,
         "Price": 5950
@@ -46880,11 +50950,6 @@ var item_db_array = [
         "Price": 5950
     },
     {
-        "Name": "Kung Fu Vandagyre Shoes",
-        "Rarity": 86,
-        "Price": 5950
-    },
-    {
         "Name": "Lava Arrow",
         "Rarity": 99,
         "Price": 5950
@@ -46907,6 +50972,11 @@ var item_db_array = [
     {
         "Name": "Marak Peophin Helmet",
         "Rarity": 87,
+        "Price": 5950
+    },
+    {
+        "Name": "Minimalist Cake",
+        "Rarity": 91,
         "Price": 5950
     },
     {
@@ -46995,18 +51065,8 @@ var item_db_array = [
         "Price": 5950
     },
     {
-        "Name": "Strawberry Cybunny Cookie",
-        "Rarity": 80,
-        "Price": 5950
-    },
-    {
         "Name": "Strawberry Urgoni Cupcake",
         "Rarity": 78,
-        "Price": 5950
-    },
-    {
-        "Name": "The Art of Sleeping In",
-        "Rarity": 85,
         "Price": 5950
     },
     {
@@ -47060,6 +51120,11 @@ var item_db_array = [
         "Price": 5900
     },
     {
+        "Name": "Casual Lutari Scarf",
+        "Rarity": 89,
+        "Price": 5900
+    },
+    {
         "Name": "Chocolate Starfish",
         "Rarity": 93,
         "Price": 5900
@@ -47085,11 +51150,6 @@ var item_db_array = [
         "Price": 5900
     },
     {
-        "Name": "Draik Space Slacks",
-        "Rarity": 90,
-        "Price": 5900
-    },
-    {
         "Name": "Elegant Gear Boots",
         "Rarity": 82,
         "Price": 5900
@@ -47102,6 +51162,11 @@ var item_db_array = [
     {
         "Name": "Eliv Thade Kacheek Shoes",
         "Rarity": 87,
+        "Price": 5900
+    },
+    {
+        "Name": "Famous Lennies",
+        "Rarity": 88,
         "Price": 5900
     },
     {
@@ -47160,11 +51225,6 @@ var item_db_array = [
         "Price": 5900
     },
     {
-        "Name": "Kacheek Musician Flute",
-        "Rarity": 89,
-        "Price": 5900
-    },
-    {
         "Name": "Kiko Pilot Suit",
         "Rarity": 97,
         "Price": 5900
@@ -47172,11 +51232,6 @@ var item_db_array = [
     {
         "Name": "Koya Korbat Hair",
         "Rarity": 87,
-        "Price": 5900
-    },
-    {
-        "Name": "Krawk Hunter Satchel",
-        "Rarity": 88,
         "Price": 5900
     },
     {
@@ -47207,11 +51262,6 @@ var item_db_array = [
     {
         "Name": "Mogul Skeith Slacks",
         "Rarity": 91,
-        "Price": 5900
-    },
-    {
-        "Name": "Moltara Citizen Gelert Hat",
-        "Rarity": 93,
         "Price": 5900
     },
     {
@@ -47440,6 +51490,11 @@ var item_db_array = [
         "Price": 5850
     },
     {
+        "Name": "Deluxe Red Treehouse",
+        "Rarity": 89,
+        "Price": 5850
+    },
+    {
         "Name": "Deluxe Strawberry Usul Cake",
         "Rarity": 90,
         "Price": 5850
@@ -47457,6 +51512,11 @@ var item_db_array = [
     {
         "Name": "Flotato-Stuffed Turkey",
         "Rarity": 76,
+        "Price": 5850
+    },
+    {
+        "Name": "Flower Picking Gelert Gnome",
+        "Rarity": 87,
         "Price": 5850
     },
     {
@@ -47525,23 +51585,18 @@ var item_db_array = [
         "Price": 5850
     },
     {
+        "Name": "Meepit Juice Break Marshmallow",
+        "Rarity": 90,
+        "Price": 5850
+    },
+    {
         "Name": "Meerca Nominee Trophy",
         "Rarity": 91,
         "Price": 5850
     },
     {
-        "Name": "Melton",
-        "Rarity": 89,
-        "Price": 5850
-    },
-    {
         "Name": "Minty Meerca Mini Cake",
         "Rarity": 90,
-        "Price": 5850
-    },
-    {
-        "Name": "Mysterious Acara Archer Mask",
-        "Rarity": 93,
         "Price": 5850
     },
     {
@@ -47710,11 +51765,6 @@ var item_db_array = [
         "Price": 5800
     },
     {
-        "Name": "Galactic Water",
-        "Rarity": 94,
-        "Price": 5800
-    },
-    {
         "Name": "Gargaraptor Arm",
         "Rarity": 94,
         "Price": 5800
@@ -47732,11 +51782,6 @@ var item_db_array = [
     {
         "Name": "Holiday Themed Earrings",
         "Rarity": 84,
-        "Price": 5800
-    },
-    {
-        "Name": "Iced Tuskaninny Cake",
-        "Rarity": 91,
         "Price": 5800
     },
     {
@@ -47810,18 +51855,8 @@ var item_db_array = [
         "Price": 5800
     },
     {
-        "Name": "Rainbow Petpet Food",
-        "Rarity": 88,
-        "Price": 5800
-    },
-    {
         "Name": "Red Flamenco Peophin Dress",
         "Rarity": 88,
-        "Price": 5800
-    },
-    {
-        "Name": "Roast Worm with Cranberries",
-        "Rarity": 86,
         "Price": 5800
     },
     {
@@ -47857,11 +51892,6 @@ var item_db_array = [
     {
         "Name": "Silk Infinity Scarf",
         "Rarity": 81,
-        "Price": 5800
-    },
-    {
-        "Name": "Sour Lime Pizza",
-        "Rarity": 89,
         "Price": 5800
     },
     {
@@ -47980,11 +52010,6 @@ var item_db_array = [
         "Price": 5750
     },
     {
-        "Name": "Grim Reaper Eyrie Dress",
-        "Rarity": 83,
-        "Price": 5750
-    },
-    {
         "Name": "Groovy Koi Dumbells",
         "Rarity": 90,
         "Price": 5750
@@ -48002,6 +52027,11 @@ var item_db_array = [
     {
         "Name": "Moehog Eye Guards",
         "Rarity": 97,
+        "Price": 5750
+    },
+    {
+        "Name": "Moltara Citizen Gelert Hat",
+        "Rarity": 93,
         "Price": 5750
     },
     {
@@ -48067,11 +52097,6 @@ var item_db_array = [
     {
         "Name": "Silver Uni Wing Guards",
         "Rarity": 94,
-        "Price": 5750
-    },
-    {
-        "Name": "Snow Piano",
-        "Rarity": 86,
         "Price": 5750
     },
     {
@@ -48325,13 +52350,13 @@ var item_db_array = [
         "Price": 5700
     },
     {
-        "Name": "Minimalist Cake",
-        "Rarity": 91,
+        "Name": "Morguss Kau Skarl Doll",
+        "Rarity": 86,
         "Price": 5700
     },
     {
-        "Name": "Morguss Kau Skarl Doll",
-        "Rarity": 86,
+        "Name": "My Neohome",
+        "Rarity": 88,
         "Price": 5700
     },
     {
@@ -48426,11 +52451,6 @@ var item_db_array = [
     },
     {
         "Name": "The Slorg and I",
-        "Rarity": 88,
-        "Price": 5700
-    },
-    {
-        "Name": "The Wonder Of Toast",
         "Rarity": 88,
         "Price": 5700
     },
@@ -48555,11 +52575,6 @@ var item_db_array = [
         "Price": 5650
     },
     {
-        "Name": "My Neohome",
-        "Rarity": 88,
-        "Price": 5650
-    },
-    {
         "Name": "Neopian Times Bean Bag",
         "Rarity": 91,
         "Price": 5650
@@ -48577,6 +52592,11 @@ var item_db_array = [
     {
         "Name": "Scratchcard Wocky Usuki",
         "Rarity": 89,
+        "Price": 5650
+    },
+    {
+        "Name": "Shoyru Battle Sabre",
+        "Rarity": 96,
         "Price": 5650
     },
     {
@@ -48635,11 +52655,6 @@ var item_db_array = [
         "Price": 5600
     },
     {
-        "Name": "Bank Manager Skeith Shoes",
-        "Rarity": 86,
-        "Price": 5600
-    },
-    {
         "Name": "Beautiful Bride Usuki Usul Gloves",
         "Rarity": 87,
         "Price": 5600
@@ -48647,6 +52662,11 @@ var item_db_array = [
     {
         "Name": "Berried in Bread",
         "Rarity": 78,
+        "Price": 5600
+    },
+    {
+        "Name": "Biker Usul Boots",
+        "Rarity": 87,
         "Price": 5600
     },
     {
@@ -48867,6 +52887,11 @@ var item_db_array = [
     {
         "Name": "Tribal Draik Necklace",
         "Rarity": 86,
+        "Price": 5600
+    },
+    {
+        "Name": "Wind Up Tonu Toy",
+        "Rarity": 89,
         "Price": 5600
     },
     {
@@ -49095,6 +53120,11 @@ var item_db_array = [
         "Price": 5500
     },
     {
+        "Name": "Ancient Neopian Decree",
+        "Rarity": 88,
+        "Price": 5500
+    },
+    {
         "Name": "Baby Aisha Plushie",
         "Rarity": 80,
         "Price": 5500
@@ -49112,11 +53142,6 @@ var item_db_array = [
     {
         "Name": "Battle Eyrie Stamp",
         "Rarity": 80,
-        "Price": 5500
-    },
-    {
-        "Name": "Blumaroo Drawers",
-        "Rarity": 90,
         "Price": 5500
     },
     {
@@ -49195,11 +53220,6 @@ var item_db_array = [
         "Price": 5500
     },
     {
-        "Name": "Dystopic Flotsam Hoodie",
-        "Rarity": 87,
-        "Price": 5500
-    },
-    {
         "Name": "Elegant Blue Bruce Gown",
         "Rarity": 94,
         "Price": 5500
@@ -49235,6 +53255,11 @@ var item_db_array = [
         "Price": 5500
     },
     {
+        "Name": "Gnorbu Snowbeast Costume Outfit",
+        "Rarity": 82,
+        "Price": 5500
+    },
+    {
         "Name": "Grape Jelly Brucicle",
         "Rarity": 91,
         "Price": 5500
@@ -49265,6 +53290,11 @@ var item_db_array = [
         "Price": 5500
     },
     {
+        "Name": "Iced Tuskaninny Cake",
+        "Rarity": 91,
+        "Price": 5500
+    },
+    {
         "Name": "Illusen Canopy Bed",
         "Rarity": 92,
         "Price": 5500
@@ -49285,13 +53315,18 @@ var item_db_array = [
         "Price": 5500
     },
     {
-        "Name": "Jetsam Knight Sandals",
-        "Rarity": 90,
+        "Name": "Jumbleberry Potion",
+        "Rarity": 95,
         "Price": 5500
     },
     {
-        "Name": "Jumbleberry Potion",
-        "Rarity": 95,
+        "Name": "Kacheek Musician Flute",
+        "Rarity": 89,
+        "Price": 5500
+    },
+    {
+        "Name": "Kepru",
+        "Rarity": 83,
         "Price": 5500
     },
     {
@@ -49307,6 +53342,11 @@ var item_db_array = [
     {
         "Name": "Kyrii Battle Helmet",
         "Rarity": 95,
+        "Price": 5500
+    },
+    {
+        "Name": "Kyrii Warrior Boots",
+        "Rarity": 85,
         "Price": 5500
     },
     {
@@ -49457,11 +53497,6 @@ var item_db_array = [
     {
         "Name": "Sweet and Sour Soup",
         "Rarity": 78,
-        "Price": 5500
-    },
-    {
-        "Name": "Tall Stack of Mutant Pancakes",
-        "Rarity": 90,
         "Price": 5500
     },
     {
@@ -49775,9 +53810,9 @@ var item_db_array = [
         "Price": 5450
     },
     {
-        "Name": "Angelic Flotsam Dress",
-        "Rarity": 81,
-        "Price": 5400
+        "Name": "Zytch Petpet Tunnel",
+        "Rarity": 88,
+        "Price": 5450
     },
     {
         "Name": "Asparagus Chocolate Cupcake",
@@ -49835,11 +53870,6 @@ var item_db_array = [
         "Price": 5400
     },
     {
-        "Name": "Delinquent Ogrin Wig",
-        "Rarity": 85,
-        "Price": 5400
-    },
-    {
         "Name": "Earth Faerie Frame",
         "Rarity": 88,
         "Price": 5400
@@ -49847,11 +53877,6 @@ var item_db_array = [
     {
         "Name": "Eerie Sutekh Scroll",
         "Rarity": 89,
-        "Price": 5400
-    },
-    {
-        "Name": "Evening Kougra Necklace",
-        "Rarity": 83,
         "Price": 5400
     },
     {
@@ -49917,6 +53942,11 @@ var item_db_array = [
     {
         "Name": "Niten Hiroru",
         "Rarity": 65,
+        "Price": 5400
+    },
+    {
+        "Name": "Noble Ruki Jacket",
+        "Rarity": 86,
         "Price": 5400
     },
     {
@@ -49995,11 +54025,6 @@ var item_db_array = [
         "Price": 5400
     },
     {
-        "Name": "Stained Glass Sai Window",
-        "Rarity": 98,
-        "Price": 5400
-    },
-    {
         "Name": "Storage Ideas",
         "Rarity": 82,
         "Price": 5400
@@ -50017,6 +54042,11 @@ var item_db_array = [
     {
         "Name": "Sweet Vandagyre Dress",
         "Rarity": 84,
+        "Price": 5400
+    },
+    {
+        "Name": "The Art of Sleeping In",
+        "Rarity": 85,
         "Price": 5400
     },
     {
@@ -50045,11 +54075,6 @@ var item_db_array = [
         "Price": 5400
     },
     {
-        "Name": "Adorable Gnorbu Shirt",
-        "Rarity": 85,
-        "Price": 5350
-    },
-    {
         "Name": "Arid Ruki Shirt",
         "Rarity": 86,
         "Price": 5350
@@ -50057,6 +54082,11 @@ var item_db_array = [
     {
         "Name": "Babaa Toaster",
         "Rarity": 89,
+        "Price": 5350
+    },
+    {
+        "Name": "Blue Lenny Kimono",
+        "Rarity": 91,
         "Price": 5350
     },
     {
@@ -50155,6 +54185,11 @@ var item_db_array = [
         "Price": 5350
     },
     {
+        "Name": "Proper Lady Kacheek Hat and Wig",
+        "Rarity": 88,
+        "Price": 5350
+    },
+    {
         "Name": "Pteri Lemon Sundress",
         "Rarity": 92,
         "Price": 5350
@@ -50176,6 +54211,11 @@ var item_db_array = [
     },
     {
         "Name": "Sporty Blue Buzz Shoes",
+        "Rarity": 91,
+        "Price": 5350
+    },
+    {
+        "Name": "Strawberry Chia Pop",
         "Rarity": 91,
         "Price": 5350
     },
@@ -50226,11 +54266,6 @@ var item_db_array = [
     },
     {
         "Name": "8-Bit Mystery Island Background",
-        "Rarity": 88,
-        "Price": 5300
-    },
-    {
-        "Name": "Acara Nurse Uniform",
         "Rarity": 88,
         "Price": 5300
     },
@@ -50360,6 +54395,11 @@ var item_db_array = [
         "Price": 5300
     },
     {
+        "Name": "Oaken Kacheek Wand",
+        "Rarity": 93,
+        "Price": 5300
+    },
+    {
         "Name": "Orange Bori Lolly",
         "Rarity": 77,
         "Price": 5300
@@ -50420,6 +54460,11 @@ var item_db_array = [
         "Price": 5300
     },
     {
+        "Name": "Trendy Ruki Wig",
+        "Rarity": 86,
+        "Price": 5300
+    },
+    {
         "Name": "Tuskaninny Grooming",
         "Rarity": 87,
         "Price": 5300
@@ -50438,11 +54483,6 @@ var item_db_array = [
         "Name": "Xweetok Barista Shirt",
         "Rarity": 87,
         "Price": 5300
-    },
-    {
-        "Name": "Acnefruit Scone",
-        "Rarity": 80,
-        "Price": 5250
     },
     {
         "Name": "Admiral Yurble Hat and Wig",
@@ -50565,6 +54605,11 @@ var item_db_array = [
         "Price": 5250
     },
     {
+        "Name": "Kyrii Country",
+        "Rarity": 85,
+        "Price": 5250
+    },
+    {
         "Name": "Kyrii Mage Circlet",
         "Rarity": 91,
         "Price": 5250
@@ -50577,11 +54622,6 @@ var item_db_array = [
     {
         "Name": "Mind Control for Dummies",
         "Rarity": 88,
-        "Price": 5250
-    },
-    {
-        "Name": "Moltaran Fashion Eyrie Wig and Goggles",
-        "Rarity": 89,
         "Price": 5250
     },
     {
@@ -50612,6 +54652,11 @@ var item_db_array = [
     {
         "Name": "Roseatte Plushie",
         "Rarity": 90,
+        "Price": 5250
+    },
+    {
+        "Name": "Shenkuu-Themed Neopets 7th Birthday Cake",
+        "Rarity": 80,
         "Price": 5250
     },
     {
@@ -50650,6 +54695,11 @@ var item_db_array = [
         "Price": 5250
     },
     {
+        "Name": "Sweet Necklace",
+        "Rarity": 90,
+        "Price": 5250
+    },
+    {
         "Name": "The Yurble Spy",
         "Rarity": 89,
         "Price": 5250
@@ -50685,11 +54735,6 @@ var item_db_array = [
         "Price": 5200
     },
     {
-        "Name": "Barbarian Tuskaninny Armour",
-        "Rarity": 87,
-        "Price": 5200
-    },
-    {
         "Name": "Blue Draik Pencil",
         "Rarity": 90,
         "Price": 5200
@@ -50705,11 +54750,6 @@ var item_db_array = [
         "Price": 5200
     },
     {
-        "Name": "Buzz Musketeer Sword",
-        "Rarity": 85,
-        "Price": 5200
-    },
-    {
         "Name": "Chocolate Heart",
         "Rarity": 80,
         "Price": 5200
@@ -50720,11 +54760,6 @@ var item_db_array = [
         "Price": 5200
     },
     {
-        "Name": "Chomby Red Tuxedo Jacket",
-        "Rarity": 88,
-        "Price": 5200
-    },
-    {
         "Name": "Classic Moltaran Smithing",
         "Rarity": 89,
         "Price": 5200
@@ -50732,6 +54767,11 @@ var item_db_array = [
     {
         "Name": "Electro Shield Coin",
         "Rarity": 91,
+        "Price": 5200
+    },
+    {
+        "Name": "Evening Kougra Necklace",
+        "Rarity": 83,
         "Price": 5200
     },
     {
@@ -50762,6 +54802,11 @@ var item_db_array = [
     {
         "Name": "Gnorbu Wool Burger",
         "Rarity": 79,
+        "Price": 5200
+    },
+    {
+        "Name": "Grarrl Enchantress Wig",
+        "Rarity": 86,
         "Price": 5200
     },
     {
@@ -50890,11 +54935,6 @@ var item_db_array = [
         "Price": 5200
     },
     {
-        "Name": "Spice Ruki Biscuit",
-        "Rarity": 79,
-        "Price": 5200
-    },
-    {
         "Name": "Spiky Spiral Pretzels",
         "Rarity": 73,
         "Price": 5200
@@ -50957,6 +54997,11 @@ var item_db_array = [
     {
         "Name": "Christmas Tree Guitar",
         "Rarity": 92,
+        "Price": 5150
+    },
+    {
+        "Name": "Classroom Background",
+        "Rarity": 89,
         "Price": 5150
     },
     {
@@ -51185,6 +55230,11 @@ var item_db_array = [
         "Price": 5100
     },
     {
+        "Name": "Clowning Around",
+        "Rarity": 88,
+        "Price": 5100
+    },
+    {
         "Name": "Crokabek",
         "Rarity": 90,
         "Price": 5100
@@ -51265,11 +55315,6 @@ var item_db_array = [
         "Price": 5100
     },
     {
-        "Name": "Kyrii Warrior Boots",
-        "Rarity": 85,
-        "Price": 5100
-    },
-    {
         "Name": "Lamberts Expeditions",
         "Rarity": 78,
         "Price": 5100
@@ -51277,6 +55322,11 @@ var item_db_array = [
     {
         "Name": "Lord Kass Quill",
         "Rarity": 90,
+        "Price": 5100
+    },
+    {
+        "Name": "Lost Desert Map Scroll",
+        "Rarity": 93,
         "Price": 5100
     },
     {
@@ -51382,11 +55432,6 @@ var item_db_array = [
     {
         "Name": "Xrepefruit",
         "Rarity": 92,
-        "Price": 5100
-    },
-    {
-        "Name": "Zytch Petpet Tunnel",
-        "Rarity": 88,
         "Price": 5100
     },
     {
@@ -51522,6 +55567,11 @@ var item_db_array = [
     {
         "Name": "Rocket Shoyru Trousers",
         "Rarity": 92,
+        "Price": 5050
+    },
+    {
+        "Name": "Scorchio Blacksmith Apron",
+        "Rarity": 87,
         "Price": 5050
     },
     {
@@ -51715,6 +55765,11 @@ var item_db_array = [
         "Price": 5000
     },
     {
+        "Name": "Charnie",
+        "Rarity": 80,
+        "Price": 5000
+    },
+    {
         "Name": "Chia Sailor Shoes",
         "Rarity": 92,
         "Price": 5000
@@ -51732,6 +55787,11 @@ var item_db_array = [
     {
         "Name": "Chomby Punk Choker",
         "Rarity": 86,
+        "Price": 5000
+    },
+    {
+        "Name": "Cloud Gelert Plushie",
+        "Rarity": 90,
         "Price": 5000
     },
     {
@@ -51767,6 +55827,11 @@ var item_db_array = [
     {
         "Name": "Cooking With A Bomberry",
         "Rarity": 89,
+        "Price": 5000
+    },
+    {
+        "Name": "Cool Bruce Jacket",
+        "Rarity": 86,
         "Price": 5000
     },
     {
@@ -51835,13 +55900,18 @@ var item_db_array = [
         "Price": 5000
     },
     {
-        "Name": "Dr_Death",
-        "Rarity": 84,
+        "Name": "Dribblet",
+        "Rarity": 86,
         "Price": 5000
     },
     {
-        "Name": "Duchess Lenny Wig",
-        "Rarity": 87,
+        "Name": "Dry Flower Decor",
+        "Rarity": 86,
+        "Price": 5000
+    },
+    {
+        "Name": "Dr_Death",
+        "Rarity": 84,
         "Price": 5000
     },
     {
@@ -51950,11 +56020,6 @@ var item_db_array = [
         "Price": 5000
     },
     {
-        "Name": "Glow-in-the-Dark Comet",
-        "Rarity": 90,
-        "Price": 5000
-    },
-    {
         "Name": "Goparokko Gnorlolly",
         "Rarity": 70,
         "Price": 5000
@@ -51987,6 +56052,11 @@ var item_db_array = [
     {
         "Name": "Guard Zomutt Stamp",
         "Rarity": 80,
+        "Price": 5000
+    },
+    {
+        "Name": "Hand Wrap",
+        "Rarity": 83,
         "Price": 5000
     },
     {
@@ -52037,6 +56107,11 @@ var item_db_array = [
     {
         "Name": "Iced Aisha Wig",
         "Rarity": 79,
+        "Price": 5000
+    },
+    {
+        "Name": "Island Acara Plushie",
+        "Rarity": 87,
         "Price": 5000
     },
     {
@@ -52185,6 +56260,11 @@ var item_db_array = [
         "Price": 5000
     },
     {
+        "Name": "Negg Noodle Soup",
+        "Rarity": 79,
+        "Price": 5000
+    },
+    {
         "Name": "Neovian Gentleman Korbat Monocle",
         "Rarity": 85,
         "Price": 5000
@@ -52200,11 +56280,6 @@ var item_db_array = [
         "Price": 5000
     },
     {
-        "Name": "Orange Kreludan Table",
-        "Rarity": 88,
-        "Price": 5000
-    },
-    {
         "Name": "Orange Skeith Plushie",
         "Rarity": 92,
         "Price": 5000
@@ -52212,11 +56287,6 @@ var item_db_array = [
     {
         "Name": "Ornate Bowl of Oranges",
         "Rarity": 91,
-        "Price": 5000
-    },
-    {
-        "Name": "Pan Flute",
-        "Rarity": 86,
         "Price": 5000
     },
     {
@@ -52360,6 +56430,16 @@ var item_db_array = [
         "Price": 5000
     },
     {
+        "Name": "Scrapbooking for Beginners",
+        "Rarity": 80,
+        "Price": 5000
+    },
+    {
+        "Name": "Scroll Keeper Nimmo Shoes",
+        "Rarity": 87,
+        "Price": 5000
+    },
+    {
         "Name": "Scroll of the Western Winds",
         "Rarity": 99,
         "Price": 5000
@@ -52390,6 +56470,11 @@ var item_db_array = [
         "Price": 5000
     },
     {
+        "Name": "Sour Lime Pizza",
+        "Rarity": 89,
+        "Price": 5000
+    },
+    {
         "Name": "Sparkling Green Chia Wig",
         "Rarity": 88,
         "Price": 5000
@@ -52415,6 +56500,11 @@ var item_db_array = [
         "Price": 5000
     },
     {
+        "Name": "Stained Glass Sai Window",
+        "Rarity": 98,
+        "Price": 5000
+    },
+    {
         "Name": "Star Ice Skating Rink",
         "Rarity": 88,
         "Price": 5000
@@ -52427,11 +56517,6 @@ var item_db_array = [
     {
         "Name": "Stone Garden Bench",
         "Rarity": 85,
-        "Price": 5000
-    },
-    {
-        "Name": "Strawberry Chia Pop",
-        "Rarity": 91,
         "Price": 5000
     },
     {
@@ -52572,6 +56657,11 @@ var item_db_array = [
     {
         "Name": "Birthday Clues",
         "Rarity": 83,
+        "Price": 4975
+    },
+    {
+        "Name": "Blumaroo Stickers",
+        "Rarity": 82,
         "Price": 4975
     },
     {
@@ -52775,6 +56865,11 @@ var item_db_array = [
         "Price": 4950
     },
     {
+        "Name": "Draik Space Slacks",
+        "Rarity": 90,
+        "Price": 4950
+    },
+    {
         "Name": "Eccentric Aisha Shirt and Waistcoat",
         "Rarity": 88,
         "Price": 4950
@@ -52782,11 +56877,6 @@ var item_db_array = [
     {
         "Name": "Elegant Lupe Dress",
         "Rarity": 85,
-        "Price": 4950
-    },
-    {
-        "Name": "Feather Gelert Headband",
-        "Rarity": 90,
         "Price": 4950
     },
     {
@@ -52810,6 +56900,11 @@ var item_db_array = [
         "Price": 4950
     },
     {
+        "Name": "History of Whirlpools",
+        "Rarity": 89,
+        "Price": 4950
+    },
+    {
         "Name": "Holiday Decorating Hints",
         "Rarity": 88,
         "Price": 4950
@@ -52817,11 +56912,6 @@ var item_db_array = [
     {
         "Name": "Iced Aisha Cape",
         "Rarity": 79,
-        "Price": 4950
-    },
-    {
-        "Name": "Indestructible Petpet Ball",
-        "Rarity": 90,
         "Price": 4950
     },
     {
@@ -52842,11 +56932,6 @@ var item_db_array = [
     {
         "Name": "Lost Desert Brush Plushie",
         "Rarity": 85,
-        "Price": 4950
-    },
-    {
-        "Name": "Lost Desert Map Scroll",
-        "Rarity": 93,
         "Price": 4950
     },
     {
@@ -53045,11 +57130,6 @@ var item_db_array = [
         "Price": 4925
     },
     {
-        "Name": "Blue Poogle Slippers",
-        "Rarity": 92,
-        "Price": 4925
-    },
-    {
         "Name": "Borovan Day Gift Basket",
         "Rarity": 88,
         "Price": 4925
@@ -53067,6 +57147,11 @@ var item_db_array = [
     {
         "Name": "Faerie Cadro Plushie",
         "Rarity": 92,
+        "Price": 4925
+    },
+    {
+        "Name": "Feather Gelert Headband",
+        "Rarity": 90,
         "Price": 4925
     },
     {
@@ -53122,6 +57207,11 @@ var item_db_array = [
     {
         "Name": "Rainy Day Hissi Shoes",
         "Rarity": 89,
+        "Price": 4925
+    },
+    {
+        "Name": "Shenkuu Style Window",
+        "Rarity": 90,
         "Price": 4925
     },
     {
@@ -53195,13 +57285,13 @@ var item_db_array = [
         "Price": 4900
     },
     {
-        "Name": "Coffee of the Dead",
-        "Rarity": 97,
+        "Name": "Casual Grundo Trousers",
+        "Rarity": 86,
         "Price": 4900
     },
     {
-        "Name": "Crumbling Ancient Castle Background",
-        "Rarity": 82,
+        "Name": "Coffee of the Dead",
+        "Rarity": 97,
         "Price": 4900
     },
     {
@@ -53260,6 +57350,11 @@ var item_db_array = [
         "Price": 4900
     },
     {
+        "Name": "Hasee Bounce Card",
+        "Rarity": 82,
+        "Price": 4900
+    },
+    {
         "Name": "Healing Potion XVI",
         "Rarity": 93,
         "Price": 4900
@@ -53285,11 +57380,6 @@ var item_db_array = [
         "Price": 4900
     },
     {
-        "Name": "Influence of Potatoes on History",
-        "Rarity": 79,
-        "Price": 4900
-    },
-    {
         "Name": "Invisible Brucicle",
         "Rarity": 70,
         "Price": 4900
@@ -53302,11 +57392,6 @@ var item_db_array = [
     {
         "Name": "Jawshell",
         "Rarity": 82,
-        "Price": 4900
-    },
-    {
-        "Name": "Jungle Aisha Trousers",
-        "Rarity": 90,
         "Price": 4900
     },
     {
@@ -53357,6 +57442,11 @@ var item_db_array = [
     {
         "Name": "Milk Chocolate JubJub Cake",
         "Rarity": 78,
+        "Price": 4900
+    },
+    {
+        "Name": "Milkman Kau Hat",
+        "Rarity": 91,
         "Price": 4900
     },
     {
@@ -53497,11 +57587,6 @@ var item_db_array = [
     {
         "Name": "Toffee Dubloon",
         "Rarity": 91,
-        "Price": 4900
-    },
-    {
-        "Name": "Tonu Leather Shield",
-        "Rarity": 97,
         "Price": 4900
     },
     {
@@ -53660,11 +57745,6 @@ var item_db_array = [
         "Price": 4850
     },
     {
-        "Name": "Biker Usul Boots",
-        "Rarity": 87,
-        "Price": 4850
-    },
-    {
         "Name": "Blue Acara Cake",
         "Rarity": 80,
         "Price": 4850
@@ -53800,11 +57880,6 @@ var item_db_array = [
         "Price": 4850
     },
     {
-        "Name": "Trendy Ruki Scarf",
-        "Rarity": 86,
-        "Price": 4850
-    },
-    {
         "Name": "Usuki Western Set",
         "Rarity": 89,
         "Price": 4850
@@ -53867,11 +57942,6 @@ var item_db_array = [
     {
         "Name": "Uni Garden Hat",
         "Rarity": 91,
-        "Price": 4825
-    },
-    {
-        "Name": "Yurble Raider Handguards",
-        "Rarity": 87,
         "Price": 4825
     },
     {
@@ -54135,6 +58205,11 @@ var item_db_array = [
         "Price": 4800
     },
     {
+        "Name": "Strawberry Cybunny Cookie",
+        "Rarity": 80,
+        "Price": 4800
+    },
+    {
         "Name": "Strawberry Poogle Cake",
         "Rarity": 89,
         "Price": 4800
@@ -54317,11 +58392,6 @@ var item_db_array = [
     {
         "Name": "Bruce Holiday Shoes",
         "Rarity": 87,
-        "Price": 4750
-    },
-    {
-        "Name": "Buzz Mage Wig",
-        "Rarity": 86,
         "Price": 4750
     },
     {
@@ -54570,6 +58640,11 @@ var item_db_array = [
         "Price": 4725
     },
     {
+        "Name": "Explorer Kacheek Hat",
+        "Rarity": 87,
+        "Price": 4725
+    },
+    {
         "Name": "Fire Accordion",
         "Rarity": 91,
         "Price": 4725
@@ -54690,11 +58765,6 @@ var item_db_array = [
         "Price": 4700
     },
     {
-        "Name": "Clowning Around",
-        "Rarity": 88,
-        "Price": 4700
-    },
-    {
         "Name": "Colour Changing Tulips",
         "Rarity": 90,
         "Price": 4700
@@ -54730,11 +58800,6 @@ var item_db_array = [
         "Price": 4700
     },
     {
-        "Name": "Gnorbu Snowbeast Costume Outfit",
-        "Rarity": 82,
-        "Price": 4700
-    },
-    {
         "Name": "Gummy Dice Lamp",
         "Rarity": 92,
         "Price": 4700
@@ -54760,8 +58825,8 @@ var item_db_array = [
         "Price": 4700
     },
     {
-        "Name": "Kyrii Country",
-        "Rarity": 85,
+        "Name": "Krawk Hunter Satchel",
+        "Rarity": 88,
         "Price": 4700
     },
     {
@@ -54782,11 +58847,6 @@ var item_db_array = [
     {
         "Name": "Mutant Cybunny Plushie",
         "Rarity": 87,
-        "Price": 4700
-    },
-    {
-        "Name": "My First Book",
-        "Rarity": 80,
         "Price": 4700
     },
     {
@@ -54870,11 +58930,6 @@ var item_db_array = [
         "Price": 4700
     },
     {
-        "Name": "When All Else Fails...",
-        "Rarity": 92,
-        "Price": 4700
-    },
-    {
         "Name": "Who Is The Nightsteed",
         "Rarity": 89,
         "Price": 4700
@@ -54883,6 +58938,11 @@ var item_db_array = [
         "Name": "Wocky Glove",
         "Rarity": 90,
         "Price": 4700
+    },
+    {
+        "Name": "Blue Glazed Bread Basket",
+        "Rarity": 94,
+        "Price": 4675
     },
     {
         "Name": "Bruce Wizard Beard",
@@ -55025,6 +59085,11 @@ var item_db_array = [
         "Price": 4650
     },
     {
+        "Name": "Goregas Jetsam Body",
+        "Rarity": 87,
+        "Price": 4650
+    },
+    {
         "Name": "Hand Weights",
         "Rarity": 89,
         "Price": 4650
@@ -55065,11 +59130,6 @@ var item_db_array = [
         "Price": 4650
     },
     {
-        "Name": "Peophin Leg Shields",
-        "Rarity": 97,
-        "Price": 4650
-    },
-    {
         "Name": "Punk Kyrii Choker",
         "Rarity": 82,
         "Price": 4650
@@ -55092,11 +59152,6 @@ var item_db_array = [
     {
         "Name": "Scroll of the Scholar",
         "Rarity": 95,
-        "Price": 4650
-    },
-    {
-        "Name": "Shenkuu Style Window",
-        "Rarity": 90,
         "Price": 4650
     },
     {
@@ -55135,6 +59190,11 @@ var item_db_array = [
         "Price": 4650
     },
     {
+        "Name": "Super Soft Orange Plushie",
+        "Rarity": 87,
+        "Price": 4650
+    },
+    {
         "Name": "Tasu Stamp",
         "Rarity": 88,
         "Price": 4650
@@ -55167,6 +59227,11 @@ var item_db_array = [
     {
         "Name": "Beef and Veggie Soup",
         "Rarity": 77,
+        "Price": 4625
+    },
+    {
+        "Name": "Buzz Musketeer Sword",
+        "Rarity": 85,
         "Price": 4625
     },
     {
@@ -55220,6 +59285,11 @@ var item_db_array = [
         "Price": 4625
     },
     {
+        "Name": "Mau Codestone",
+        "Rarity": 40,
+        "Price": 4625
+    },
+    {
         "Name": "Peasant Usuki Set",
         "Rarity": 90,
         "Price": 4625
@@ -55235,8 +59305,8 @@ var item_db_array = [
         "Price": 4625
     },
     {
-        "Name": "Sweet Necklace",
-        "Rarity": 90,
+        "Name": "Uni Elixir",
+        "Rarity": 94,
         "Price": 4625
     },
     {
@@ -55280,18 +59350,8 @@ var item_db_array = [
         "Price": 4600
     },
     {
-        "Name": "Corbin Ogrin Shoes",
-        "Rarity": 86,
-        "Price": 4600
-    },
-    {
         "Name": "Desert Princess Peophin Wig",
         "Rarity": 89,
-        "Price": 4600
-    },
-    {
-        "Name": "Dribblet",
-        "Rarity": 86,
         "Price": 4600
     },
     {
@@ -55307,6 +59367,11 @@ var item_db_array = [
     {
         "Name": "Grundo Beach Hat",
         "Rarity": 73,
+        "Price": 4600
+    },
+    {
+        "Name": "Gummi Worms",
+        "Rarity": 83,
         "Price": 4600
     },
     {
@@ -55360,11 +59425,6 @@ var item_db_array = [
         "Price": 4600
     },
     {
-        "Name": "Mau Codestone",
-        "Rarity": 40,
-        "Price": 4600
-    },
-    {
         "Name": "Mozzarella Basil Hot Dog",
         "Rarity": 90,
         "Price": 4600
@@ -55397,11 +59457,6 @@ var item_db_array = [
     {
         "Name": "Scorchio Chocolate Cream Cake",
         "Rarity": 80,
-        "Price": 4600
-    },
-    {
-        "Name": "Scroll Keeper Nimmo Shoes",
-        "Rarity": 87,
         "Price": 4600
     },
     {
@@ -55445,13 +59500,13 @@ var item_db_array = [
         "Price": 4575
     },
     {
-        "Name": "Dressy Eyrie Bracelets",
-        "Rarity": 83,
+        "Name": "Galgarroth Action Figure",
+        "Rarity": 89,
         "Price": 4575
     },
     {
-        "Name": "Galgarroth Action Figure",
-        "Rarity": 89,
+        "Name": "Orange Kreludan Table",
+        "Rarity": 88,
         "Price": 4575
     },
     {
@@ -55550,11 +59605,6 @@ var item_db_array = [
         "Price": 4550
     },
     {
-        "Name": "Pink Poogle Arm Chair",
-        "Rarity": 86,
-        "Price": 4550
-    },
-    {
         "Name": "Pirate Meerca Plushie",
         "Rarity": 82,
         "Price": 4550
@@ -55562,6 +59612,11 @@ var item_db_array = [
     {
         "Name": "Poetic Poogle Hat",
         "Rarity": 86,
+        "Price": 4550
+    },
+    {
+        "Name": "Potion Table",
+        "Rarity": 88,
         "Price": 4550
     },
     {
@@ -55582,6 +59637,11 @@ var item_db_array = [
     {
         "Name": "Senator Barca Stamp",
         "Rarity": 80,
+        "Price": 4550
+    },
+    {
+        "Name": "Short Stories from Brightvale",
+        "Rarity": 82,
         "Price": 4550
     },
     {
@@ -55695,6 +59755,11 @@ var item_db_array = [
         "Price": 4525
     },
     {
+        "Name": "Robot Moehog Plushie",
+        "Rarity": 90,
+        "Price": 4525
+    },
+    {
         "Name": "Scroll of the Earth",
         "Rarity": 90,
         "Price": 4525
@@ -55718,11 +59783,6 @@ var item_db_array = [
         "Name": "Velm Techo Gauntlets",
         "Rarity": 87,
         "Price": 4525
-    },
-    {
-        "Name": "AAC Device",
-        "Rarity": 75,
-        "Price": 4500
     },
     {
         "Name": "Acara Cabbage Cake",
@@ -55752,6 +59812,11 @@ var item_db_array = [
     {
         "Name": "Blue Camouflage Chair",
         "Rarity": 90,
+        "Price": 4500
+    },
+    {
+        "Name": "Blue Poogle Slippers",
+        "Rarity": 92,
         "Price": 4500
     },
     {
@@ -55960,6 +60025,16 @@ var item_db_array = [
         "Price": 4500
     },
     {
+        "Name": "Influence of Potatoes on History",
+        "Rarity": 79,
+        "Price": 4500
+    },
+    {
+        "Name": "Jungle Aisha Trousers",
+        "Rarity": 90,
+        "Price": 4500
+    },
+    {
         "Name": "Kale Chips",
         "Rarity": 78,
         "Price": 4500
@@ -56020,11 +60095,6 @@ var item_db_array = [
         "Price": 4500
     },
     {
-        "Name": "Milkman Kau Hat",
-        "Rarity": 91,
-        "Price": 4500
-    },
-    {
         "Name": "Mini Swiss Kau Cheese Wheel",
         "Rarity": 78,
         "Price": 4500
@@ -56062,11 +60132,6 @@ var item_db_array = [
     {
         "Name": "Neopian Times Pencil Case",
         "Rarity": 89,
-        "Price": 4500
-    },
-    {
-        "Name": "NG Tube with Paw Print Sticker",
-        "Rarity": 73,
         "Price": 4500
     },
     {
@@ -56160,6 +60225,11 @@ var item_db_array = [
         "Price": 4500
     },
     {
+        "Name": "Pocket Instrument Multi-Tool",
+        "Rarity": 89,
+        "Price": 4500
+    },
+    {
         "Name": "Polka Dot Hot Dog",
         "Rarity": 91,
         "Price": 4500
@@ -56205,11 +60275,6 @@ var item_db_array = [
         "Price": 4500
     },
     {
-        "Name": "Sceptre of Lost Time",
-        "Rarity": 89,
-        "Price": 4500
-    },
-    {
         "Name": "Scholar Gelert Pants",
         "Rarity": 86,
         "Price": 4500
@@ -56237,6 +60302,16 @@ var item_db_array = [
     {
         "Name": "Shrimp on Ice",
         "Rarity": 92,
+        "Price": 4500
+    },
+    {
+        "Name": "Skeith Quesadilla",
+        "Rarity": 65,
+        "Price": 4500
+    },
+    {
+        "Name": "Skeith Sword",
+        "Rarity": 95,
         "Price": 4500
     },
     {
@@ -56360,11 +60435,6 @@ var item_db_array = [
         "Price": 4475
     },
     {
-        "Name": "Cobbled Maractite Path",
-        "Rarity": 88,
-        "Price": 4475
-    },
-    {
         "Name": "Cybunny Carrot Burger",
         "Rarity": 90,
         "Price": 4475
@@ -56387,11 +60457,6 @@ var item_db_array = [
     {
         "Name": "Fluorescent Hot Dog",
         "Rarity": 77,
-        "Price": 4475
-    },
-    {
-        "Name": "Har Codestone",
-        "Rarity": 40,
         "Price": 4475
     },
     {
@@ -56495,12 +60560,12 @@ var item_db_array = [
         "Price": 4450
     },
     {
-        "Name": "Cloud Gelert Plushie",
-        "Rarity": 90,
+        "Name": "Cubett",
+        "Rarity": 87,
         "Price": 4450
     },
     {
-        "Name": "Cubett",
+        "Name": "Cybunny Dancer Plushie",
         "Rarity": 87,
         "Price": 4450
     },
@@ -56540,11 +60605,6 @@ var item_db_array = [
         "Price": 4450
     },
     {
-        "Name": "Jhudoras Book of Recipes",
-        "Rarity": 89,
-        "Price": 4450
-    },
-    {
         "Name": "Koi Snow Princess Dress",
         "Rarity": 83,
         "Price": 4450
@@ -56575,16 +60635,6 @@ var item_db_array = [
         "Price": 4450
     },
     {
-        "Name": "Pocket Instrument Multi-Tool",
-        "Rarity": 89,
-        "Price": 4450
-    },
-    {
-        "Name": "Postman Draik Bag",
-        "Rarity": 87,
-        "Price": 4450
-    },
-    {
         "Name": "Quiggle Stapler",
         "Rarity": 88,
         "Price": 4450
@@ -56597,11 +60647,6 @@ var item_db_array = [
     {
         "Name": "Red Peophin Plushie",
         "Rarity": 85,
-        "Price": 4450
-    },
-    {
-        "Name": "Shoyru Battle Sabre",
-        "Rarity": 96,
         "Price": 4450
     },
     {
@@ -56735,8 +60780,18 @@ var item_db_array = [
         "Price": 4400
     },
     {
+        "Name": "Acnefruit Scone",
+        "Rarity": 80,
+        "Price": 4400
+    },
+    {
         "Name": "Alabriss",
         "Rarity": 72,
+        "Price": 4400
+    },
+    {
+        "Name": "Angelic Flotsam Dress",
+        "Rarity": 81,
         "Price": 4400
     },
     {
@@ -56772,11 +60827,6 @@ var item_db_array = [
     {
         "Name": "Chocolate Ship Cookie",
         "Rarity": 76,
-        "Price": 4400
-    },
-    {
-        "Name": "Christmas Tuskaninny Plushie",
-        "Rarity": 87,
         "Price": 4400
     },
     {
@@ -56885,11 +60935,6 @@ var item_db_array = [
         "Price": 4400
     },
     {
-        "Name": "Krawk Island Flag",
-        "Rarity": 89,
-        "Price": 4400
-    },
-    {
         "Name": "Laser Energy",
         "Rarity": 91,
         "Price": 4400
@@ -56932,6 +60977,11 @@ var item_db_array = [
     {
         "Name": "Moon Soup",
         "Rarity": 87,
+        "Price": 4400
+    },
+    {
+        "Name": "My First Book",
+        "Rarity": 80,
         "Price": 4400
     },
     {
@@ -57115,11 +61165,6 @@ var item_db_array = [
         "Price": 4375
     },
     {
-        "Name": "Grundo Sloth Sock Puppet",
-        "Rarity": 90,
-        "Price": 4375
-    },
-    {
         "Name": "Gruslen Rug",
         "Rarity": 93,
         "Price": 4375
@@ -57200,13 +61245,13 @@ var item_db_array = [
         "Price": 4350
     },
     {
-        "Name": "Blue Lenny Kimono",
-        "Rarity": 91,
+        "Name": "Bruce Holiday Wig",
+        "Rarity": 87,
         "Price": 4350
     },
     {
-        "Name": "Bruce Holiday Wig",
-        "Rarity": 87,
+        "Name": "Corbin Ogrin Shoes",
+        "Rarity": 86,
         "Price": 4350
     },
     {
@@ -57245,6 +61290,11 @@ var item_db_array = [
         "Price": 4350
     },
     {
+        "Name": "Glass Dip Pen and Ink",
+        "Rarity": 90,
+        "Price": 4350
+    },
+    {
         "Name": "Gnorbu Zoot Suit Trousers",
         "Rarity": 91,
         "Price": 4350
@@ -57260,13 +61310,13 @@ var item_db_array = [
         "Price": 4350
     },
     {
-        "Name": "Lime Jelly Eyeball",
-        "Rarity": 90,
+        "Name": "Mixed Flowers",
+        "Rarity": 86,
         "Price": 4350
     },
     {
-        "Name": "Mixed Flowers",
-        "Rarity": 86,
+        "Name": "Portable Oxygen Device",
+        "Rarity": 73,
         "Price": 4350
     },
     {
@@ -57315,11 +61365,6 @@ var item_db_array = [
         "Price": 4350
     },
     {
-        "Name": "Chomby Red Tuxedo Shirt",
-        "Rarity": 80,
-        "Price": 4325
-    },
-    {
         "Name": "Dark Chocolate Lutari",
         "Rarity": 92,
         "Price": 4325
@@ -57347,6 +61392,11 @@ var item_db_array = [
     {
         "Name": "Tropical Bruce Shirt",
         "Rarity": 90,
+        "Price": 4325
+    },
+    {
+        "Name": "When All Else Fails...",
+        "Rarity": 92,
         "Price": 4325
     },
     {
@@ -57392,6 +61442,11 @@ var item_db_array = [
     {
         "Name": "Chocolate Wocky Paws",
         "Rarity": 80,
+        "Price": 4300
+    },
+    {
+        "Name": "Crumbling Ancient Castle Background",
+        "Rarity": 82,
         "Price": 4300
     },
     {
@@ -57455,6 +61510,11 @@ var item_db_array = [
         "Price": 4300
     },
     {
+        "Name": "Jhudoras Book of Recipes",
+        "Rarity": 89,
+        "Price": 4300
+    },
+    {
         "Name": "Matching Pastel Shells",
         "Rarity": 93,
         "Price": 4300
@@ -57467,11 +61527,6 @@ var item_db_array = [
     {
         "Name": "Meaty Gnorbu Pie",
         "Rarity": 78,
-        "Price": 4300
-    },
-    {
-        "Name": "Meerca Boomerang",
-        "Rarity": 92,
         "Price": 4300
     },
     {
@@ -57495,23 +61550,23 @@ var item_db_array = [
         "Price": 4300
     },
     {
-        "Name": "Pirate Slorg Plushie",
-        "Rarity": 89,
-        "Price": 4300
-    },
-    {
         "Name": "Potted Asparagus Plant",
         "Rarity": 85,
         "Price": 4300
     },
     {
-        "Name": "Robot Moehog Plushie",
+        "Name": "Sakhmet Style Window",
         "Rarity": 90,
         "Price": 4300
     },
     {
-        "Name": "Sakhmet Style Window",
-        "Rarity": 90,
+        "Name": "Sceptre of Lost Time",
+        "Rarity": 89,
+        "Price": 4300
+    },
+    {
+        "Name": "Scorchio Blacksmith Shoes",
+        "Rarity": 87,
         "Price": 4300
     },
     {
@@ -57550,11 +61605,6 @@ var item_db_array = [
         "Price": 4300
     },
     {
-        "Name": "The Story of the Cloud Acara",
-        "Rarity": 80,
-        "Price": 4300
-    },
-    {
         "Name": "Tomb Tales",
         "Rarity": 93,
         "Price": 4300
@@ -57585,8 +61635,8 @@ var item_db_array = [
         "Price": 4300
     },
     {
-        "Name": "Yurble Raider Arrow",
-        "Rarity": 87,
+        "Name": "White Chocolate Ruki",
+        "Rarity": 76,
         "Price": 4300
     },
     {
@@ -57597,6 +61647,11 @@ var item_db_array = [
     {
         "Name": "Alchemist Scorchio Boots",
         "Rarity": 88,
+        "Price": 4275
+    },
+    {
+        "Name": "Barbarian Tuskaninny Armour",
+        "Rarity": 87,
         "Price": 4275
     },
     {
@@ -57720,6 +61775,11 @@ var item_db_array = [
         "Price": 4250
     },
     {
+        "Name": "Digging Kiko Gnome",
+        "Rarity": 90,
+        "Price": 4250
+    },
+    {
         "Name": "Distinguished Buzz Wig",
         "Rarity": 89,
         "Price": 4250
@@ -57742,6 +61802,11 @@ var item_db_array = [
     {
         "Name": "Flotsam Bustle Skirt",
         "Rarity": 92,
+        "Price": 4250
+    },
+    {
+        "Name": "Glow-in-the-Dark Comet",
+        "Rarity": 90,
         "Price": 4250
     },
     {
@@ -57777,6 +61842,11 @@ var item_db_array = [
     {
         "Name": "Hanging Out",
         "Rarity": 89,
+        "Price": 4250
+    },
+    {
+        "Name": "Har Codestone",
+        "Rarity": 40,
         "Price": 4250
     },
     {
@@ -57880,24 +61950,19 @@ var item_db_array = [
         "Price": 4250
     },
     {
-        "Name": "Unhappy Tails",
-        "Rarity": 88,
+        "Name": "White Blackberry Candy",
+        "Rarity": 78,
         "Price": 4250
     },
     {
-        "Name": "White Blackberry Candy",
-        "Rarity": 78,
+        "Name": "Wocky Hide and Seek Book",
+        "Rarity": 89,
         "Price": 4250
     },
     {
         "Name": "Yellow Yurble Sundress",
         "Rarity": 91,
         "Price": 4250
-    },
-    {
-        "Name": "Blacksmith Elephante Boots",
-        "Rarity": 87,
-        "Price": 4225
     },
     {
         "Name": "Chic Bruce Shoes",
@@ -57990,11 +62055,6 @@ var item_db_array = [
         "Price": 4200
     },
     {
-        "Name": "Charnie",
-        "Rarity": 80,
-        "Price": 4200
-    },
-    {
         "Name": "Cheeky Blue Acara Gnome",
         "Rarity": 88,
         "Price": 4200
@@ -58060,28 +62120,18 @@ var item_db_array = [
         "Price": 4200
     },
     {
-        "Name": "Gross Palette",
-        "Rarity": 86,
-        "Price": 4200
-    },
-    {
         "Name": "Guide to Petpets",
         "Rarity": 89,
         "Price": 4200
     },
     {
-        "Name": "History of Whirlpools",
-        "Rarity": 89,
-        "Price": 4200
-    },
-    {
-        "Name": "How To Play Zurroball",
-        "Rarity": 88,
-        "Price": 4200
-    },
-    {
         "Name": "Ice Snowflake Sculpture",
         "Rarity": 90,
+        "Price": 4200
+    },
+    {
+        "Name": "Industrial Steel Drum",
+        "Rarity": 86,
         "Price": 4200
     },
     {
@@ -58132,16 +62182,6 @@ var item_db_array = [
     {
         "Name": "Mustard Mayhem Grarrl Gobstopper",
         "Rarity": 76,
-        "Price": 4200
-    },
-    {
-        "Name": "Mutant Chomby Plushie",
-        "Rarity": 88,
-        "Price": 4200
-    },
-    {
-        "Name": "Neopia Central Background",
-        "Rarity": 81,
         "Price": 4200
     },
     {
@@ -58268,6 +62308,11 @@ var item_db_array = [
         "Name": "Yewfruit Candy",
         "Rarity": 79,
         "Price": 4200
+    },
+    {
+        "Name": "Bank Manager Skeith Shoes",
+        "Rarity": 86,
+        "Price": 4175
     },
     {
         "Name": "Blue Bruce Loafers",
@@ -58455,12 +62500,12 @@ var item_db_array = [
         "Price": 4150
     },
     {
-        "Name": "Myths and Legends of Alien Aishas",
-        "Rarity": 93,
+        "Name": "Nest Foreground",
+        "Rarity": 86,
         "Price": 4150
     },
     {
-        "Name": "Nest Foreground",
+        "Name": "Pan Flute",
         "Rarity": 86,
         "Price": 4150
     },
@@ -58487,6 +62532,11 @@ var item_db_array = [
     {
         "Name": "Rocket Building for Fun and Profit",
         "Rarity": 82,
+        "Price": 4150
+    },
+    {
+        "Name": "Silver Uni Kite Shield",
+        "Rarity": 92,
         "Price": 4150
     },
     {
@@ -58530,6 +62580,11 @@ var item_db_array = [
         "Price": 4125
     },
     {
+        "Name": "Buzz Mage Wig",
+        "Rarity": 86,
+        "Price": 4125
+    },
+    {
         "Name": "Chocolate Honey Buzz Bar",
         "Rarity": 80,
         "Price": 4125
@@ -58547,11 +62602,6 @@ var item_db_array = [
     {
         "Name": "Handsome Prince Quiggle Sceptre",
         "Rarity": 88,
-        "Price": 4125
-    },
-    {
-        "Name": "Hasee Bounce Card",
-        "Rarity": 82,
         "Price": 4125
     },
     {
@@ -58670,11 +62720,6 @@ var item_db_array = [
         "Price": 4100
     },
     {
-        "Name": "Colourful Noise Cancelling Headphones",
-        "Rarity": 75,
-        "Price": 4100
-    },
-    {
         "Name": "Commemorative Defenders Stamp #3",
         "Rarity": 87,
         "Price": 4100
@@ -58685,8 +62730,8 @@ var item_db_array = [
         "Price": 4100
     },
     {
-        "Name": "Cybunny Dancer Plushie",
-        "Rarity": 87,
+        "Name": "Delinquent Ogrin Wig",
+        "Rarity": 85,
         "Price": 4100
     },
     {
@@ -58702,6 +62747,11 @@ var item_db_array = [
     {
         "Name": "Edible Argyle Socks",
         "Rarity": 76,
+        "Price": 4100
+    },
+    {
+        "Name": "Faerie Kyrii Ball",
+        "Rarity": 90,
         "Price": 4100
     },
     {
@@ -58775,8 +62825,18 @@ var item_db_array = [
         "Price": 4100
     },
     {
+        "Name": "Meerca Boomerang",
+        "Rarity": 92,
+        "Price": 4100
+    },
+    {
         "Name": "Meowclops Head Pillow",
         "Rarity": 85,
+        "Price": 4100
+    },
+    {
+        "Name": "Moltaran Fashion Eyrie Wig and Goggles",
+        "Rarity": 89,
         "Price": 4100
     },
     {
@@ -58802,6 +62862,11 @@ var item_db_array = [
     {
         "Name": "Pink Meerca Tail Bows",
         "Rarity": 92,
+        "Price": 4100
+    },
+    {
+        "Name": "Planetary Onion Rings",
+        "Rarity": 89,
         "Price": 4100
     },
     {
@@ -58845,11 +62910,6 @@ var item_db_array = [
         "Price": 4100
     },
     {
-        "Name": "Silver Uni Kite Shield",
-        "Rarity": 92,
-        "Price": 4100
-    },
-    {
         "Name": "Sourmelon Brew",
         "Rarity": 68,
         "Price": 4100
@@ -58862,11 +62922,6 @@ var item_db_array = [
     {
         "Name": "Sticky Buns",
         "Rarity": 73,
-        "Price": 4100
-    },
-    {
-        "Name": "Strawberry Achyfi Lollypop",
-        "Rarity": 80,
         "Price": 4100
     },
     {
@@ -58898,11 +62953,6 @@ var item_db_array = [
         "Name": "Zafara Fisherman Jacket",
         "Rarity": 85,
         "Price": 4100
-    },
-    {
-        "Name": "Blueberry Grundo Lollypop",
-        "Rarity": 80,
-        "Price": 4075
     },
     {
         "Name": "Chocolate Ixi Cookies",
@@ -58990,11 +63040,6 @@ var item_db_array = [
         "Price": 4050
     },
     {
-        "Name": "Hilarious Chia Jokes",
-        "Rarity": 88,
-        "Price": 4050
-    },
-    {
         "Name": "Insect Eating House Plant",
         "Rarity": 85,
         "Price": 4050
@@ -59055,6 +63100,11 @@ var item_db_array = [
         "Price": 4050
     },
     {
+        "Name": "Vo Codestone",
+        "Rarity": 40,
+        "Price": 4050
+    },
+    {
         "Name": "Acara Rainbow Lollypop",
         "Rarity": 78,
         "Price": 4025
@@ -59110,11 +63160,6 @@ var item_db_array = [
         "Price": 4025
     },
     {
-        "Name": "Vo Codestone",
-        "Rarity": 40,
-        "Price": 4025
-    },
-    {
         "Name": "30 proof Kacheek Sun Screen",
         "Rarity": 88,
         "Price": 4000
@@ -59132,6 +63177,11 @@ var item_db_array = [
     {
         "Name": "Adorable Chomby Hat",
         "Rarity": 88,
+        "Price": 4000
+    },
+    {
+        "Name": "Adorable Gnorbu Shirt",
+        "Rarity": 85,
         "Price": 4000
     },
     {
@@ -59320,8 +63370,13 @@ var item_db_array = [
         "Price": 4000
     },
     {
-        "Name": "Cuttlebot",
-        "Rarity": 86,
+        "Name": "Colourful Noise Cancelling Headphones",
+        "Rarity": 75,
+        "Price": 4000
+    },
+    {
+        "Name": "Colourful Rolling Walker",
+        "Rarity": 75,
         "Price": 4000
     },
     {
@@ -59580,6 +63635,11 @@ var item_db_array = [
         "Price": 4000
     },
     {
+        "Name": "Indestructible Petpet Ball",
+        "Rarity": 90,
+        "Price": 4000
+    },
+    {
         "Name": "Inky Eraser",
         "Rarity": 90,
         "Price": 4000
@@ -59825,11 +63885,6 @@ var item_db_array = [
         "Price": 4000
     },
     {
-        "Name": "Ombat",
-        "Rarity": 88,
-        "Price": 4000
-    },
-    {
         "Name": "Orange Kreludan Bean Bag",
         "Rarity": 87,
         "Price": 4000
@@ -59865,6 +63920,11 @@ var item_db_array = [
         "Price": 4000
     },
     {
+        "Name": "Pizza Notepad",
+        "Rarity": 87,
+        "Price": 4000
+    },
+    {
         "Name": "Plains Aisha",
         "Rarity": 66,
         "Price": 4000
@@ -59877,11 +63937,6 @@ var item_db_array = [
     {
         "Name": "Postman Draik Letter",
         "Rarity": 87,
-        "Price": 4000
-    },
-    {
-        "Name": "Proper Lady Kacheek Hat and Wig",
-        "Rarity": 88,
         "Price": 4000
     },
     {
@@ -60020,6 +64075,11 @@ var item_db_array = [
         "Price": 4000
     },
     {
+        "Name": "Solitary Rock Garden",
+        "Rarity": 93,
+        "Price": 4000
+    },
+    {
         "Name": "Soup Faerie Soup",
         "Rarity": 90,
         "Price": 4000
@@ -60080,6 +64140,11 @@ var item_db_array = [
         "Price": 4000
     },
     {
+        "Name": "Tablet of Zombie Defence Tactics",
+        "Rarity": 84,
+        "Price": 4000
+    },
+    {
         "Name": "Techo Bandit Shoes",
         "Rarity": 90,
         "Price": 4000
@@ -60105,11 +64170,6 @@ var item_db_array = [
         "Price": 4000
     },
     {
-        "Name": "Turmaculus Stamp",
-        "Rarity": 89,
-        "Price": 4000
-    },
-    {
         "Name": "Turtum",
         "Rarity": 96,
         "Price": 4000
@@ -60117,6 +64177,16 @@ var item_db_array = [
     {
         "Name": "Twin Noil Statues Foreground",
         "Rarity": 84,
+        "Price": 4000
+    },
+    {
+        "Name": "Tyrannian Dishes Recipe Book",
+        "Rarity": 81,
+        "Price": 4000
+    },
+    {
+        "Name": "Usuki Neoschool Teacher",
+        "Rarity": 85,
         "Price": 4000
     },
     {
@@ -60205,11 +64275,6 @@ var item_db_array = [
         "Price": 3975
     },
     {
-        "Name": "Ghost Draik Plushie",
-        "Rarity": 95,
-        "Price": 3975
-    },
-    {
         "Name": "Gourmet Bowl Tips",
         "Rarity": 89,
         "Price": 3975
@@ -60222,11 +64287,6 @@ var item_db_array = [
     {
         "Name": "Judge Hog Poster",
         "Rarity": 89,
-        "Price": 3975
-    },
-    {
-        "Name": "Leaf Mosaics and You!",
-        "Rarity": 86,
         "Price": 3975
     },
     {
@@ -60247,11 +64307,6 @@ var item_db_array = [
     {
         "Name": "Organic Pecan",
         "Rarity": 91,
-        "Price": 3975
-    },
-    {
-        "Name": "Orn Codestone",
-        "Rarity": 40,
         "Price": 3975
     },
     {
@@ -60292,6 +64347,11 @@ var item_db_array = [
     {
         "Name": "Sloth Valentine Gift Bag",
         "Rarity": 87,
+        "Price": 3975
+    },
+    {
+        "Name": "Tall Stack of Mutant Pancakes",
+        "Rarity": 90,
         "Price": 3975
     },
     {
@@ -60405,6 +64465,11 @@ var item_db_array = [
         "Price": 3950
     },
     {
+        "Name": "Ice Covered Bush",
+        "Rarity": 89,
+        "Price": 3950
+    },
+    {
         "Name": "Jetsam Chalkboard",
         "Rarity": 88,
         "Price": 3950
@@ -60495,6 +64560,11 @@ var item_db_array = [
         "Price": 3950
     },
     {
+        "Name": "Scratch Card Kiosk Wocky",
+        "Rarity": 80,
+        "Price": 3950
+    },
+    {
         "Name": "Searing Scroll of Light",
         "Rarity": 87,
         "Price": 3950
@@ -60570,6 +64640,11 @@ var item_db_array = [
         "Price": 3925
     },
     {
+        "Name": "Donut Bath Bomb",
+        "Rarity": 85,
+        "Price": 3925
+    },
+    {
         "Name": "Fire Bush",
         "Rarity": 25,
         "Price": 3925
@@ -60585,11 +64660,6 @@ var item_db_array = [
         "Price": 3925
     },
     {
-        "Name": "Goregas Jetsam Body",
-        "Rarity": 87,
-        "Price": 3925
-    },
-    {
         "Name": "Heart Shaped Orange Chair",
         "Rarity": 90,
         "Price": 3925
@@ -60602,11 +64672,6 @@ var item_db_array = [
     {
         "Name": "Kau Surfer Trunks",
         "Rarity": 89,
-        "Price": 3925
-    },
-    {
-        "Name": "King Skarl Gnome",
-        "Rarity": 90,
         "Price": 3925
     },
     {
@@ -60710,11 +64775,6 @@ var item_db_array = [
         "Price": 3900
     },
     {
-        "Name": "Digging Kiko Gnome",
-        "Rarity": 90,
-        "Price": 3900
-    },
-    {
         "Name": "Disco Ice Cream",
         "Rarity": 79,
         "Price": 3900
@@ -60790,6 +64850,11 @@ var item_db_array = [
         "Price": 3900
     },
     {
+        "Name": "How To Play Zurroball",
+        "Rarity": 88,
+        "Price": 3900
+    },
+    {
         "Name": "Islandberry Tonu Cupcake",
         "Rarity": 80,
         "Price": 3900
@@ -60817,6 +64882,11 @@ var item_db_array = [
     {
         "Name": "Lab Ray Mad Scientist Plushie",
         "Rarity": 89,
+        "Price": 3900
+    },
+    {
+        "Name": "Leaf Mosaics and You!",
+        "Rarity": 86,
         "Price": 3900
     },
     {
@@ -60875,6 +64945,11 @@ var item_db_array = [
         "Price": 3900
     },
     {
+        "Name": "Orn Codestone",
+        "Rarity": 40,
+        "Price": 3900
+    },
+    {
         "Name": "Peophin Defender Wig",
         "Rarity": 81,
         "Price": 3900
@@ -60920,6 +64995,11 @@ var item_db_array = [
         "Price": 3900
     },
     {
+        "Name": "Scarabug Plushie",
+        "Rarity": 89,
+        "Price": 3900
+    },
+    {
         "Name": "Scorchio Birthday Plushie",
         "Rarity": 87,
         "Price": 3900
@@ -60947,11 +65027,6 @@ var item_db_array = [
     {
         "Name": "Shop Wizard Usuki",
         "Rarity": 90,
-        "Price": 3900
-    },
-    {
-        "Name": "Snap Draik",
-        "Rarity": 88,
         "Price": 3900
     },
     {
@@ -61040,23 +65115,18 @@ var item_db_array = [
         "Price": 3875
     },
     {
-        "Name": "Fyora Rules Poster",
-        "Rarity": 90,
+        "Name": "Cuttlebot",
+        "Rarity": 86,
+        "Price": 3875
+    },
+    {
+        "Name": "Duchess Lenny Wig",
+        "Rarity": 87,
         "Price": 3875
     },
     {
         "Name": "Gilded Kougra Mask",
         "Rarity": 96,
-        "Price": 3875
-    },
-    {
-        "Name": "Glass Dip Pen and Ink",
-        "Rarity": 90,
-        "Price": 3875
-    },
-    {
-        "Name": "Grey Bouquet",
-        "Rarity": 80,
         "Price": 3875
     },
     {
@@ -61077,6 +65147,11 @@ var item_db_array = [
     {
         "Name": "King Hagan Usuki",
         "Rarity": 94,
+        "Price": 3875
+    },
+    {
+        "Name": "Krawk Scrapwork Scissors",
+        "Rarity": 87,
         "Price": 3875
     },
     {
@@ -61135,6 +65210,11 @@ var item_db_array = [
         "Price": 3875
     },
     {
+        "Name": "Unhappy Tails",
+        "Rarity": 88,
+        "Price": 3875
+    },
+    {
         "Name": "Usukicon Y9 Bow Poster",
         "Rarity": 87,
         "Price": 3875
@@ -61147,11 +65227,6 @@ var item_db_array = [
     {
         "Name": "Veiled Uni Pants",
         "Rarity": 88,
-        "Price": 3875
-    },
-    {
-        "Name": "Zei Codestone",
-        "Rarity": 40,
         "Price": 3875
     },
     {
@@ -61192,11 +65267,6 @@ var item_db_array = [
     {
         "Name": "Card of Apology",
         "Rarity": 55,
-        "Price": 3850
-    },
-    {
-        "Name": "Casual Grundo Trousers",
-        "Rarity": 86,
         "Price": 3850
     },
     {
@@ -61260,11 +65330,6 @@ var item_db_array = [
         "Price": 3850
     },
     {
-        "Name": "Ice Covered Bush",
-        "Rarity": 89,
-        "Price": 3850
-    },
-    {
         "Name": "Janitor Usuki Doll",
         "Rarity": 80,
         "Price": 3850
@@ -61320,6 +65385,11 @@ var item_db_array = [
         "Price": 3850
     },
     {
+        "Name": "Pink Poogle Arm Chair",
+        "Rarity": 86,
+        "Price": 3850
+    },
+    {
         "Name": "Pizza Pencil Case",
         "Rarity": 88,
         "Price": 3850
@@ -61367,6 +65437,11 @@ var item_db_array = [
     {
         "Name": "Sleepy Kiko Blankey",
         "Rarity": 85,
+        "Price": 3850
+    },
+    {
+        "Name": "Smiley Pancakes",
+        "Rarity": 77,
         "Price": 3850
     },
     {
@@ -61515,6 +65590,11 @@ var item_db_array = [
         "Price": 3800
     },
     {
+        "Name": "Armin Bori Dagger",
+        "Rarity": 87,
+        "Price": 3800
+    },
+    {
         "Name": "Asparagus and Yogurt Pizza",
         "Rarity": 26,
         "Price": 3800
@@ -61557,6 +65637,11 @@ var item_db_array = [
     {
         "Name": "Chocolate Dipped Pteri Tail",
         "Rarity": 70,
+        "Price": 3800
+    },
+    {
+        "Name": "Christmas Tuskaninny Plushie",
+        "Rarity": 87,
         "Price": 3800
     },
     {
@@ -61622,11 +65707,6 @@ var item_db_array = [
     {
         "Name": "Freeze Dried Meat",
         "Rarity": 80,
-        "Price": 3800
-    },
-    {
-        "Name": "Frowny Tambourine",
-        "Rarity": 87,
         "Price": 3800
     },
     {
@@ -61780,6 +65860,11 @@ var item_db_array = [
         "Price": 3800
     },
     {
+        "Name": "Roast Worm with Cranberries",
+        "Rarity": 86,
+        "Price": 3800
+    },
+    {
         "Name": "Rohanes Mother Stamp",
         "Rarity": 87,
         "Price": 3800
@@ -61815,6 +65900,11 @@ var item_db_array = [
         "Price": 3800
     },
     {
+        "Name": "Tai-Kai Codestone",
+        "Rarity": 40,
+        "Price": 3800
+    },
+    {
         "Name": "Techo Mountain",
         "Rarity": 87,
         "Price": 3800
@@ -61831,11 +65921,6 @@ var item_db_array = [
     },
     {
         "Name": "Trash Can Lid Cymbals",
-        "Rarity": 89,
-        "Price": 3800
-    },
-    {
-        "Name": "Usukicon Y9 Feather Poster",
         "Rarity": 89,
         "Price": 3800
     },
@@ -61875,6 +65960,11 @@ var item_db_array = [
         "Price": 3775
     },
     {
+        "Name": "Curved Scorchio Wing Blade",
+        "Rarity": 93,
+        "Price": 3775
+    },
+    {
         "Name": "Disco Bath Tub",
         "Rarity": 86,
         "Price": 3775
@@ -61897,11 +65987,6 @@ var item_db_array = [
     {
         "Name": "Fancy Rug",
         "Rarity": 90,
-        "Price": 3775
-    },
-    {
-        "Name": "Golden Clawed Bath Tub",
-        "Rarity": 85,
         "Price": 3775
     },
     {
@@ -61965,11 +66050,6 @@ var item_db_array = [
         "Price": 3775
     },
     {
-        "Name": "Scorchio Blacksmith Shoes",
-        "Rarity": 87,
-        "Price": 3775
-    },
-    {
         "Name": "Skier Chia Helmet",
         "Rarity": 90,
         "Price": 3775
@@ -61982,11 +66062,6 @@ var item_db_array = [
     {
         "Name": "Tales of Bravery",
         "Rarity": 92,
-        "Price": 3775
-    },
-    {
-        "Name": "Wocky Hide and Seek Book",
-        "Rarity": 89,
         "Price": 3775
     },
     {
@@ -62035,6 +66110,11 @@ var item_db_array = [
         "Price": 3750
     },
     {
+        "Name": "Hilarious Chia Jokes",
+        "Rarity": 88,
+        "Price": 3750
+    },
+    {
         "Name": "Howling For Fun",
         "Rarity": 87,
         "Price": 3750
@@ -62047,6 +66127,11 @@ var item_db_array = [
     {
         "Name": "JubJub Author Shoes",
         "Rarity": 87,
+        "Price": 3750
+    },
+    {
+        "Name": "Kacheeks Are Cool",
+        "Rarity": 84,
         "Price": 3750
     },
     {
@@ -62077,11 +66162,6 @@ var item_db_array = [
     {
         "Name": "Lutari Battle Shield",
         "Rarity": 89,
-        "Price": 3750
-    },
-    {
-        "Name": "Maraquan JubJub Adventures",
-        "Rarity": 88,
         "Price": 3750
     },
     {
@@ -62152,11 +66232,6 @@ var item_db_array = [
     {
         "Name": "Refried Beans and Rice",
         "Rarity": 65,
-        "Price": 3750
-    },
-    {
-        "Name": "Scratch Card Kiosk Wocky",
-        "Rarity": 80,
         "Price": 3750
     },
     {
@@ -62241,6 +66316,11 @@ var item_db_array = [
     },
     {
         "Name": "Yurble Raider Bow",
+        "Rarity": 87,
+        "Price": 3750
+    },
+    {
+        "Name": "Yurble Raider Handguards",
         "Rarity": 87,
         "Price": 3750
     },
@@ -62365,16 +66445,6 @@ var item_db_array = [
         "Price": 3700
     },
     {
-        "Name": "Armin Bori Shirt and Vest",
-        "Rarity": 87,
-        "Price": 3700
-    },
-    {
-        "Name": "Baby Draik Plushie",
-        "Rarity": 86,
-        "Price": 3700
-    },
-    {
         "Name": "Baby Faellie Plushie Friend",
         "Rarity": 80,
         "Price": 3700
@@ -62382,6 +66452,11 @@ var item_db_array = [
     {
         "Name": "Baelia Antennae Headband",
         "Rarity": 81,
+        "Price": 3700
+    },
+    {
+        "Name": "Blacksmith Elephante Boots",
+        "Rarity": 87,
         "Price": 3700
     },
     {
@@ -62422,11 +66497,6 @@ var item_db_array = [
     {
         "Name": "Coconut Shell Slushie",
         "Rarity": 76,
-        "Price": 3700
-    },
-    {
-        "Name": "Colourful Rolling Walker",
-        "Rarity": 75,
         "Price": 3700
     },
     {
@@ -62500,6 +66570,11 @@ var item_db_array = [
         "Price": 3700
     },
     {
+        "Name": "Halloween Dribblet Plushie",
+        "Rarity": 88,
+        "Price": 3700
+    },
+    {
         "Name": "Heart Breath Mints",
         "Rarity": 70,
         "Price": 3700
@@ -62557,6 +66632,11 @@ var item_db_array = [
     {
         "Name": "Kelland Techo Outfit",
         "Rarity": 87,
+        "Price": 3700
+    },
+    {
+        "Name": "Korbat Motif Vase",
+        "Rarity": 91,
         "Price": 3700
     },
     {
@@ -62680,18 +66760,23 @@ var item_db_array = [
         "Price": 3700
     },
     {
-        "Name": "Tai-Kai Codestone",
-        "Rarity": 40,
-        "Price": 3700
-    },
-    {
         "Name": "Tar Creature Elephante Wings",
         "Rarity": 87,
         "Price": 3700
     },
     {
+        "Name": "Tea Jelly",
+        "Rarity": 77,
+        "Price": 3700
+    },
+    {
         "Name": "The Uni Trilogy",
         "Rarity": 88,
+        "Price": 3700
+    },
+    {
+        "Name": "Tyrannian Koi Plushie",
+        "Rarity": 89,
         "Price": 3700
     },
     {
@@ -62717,6 +66802,11 @@ var item_db_array = [
     {
         "Name": "Chocolate Factory Stamp",
         "Rarity": 89,
+        "Price": 3675
+    },
+    {
+        "Name": "Chunky Mushroom Soup",
+        "Rarity": 76,
         "Price": 3675
     },
     {
@@ -62750,13 +66840,13 @@ var item_db_array = [
         "Price": 3675
     },
     {
-        "Name": "Frothy Fruit Juice",
-        "Rarity": 70,
+        "Name": "Fyora Table Mirror",
+        "Rarity": 89,
         "Price": 3675
     },
     {
-        "Name": "Fyora Table Mirror",
-        "Rarity": 89,
+        "Name": "Gross Palette",
+        "Rarity": 86,
         "Price": 3675
     },
     {
@@ -62820,6 +66910,11 @@ var item_db_array = [
         "Price": 3675
     },
     {
+        "Name": "Zei Codestone",
+        "Rarity": 40,
+        "Price": 3675
+    },
+    {
         "Name": "Autumn Leaf Wreath",
         "Rarity": 88,
         "Price": 3650
@@ -62837,11 +66932,6 @@ var item_db_array = [
     {
         "Name": "Bring Back The Book",
         "Rarity": 88,
-        "Price": 3650
-    },
-    {
-        "Name": "Casual Kougra Shoes",
-        "Rarity": 86,
         "Price": 3650
     },
     {
@@ -63005,11 +67095,6 @@ var item_db_array = [
         "Price": 3625
     },
     {
-        "Name": "Usuki Neoschool Teacher",
-        "Rarity": 85,
-        "Price": 3625
-    },
-    {
         "Name": "Altador Travel Brochure",
         "Rarity": 88,
         "Price": 3600
@@ -63067,11 +67152,6 @@ var item_db_array = [
     {
         "Name": "Flamboyant Krawk Top",
         "Rarity": 83,
-        "Price": 3600
-    },
-    {
-        "Name": "Flower Picking Gelert Gnome",
-        "Rarity": 87,
         "Price": 3600
     },
     {
@@ -63177,11 +67257,6 @@ var item_db_array = [
     {
         "Name": "Negg Hot Dog",
         "Rarity": 76,
-        "Price": 3600
-    },
-    {
-        "Name": "Negg Noodle Soup",
-        "Rarity": 79,
         "Price": 3600
     },
     {
@@ -63345,6 +67420,11 @@ var item_db_array = [
         "Price": 3600
     },
     {
+        "Name": "Urban Xweetok Shoes",
+        "Rarity": 87,
+        "Price": 3600
+    },
+    {
         "Name": "Week of the Kacheek",
         "Rarity": 83,
         "Price": 3600
@@ -63405,6 +67485,11 @@ var item_db_array = [
         "Price": 3575
     },
     {
+        "Name": "Grundo Sloth Sock Puppet",
+        "Rarity": 90,
+        "Price": 3575
+    },
+    {
         "Name": "Heart Stepping Stone",
         "Rarity": 87,
         "Price": 3575
@@ -63412,6 +67497,11 @@ var item_db_array = [
     {
         "Name": "Isca Pop Art Poster",
         "Rarity": 86,
+        "Price": 3575
+    },
+    {
+        "Name": "Maraquan JubJub Adventures",
+        "Rarity": 88,
         "Price": 3575
     },
     {
@@ -63490,6 +67580,11 @@ var item_db_array = [
         "Price": 3550
     },
     {
+        "Name": "Frowny Tambourine",
+        "Rarity": 87,
+        "Price": 3550
+    },
+    {
         "Name": "Fruit Cornucopia",
         "Rarity": 88,
         "Price": 3550
@@ -63565,11 +67660,6 @@ var item_db_array = [
         "Price": 3550
     },
     {
-        "Name": "Pizza Notepad",
-        "Rarity": 87,
-        "Price": 3550
-    },
-    {
         "Name": "Red Lupe Scarf",
         "Rarity": 89,
         "Price": 3550
@@ -63582,11 +67672,6 @@ var item_db_array = [
     {
         "Name": "Rusty Door Stamp",
         "Rarity": 76,
-        "Price": 3550
-    },
-    {
-        "Name": "Scarabug Plushie",
-        "Rarity": 89,
         "Price": 3550
     },
     {
@@ -63715,6 +67800,11 @@ var item_db_array = [
         "Price": 3500
     },
     {
+        "Name": "Blue Harris Plushie",
+        "Rarity": 87,
+        "Price": 3500
+    },
+    {
         "Name": "Blueberry Moon Tart",
         "Rarity": 78,
         "Price": 3500
@@ -63805,6 +67895,11 @@ var item_db_array = [
         "Price": 3500
     },
     {
+        "Name": "Darigan Kau Collectable Figurine",
+        "Rarity": 87,
+        "Price": 3500
+    },
+    {
         "Name": "Dazzling Steel Lenny Sword",
         "Rarity": 96,
         "Price": 3500
@@ -63827,6 +67922,11 @@ var item_db_array = [
     {
         "Name": "Desert Princess Peophin Outfit",
         "Rarity": 89,
+        "Price": 3500
+    },
+    {
+        "Name": "Dressy Eyrie Bracelets",
+        "Rarity": 83,
         "Price": 3500
     },
     {
@@ -63857,6 +67957,11 @@ var item_db_array = [
     {
         "Name": "Fauna Acara Staff",
         "Rarity": 87,
+        "Price": 3500
+    },
+    {
+        "Name": "Fir Usuki Set",
+        "Rarity": 89,
         "Price": 3500
     },
     {
@@ -63960,6 +68065,11 @@ var item_db_array = [
         "Price": 3500
     },
     {
+        "Name": "Korbat Assembled Eyewear",
+        "Rarity": 79,
+        "Price": 3500
+    },
+    {
         "Name": "Kougra Warrior Princess Toy Weapons",
         "Rarity": 90,
         "Price": 3500
@@ -64010,6 +68120,11 @@ var item_db_array = [
         "Price": 3500
     },
     {
+        "Name": "Lutari Baker Dress",
+        "Rarity": 86,
+        "Price": 3500
+    },
+    {
         "Name": "Lutari Knight Helmet",
         "Rarity": 74,
         "Price": 3500
@@ -64017,11 +68132,6 @@ var item_db_array = [
     {
         "Name": "Maelstra The Dark Faerie",
         "Rarity": 81,
-        "Price": 3500
-    },
-    {
-        "Name": "Malevolent Tombstones",
-        "Rarity": 84,
         "Price": 3500
     },
     {
@@ -64047,6 +68157,11 @@ var item_db_array = [
     {
         "Name": "Moehog Chef Shoes",
         "Rarity": 85,
+        "Price": 3500
+    },
+    {
+        "Name": "Myths and Legends of Alien Aishas",
+        "Rarity": 93,
         "Price": 3500
     },
     {
@@ -64160,11 +68275,6 @@ var item_db_array = [
         "Price": 3500
     },
     {
-        "Name": "Rotawheel Plushie",
-        "Rarity": 88,
-        "Price": 3500
-    },
-    {
         "Name": "Ruling Faerieland",
         "Rarity": 89,
         "Price": 3500
@@ -64245,6 +68355,11 @@ var item_db_array = [
         "Price": 3500
     },
     {
+        "Name": "Tea Time Usuki",
+        "Rarity": 89,
+        "Price": 3500
+    },
+    {
         "Name": "Tekel Plushie",
         "Rarity": 92,
         "Price": 3500
@@ -64302,11 +68417,6 @@ var item_db_array = [
     {
         "Name": "Yachting Flotsam Pants",
         "Rarity": 88,
-        "Price": 3500
-    },
-    {
-        "Name": "Zygorax Stamp",
-        "Rarity": 80,
         "Price": 3500
     },
     {
@@ -64375,11 +68485,6 @@ var item_db_array = [
         "Price": 3475
     },
     {
-        "Name": "Plushie Scorchipepper",
-        "Rarity": 89,
-        "Price": 3475
-    },
-    {
         "Name": "Pomegranate Doughnut",
         "Rarity": 80,
         "Price": 3475
@@ -64425,11 +68530,6 @@ var item_db_array = [
         "Price": 3450
     },
     {
-        "Name": "All In A Days Work",
-        "Rarity": 85,
-        "Price": 3450
-    },
-    {
         "Name": "Battle 4 Meridell Game",
         "Rarity": 80,
         "Price": 3450
@@ -64462,11 +68562,6 @@ var item_db_array = [
     {
         "Name": "Corn Pyramid",
         "Rarity": 94,
-        "Price": 3450
-    },
-    {
-        "Name": "Drabby Rose",
-        "Rarity": 88,
         "Price": 3450
     },
     {
@@ -64580,6 +68675,11 @@ var item_db_array = [
         "Price": 3450
     },
     {
+        "Name": "Ombat",
+        "Rarity": 88,
+        "Price": 3450
+    },
+    {
         "Name": "Orange Whirlpool Candy",
         "Rarity": 76,
         "Price": 3450
@@ -64612,6 +68712,16 @@ var item_db_array = [
     {
         "Name": "Regal Mynci Blade",
         "Rarity": 97,
+        "Price": 3450
+    },
+    {
+        "Name": "Scorchio Blacksmith Gloves",
+        "Rarity": 87,
+        "Price": 3450
+    },
+    {
+        "Name": "Scorchio Blacksmith Tail Guard",
+        "Rarity": 87,
         "Price": 3450
     },
     {
@@ -64665,8 +68775,8 @@ var item_db_array = [
         "Price": 3450
     },
     {
-        "Name": "Uni Elixir",
-        "Rarity": 94,
+        "Name": "Turmaculus Stamp",
+        "Rarity": 89,
         "Price": 3450
     },
     {
@@ -64693,6 +68803,11 @@ var item_db_array = [
         "Name": "Yurble Noil Tamer Shoes",
         "Rarity": 88,
         "Price": 3450
+    },
+    {
+        "Name": "All In A Days Work",
+        "Rarity": 85,
+        "Price": 3425
     },
     {
         "Name": "Brightvale Flag",
@@ -64740,11 +68855,6 @@ var item_db_array = [
         "Price": 3425
     },
     {
-        "Name": "Korbat Forest Ranger Hat",
-        "Rarity": 85,
-        "Price": 3425
-    },
-    {
         "Name": "Marshmallow and Cherry Grarrl Cake",
         "Rarity": 84,
         "Price": 3425
@@ -64780,6 +68890,11 @@ var item_db_array = [
         "Price": 3425
     },
     {
+        "Name": "Scorchio Blacksmith Hammer",
+        "Rarity": 87,
+        "Price": 3425
+    },
+    {
         "Name": "Skeith Mountaineer Hood",
         "Rarity": 88,
         "Price": 3425
@@ -64787,6 +68902,11 @@ var item_db_array = [
     {
         "Name": "Slorg Garden Statue",
         "Rarity": 86,
+        "Price": 3425
+    },
+    {
+        "Name": "The Art of Food Sculpting",
+        "Rarity": 89,
         "Price": 3425
     },
     {
@@ -64812,11 +68932,6 @@ var item_db_array = [
     {
         "Name": "A Christmas Quiggle Carol",
         "Rarity": 78,
-        "Price": 3400
-    },
-    {
-        "Name": "Altadorian Nectar",
-        "Rarity": 79,
         "Price": 3400
     },
     {
@@ -65010,11 +69125,6 @@ var item_db_array = [
         "Price": 3400
     },
     {
-        "Name": "Making Faerie Friends",
-        "Rarity": 83,
-        "Price": 3400
-    },
-    {
         "Name": "Medium Sized Bonfire",
         "Rarity": 93,
         "Price": 3400
@@ -65047,6 +69157,11 @@ var item_db_array = [
     {
         "Name": "Pastel Snowflake Tree",
         "Rarity": 88,
+        "Price": 3400
+    },
+    {
+        "Name": "Peachbread",
+        "Rarity": 85,
         "Price": 3400
     },
     {
@@ -65127,11 +69242,6 @@ var item_db_array = [
     {
         "Name": "Sunflower Kau Shirt",
         "Rarity": 86,
-        "Price": 3400
-    },
-    {
-        "Name": "The Art of Food Sculpting",
-        "Rarity": 89,
         "Price": 3400
     },
     {
@@ -65257,6 +69367,11 @@ var item_db_array = [
     {
         "Name": "Explorer Chomby Sunglasses",
         "Rarity": 87,
+        "Price": 3375
+    },
+    {
+        "Name": "Grey Bouquet",
+        "Rarity": 80,
         "Price": 3375
     },
     {
@@ -65432,21 +69547,6 @@ var item_db_array = [
     {
         "Name": "Haunted Pumpkin Bar",
         "Rarity": 85,
-        "Price": 3350
-    },
-    {
-        "Name": "How to Teach Your Pet Not to Eat Everything They See",
-        "Rarity": 81,
-        "Price": 3350
-    },
-    {
-        "Name": "Island Acara Plushie",
-        "Rarity": 87,
-        "Price": 3350
-    },
-    {
-        "Name": "IV Pole",
-        "Rarity": 74,
         "Price": 3350
     },
     {
@@ -65705,11 +69805,6 @@ var item_db_array = [
         "Price": 3325
     },
     {
-        "Name": "Tonu Talk",
-        "Rarity": 85,
-        "Price": 3325
-    },
-    {
         "Name": "Uni Scissors",
         "Rarity": 87,
         "Price": 3325
@@ -65810,8 +69905,8 @@ var item_db_array = [
         "Price": 3300
     },
     {
-        "Name": "Donut Bath Bomb",
-        "Rarity": 85,
+        "Name": "Drabby Rose",
+        "Rarity": 88,
         "Price": 3300
     },
     {
@@ -65867,11 +69962,6 @@ var item_db_array = [
     {
         "Name": "Jute Vandagyre Lipstick",
         "Rarity": 78,
-        "Price": 3300
-    },
-    {
-        "Name": "Kacheeks Are Cool",
-        "Rarity": 84,
         "Price": 3300
     },
     {
@@ -65972,11 +70062,6 @@ var item_db_array = [
     {
         "Name": "Rugged Kacheek Keys",
         "Rarity": 82,
-        "Price": 3300
-    },
-    {
-        "Name": "Scorchio Blacksmith Tail Guard",
-        "Rarity": 87,
         "Price": 3300
     },
     {
@@ -66095,6 +70180,11 @@ var item_db_array = [
         "Price": 3300
     },
     {
+        "Name": "Yurble Raider Arrow",
+        "Rarity": 87,
+        "Price": 3300
+    },
+    {
         "Name": "Yurble Skirmishes",
         "Rarity": 86,
         "Price": 3300
@@ -66102,11 +70192,6 @@ var item_db_array = [
     {
         "Name": "A Buzz Faerie Tale",
         "Rarity": 86,
-        "Price": 3275
-    },
-    {
-        "Name": "Blue Harris Plushie",
-        "Rarity": 87,
         "Price": 3275
     },
     {
@@ -66202,6 +70287,11 @@ var item_db_array = [
     {
         "Name": "Rainbow Artichoke",
         "Rarity": 85,
+        "Price": 3275
+    },
+    {
+        "Name": "Rotawheel Plushie",
+        "Rarity": 88,
         "Price": 3275
     },
     {
@@ -66405,17 +70495,22 @@ var item_db_array = [
         "Price": 3250
     },
     {
+        "Name": "Plushie Scorchipepper",
+        "Rarity": 89,
+        "Price": 3250
+    },
+    {
+        "Name": "Quiggle Socks",
+        "Rarity": 89,
+        "Price": 3250
+    },
+    {
         "Name": "Refined Flotsam Wig",
         "Rarity": 86,
         "Price": 3250
     },
     {
         "Name": "Rohane Blumaroo Gloves",
-        "Rarity": 87,
-        "Price": 3250
-    },
-    {
-        "Name": "Scorchio Blacksmith Gloves",
         "Rarity": 87,
         "Price": 3250
     },
@@ -66795,6 +70890,11 @@ var item_db_array = [
         "Price": 3200
     },
     {
+        "Name": "Gourmet Club Bowls Background",
+        "Rarity": 78,
+        "Price": 3200
+    },
+    {
         "Name": "Green Apple Gelert Gelato",
         "Rarity": 78,
         "Price": 3200
@@ -66817,6 +70917,11 @@ var item_db_array = [
     {
         "Name": "Hissi Ao Dai Hat",
         "Rarity": 82,
+        "Price": 3200
+    },
+    {
+        "Name": "History of the Meerca Boomerang",
+        "Rarity": 85,
         "Price": 3200
     },
     {
@@ -66930,6 +71035,11 @@ var item_db_array = [
         "Price": 3200
     },
     {
+        "Name": "Musical Lupe Gnome",
+        "Rarity": 88,
+        "Price": 3200
+    },
+    {
         "Name": "Mynci Banana Blade",
         "Rarity": 98,
         "Price": 3200
@@ -66987,11 +71097,6 @@ var item_db_array = [
     {
         "Name": "Robo Pull Along Ixi",
         "Rarity": 92,
-        "Price": 3200
-    },
-    {
-        "Name": "Scorchio Blacksmith Slacks",
-        "Rarity": 87,
         "Price": 3200
     },
     {
@@ -67065,18 +71170,8 @@ var item_db_array = [
         "Price": 3200
     },
     {
-        "Name": "Woodland Tonu Plushie",
-        "Rarity": 89,
-        "Price": 3200
-    },
-    {
         "Name": "Zafara Hero",
         "Rarity": 55,
-        "Price": 3200
-    },
-    {
-        "Name": "Zyrolon",
-        "Rarity": 63,
         "Price": 3200
     },
     {
@@ -67112,6 +71207,11 @@ var item_db_array = [
     {
         "Name": "Fruity Scone",
         "Rarity": 80,
+        "Price": 3175
+    },
+    {
+        "Name": "Fyora Rules Poster",
+        "Rarity": 90,
         "Price": 3175
     },
     {
@@ -67265,11 +71365,6 @@ var item_db_array = [
         "Price": 3150
     },
     {
-        "Name": "Explorer Kacheek Hat",
-        "Rarity": 87,
-        "Price": 3150
-    },
-    {
         "Name": "Fig Muffin",
         "Rarity": 71,
         "Price": 3150
@@ -67355,11 +71450,6 @@ var item_db_array = [
         "Price": 3150
     },
     {
-        "Name": "Marshmallow Sweet Potato",
-        "Rarity": 77,
-        "Price": 3150
-    },
-    {
         "Name": "Meowclops Hair Brush",
         "Rarity": 87,
         "Price": 3150
@@ -67390,6 +71480,16 @@ var item_db_array = [
         "Price": 3150
     },
     {
+        "Name": "Pirate Brute Plushie",
+        "Rarity": 90,
+        "Price": 3150
+    },
+    {
+        "Name": "Pirate Slorg Plushie",
+        "Rarity": 89,
+        "Price": 3150
+    },
+    {
         "Name": "Prigpants and Swolthy Plushie",
         "Rarity": 85,
         "Price": 3150
@@ -67411,11 +71511,6 @@ var item_db_array = [
     },
     {
         "Name": "Starry Lamp",
-        "Rarity": 88,
-        "Price": 3150
-    },
-    {
-        "Name": "Strawberry Pi Pie",
         "Rarity": 88,
         "Price": 3150
     },
@@ -67452,6 +71547,11 @@ var item_db_array = [
     {
         "Name": "Valentine Harp",
         "Rarity": 85,
+        "Price": 3150
+    },
+    {
+        "Name": "Vinyl Darigan JubJub Toy",
+        "Rarity": 98,
         "Price": 3150
     },
     {
@@ -67492,16 +71592,6 @@ var item_db_array = [
     {
         "Name": "Carassa Plushie",
         "Rarity": 85,
-        "Price": 3125
-    },
-    {
-        "Name": "Chocolate Gobstopper",
-        "Rarity": 75,
-        "Price": 3125
-    },
-    {
-        "Name": "Dark Chocolate Pteri",
-        "Rarity": 60,
         "Price": 3125
     },
     {
@@ -67660,11 +71750,6 @@ var item_db_array = [
         "Price": 3100
     },
     {
-        "Name": "Cheesy Sloth Cake",
-        "Rarity": 83,
-        "Price": 3100
-    },
-    {
         "Name": "Chilli Bouquet",
         "Rarity": 88,
         "Price": 3100
@@ -67677,11 +71762,6 @@ var item_db_array = [
     {
         "Name": "Christmas Eyrie Plushie",
         "Rarity": 83,
-        "Price": 3100
-    },
-    {
-        "Name": "Classroom Background",
-        "Rarity": 89,
         "Price": 3100
     },
     {
@@ -67757,11 +71837,6 @@ var item_db_array = [
     {
         "Name": "Gummy Worm Lollypop",
         "Rarity": 79,
-        "Price": 3100
-    },
-    {
-        "Name": "History of the Meerca Boomerang",
-        "Rarity": 85,
         "Price": 3100
     },
     {
@@ -67935,18 +72010,8 @@ var item_db_array = [
         "Price": 3100
     },
     {
-        "Name": "Rainstick",
-        "Rarity": 89,
-        "Price": 3100
-    },
-    {
         "Name": "Red Korbat Vase",
         "Rarity": 89,
-        "Price": 3100
-    },
-    {
-        "Name": "Regal Mynci Stars",
-        "Rarity": 95,
         "Price": 3100
     },
     {
@@ -68035,6 +72100,11 @@ var item_db_array = [
         "Price": 3100
     },
     {
+        "Name": "Tonu Talk",
+        "Rarity": 85,
+        "Price": 3100
+    },
+    {
         "Name": "Turmac Bank",
         "Rarity": 90,
         "Price": 3100
@@ -68042,11 +72112,6 @@ var item_db_array = [
     {
         "Name": "Tyrannian Chia Plushie",
         "Rarity": 76,
-        "Price": 3100
-    },
-    {
-        "Name": "Tyrannian Koi Plushie",
-        "Rarity": 89,
         "Price": 3100
     },
     {
@@ -68087,6 +72152,11 @@ var item_db_array = [
     {
         "Name": "Xweetok Veggie Crepe",
         "Rarity": 77,
+        "Price": 3100
+    },
+    {
+        "Name": "Zygorax Stamp",
+        "Rarity": 80,
         "Price": 3100
     },
     {
@@ -68165,11 +72235,6 @@ var item_db_array = [
         "Price": 3075
     },
     {
-        "Name": "Tea Jelly",
-        "Rarity": 77,
-        "Price": 3075
-    },
-    {
         "Name": "Wanderer Music",
         "Rarity": 79,
         "Price": 3075
@@ -68207,11 +72272,6 @@ var item_db_array = [
     {
         "Name": "Caylis Pedestal Chair",
         "Rarity": 88,
-        "Price": 3050
-    },
-    {
-        "Name": "Cherry Rose Lolly",
-        "Rarity": 67,
         "Price": 3050
     },
     {
@@ -68300,8 +72360,18 @@ var item_db_array = [
         "Price": 3050
     },
     {
+        "Name": "Krawk Island Flag",
+        "Rarity": 89,
+        "Price": 3050
+    },
+    {
         "Name": "Large Gong",
         "Rarity": 80,
+        "Price": 3050
+    },
+    {
+        "Name": "Main Codestone",
+        "Rarity": 40,
         "Price": 3050
     },
     {
@@ -68680,11 +72750,6 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Blumaroo Stickers",
-        "Rarity": 82,
-        "Price": 3000
-    },
-    {
         "Name": "Bony Boomerang",
         "Rarity": 86,
         "Price": 3000
@@ -68795,6 +72860,16 @@ var item_db_array = [
         "Price": 3000
     },
     {
+        "Name": "Chomby Red Tuxedo Shirt",
+        "Rarity": 80,
+        "Price": 3000
+    },
+    {
+        "Name": "Christmas Kacheek Plushie",
+        "Rarity": 88,
+        "Price": 3000
+    },
+    {
         "Name": "Christmas Peophin Stocking",
         "Rarity": 79,
         "Price": 3000
@@ -68802,6 +72877,11 @@ var item_db_array = [
     {
         "Name": "Christmas Quiggle Lettuce and Tomato Wrap",
         "Rarity": 73,
+        "Price": 3000
+    },
+    {
+        "Name": "Clay and Leaf Paste",
+        "Rarity": 86,
         "Price": 3000
     },
     {
@@ -68880,6 +72960,11 @@ var item_db_array = [
         "Price": 3000
     },
     {
+        "Name": "Dystopic Flotsam Hoodie",
+        "Rarity": 87,
+        "Price": 3000
+    },
+    {
         "Name": "Earth Faerie Hair Clip",
         "Rarity": 89,
         "Price": 3000
@@ -68907,11 +72992,6 @@ var item_db_array = [
     {
         "Name": "Eliv Thade Peek a Boo Book",
         "Rarity": 88,
-        "Price": 3000
-    },
-    {
-        "Name": "Enamel Elephante Sword",
-        "Rarity": 92,
         "Price": 3000
     },
     {
@@ -68977,6 +73057,11 @@ var item_db_array = [
     {
         "Name": "Flowers and Coffee",
         "Rarity": 76,
+        "Price": 3000
+    },
+    {
+        "Name": "Food and Water Bowl Mat",
+        "Rarity": 86,
         "Price": 3000
     },
     {
@@ -69100,16 +73185,6 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Grobrin",
-        "Rarity": 87,
-        "Price": 3000
-    },
-    {
-        "Name": "Hairy Fungus Salad",
-        "Rarity": 70,
-        "Price": 3000
-    },
-    {
         "Name": "Handheld 8-Bit Rainbow Pride Flag",
         "Rarity": 85,
         "Price": 3000
@@ -69122,11 +73197,6 @@ var item_db_array = [
     {
         "Name": "Hard Blumaroo Candy",
         "Rarity": 82,
-        "Price": 3000
-    },
-    {
-        "Name": "Headless Dr_Death Plushie",
-        "Rarity": 85,
         "Price": 3000
     },
     {
@@ -69160,11 +73230,6 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Illusen Gardening Kit",
-        "Rarity": 84,
-        "Price": 3000
-    },
-    {
         "Name": "Island Mystic Eraser",
         "Rarity": 87,
         "Price": 3000
@@ -69172,6 +73237,11 @@ var item_db_array = [
     {
         "Name": "Island Quiggle Plushie",
         "Rarity": 86,
+        "Price": 3000
+    },
+    {
+        "Name": "IV Pole",
+        "Rarity": 74,
         "Price": 3000
     },
     {
@@ -69300,6 +73370,11 @@ var item_db_array = [
         "Price": 3000
     },
     {
+        "Name": "Making Faerie Friends",
+        "Rarity": 83,
+        "Price": 3000
+    },
+    {
         "Name": "Malkus Vile Skeith Hat",
         "Rarity": 87,
         "Price": 3000
@@ -69350,16 +73425,6 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Musical Lupe Gnome",
-        "Rarity": 88,
-        "Price": 3000
-    },
-    {
-        "Name": "Mutant Lenny Plushie",
-        "Rarity": 88,
-        "Price": 3000
-    },
-    {
         "Name": "Mynci Construction Worker Work Belt",
         "Rarity": 89,
         "Price": 3000
@@ -69367,6 +73432,11 @@ var item_db_array = [
     {
         "Name": "Mystery Island Kacheekers",
         "Rarity": 90,
+        "Price": 3000
+    },
+    {
+        "Name": "Mystery Island Snowglobe",
+        "Rarity": 93,
         "Price": 3000
     },
     {
@@ -69405,8 +73475,8 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Oaken Kacheek Wand",
-        "Rarity": 93,
+        "Name": "Nimmo Pencil Sharpener",
+        "Rarity": 87,
         "Price": 3000
     },
     {
@@ -69615,11 +73685,6 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Short Stories from Brightvale",
-        "Rarity": 82,
-        "Price": 3000
-    },
-    {
         "Name": "Shoyru Gladiator Sword",
         "Rarity": 88,
         "Price": 3000
@@ -69635,18 +73700,8 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Skeith Sword",
-        "Rarity": 95,
-        "Price": 3000
-    },
-    {
         "Name": "Skeletal Fire Gun",
         "Rarity": 90,
-        "Price": 3000
-    },
-    {
-        "Name": "Smiley Pancakes",
-        "Rarity": 77,
         "Price": 3000
     },
     {
@@ -69657,6 +73712,11 @@ var item_db_array = [
     {
         "Name": "Snackrifice Polarchuck Plushie",
         "Rarity": 85,
+        "Price": 3000
+    },
+    {
+        "Name": "Snap Draik",
+        "Rarity": 88,
         "Price": 3000
     },
     {
@@ -69750,11 +73810,6 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Super Soft Orange Plushie",
-        "Rarity": 87,
-        "Price": 3000
-    },
-    {
         "Name": "Suspicious Borovan Creame Pie",
         "Rarity": 78,
         "Price": 3000
@@ -69772,11 +73827,6 @@ var item_db_array = [
     {
         "Name": "Tangerine Trumpet Shell Plushie",
         "Rarity": 87,
-        "Price": 3000
-    },
-    {
-        "Name": "Tea Time Acara Plushie",
-        "Rarity": 83,
         "Price": 3000
     },
     {
@@ -69870,18 +73920,8 @@ var item_db_array = [
         "Price": 3000
     },
     {
-        "Name": "Usuki Singing Star #2",
-        "Rarity": 87,
-        "Price": 3000
-    },
-    {
         "Name": "Usul Petit Fours",
         "Rarity": 85,
-        "Price": 3000
-    },
-    {
-        "Name": "Usul Plush and Gumball Gift Set",
-        "Rarity": 88,
         "Price": 3000
     },
     {
@@ -70110,7 +74150,7 @@ var item_db_array = [
         "Price": 2975
     },
     {
-        "Name": "Tonu Lightning Horn",
+        "Name": "Tasty Pie",
         "Rarity": 96,
         "Price": 2975
     },
@@ -70142,11 +74182,6 @@ var item_db_array = [
     {
         "Name": "Anemone in a Shell Pot",
         "Rarity": 86,
-        "Price": 2950
-    },
-    {
-        "Name": "Appriberry",
-        "Rarity": 84,
         "Price": 2950
     },
     {
@@ -70245,11 +74280,6 @@ var item_db_array = [
         "Price": 2950
     },
     {
-        "Name": "Clop Action Figure",
-        "Rarity": 85,
-        "Price": 2950
-    },
-    {
         "Name": "Crystal Formation",
         "Rarity": 78,
         "Price": 2950
@@ -70310,6 +74340,11 @@ var item_db_array = [
         "Price": 2950
     },
     {
+        "Name": "Frothy Fruit Juice",
+        "Rarity": 70,
+        "Price": 2950
+    },
+    {
         "Name": "Fyora Day Sandwich",
         "Rarity": 89,
         "Price": 2950
@@ -70337,6 +74372,11 @@ var item_db_array = [
     {
         "Name": "Grim Reaper Eyrie Shoes",
         "Rarity": 83,
+        "Price": 2950
+    },
+    {
+        "Name": "Grundo Rustic Shirt",
+        "Rarity": 81,
         "Price": 2950
     },
     {
@@ -70375,6 +74415,11 @@ var item_db_array = [
         "Price": 2950
     },
     {
+        "Name": "Mutant Grundo Plushie",
+        "Rarity": 90,
+        "Price": 2950
+    },
+    {
         "Name": "Mysterious Acara Archer Gloves",
         "Rarity": 89,
         "Price": 2950
@@ -70390,11 +74435,6 @@ var item_db_array = [
         "Price": 2950
     },
     {
-        "Name": "Orb of the Light Faerie",
-        "Rarity": 96,
-        "Price": 2950
-    },
-    {
         "Name": "Pile of Dung Stamp",
         "Rarity": 84,
         "Price": 2950
@@ -70402,11 +74442,6 @@ var item_db_array = [
     {
         "Name": "Pinklet Plushie",
         "Rarity": 85,
-        "Price": 2950
-    },
-    {
-        "Name": "Rainbow Coloured Shell",
-        "Rarity": 88,
         "Price": 2950
     },
     {
@@ -70422,11 +74457,6 @@ var item_db_array = [
     {
         "Name": "Rose Ring",
         "Rarity": 77,
-        "Price": 2950
-    },
-    {
-        "Name": "Scorchio Blacksmith Hammer",
-        "Rarity": 87,
         "Price": 2950
     },
     {
@@ -70487,11 +74517,6 @@ var item_db_array = [
     {
         "Name": "Tchea JubJub Mini Burger",
         "Rarity": 85,
-        "Price": 2950
-    },
-    {
-        "Name": "Tea Time Usuki",
-        "Rarity": 89,
         "Price": 2950
     },
     {
@@ -70640,6 +74665,11 @@ var item_db_array = [
         "Price": 2925
     },
     {
+        "Name": "Lupe Reflector Shield",
+        "Rarity": 92,
+        "Price": 2925
+    },
+    {
         "Name": "Moehog Lance",
         "Rarity": 97,
         "Price": 2925
@@ -70785,11 +74815,6 @@ var item_db_array = [
         "Price": 2900
     },
     {
-        "Name": "Chunky Mushroom Soup",
-        "Rarity": 76,
-        "Price": 2900
-    },
-    {
         "Name": "Cloud Rug",
         "Rarity": 85,
         "Price": 2900
@@ -70885,6 +74910,11 @@ var item_db_array = [
         "Price": 2900
     },
     {
+        "Name": "Golden Clawed Bath Tub",
+        "Rarity": 85,
+        "Price": 2900
+    },
+    {
         "Name": "Grapefruit Biscuits",
         "Rarity": 78,
         "Price": 2900
@@ -70915,8 +74945,8 @@ var item_db_array = [
         "Price": 2900
     },
     {
-        "Name": "Hard Leather Bracers",
-        "Rarity": 90,
+        "Name": "How to Teach Your Pet Not to Eat Everything They See",
+        "Rarity": 81,
         "Price": 2900
     },
     {
@@ -70952,11 +74982,6 @@ var item_db_array = [
     {
         "Name": "Kasuki Lu",
         "Rarity": 45,
-        "Price": 2900
-    },
-    {
-        "Name": "Kelpflake Plushie",
-        "Rarity": 86,
         "Price": 2900
     },
     {
@@ -71090,6 +75115,11 @@ var item_db_array = [
         "Price": 2900
     },
     {
+        "Name": "Rainbow Coloured Shell",
+        "Rarity": 88,
+        "Price": 2900
+    },
+    {
         "Name": "Raisin Kacheek Bread",
         "Rarity": 71,
         "Price": 2900
@@ -71097,11 +75127,6 @@ var item_db_array = [
     {
         "Name": "Rohane Stamp",
         "Rarity": 80,
-        "Price": 2900
-    },
-    {
-        "Name": "Scorchio Blacksmith Apron",
-        "Rarity": 87,
         "Price": 2900
     },
     {
@@ -71190,6 +75215,11 @@ var item_db_array = [
         "Price": 2900
     },
     {
+        "Name": "Tonu Lightning Horn",
+        "Rarity": 96,
+        "Price": 2900
+    },
+    {
         "Name": "Toy Darigan Beauty Set",
         "Rarity": 87,
         "Price": 2900
@@ -71227,11 +75257,6 @@ var item_db_array = [
     {
         "Name": "White Chocolate Dipped Sandwich",
         "Rarity": 70,
-        "Price": 2900
-    },
-    {
-        "Name": "Wind Up Tonu Toy",
-        "Rarity": 89,
         "Price": 2900
     },
     {
@@ -71300,6 +75325,11 @@ var item_db_array = [
         "Price": 2875
     },
     {
+        "Name": "Faerieland Postcards 10 Pack",
+        "Rarity": 85,
+        "Price": 2875
+    },
+    {
         "Name": "Fire Saxophone",
         "Rarity": 89,
         "Price": 2875
@@ -71365,6 +75395,11 @@ var item_db_array = [
         "Price": 2875
     },
     {
+        "Name": "Rainstick",
+        "Rarity": 89,
+        "Price": 2875
+    },
+    {
         "Name": "Roo Island Bath Tub",
         "Rarity": 84,
         "Price": 2875
@@ -71407,11 +75442,6 @@ var item_db_array = [
     {
         "Name": "Superstar Earrings",
         "Rarity": 88,
-        "Price": 2875
-    },
-    {
-        "Name": "The Crumpetmongers Secret Recipes",
-        "Rarity": 87,
         "Price": 2875
     },
     {
@@ -71460,11 +75490,6 @@ var item_db_array = [
         "Price": 2850
     },
     {
-        "Name": "Blue Meerca Gnome",
-        "Rarity": 86,
-        "Price": 2850
-    },
-    {
         "Name": "Blueberry Mooncake",
         "Rarity": 85,
         "Price": 2850
@@ -71472,6 +75497,11 @@ var item_db_array = [
     {
         "Name": "Boomerang Throwing Techniques",
         "Rarity": 84,
+        "Price": 2850
+    },
+    {
+        "Name": "Bri Codestone",
+        "Rarity": 40,
         "Price": 2850
     },
     {
@@ -71487,11 +75517,6 @@ var item_db_array = [
     {
         "Name": "Chocolate Sloth Head",
         "Rarity": 89,
-        "Price": 2850
-    },
-    {
-        "Name": "Coltzans Shrine Stained Glass Window",
-        "Rarity": 93,
         "Price": 2850
     },
     {
@@ -71542,6 +75567,11 @@ var item_db_array = [
     {
         "Name": "Glowy Quiggle Shirt",
         "Rarity": 88,
+        "Price": 2850
+    },
+    {
+        "Name": "Green Grundo Fountain",
+        "Rarity": 91,
         "Price": 2850
     },
     {
@@ -71630,11 +75660,6 @@ var item_db_array = [
         "Price": 2850
     },
     {
-        "Name": "Peachbread",
-        "Rarity": 85,
-        "Price": 2850
-    },
-    {
         "Name": "Peophin Fur Spray",
         "Rarity": 87,
         "Price": 2850
@@ -71672,11 +75697,6 @@ var item_db_array = [
     {
         "Name": "Red Wooden Trellis",
         "Rarity": 91,
-        "Price": 2850
-    },
-    {
-        "Name": "Skeletal Meerca Lens",
-        "Rarity": 81,
         "Price": 2850
     },
     {
@@ -71720,6 +75740,11 @@ var item_db_array = [
         "Price": 2850
     },
     {
+        "Name": "The Crumpetmongers Secret Recipes",
+        "Rarity": 87,
+        "Price": 2850
+    },
+    {
         "Name": "Training Your Flotsam",
         "Rarity": 85,
         "Price": 2850
@@ -71737,11 +75762,6 @@ var item_db_array = [
     {
         "Name": "Walking Carpet Powder Puff",
         "Rarity": 89,
-        "Price": 2850
-    },
-    {
-        "Name": "Werther JubJub Backpack",
-        "Rarity": 87,
         "Price": 2850
     },
     {
@@ -71810,11 +75830,6 @@ var item_db_array = [
         "Price": 2825
     },
     {
-        "Name": "Green Grundo Fountain",
-        "Rarity": 91,
-        "Price": 2825
-    },
-    {
         "Name": "Kougra Paw Stamp",
         "Rarity": 88,
         "Price": 2825
@@ -71877,6 +75892,11 @@ var item_db_array = [
     {
         "Name": "Uni Kiwi Cake",
         "Rarity": 87,
+        "Price": 2825
+    },
+    {
+        "Name": "Usuki Pink Party Set",
+        "Rarity": 88,
         "Price": 2825
     },
     {
@@ -71951,11 +75971,6 @@ var item_db_array = [
     },
     {
         "Name": "Beerlap III",
-        "Rarity": 80,
-        "Price": 2800
-    },
-    {
-        "Name": "Best Tooth Catalogue",
         "Rarity": 80,
         "Price": 2800
     },
@@ -72090,6 +76105,11 @@ var item_db_array = [
         "Price": 2800
     },
     {
+        "Name": "Dark Chocolate Pteri",
+        "Rarity": 60,
+        "Price": 2800
+    },
+    {
         "Name": "Deadly Doll Poogle Top",
         "Rarity": 78,
         "Price": 2800
@@ -72165,11 +76185,6 @@ var item_db_array = [
         "Price": 2800
     },
     {
-        "Name": "Hamburger Mirror",
-        "Rarity": 87,
-        "Price": 2800
-    },
-    {
         "Name": "Handheld Maraquan Rainbow Pride Flag",
         "Rarity": 85,
         "Price": 2800
@@ -72177,11 +76192,6 @@ var item_db_array = [
     {
         "Name": "Hatching A Draik Egg",
         "Rarity": 87,
-        "Price": 2800
-    },
-    {
-        "Name": "Herb Infused Soap",
-        "Rarity": 85,
         "Price": 2800
     },
     {
@@ -72235,6 +76245,11 @@ var item_db_array = [
         "Price": 2800
     },
     {
+        "Name": "Malevolent Tombstones",
+        "Rarity": 84,
+        "Price": 2800
+    },
+    {
         "Name": "Manes",
         "Rarity": 84,
         "Price": 2800
@@ -72280,6 +76295,11 @@ var item_db_array = [
         "Price": 2800
     },
     {
+        "Name": "Mutant Lenny Plushie",
+        "Rarity": 88,
+        "Price": 2800
+    },
+    {
         "Name": "Nabile Stained Glass Window",
         "Rarity": 92,
         "Price": 2800
@@ -72317,11 +76337,6 @@ var item_db_array = [
     {
         "Name": "Pineapple Dessert Stamp",
         "Rarity": 86,
-        "Price": 2800
-    },
-    {
-        "Name": "Pink Violin",
-        "Rarity": 84,
         "Price": 2800
     },
     {
@@ -72390,6 +76405,11 @@ var item_db_array = [
         "Price": 2800
     },
     {
+        "Name": "Sliced and Pickled Azzle",
+        "Rarity": 68,
+        "Price": 2800
+    },
+    {
         "Name": "Slorg Signpost",
         "Rarity": 86,
         "Price": 2800
@@ -72402,6 +76422,11 @@ var item_db_array = [
     {
         "Name": "Stormy JubJub Wig",
         "Rarity": 81,
+        "Price": 2800
+    },
+    {
+        "Name": "Strawberry Achyfi Lollypop",
+        "Rarity": 80,
         "Price": 2800
     },
     {
@@ -72520,11 +76545,6 @@ var item_db_array = [
         "Price": 2800
     },
     {
-        "Name": "Wooden Flail",
-        "Rarity": 95,
-        "Price": 2800
-    },
-    {
         "Name": "Xweetok Grooming",
         "Rarity": 85,
         "Price": 2800
@@ -72540,6 +76560,11 @@ var item_db_array = [
         "Price": 2800
     },
     {
+        "Name": "Zyrolon",
+        "Rarity": 63,
+        "Price": 2800
+    },
+    {
         "Name": "Zytch Scratching Post",
         "Rarity": 85,
         "Price": 2800
@@ -72552,11 +76577,6 @@ var item_db_array = [
     {
         "Name": "Cloud Print Speaker",
         "Rarity": 87,
-        "Price": 2775
-    },
-    {
-        "Name": "Digging Lupe Gnome",
-        "Rarity": 85,
         "Price": 2775
     },
     {
@@ -72740,6 +76760,11 @@ var item_db_array = [
         "Price": 2775
     },
     {
+        "Name": "Usul Sailor Hat",
+        "Rarity": 89,
+        "Price": 2775
+    },
+    {
         "Name": "Usul Water Balloon Attack",
         "Rarity": 97,
         "Price": 2775
@@ -72780,8 +76805,8 @@ var item_db_array = [
         "Price": 2750
     },
     {
-        "Name": "Bri Codestone",
-        "Rarity": 40,
+        "Name": "Blue Meerca Gnome",
+        "Rarity": 86,
         "Price": 2750
     },
     {
@@ -72855,23 +76880,8 @@ var item_db_array = [
         "Price": 2750
     },
     {
-        "Name": "Dirt Burgers",
-        "Rarity": 76,
-        "Price": 2750
-    },
-    {
         "Name": "Disco Dancing Usuki",
         "Rarity": 85,
-        "Price": 2750
-    },
-    {
-        "Name": "Droopy Maple Bush",
-        "Rarity": 88,
-        "Price": 2750
-    },
-    {
-        "Name": "Dry Flower Decor",
-        "Rarity": 86,
         "Price": 2750
     },
     {
@@ -73045,11 +77055,6 @@ var item_db_array = [
         "Price": 2750
     },
     {
-        "Name": "Skeith Quesadilla",
-        "Rarity": 65,
-        "Price": 2750
-    },
-    {
         "Name": "Snorkle in a Blanket",
         "Rarity": 76,
         "Price": 2750
@@ -73110,6 +77115,11 @@ var item_db_array = [
         "Price": 2750
     },
     {
+        "Name": "Usukicon Y9 Feather Poster",
+        "Rarity": 89,
+        "Price": 2750
+    },
+    {
         "Name": "What A Wonderful Day",
         "Rarity": 80,
         "Price": 2750
@@ -73132,11 +77142,6 @@ var item_db_array = [
     {
         "Name": "Acara Seaweed Panini",
         "Rarity": 78,
-        "Price": 2725
-    },
-    {
-        "Name": "Alkenore",
-        "Rarity": 90,
         "Price": 2725
     },
     {
@@ -73210,6 +77215,11 @@ var item_db_array = [
         "Price": 2725
     },
     {
+        "Name": "Pop-Up Skeith",
+        "Rarity": 68,
+        "Price": 2725
+    },
+    {
         "Name": "Potato Counting For Beginners",
         "Rarity": 80,
         "Price": 2725
@@ -73275,6 +77285,11 @@ var item_db_array = [
         "Price": 2700
     },
     {
+        "Name": "Altadorian Nectar",
+        "Rarity": 79,
+        "Price": 2700
+    },
+    {
         "Name": "Apple Lantern Pie",
         "Rarity": 85,
         "Price": 2700
@@ -73320,11 +77335,6 @@ var item_db_array = [
         "Price": 2700
     },
     {
-        "Name": "Cloud Elephante Plushie",
-        "Rarity": 82,
-        "Price": 2700
-    },
-    {
         "Name": "Corbin Ogrin Jacket",
         "Rarity": 86,
         "Price": 2700
@@ -73355,13 +77365,13 @@ var item_db_array = [
         "Price": 2700
     },
     {
-        "Name": "Faerie Jelly in a Jar",
-        "Rarity": 85,
+        "Name": "Enamel Elephante Sword",
+        "Rarity": 92,
         "Price": 2700
     },
     {
-        "Name": "Food and Water Bowl Mat",
-        "Rarity": 86,
+        "Name": "Faerie Jelly in a Jar",
+        "Rarity": 85,
         "Price": 2700
     },
     {
@@ -73390,6 +77400,16 @@ var item_db_array = [
         "Price": 2700
     },
     {
+        "Name": "Hard Leather Bracers",
+        "Rarity": 90,
+        "Price": 2700
+    },
+    {
+        "Name": "Headless Dr_Death Plushie",
+        "Rarity": 85,
+        "Price": 2700
+    },
+    {
         "Name": "Heart Shaped Fruit Cake",
         "Rarity": 75,
         "Price": 2700
@@ -73397,6 +77417,11 @@ var item_db_array = [
     {
         "Name": "Jelly Orange",
         "Rarity": 78,
+        "Price": 2700
+    },
+    {
+        "Name": "Jhudora Day Pastry",
+        "Rarity": 87,
         "Price": 2700
     },
     {
@@ -73485,6 +77510,11 @@ var item_db_array = [
         "Price": 2700
     },
     {
+        "Name": "Orange Kougra Cake",
+        "Rarity": 89,
+        "Price": 2700
+    },
+    {
         "Name": "Osiris Pottery Stamp",
         "Rarity": 76,
         "Price": 2700
@@ -73537,11 +77567,6 @@ var item_db_array = [
     {
         "Name": "Primeval Pteri Wings",
         "Rarity": 88,
-        "Price": 2700
-    },
-    {
-        "Name": "Quiggle Socks",
-        "Rarity": 89,
         "Price": 2700
     },
     {
@@ -73645,11 +77670,6 @@ var item_db_array = [
         "Price": 2700
     },
     {
-        "Name": "Usuki Pink Party Set",
-        "Rarity": 88,
-        "Price": 2700
-    },
-    {
         "Name": "Vanilla Flotsam Day Shake",
         "Rarity": 85,
         "Price": 2700
@@ -73662,6 +77682,11 @@ var item_db_array = [
     {
         "Name": "Wanderer Lutari Top",
         "Rarity": 83,
+        "Price": 2700
+    },
+    {
+        "Name": "Werther JubJub Backpack",
+        "Rarity": 87,
         "Price": 2700
     },
     {
@@ -73760,11 +77785,6 @@ var item_db_array = [
         "Price": 2675
     },
     {
-        "Name": "Jetsam Teeth Maintenance",
-        "Rarity": 86,
-        "Price": 2675
-    },
-    {
         "Name": "JubJub Battle Shield",
         "Rarity": 92,
         "Price": 2675
@@ -73837,6 +77857,11 @@ var item_db_array = [
     {
         "Name": "Red Lupe Chia Plushie",
         "Rarity": 86,
+        "Price": 2675
+    },
+    {
+        "Name": "Red Pot",
+        "Rarity": 45,
         "Price": 2675
     },
     {
@@ -73955,6 +77980,11 @@ var item_db_array = [
         "Price": 2650
     },
     {
+        "Name": "Dirt Burgers",
+        "Rarity": 76,
+        "Price": 2650
+    },
+    {
         "Name": "Disco Curtains",
         "Rarity": 85,
         "Price": 2650
@@ -73967,16 +77997,6 @@ var item_db_array = [
     {
         "Name": "Draik Guard Stamp",
         "Rarity": 84,
-        "Price": 2650
-    },
-    {
-        "Name": "Draik Legends",
-        "Rarity": 80,
-        "Price": 2650
-    },
-    {
-        "Name": "Elixir of the Sun",
-        "Rarity": 89,
         "Price": 2650
     },
     {
@@ -74030,11 +78050,6 @@ var item_db_array = [
         "Price": 2650
     },
     {
-        "Name": "Grarrl Boot",
-        "Rarity": 98,
-        "Price": 2650
-    },
-    {
         "Name": "Green Gummy Quiggles",
         "Rarity": 65,
         "Price": 2650
@@ -74067,6 +78082,11 @@ var item_db_array = [
     {
         "Name": "Jake the Explorer",
         "Rarity": 57,
+        "Price": 2650
+    },
+    {
+        "Name": "Jetsam Teeth Maintenance",
+        "Rarity": 86,
         "Price": 2650
     },
     {
@@ -74220,11 +78240,6 @@ var item_db_array = [
         "Price": 2650
     },
     {
-        "Name": "Velm Techo Armour",
-        "Rarity": 87,
-        "Price": 2650
-    },
-    {
         "Name": "Walnut Pomegranate Pastry",
         "Rarity": 77,
         "Price": 2650
@@ -74287,6 +78302,11 @@ var item_db_array = [
     {
         "Name": "Chombytastic",
         "Rarity": 80,
+        "Price": 2625
+    },
+    {
+        "Name": "Elixir of the Sun",
+        "Rarity": 89,
         "Price": 2625
     },
     {
@@ -74462,6 +78482,11 @@ var item_db_array = [
     {
         "Name": "Blue Long Hair Brush",
         "Rarity": 60,
+        "Price": 2600
+    },
+    {
+        "Name": "Blue Smug Bug Cookie",
+        "Rarity": 75,
         "Price": 2600
     },
     {
@@ -74750,11 +78775,6 @@ var item_db_array = [
         "Price": 2600
     },
     {
-        "Name": "Planetary Onion Rings",
-        "Rarity": 89,
-        "Price": 2600
-    },
-    {
         "Name": "Pretty Covered Table",
         "Rarity": 65,
         "Price": 2600
@@ -74922,6 +78942,11 @@ var item_db_array = [
     {
         "Name": "Construction Poogle Overalls",
         "Rarity": 85,
+        "Price": 2575
+    },
+    {
+        "Name": "Country Scorchio Work Shoes",
+        "Rarity": 87,
         "Price": 2575
     },
     {
@@ -75160,8 +79185,8 @@ var item_db_array = [
         "Price": 2550
     },
     {
-        "Name": "Faerie Kyrii Ball",
-        "Rarity": 90,
+        "Name": "Fyoras Magic Hairspray",
+        "Rarity": 87,
         "Price": 2550
     },
     {
@@ -75187,11 +79212,6 @@ var item_db_array = [
     {
         "Name": "Grey Yurble Plushie",
         "Rarity": 87,
-        "Price": 2550
-    },
-    {
-        "Name": "Grundo Rustic Shirt",
-        "Rarity": 81,
         "Price": 2550
     },
     {
@@ -75315,11 +79335,6 @@ var item_db_array = [
         "Price": 2550
     },
     {
-        "Name": "Portable Oxygen Device",
-        "Rarity": 73,
-        "Price": 2550
-    },
-    {
         "Name": "Potato Puff",
         "Rarity": 72,
         "Price": 2550
@@ -75380,11 +79395,6 @@ var item_db_array = [
         "Price": 2550
     },
     {
-        "Name": "Tablet of Zombie Defence Tactics",
-        "Rarity": 84,
-        "Price": 2550
-    },
-    {
         "Name": "Tchea Fruit Bowl",
         "Rarity": 90,
         "Price": 2550
@@ -75407,6 +79417,11 @@ var item_db_array = [
     {
         "Name": "Towel",
         "Rarity": 10,
+        "Price": 2550
+    },
+    {
+        "Name": "Velm Techo Armour",
+        "Rarity": 87,
         "Price": 2550
     },
     {
@@ -75482,11 +79497,6 @@ var item_db_array = [
     {
         "Name": "Fun Lava Facts",
         "Rarity": 84,
-        "Price": 2525
-    },
-    {
-        "Name": "Grey Cloud Cake",
-        "Rarity": 87,
         "Price": 2525
     },
     {
@@ -75660,11 +79670,6 @@ var item_db_array = [
         "Price": 2500
     },
     {
-        "Name": "Beginners Curses",
-        "Rarity": 96,
-        "Price": 2500
-    },
-    {
         "Name": "Berry Jhudora Petit Four",
         "Rarity": 72,
         "Price": 2500
@@ -75765,6 +79770,11 @@ var item_db_array = [
         "Price": 2500
     },
     {
+        "Name": "Cherry Rose Lolly",
+        "Rarity": 67,
+        "Price": 2500
+    },
+    {
         "Name": "Chocolate Flakes",
         "Rarity": 50,
         "Price": 2500
@@ -75800,11 +79810,6 @@ var item_db_array = [
         "Price": 2500
     },
     {
-        "Name": "Curved Scorchio Wing Blade",
-        "Rarity": 93,
-        "Price": 2500
-    },
-    {
         "Name": "Darigan War Machine Toy",
         "Rarity": 88,
         "Price": 2500
@@ -75830,6 +79835,11 @@ var item_db_array = [
         "Price": 2500
     },
     {
+        "Name": "Digging Lupe Gnome",
+        "Rarity": 85,
+        "Price": 2500
+    },
+    {
         "Name": "Disco Hot Dog",
         "Rarity": 88,
         "Price": 2500
@@ -75847,11 +79857,6 @@ var item_db_array = [
     {
         "Name": "Domed Jhudora Petit Four",
         "Rarity": 73,
-        "Price": 2500
-    },
-    {
-        "Name": "Double Mustard Double Bacon Hot Dog",
-        "Rarity": 67,
         "Price": 2500
     },
     {
@@ -75975,11 +79980,6 @@ var item_db_array = [
         "Price": 2500
     },
     {
-        "Name": "Fyoras Magic Hairspray",
-        "Rarity": 87,
-        "Price": 2500
-    },
-    {
         "Name": "Galloping into a New Year",
         "Rarity": 78,
         "Price": 2500
@@ -75987,11 +79987,6 @@ var item_db_array = [
     {
         "Name": "Gebmid Jellies",
         "Rarity": 73,
-        "Price": 2500
-    },
-    {
-        "Name": "Glowing Acara Plushie",
-        "Rarity": 87,
         "Price": 2500
     },
     {
@@ -76032,6 +80027,11 @@ var item_db_array = [
     {
         "Name": "Grondik Root Hot Dog",
         "Rarity": 80,
+        "Price": 2500
+    },
+    {
+        "Name": "Hairy Fungus Salad",
+        "Rarity": 70,
         "Price": 2500
     },
     {
@@ -76120,11 +80120,6 @@ var item_db_array = [
         "Price": 2500
     },
     {
-        "Name": "Kaylas Spellbook",
-        "Rarity": 75,
-        "Price": 2500
-    },
-    {
         "Name": "Kelland Techo Dagger",
         "Rarity": 87,
         "Price": 2500
@@ -76137,11 +80132,6 @@ var item_db_array = [
     {
         "Name": "Korabric",
         "Rarity": 32,
-        "Price": 2500
-    },
-    {
-        "Name": "Kougra Blurf Shake",
-        "Rarity": 86,
         "Price": 2500
     },
     {
@@ -76255,6 +80245,11 @@ var item_db_array = [
         "Price": 2500
     },
     {
+        "Name": "Mutant Desk",
+        "Rarity": 88,
+        "Price": 2500
+    },
+    {
         "Name": "Mynci Banana Book",
         "Rarity": 85,
         "Price": 2500
@@ -76360,6 +80355,11 @@ var item_db_array = [
         "Price": 2500
     },
     {
+        "Name": "Pizza Eraser",
+        "Rarity": 86,
+        "Price": 2500
+    },
+    {
         "Name": "Plain Old French Toast",
         "Rarity": 82,
         "Price": 2500
@@ -76372,11 +80372,6 @@ var item_db_array = [
     {
         "Name": "Poogle Mysteries",
         "Rarity": 80,
-        "Price": 2500
-    },
-    {
-        "Name": "Pop-Up Skeith",
-        "Rarity": 68,
         "Price": 2500
     },
     {
@@ -76412,11 +80407,6 @@ var item_db_array = [
     {
         "Name": "Sandrock Sculpture",
         "Rarity": 88,
-        "Price": 2500
-    },
-    {
-        "Name": "Sasha the Dancer Cybunny Tambourine",
-        "Rarity": 87,
         "Price": 2500
     },
     {
@@ -76550,11 +80540,6 @@ var item_db_array = [
         "Price": 2500
     },
     {
-        "Name": "Tangy Twirly Fruit Soup",
-        "Rarity": 83,
-        "Price": 2500
-    },
-    {
         "Name": "The Lone Quiggle",
         "Rarity": 60,
         "Price": 2500
@@ -76590,11 +80575,6 @@ var item_db_array = [
         "Price": 2500
     },
     {
-        "Name": "Tonu Camouflage Shoes",
-        "Rarity": 88,
-        "Price": 2500
-    },
-    {
         "Name": "Traditional Altadorian Gyro",
         "Rarity": 92,
         "Price": 2500
@@ -76610,13 +80590,13 @@ var item_db_array = [
         "Price": 2500
     },
     {
-        "Name": "Twig Chair",
+        "Name": "Turkey Salad",
         "Rarity": 87,
         "Price": 2500
     },
     {
-        "Name": "Twirly Fruit Daisy Lollypop",
-        "Rarity": 66,
+        "Name": "Twig Chair",
+        "Rarity": 87,
         "Price": 2500
     },
     {
@@ -76850,11 +80830,6 @@ var item_db_array = [
         "Price": 2475
     },
     {
-        "Name": "Lost City Lanes Wrapped Chocolate Pin",
-        "Rarity": 84,
-        "Price": 2475
-    },
-    {
         "Name": "Melted Tuna Sandwich",
         "Rarity": 78,
         "Price": 2475
@@ -77050,11 +81025,6 @@ var item_db_array = [
         "Price": 2450
     },
     {
-        "Name": "Coral Sink",
-        "Rarity": 89,
-        "Price": 2450
-    },
-    {
         "Name": "Darigan Bruce Balloon",
         "Rarity": 88,
         "Price": 2450
@@ -77160,6 +81130,11 @@ var item_db_array = [
         "Price": 2450
     },
     {
+        "Name": "Illusen Gardening Kit",
+        "Rarity": 84,
+        "Price": 2450
+    },
+    {
         "Name": "Jhudora and the Evil Eyes",
         "Rarity": 85,
         "Price": 2450
@@ -77196,11 +81171,6 @@ var item_db_array = [
     },
     {
         "Name": "Koya Korbat Shoes",
-        "Rarity": 87,
-        "Price": 2450
-    },
-    {
-        "Name": "Krawk Scrapwork Scissors",
         "Rarity": 87,
         "Price": 2450
     },
@@ -77345,11 +81315,6 @@ var item_db_array = [
         "Price": 2450
     },
     {
-        "Name": "Potion Table",
-        "Rarity": 88,
-        "Price": 2450
-    },
-    {
         "Name": "Qando Fruit Punch",
         "Rarity": 80,
         "Price": 2450
@@ -77382,6 +81347,11 @@ var item_db_array = [
     {
         "Name": "Snot Pen",
         "Rarity": 88,
+        "Price": 2450
+    },
+    {
+        "Name": "Snow Piano",
+        "Rarity": 86,
         "Price": 2450
     },
     {
@@ -77510,13 +81480,13 @@ var item_db_array = [
         "Price": 2425
     },
     {
-        "Name": "Clay and Leaf Paste",
-        "Rarity": 86,
+        "Name": "Coral Fireplace",
+        "Rarity": 88,
         "Price": 2425
     },
     {
-        "Name": "Coral Fireplace",
-        "Rarity": 88,
+        "Name": "Coral Sink",
+        "Rarity": 89,
         "Price": 2425
     },
     {
@@ -77695,6 +81665,11 @@ var item_db_array = [
         "Price": 2400
     },
     {
+        "Name": "Chai Tea",
+        "Rarity": 70,
+        "Price": 2400
+    },
+    {
         "Name": "Cherry-Smothered French Toast",
         "Rarity": 88,
         "Price": 2400
@@ -77722,6 +81697,11 @@ var item_db_array = [
     {
         "Name": "Chumablah",
         "Rarity": 86,
+        "Price": 2400
+    },
+    {
+        "Name": "Clop Action Figure",
+        "Rarity": 85,
         "Price": 2400
     },
     {
@@ -77817,11 +81797,6 @@ var item_db_array = [
     {
         "Name": "Eyeball Slushie",
         "Rarity": 85,
-        "Price": 2400
-    },
-    {
-        "Name": "Eyrie Sleeping Cap",
-        "Rarity": 88,
         "Price": 2400
     },
     {
@@ -77935,11 +81910,6 @@ var item_db_array = [
         "Price": 2400
     },
     {
-        "Name": "Halloween Jinjah Platter",
-        "Rarity": 76,
-        "Price": 2400
-    },
-    {
         "Name": "Happy Happy Peanuts",
         "Rarity": 84,
         "Price": 2400
@@ -78012,11 +81982,6 @@ var item_db_array = [
     {
         "Name": "Kiko Space Exploration Gloves",
         "Rarity": 87,
-        "Price": 2400
-    },
-    {
-        "Name": "Kiko Sword",
-        "Rarity": 92,
         "Price": 2400
     },
     {
@@ -78135,11 +82100,6 @@ var item_db_array = [
         "Price": 2400
     },
     {
-        "Name": "Orange Eyrie Plushie",
-        "Rarity": 81,
-        "Price": 2400
-    },
-    {
         "Name": "Orange Filled Jacket Potato",
         "Rarity": 85,
         "Price": 2400
@@ -78215,6 +82175,11 @@ var item_db_array = [
         "Price": 2400
     },
     {
+        "Name": "Rainbow Petpet Food",
+        "Rarity": 88,
+        "Price": 2400
+    },
+    {
         "Name": "Raindorf Soap",
         "Rarity": 88,
         "Price": 2400
@@ -78277,6 +82242,11 @@ var item_db_array = [
     {
         "Name": "Skip",
         "Rarity": 85,
+        "Price": 2400
+    },
+    {
+        "Name": "Slingshot Sugar Cookie",
+        "Rarity": 76,
         "Price": 2400
     },
     {
@@ -78410,6 +82380,11 @@ var item_db_array = [
         "Price": 2400
     },
     {
+        "Name": "Twirly Fruit Daisy Lollypop",
+        "Rarity": 66,
+        "Price": 2400
+    },
+    {
         "Name": "Twirly Fruit Flavoured Milk",
         "Rarity": 85,
         "Price": 2400
@@ -78495,18 +82470,13 @@ var item_db_array = [
         "Price": 2400
     },
     {
-        "Name": "Apple Cinnamon Slushie",
-        "Rarity": 75,
+        "Name": "Black Currant Chia Pop",
+        "Rarity": 85,
         "Price": 2375
     },
     {
         "Name": "Black Currant Slushie",
         "Rarity": 73,
-        "Price": 2375
-    },
-    {
-        "Name": "Brown Bassoon",
-        "Rarity": 86,
         "Price": 2375
     },
     {
@@ -78575,11 +82545,6 @@ var item_db_array = [
         "Price": 2375
     },
     {
-        "Name": "Milk Bubble Tea",
-        "Rarity": 88,
-        "Price": 2375
-    },
-    {
         "Name": "Old Tire Planters",
         "Rarity": 73,
         "Price": 2375
@@ -78642,11 +82607,6 @@ var item_db_array = [
     {
         "Name": "Asparagus Chia Treat",
         "Rarity": 80,
-        "Price": 2350
-    },
-    {
-        "Name": "Baby Scorchio Nursery Rhymes",
-        "Rarity": 83,
         "Price": 2350
     },
     {
@@ -78945,11 +82905,6 @@ var item_db_array = [
         "Price": 2350
     },
     {
-        "Name": "Usul Lemon Bomb",
-        "Rarity": 98,
-        "Price": 2350
-    },
-    {
         "Name": "Veggie Stew Pie",
         "Rarity": 77,
         "Price": 2350
@@ -78967,6 +82922,11 @@ var item_db_array = [
     {
         "Name": "White Chocolate Buzz",
         "Rarity": 70,
+        "Price": 2350
+    },
+    {
+        "Name": "Woodland Tonu Plushie",
+        "Rarity": 89,
         "Price": 2350
     },
     {
@@ -79025,6 +82985,11 @@ var item_db_array = [
         "Price": 2325
     },
     {
+        "Name": "Coltzans Shrine Stained Glass Window",
+        "Rarity": 93,
+        "Price": 2325
+    },
+    {
         "Name": "Corn Colouring Book",
         "Rarity": 76,
         "Price": 2325
@@ -79057,6 +83022,11 @@ var item_db_array = [
     {
         "Name": "Green Lupe Chia Plushie",
         "Rarity": 85,
+        "Price": 2325
+    },
+    {
+        "Name": "Guitar Comb",
+        "Rarity": 68,
         "Price": 2325
     },
     {
@@ -79280,6 +83250,11 @@ var item_db_array = [
         "Price": 2300
     },
     {
+        "Name": "Beginners Curses",
+        "Rarity": 96,
+        "Price": 2300
+    },
+    {
         "Name": "Bird Call",
         "Rarity": 86,
         "Price": 2300
@@ -79297,6 +83272,11 @@ var item_db_array = [
     {
         "Name": "Brightvale Books Background",
         "Rarity": 72,
+        "Price": 2300
+    },
+    {
+        "Name": "Bruce Fish Slingshot",
+        "Rarity": 94,
         "Price": 2300
     },
     {
@@ -79415,6 +83395,11 @@ var item_db_array = [
         "Price": 2300
     },
     {
+        "Name": "Draik Legends",
+        "Rarity": 80,
+        "Price": 2300
+    },
+    {
         "Name": "Drum Paradiddles",
         "Rarity": 78,
         "Price": 2300
@@ -79460,6 +83445,11 @@ var item_db_array = [
         "Price": 2300
     },
     {
+        "Name": "Fyora Print Bean Bag",
+        "Rarity": 89,
+        "Price": 2300
+    },
+    {
         "Name": "Galactic Adventures II",
         "Rarity": 89,
         "Price": 2300
@@ -79492,11 +83482,6 @@ var item_db_array = [
     {
         "Name": "Gothic Nimmo Bracelet",
         "Rarity": 88,
-        "Price": 2300
-    },
-    {
-        "Name": "Gourmet Club Bowls Background",
-        "Rarity": 78,
         "Price": 2300
     },
     {
@@ -79840,11 +83825,6 @@ var item_db_array = [
         "Price": 2300
     },
     {
-        "Name": "Slymook",
-        "Rarity": 60,
-        "Price": 2300
-    },
-    {
         "Name": "Snowager Rug",
         "Rarity": 86,
         "Price": 2300
@@ -79862,11 +83842,6 @@ var item_db_array = [
     {
         "Name": "Splibean",
         "Rarity": 78,
-        "Price": 2300
-    },
-    {
-        "Name": "Split Nimmo Plushie",
-        "Rarity": 84,
         "Price": 2300
     },
     {
@@ -79897,6 +83872,11 @@ var item_db_array = [
     {
         "Name": "Stained Glass Sandan Window",
         "Rarity": 91,
+        "Price": 2300
+    },
+    {
+        "Name": "Steam Jug",
+        "Rarity": 53,
         "Price": 2300
     },
     {
@@ -79955,8 +83935,18 @@ var item_db_array = [
         "Price": 2300
     },
     {
+        "Name": "Tigerbuggle Jam on Toast",
+        "Rarity": 66,
+        "Price": 2300
+    },
+    {
         "Name": "Tomato Cheese Salad",
         "Rarity": 86,
+        "Price": 2300
+    },
+    {
+        "Name": "Trapped",
+        "Rarity": 31,
         "Price": 2300
     },
     {
@@ -80250,11 +84240,6 @@ var item_db_array = [
         "Price": 2250
     },
     {
-        "Name": "Brain Tree Lolly",
-        "Rarity": 85,
-        "Price": 2250
-    },
-    {
         "Name": "Bran Boulders",
         "Rarity": 70,
         "Price": 2250
@@ -80272,6 +84257,11 @@ var item_db_array = [
     {
         "Name": "Chestnut Soup",
         "Rarity": 76,
+        "Price": 2250
+    },
+    {
+        "Name": "Cloud Elephante Plushie",
+        "Rarity": 82,
         "Price": 2250
     },
     {
@@ -80327,11 +84317,6 @@ var item_db_array = [
     {
         "Name": "Faerie Beetroot",
         "Rarity": 79,
-        "Price": 2250
-    },
-    {
-        "Name": "Fir Usuki Set",
-        "Rarity": 89,
         "Price": 2250
     },
     {
@@ -80525,11 +84510,6 @@ var item_db_array = [
         "Price": 2250
     },
     {
-        "Name": "Mutant Chia Gnome Plushie",
-        "Rarity": 80,
-        "Price": 2250
-    },
-    {
         "Name": "Mutant Chia Hole Punch",
         "Rarity": 56,
         "Price": 2250
@@ -80567,6 +84547,11 @@ var item_db_array = [
     {
         "Name": "Ona Activity Center",
         "Rarity": 85,
+        "Price": 2250
+    },
+    {
+        "Name": "Patch of Knitting",
+        "Rarity": 76,
         "Price": 2250
     },
     {
@@ -80637,11 +84622,6 @@ var item_db_array = [
     {
         "Name": "Starry Toast",
         "Rarity": 76,
-        "Price": 2250
-    },
-    {
-        "Name": "Steam Jug",
-        "Rarity": 53,
         "Price": 2250
     },
     {
@@ -80725,6 +84705,11 @@ var item_db_array = [
         "Price": 2225
     },
     {
+        "Name": "Blueberry Grundo Lollypop",
+        "Rarity": 80,
+        "Price": 2225
+    },
+    {
         "Name": "Borovan Punch",
         "Rarity": 73,
         "Price": 2225
@@ -80790,11 +84775,6 @@ var item_db_array = [
         "Price": 2225
     },
     {
-        "Name": "Fire Tape",
-        "Rarity": 85,
-        "Price": 2225
-    },
-    {
         "Name": "Glitter 101",
         "Rarity": 66,
         "Price": 2225
@@ -80812,6 +84792,11 @@ var item_db_array = [
     {
         "Name": "Grarrl Battlemaster",
         "Rarity": 56,
+        "Price": 2225
+    },
+    {
+        "Name": "Grarrl Boot",
+        "Rarity": 98,
         "Price": 2225
     },
     {
@@ -80850,11 +84835,6 @@ var item_db_array = [
         "Price": 2225
     },
     {
-        "Name": "Kacheek Plunger",
-        "Rarity": 94,
-        "Price": 2225
-    },
-    {
         "Name": "Kyrii Protectogoggles",
         "Rarity": 92,
         "Price": 2225
@@ -80887,11 +84867,6 @@ var item_db_array = [
     {
         "Name": "Meowclops Rug",
         "Rarity": 88,
-        "Price": 2225
-    },
-    {
-        "Name": "Mutant Grundo Plushie",
-        "Rarity": 90,
         "Price": 2225
     },
     {
@@ -81030,6 +85005,11 @@ var item_db_array = [
         "Price": 2200
     },
     {
+        "Name": "Brown Bassoon",
+        "Rarity": 86,
+        "Price": 2200
+    },
+    {
         "Name": "Buttered Rice",
         "Rarity": 78,
         "Price": 2200
@@ -81037,6 +85017,11 @@ var item_db_array = [
     {
         "Name": "Cheese Bowl",
         "Rarity": 87,
+        "Price": 2200
+    },
+    {
+        "Name": "Cheesy Sloth Cake",
+        "Rarity": 83,
         "Price": 2200
     },
     {
@@ -81125,6 +85110,11 @@ var item_db_array = [
         "Price": 2200
     },
     {
+        "Name": "Droopy Maple Bush",
+        "Rarity": 88,
+        "Price": 2200
+    },
+    {
         "Name": "Egg Chair",
         "Rarity": 68,
         "Price": 2200
@@ -81155,11 +85145,6 @@ var item_db_array = [
         "Price": 2200
     },
     {
-        "Name": "Faerie Tonu Costume",
-        "Rarity": 87,
-        "Price": 2200
-    },
-    {
         "Name": "Fancy Waffles",
         "Rarity": 66,
         "Price": 2200
@@ -81170,18 +85155,8 @@ var item_db_array = [
         "Price": 2200
     },
     {
-        "Name": "Fried Tofu",
-        "Rarity": 86,
-        "Price": 2200
-    },
-    {
         "Name": "Frozen Veggie Sandwich",
         "Rarity": 78,
-        "Price": 2200
-    },
-    {
-        "Name": "Fyora Print Bean Bag",
-        "Rarity": 89,
         "Price": 2200
     },
     {
@@ -81302,11 +85277,6 @@ var item_db_array = [
     {
         "Name": "Islandberry Ice Cream",
         "Rarity": 85,
-        "Price": 2200
-    },
-    {
-        "Name": "Jhudora Day Pastry",
-        "Rarity": 87,
         "Price": 2200
     },
     {
@@ -81435,11 +85405,6 @@ var item_db_array = [
         "Price": 2200
     },
     {
-        "Name": "Molten Meatballs",
-        "Rarity": 88,
-        "Price": 2200
-    },
-    {
         "Name": "Moon Lollipop",
         "Rarity": 70,
         "Price": 2200
@@ -81447,6 +85412,11 @@ var item_db_array = [
     {
         "Name": "Most Memorable Dr Sloth Quotes",
         "Rarity": 88,
+        "Price": 2200
+    },
+    {
+        "Name": "Mutant Chia Gnome Plushie",
+        "Rarity": 80,
         "Price": 2200
     },
     {
@@ -81537,11 +85507,6 @@ var item_db_array = [
     {
         "Name": "Perfectly Flat Rock Stamp",
         "Rarity": 78,
-        "Price": 2200
-    },
-    {
-        "Name": "Pizza Eraser",
-        "Rarity": 86,
         "Price": 2200
     },
     {
@@ -81745,11 +85710,6 @@ var item_db_array = [
         "Price": 2200
     },
     {
-        "Name": "Sugar-Free Tooth Faerie Cake",
-        "Rarity": 86,
-        "Price": 2200
-    },
-    {
         "Name": "Super Fashion Playmate Handbook",
         "Rarity": 80,
         "Price": 2200
@@ -81835,6 +85795,11 @@ var item_db_array = [
         "Price": 2200
     },
     {
+        "Name": "Ultra Cheesy Hot Dog",
+        "Rarity": 76,
+        "Price": 2200
+    },
+    {
         "Name": "Underwater Chef Biography",
         "Rarity": 84,
         "Price": 2200
@@ -81842,6 +85807,11 @@ var item_db_array = [
     {
         "Name": "Uniocto Marker",
         "Rarity": 88,
+        "Price": 2200
+    },
+    {
+        "Name": "Usuki Singing Star #2",
+        "Rarity": 87,
         "Price": 2200
     },
     {
@@ -81872,11 +85842,6 @@ var item_db_array = [
     {
         "Name": "White Chocolate Tuskaninny",
         "Rarity": 40,
-        "Price": 2200
-    },
-    {
-        "Name": "Wocky Cookies",
-        "Rarity": 80,
         "Price": 2200
     },
     {
@@ -81932,6 +85897,11 @@ var item_db_array = [
     {
         "Name": "Caramel Kiko Popcorn Ball",
         "Rarity": 77,
+        "Price": 2175
+    },
+    {
+        "Name": "Chimney",
+        "Rarity": 88,
         "Price": 2175
     },
     {
@@ -82120,11 +86090,6 @@ var item_db_array = [
         "Price": 2175
     },
     {
-        "Name": "Spiked Skeith Boomerang",
-        "Rarity": 94,
-        "Price": 2175
-    },
-    {
         "Name": "Strawberry Draik Biscuit",
         "Rarity": 78,
         "Price": 2175
@@ -82165,8 +86130,18 @@ var item_db_array = [
         "Price": 2175
     },
     {
+        "Name": "Tyrannian Poogle Plushie",
+        "Rarity": 86,
+        "Price": 2175
+    },
+    {
         "Name": "White Chocolate Peophin",
         "Rarity": 50,
+        "Price": 2175
+    },
+    {
+        "Name": "Wocky Cookies",
+        "Rarity": 80,
         "Price": 2175
     },
     {
@@ -82205,18 +86180,8 @@ var item_db_array = [
         "Price": 2150
     },
     {
-        "Name": "Blue Smug Bug Cookie",
-        "Rarity": 75,
-        "Price": 2150
-    },
-    {
         "Name": "Blurf Gelert Cake",
         "Rarity": 88,
-        "Price": 2150
-    },
-    {
-        "Name": "Bruce Fish Slingshot",
-        "Rarity": 94,
         "Price": 2150
     },
     {
@@ -82470,11 +86435,6 @@ var item_db_array = [
         "Price": 2150
     },
     {
-        "Name": "Pink and Yellow Parasol",
-        "Rarity": 88,
-        "Price": 2150
-    },
-    {
         "Name": "Plushie Turkey",
         "Rarity": 68,
         "Price": 2150
@@ -82535,8 +86495,8 @@ var item_db_array = [
         "Price": 2150
     },
     {
-        "Name": "Strawberry Jetsam Fin Cookie",
-        "Rarity": 67,
+        "Name": "Striped Elephante Pop-Up Book",
+        "Rarity": 89,
         "Price": 2150
     },
     {
@@ -82567,6 +86527,11 @@ var item_db_array = [
     {
         "Name": "Tuna Jacket Potato",
         "Rarity": 77,
+        "Price": 2150
+    },
+    {
+        "Name": "Usul Lemon Bomb",
+        "Rarity": 98,
         "Price": 2150
     },
     {
@@ -82685,11 +86650,6 @@ var item_db_array = [
         "Price": 2125
     },
     {
-        "Name": "Lupe Reflector Shield",
-        "Rarity": 92,
-        "Price": 2125
-    },
-    {
         "Name": "Meridell Dart Board Armour",
         "Rarity": 81,
         "Price": 2125
@@ -82765,11 +86725,6 @@ var item_db_array = [
         "Price": 2125
     },
     {
-        "Name": "Tigerbuggle Jam on Toast",
-        "Rarity": 66,
-        "Price": 2125
-    },
-    {
         "Name": "Tigersquash Rock Stick",
         "Rarity": 85,
         "Price": 2125
@@ -82777,11 +86732,6 @@ var item_db_array = [
     {
         "Name": "Tuskaninny Chef Recipes",
         "Rarity": 79,
-        "Price": 2125
-    },
-    {
-        "Name": "Usul Sailor Hat",
-        "Rarity": 89,
         "Price": 2125
     },
     {
@@ -82802,11 +86752,6 @@ var item_db_array = [
     {
         "Name": "Altalaphus",
         "Rarity": 76,
-        "Price": 2100
-    },
-    {
-        "Name": "Armin Bori Dagger",
-        "Rarity": 87,
         "Price": 2100
     },
     {
@@ -82836,11 +86781,6 @@ var item_db_array = [
     },
     {
         "Name": "Blueberry Sugared Slorg",
-        "Rarity": 87,
-        "Price": 2100
-    },
-    {
-        "Name": "Blumaroo Mirror",
         "Rarity": 87,
         "Price": 2100
     },
@@ -83010,11 +86950,6 @@ var item_db_array = [
         "Price": 2100
     },
     {
-        "Name": "Fruit Bomb Stamp",
-        "Rarity": 81,
-        "Price": 2100
-    },
-    {
         "Name": "Fruit Stuffed Jacket Potato",
         "Rarity": 71,
         "Price": 2100
@@ -83025,8 +86960,8 @@ var item_db_array = [
         "Price": 2100
     },
     {
-        "Name": "Fruity Fondue",
-        "Rarity": 85,
+        "Name": "Ghost Draik Plushie",
+        "Rarity": 95,
         "Price": 2100
     },
     {
@@ -83040,8 +86975,8 @@ var item_db_array = [
         "Price": 2100
     },
     {
-        "Name": "Green JubJub Topper Pencil",
-        "Rarity": 85,
+        "Name": "Green Lutari Plushie",
+        "Rarity": 58,
         "Price": 2100
     },
     {
@@ -83090,12 +87025,22 @@ var item_db_array = [
         "Price": 2100
     },
     {
+        "Name": "Hot Chocolate Dip",
+        "Rarity": 68,
+        "Price": 2100
+    },
+    {
         "Name": "Hover Table",
         "Rarity": 90,
         "Price": 2100
     },
     {
         "Name": "How to Spot a Gormball",
+        "Rarity": 78,
+        "Price": 2100
+    },
+    {
+        "Name": "Iced Cybunny Head Cookie",
         "Rarity": 78,
         "Price": 2100
     },
@@ -83137,6 +87082,11 @@ var item_db_array = [
     {
         "Name": "Just the Corn Facts",
         "Rarity": 78,
+        "Price": 2100
+    },
+    {
+        "Name": "Kacheek Plunger",
+        "Rarity": 94,
         "Price": 2100
     },
     {
@@ -83260,6 +87210,11 @@ var item_db_array = [
         "Price": 2100
     },
     {
+        "Name": "Orange Eyrie Plushie",
+        "Rarity": 81,
+        "Price": 2100
+    },
+    {
         "Name": "Orange Ixi Toothpaste",
         "Rarity": 88,
         "Price": 2100
@@ -83325,6 +87280,11 @@ var item_db_array = [
         "Price": 2100
     },
     {
+        "Name": "Red Techo Pen",
+        "Rarity": 88,
+        "Price": 2100
+    },
+    {
         "Name": "Regal Mynci Boots",
         "Rarity": 94,
         "Price": 2100
@@ -83362,11 +87322,6 @@ var item_db_array = [
     {
         "Name": "Skrazapod",
         "Rarity": 89,
-        "Price": 2100
-    },
-    {
-        "Name": "Sliced and Pickled Azzle",
-        "Rarity": 68,
         "Price": 2100
     },
     {
@@ -83540,6 +87495,11 @@ var item_db_array = [
         "Price": 2075
     },
     {
+        "Name": "Chocolate Gobstopper",
+        "Rarity": 75,
+        "Price": 2075
+    },
+    {
         "Name": "Chocolate Moehog Cookie",
         "Rarity": 84,
         "Price": 2075
@@ -83592,11 +87552,6 @@ var item_db_array = [
     {
         "Name": "History of Disclaimers",
         "Rarity": 83,
-        "Price": 2075
-    },
-    {
-        "Name": "Korbat Assembled Eyewear",
-        "Rarity": 79,
         "Price": 2075
     },
     {
@@ -83665,11 +87620,6 @@ var item_db_array = [
         "Price": 2075
     },
     {
-        "Name": "Striped Elephante Pop-Up Book",
-        "Rarity": 89,
-        "Price": 2075
-    },
-    {
         "Name": "Twisted Tonu Tail Guard",
         "Rarity": 98,
         "Price": 2075
@@ -83707,11 +87657,6 @@ var item_db_array = [
     {
         "Name": "Ancient Contract Stamp",
         "Rarity": 77,
-        "Price": 2050
-    },
-    {
-        "Name": "Apricot Gnorbu Juice",
-        "Rarity": 74,
         "Price": 2050
     },
     {
@@ -83790,13 +87735,13 @@ var item_db_array = [
         "Price": 2050
     },
     {
-        "Name": "Chocolate Milk",
-        "Rarity": 10,
+        "Name": "Chocolate Scorchio Cookie",
+        "Rarity": 88,
         "Price": 2050
     },
     {
-        "Name": "Chocolate Scorchio Cookie",
-        "Rarity": 88,
+        "Name": "Classic Uni Jokes",
+        "Rarity": 80,
         "Price": 2050
     },
     {
@@ -83812,16 +87757,6 @@ var item_db_array = [
     {
         "Name": "Crown Roast Beef",
         "Rarity": 70,
-        "Price": 2050
-    },
-    {
-        "Name": "Cucumber Kimchee",
-        "Rarity": 87,
-        "Price": 2050
-    },
-    {
-        "Name": "Darigan Kau Collectable Figurine",
-        "Rarity": 87,
         "Price": 2050
     },
     {
@@ -83910,6 +87845,11 @@ var item_db_array = [
         "Price": 2050
     },
     {
+        "Name": "Hermiteese",
+        "Rarity": 79,
+        "Price": 2050
+    },
+    {
         "Name": "Hissi Exercise",
         "Rarity": 83,
         "Price": 2050
@@ -83945,6 +87885,11 @@ var item_db_array = [
         "Price": 2050
     },
     {
+        "Name": "Kelpflake Plushie",
+        "Rarity": 86,
+        "Price": 2050
+    },
+    {
         "Name": "Kyrii Shocker",
         "Rarity": 92,
         "Price": 2050
@@ -83972,11 +87917,6 @@ var item_db_array = [
     {
         "Name": "Mega Fishy Smoothie",
         "Rarity": 73,
-        "Price": 2050
-    },
-    {
-        "Name": "Mega Roasted Chestnut Smoothie",
-        "Rarity": 88,
         "Price": 2050
     },
     {
@@ -84027,6 +87967,11 @@ var item_db_array = [
     {
         "Name": "Pink Triple Decker Sandwich",
         "Rarity": 78,
+        "Price": 2050
+    },
+    {
+        "Name": "Pink Violin",
+        "Rarity": 84,
         "Price": 2050
     },
     {
@@ -84140,11 +88085,6 @@ var item_db_array = [
         "Price": 2050
     },
     {
-        "Name": "Wocky Shield of Truth",
-        "Rarity": 92,
-        "Price": 2050
-    },
-    {
         "Name": "Avocado Plushie",
         "Rarity": 79,
         "Price": 2025
@@ -84172,11 +88112,6 @@ var item_db_array = [
     {
         "Name": "Captain Threelegs",
         "Rarity": 75,
-        "Price": 2025
-    },
-    {
-        "Name": "Chimney",
-        "Rarity": 88,
         "Price": 2025
     },
     {
@@ -84325,11 +88260,6 @@ var item_db_array = [
         "Price": 2025
     },
     {
-        "Name": "Uni-versity",
-        "Rarity": 76,
-        "Price": 2025
-    },
-    {
         "Name": "Usuki Gym Goddess Set",
         "Rarity": 45,
         "Price": 2025
@@ -84412,11 +88342,6 @@ var item_db_array = [
     {
         "Name": "Ariadne Plushie",
         "Rarity": 79,
-        "Price": 2000
-    },
-    {
-        "Name": "Aubergine Wrap",
-        "Rarity": 88,
         "Price": 2000
     },
     {
@@ -84540,6 +88465,11 @@ var item_db_array = [
         "Price": 2000
     },
     {
+        "Name": "Blumaroo Mirror",
+        "Rarity": 87,
+        "Price": 2000
+    },
+    {
         "Name": "Bluna Burger",
         "Rarity": 98,
         "Price": 2000
@@ -84562,6 +88492,11 @@ var item_db_array = [
     {
         "Name": "Bori Photo Album",
         "Rarity": 65,
+        "Price": 2000
+    },
+    {
+        "Name": "Brain Tree Lolly",
+        "Rarity": 85,
         "Price": 2000
     },
     {
@@ -84635,11 +88570,6 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Cheesy Potato Tower",
-        "Rarity": 68,
-        "Price": 2000
-    },
-    {
         "Name": "Cherry Cheese Pizza",
         "Rarity": 85,
         "Price": 2000
@@ -84672,6 +88602,11 @@ var item_db_array = [
     {
         "Name": "Chocolate Jetsam Fin Cookie",
         "Rarity": 66,
+        "Price": 2000
+    },
+    {
+        "Name": "Chocolate Milk",
+        "Rarity": 10,
         "Price": 2000
     },
     {
@@ -84755,6 +88690,11 @@ var item_db_array = [
         "Price": 2000
     },
     {
+        "Name": "Cougi",
+        "Rarity": 83,
+        "Price": 2000
+    },
+    {
         "Name": "Courgette Pull Along",
         "Rarity": 68,
         "Price": 2000
@@ -84810,11 +88750,6 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Decorated Fruit Basket",
-        "Rarity": 89,
-        "Price": 2000
-    },
-    {
         "Name": "Desert Princess Kyrii Accessory",
         "Rarity": 83,
         "Price": 2000
@@ -84855,16 +88790,6 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Dubloon Nuggets",
-        "Rarity": 78,
-        "Price": 2000
-    },
-    {
-        "Name": "Dung Sofa",
-        "Rarity": 57,
-        "Price": 2000
-    },
-    {
         "Name": "Dwarf Tree",
         "Rarity": 60,
         "Price": 2000
@@ -84887,6 +88812,11 @@ var item_db_array = [
     {
         "Name": "End Stream",
         "Rarity": 70,
+        "Price": 2000
+    },
+    {
+        "Name": "Eyrie Sleeping Cap",
+        "Rarity": 88,
         "Price": 2000
     },
     {
@@ -85045,6 +88975,11 @@ var item_db_array = [
         "Price": 2000
     },
     {
+        "Name": "Glowing Acara Plushie",
+        "Rarity": 87,
+        "Price": 2000
+    },
+    {
         "Name": "Glowleaf Tea",
         "Rarity": 79,
         "Price": 2000
@@ -85097,11 +89032,6 @@ var item_db_array = [
     {
         "Name": "Grapeberry Krawkade",
         "Rarity": 89,
-        "Price": 2000
-    },
-    {
-        "Name": "Grarrl Gauntlet",
-        "Rarity": 96,
         "Price": 2000
     },
     {
@@ -85160,6 +89090,11 @@ var item_db_array = [
         "Price": 2000
     },
     {
+        "Name": "Grobrin",
+        "Rarity": 87,
+        "Price": 2000
+    },
+    {
         "Name": "Grundo Nobleman Handheld",
         "Rarity": 87,
         "Price": 2000
@@ -85215,6 +89150,11 @@ var item_db_array = [
         "Price": 2000
     },
     {
+        "Name": "Holiday Colouring Book",
+        "Rarity": 76,
+        "Price": 2000
+    },
+    {
         "Name": "Hoovle Usuki Set",
         "Rarity": 89,
         "Price": 2000
@@ -85227,6 +89167,11 @@ var item_db_array = [
     {
         "Name": "Ice Mote Lollypop",
         "Rarity": 68,
+        "Price": 2000
+    },
+    {
+        "Name": "Iced Blackberry Tea",
+        "Rarity": 88,
         "Price": 2000
     },
     {
@@ -85350,8 +89295,8 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Koi Trident",
-        "Rarity": 96,
+        "Name": "Korbat Forest Ranger Hat",
+        "Rarity": 85,
         "Price": 2000
     },
     {
@@ -85580,6 +89525,11 @@ var item_db_array = [
         "Price": 2000
     },
     {
+        "Name": "Molten Meatballs",
+        "Rarity": 88,
+        "Price": 2000
+    },
+    {
         "Name": "Mop Cookie",
         "Rarity": 61,
         "Price": 2000
@@ -85605,8 +89555,8 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Mystery Island Snowglobe",
-        "Rarity": 93,
+        "Name": "Mystery Meat Sandwich",
+        "Rarity": 80,
         "Price": 2000
     },
     {
@@ -85700,11 +89650,6 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Orange Kougra Cake",
-        "Rarity": 89,
-        "Price": 2000
-    },
-    {
         "Name": "Orange Lupe Treat",
         "Rarity": 75,
         "Price": 2000
@@ -85715,11 +89660,6 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Origami Breakfast",
-        "Rarity": 82,
-        "Price": 2000
-    },
-    {
         "Name": "Ornate Shenkuu Bed",
         "Rarity": 84,
         "Price": 2000
@@ -85727,11 +89667,6 @@ var item_db_array = [
     {
         "Name": "P is for Peophin",
         "Rarity": 79,
-        "Price": 2000
-    },
-    {
-        "Name": "Padded Quiggle Cloak",
-        "Rarity": 90,
         "Price": 2000
     },
     {
@@ -85850,11 +89785,6 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Purple Sink",
-        "Rarity": 86,
-        "Price": 2000
-    },
-    {
         "Name": "Qando Fruit",
         "Rarity": 74,
         "Price": 2000
@@ -85907,6 +89837,11 @@ var item_db_array = [
     {
         "Name": "Rebuilding Faerieland: A Journey",
         "Rarity": 87,
+        "Price": 2000
+    },
+    {
+        "Name": "Red Gummy Hearts",
+        "Rarity": 72,
         "Price": 2000
     },
     {
@@ -85980,11 +89915,6 @@ var item_db_array = [
         "Price": 2000
     },
     {
-        "Name": "Scholar Gelert Shoes",
-        "Rarity": 86,
-        "Price": 2000
-    },
-    {
         "Name": "Scorchio Book Label",
         "Rarity": 84,
         "Price": 2000
@@ -86032,6 +89962,11 @@ var item_db_array = [
     {
         "Name": "Skeith Winter Warrior Sword",
         "Rarity": 78,
+        "Price": 2000
+    },
+    {
+        "Name": "Skeletal Meerca Lens",
+        "Rarity": 81,
         "Price": 2000
     },
     {
@@ -86305,6 +90240,11 @@ var item_db_array = [
         "Price": 2000
     },
     {
+        "Name": "The Story of the Cloud Acara",
+        "Rarity": 80,
+        "Price": 2000
+    },
+    {
         "Name": "Tiered Stone Fountain",
         "Rarity": 84,
         "Price": 2000
@@ -86315,6 +90255,16 @@ var item_db_array = [
         "Price": 2000
     },
     {
+        "Name": "Tonu Camouflage Shoes",
+        "Rarity": 88,
+        "Price": 2000
+    },
+    {
+        "Name": "Tonu Fanfare Horn",
+        "Rarity": 84,
+        "Price": 2000
+    },
+    {
         "Name": "Toy Sailboat",
         "Rarity": 55,
         "Price": 2000
@@ -86322,11 +90272,6 @@ var item_db_array = [
     {
         "Name": "Training Your Moehog",
         "Rarity": 45,
-        "Price": 2000
-    },
-    {
-        "Name": "Trapped",
-        "Rarity": 31,
         "Price": 2000
     },
     {
@@ -86462,11 +90407,6 @@ var item_db_array = [
     {
         "Name": "Yellow Lounger",
         "Rarity": 86,
-        "Price": 2000
-    },
-    {
-        "Name": "Yellow Tuskaninny Plushie",
-        "Rarity": 84,
         "Price": 2000
     },
     {
@@ -86655,6 +90595,11 @@ var item_db_array = [
         "Price": 1975
     },
     {
+        "Name": "Koi Dumplings And Chicken",
+        "Rarity": 87,
+        "Price": 1975
+    },
+    {
         "Name": "Kougras of Tyrannia",
         "Rarity": 78,
         "Price": 1975
@@ -86710,13 +90655,13 @@ var item_db_array = [
         "Price": 1975
     },
     {
-        "Name": "Mynci Nana-Chucks",
-        "Rarity": 93,
+        "Name": "Nimmo Helmet",
+        "Rarity": 90,
         "Price": 1975
     },
     {
-        "Name": "Nimmo Helmet",
-        "Rarity": 90,
+        "Name": "Official Usuki Drum",
+        "Rarity": 85,
         "Price": 1975
     },
     {
@@ -86790,13 +90735,13 @@ var item_db_array = [
         "Price": 1975
     },
     {
-        "Name": "Usuki Park Fun Set",
-        "Rarity": 86,
+        "Name": "Uni-versity",
+        "Rarity": 76,
         "Price": 1975
     },
     {
-        "Name": "Usul Armour",
-        "Rarity": 93,
+        "Name": "Usuki Park Fun Set",
+        "Rarity": 86,
         "Price": 1975
     },
     {
@@ -86940,11 +90885,6 @@ var item_db_array = [
         "Price": 1950
     },
     {
-        "Name": "Country Scorchio Work Shoes",
-        "Rarity": 87,
-        "Price": 1950
-    },
-    {
         "Name": "Courgette Bread",
         "Rarity": 75,
         "Price": 1950
@@ -87015,11 +90955,6 @@ var item_db_array = [
         "Price": 1950
     },
     {
-        "Name": "Grarrl Tailspike",
-        "Rarity": 96,
-        "Price": 1950
-    },
-    {
         "Name": "Green Krawk Plushie",
         "Rarity": 80,
         "Price": 1950
@@ -87032,6 +90967,11 @@ var item_db_array = [
     {
         "Name": "Green Tea Shaved Ice",
         "Rarity": 78,
+        "Price": 1950
+    },
+    {
+        "Name": "Grey Cloud Cake",
+        "Rarity": 87,
         "Price": 1950
     },
     {
@@ -87087,6 +91027,11 @@ var item_db_array = [
     {
         "Name": "Kiko Food",
         "Rarity": 50,
+        "Price": 1950
+    },
+    {
+        "Name": "Kougra Blurf Shake",
+        "Rarity": 86,
         "Price": 1950
     },
     {
@@ -87220,6 +91165,11 @@ var item_db_array = [
         "Price": 1950
     },
     {
+        "Name": "Red Lutari Plushie",
+        "Rarity": 59,
+        "Price": 1950
+    },
+    {
         "Name": "Red Riding Lenny Shoes",
         "Rarity": 79,
         "Price": 1950
@@ -87237,6 +91187,11 @@ var item_db_array = [
     {
         "Name": "Salty Gumball",
         "Rarity": 66,
+        "Price": 1950
+    },
+    {
+        "Name": "Sasha the Dancer Cybunny Tambourine",
+        "Rarity": 87,
         "Price": 1950
     },
     {
@@ -87287,11 +91242,6 @@ var item_db_array = [
     {
         "Name": "Strawberry Scorchio Meringue",
         "Rarity": 88,
-        "Price": 1950
-    },
-    {
-        "Name": "Tasty Pie",
-        "Rarity": 96,
         "Price": 1950
     },
     {
@@ -87395,6 +91345,11 @@ var item_db_array = [
         "Price": 1950
     },
     {
+        "Name": "Wocky Shield of Truth",
+        "Rarity": 92,
+        "Price": 1950
+    },
+    {
         "Name": "Wraith Scroll",
         "Rarity": 97,
         "Price": 1950
@@ -87435,18 +91390,8 @@ var item_db_array = [
         "Price": 1925
     },
     {
-        "Name": "Dirty Snow",
-        "Rarity": 55,
-        "Price": 1925
-    },
-    {
         "Name": "Edna",
         "Rarity": 80,
-        "Price": 1925
-    },
-    {
-        "Name": "Elegant Buzz Shoes",
-        "Rarity": 87,
         "Price": 1925
     },
     {
@@ -87550,6 +91495,11 @@ var item_db_array = [
         "Price": 1925
     },
     {
+        "Name": "Pebble Patio Chair",
+        "Rarity": 89,
+        "Price": 1925
+    },
+    {
         "Name": "Peophin Shampoo",
         "Rarity": 25,
         "Price": 1925
@@ -87615,6 +91565,16 @@ var item_db_array = [
         "Price": 1925
     },
     {
+        "Name": "Split Nimmo Plushie",
+        "Rarity": 84,
+        "Price": 1925
+    },
+    {
+        "Name": "Star Shaped Stained Glass Window",
+        "Rarity": 96,
+        "Price": 1925
+    },
+    {
         "Name": "Strawberry Moehog Cookie",
         "Rarity": 82,
         "Price": 1925
@@ -87642,6 +91602,11 @@ var item_db_array = [
     {
         "Name": "Tea Time Pteri Plushie",
         "Rarity": 82,
+        "Price": 1925
+    },
+    {
+        "Name": "Usul Plush and Gumball Gift Set",
+        "Rarity": 88,
         "Price": 1925
     },
     {
@@ -87765,11 +91730,6 @@ var item_db_array = [
         "Price": 1900
     },
     {
-        "Name": "Chai Tea",
-        "Rarity": 70,
-        "Price": 1900
-    },
-    {
         "Name": "Checkered Carrot",
         "Rarity": 62,
         "Price": 1900
@@ -87855,13 +91815,13 @@ var item_db_array = [
         "Price": 1900
     },
     {
-        "Name": "Cybunny Battle Pen",
-        "Rarity": 92,
+        "Name": "Cybunny Gift Basket",
+        "Rarity": 78,
         "Price": 1900
     },
     {
-        "Name": "Cybunny Gift Basket",
-        "Rarity": 78,
+        "Name": "Decorated Fruit Basket",
+        "Rarity": 89,
         "Price": 1900
     },
     {
@@ -87935,6 +91895,11 @@ var item_db_array = [
         "Price": 1900
     },
     {
+        "Name": "Fried Tofu",
+        "Rarity": 86,
+        "Price": 1900
+    },
+    {
         "Name": "Fruit in a Tube",
         "Rarity": 89,
         "Price": 1900
@@ -87977,6 +91942,11 @@ var item_db_array = [
     {
         "Name": "Green Buzz Plushie",
         "Rarity": 35,
+        "Price": 1900
+    },
+    {
+        "Name": "Green JubJub Topper Pencil",
+        "Rarity": 85,
         "Price": 1900
     },
     {
@@ -88052,6 +92022,11 @@ var item_db_array = [
     {
         "Name": "Kacheek Marshmallows on a Stick",
         "Rarity": 67,
+        "Price": 1900
+    },
+    {
+        "Name": "Kaylas Spellbook",
+        "Rarity": 75,
         "Price": 1900
     },
     {
@@ -88190,11 +92165,6 @@ var item_db_array = [
         "Price": 1900
     },
     {
-        "Name": "Mystery Meat Sandwich",
-        "Rarity": 80,
-        "Price": 1900
-    },
-    {
         "Name": "Natural Wonders of Neopia: Shenkuu",
         "Rarity": 78,
         "Price": 1900
@@ -88215,11 +92185,6 @@ var item_db_array = [
         "Price": 1900
     },
     {
-        "Name": "Nimmo Pencil Sharpener",
-        "Rarity": 87,
-        "Price": 1900
-    },
-    {
         "Name": "Not-So-Disgusting Dung Uses",
         "Rarity": 66,
         "Price": 1900
@@ -88230,11 +92195,6 @@ var item_db_array = [
         "Price": 1900
     },
     {
-        "Name": "Official Usuki Drum",
-        "Rarity": 85,
-        "Price": 1900
-    },
-    {
         "Name": "Ogrin Jester Hat",
         "Rarity": 82,
         "Price": 1900
@@ -88242,11 +92202,6 @@ var item_db_array = [
     {
         "Name": "Ona Usuki Set",
         "Rarity": 76,
-        "Price": 1900
-    },
-    {
-        "Name": "Orange Chocolate Hollow Kacheek",
-        "Rarity": 88,
         "Price": 1900
     },
     {
@@ -88350,6 +92305,11 @@ var item_db_array = [
         "Price": 1900
     },
     {
+        "Name": "Purple Sink",
+        "Rarity": 86,
+        "Price": 1900
+    },
+    {
         "Name": "Qasalan Cone",
         "Rarity": 75,
         "Price": 1900
@@ -88362,11 +92322,6 @@ var item_db_array = [
     {
         "Name": "Raspberry Achyfi Lollypop",
         "Rarity": 79,
-        "Price": 1900
-    },
-    {
-        "Name": "Red Negg Plushie",
-        "Rarity": 90,
         "Price": 1900
     },
     {
@@ -88387,6 +92342,11 @@ var item_db_array = [
     {
         "Name": "Robot Care",
         "Rarity": 78,
+        "Price": 1900
+    },
+    {
+        "Name": "Robot Fashions",
+        "Rarity": 69,
         "Price": 1900
     },
     {
@@ -88465,6 +92425,11 @@ var item_db_array = [
         "Price": 1900
     },
     {
+        "Name": "Slymook",
+        "Rarity": 60,
+        "Price": 1900
+    },
+    {
         "Name": "Snot My Fault",
         "Rarity": 87,
         "Price": 1900
@@ -88477,6 +92442,11 @@ var item_db_array = [
     {
         "Name": "Spaghetti Kiko Taffy",
         "Rarity": 89,
+        "Price": 1900
+    },
+    {
+        "Name": "Spiked Skeith Boomerang",
+        "Rarity": 94,
         "Price": 1900
     },
     {
@@ -88687,6 +92657,16 @@ var item_db_array = [
     {
         "Name": "A Two Rings Crusader",
         "Rarity": 36,
+        "Price": 1875
+    },
+    {
+        "Name": "Apple Cinnamon Slushie",
+        "Rarity": 75,
+        "Price": 1875
+    },
+    {
+        "Name": "Baby Scorchio Nursery Rhymes",
+        "Rarity": 83,
         "Price": 1875
     },
     {
@@ -89275,6 +93255,11 @@ var item_db_array = [
         "Price": 1850
     },
     {
+        "Name": "Grarrl Gauntlet",
+        "Rarity": 96,
+        "Price": 1850
+    },
+    {
         "Name": "Ham and Tomato Korbat Sandwich",
         "Rarity": 87,
         "Price": 1850
@@ -89287,11 +93272,6 @@ var item_db_array = [
     {
         "Name": "Heated Blanket",
         "Rarity": 87,
-        "Price": 1850
-    },
-    {
-        "Name": "Hissi Herder Staff",
-        "Rarity": 88,
         "Price": 1850
     },
     {
@@ -89332,6 +93312,11 @@ var item_db_array = [
     {
         "Name": "Kiko Swirl Lolly",
         "Rarity": 75,
+        "Price": 1850
+    },
+    {
+        "Name": "Kiko Sword",
+        "Rarity": 92,
         "Price": 1850
     },
     {
@@ -89445,8 +93430,8 @@ var item_db_array = [
         "Price": 1850
     },
     {
-        "Name": "Raspberry Jam Sandwich Cookie",
-        "Rarity": 82,
+        "Name": "Raspberry Faerie Crepe",
+        "Rarity": 75,
         "Price": 1850
     },
     {
@@ -89550,6 +93535,11 @@ var item_db_array = [
         "Price": 1850
     },
     {
+        "Name": "Y9 Festive Floral Cake",
+        "Rarity": 66,
+        "Price": 1850
+    },
+    {
         "Name": "A Tale of Love and Loyalty",
         "Rarity": 80,
         "Price": 1825
@@ -89632,11 +93622,6 @@ var item_db_array = [
     {
         "Name": "Electric Sofa",
         "Rarity": 86,
-        "Price": 1825
-    },
-    {
-        "Name": "Fire Sword",
-        "Rarity": 90,
         "Price": 1825
     },
     {
@@ -89730,8 +93715,13 @@ var item_db_array = [
         "Price": 1825
     },
     {
-        "Name": "Pebble Patio Chair",
-        "Rarity": 89,
+        "Name": "Origami Breakfast",
+        "Rarity": 82,
+        "Price": 1825
+    },
+    {
+        "Name": "Pea Hot Dog",
+        "Rarity": 87,
         "Price": 1825
     },
     {
@@ -89792,6 +93782,11 @@ var item_db_array = [
     {
         "Name": "Sunflower Tea",
         "Rarity": 62,
+        "Price": 1825
+    },
+    {
+        "Name": "Tangy Twirly Fruit Soup",
+        "Rarity": 83,
         "Price": 1825
     },
     {
@@ -90205,6 +94200,11 @@ var item_db_array = [
         "Price": 1800
     },
     {
+        "Name": "Fruit Bomb Stamp",
+        "Rarity": 81,
+        "Price": 1800
+    },
+    {
         "Name": "Fungus Cave Background",
         "Rarity": 75,
         "Price": 1800
@@ -90230,11 +94230,6 @@ var item_db_array = [
         "Price": 1800
     },
     {
-        "Name": "Ghostkerchief Blueberry Roll",
-        "Rarity": 88,
-        "Price": 1800
-    },
-    {
         "Name": "Gnorbu Knitting",
         "Rarity": 75,
         "Price": 1800
@@ -90252,6 +94247,11 @@ var item_db_array = [
     {
         "Name": "Gothic Usul Plushie",
         "Rarity": 83,
+        "Price": 1800
+    },
+    {
+        "Name": "Grarrl Balloon Pet",
+        "Rarity": 67,
         "Price": 1800
     },
     {
@@ -90300,6 +94300,11 @@ var item_db_array = [
         "Price": 1800
     },
     {
+        "Name": "Ice Meat Loaf",
+        "Rarity": 87,
+        "Price": 1800
+    },
+    {
         "Name": "Icy Tissues",
         "Rarity": 60,
         "Price": 1800
@@ -90326,11 +94331,6 @@ var item_db_array = [
     },
     {
         "Name": "King Kelpbeard Koi Robe",
-        "Rarity": 87,
-        "Price": 1800
-    },
-    {
-        "Name": "Koi Dumplings And Chicken",
         "Rarity": 87,
         "Price": 1800
     },
@@ -90432,11 +94432,6 @@ var item_db_array = [
     {
         "Name": "Mynci Colouring Book",
         "Rarity": 83,
-        "Price": 1800
-    },
-    {
-        "Name": "Mynci Steak",
-        "Rarity": 89,
         "Price": 1800
     },
     {
@@ -90545,6 +94540,11 @@ var item_db_array = [
         "Price": 1800
     },
     {
+        "Name": "Roo Bottle Opener",
+        "Rarity": 63,
+        "Price": 1800
+    },
+    {
         "Name": "Ruki Lime Cake",
         "Rarity": 88,
         "Price": 1800
@@ -90552,6 +94552,11 @@ var item_db_array = [
     {
         "Name": "Sausage and Cheese Pasty",
         "Rarity": 65,
+        "Price": 1800
+    },
+    {
+        "Name": "Scholar Gelert Shoes",
+        "Rarity": 86,
         "Price": 1800
     },
     {
@@ -90615,11 +94620,6 @@ var item_db_array = [
         "Price": 1800
     },
     {
-        "Name": "Stained Glass Taelia Window",
-        "Rarity": 90,
-        "Price": 1800
-    },
-    {
         "Name": "Stake Sandwich",
         "Rarity": 76,
         "Price": 1800
@@ -90652,6 +94652,11 @@ var item_db_array = [
     {
         "Name": "Tanizard Comb",
         "Rarity": 64,
+        "Price": 1800
+    },
+    {
+        "Name": "Tea Time Acara Plushie",
+        "Rarity": 83,
         "Price": 1800
     },
     {
@@ -90690,11 +94695,6 @@ var item_db_array = [
         "Price": 1800
     },
     {
-        "Name": "Tonu Fanfare Horn",
-        "Rarity": 84,
-        "Price": 1800
-    },
-    {
         "Name": "Too Much Island Sun",
         "Rarity": 70,
         "Price": 1800
@@ -90712,11 +94712,6 @@ var item_db_array = [
     {
         "Name": "Trendy Vandagyre Trousers",
         "Rarity": 84,
-        "Price": 1800
-    },
-    {
-        "Name": "Tropical Fruit Smoothie",
-        "Rarity": 15,
         "Price": 1800
     },
     {
@@ -90770,11 +94765,6 @@ var item_db_array = [
         "Price": 1800
     },
     {
-        "Name": "Usul Axe",
-        "Rarity": 97,
-        "Price": 1800
-    },
-    {
         "Name": "Usul Beach Hat",
         "Rarity": 79,
         "Price": 1800
@@ -90797,6 +94787,11 @@ var item_db_array = [
     {
         "Name": "Vanilla Cream Puffs",
         "Rarity": 70,
+        "Price": 1800
+    },
+    {
+        "Name": "Variations on a Gormball",
+        "Rarity": 72,
         "Price": 1800
     },
     {
@@ -91010,6 +95005,11 @@ var item_db_array = [
         "Price": 1775
     },
     {
+        "Name": "Halloween Jinjah Platter",
+        "Rarity": 76,
+        "Price": 1775
+    },
+    {
         "Name": "Hannah and the Pirate Caves",
         "Rarity": 78,
         "Price": 1775
@@ -91110,18 +95110,8 @@ var item_db_array = [
         "Price": 1775
     },
     {
-        "Name": "Raspberry Faerie Crepe",
-        "Rarity": 75,
-        "Price": 1775
-    },
-    {
         "Name": "Sandy Pita",
         "Rarity": 78,
-        "Price": 1775
-    },
-    {
-        "Name": "Scorchio Sugar Skull",
-        "Rarity": 88,
         "Price": 1775
     },
     {
@@ -91200,11 +95190,6 @@ var item_db_array = [
         "Price": 1775
     },
     {
-        "Name": "Wocky Hair Grenade",
-        "Rarity": 92,
-        "Price": 1775
-    },
-    {
         "Name": "Yellow Elephante Plushie",
         "Rarity": 49,
         "Price": 1775
@@ -91217,11 +95202,6 @@ var item_db_array = [
     {
         "Name": "A Smatter of Ketchup",
         "Rarity": 78,
-        "Price": 1750
-    },
-    {
-        "Name": "Accelerator Helmet",
-        "Rarity": 66,
         "Price": 1750
     },
     {
@@ -91382,6 +95362,11 @@ var item_db_array = [
     {
         "Name": "Gelert Tail Armour",
         "Rarity": 92,
+        "Price": 1750
+    },
+    {
+        "Name": "Ghostkerchief Blueberry Roll",
+        "Rarity": 88,
         "Price": 1750
     },
     {
@@ -91580,6 +95565,11 @@ var item_db_array = [
         "Price": 1750
     },
     {
+        "Name": "Orange Chocolate Hollow Kacheek",
+        "Rarity": 88,
+        "Price": 1750
+    },
+    {
         "Name": "Orange Scorchipop",
         "Rarity": 88,
         "Price": 1750
@@ -91652,11 +95642,6 @@ var item_db_array = [
     {
         "Name": "Rambus Salad Sandwich",
         "Rarity": 70,
-        "Price": 1750
-    },
-    {
-        "Name": "Red Marbleman T-shirt",
-        "Rarity": 90,
         "Price": 1750
     },
     {
@@ -91835,11 +95820,6 @@ var item_db_array = [
         "Price": 1750
     },
     {
-        "Name": "Wonderful World of Gardening",
-        "Rarity": 45,
-        "Price": 1750
-    },
-    {
         "Name": "Xweetok Pancakes",
         "Rarity": 87,
         "Price": 1750
@@ -91857,6 +95837,11 @@ var item_db_array = [
     {
         "Name": "Yellow Bori Plushie",
         "Rarity": 82,
+        "Price": 1750
+    },
+    {
+        "Name": "Yellow Lutari Plushie",
+        "Rarity": 60,
         "Price": 1750
     },
     {
@@ -92125,6 +96110,11 @@ var item_db_array = [
         "Price": 1725
     },
     {
+        "Name": "Raspberry Chicken",
+        "Rarity": 82,
+        "Price": 1725
+    },
+    {
         "Name": "Roaring Wind Up Grarrl",
         "Rarity": 87,
         "Price": 1725
@@ -92137,6 +96127,11 @@ var item_db_array = [
     {
         "Name": "Slorg Planter",
         "Rarity": 80,
+        "Price": 1725
+    },
+    {
+        "Name": "Stained Glass Taelia Window",
+        "Rarity": 90,
         "Price": 1725
     },
     {
@@ -92345,6 +96340,11 @@ var item_db_array = [
         "Price": 1700
     },
     {
+        "Name": "Chocolate Marshmallow Pasty",
+        "Rarity": 70,
+        "Price": 1700
+    },
+    {
         "Name": "Chocolate Silver Coins",
         "Rarity": 70,
         "Price": 1700
@@ -92365,13 +96365,18 @@ var item_db_array = [
         "Price": 1700
     },
     {
-        "Name": "Cliffhanger Puzzles",
+        "Name": "Cloud JubJub Plushie",
+        "Rarity": 82,
+        "Price": 1700
+    },
+    {
+        "Name": "Colourful Uni Folder",
         "Rarity": 78,
         "Price": 1700
     },
     {
-        "Name": "Cloud JubJub Plushie",
-        "Rarity": 82,
+        "Name": "Cucumber Kimchee",
+        "Rarity": 87,
         "Price": 1700
     },
     {
@@ -92406,6 +96411,11 @@ var item_db_array = [
     },
     {
         "Name": "Darigan Scorchio Plushie",
+        "Rarity": 82,
+        "Price": 1700
+    },
+    {
+        "Name": "Darigan Trunkard Plushie",
         "Rarity": 82,
         "Price": 1700
     },
@@ -92575,11 +96585,6 @@ var item_db_array = [
         "Price": 1700
     },
     {
-        "Name": "Hot Chocolate Dip",
-        "Rarity": 68,
-        "Price": 1700
-    },
-    {
         "Name": "Ice Blended Caramel Coffee",
         "Rarity": 78,
         "Price": 1700
@@ -92597,11 +96602,6 @@ var item_db_array = [
     {
         "Name": "Icy Baked Beans",
         "Rarity": 75,
-        "Price": 1700
-    },
-    {
-        "Name": "Interesting Ixi",
-        "Rarity": 70,
         "Price": 1700
     },
     {
@@ -92682,6 +96682,11 @@ var item_db_array = [
     {
         "Name": "Lime Slushie",
         "Rarity": 57,
+        "Price": 1700
+    },
+    {
+        "Name": "Lost City Lanes Wrapped Chocolate Pin",
+        "Rarity": 84,
         "Price": 1700
     },
     {
@@ -92802,16 +96807,6 @@ var item_db_array = [
     {
         "Name": "Organic Leek",
         "Rarity": 20,
-        "Price": 1700
-    },
-    {
-        "Name": "Pea and Ham Baby Food",
-        "Rarity": 15,
-        "Price": 1700
-    },
-    {
-        "Name": "Pea Hot Dog",
-        "Rarity": 87,
         "Price": 1700
     },
     {
@@ -93160,8 +97155,8 @@ var item_db_array = [
         "Price": 1700
     },
     {
-        "Name": "Y9 Festive Floral Cake",
-        "Rarity": 66,
+        "Name": "Yellow Cybunny Plushie",
+        "Rarity": 58,
         "Price": 1700
     },
     {
@@ -93172,11 +97167,6 @@ var item_db_array = [
     {
         "Name": "Yummy Muddy Pizza",
         "Rarity": 28,
-        "Price": 1700
-    },
-    {
-        "Name": "Yurble Steak",
-        "Rarity": 88,
         "Price": 1700
     },
     {
@@ -93230,13 +97220,23 @@ var item_db_array = [
         "Price": 1675
     },
     {
-        "Name": "Darigan Trunkard Plushie",
-        "Rarity": 82,
+        "Name": "Cybunny Battle Pen",
+        "Rarity": 92,
         "Price": 1675
     },
     {
         "Name": "Double Dung Hot Dog",
         "Rarity": 85,
+        "Price": 1675
+    },
+    {
+        "Name": "Elegant Buzz Shoes",
+        "Rarity": 87,
+        "Price": 1675
+    },
+    {
+        "Name": "Eyrie Sushi",
+        "Rarity": 70,
         "Price": 1675
     },
     {
@@ -93282,11 +97282,6 @@ var item_db_array = [
     {
         "Name": "Green Weewoo Plushie",
         "Rarity": 87,
-        "Price": 1675
-    },
-    {
-        "Name": "Guitar Comb",
-        "Rarity": 68,
         "Price": 1675
     },
     {
@@ -93370,6 +97365,11 @@ var item_db_array = [
         "Price": 1675
     },
     {
+        "Name": "Pink and Yellow Parasol",
+        "Rarity": 88,
+        "Price": 1675
+    },
+    {
         "Name": "Plushie Slice of Cake",
         "Rarity": 67,
         "Price": 1675
@@ -93425,11 +97425,6 @@ var item_db_array = [
         "Price": 1675
     },
     {
-        "Name": "The Unlucky Blumaroo",
-        "Rarity": 55,
-        "Price": 1675
-    },
-    {
         "Name": "Tombstone Cupcake",
         "Rarity": 85,
         "Price": 1675
@@ -93442,6 +97437,11 @@ var item_db_array = [
     {
         "Name": "Uni Day Chokato Sandwich",
         "Rarity": 88,
+        "Price": 1675
+    },
+    {
+        "Name": "Valentines Day Tree",
+        "Rarity": 78,
         "Price": 1675
     },
     {
@@ -93645,11 +97645,6 @@ var item_db_array = [
         "Price": 1650
     },
     {
-        "Name": "Iced Cybunny Head Cookie",
-        "Rarity": 78,
-        "Price": 1650
-    },
-    {
         "Name": "Jelly Parsley",
         "Rarity": 46,
         "Price": 1650
@@ -93710,6 +97705,11 @@ var item_db_array = [
         "Price": 1650
     },
     {
+        "Name": "Lemon Sprinkle Doughnut",
+        "Rarity": 27,
+        "Price": 1650
+    },
+    {
         "Name": "Liandra",
         "Rarity": 56,
         "Price": 1650
@@ -93742,11 +97742,6 @@ var item_db_array = [
     {
         "Name": "Missing Toy Pieces Wall Hanging",
         "Rarity": 66,
-        "Price": 1650
-    },
-    {
-        "Name": "Mutant Desk",
-        "Rarity": 88,
         "Price": 1650
     },
     {
@@ -93845,11 +97840,6 @@ var item_db_array = [
         "Price": 1650
     },
     {
-        "Name": "Scorchio Mage",
-        "Rarity": 50,
-        "Price": 1650
-    },
-    {
         "Name": "Slice of Deluxe Lemon Mynci Cake",
         "Rarity": 83,
         "Price": 1650
@@ -93942,6 +97932,11 @@ var item_db_array = [
     {
         "Name": "Tyrannia Travel Brochure",
         "Rarity": 85,
+        "Price": 1650
+    },
+    {
+        "Name": "Usul Axe",
+        "Rarity": 97,
         "Price": 1650
     },
     {
@@ -94080,11 +98075,6 @@ var item_db_array = [
         "Price": 1625
     },
     {
-        "Name": "Eyrie Sushi",
-        "Rarity": 70,
-        "Price": 1625
-    },
-    {
         "Name": "Factor 15 Sun Tan Lotion",
         "Rarity": 60,
         "Price": 1625
@@ -94092,6 +98082,11 @@ var item_db_array = [
     {
         "Name": "Fancy Sundae",
         "Rarity": 65,
+        "Price": 1625
+    },
+    {
+        "Name": "Fruity Fondue",
+        "Rarity": 85,
         "Price": 1625
     },
     {
@@ -94150,11 +98145,6 @@ var item_db_array = [
         "Price": 1625
     },
     {
-        "Name": "Red Pot",
-        "Rarity": 45,
-        "Price": 1625
-    },
-    {
         "Name": "Sir Wockilan the Brave",
         "Rarity": 50,
         "Price": 1625
@@ -94177,11 +98167,6 @@ var item_db_array = [
     {
         "Name": "Starflower",
         "Rarity": 82,
-        "Price": 1625
-    },
-    {
-        "Name": "Strawberry Cream Puff",
-        "Rarity": 88,
         "Price": 1625
     },
     {
@@ -94245,6 +98230,11 @@ var item_db_array = [
         "Price": 1600
     },
     {
+        "Name": "Best Tooth Catalogue",
+        "Rarity": 80,
+        "Price": 1600
+    },
+    {
         "Name": "Black Mirror",
         "Rarity": 40,
         "Price": 1600
@@ -94272,6 +98262,11 @@ var item_db_array = [
     {
         "Name": "Boating Usuki Set",
         "Rarity": 62,
+        "Price": 1600
+    },
+    {
+        "Name": "Bori Colouring Pages",
+        "Rarity": 75,
         "Price": 1600
     },
     {
@@ -94445,6 +98440,11 @@ var item_db_array = [
         "Price": 1600
     },
     {
+        "Name": "Green Aisha Plushie",
+        "Rarity": 30,
+        "Price": 1600
+    },
+    {
         "Name": "Grey Backpack",
         "Rarity": 85,
         "Price": 1600
@@ -94520,11 +98520,6 @@ var item_db_array = [
         "Price": 1600
     },
     {
-        "Name": "Korbat Motif Vase",
-        "Rarity": 91,
-        "Price": 1600
-    },
-    {
         "Name": "Kyrii Florange Milkshake",
         "Rarity": 77,
         "Price": 1600
@@ -94567,6 +98562,11 @@ var item_db_array = [
     {
         "Name": "Linzer Torte",
         "Rarity": 68,
+        "Price": 1600
+    },
+    {
+        "Name": "Lizark",
+        "Rarity": 89,
         "Price": 1600
     },
     {
@@ -94690,8 +98690,13 @@ var item_db_array = [
         "Price": 1600
     },
     {
-        "Name": "Patch of Knitting",
-        "Rarity": 76,
+        "Name": "Pea and Ham Baby Food",
+        "Rarity": 15,
+        "Price": 1600
+    },
+    {
+        "Name": "Pear Tart",
+        "Rarity": 85,
         "Price": 1600
     },
     {
@@ -94725,11 +98730,6 @@ var item_db_array = [
         "Price": 1600
     },
     {
-        "Name": "Pirate Brute Plushie",
-        "Rarity": 90,
-        "Price": 1600
-    },
-    {
         "Name": "Pirate Eyrie Morphing Potion",
         "Rarity": 99,
         "Price": 1600
@@ -94742,6 +98742,11 @@ var item_db_array = [
     {
         "Name": "Plain Sourdough Baguette",
         "Rarity": 38,
+        "Price": 1600
+    },
+    {
+        "Name": "Planning Shenkuu Gardens",
+        "Rarity": 82,
         "Price": 1600
     },
     {
@@ -94780,17 +98785,17 @@ var item_db_array = [
         "Price": 1600
     },
     {
+        "Name": "Raspberry Jam Sandwich Cookie",
+        "Rarity": 82,
+        "Price": 1600
+    },
+    {
         "Name": "Raspberry Jelly A",
         "Rarity": 65,
         "Price": 1600
     },
     {
         "Name": "Raspberry Shell Twist",
-        "Rarity": 84,
-        "Price": 1600
-    },
-    {
-        "Name": "Red Apple Plushie",
         "Rarity": 84,
         "Price": 1600
     },
@@ -94837,6 +98842,11 @@ var item_db_array = [
     {
         "Name": "Shimmering Chomby Shield",
         "Rarity": 92,
+        "Price": 1600
+    },
+    {
+        "Name": "Shock Humour",
+        "Rarity": 76,
         "Price": 1600
     },
     {
@@ -94887,6 +98897,11 @@ var item_db_array = [
     {
         "Name": "Strawberry Cooty Lollypop",
         "Rarity": 88,
+        "Price": 1600
+    },
+    {
+        "Name": "Strawberry Jetsam Fin Cookie",
+        "Rarity": 67,
         "Price": 1600
     },
     {
@@ -95090,6 +99105,11 @@ var item_db_array = [
         "Price": 1575
     },
     {
+        "Name": "Dandelion Slushie",
+        "Rarity": 89,
+        "Price": 1575
+    },
+    {
         "Name": "Dark Chocolate Hearts",
         "Rarity": 86,
         "Price": 1575
@@ -95170,18 +99190,8 @@ var item_db_array = [
         "Price": 1575
     },
     {
-        "Name": "Hermiteese",
-        "Rarity": 79,
-        "Price": 1575
-    },
-    {
         "Name": "Hidden Among Clouds",
         "Rarity": 78,
-        "Price": 1575
-    },
-    {
-        "Name": "Jelly Pecan",
-        "Rarity": 70,
         "Price": 1575
     },
     {
@@ -95212,6 +99222,11 @@ var item_db_array = [
     {
         "Name": "Mano Root",
         "Rarity": 80,
+        "Price": 1575
+    },
+    {
+        "Name": "Mega Roasted Chestnut Smoothie",
+        "Rarity": 88,
         "Price": 1575
     },
     {
@@ -95247,11 +99262,6 @@ var item_db_array = [
     {
         "Name": "Pink Petpet Flying Disc",
         "Rarity": 86,
-        "Price": 1575
-    },
-    {
-        "Name": "Planning Shenkuu Gardens",
-        "Rarity": 82,
         "Price": 1575
     },
     {
@@ -95307,11 +99317,6 @@ var item_db_array = [
     {
         "Name": "Splyke",
         "Rarity": 85,
-        "Price": 1575
-    },
-    {
-        "Name": "Stamp Puzzle",
-        "Rarity": 58,
         "Price": 1575
     },
     {
@@ -95625,11 +99630,6 @@ var item_db_array = [
         "Price": 1550
     },
     {
-        "Name": "Lemon Sprinkle Doughnut",
-        "Rarity": 27,
-        "Price": 1550
-    },
-    {
         "Name": "Licorice Zafara Tail",
         "Rarity": 86,
         "Price": 1550
@@ -95785,13 +99785,13 @@ var item_db_array = [
         "Price": 1550
     },
     {
-        "Name": "Stylishly Simple Pond",
-        "Rarity": 80,
+        "Name": "Strawberry Pi Pie",
+        "Rarity": 88,
         "Price": 1550
     },
     {
-        "Name": "Sunset Coral Armchair",
-        "Rarity": 87,
+        "Name": "Stylishly Simple Pond",
+        "Rarity": 80,
         "Price": 1550
     },
     {
@@ -95817,6 +99817,11 @@ var item_db_array = [
     {
         "Name": "Tonu Golden Blade",
         "Rarity": 98,
+        "Price": 1550
+    },
+    {
+        "Name": "Tree Weed",
+        "Rarity": 81,
         "Price": 1550
     },
     {
@@ -95887,11 +99892,6 @@ var item_db_array = [
     {
         "Name": "Buzz Colouring Book",
         "Rarity": 80,
-        "Price": 1525
-    },
-    {
-        "Name": "Chocolate Marshmallow Pasty",
-        "Rarity": 70,
         "Price": 1525
     },
     {
@@ -96010,6 +100010,11 @@ var item_db_array = [
         "Price": 1525
     },
     {
+        "Name": "Milk Bubble Tea",
+        "Rarity": 88,
+        "Price": 1525
+    },
+    {
         "Name": "Orange Wave Sofa",
         "Rarity": 87,
         "Price": 1525
@@ -96032,16 +100037,6 @@ var item_db_array = [
     {
         "Name": "Rainbow Ink Pad",
         "Rarity": 78,
-        "Price": 1525
-    },
-    {
-        "Name": "Red Techo Pen",
-        "Rarity": 88,
-        "Price": 1525
-    },
-    {
-        "Name": "Rotting Skeleton Stamp",
-        "Rarity": 50,
         "Price": 1525
     },
     {
@@ -96145,11 +100140,6 @@ var item_db_array = [
         "Price": 1500
     },
     {
-        "Name": "Acaras in History",
-        "Rarity": 50,
-        "Price": 1500
-    },
-    {
         "Name": "Aisha Hot Chocolate",
         "Rarity": 70,
         "Price": 1500
@@ -96225,11 +100215,6 @@ var item_db_array = [
         "Price": 1500
     },
     {
-        "Name": "Blue Shoyru Slushie Cup",
-        "Rarity": 82,
-        "Price": 1500
-    },
-    {
         "Name": "Blueberry Gummy Peophin",
         "Rarity": 76,
         "Price": 1500
@@ -96267,6 +100252,11 @@ var item_db_array = [
     {
         "Name": "Brass Gears Border",
         "Rarity": 73,
+        "Price": 1500
+    },
+    {
+        "Name": "Brown Rice",
+        "Rarity": 76,
         "Price": 1500
     },
     {
@@ -96315,6 +100305,11 @@ var item_db_array = [
         "Price": 1500
     },
     {
+        "Name": "Celebratory Gift Basket",
+        "Rarity": 79,
+        "Price": 1500
+    },
+    {
         "Name": "Chocolate Banana Pteri Eggs",
         "Rarity": 77,
         "Price": 1500
@@ -96355,8 +100350,8 @@ var item_db_array = [
         "Price": 1500
     },
     {
-        "Name": "Classic Uni Jokes",
-        "Rarity": 80,
+        "Name": "Cliffhanger Puzzles",
+        "Rarity": 78,
         "Price": 1500
     },
     {
@@ -96377,11 +100372,6 @@ var item_db_array = [
     {
         "Name": "Corn Horn",
         "Rarity": 88,
-        "Price": 1500
-    },
-    {
-        "Name": "Cougi",
-        "Rarity": 83,
         "Price": 1500
     },
     {
@@ -96447,11 +100437,6 @@ var item_db_array = [
     {
         "Name": "Dream Clouds",
         "Rarity": 65,
-        "Price": 1500
-    },
-    {
-        "Name": "Dung Mote",
-        "Rarity": 59,
         "Price": 1500
     },
     {
@@ -96562,11 +100547,6 @@ var item_db_array = [
     {
         "Name": "Ghostkerchief Cookies",
         "Rarity": 84,
-        "Price": 1500
-    },
-    {
-        "Name": "Glack Plushie",
-        "Rarity": 77,
         "Price": 1500
     },
     {
@@ -96780,11 +100760,6 @@ var item_db_array = [
         "Price": 1500
     },
     {
-        "Name": "Lizark",
-        "Rarity": 89,
-        "Price": 1500
-    },
-    {
         "Name": "Lost Scroll of Lost Scrolls",
         "Rarity": 84,
         "Price": 1500
@@ -96885,6 +100860,11 @@ var item_db_array = [
         "Price": 1500
     },
     {
+        "Name": "Orb of the Light Faerie",
+        "Rarity": 96,
+        "Price": 1500
+    },
+    {
         "Name": "Organic Pear Slices",
         "Rarity": 78,
         "Price": 1500
@@ -96930,11 +100910,6 @@ var item_db_array = [
         "Price": 1500
     },
     {
-        "Name": "Picking Better Berries",
-        "Rarity": 70,
-        "Price": 1500
-    },
-    {
         "Name": "Pickled Eyeballs",
         "Rarity": 63,
         "Price": 1500
@@ -96977,6 +100952,11 @@ var item_db_array = [
     {
         "Name": "Protein Bar",
         "Rarity": 78,
+        "Price": 1500
+    },
+    {
+        "Name": "Pull-up Bar",
+        "Rarity": 91,
         "Price": 1500
     },
     {
@@ -97040,6 +101020,11 @@ var item_db_array = [
         "Price": 1500
     },
     {
+        "Name": "Red Apple Plushie",
+        "Rarity": 84,
+        "Price": 1500
+    },
+    {
         "Name": "Red Bean Bag Chair",
         "Rarity": 30,
         "Price": 1500
@@ -97050,8 +101035,18 @@ var item_db_array = [
         "Price": 1500
     },
     {
+        "Name": "Red Negg Plushie",
+        "Rarity": 90,
+        "Price": 1500
+    },
+    {
         "Name": "Reject Cybunny Toy",
         "Rarity": 60,
+        "Price": 1500
+    },
+    {
+        "Name": "Reject Dung Mote Lolly",
+        "Rarity": 65,
         "Price": 1500
     },
     {
@@ -97080,8 +101075,8 @@ var item_db_array = [
         "Price": 1500
     },
     {
-        "Name": "Scout Unit",
-        "Rarity": 92,
+        "Name": "Scorchio Mage",
+        "Rarity": 50,
         "Price": 1500
     },
     {
@@ -97157,11 +101152,6 @@ var item_db_array = [
     {
         "Name": "Snowickle Plushie",
         "Rarity": 83,
-        "Price": 1500
-    },
-    {
-        "Name": "Sour Apple Gummy Gloves",
-        "Rarity": 84,
         "Price": 1500
     },
     {
@@ -97295,11 +101285,6 @@ var item_db_array = [
         "Price": 1500
     },
     {
-        "Name": "Tree Weed",
-        "Rarity": 81,
-        "Price": 1500
-    },
-    {
         "Name": "Trendy Vandagyre Wig",
         "Rarity": 84,
         "Price": 1500
@@ -97347,6 +101332,11 @@ var item_db_array = [
     {
         "Name": "Usuki Travel Set",
         "Rarity": 73,
+        "Price": 1500
+    },
+    {
+        "Name": "Usul Armour",
+        "Rarity": 93,
         "Price": 1500
     },
     {
@@ -97432,6 +101422,11 @@ var item_db_array = [
     {
         "Name": "Yellow Techo Chair",
         "Rarity": 87,
+        "Price": 1500
+    },
+    {
+        "Name": "Yurble Steak",
+        "Rarity": 88,
         "Price": 1500
     },
     {
@@ -97730,11 +101725,6 @@ var item_db_array = [
         "Price": 1475
     },
     {
-        "Name": "Red Gummy Hearts",
-        "Rarity": 72,
-        "Price": 1475
-    },
-    {
         "Name": "Red Lenny Plushie",
         "Rarity": 68,
         "Price": 1475
@@ -97770,11 +101760,6 @@ var item_db_array = [
         "Price": 1475
     },
     {
-        "Name": "Slingshot Sugar Cookie",
-        "Rarity": 76,
-        "Price": 1475
-    },
-    {
         "Name": "Slorg Flakes Stamp",
         "Rarity": 68,
         "Price": 1475
@@ -97802,6 +101787,11 @@ var item_db_array = [
     {
         "Name": "The Littlest Mazzew",
         "Rarity": 87,
+        "Price": 1475
+    },
+    {
+        "Name": "The Phantom",
+        "Rarity": 45,
         "Price": 1475
     },
     {
@@ -97855,6 +101845,11 @@ var item_db_array = [
         "Price": 1450
     },
     {
+        "Name": "Appriberry",
+        "Rarity": 84,
+        "Price": 1450
+    },
+    {
         "Name": "Asparagus Toast Dumplings",
         "Rarity": 75,
         "Price": 1450
@@ -97877,11 +101872,6 @@ var item_db_array = [
     {
         "Name": "Benyeroberry Tea",
         "Rarity": 80,
-        "Price": 1450
-    },
-    {
-        "Name": "Black Currant Chia Pop",
-        "Rarity": 85,
         "Price": 1450
     },
     {
@@ -98115,6 +102105,11 @@ var item_db_array = [
         "Price": 1450
     },
     {
+        "Name": "Glack Plushie",
+        "Rarity": 77,
+        "Price": 1450
+    },
+    {
         "Name": "Grapefruit Grundo Lollypop",
         "Rarity": 89,
         "Price": 1450
@@ -98132,6 +102127,11 @@ var item_db_array = [
     {
         "Name": "Guacasymole",
         "Rarity": 81,
+        "Price": 1450
+    },
+    {
+        "Name": "Hamburger Mirror",
+        "Rarity": 87,
         "Price": 1450
     },
     {
@@ -98162,6 +102162,11 @@ var item_db_array = [
     {
         "Name": "Jam Scone",
         "Rarity": 75,
+        "Price": 1450
+    },
+    {
+        "Name": "Jelly Pecan",
+        "Rarity": 70,
         "Price": 1450
     },
     {
@@ -98355,6 +102360,11 @@ var item_db_array = [
         "Price": 1450
     },
     {
+        "Name": "Sakhmet Natives",
+        "Rarity": 43,
+        "Price": 1450
+    },
+    {
         "Name": "Scroll of Trickery",
         "Rarity": 97,
         "Price": 1450
@@ -98425,11 +102435,6 @@ var item_db_array = [
         "Price": 1450
     },
     {
-        "Name": "Ultra Cheesy Hot Dog",
-        "Rarity": 76,
-        "Price": 1450
-    },
-    {
         "Name": "Uni Day BLT Sandwich",
         "Rarity": 84,
         "Price": 1450
@@ -98485,6 +102490,11 @@ var item_db_array = [
         "Price": 1450
     },
     {
+        "Name": "Woodland Koi Plushie",
+        "Rarity": 89,
+        "Price": 1450
+    },
+    {
         "Name": "Yellow Turtum Notebook",
         "Rarity": 87,
         "Price": 1450
@@ -98525,6 +102535,11 @@ var item_db_array = [
         "Price": 1425
     },
     {
+        "Name": "Blue Shoyru Slushie Cup",
+        "Rarity": 82,
+        "Price": 1425
+    },
+    {
         "Name": "Celesta",
         "Rarity": 82,
         "Price": 1425
@@ -98552,6 +102567,11 @@ var item_db_array = [
     {
         "Name": "Doglecoffee",
         "Rarity": 85,
+        "Price": 1425
+    },
+    {
+        "Name": "Dung Mote",
+        "Rarity": 59,
         "Price": 1425
     },
     {
@@ -98605,11 +102625,6 @@ var item_db_array = [
         "Price": 1425
     },
     {
-        "Name": "Green Aisha Plushie",
-        "Rarity": 30,
-        "Price": 1425
-    },
-    {
         "Name": "Guide to Tuskaninny Plushies",
         "Rarity": 77,
         "Price": 1425
@@ -98632,11 +102647,6 @@ var item_db_array = [
     {
         "Name": "Honey and Wheat Baguette",
         "Rarity": 28,
-        "Price": 1425
-    },
-    {
-        "Name": "Iced Blackberry Tea",
-        "Rarity": 88,
         "Price": 1425
     },
     {
@@ -98745,11 +102755,6 @@ var item_db_array = [
         "Price": 1425
     },
     {
-        "Name": "Raspberry Chicken",
-        "Rarity": 82,
-        "Price": 1425
-    },
-    {
         "Name": "Rice Dice",
         "Rarity": 86,
         "Price": 1425
@@ -98797,11 +102802,6 @@ var item_db_array = [
     {
         "Name": "The Jovial Jetsam",
         "Rarity": 79,
-        "Price": 1425
-    },
-    {
-        "Name": "The Phantom",
-        "Rarity": 45,
         "Price": 1425
     },
     {
@@ -98860,6 +102860,11 @@ var item_db_array = [
         "Price": 1400
     },
     {
+        "Name": "Accelerator Helmet",
+        "Rarity": 66,
+        "Price": 1400
+    },
+    {
         "Name": "Air Faerie Guitar",
         "Rarity": 82,
         "Price": 1400
@@ -98872,6 +102877,11 @@ var item_db_array = [
     {
         "Name": "Angry Shoyru Friends",
         "Rarity": 79,
+        "Price": 1400
+    },
+    {
+        "Name": "Arid Ruki Hat",
+        "Rarity": 84,
         "Price": 1400
     },
     {
@@ -98897,11 +102907,6 @@ var item_db_array = [
     {
         "Name": "Bazri The Grundo",
         "Rarity": 73,
-        "Price": 1400
-    },
-    {
-        "Name": "Being Stinky",
-        "Rarity": 70,
         "Price": 1400
     },
     {
@@ -99055,6 +103060,11 @@ var item_db_array = [
         "Price": 1400
     },
     {
+        "Name": "Cooler Than You Perfume",
+        "Rarity": 82,
+        "Price": 1400
+    },
+    {
         "Name": "Crunchy Kacheek Cereal",
         "Rarity": 50,
         "Price": 1400
@@ -99160,11 +103170,6 @@ var item_db_array = [
         "Price": 1400
     },
     {
-        "Name": "Flight of the Battle Faerie",
-        "Rarity": 70,
-        "Price": 1400
-    },
-    {
         "Name": "Flowered Vase",
         "Rarity": 81,
         "Price": 1400
@@ -99222,11 +103227,6 @@ var item_db_array = [
     {
         "Name": "Gold Chomby Plushie",
         "Rarity": 80,
-        "Price": 1400
-    },
-    {
-        "Name": "Gold Mote Lollypop",
-        "Rarity": 67,
         "Price": 1400
     },
     {
@@ -99297,6 +103297,11 @@ var item_db_array = [
     {
         "Name": "Hewn Stone Chair",
         "Rarity": 35,
+        "Price": 1400
+    },
+    {
+        "Name": "Hissi Herder Staff",
+        "Rarity": 88,
         "Price": 1400
     },
     {
@@ -99660,6 +103665,11 @@ var item_db_array = [
         "Price": 1400
     },
     {
+        "Name": "Scorchio Sugar Skull",
+        "Rarity": 88,
+        "Price": 1400
+    },
+    {
         "Name": "Scroll of Flame Strike",
         "Rarity": 99,
         "Price": 1400
@@ -99830,6 +103840,11 @@ var item_db_array = [
         "Price": 1400
     },
     {
+        "Name": "The Unlucky Blumaroo",
+        "Rarity": 55,
+        "Price": 1400
+    },
+    {
         "Name": "Tigersquash Sandwich",
         "Rarity": 45,
         "Price": 1400
@@ -99902,6 +103917,11 @@ var item_db_array = [
     {
         "Name": "Wocky Gadgeteer Air Balloon",
         "Rarity": 85,
+        "Price": 1400
+    },
+    {
+        "Name": "Wooden Practice Staff",
+        "Rarity": 65,
         "Price": 1400
     },
     {
@@ -99995,6 +104015,11 @@ var item_db_array = [
         "Price": 1375
     },
     {
+        "Name": "Faerie Tonu Costume",
+        "Rarity": 87,
+        "Price": 1375
+    },
+    {
         "Name": "Famous Crab Burger",
         "Rarity": 40,
         "Price": 1375
@@ -100075,6 +104100,11 @@ var item_db_array = [
         "Price": 1375
     },
     {
+        "Name": "Mootix Ruler",
+        "Rarity": 97,
+        "Price": 1375
+    },
+    {
         "Name": "Mortogberry Pie",
         "Rarity": 89,
         "Price": 1375
@@ -100150,6 +104180,11 @@ var item_db_array = [
         "Price": 1375
     },
     {
+        "Name": "Stamp Puzzle",
+        "Rarity": 58,
+        "Price": 1375
+    },
+    {
         "Name": "Strawberry Lupe Hard Candy",
         "Rarity": 82,
         "Price": 1375
@@ -100197,11 +104232,6 @@ var item_db_array = [
     {
         "Name": "Zafara Pyjama Plushie",
         "Rarity": 84,
-        "Price": 1375
-    },
-    {
-        "Name": "Zero Gravity and Loving It",
-        "Rarity": 80,
         "Price": 1375
     },
     {
@@ -100262,11 +104292,6 @@ var item_db_array = [
     {
         "Name": "Brightvale Rigamaroll",
         "Rarity": 89,
-        "Price": 1350
-    },
-    {
-        "Name": "Captain Scarblade Action Figure",
-        "Rarity": 90,
         "Price": 1350
     },
     {
@@ -100340,13 +104365,13 @@ var item_db_array = [
         "Price": 1350
     },
     {
-        "Name": "Cosmic Cheese Stars",
-        "Rarity": 80,
+        "Name": "Colourful Charm Bracelet",
+        "Rarity": 92,
         "Price": 1350
     },
     {
-        "Name": "Dandelion Slushie",
-        "Rarity": 89,
+        "Name": "Cosmic Cheese Stars",
+        "Rarity": 80,
         "Price": 1350
     },
     {
@@ -100375,6 +104400,11 @@ var item_db_array = [
         "Price": 1350
     },
     {
+        "Name": "Dirty Snow",
+        "Rarity": 55,
+        "Price": 1350
+    },
+    {
         "Name": "Elephante Marching Band Hat",
         "Rarity": 82,
         "Price": 1350
@@ -100391,6 +104421,11 @@ var item_db_array = [
     },
     {
         "Name": "Fire Eggs",
+        "Rarity": 85,
+        "Price": 1350
+    },
+    {
+        "Name": "Fire Tape",
         "Rarity": 85,
         "Price": 1350
     },
@@ -100417,11 +104452,6 @@ var item_db_array = [
     {
         "Name": "Gold Mote",
         "Rarity": 68,
-        "Price": 1350
-    },
-    {
-        "Name": "Gold Stars Sheet",
-        "Rarity": 63,
         "Price": 1350
     },
     {
@@ -100545,11 +104575,6 @@ var item_db_array = [
         "Price": 1350
     },
     {
-        "Name": "Pull-up Bar",
-        "Rarity": 91,
-        "Price": 1350
-    },
-    {
         "Name": "Pumpkin Lantern",
         "Rarity": 86,
         "Price": 1350
@@ -100595,11 +104620,6 @@ var item_db_array = [
         "Price": 1350
     },
     {
-        "Name": "Shock Humour",
-        "Rarity": 76,
-        "Price": 1350
-    },
-    {
         "Name": "Shoyru Songs",
         "Rarity": 60,
         "Price": 1350
@@ -100632,11 +104652,6 @@ var item_db_array = [
     {
         "Name": "Stamp Bouncy Ball",
         "Rarity": 59,
-        "Price": 1350
-    },
-    {
-        "Name": "Star Shortbread Cookies",
-        "Rarity": 65,
         "Price": 1350
     },
     {
@@ -100780,6 +104795,11 @@ var item_db_array = [
         "Price": 1325
     },
     {
+        "Name": "Captain Scarblade Action Figure",
+        "Rarity": 90,
+        "Price": 1325
+    },
+    {
         "Name": "Cheesy Onion Sticks",
         "Rarity": 70,
         "Price": 1325
@@ -100840,11 +104860,6 @@ var item_db_array = [
         "Price": 1325
     },
     {
-        "Name": "Illusen Mints",
-        "Rarity": 84,
-        "Price": 1325
-    },
-    {
         "Name": "Knock on Wood",
         "Rarity": 70,
         "Price": 1325
@@ -100867,11 +104882,6 @@ var item_db_array = [
     {
         "Name": "Lupe Snowcone",
         "Rarity": 81,
-        "Price": 1325
-    },
-    {
-        "Name": "Main Codestone",
-        "Rarity": 40,
         "Price": 1325
     },
     {
@@ -101095,11 +105105,6 @@ var item_db_array = [
         "Price": 1300
     },
     {
-        "Name": "Arid Ruki Hat",
-        "Rarity": 84,
-        "Price": 1300
-    },
-    {
         "Name": "Bamboo Vase",
         "Rarity": 86,
         "Price": 1300
@@ -101180,11 +105185,6 @@ var item_db_array = [
         "Price": 1300
     },
     {
-        "Name": "Caffeine Free Neocola",
-        "Rarity": 25,
-        "Price": 1300
-    },
-    {
         "Name": "Cantaloupe Melon",
         "Rarity": 65,
         "Price": 1300
@@ -101192,6 +105192,11 @@ var item_db_array = [
     {
         "Name": "Cheery Zafara Mug",
         "Rarity": 86,
+        "Price": 1300
+    },
+    {
+        "Name": "Cheesy Potato Tower",
+        "Rarity": 68,
         "Price": 1300
     },
     {
@@ -101305,6 +105310,11 @@ var item_db_array = [
         "Price": 1300
     },
     {
+        "Name": "Dubloon Nuggets",
+        "Rarity": 78,
+        "Price": 1300
+    },
+    {
         "Name": "Earth Faerie Charm",
         "Rarity": 91,
         "Price": 1300
@@ -101365,6 +105375,11 @@ var item_db_array = [
         "Price": 1300
     },
     {
+        "Name": "Gelert Body Armour",
+        "Rarity": 90,
+        "Price": 1300
+    },
+    {
         "Name": "Ghostkerchief Island Cake",
         "Rarity": 86,
         "Price": 1300
@@ -101420,6 +105435,11 @@ var item_db_array = [
         "Price": 1300
     },
     {
+        "Name": "Herb Infused Soap",
+        "Rarity": 85,
+        "Price": 1300
+    },
+    {
         "Name": "Hissi Secrets",
         "Rarity": 80,
         "Price": 1300
@@ -101447,6 +105467,11 @@ var item_db_array = [
     {
         "Name": "Ice Lolly",
         "Rarity": 65,
+        "Price": 1300
+    },
+    {
+        "Name": "Illusen Mints",
+        "Rarity": 84,
         "Price": 1300
     },
     {
@@ -101630,6 +105655,11 @@ var item_db_array = [
         "Price": 1300
     },
     {
+        "Name": "One Bad Bruce",
+        "Rarity": 70,
+        "Price": 1300
+    },
+    {
         "Name": "Orange Fungus Petpet Ball",
         "Rarity": 86,
         "Price": 1300
@@ -101677,6 +105707,11 @@ var item_db_array = [
     {
         "Name": "Petpet Mints",
         "Rarity": 82,
+        "Price": 1300
+    },
+    {
+        "Name": "Picking Better Berries",
+        "Rarity": 70,
         "Price": 1300
     },
     {
@@ -102045,13 +106080,13 @@ var item_db_array = [
         "Price": 1300
     },
     {
-        "Name": "White Chocolate Draik",
-        "Rarity": 84,
+        "Name": "Winter Love Usuki Set",
+        "Rarity": 85,
         "Price": 1300
     },
     {
-        "Name": "Winter Love Usuki Set",
-        "Rarity": 85,
+        "Name": "Wonderful World of Gardening",
+        "Rarity": 45,
         "Price": 1300
     },
     {
@@ -102060,9 +106095,19 @@ var item_db_array = [
         "Price": 1300
     },
     {
+        "Name": "Zero Gravity and Loving It",
+        "Rarity": 80,
+        "Price": 1300
+    },
+    {
         "Name": "Zurroball Tournament Rule Book",
         "Rarity": 56,
         "Price": 1300
+    },
+    {
+        "Name": "Acaras in History",
+        "Rarity": 50,
+        "Price": 1275
     },
     {
         "Name": "Apple Jelly Apple",
@@ -102092,11 +106137,6 @@ var item_db_array = [
     {
         "Name": "Chocolate Grarrl Ice Cream",
         "Rarity": 87,
-        "Price": 1275
-    },
-    {
-        "Name": "Chocolate Peanut Butter Bagel",
-        "Rarity": 88,
         "Price": 1275
     },
     {
@@ -102155,8 +106195,8 @@ var item_db_array = [
         "Price": 1275
     },
     {
-        "Name": "Faerieland Postcards 10 Pack",
-        "Rarity": 85,
+        "Name": "Faerie Kitchen Cupboard",
+        "Rarity": 80,
         "Price": 1275
     },
     {
@@ -102315,8 +106355,18 @@ var item_db_array = [
         "Price": 1275
     },
     {
+        "Name": "Star Shortbread Cookies",
+        "Rarity": 65,
+        "Price": 1275
+    },
+    {
         "Name": "Sticker Album",
         "Rarity": 72,
+        "Price": 1275
+    },
+    {
+        "Name": "Sugar-Free Tooth Faerie Cake",
+        "Rarity": 86,
         "Price": 1275
     },
     {
@@ -102625,6 +106675,11 @@ var item_db_array = [
         "Price": 1250
     },
     {
+        "Name": "Grarrl Tailspike",
+        "Rarity": 96,
+        "Price": 1250
+    },
+    {
         "Name": "Green Acara Plushie",
         "Rarity": 65,
         "Price": 1250
@@ -102707,11 +106762,6 @@ var item_db_array = [
     {
         "Name": "Kreludan Encyclopedia",
         "Rarity": 55,
-        "Price": 1250
-    },
-    {
-        "Name": "Kreludan Jelly Cupcake",
-        "Rarity": 74,
         "Price": 1250
     },
     {
@@ -102945,6 +106995,11 @@ var item_db_array = [
         "Price": 1250
     },
     {
+        "Name": "Strawberry Cream Puff",
+        "Rarity": 88,
+        "Price": 1250
+    },
+    {
         "Name": "Strawberry Crumpet",
         "Rarity": 70,
         "Price": 1250
@@ -102960,6 +107015,11 @@ var item_db_array = [
         "Price": 1250
     },
     {
+        "Name": "Sunset Coral Armchair",
+        "Rarity": 87,
+        "Price": 1250
+    },
+    {
         "Name": "Swashbuckling Academy Background",
         "Rarity": 79,
         "Price": 1250
@@ -102972,11 +107032,6 @@ var item_db_array = [
     {
         "Name": "Talk Tuska",
         "Rarity": 78,
-        "Price": 1250
-    },
-    {
-        "Name": "Tangleberry Meerca Tail Fruit Tape",
-        "Rarity": 77,
         "Price": 1250
     },
     {
@@ -103017,11 +107072,6 @@ var item_db_array = [
     {
         "Name": "Usuki Sandcastle Set",
         "Rarity": 85,
-        "Price": 1250
-    },
-    {
-        "Name": "White Chocolate Ruki",
-        "Rarity": 76,
         "Price": 1250
     },
     {
@@ -103190,11 +107240,6 @@ var item_db_array = [
         "Price": 1225
     },
     {
-        "Name": "Kyrii Tank Top",
-        "Rarity": 97,
-        "Price": 1225
-    },
-    {
         "Name": "Large Avocado Smoothie",
         "Rarity": 80,
         "Price": 1225
@@ -103320,11 +107365,6 @@ var item_db_array = [
         "Price": 1225
     },
     {
-        "Name": "Wooden Practice Staff",
-        "Rarity": 65,
-        "Price": 1225
-    },
-    {
         "Name": "Yellow and Pink Spotted Parasol",
         "Rarity": 85,
         "Price": 1225
@@ -103347,6 +107387,11 @@ var item_db_array = [
     {
         "Name": "Acara Peanut Butter and Jelly Panini",
         "Rarity": 77,
+        "Price": 1200
+    },
+    {
+        "Name": "Apricot Gnorbu Juice",
+        "Rarity": 74,
         "Price": 1200
     },
     {
@@ -103386,6 +107431,11 @@ var item_db_array = [
     },
     {
         "Name": "Beautiful Bride Usuki",
+        "Rarity": 70,
+        "Price": 1200
+    },
+    {
+        "Name": "Being Stinky",
         "Rarity": 70,
         "Price": 1200
     },
@@ -103475,11 +107525,6 @@ var item_db_array = [
         "Price": 1200
     },
     {
-        "Name": "Bori Colouring Pages",
-        "Rarity": 75,
-        "Price": 1200
-    },
-    {
         "Name": "Borovan Time Scorchio Plushie",
         "Rarity": 82,
         "Price": 1200
@@ -103502,6 +107547,11 @@ var item_db_array = [
     {
         "Name": "Buzz Blaster",
         "Rarity": 92,
+        "Price": 1200
+    },
+    {
+        "Name": "Caffeine Free Neocola",
+        "Rarity": 25,
         "Price": 1200
     },
     {
@@ -103850,11 +107900,6 @@ var item_db_array = [
         "Price": 1200
     },
     {
-        "Name": "Green Lutari Plushie",
-        "Rarity": 58,
-        "Price": 1200
-    },
-    {
         "Name": "Green Mirror",
         "Rarity": 50,
         "Price": 1200
@@ -103935,18 +107980,8 @@ var item_db_array = [
         "Price": 1200
     },
     {
-        "Name": "How I Lost Me Leg",
-        "Rarity": 70,
-        "Price": 1200
-    },
-    {
         "Name": "Ice Crystal Ball",
         "Rarity": 87,
-        "Price": 1200
-    },
-    {
-        "Name": "Industrial Steel Drum",
-        "Rarity": 86,
         "Price": 1200
     },
     {
@@ -104007,6 +108042,11 @@ var item_db_array = [
     {
         "Name": "Kohl",
         "Rarity": 82,
+        "Price": 1200
+    },
+    {
+        "Name": "Kougra Face Paint",
+        "Rarity": 70,
         "Price": 1200
     },
     {
@@ -104130,11 +108170,6 @@ var item_db_array = [
         "Price": 1200
     },
     {
-        "Name": "Mint Chocolate Grundo",
-        "Rarity": 86,
-        "Price": 1200
-    },
-    {
         "Name": "Mint Chocolate Nimmo",
         "Rarity": 88,
         "Price": 1200
@@ -104162,6 +108197,11 @@ var item_db_array = [
     {
         "Name": "My 1st Shovel",
         "Rarity": 64,
+        "Price": 1200
+    },
+    {
+        "Name": "Mynci Nana-Chucks",
+        "Rarity": 93,
         "Price": 1200
     },
     {
@@ -104237,6 +108277,11 @@ var item_db_array = [
     {
         "Name": "Pink Cyclamen",
         "Rarity": 68,
+        "Price": 1200
+    },
+    {
+        "Name": "Pink Rock Slices",
+        "Rarity": 73,
         "Price": 1200
     },
     {
@@ -104340,8 +108385,18 @@ var item_db_array = [
         "Price": 1200
     },
     {
+        "Name": "Rock Mote",
+        "Rarity": 68,
+        "Price": 1200
+    },
+    {
         "Name": "Rolltop Desk",
         "Rarity": 88,
+        "Price": 1200
+    },
+    {
+        "Name": "Rotting Skeleton Stamp",
+        "Rarity": 50,
         "Price": 1200
     },
     {
@@ -104507,11 +108562,6 @@ var item_db_array = [
     {
         "Name": "Stripe, the Strange Skeith",
         "Rarity": 75,
-        "Price": 1200
-    },
-    {
-        "Name": "Substitute Greeting Card",
-        "Rarity": 78,
         "Price": 1200
     },
     {
@@ -104715,6 +108765,11 @@ var item_db_array = [
         "Price": 1200
     },
     {
+        "Name": "Wocky Hair Grenade",
+        "Rarity": 92,
+        "Price": 1200
+    },
+    {
         "Name": "Workout Bench",
         "Rarity": 90,
         "Price": 1200
@@ -104735,18 +108790,8 @@ var item_db_array = [
         "Price": 1200
     },
     {
-        "Name": "Yellow Cybunny Plushie",
-        "Rarity": 58,
-        "Price": 1200
-    },
-    {
         "Name": "Yellow Gummy Meerca",
         "Rarity": 87,
-        "Price": 1200
-    },
-    {
-        "Name": "Yellow Lutari Plushie",
-        "Rarity": 60,
         "Price": 1200
     },
     {
@@ -104840,6 +108885,11 @@ var item_db_array = [
         "Price": 1175
     },
     {
+        "Name": "Guide to Bruces",
+        "Rarity": 70,
+        "Price": 1175
+    },
+    {
         "Name": "Kacheek Tree Sculpture",
         "Rarity": 84,
         "Price": 1175
@@ -104856,6 +108906,11 @@ var item_db_array = [
     },
     {
         "Name": "Lhika Burrtail",
+        "Rarity": 35,
+        "Price": 1175
+    },
+    {
+        "Name": "Lime Chia Pop",
         "Rarity": 35,
         "Price": 1175
     },
@@ -104930,11 +108985,6 @@ var item_db_array = [
         "Price": 1175
     },
     {
-        "Name": "Rock Mote",
-        "Rarity": 68,
-        "Price": 1175
-    },
-    {
         "Name": "Roseatte Latte",
         "Rarity": 83,
         "Price": 1175
@@ -104962,6 +109012,11 @@ var item_db_array = [
     {
         "Name": "Snow Gyro",
         "Rarity": 78,
+        "Price": 1175
+    },
+    {
+        "Name": "Sour Apple Gummy Gloves",
+        "Rarity": 84,
         "Price": 1175
     },
     {
@@ -105210,6 +109265,11 @@ var item_db_array = [
         "Price": 1150
     },
     {
+        "Name": "Gold Mote Lollypop",
+        "Rarity": 67,
+        "Price": 1150
+    },
+    {
         "Name": "Grape Arnold Lolly",
         "Rarity": 86,
         "Price": 1150
@@ -105247,6 +109307,11 @@ var item_db_array = [
     {
         "Name": "Honey Glazed Ham",
         "Rarity": 84,
+        "Price": 1150
+    },
+    {
+        "Name": "How I Lost Me Leg",
+        "Rarity": 70,
         "Price": 1150
     },
     {
@@ -105310,6 +109375,16 @@ var item_db_array = [
         "Price": 1150
     },
     {
+        "Name": "Kreludan Jelly Cupcake",
+        "Rarity": 74,
+        "Price": 1150
+    },
+    {
+        "Name": "Kyrii Tank Top",
+        "Rarity": 97,
+        "Price": 1150
+    },
+    {
         "Name": "Large Blue Elephante Bean Bag",
         "Rarity": 83,
         "Price": 1150
@@ -105345,6 +109420,11 @@ var item_db_array = [
         "Price": 1150
     },
     {
+        "Name": "Marshmallow Sweet Potato",
+        "Rarity": 77,
+        "Price": 1150
+    },
+    {
         "Name": "Masking Tape",
         "Rarity": 66,
         "Price": 1150
@@ -105370,11 +109450,6 @@ var item_db_array = [
         "Price": 1150
     },
     {
-        "Name": "Mushroom Sandwich",
-        "Rarity": 84,
-        "Price": 1150
-    },
-    {
         "Name": "Mystery Island Heads Stamp",
         "Rarity": 71,
         "Price": 1150
@@ -105382,11 +109457,6 @@ var item_db_array = [
     {
         "Name": "Nimmo Rice Ball",
         "Rarity": 77,
-        "Price": 1150
-    },
-    {
-        "Name": "One Bad Bruce",
-        "Rarity": 70,
         "Price": 1150
     },
     {
@@ -105485,6 +109555,11 @@ var item_db_array = [
         "Price": 1150
     },
     {
+        "Name": "Substitute Greeting Card",
+        "Rarity": 78,
+        "Price": 1150
+    },
+    {
         "Name": "The Book of Ice",
         "Rarity": 80,
         "Price": 1150
@@ -105550,6 +109625,11 @@ var item_db_array = [
         "Price": 1150
     },
     {
+        "Name": "White Chocolate Draik",
+        "Rarity": 84,
+        "Price": 1150
+    },
+    {
         "Name": "Witch Bori Broom",
         "Rarity": 72,
         "Price": 1150
@@ -105557,11 +109637,6 @@ var item_db_array = [
     {
         "Name": "Wooden Vampire Stake",
         "Rarity": 78,
-        "Price": 1150
-    },
-    {
-        "Name": "Woodland Koi Plushie",
-        "Rarity": 89,
         "Price": 1150
     },
     {
@@ -105760,6 +109835,11 @@ var item_db_array = [
         "Price": 1125
     },
     {
+        "Name": "Interesting Ixi",
+        "Rarity": 70,
+        "Price": 1125
+    },
+    {
         "Name": "Jewellery Box",
         "Rarity": 90,
         "Price": 1125
@@ -105792,6 +109872,11 @@ var item_db_array = [
     {
         "Name": "Maple Doughnut",
         "Rarity": 83,
+        "Price": 1125
+    },
+    {
+        "Name": "Megapepper Pizza",
+        "Rarity": 36,
         "Price": 1125
     },
     {
@@ -105870,6 +109955,11 @@ var item_db_array = [
         "Price": 1125
     },
     {
+        "Name": "Purple Invisihat",
+        "Rarity": 60,
+        "Price": 1125
+    },
+    {
         "Name": "Rainbow Bed",
         "Rarity": 84,
         "Price": 1125
@@ -105935,6 +110025,11 @@ var item_db_array = [
         "Price": 1125
     },
     {
+        "Name": "Tiffanys Moehog Necklace",
+        "Rarity": 78,
+        "Price": 1125
+    },
+    {
         "Name": "Tiger Table",
         "Rarity": 86,
         "Price": 1125
@@ -105947,11 +110042,6 @@ var item_db_array = [
     {
         "Name": "Tower-o-Boxes",
         "Rarity": 60,
-        "Price": 1125
-    },
-    {
-        "Name": "Turkey Salad",
-        "Rarity": 87,
         "Price": 1125
     },
     {
@@ -106060,6 +110150,11 @@ var item_db_array = [
         "Price": 1100
     },
     {
+        "Name": "Borovan Time Asparagus Chia Plushie",
+        "Rarity": 88,
+        "Price": 1100
+    },
+    {
         "Name": "Broken Desert Pottery",
         "Rarity": 88,
         "Price": 1100
@@ -106107,11 +110202,6 @@ var item_db_array = [
     {
         "Name": "Cheese Xweetok",
         "Rarity": 86,
-        "Price": 1100
-    },
-    {
-        "Name": "Cheesy Sausage Roll",
-        "Rarity": 87,
         "Price": 1100
     },
     {
@@ -106310,6 +110400,11 @@ var item_db_array = [
         "Price": 1100
     },
     {
+        "Name": "Flight of the Battle Faerie",
+        "Rarity": 70,
+        "Price": 1100
+    },
+    {
         "Name": "Florist Jubjub Hat",
         "Rarity": 83,
         "Price": 1100
@@ -106332,11 +110427,6 @@ var item_db_array = [
     {
         "Name": "Ghostly Greetings Gift Basket",
         "Rarity": 74,
-        "Price": 1100
-    },
-    {
-        "Name": "Glass Organ",
-        "Rarity": 83,
         "Price": 1100
     },
     {
@@ -106395,11 +110485,6 @@ var item_db_array = [
         "Price": 1100
     },
     {
-        "Name": "Guide to Bruces",
-        "Rarity": 70,
-        "Price": 1100
-    },
-    {
         "Name": "Halloween Aisha Stamp",
         "Rarity": 70,
         "Price": 1100
@@ -106407,11 +110492,6 @@ var item_db_array = [
     {
         "Name": "Halloween Gelert Plushie",
         "Rarity": 87,
-        "Price": 1100
-    },
-    {
-        "Name": "Holiday Colouring Book",
-        "Rarity": 76,
         "Price": 1100
     },
     {
@@ -106446,6 +110526,11 @@ var item_db_array = [
     },
     {
         "Name": "Illusen Day Cake",
+        "Rarity": 88,
+        "Price": 1100
+    },
+    {
+        "Name": "Inkade",
         "Rarity": 88,
         "Price": 1100
     },
@@ -106547,11 +110632,6 @@ var item_db_array = [
     {
         "Name": "Magaral",
         "Rarity": 55,
-        "Price": 1100
-    },
-    {
-        "Name": "MAGAX Poster",
-        "Rarity": 80,
         "Price": 1100
     },
     {
@@ -106750,11 +110830,6 @@ var item_db_array = [
         "Price": 1100
     },
     {
-        "Name": "Sakhmet Natives",
-        "Rarity": 43,
-        "Price": 1100
-    },
-    {
         "Name": "Salisbury Steak",
         "Rarity": 85,
         "Price": 1100
@@ -106802,11 +110877,6 @@ var item_db_array = [
     {
         "Name": "Simple Yellow Rug",
         "Rarity": 20,
-        "Price": 1100
-    },
-    {
-        "Name": "Skeith Magic",
-        "Rarity": 70,
         "Price": 1100
     },
     {
@@ -106980,11 +111050,6 @@ var item_db_array = [
         "Price": 1100
     },
     {
-        "Name": "Twirly Plant",
-        "Rarity": 98,
-        "Price": 1100
-    },
-    {
         "Name": "Tyrowbee",
         "Rarity": 76,
         "Price": 1100
@@ -107022,11 +111087,6 @@ var item_db_array = [
     {
         "Name": "Usuki Magical Shampoo",
         "Rarity": 76,
-        "Price": 1100
-    },
-    {
-        "Name": "Valentines Day Tree",
-        "Rarity": 78,
         "Price": 1100
     },
     {
@@ -107340,6 +111400,11 @@ var item_db_array = [
         "Price": 1075
     },
     {
+        "Name": "Leaps and Bounds",
+        "Rarity": 70,
+        "Price": 1075
+    },
+    {
         "Name": "Limestone Doughnutfruit",
         "Rarity": 76,
         "Price": 1075
@@ -107397,11 +111462,6 @@ var item_db_array = [
     {
         "Name": "Orange Smothered Swiss Roll",
         "Rarity": 84,
-        "Price": 1075
-    },
-    {
-        "Name": "Pear Tart",
-        "Rarity": 85,
         "Price": 1075
     },
     {
@@ -107465,6 +111525,11 @@ var item_db_array = [
         "Price": 1075
     },
     {
+        "Name": "Skeith Magic",
+        "Rarity": 70,
+        "Price": 1075
+    },
+    {
         "Name": "Slug Flakes",
         "Rarity": 50,
         "Price": 1075
@@ -107510,6 +111575,11 @@ var item_db_array = [
         "Price": 1075
     },
     {
+        "Name": "The Mystery Of The Shy Shoyru",
+        "Rarity": 89,
+        "Price": 1075
+    },
+    {
         "Name": "The Natural Decorator",
         "Rarity": 71,
         "Price": 1075
@@ -107527,11 +111597,6 @@ var item_db_array = [
     {
         "Name": "Two in One Hair Care",
         "Rarity": 60,
-        "Price": 1075
-    },
-    {
-        "Name": "Tyrannian Poogle Plushie",
-        "Rarity": 86,
         "Price": 1075
     },
     {
@@ -107655,11 +111720,6 @@ var item_db_array = [
         "Price": 1050
     },
     {
-        "Name": "Celebratory Gift Basket",
-        "Rarity": 79,
-        "Price": 1050
-    },
-    {
         "Name": "Chatter",
         "Rarity": 75,
         "Price": 1050
@@ -107722,6 +111782,11 @@ var item_db_array = [
     {
         "Name": "Dark Chocolate Tonu",
         "Rarity": 81,
+        "Price": 1050
+    },
+    {
+        "Name": "Dark Neovian Eyrie Sandals",
+        "Rarity": 92,
         "Price": 1050
     },
     {
@@ -107980,6 +112045,11 @@ var item_db_array = [
         "Price": 1050
     },
     {
+        "Name": "Mushroom Sandwich",
+        "Rarity": 84,
+        "Price": 1050
+    },
+    {
         "Name": "Mysterious Kau Wig",
         "Rarity": 83,
         "Price": 1050
@@ -108002,11 +112072,6 @@ var item_db_array = [
     {
         "Name": "Orange Flavoured Borovan",
         "Rarity": 88,
-        "Price": 1050
-    },
-    {
-        "Name": "Peophin Dance Fan",
-        "Rarity": 81,
         "Price": 1050
     },
     {
@@ -108132,11 +112197,6 @@ var item_db_array = [
     {
         "Name": "The Negg Faerie Diaries",
         "Rarity": 84,
-        "Price": 1050
-    },
-    {
-        "Name": "Tiffanys Moehog Necklace",
-        "Rarity": 78,
         "Price": 1050
     },
     {
@@ -108400,11 +112460,6 @@ var item_db_array = [
         "Price": 1025
     },
     {
-        "Name": "Robot Fashions",
-        "Rarity": 69,
-        "Price": 1025
-    },
-    {
         "Name": "Scorchio Forest Archer Bow and Arrow",
         "Rarity": 83,
         "Price": 1025
@@ -108532,11 +112587,6 @@ var item_db_array = [
     {
         "Name": "Aquaberry Kiko Candy Floss",
         "Rarity": 75,
-        "Price": 1000
-    },
-    {
-        "Name": "Autumn Birch Tree",
-        "Rarity": 65,
         "Price": 1000
     },
     {
@@ -108707,6 +112757,11 @@ var item_db_array = [
     {
         "Name": "Bori Tennis Set",
         "Rarity": 58,
+        "Price": 1000
+    },
+    {
+        "Name": "Boween",
+        "Rarity": 88,
         "Price": 1000
     },
     {
@@ -108935,11 +112990,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Chocolate Covered Strawberries",
-        "Rarity": 86,
-        "Price": 1000
-    },
-    {
         "Name": "Chocolate Creme Shell",
         "Rarity": 81,
         "Price": 1000
@@ -108975,6 +113025,11 @@ var item_db_array = [
         "Price": 1000
     },
     {
+        "Name": "Chocolate Peanut Butter Bagel",
+        "Rarity": 88,
+        "Price": 1000
+    },
+    {
         "Name": "Chocolate Perfume",
         "Rarity": 66,
         "Price": 1000
@@ -108987,11 +113042,6 @@ var item_db_array = [
     {
         "Name": "Chocolate Top Hat and Cane",
         "Rarity": 89,
-        "Price": 1000
-    },
-    {
-        "Name": "Christmas Kacheek Plushie",
-        "Rarity": 88,
         "Price": 1000
     },
     {
@@ -109242,6 +113292,11 @@ var item_db_array = [
     {
         "Name": "Discounted Cake",
         "Rarity": 65,
+        "Price": 1000
+    },
+    {
+        "Name": "Double Mustard Double Bacon Hot Dog",
+        "Rarity": 67,
         "Price": 1000
     },
     {
@@ -109560,11 +113615,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Garlic Kebab",
-        "Rarity": 70,
-        "Price": 1000
-    },
-    {
         "Name": "Gelert Sporting Records",
         "Rarity": 74,
         "Price": 1000
@@ -109715,11 +113765,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Grey Cobrall Plushie",
-        "Rarity": 75,
-        "Price": 1000
-    },
-    {
         "Name": "Grey Doughnutfruit",
         "Rarity": 86,
         "Price": 1000
@@ -109800,6 +113845,16 @@ var item_db_array = [
         "Price": 1000
     },
     {
+        "Name": "I Love Captain Scarblade Hat",
+        "Rarity": 90,
+        "Price": 1000
+    },
+    {
+        "Name": "Ice Blocks",
+        "Rarity": 66,
+        "Price": 1000
+    },
+    {
         "Name": "Ice Cream Factory Game Guide",
         "Rarity": 74,
         "Price": 1000
@@ -109832,11 +113887,6 @@ var item_db_array = [
     {
         "Name": "Illusen Day Jelly",
         "Rarity": 89,
-        "Price": 1000
-    },
-    {
-        "Name": "Inkade",
-        "Rarity": 88,
         "Price": 1000
     },
     {
@@ -109902,11 +113952,6 @@ var item_db_array = [
     {
         "Name": "Kacheek Fishing Trousers",
         "Rarity": 76,
-        "Price": 1000
-    },
-    {
-        "Name": "Kacheek Musician Hat and Wig",
-        "Rarity": 84,
         "Price": 1000
     },
     {
@@ -110037,11 +114082,6 @@ var item_db_array = [
     {
         "Name": "Large Spirulina Smoothie",
         "Rarity": 63,
-        "Price": 1000
-    },
-    {
-        "Name": "Leaps and Bounds",
-        "Rarity": 70,
         "Price": 1000
     },
     {
@@ -110210,11 +114250,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Megapepper Pizza",
-        "Rarity": 36,
-        "Price": 1000
-    },
-    {
         "Name": "Mellophone",
         "Rarity": 81,
         "Price": 1000
@@ -110257,6 +114292,11 @@ var item_db_array = [
     {
         "Name": "Mint Chocolate Chip Smore",
         "Rarity": 87,
+        "Price": 1000
+    },
+    {
+        "Name": "Mint Chocolate Grundo",
+        "Rarity": 86,
         "Price": 1000
     },
     {
@@ -110322,11 +114362,6 @@ var item_db_array = [
     {
         "Name": "Mushroom Moisturiser",
         "Rarity": 65,
-        "Price": 1000
-    },
-    {
-        "Name": "Mushroom Soap",
-        "Rarity": 67,
         "Price": 1000
     },
     {
@@ -110620,11 +114655,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Pink Glittery Soap",
-        "Rarity": 67,
-        "Price": 1000
-    },
-    {
         "Name": "Pink Hot Dog",
         "Rarity": 80,
         "Price": 1000
@@ -110637,11 +114667,6 @@ var item_db_array = [
     {
         "Name": "Pink Poogle Table Lamp",
         "Rarity": 85,
-        "Price": 1000
-    },
-    {
-        "Name": "Pirate Tonu Plushie",
-        "Rarity": 84,
         "Price": 1000
     },
     {
@@ -110840,8 +114865,8 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Red Lutari Plushie",
-        "Rarity": 59,
+        "Name": "Red Marbleman T-shirt",
+        "Rarity": 90,
         "Price": 1000
     },
     {
@@ -110910,11 +114935,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Roo Bottle Opener",
-        "Rarity": 63,
-        "Price": 1000
-    },
-    {
         "Name": "Roseatte Ice Cream",
         "Rarity": 66,
         "Price": 1000
@@ -110967,6 +114987,11 @@ var item_db_array = [
     {
         "Name": "Scorchio Seaweed Cake",
         "Rarity": 84,
+        "Price": 1000
+    },
+    {
+        "Name": "Scout Unit",
+        "Rarity": 92,
         "Price": 1000
     },
     {
@@ -111250,11 +115275,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Spyder Notebook",
-        "Rarity": 75,
-        "Price": 1000
-    },
-    {
         "Name": "Square Stepping Stone",
         "Rarity": 85,
         "Price": 1000
@@ -111375,6 +115395,11 @@ var item_db_array = [
         "Price": 1000
     },
     {
+        "Name": "Tangleberry Meerca Tail Fruit Tape",
+        "Rarity": 77,
+        "Price": 1000
+    },
+    {
         "Name": "Tangy Tropic Slushie",
         "Rarity": 70,
         "Price": 1000
@@ -111407,11 +115432,6 @@ var item_db_array = [
     {
         "Name": "The Meercas Bad Day",
         "Rarity": 50,
-        "Price": 1000
-    },
-    {
-        "Name": "The Mystery Of The Shy Shoyru",
-        "Rarity": 89,
         "Price": 1000
     },
     {
@@ -111500,6 +115520,11 @@ var item_db_array = [
         "Price": 1000
     },
     {
+        "Name": "Tome of Selket",
+        "Rarity": 23,
+        "Price": 1000
+    },
+    {
         "Name": "Tongue Shrinker",
         "Rarity": 65,
         "Price": 1000
@@ -111525,11 +115550,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Turtum Cookie",
-        "Rarity": 65,
-        "Price": 1000
-    },
-    {
         "Name": "Tusk Care For Moehogs",
         "Rarity": 88,
         "Price": 1000
@@ -111547,6 +115567,11 @@ var item_db_array = [
     {
         "Name": "Twirly Fruit Kikotube",
         "Rarity": 78,
+        "Price": 1000
+    },
+    {
+        "Name": "Twirly Plant",
+        "Rarity": 98,
         "Price": 1000
     },
     {
@@ -111650,11 +115675,6 @@ var item_db_array = [
         "Price": 1000
     },
     {
-        "Name": "Variations on a Gormball",
-        "Rarity": 72,
-        "Price": 1000
-    },
-    {
         "Name": "Vegetarian Kyrii Sandwich",
         "Rarity": 88,
         "Price": 1000
@@ -111697,6 +115717,11 @@ var item_db_array = [
     {
         "Name": "Weathered Blue Vase",
         "Rarity": 78,
+        "Price": 1000
+    },
+    {
+        "Name": "Weight Lifting for Jetsams",
+        "Rarity": 70,
         "Price": 1000
     },
     {
@@ -111810,6 +115835,11 @@ var item_db_array = [
         "Price": 1000
     },
     {
+        "Name": "Yellow Yurble Plushie",
+        "Rarity": 80,
+        "Price": 1000
+    },
+    {
         "Name": "Young Rompers Zafara Shoes",
         "Rarity": 82,
         "Price": 1000
@@ -111857,6 +115887,11 @@ var item_db_array = [
     {
         "Name": "A New Day",
         "Rarity": 71,
+        "Price": 990
+    },
+    {
+        "Name": "Aubergine Wrap",
+        "Rarity": 88,
         "Price": 990
     },
     {
@@ -112012,11 +116047,6 @@ var item_db_array = [
     {
         "Name": "History of the Brightvale Book Shop",
         "Rarity": 78,
-        "Price": 990
-    },
-    {
-        "Name": "Hula Girl Usuki",
-        "Rarity": 60,
         "Price": 990
     },
     {
@@ -112205,11 +116235,6 @@ var item_db_array = [
         "Price": 990
     },
     {
-        "Name": "Tome of Selket",
-        "Rarity": 23,
-        "Price": 990
-    },
-    {
         "Name": "Tree Species Native to the Haunted Woods",
         "Rarity": 65,
         "Price": 990
@@ -112320,8 +116345,8 @@ var item_db_array = [
         "Price": 980
     },
     {
-        "Name": "Chia Clown Punching Bag",
-        "Rarity": 88,
+        "Name": "Cheesy Sausage Roll",
+        "Rarity": 87,
         "Price": 980
     },
     {
@@ -112410,11 +116435,6 @@ var item_db_array = [
         "Price": 980
     },
     {
-        "Name": "Green Glittery Soap",
-        "Rarity": 66,
-        "Price": 980
-    },
-    {
         "Name": "Grilled Sandfish",
         "Rarity": 83,
         "Price": 980
@@ -112492,6 +116512,11 @@ var item_db_array = [
     {
         "Name": "Moehog Poetry",
         "Rarity": 70,
+        "Price": 980
+    },
+    {
+        "Name": "Neo Cola Chia Pop",
+        "Rarity": 55,
         "Price": 980
     },
     {
@@ -112585,11 +116610,6 @@ var item_db_array = [
         "Price": 980
     },
     {
-        "Name": "Strawberry and Chocolate Yurble Cupcake",
-        "Rarity": 88,
-        "Price": 980
-    },
-    {
         "Name": "Sweet Potato Smoothie",
         "Rarity": 86,
         "Price": 980
@@ -112637,6 +116657,11 @@ var item_db_array = [
     {
         "Name": "Yellow Ogrin Plushie",
         "Rarity": 64,
+        "Price": 980
+    },
+    {
+        "Name": "Yellow Tuskaninny Plushie",
+        "Rarity": 84,
         "Price": 980
     },
     {
@@ -112710,6 +116735,11 @@ var item_db_array = [
         "Price": 970
     },
     {
+        "Name": "Kacheek Musician Hat and Wig",
+        "Rarity": 84,
+        "Price": 970
+    },
+    {
         "Name": "Lemon Faerie Bubble",
         "Rarity": 65,
         "Price": 970
@@ -112772,16 +116802,6 @@ var item_db_array = [
     {
         "Name": "Snuffly Folder",
         "Rarity": 61,
-        "Price": 970
-    },
-    {
-        "Name": "Spinach and Feta Pie",
-        "Rarity": 82,
-        "Price": 970
-    },
-    {
-        "Name": "Toast Treats",
-        "Rarity": 86,
         "Price": 970
     },
     {
@@ -112935,6 +116955,11 @@ var item_db_array = [
         "Price": 950
     },
     {
+        "Name": "Black Velvet Cloak",
+        "Rarity": 96,
+        "Price": 950
+    },
+    {
         "Name": "Blue Chia Plushie",
         "Rarity": 38,
         "Price": 950
@@ -112967,11 +116992,6 @@ var item_db_array = [
     {
         "Name": "Bori Helmet",
         "Rarity": 90,
-        "Price": 950
-    },
-    {
-        "Name": "Boween",
-        "Rarity": 88,
         "Price": 950
     },
     {
@@ -113035,7 +117055,7 @@ var item_db_array = [
         "Price": 950
     },
     {
-        "Name": "Cooler Than You Perfume",
+        "Name": "Cranberry Scone",
         "Rarity": 82,
         "Price": 950
     },
@@ -113230,13 +117250,13 @@ var item_db_array = [
         "Price": 950
     },
     {
-        "Name": "Nedler Plushie",
-        "Rarity": 82,
+        "Name": "Mushroom Soap",
+        "Rarity": 67,
         "Price": 950
     },
     {
-        "Name": "Neo Cola Chia Pop",
-        "Rarity": 55,
+        "Name": "Nedler Plushie",
+        "Rarity": 82,
         "Price": 950
     },
     {
@@ -113385,6 +117405,11 @@ var item_db_array = [
         "Price": 950
     },
     {
+        "Name": "Snow Gnorbu Plushie",
+        "Rarity": 83,
+        "Price": 950
+    },
+    {
         "Name": "Snowberry Rocketpop",
         "Rarity": 73,
         "Price": 950
@@ -113415,6 +117440,11 @@ var item_db_array = [
         "Price": 950
     },
     {
+        "Name": "Strawberry and Chocolate Yurble Cupcake",
+        "Rarity": 88,
+        "Price": 950
+    },
+    {
         "Name": "Strawberry Poogle Cupcake",
         "Rarity": 88,
         "Price": 950
@@ -113442,6 +117472,11 @@ var item_db_array = [
     {
         "Name": "The Great Koi Caper",
         "Rarity": 89,
+        "Price": 950
+    },
+    {
+        "Name": "Tropical Fruit Smoothie",
+        "Rarity": 15,
         "Price": 950
     },
     {
@@ -113795,6 +117830,11 @@ var item_db_array = [
         "Price": 930
     },
     {
+        "Name": "Parasol of Unfortunate Demise",
+        "Rarity": 98,
+        "Price": 930
+    },
+    {
         "Name": "Pasta Nest",
         "Rarity": 89,
         "Price": 930
@@ -113912,11 +117952,6 @@ var item_db_array = [
     {
         "Name": "Bludberry Coral Lolly",
         "Rarity": 66,
-        "Price": 920
-    },
-    {
-        "Name": "Colourful Charm Bracelet",
-        "Rarity": 92,
         "Price": 920
     },
     {
@@ -114065,11 +118100,6 @@ var item_db_array = [
         "Price": 910
     },
     {
-        "Name": "Gelert Body Armour",
-        "Rarity": 90,
-        "Price": 910
-    },
-    {
         "Name": "Glowing Chalk",
         "Rarity": 68,
         "Price": 910
@@ -114132,6 +118162,11 @@ var item_db_array = [
     {
         "Name": "Anshu Stamp",
         "Rarity": 82,
+        "Price": 900
+    },
+    {
+        "Name": "Autumn Birch Tree",
+        "Rarity": 65,
         "Price": 900
     },
     {
@@ -114295,11 +118330,6 @@ var item_db_array = [
         "Price": 900
     },
     {
-        "Name": "Cranberry Scone",
-        "Rarity": 82,
-        "Price": 900
-    },
-    {
         "Name": "Curses of Qasala",
         "Rarity": 89,
         "Price": 900
@@ -114335,11 +118365,6 @@ var item_db_array = [
         "Price": 900
     },
     {
-        "Name": "Faerie Kitchen Cupboard",
-        "Rarity": 80,
-        "Price": 900
-    },
-    {
         "Name": "Faerie Saxophone",
         "Rarity": 81,
         "Price": 900
@@ -114362,6 +118387,11 @@ var item_db_array = [
     {
         "Name": "Festive Seasonal Usuki",
         "Rarity": 95,
+        "Price": 900
+    },
+    {
+        "Name": "Fetch! Stamp",
+        "Rarity": 60,
         "Price": 900
     },
     {
@@ -114395,6 +118425,16 @@ var item_db_array = [
         "Price": 900
     },
     {
+        "Name": "Garlic Kebab",
+        "Rarity": 70,
+        "Price": 900
+    },
+    {
+        "Name": "Glass Organ",
+        "Rarity": 83,
+        "Price": 900
+    },
+    {
         "Name": "Glitter Moon Candy",
         "Rarity": 68,
         "Price": 900
@@ -114402,11 +118442,6 @@ var item_db_array = [
     {
         "Name": "Glittery Rainbow Soap",
         "Rarity": 75,
-        "Price": 900
-    },
-    {
-        "Name": "Gloomy Drums",
-        "Rarity": 80,
         "Price": 900
     },
     {
@@ -114790,11 +118825,6 @@ var item_db_array = [
         "Price": 900
     },
     {
-        "Name": "Rose Petal Crisps",
-        "Rarity": 64,
-        "Price": 900
-    },
-    {
         "Name": "Ruby Heart Pendant",
         "Rarity": 88,
         "Price": 900
@@ -114837,6 +118867,11 @@ var item_db_array = [
     {
         "Name": "Snowberry Poogle Cake",
         "Rarity": 88,
+        "Price": 900
+    },
+    {
+        "Name": "Spinach and Feta Pie",
+        "Rarity": 82,
         "Price": 900
     },
     {
@@ -114927,11 +118962,6 @@ var item_db_array = [
     {
         "Name": "Thistleberry Ice Lolly",
         "Rarity": 88,
-        "Price": 900
-    },
-    {
-        "Name": "Tiny Snowman",
-        "Rarity": 72,
         "Price": 900
     },
     {
@@ -115125,11 +119155,6 @@ var item_db_array = [
         "Price": 890
     },
     {
-        "Name": "Halloween Dribblet Plushie",
-        "Rarity": 88,
-        "Price": 890
-    },
-    {
         "Name": "Haunted Woods Flag",
         "Rarity": 89,
         "Price": 890
@@ -115177,11 +119202,6 @@ var item_db_array = [
     {
         "Name": "Orange Chocolate Koi",
         "Rarity": 83,
-        "Price": 890
-    },
-    {
-        "Name": "Pink Rock Slices",
-        "Rarity": 73,
         "Price": 890
     },
     {
@@ -115315,11 +119335,6 @@ var item_db_array = [
         "Price": 880
     },
     {
-        "Name": "Dark Neovian Eyrie Sandals",
-        "Rarity": 92,
-        "Price": 880
-    },
-    {
         "Name": "Doughnut Folder",
         "Rarity": 82,
         "Price": 880
@@ -115350,6 +119365,11 @@ var item_db_array = [
         "Price": 880
     },
     {
+        "Name": "Fire Sword",
+        "Rarity": 90,
+        "Price": 880
+    },
+    {
         "Name": "Flamenco Peophin Shoes",
         "Rarity": 83,
         "Price": 880
@@ -115372,6 +119392,11 @@ var item_db_array = [
     {
         "Name": "Glitter Heart Candy",
         "Rarity": 66,
+        "Price": 880
+    },
+    {
+        "Name": "Gloomy Drums",
+        "Rarity": 80,
         "Price": 880
     },
     {
@@ -115415,6 +119440,11 @@ var item_db_array = [
         "Price": 880
     },
     {
+        "Name": "MAGAX Poster",
+        "Rarity": 80,
+        "Price": 880
+    },
+    {
         "Name": "Magic Hanky",
         "Rarity": 68,
         "Price": 880
@@ -115455,8 +119485,8 @@ var item_db_array = [
         "Price": 880
     },
     {
-        "Name": "Sketch Loaf",
-        "Rarity": 89,
+        "Name": "Snow Faerie Darts",
+        "Rarity": 90,
         "Price": 880
     },
     {
@@ -115492,6 +119522,11 @@ var item_db_array = [
     {
         "Name": "Tomb Chips",
         "Rarity": 86,
+        "Price": 880
+    },
+    {
+        "Name": "Turtum Cookie",
+        "Rarity": 65,
         "Price": 880
     },
     {
@@ -115602,11 +119637,6 @@ var item_db_array = [
     {
         "Name": "Purblare Fruit Bowl",
         "Rarity": 91,
-        "Price": 870
-    },
-    {
-        "Name": "Purple Invisihat",
-        "Rarity": 60,
         "Price": 870
     },
     {
@@ -115940,6 +119970,11 @@ var item_db_array = [
         "Price": 850
     },
     {
+        "Name": "Purse Cookie",
+        "Rarity": 75,
+        "Price": 850
+    },
+    {
         "Name": "Pyranegg",
         "Rarity": 87,
         "Price": 850
@@ -115997,6 +120032,11 @@ var item_db_array = [
     {
         "Name": "Spooky Tape",
         "Rarity": 87,
+        "Price": 850
+    },
+    {
+        "Name": "Spyder Notebook",
+        "Rarity": 75,
         "Price": 850
     },
     {
@@ -116065,11 +120105,6 @@ var item_db_array = [
         "Price": 850
     },
     {
-        "Name": "Yellow Yurble Plushie",
-        "Rarity": 80,
-        "Price": 850
-    },
-    {
         "Name": "Yurble Native Lolo Wig",
         "Rarity": 84,
         "Price": 850
@@ -116112,6 +120147,11 @@ var item_db_array = [
     {
         "Name": "Enchanted Cobweb",
         "Rarity": 89,
+        "Price": 840
+    },
+    {
+        "Name": "Faerie Dartboard",
+        "Rarity": 65,
         "Price": 840
     },
     {
@@ -116215,11 +120255,6 @@ var item_db_array = [
         "Price": 830
     },
     {
-        "Name": "Felly Jelly Yellow Candy",
-        "Rarity": 70,
-        "Price": 830
-    },
-    {
         "Name": "Fire and Ice Slushie",
         "Rarity": 88,
         "Price": 830
@@ -116240,8 +120275,8 @@ var item_db_array = [
         "Price": 830
     },
     {
-        "Name": "Ice Meat Loaf",
-        "Rarity": 87,
+        "Name": "Hula Girl Usuki",
+        "Rarity": 60,
         "Price": 830
     },
     {
@@ -116287,11 +120322,6 @@ var item_db_array = [
     {
         "Name": "Purple Vandagyre Plushie",
         "Rarity": 95,
-        "Price": 830
-    },
-    {
-        "Name": "Purse Cookie",
-        "Rarity": 75,
         "Price": 830
     },
     {
@@ -116405,11 +120435,6 @@ var item_db_array = [
         "Price": 820
     },
     {
-        "Name": "Spicy Coconut Soup",
-        "Rarity": 83,
-        "Price": 820
-    },
-    {
         "Name": "Stick of Butter",
         "Rarity": 90,
         "Price": 820
@@ -116455,11 +120480,6 @@ var item_db_array = [
         "Price": 810
     },
     {
-        "Name": "Colourful Uni Folder",
-        "Rarity": 78,
-        "Price": 810
-    },
-    {
         "Name": "Desert Rider Peophin Shoes",
         "Rarity": 80,
         "Price": 810
@@ -116482,11 +120502,6 @@ var item_db_array = [
     {
         "Name": "Hoppers Hayday",
         "Rarity": 70,
-        "Price": 810
-    },
-    {
-        "Name": "Ice Blocks",
-        "Rarity": 66,
         "Price": 810
     },
     {
@@ -116520,6 +120535,11 @@ var item_db_array = [
         "Price": 810
     },
     {
+        "Name": "Pink Flotsam Pull Toy",
+        "Rarity": 67,
+        "Price": 810
+    },
+    {
         "Name": "Spyder Yoyo",
         "Rarity": 85,
         "Price": 810
@@ -116537,6 +120557,11 @@ var item_db_array = [
     {
         "Name": "Aisha Chocolate Cheesecake",
         "Rarity": 65,
+        "Price": 800
+    },
+    {
+        "Name": "Alkenore",
+        "Rarity": 90,
         "Price": 800
     },
     {
@@ -116630,11 +120655,6 @@ var item_db_array = [
         "Price": 800
     },
     {
-        "Name": "Dirt Seedling",
-        "Rarity": 79,
-        "Price": 800
-    },
-    {
         "Name": "Dried Carrot Slices",
         "Rarity": 75,
         "Price": 800
@@ -116660,8 +120680,13 @@ var item_db_array = [
         "Price": 800
     },
     {
-        "Name": "Fetch! Stamp",
-        "Rarity": 60,
+        "Name": "Felly Jelly Yellow Candy",
+        "Rarity": 70,
+        "Price": 800
+    },
+    {
+        "Name": "Fire Faerie Cookie Sandwich",
+        "Rarity": 66,
         "Price": 800
     },
     {
@@ -116707,6 +120732,11 @@ var item_db_array = [
     {
         "Name": "Grarrl Workout Pants",
         "Rarity": 80,
+        "Price": 800
+    },
+    {
+        "Name": "Green Glittery Soap",
+        "Rarity": 66,
         "Price": 800
     },
     {
@@ -116825,6 +120855,11 @@ var item_db_array = [
         "Price": 800
     },
     {
+        "Name": "Mynci Steak",
+        "Rarity": 89,
+        "Price": 800
+    },
+    {
         "Name": "Mynci Tails",
         "Rarity": 70,
         "Price": 800
@@ -116927,11 +120962,6 @@ var item_db_array = [
     {
         "Name": "Red Holly Bush",
         "Rarity": 78,
-        "Price": 800
-    },
-    {
-        "Name": "Reject Dung Mote Lolly",
-        "Rarity": 65,
         "Price": 800
     },
     {
@@ -117090,6 +121120,11 @@ var item_db_array = [
         "Price": 800
     },
     {
+        "Name": "Toast Treats",
+        "Rarity": 86,
+        "Price": 800
+    },
+    {
         "Name": "Tombscones",
         "Rarity": 68,
         "Price": 800
@@ -117180,6 +121215,11 @@ var item_db_array = [
         "Price": 790
     },
     {
+        "Name": "Darigan Peophin Plushie",
+        "Rarity": 92,
+        "Price": 790
+    },
+    {
         "Name": "Earthen Scorchstone",
         "Rarity": 90,
         "Price": 790
@@ -117205,11 +121245,6 @@ var item_db_array = [
         "Price": 790
     },
     {
-        "Name": "Gold Glittery Soap",
-        "Rarity": 65,
-        "Price": 790
-    },
-    {
         "Name": "Green Kyrii Comb",
         "Rarity": 89,
         "Price": 790
@@ -117222,6 +121257,11 @@ var item_db_array = [
     {
         "Name": "Kau Kau Farm Half And Half",
         "Rarity": 70,
+        "Price": 790
+    },
+    {
+        "Name": "Koi Trident",
+        "Rarity": 96,
         "Price": 790
     },
     {
@@ -117280,11 +121320,6 @@ var item_db_array = [
         "Price": 790
     },
     {
-        "Name": "Rainbow Bubble Tea",
-        "Rarity": 68,
-        "Price": 790
-    },
-    {
         "Name": "Red Grass Skirt",
         "Rarity": 70,
         "Price": 790
@@ -117292,6 +121327,11 @@ var item_db_array = [
     {
         "Name": "Regular Bacon Eggs and Toast Smoothie",
         "Rarity": 84,
+        "Price": 790
+    },
+    {
+        "Name": "Rose Petal Crisps",
+        "Rarity": 64,
         "Price": 790
     },
     {
@@ -117312,6 +121352,11 @@ var item_db_array = [
     {
         "Name": "Strawberry Brucicle",
         "Rarity": 56,
+        "Price": 790
+    },
+    {
+        "Name": "Tattered Cloud Kiko Plushie",
+        "Rarity": 78,
         "Price": 790
     },
     {
@@ -117397,6 +121442,11 @@ var item_db_array = [
     {
         "Name": "Fife",
         "Rarity": 80,
+        "Price": 780
+    },
+    {
+        "Name": "Gold Stars Sheet",
+        "Rarity": 63,
         "Price": 780
     },
     {
@@ -117720,11 +121770,6 @@ var item_db_array = [
         "Price": 760
     },
     {
-        "Name": "Solitary Rock Garden",
-        "Rarity": 93,
-        "Price": 760
-    },
-    {
         "Name": "Sproing T-shirt",
         "Rarity": 85,
         "Price": 760
@@ -117737,11 +121782,6 @@ var item_db_array = [
     {
         "Name": "Von Roo Mirror",
         "Rarity": 79,
-        "Price": 760
-    },
-    {
-        "Name": "Weight Lifting for Jetsams",
-        "Rarity": 70,
         "Price": 760
     },
     {
@@ -117837,6 +121877,11 @@ var item_db_array = [
     {
         "Name": "Elephante Marching Band Trousers",
         "Rarity": 82,
+        "Price": 750
+    },
+    {
+        "Name": "Fajita Chips",
+        "Rarity": 30,
         "Price": 750
     },
     {
@@ -117982,11 +122027,6 @@ var item_db_array = [
     {
         "Name": "Sloth Action Figure",
         "Rarity": 95,
-        "Price": 750
-    },
-    {
-        "Name": "Snow Gnorbu Plushie",
-        "Rarity": 83,
         "Price": 750
     },
     {
@@ -118500,11 +122540,6 @@ var item_db_array = [
         "Price": 700
     },
     {
-        "Name": "Brown Rice",
-        "Rarity": 76,
-        "Price": 700
-    },
-    {
         "Name": "Bucket of Neopets",
         "Rarity": 84,
         "Price": 700
@@ -118740,13 +122775,13 @@ var item_db_array = [
         "Price": 700
     },
     {
-        "Name": "Papayanana",
-        "Rarity": 65,
+        "Name": "Ornate Fur Trimmed Robe",
+        "Rarity": 97,
         "Price": 700
     },
     {
-        "Name": "Peanut Shaker",
-        "Rarity": 87,
+        "Name": "Papayanana",
+        "Rarity": 65,
         "Price": 700
     },
     {
@@ -118825,6 +122860,11 @@ var item_db_array = [
         "Price": 700
     },
     {
+        "Name": "Sketch Loaf",
+        "Rarity": 89,
+        "Price": 700
+    },
+    {
         "Name": "Sketch Roast Chicken",
         "Rarity": 86,
         "Price": 700
@@ -118862,6 +122902,11 @@ var item_db_array = [
     {
         "Name": "Stained Glass Soup Faerie Window",
         "Rarity": 91,
+        "Price": 700
+    },
+    {
+        "Name": "Stately Tree Foreground",
+        "Rarity": 65,
         "Price": 700
     },
     {
@@ -119090,6 +123135,11 @@ var item_db_array = [
         "Price": 680
     },
     {
+        "Name": "Bag of Nuts",
+        "Rarity": 60,
+        "Price": 680
+    },
+    {
         "Name": "Banan Pencil Pouch",
         "Rarity": 84,
         "Price": 680
@@ -119160,11 +123210,6 @@ var item_db_array = [
         "Price": 680
     },
     {
-        "Name": "Pink Flotsam Pull Toy",
-        "Rarity": 67,
-        "Price": 680
-    },
-    {
         "Name": "Pink Usul Soap",
         "Rarity": 78,
         "Price": 680
@@ -119182,6 +123227,11 @@ var item_db_array = [
     {
         "Name": "Sinister Krawk Neovian Top Hat",
         "Rarity": 90,
+        "Price": 680
+    },
+    {
+        "Name": "Snowball Club",
+        "Rarity": 93,
         "Price": 680
     },
     {
@@ -119312,11 +123362,6 @@ var item_db_array = [
     {
         "Name": "Magical Hair Usuki",
         "Rarity": 40,
-        "Price": 660
-    },
-    {
-        "Name": "Parasol of Unfortunate Demise",
-        "Rarity": 98,
         "Price": 660
     },
     {
@@ -119485,11 +123530,6 @@ var item_db_array = [
         "Price": 650
     },
     {
-        "Name": "Lime Chia Pop",
-        "Rarity": 35,
-        "Price": 650
-    },
-    {
         "Name": "Lost Desert Kyrii Plushie",
         "Rarity": 78,
         "Price": 650
@@ -119547,11 +123587,6 @@ var item_db_array = [
     {
         "Name": "Snicklebeast Plushie",
         "Rarity": 79,
-        "Price": 650
-    },
-    {
-        "Name": "Star Shaped Stained Glass Window",
-        "Rarity": 96,
         "Price": 650
     },
     {
@@ -119640,6 +123675,11 @@ var item_db_array = [
         "Price": 640
     },
     {
+        "Name": "Tiny Snowman",
+        "Rarity": 72,
+        "Price": 640
+    },
+    {
         "Name": "Wooden Pet Magnet",
         "Rarity": 79,
         "Price": 640
@@ -119662,11 +123702,6 @@ var item_db_array = [
     {
         "Name": "Dark Translucent Wings",
         "Rarity": 72,
-        "Price": 630
-    },
-    {
-        "Name": "Deceptive Gift Basket",
-        "Rarity": 70,
         "Price": 630
     },
     {
@@ -119737,11 +123772,6 @@ var item_db_array = [
     {
         "Name": "Mint Chocolate Kougra Paw",
         "Rarity": 67,
-        "Price": 630
-    },
-    {
-        "Name": "Ornate Fur Trimmed Robe",
-        "Rarity": 97,
         "Price": 630
     },
     {
@@ -119960,11 +123990,6 @@ var item_db_array = [
         "Price": 600
     },
     {
-        "Name": "Fire Faerie Cookie Sandwich",
-        "Rarity": 66,
-        "Price": 600
-    },
-    {
         "Name": "Fire Ruler",
         "Rarity": 92,
         "Price": 600
@@ -120035,6 +124060,11 @@ var item_db_array = [
         "Price": 600
     },
     {
+        "Name": "Krawk Bubble Bath",
+        "Rarity": 70,
+        "Price": 600
+    },
+    {
         "Name": "Mighty JubJub Shield",
         "Rarity": 90,
         "Price": 600
@@ -120047,11 +124077,6 @@ var item_db_array = [
     {
         "Name": "Mynci Mime Artist Hat",
         "Rarity": 80,
-        "Price": 600
-    },
-    {
-        "Name": "Noise Cancelling Headphones",
-        "Rarity": 70,
         "Price": 600
     },
     {
@@ -120072,6 +124097,11 @@ var item_db_array = [
     {
         "Name": "Pine Fresh Potpourri",
         "Rarity": 78,
+        "Price": 600
+    },
+    {
+        "Name": "Pink Glittery Soap",
+        "Rarity": 67,
         "Price": 600
     },
     {
@@ -120101,6 +124131,11 @@ var item_db_array = [
     },
     {
         "Name": "Quiggle Whistle",
+        "Rarity": 68,
+        "Price": 600
+    },
+    {
+        "Name": "Rainbow Bubble Tea",
         "Rarity": 68,
         "Price": 600
     },
@@ -120357,6 +124392,11 @@ var item_db_array = [
     {
         "Name": "Sparkling Draik Cake",
         "Rarity": 89,
+        "Price": 590
+    },
+    {
+        "Name": "Spicy Coconut Soup",
+        "Rarity": 83,
         "Price": 590
     },
     {
@@ -120670,6 +124710,11 @@ var item_db_array = [
         "Price": 560
     },
     {
+        "Name": "Kiko Explorer Plushie",
+        "Rarity": 83,
+        "Price": 560
+    },
+    {
         "Name": "Leaning Tree",
         "Rarity": 72,
         "Price": 560
@@ -120737,6 +124782,11 @@ var item_db_array = [
     {
         "Name": "Cofferling",
         "Rarity": 92,
+        "Price": 550
+    },
+    {
+        "Name": "Dirt Seedling",
+        "Rarity": 79,
         "Price": 550
     },
     {
@@ -121045,18 +125095,13 @@ var item_db_array = [
         "Price": 530
     },
     {
-        "Name": "Neovian Gentleman Grarrl Shirt and Jacket",
-        "Rarity": 90,
+        "Name": "Noir Mynci Suit",
+        "Rarity": 79,
         "Price": 530
     },
     {
         "Name": "Onion Cola",
         "Rarity": 93,
-        "Price": 530
-    },
-    {
-        "Name": "Snow Faerie Darts",
-        "Rarity": 90,
         "Price": 530
     },
     {
@@ -121190,16 +125235,6 @@ var item_db_array = [
         "Price": 510
     },
     {
-        "Name": "Grilled Doughnutfruit",
-        "Rarity": 86,
-        "Price": 510
-    },
-    {
-        "Name": "Lentil Cookies",
-        "Rarity": 88,
-        "Price": 510
-    },
-    {
         "Name": "Pink Seashell Sand",
         "Rarity": 76,
         "Price": 510
@@ -121265,11 +125300,6 @@ var item_db_array = [
         "Price": 500
     },
     {
-        "Name": "Borovan Time Asparagus Chia Plushie",
-        "Rarity": 88,
-        "Price": 500
-    },
-    {
         "Name": "Breakfast Croissant",
         "Rarity": 30,
         "Price": 500
@@ -121307,11 +125337,6 @@ var item_db_array = [
     {
         "Name": "Candy Pirate Earrings",
         "Rarity": 90,
-        "Price": 500
-    },
-    {
-        "Name": "Captain Scarblade Plushie",
-        "Rarity": 92,
         "Price": 500
     },
     {
@@ -121405,6 +125430,11 @@ var item_db_array = [
         "Price": 500
     },
     {
+        "Name": "Dung Sofa",
+        "Rarity": 57,
+        "Price": 500
+    },
+    {
         "Name": "Elephante Marching Band Gloves",
         "Rarity": 82,
         "Price": 500
@@ -121417,11 +125447,6 @@ var item_db_array = [
     {
         "Name": "Eyrie Clown Wig",
         "Rarity": 79,
-        "Price": 500
-    },
-    {
-        "Name": "Fajita Chips",
-        "Rarity": 30,
         "Price": 500
     },
     {
@@ -121535,6 +125560,11 @@ var item_db_array = [
         "Price": 500
     },
     {
+        "Name": "Halloween Kiko Balloon",
+        "Rarity": 90,
+        "Price": 500
+    },
+    {
         "Name": "Honey Filled Olive",
         "Rarity": 66,
         "Price": 500
@@ -121580,13 +125610,13 @@ var item_db_array = [
         "Price": 500
     },
     {
-        "Name": "Kougra Face Paint",
-        "Rarity": 70,
+        "Name": "Kyrii Fur Spray",
+        "Rarity": 86,
         "Price": 500
     },
     {
-        "Name": "Kyrii Fur Spray",
-        "Rarity": 86,
+        "Name": "Lentil Cookies",
+        "Rarity": 88,
         "Price": 500
     },
     {
@@ -121657,6 +125687,11 @@ var item_db_array = [
     {
         "Name": "Nerkmid Stencil",
         "Rarity": 76,
+        "Price": 500
+    },
+    {
+        "Name": "Noise Cancelling Headphones",
+        "Rarity": 70,
         "Price": 500
     },
     {
@@ -121770,11 +125805,6 @@ var item_db_array = [
         "Price": 500
     },
     {
-        "Name": "Snowball Club",
-        "Rarity": 93,
-        "Price": 500
-    },
-    {
         "Name": "Snowflake Cake",
         "Rarity": 86,
         "Price": 500
@@ -121825,11 +125855,6 @@ var item_db_array = [
         "Price": 500
     },
     {
-        "Name": "Stately Tree Foreground",
-        "Rarity": 65,
-        "Price": 500
-    },
-    {
         "Name": "Stink Bomb",
         "Rarity": 81,
         "Price": 500
@@ -121865,6 +125890,11 @@ var item_db_array = [
         "Price": 500
     },
     {
+        "Name": "Tyrannian Fur Bed",
+        "Rarity": 90,
+        "Price": 500
+    },
+    {
         "Name": "Veggie Tuskabob",
         "Rarity": 83,
         "Price": 500
@@ -121892,6 +125922,11 @@ var item_db_array = [
     {
         "Name": "Yellow Vinyl JubJub",
         "Rarity": 68,
+        "Price": 500
+    },
+    {
+        "Name": "Zombie Flotsam Plushie",
+        "Rarity": 93,
         "Price": 500
     },
     {
@@ -121962,6 +125997,11 @@ var item_db_array = [
     {
         "Name": "Fire Umbrella",
         "Rarity": 86,
+        "Price": 490
+    },
+    {
+        "Name": "Flattened Durian",
+        "Rarity": 89,
         "Price": 490
     },
     {
@@ -122185,6 +126225,11 @@ var item_db_array = [
         "Price": 480
     },
     {
+        "Name": "Metallic Buzz Top",
+        "Rarity": 79,
+        "Price": 480
+    },
+    {
         "Name": "Mixed Rock Slices",
         "Rarity": 82,
         "Price": 480
@@ -122205,6 +126250,11 @@ var item_db_array = [
         "Price": 480
     },
     {
+        "Name": "Peophin Dance Fan",
+        "Rarity": 81,
+        "Price": 480
+    },
+    {
         "Name": "Purple Evil Fuzzle",
         "Rarity": 73,
         "Price": 480
@@ -122222,11 +126272,6 @@ var item_db_array = [
     {
         "Name": "Swirly Kiko Fudge",
         "Rarity": 83,
-        "Price": 480
-    },
-    {
-        "Name": "Tattered Cloud Kiko Plushie",
-        "Rarity": 78,
         "Price": 480
     },
     {
@@ -122252,11 +126297,6 @@ var item_db_array = [
     {
         "Name": "Yellow Cap",
         "Rarity": 70,
-        "Price": 480
-    },
-    {
-        "Name": "Zomutt Fluffy Ball",
-        "Rarity": 78,
         "Price": 480
     },
     {
@@ -122317,6 +126357,21 @@ var item_db_array = [
     {
         "Name": "Gnorbu Conditioning Shampoo",
         "Rarity": 77,
+        "Price": 470
+    },
+    {
+        "Name": "Gold Glittery Soap",
+        "Rarity": 65,
+        "Price": 470
+    },
+    {
+        "Name": "Grey Cobrall Plushie",
+        "Rarity": 75,
+        "Price": 470
+    },
+    {
+        "Name": "Grilled Doughnutfruit",
+        "Rarity": 86,
         "Price": 470
     },
     {
@@ -122415,11 +126470,6 @@ var item_db_array = [
         "Price": 460
     },
     {
-        "Name": "Krawk Bubble Bath",
-        "Rarity": 70,
-        "Price": 460
-    },
-    {
         "Name": "Large Patterned Window",
         "Rarity": 86,
         "Price": 460
@@ -122497,11 +126547,6 @@ var item_db_array = [
     {
         "Name": "Blumaroo Pad Table",
         "Rarity": 82,
-        "Price": 450
-    },
-    {
-        "Name": "Bowl-O-Bones",
-        "Rarity": 88,
         "Price": 450
     },
     {
@@ -122955,11 +127000,6 @@ var item_db_array = [
         "Price": 440
     },
     {
-        "Name": "Mootix Ruler",
-        "Rarity": 97,
-        "Price": 440
-    },
-    {
         "Name": "Painted Pottery Kacheek Candle Holders",
         "Rarity": 76,
         "Price": 440
@@ -123042,6 +127082,11 @@ var item_db_array = [
     {
         "Name": "Cherry Faerie Bubble",
         "Rarity": 55,
+        "Price": 430
+    },
+    {
+        "Name": "Chocolate Covered Strawberries",
+        "Rarity": 86,
         "Price": 430
     },
     {
@@ -123155,11 +127200,6 @@ var item_db_array = [
         "Price": 430
     },
     {
-        "Name": "Shadow Korbat Plushie",
-        "Rarity": 66,
-        "Price": 430
-    },
-    {
         "Name": "Shoyru Comb",
         "Rarity": 83,
         "Price": 430
@@ -123217,6 +127257,11 @@ var item_db_array = [
     {
         "Name": "Wooden Display Pillar",
         "Rarity": 79,
+        "Price": 430
+    },
+    {
+        "Name": "Zomutt Fluffy Ball",
+        "Rarity": 78,
         "Price": 430
     },
     {
@@ -123285,11 +127330,6 @@ var item_db_array = [
         "Price": 420
     },
     {
-        "Name": "Noir Mynci Suit",
-        "Rarity": 79,
-        "Price": 420
-    },
-    {
         "Name": "Orange Jelly Pillow",
         "Rarity": 70,
         "Price": 420
@@ -123307,6 +127347,11 @@ var item_db_array = [
     {
         "Name": "Red Cotton JubJub Plushie",
         "Rarity": 73,
+        "Price": 420
+    },
+    {
+        "Name": "Shadow Korbat Plushie",
+        "Rarity": 66,
         "Price": 420
     },
     {
@@ -123355,11 +127400,6 @@ var item_db_array = [
         "Price": 410
     },
     {
-        "Name": "Flattened Durian",
-        "Rarity": 89,
-        "Price": 410
-    },
-    {
         "Name": "Ghostkerchief Dagger",
         "Rarity": 90,
         "Price": 410
@@ -123377,11 +127417,6 @@ var item_db_array = [
     {
         "Name": "Kau Tape",
         "Rarity": 83,
-        "Price": 410
-    },
-    {
-        "Name": "Metallic Buzz Top",
-        "Rarity": 79,
         "Price": 410
     },
     {
@@ -123552,6 +127587,11 @@ var item_db_array = [
     {
         "Name": "Darigan Stacking Rings",
         "Rarity": 76,
+        "Price": 400
+    },
+    {
+        "Name": "Deceptive Gift Basket",
+        "Rarity": 70,
         "Price": 400
     },
     {
@@ -123815,6 +127855,11 @@ var item_db_array = [
         "Price": 400
     },
     {
+        "Name": "Padded Quiggle Cloak",
+        "Rarity": 90,
+        "Price": 400
+    },
+    {
         "Name": "Paper Seal",
         "Rarity": 73,
         "Price": 400
@@ -123985,11 +128030,6 @@ var item_db_array = [
         "Price": 400
     },
     {
-        "Name": "Utensil of Deadly Utensils",
-        "Rarity": 85,
-        "Price": 400
-    },
-    {
         "Name": "Vegetable Dip Platter",
         "Rarity": 82,
         "Price": 400
@@ -124051,6 +128091,11 @@ var item_db_array = [
     },
     {
         "Name": "Chokato Crisps",
+        "Rarity": 60,
+        "Price": 390
+    },
+    {
+        "Name": "Chokato Cybunny Cake",
         "Rarity": 60,
         "Price": 390
     },
@@ -124155,6 +128200,11 @@ var item_db_array = [
         "Price": 390
     },
     {
+        "Name": "Space Fungus Plushie",
+        "Rarity": 88,
+        "Price": 390
+    },
+    {
         "Name": "Thornata Bean Bag",
         "Rarity": 75,
         "Price": 390
@@ -124212,11 +128262,6 @@ var item_db_array = [
     {
         "Name": "Chocolate Gelert Heads",
         "Rarity": 87,
-        "Price": 380
-    },
-    {
-        "Name": "Chokato Cybunny Cake",
-        "Rarity": 60,
         "Price": 380
     },
     {
@@ -124455,6 +128500,11 @@ var item_db_array = [
         "Price": 370
     },
     {
+        "Name": "Flishy Hat",
+        "Rarity": 86,
+        "Price": 370
+    },
+    {
         "Name": "Green Cobrall Sponge",
         "Rarity": 80,
         "Price": 370
@@ -124477,6 +128527,11 @@ var item_db_array = [
     {
         "Name": "Mystery Of Halloween",
         "Rarity": 87,
+        "Price": 370
+    },
+    {
+        "Name": "Neovian Gentleman Grarrl Shirt and Jacket",
+        "Rarity": 90,
         "Price": 370
     },
     {
@@ -124612,6 +128667,11 @@ var item_db_array = [
     {
         "Name": "Orange Spyder Candle",
         "Rarity": 89,
+        "Price": 360
+    },
+    {
+        "Name": "Orange Yoyo",
+        "Rarity": 80,
         "Price": 360
     },
     {
@@ -124960,11 +129020,6 @@ var item_db_array = [
         "Price": 340
     },
     {
-        "Name": "Grarrl Balloon Pet",
-        "Rarity": 67,
-        "Price": 340
-    },
-    {
         "Name": "Hot Dog with Mustard & Relish",
         "Rarity": 46,
         "Price": 340
@@ -125040,11 +129095,6 @@ var item_db_array = [
         "Price": 340
     },
     {
-        "Name": "Space Fungus Plushie",
-        "Rarity": 88,
-        "Price": 340
-    },
-    {
         "Name": "Spotted Blanket",
         "Rarity": 79,
         "Price": 340
@@ -125100,6 +129150,11 @@ var item_db_array = [
         "Price": 330
     },
     {
+        "Name": "Florg Plushie",
+        "Rarity": 77,
+        "Price": 330
+    },
+    {
         "Name": "Fresh Seaweed Pie",
         "Rarity": 35,
         "Price": 330
@@ -125107,11 +129162,6 @@ var item_db_array = [
     {
         "Name": "Glowing Eyrie Mousse",
         "Rarity": 77,
-        "Price": 330
-    },
-    {
-        "Name": "Golden Snowflake",
-        "Rarity": 89,
         "Price": 330
     },
     {
@@ -125197,6 +129247,21 @@ var item_db_array = [
     {
         "Name": "Azzle Dresser",
         "Rarity": 72,
+        "Price": 320
+    },
+    {
+        "Name": "Bottle of Grey Sand",
+        "Rarity": 96,
+        "Price": 320
+    },
+    {
+        "Name": "Bowl-O-Bones",
+        "Rarity": 88,
+        "Price": 320
+    },
+    {
+        "Name": "Can of Neocola",
+        "Rarity": 15,
         "Price": 320
     },
     {
@@ -125595,11 +129660,6 @@ var item_db_array = [
         "Price": 300
     },
     {
-        "Name": "Darigan Peophin Plushie",
-        "Rarity": 92,
-        "Price": 300
-    },
-    {
         "Name": "Deluxe Water Pizza",
         "Rarity": 97,
         "Price": 300
@@ -125660,6 +129720,11 @@ var item_db_array = [
         "Price": 300
     },
     {
+        "Name": "Golden Snowflake",
+        "Rarity": 89,
+        "Price": 300
+    },
+    {
         "Name": "Green Evil Fuzzle",
         "Rarity": 70,
         "Price": 300
@@ -125695,11 +129760,6 @@ var item_db_array = [
         "Price": 300
     },
     {
-        "Name": "Halloween Kiko Balloon",
-        "Rarity": 90,
-        "Price": 300
-    },
-    {
         "Name": "Happiness Faerie Poster",
         "Rarity": 88,
         "Price": 300
@@ -125707,6 +129767,11 @@ var item_db_array = [
     {
         "Name": "Hardened Leather Kau Helm",
         "Rarity": 89,
+        "Price": 300
+    },
+    {
+        "Name": "Headscarf",
+        "Rarity": 70,
         "Price": 300
     },
     {
@@ -125855,11 +129920,6 @@ var item_db_array = [
         "Price": 300
     },
     {
-        "Name": "Neovian Blumaroo Gentleman Cane",
-        "Rarity": 91,
-        "Price": 300
-    },
-    {
         "Name": "Neovian Lenny Gentleman Boots",
         "Rarity": 95,
         "Price": 300
@@ -125902,6 +129962,11 @@ var item_db_array = [
     {
         "Name": "One Scary Night",
         "Rarity": 78,
+        "Price": 300
+    },
+    {
+        "Name": "Orange Draik Stamp",
+        "Rarity": 80,
         "Price": 300
     },
     {
@@ -126100,11 +130165,6 @@ var item_db_array = [
         "Price": 300
     },
     {
-        "Name": "Tyrannian Fur Bed",
-        "Rarity": 90,
-        "Price": 300
-    },
-    {
         "Name": "Ultra Dark Reflectorb",
         "Rarity": 87,
         "Price": 300
@@ -126215,21 +130275,6 @@ var item_db_array = [
         "Price": 290
     },
     {
-        "Name": "Faerie Dartboard",
-        "Rarity": 65,
-        "Price": 290
-    },
-    {
-        "Name": "Finger Coils Wig",
-        "Rarity": 70,
-        "Price": 290
-    },
-    {
-        "Name": "Headscarf",
-        "Rarity": 70,
-        "Price": 290
-    },
-    {
         "Name": "Hypoallergenic Facial Cleanser",
         "Rarity": 79,
         "Price": 290
@@ -126242,11 +130287,6 @@ var item_db_array = [
     {
         "Name": "Jhudora Compact",
         "Rarity": 93,
-        "Price": 290
-    },
-    {
-        "Name": "Kiko Explorer Plushie",
-        "Rarity": 83,
         "Price": 290
     },
     {
@@ -126275,8 +130315,8 @@ var item_db_array = [
         "Price": 290
     },
     {
-        "Name": "Naturally Curly Hair Wig",
-        "Rarity": 70,
+        "Name": "Neovian Blumaroo Gentleman Cane",
+        "Rarity": 91,
         "Price": 290
     },
     {
@@ -126287,11 +130327,6 @@ var item_db_array = [
     {
         "Name": "Ordinary Seashell Sand",
         "Rarity": 77,
-        "Price": 290
-    },
-    {
-        "Name": "Pitcher of Water",
-        "Rarity": 81,
         "Price": 290
     },
     {
@@ -126610,11 +130645,6 @@ var item_db_array = [
         "Price": 260
     },
     {
-        "Name": "Flishy Hat",
-        "Rarity": 86,
-        "Price": 260
-    },
-    {
         "Name": "Fuzzy Notebook",
         "Rarity": 80,
         "Price": 260
@@ -126676,11 +130706,6 @@ var item_db_array = [
     },
     {
         "Name": "Sweet Ummagine Roll",
-        "Rarity": 88,
-        "Price": 260
-    },
-    {
-        "Name": "Terror Mountain Travel Brochure",
         "Rarity": 88,
         "Price": 260
     },
@@ -126757,6 +130782,11 @@ var item_db_array = [
     {
         "Name": "Candy Filled Negg",
         "Rarity": 66,
+        "Price": 250
+    },
+    {
+        "Name": "Captain Scarblade Plushie",
+        "Rarity": 92,
         "Price": 250
     },
     {
@@ -126970,11 +131000,6 @@ var item_db_array = [
         "Price": 250
     },
     {
-        "Name": "Orange Draik Stamp",
-        "Rarity": 80,
-        "Price": 250
-    },
-    {
         "Name": "Orange Fuzzle",
         "Rarity": 70,
         "Price": 250
@@ -126982,11 +131007,6 @@ var item_db_array = [
     {
         "Name": "Organic Cashew Butter",
         "Rarity": 82,
-        "Price": 250
-    },
-    {
-        "Name": "Pegleg Chicken",
-        "Rarity": 88,
         "Price": 250
     },
     {
@@ -127080,6 +131100,11 @@ var item_db_array = [
         "Price": 250
     },
     {
+        "Name": "Utensil of Deadly Utensils",
+        "Rarity": 85,
+        "Price": 250
+    },
+    {
         "Name": "Wooden Beaded Maracas",
         "Rarity": 74,
         "Price": 250
@@ -127135,6 +131160,11 @@ var item_db_array = [
         "Price": 240
     },
     {
+        "Name": "Deadly Attack Spork",
+        "Rarity": 96,
+        "Price": 240
+    },
+    {
         "Name": "Fire Rubber Bands",
         "Rarity": 78,
         "Price": 240
@@ -127157,11 +131187,6 @@ var item_db_array = [
     {
         "Name": "Grey Shampoo",
         "Rarity": 77,
-        "Price": 240
-    },
-    {
-        "Name": "I Love Captain Scarblade Hat",
-        "Rarity": 90,
         "Price": 240
     },
     {
@@ -127210,6 +131235,11 @@ var item_db_array = [
         "Price": 240
     },
     {
+        "Name": "Sand Pit",
+        "Rarity": 95,
+        "Price": 240
+    },
+    {
         "Name": "Scroll of Flight",
         "Rarity": 85,
         "Price": 240
@@ -127245,14 +131275,14 @@ var item_db_array = [
         "Price": 240
     },
     {
-        "Name": "Vanilla Acara Sandwich Cookie",
-        "Rarity": 60,
-        "Price": 240
-    },
-    {
         "Name": "Watermelon Shampoo",
         "Rarity": 71,
         "Price": 240
+    },
+    {
+        "Name": "Awesome Blumaroo Battles",
+        "Rarity": 85,
+        "Price": 230
     },
     {
         "Name": "Balloon Crown Hat",
@@ -127402,6 +131432,11 @@ var item_db_array = [
     {
         "Name": "Tomato Smasher",
         "Rarity": 90,
+        "Price": 230
+    },
+    {
+        "Name": "Tombola Tips",
+        "Rarity": 86,
         "Price": 230
     },
     {
@@ -127630,8 +131665,8 @@ var item_db_array = [
         "Price": 210
     },
     {
-        "Name": "Giant Tomato Kebab",
-        "Rarity": 88,
+        "Name": "Ettaphant Petpet Tunnel",
+        "Rarity": 72,
         "Price": 210
     },
     {
@@ -127737,11 +131772,6 @@ var item_db_array = [
     {
         "Name": "Aqua Coral Pillow",
         "Rarity": 76,
-        "Price": 200
-    },
-    {
-        "Name": "Awesome Blumaroo Battles",
-        "Rarity": 85,
         "Price": 200
     },
     {
@@ -128015,6 +132045,11 @@ var item_db_array = [
         "Price": 200
     },
     {
+        "Name": "Green Shoyru Plushie",
+        "Rarity": 75,
+        "Price": 200
+    },
+    {
         "Name": "Green Tuskaninny Plushie",
         "Rarity": 76,
         "Price": 200
@@ -128200,6 +132235,11 @@ var item_db_array = [
         "Price": 200
     },
     {
+        "Name": "Pegleg Chicken",
+        "Rarity": 88,
+        "Price": 200
+    },
+    {
         "Name": "Peppermint Pizza",
         "Rarity": 56,
         "Price": 200
@@ -128212,6 +132252,11 @@ var item_db_array = [
     {
         "Name": "Pink Squirt Flower",
         "Rarity": 84,
+        "Price": 200
+    },
+    {
+        "Name": "Pitcher of Water",
+        "Rarity": 81,
         "Price": 200
     },
     {
@@ -128630,6 +132675,16 @@ var item_db_array = [
         "Price": 190
     },
     {
+        "Name": "Snow Banana",
+        "Rarity": 60,
+        "Price": 190
+    },
+    {
+        "Name": "Spooky Doughnut",
+        "Rarity": 23,
+        "Price": 190
+    },
+    {
         "Name": "Stamp Poster",
         "Rarity": 70,
         "Price": 190
@@ -128662,6 +132717,11 @@ var item_db_array = [
     {
         "Name": "Tyrannian Style Window",
         "Rarity": 87,
+        "Price": 190
+    },
+    {
+        "Name": "Ubikiberry Elixir",
+        "Rarity": 75,
         "Price": 190
     },
     {
@@ -128890,11 +132950,6 @@ var item_db_array = [
         "Price": 180
     },
     {
-        "Name": "Tombola Tips",
-        "Rarity": 86,
-        "Price": 180
-    },
-    {
         "Name": "Trumpet",
         "Rarity": 74,
         "Price": 180
@@ -128982,6 +133037,11 @@ var item_db_array = [
     {
         "Name": "Desert Usul Plushie",
         "Rarity": 92,
+        "Price": 170
+    },
+    {
+        "Name": "Giant Tomato Kebab",
+        "Rarity": 88,
         "Price": 170
     },
     {
@@ -129135,11 +133195,6 @@ var item_db_array = [
         "Price": 160
     },
     {
-        "Name": "Holiday Tiki Hammock",
-        "Rarity": 80,
-        "Price": 160
-    },
-    {
         "Name": "Island Leaves and Flowers Foreground",
         "Rarity": 82,
         "Price": 160
@@ -129175,6 +133230,11 @@ var item_db_array = [
         "Price": 160
     },
     {
+        "Name": "Naturally Curly Hair Wig",
+        "Rarity": 70,
+        "Price": 160
+    },
+    {
         "Name": "Ornate Pteri Sash",
         "Rarity": 90,
         "Price": 160
@@ -129207,6 +133267,11 @@ var item_db_array = [
     {
         "Name": "Tyrannian Goulash",
         "Rarity": 93,
+        "Price": 160
+    },
+    {
+        "Name": "Vanilla Acara Sandwich Cookie",
+        "Rarity": 60,
         "Price": 160
     },
     {
@@ -129705,11 +133770,6 @@ var item_db_array = [
         "Price": 140
     },
     {
-        "Name": "Walking Cane",
-        "Rarity": 70,
-        "Price": 140
-    },
-    {
         "Name": "Wind Up Zytch",
         "Rarity": 70,
         "Price": 140
@@ -129757,11 +133817,6 @@ var item_db_array = [
     {
         "Name": "Bullseye Pie",
         "Rarity": 72,
-        "Price": 130
-    },
-    {
-        "Name": "Can of Neocola",
-        "Rarity": 15,
         "Price": 130
     },
     {
@@ -129822,11 +133877,6 @@ var item_db_array = [
     {
         "Name": "Green Grarrl Mirror",
         "Rarity": 76,
-        "Price": 130
-    },
-    {
-        "Name": "Green Shoyru Plushie",
-        "Rarity": 75,
         "Price": 130
     },
     {
@@ -130137,11 +134187,6 @@ var item_db_array = [
     {
         "Name": "Pale Starry Notebook",
         "Rarity": 70,
-        "Price": 120
-    },
-    {
-        "Name": "Pathetic Christmas Tree",
-        "Rarity": 88,
         "Price": 120
     },
     {
@@ -130520,11 +134565,6 @@ var item_db_array = [
         "Price": 100
     },
     {
-        "Name": "Ettaphant Petpet Tunnel",
-        "Rarity": 72,
-        "Price": 100
-    },
-    {
         "Name": "Fancy Pink Gown",
         "Rarity": 70,
         "Price": 100
@@ -130552,11 +134592,6 @@ var item_db_array = [
     {
         "Name": "Florange Jam",
         "Rarity": 88,
-        "Price": 100
-    },
-    {
-        "Name": "Florg Plushie",
-        "Rarity": 77,
         "Price": 100
     },
     {
@@ -130815,6 +134850,11 @@ var item_db_array = [
         "Price": 100
     },
     {
+        "Name": "Roburg 3T3",
+        "Rarity": 96,
+        "Price": 100
+    },
+    {
         "Name": "Round Rainbow Rug",
         "Rarity": 90,
         "Price": 100
@@ -130957,6 +134997,11 @@ var item_db_array = [
     {
         "Name": "Vanilla Gnorbu Biscuit",
         "Rarity": 77,
+        "Price": 100
+    },
+    {
+        "Name": "Walking Cane",
+        "Rarity": 70,
         "Price": 100
     },
     {
@@ -131170,6 +135215,11 @@ var item_db_array = [
         "Price": 95
     },
     {
+        "Name": "Terror Mountain Travel Brochure",
+        "Rarity": 88,
+        "Price": 95
+    },
+    {
         "Name": "Tonu Curler",
         "Rarity": 73,
         "Price": 95
@@ -131182,6 +135232,11 @@ var item_db_array = [
     {
         "Name": "Volcanic Centrepiece",
         "Rarity": 81,
+        "Price": 95
+    },
+    {
+        "Name": "Whack a Symol Toy",
+        "Rarity": 88,
         "Price": 95
     },
     {
@@ -131310,11 +135365,6 @@ var item_db_array = [
         "Price": 90
     },
     {
-        "Name": "Spooky Doughnut",
-        "Rarity": 23,
-        "Price": 90
-    },
-    {
         "Name": "Strawberry Fruit Pancakes",
         "Rarity": 75,
         "Price": 90
@@ -131386,6 +135436,11 @@ var item_db_array = [
     },
     {
         "Name": "Orange Chomby Scooter",
+        "Rarity": 80,
+        "Price": 85
+    },
+    {
+        "Name": "Pickled Moehog Feet",
         "Rarity": 80,
         "Price": 85
     },
@@ -131640,11 +135695,6 @@ var item_db_array = [
         "Price": 75
     },
     {
-        "Name": "Bag of Nuts",
-        "Rarity": 60,
-        "Price": 75
-    },
-    {
         "Name": "Battle Dung Charm",
         "Rarity": 76,
         "Price": 75
@@ -131702,11 +135752,6 @@ var item_db_array = [
     {
         "Name": "Faerie Golf Club",
         "Rarity": 89,
-        "Price": 75
-    },
-    {
-        "Name": "Feepit Petpet Bath Bucket",
-        "Rarity": 75,
         "Price": 75
     },
     {
@@ -131790,11 +135835,6 @@ var item_db_array = [
         "Price": 75
     },
     {
-        "Name": "Snow Banana",
-        "Rarity": 60,
-        "Price": 75
-    },
-    {
         "Name": "Spaghetti and Eyeballs",
         "Rarity": 88,
         "Price": 75
@@ -131867,6 +135907,11 @@ var item_db_array = [
     {
         "Name": "Crystal Ball Table",
         "Rarity": 85,
+        "Price": 70
+    },
+    {
+        "Name": "Finger Coils Wig",
+        "Rarity": 70,
         "Price": 70
     },
     {
@@ -132130,11 +136175,6 @@ var item_db_array = [
         "Price": 60
     },
     {
-        "Name": "Hairpin of the Deep",
-        "Rarity": 83,
-        "Price": 60
-    },
-    {
         "Name": "Haunted Woods Snowglobe",
         "Rarity": 87,
         "Price": 60
@@ -132187,11 +136227,6 @@ var item_db_array = [
     {
         "Name": "Simple Wooden Rake",
         "Rarity": 68,
-        "Price": 60
-    },
-    {
-        "Name": "Techo Master Statue",
-        "Rarity": 57,
         "Price": 60
     },
     {
@@ -132270,6 +136305,11 @@ var item_db_array = [
         "Price": 55
     },
     {
+        "Name": "Holiday Tiki Hammock",
+        "Rarity": 80,
+        "Price": 55
+    },
+    {
         "Name": "Jazan Balloon",
         "Rarity": 88,
         "Price": 55
@@ -132322,11 +136362,6 @@ var item_db_array = [
     {
         "Name": "Space Rock Soup",
         "Rarity": 96,
-        "Price": 55
-    },
-    {
-        "Name": "Speckled Xweetok Puzzle",
-        "Rarity": 89,
         "Price": 55
     },
     {
@@ -132385,11 +136420,6 @@ var item_db_array = [
         "Price": 50
     },
     {
-        "Name": "Blumaroo Bowling Set",
-        "Rarity": 86,
-        "Price": 50
-    },
-    {
         "Name": "Bone Dog",
         "Rarity": 82,
         "Price": 50
@@ -132417,11 +136447,6 @@ var item_db_array = [
     {
         "Name": "Chefs Toy Pan",
         "Rarity": 85,
-        "Price": 50
-    },
-    {
-        "Name": "Chokato Origami",
-        "Rarity": 82,
         "Price": 50
     },
     {
@@ -132535,6 +136560,11 @@ var item_db_array = [
         "Price": 50
     },
     {
+        "Name": "Hairpin of the Deep",
+        "Rarity": 83,
+        "Price": 50
+    },
+    {
         "Name": "Hannah Bobblehead",
         "Rarity": 82,
         "Price": 50
@@ -132566,6 +136596,11 @@ var item_db_array = [
     },
     {
         "Name": "Jhudora Potion Kit",
+        "Rarity": 84,
+        "Price": 50
+    },
+    {
+        "Name": "JubJub Balloon Animal",
         "Rarity": 84,
         "Price": 50
     },
@@ -132640,8 +136675,8 @@ var item_db_array = [
         "Price": 50
     },
     {
-        "Name": "Orange Yoyo",
-        "Rarity": 80,
+        "Name": "Pathetic Christmas Tree",
+        "Rarity": 88,
         "Price": 50
     },
     {
@@ -132810,6 +136845,11 @@ var item_db_array = [
         "Price": 50
     },
     {
+        "Name": "Techo Master Statue",
+        "Rarity": 57,
+        "Price": 50
+    },
+    {
         "Name": "Techo Says Ball",
         "Rarity": 83,
         "Price": 50
@@ -132882,11 +136922,6 @@ var item_db_array = [
     {
         "Name": "Yellow Lupe Paddleball",
         "Rarity": 87,
-        "Price": 50
-    },
-    {
-        "Name": "Zombie Flotsam Plushie",
-        "Rarity": 93,
         "Price": 50
     },
     {
@@ -133005,6 +137040,11 @@ var item_db_array = [
         "Price": 45
     },
     {
+        "Name": "Feepit Petpet Bath Bucket",
+        "Rarity": 75,
+        "Price": 45
+    },
+    {
         "Name": "Fire Muffin",
         "Rarity": 83,
         "Price": 45
@@ -133042,11 +137082,6 @@ var item_db_array = [
     {
         "Name": "Jipple Pear",
         "Rarity": 88,
-        "Price": 45
-    },
-    {
-        "Name": "JubJub Balloon Animal",
-        "Rarity": 84,
         "Price": 45
     },
     {
@@ -133120,11 +137155,6 @@ var item_db_array = [
         "Price": 45
     },
     {
-        "Name": "Pocket Fire Pinball Game",
-        "Rarity": 87,
-        "Price": 45
-    },
-    {
         "Name": "Princess Fernypoo Action Figure",
         "Rarity": 89,
         "Price": 45
@@ -133157,6 +137187,11 @@ var item_db_array = [
     {
         "Name": "Sock Pouch",
         "Rarity": 88,
+        "Price": 45
+    },
+    {
+        "Name": "Speckled Xweetok Puzzle",
+        "Rarity": 89,
         "Price": 45
     },
     {
@@ -133250,6 +137285,11 @@ var item_db_array = [
         "Price": 45
     },
     {
+        "Name": "Almost Gummy Rat (Strawberry)",
+        "Rarity": 42,
+        "Price": 40
+    },
+    {
         "Name": "Baked Pumpkin Bread",
         "Rarity": 75,
         "Price": 40
@@ -133330,6 +137370,11 @@ var item_db_array = [
         "Price": 40
     },
     {
+        "Name": "Glubgar Bouncy Ball",
+        "Rarity": 82,
+        "Price": 40
+    },
+    {
         "Name": "Green Bubbly Koi Balloon",
         "Rarity": 80,
         "Price": 40
@@ -133367,11 +137412,6 @@ var item_db_array = [
     {
         "Name": "JubJub Spinning Top",
         "Rarity": 83,
-        "Price": 40
-    },
-    {
-        "Name": "Kreludan Sculpting Sand",
-        "Rarity": 74,
         "Price": 40
     },
     {
@@ -133625,11 +137665,6 @@ var item_db_array = [
         "Price": 35
     },
     {
-        "Name": "Bottle of Grey Sand",
-        "Rarity": 96,
-        "Price": 35
-    },
-    {
         "Name": "Bottled Faerie Keyring",
         "Rarity": 77,
         "Price": 35
@@ -133810,13 +137845,13 @@ var item_db_array = [
         "Price": 35
     },
     {
-        "Name": "Pull Along Halloween Ona",
+        "Name": "Pocket Fire Pinball Game",
         "Rarity": 87,
         "Price": 35
     },
     {
-        "Name": "Purple Cybunny Balloon",
-        "Rarity": 84,
+        "Name": "Pull Along Halloween Ona",
+        "Rarity": 87,
         "Price": 35
     },
     {
@@ -134010,6 +138045,11 @@ var item_db_array = [
         "Price": 30
     },
     {
+        "Name": "Blumaroo Bowling Set",
+        "Rarity": 86,
+        "Price": 30
+    },
+    {
         "Name": "Blumaroo Sock Puppet",
         "Rarity": 88,
         "Price": 30
@@ -134060,8 +138100,18 @@ var item_db_array = [
         "Price": 30
     },
     {
+        "Name": "Chocolate Beef Custard",
+        "Rarity": 74,
+        "Price": 30
+    },
+    {
         "Name": "Chocolate Liver Casserole",
         "Rarity": 78,
+        "Price": 30
+    },
+    {
+        "Name": "Chokato Origami",
+        "Rarity": 82,
         "Price": 30
     },
     {
@@ -134340,6 +138390,11 @@ var item_db_array = [
         "Price": 30
     },
     {
+        "Name": "Nimmo Lost Desert Urchin Cap",
+        "Rarity": 70,
+        "Price": 30
+    },
+    {
         "Name": "Origami Rock",
         "Rarity": 80,
         "Price": 30
@@ -134475,11 +138530,6 @@ var item_db_array = [
         "Price": 30
     },
     {
-        "Name": "Roburg 3T3",
-        "Rarity": 96,
-        "Price": 30
-    },
-    {
         "Name": "Rotten Egg Grarrl Gobstopper",
         "Rarity": 70,
         "Price": 30
@@ -134570,6 +138620,11 @@ var item_db_array = [
         "Price": 30
     },
     {
+        "Name": "Symol Clockwork Wind Up Toy",
+        "Rarity": 71,
+        "Price": 30
+    },
+    {
         "Name": "Tapira",
         "Rarity": 80,
         "Price": 30
@@ -134587,11 +138642,6 @@ var item_db_array = [
     {
         "Name": "Tuna Stroganoff",
         "Rarity": 78,
-        "Price": 30
-    },
-    {
-        "Name": "Ubikiberry Elixir",
-        "Rarity": 75,
         "Price": 30
     },
     {
@@ -134658,6 +138708,11 @@ var item_db_array = [
         "Name": "Zafara Kaleidoscope",
         "Rarity": 88,
         "Price": 30
+    },
+    {
+        "Name": "A Nimmo Music Extravaganza",
+        "Rarity": 72,
+        "Price": 25
     },
     {
         "Name": "Acara Board Game",
@@ -135495,11 +139550,6 @@ var item_db_array = [
         "Price": 25
     },
     {
-        "Name": "Yellow Grundo Keyring",
-        "Rarity": 74,
-        "Price": 25
-    },
-    {
         "Name": "Yellow Kiko Flying Disc",
         "Rarity": 80,
         "Price": 25
@@ -135592,11 +139642,6 @@ var item_db_array = [
     {
         "Name": "Cheopple",
         "Rarity": 80,
-        "Price": 20
-    },
-    {
-        "Name": "Chocolate Beef Custard",
-        "Rarity": 74,
         "Price": 20
     },
     {
@@ -135740,6 +139785,11 @@ var item_db_array = [
         "Price": 20
     },
     {
+        "Name": "Kreludan Sculpting Sand",
+        "Rarity": 74,
+        "Price": 20
+    },
+    {
         "Name": "Lime Chilli Gum",
         "Rarity": 80,
         "Price": 20
@@ -135860,6 +139910,11 @@ var item_db_array = [
         "Price": 20
     },
     {
+        "Name": "Purple Cybunny Balloon",
+        "Rarity": 84,
+        "Price": 20
+    },
+    {
         "Name": "Purple Negg Goo",
         "Rarity": 67,
         "Price": 20
@@ -135890,11 +139945,6 @@ var item_db_array = [
         "Price": 20
     },
     {
-        "Name": "Sand Pit",
-        "Rarity": 95,
-        "Price": 20
-    },
-    {
         "Name": "Scriblet Keyring",
         "Rarity": 78,
         "Price": 20
@@ -135917,11 +139967,6 @@ var item_db_array = [
     {
         "Name": "Skull Deckball",
         "Rarity": 88,
-        "Price": 20
-    },
-    {
-        "Name": "Smiley Paddleball Game",
-        "Rarity": 85,
         "Price": 20
     },
     {
@@ -135992,11 +140037,6 @@ var item_db_array = [
     {
         "Name": "Tyrannian Beanbag Chair",
         "Rarity": 75,
-        "Price": 20
-    },
-    {
-        "Name": "Ultra Bubble Beam",
-        "Rarity": 80,
         "Price": 20
     },
     {
@@ -136130,6 +140170,11 @@ var item_db_array = [
         "Price": 19
     },
     {
+        "Name": "Magical Healing Potion",
+        "Rarity": 74,
+        "Price": 19
+    },
+    {
         "Name": "Moach Pull Along Toy",
         "Rarity": 80,
         "Price": 19
@@ -136195,11 +140240,6 @@ var item_db_array = [
         "Price": 19
     },
     {
-        "Name": "A Nimmo Music Extravaganza",
-        "Rarity": 72,
-        "Price": 18
-    },
-    {
         "Name": "Aboogala Pull Along Toy",
         "Rarity": 88,
         "Price": 18
@@ -136227,6 +140267,11 @@ var item_db_array = [
     {
         "Name": "Caylis Balloon",
         "Rarity": 87,
+        "Price": 18
+    },
+    {
+        "Name": "Chia Clown Punching Bag",
+        "Rarity": 88,
         "Price": 18
     },
     {
@@ -136347,6 +140392,11 @@ var item_db_array = [
     {
         "Name": "Trumpadon Soup",
         "Rarity": 89,
+        "Price": 18
+    },
+    {
+        "Name": "Vandagyre Rock Star Wig",
+        "Rarity": 70,
         "Price": 18
     },
     {
@@ -136500,11 +140550,6 @@ var item_db_array = [
         "Price": 17
     },
     {
-        "Name": "Whack a Symol Toy",
-        "Rarity": 88,
-        "Price": 17
-    },
-    {
         "Name": "Wibreth Balloon",
         "Rarity": 89,
         "Price": 17
@@ -136620,11 +140665,6 @@ var item_db_array = [
         "Price": 16
     },
     {
-        "Name": "Waffles and Ketchup",
-        "Rarity": 85,
-        "Price": 16
-    },
-    {
         "Name": "Wrapped Strawberry Candy",
         "Rarity": 84,
         "Price": 16
@@ -136685,6 +140725,11 @@ var item_db_array = [
         "Price": 15
     },
     {
+        "Name": "Cherry Gummy Korbat Tail",
+        "Rarity": 87,
+        "Price": 15
+    },
+    {
         "Name": "Chomato",
         "Rarity": 80,
         "Price": 15
@@ -136742,11 +140787,6 @@ var item_db_array = [
     {
         "Name": "Glowing Techo Puzzle",
         "Rarity": 77,
-        "Price": 15
-    },
-    {
-        "Name": "Glubgar Bouncy Ball",
-        "Rarity": 82,
         "Price": 15
     },
     {
@@ -137235,11 +141275,6 @@ var item_db_array = [
         "Price": 13
     },
     {
-        "Name": "Cherry Gummy Korbat Tail",
-        "Rarity": 87,
-        "Price": 13
-    },
-    {
         "Name": "Cobrall Squirter",
         "Rarity": 88,
         "Price": 13
@@ -137290,6 +141325,11 @@ var item_db_array = [
         "Price": 13
     },
     {
+        "Name": "Injured Pteri Bandage",
+        "Rarity": 70,
+        "Price": 13
+    },
+    {
         "Name": "Long Grey Beard",
         "Rarity": 78,
         "Price": 13
@@ -137302,6 +141342,11 @@ var item_db_array = [
     {
         "Name": "Mix and Match Mutant Puzzle",
         "Rarity": 84,
+        "Price": 13
+    },
+    {
+        "Name": "Moon and Star Stickies",
+        "Rarity": 82,
         "Price": 13
     },
     {
@@ -137615,6 +141660,11 @@ var item_db_array = [
         "Price": 12
     },
     {
+        "Name": "Nimmo Lost Desert Urchin Sword",
+        "Rarity": 70,
+        "Price": 12
+    },
+    {
         "Name": "Paint Milkshake",
         "Rarity": 60,
         "Price": 12
@@ -137710,11 +141760,6 @@ var item_db_array = [
         "Price": 11
     },
     {
-        "Name": "Black Velvet Cloak",
-        "Rarity": 96,
-        "Price": 11
-    },
-    {
         "Name": "Black Widow Truffle",
         "Rarity": 50,
         "Price": 11
@@ -137762,11 +141807,6 @@ var item_db_array = [
     {
         "Name": "Darigan Faellie Action Figure",
         "Rarity": 87,
-        "Price": 11
-    },
-    {
-        "Name": "Deadly Attack Spork",
-        "Rarity": 96,
         "Price": 11
     },
     {
@@ -137927,6 +141967,11 @@ var item_db_array = [
     {
         "Name": "Wooden Rocking Uni",
         "Rarity": 75,
+        "Price": 11
+    },
+    {
+        "Name": "Yellow Grundo Keyring",
+        "Rarity": 74,
         "Price": 11
     },
     {
@@ -138140,16 +142185,6 @@ var item_db_array = [
         "Price": 10
     },
     {
-        "Name": "Nimmo Lost Desert Urchin Cap",
-        "Rarity": 70,
-        "Price": 10
-    },
-    {
-        "Name": "Pickled Moehog Feet",
-        "Rarity": 80,
-        "Price": 10
-    },
-    {
         "Name": "Pumpkin Spice Soap",
         "Rarity": 68,
         "Price": 10
@@ -138195,6 +142230,11 @@ var item_db_array = [
         "Price": 10
     },
     {
+        "Name": "Smiley Paddleball Game",
+        "Rarity": 85,
+        "Price": 10
+    },
+    {
         "Name": "Spooky Ghost Usuki",
         "Rarity": 79,
         "Price": 10
@@ -138220,11 +142260,6 @@ var item_db_array = [
         "Price": 10
     },
     {
-        "Name": "Symol Clockwork Wind Up Toy",
-        "Rarity": 71,
-        "Price": 10
-    },
-    {
         "Name": "Tiny Edible Palm Trees",
         "Rarity": 80,
         "Price": 10
@@ -138247,11 +142282,6 @@ var item_db_array = [
     {
         "Name": "Unidentifiable Weak Bottled Faerie",
         "Rarity": 88,
-        "Price": 10
-    },
-    {
-        "Name": "Vandagyre Rock Star Wig",
-        "Rarity": 70,
         "Price": 10
     },
     {
@@ -138505,6 +142535,11 @@ var item_db_array = [
         "Price": 9
     },
     {
+        "Name": "Waffles and Ketchup",
+        "Rarity": 85,
+        "Price": 9
+    },
+    {
         "Name": "Aisha Riceball",
         "Rarity": 65,
         "Price": 8
@@ -138625,12 +142660,7 @@ var item_db_array = [
         "Price": 8
     },
     {
-        "Name": "Moon and Star Stickies",
-        "Rarity": 82,
-        "Price": 8
-    },
-    {
-        "Name": "Nimmo Lost Desert Urchin Sword",
+        "Name": "Nimmo Lost Desert Urchin Pants",
         "Rarity": 70,
         "Price": 8
     },
@@ -138930,11 +142960,6 @@ var item_db_array = [
         "Price": 7
     },
     {
-        "Name": "Almost Gummy Rat (Strawberry)",
-        "Rarity": 42,
-        "Price": 6
-    },
-    {
         "Name": "Altador Yoyo",
         "Rarity": 65,
         "Price": 6
@@ -139200,11 +143225,6 @@ var item_db_array = [
         "Price": 5
     },
     {
-        "Name": "Nimmo Lost Desert Urchin Pants",
-        "Rarity": 70,
-        "Price": 5
-    },
-    {
         "Name": "Novelty Glasses",
         "Rarity": 70,
         "Price": 5
@@ -139307,6 +143327,11 @@ var item_db_array = [
     {
         "Name": "Tyrannian Usuki",
         "Rarity": 72,
+        "Price": 5
+    },
+    {
+        "Name": "Ultra Bubble Beam",
+        "Rarity": 80,
         "Price": 5
     },
     {
@@ -139447,11 +143472,6 @@ var item_db_array = [
     {
         "Name": "Gravy Smoothie",
         "Rarity": 65,
-        "Price": 4
-    },
-    {
-        "Name": "Injured Pteri Bandage",
-        "Rarity": 70,
         "Price": 4
     },
     {
@@ -139955,6 +143975,11 @@ var item_db_array = [
         "Price": 2
     },
     {
+        "Name": "Pirate Tonu Plushie",
+        "Rarity": 84,
+        "Price": 2
+    },
+    {
         "Name": "Purple Scallop Shell",
         "Rarity": 81,
         "Price": 2
@@ -140170,11 +144195,6 @@ var item_db_array = [
         "Price": 1
     },
     {
-        "Name": "Magical Healing Potion",
-        "Rarity": 74,
-        "Price": 1
-    },
-    {
         "Name": "Metallic Mote",
         "Rarity": 60,
         "Price": 1
@@ -140335,26 +144355,6 @@ var item_db_array = [
         "Price": 1
     },
     {
-        "Name": "A History of Chias",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Advanced Kreludan Physics",
-        "Rarity": 100,
-        "Price": 20000000
-    },
-    {
-        "Name": "Air Faerie Doll",
-        "Rarity": 99,
-        "Price": 30000000
-    },
-    {
-        "Name": "All Seeing Tree",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
         "Name": "Animal-style Chips",
         "Rarity": 99,
         "Price": "Unpriced"
@@ -140365,39 +144365,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Archmagus of Roo Plushie",
-        "Rarity": 99,
-        "Price": 10000000
-    },
-    {
-        "Name": "ARGH!!!! DONNA STAMP",
-        "Rarity": 99,
-        "Price": 90000000
-    },
-    {
-        "Name": "Artichoke and Onion Surprise",
-        "Rarity": 99,
-        "Price": 1300000
-    },
-    {
         "Name": "Asparagus Chia Wings",
         "Rarity": 89,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Baby Gnorbu Morphing Potion",
-        "Rarity": 99,
-        "Price": 980000
-    },
-    {
-        "Name": "Baby Techo Bobblehead",
-        "Rarity": 98,
-        "Price": 6000000
-    },
-    {
-        "Name": "Ballerina Quiguki",
-        "Rarity": 99,
-        "Price": 6000000
     },
     {
         "Name": "Bat Thing Usuki",
@@ -140413,41 +144383,6 @@ var item_db_array = [
         "Name": "Beam Me Aboard",
         "Rarity": 100,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Best Friends",
-        "Rarity": 99,
-        "Price": 2200000
-    },
-    {
-        "Name": "Big Gulp Neocola",
-        "Rarity": 99,
-        "Price": 9000000
-    },
-    {
-        "Name": "Black Wadjet Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Blackberry Eyrie Cookie",
-        "Rarity": 99,
-        "Price": 10000000
-    },
-    {
-        "Name": "Blade of Ultranova",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "BLT Croissant",
-        "Rarity": 99,
-        "Price": 3600000
-    },
-    {
-        "Name": "Blue Doglefox Plushie",
-        "Rarity": 99,
-        "Price": 1500000
     },
     {
         "Name": "Blumaroo Coffee",
@@ -140530,104 +144465,14 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Boraxis Plushie",
-        "Rarity": 99,
-        "Price": 7000000
-    },
-    {
-        "Name": "Borovan Hot Chocolate Bomb",
-        "Rarity": 97,
-        "Price": 2000000
-    },
-    {
-        "Name": "Borovan Layered Cake",
-        "Rarity": 99,
-        "Price": 3800000
-    },
-    {
-        "Name": "Bowe Plushie",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
         "Name": "Brightvale Books Background",
         "Rarity": 87,
         "Price": "Unpriced"
     },
     {
-        "Name": "Brown Wadjet Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Bruces Guide to Combat Eating",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Buttered Juppie Waffle",
-        "Rarity": 99,
-        "Price": 7000000
-    },
-    {
-        "Name": "Candy Cane Chocolate Advent Calendar",
-        "Rarity": 99,
-        "Price": 3900000
-    },
-    {
-        "Name": "Captain Scarblade Stamp",
-        "Rarity": 99,
-        "Price": 58000000
-    },
-    {
-        "Name": "Captain Xelqued",
-        "Rarity": 99,
-        "Price": 12000000
-    },
-    {
         "Name": "Carrot Chia Wings",
         "Rarity": 89,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Carved Watermelon",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Chain of Onions",
-        "Rarity": 99,
-        "Price": 10000000
-    },
-    {
-        "Name": "Chaos Giant Plushie",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Cheerleader Quiguki Doll",
-        "Rarity": 99,
-        "Price": 10000000
-    },
-    {
-        "Name": "Cheese Chair",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "Cheese Mat",
-        "Rarity": 99,
-        "Price": 985000
-    },
-    {
-        "Name": "Chia Art History",
-        "Rarity": 99,
-        "Price": 1800000
-    },
-    {
-        "Name": "Chia Cake",
-        "Rarity": 99,
-        "Price": 6500000
     },
     {
         "Name": "Chicken Filets with Fancy Sauce",
@@ -140645,21 +144490,6 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Chocolate Chip Eyrie Cookie",
-        "Rarity": 99,
-        "Price": 7000000
-    },
-    {
-        "Name": "Chocolate Coated Blue Cheese",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Chocolate Coated Cheese Strings",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
         "Name": "Chocolate Gum",
         "Rarity": 100,
         "Price": "Unpriced"
@@ -140668,11 +144498,6 @@ var item_db_array = [
         "Name": "Chocolate Lipstick",
         "Rarity": 100,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Chocolate Moltenore",
-        "Rarity": 99,
-        "Price": 2000000
     },
     {
         "Name": "Chocolate Peanuts With Peas",
@@ -140695,31 +144520,6 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Chokato Deluxe Aisha Cake",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Chomby Mysteries",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Chrysolite Dervish Plushie",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Cloud Draik Plushie",
-        "Rarity": 99,
-        "Price": 2500000
-    },
-    {
-        "Name": "Cloud Lenny Plushie",
-        "Rarity": 99,
-        "Price": 8000000
-    },
-    {
         "Name": "Coconut Chia Wings",
         "Rarity": 89,
         "Price": "Unpriced"
@@ -140735,64 +144535,14 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Cures for Bad Breath",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Dargil Meat Mince Pie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Darigan Globe",
-        "Rarity": 99,
-        "Price": 969000
-    },
-    {
-        "Name": "Darigan Spectre Stamp",
-        "Rarity": 99,
-        "Price": 112500000
-    },
-    {
         "Name": "Dark Nova Lamp",
         "Rarity": 99,
         "Price": "Unpriced"
     },
     {
-        "Name": "Darkest Faerie Plushie",
-        "Rarity": 99,
-        "Price": 25000000
-    },
-    {
         "Name": "Delicate Terracotta Jug",
         "Rarity": 99,
-        "Price": 981000
-    },
-    {
-        "Name": "Desert Lupe Plushie",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Disco Print Bed",
-        "Rarity": 99,
-        "Price": 1500000
-    },
-    {
-        "Name": "Double Printed Evil Fuzzle Stamp",
-        "Rarity": 99,
-        "Price": 25000000
-    },
-    {
-        "Name": "Dr Sloth Backpack",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Draconus Maximus",
-        "Rarity": 99,
-        "Price": 6000000
+        "Price": "Unpriced"
     },
     {
         "Name": "Draik Enhancement Brew",
@@ -140800,34 +144550,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Duel Bazuka",
-        "Rarity": 99,
-        "Price": 7000000
-    },
-    {
-        "Name": "Dusk Kougra Plushie",
-        "Rarity": 99,
-        "Price": 20000000
-    },
-    {
         "Name": "Echtooh Melon on Toast",
         "Rarity": 86,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Egg and Tomato Sandwich",
-        "Rarity": 99,
-        "Price": 9000000
-    },
-    {
-        "Name": "Electro Lizard Plushie",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Elephante Lamp Collectable Charm",
-        "Rarity": 99,
-        "Price": 80000000
     },
     {
         "Name": "Emerald Eyrie Coin",
@@ -140835,69 +144560,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Erisim T-Shirt",
-        "Rarity": 99,
-        "Price": 965000
-    },
-    {
-        "Name": "Faerie Korbat Plushie",
-        "Rarity": 99,
-        "Price": 970000
-    },
-    {
-        "Name": "Faerie Secrets",
-        "Rarity": 98,
-        "Price": 1000000
-    },
-    {
-        "Name": "Faleinn Plushie",
-        "Rarity": 99,
-        "Price": 790000
-    },
-    {
-        "Name": "Feather Bow and Arrow",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Fish Negg Plushie",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
         "Name": "Fish Negg Stew",
         "Rarity": 100,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Fishy Delight Grarrl Gobstopper",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Floppy Turtum Plushie",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Foil Food Shop Stamp",
-        "Rarity": 99,
-        "Price": 30000000
-    },
-    {
-        "Name": "Foil Slorg Stamp",
-        "Rarity": 99,
-        "Price": 85000000
-    },
-    {
-        "Name": "Forbidden Zafara",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "French Onion Soup",
-        "Rarity": 99,
-        "Price": 1500000
     },
     {
         "Name": "Frost Mote Buddy",
@@ -140905,129 +144570,14 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Frosted Babaa Cookies",
-        "Rarity": 98,
-        "Price": 2000000
-    },
-    {
-        "Name": "Frozen Lizard Plushie",
-        "Rarity": 99,
-        "Price": 1800000
-    },
-    {
         "Name": "Frubix Cube on Toast",
         "Rarity": 86,
         "Price": "Unpriced"
     },
     {
-        "Name": "Fun in the Sun Usuki Reject",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Fyora Apple",
-        "Rarity": 99,
-        "Price": 2500000
-    },
-    {
         "Name": "Garden Bench",
         "Rarity": 100,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Ghost Evil Fuzzle",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Ghost Fuzzle",
-        "Rarity": 99,
-        "Price": 3400000
-    },
-    {
-        "Name": "Gifts for your Enemies",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Gilly the Usul",
-        "Rarity": 99,
-        "Price": 15000000
-    },
-    {
-        "Name": "Glaring Pumpkin",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Glittery Scorchstone",
-        "Rarity": 100,
-        "Price": 85000000
-    },
-    {
-        "Name": "Gloom Kougra Plushie",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Glowing Mirror",
-        "Rarity": 99,
-        "Price": 800000
-    },
-    {
-        "Name": "Golden Caviar",
-        "Rarity": 99,
-        "Price": 3500000
-    },
-    {
-        "Name": "Golden Peophin Harp",
-        "Rarity": 99,
-        "Price": 595000
-    },
-    {
-        "Name": "Grapefruit Cake",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Guardian of Fire Magic Plushie",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Halloween Draik Plushie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Halloween JubJub Plushie",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Hannah Plushie",
-        "Rarity": 99,
-        "Price": 2500000
-    },
-    {
-        "Name": "Hannah Quiguki",
-        "Rarity": 99,
-        "Price": 1800000
-    },
-    {
-        "Name": "Hilarious Pumpkin",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Holographic Coltzans Shrine Stamp",
-        "Rarity": 99,
-        "Price": 120000000
-    },
-    {
-        "Name": "Holographic Magax Stamp",
-        "Rarity": 99,
-        "Price": 32500000
     },
     {
         "Name": "Holographic Virtupets Stamp",
@@ -141040,29 +144590,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "I Love Chezzoom T-Shirt",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "I Love Kadoatie T-Shirt",
-        "Rarity": 99,
-        "Price": 980000
-    },
-    {
         "Name": "I Love Lord Kass Bed",
         "Rarity": 99,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Illusens Diary",
-        "Rarity": 99,
-        "Price": 20000000
-    },
-    {
-        "Name": "Inferno Lizard Plushie",
-        "Rarity": 99,
-        "Price": 3500000
     },
     {
         "Name": "Interplanetary Communications",
@@ -141070,64 +144600,14 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Jeran Quiguki",
-        "Rarity": 99,
-        "Price": 1800000
-    },
-    {
-        "Name": "Jolly Pumpkin",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Keeper Of Time Plushie",
-        "Rarity": 99,
-        "Price": 10000000
-    },
-    {
-        "Name": "Khan the Unstoppable",
-        "Rarity": 99,
-        "Price": 12000000
-    },
-    {
-        "Name": "King Hagan Quiguki",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
         "Name": "King Hagan Snowglobe",
         "Rarity": 85,
         "Price": "Unpriced"
     },
     {
-        "Name": "King Kelpbeard Stamp",
-        "Rarity": 99,
-        "Price": 50000000
-    },
-    {
-        "Name": "King Skarl Plushie",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "King Skarl Quiguki",
-        "Rarity": 99,
-        "Price": 8000000
-    },
-    {
         "Name": "Know Your Robot Petpet",
         "Rarity": 100,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Kougra Classics",
-        "Rarity": 99,
-        "Price": 980000
-    },
-    {
-        "Name": "Koya Korbat Huntress",
-        "Rarity": 100,
-        "Price": 20000000
     },
     {
         "Name": "Kreludan Engineering",
@@ -141140,134 +144620,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Kyrii Sorceror",
-        "Rarity": 99,
-        "Price": 8000000
-    },
-    {
-        "Name": "Leirobas Plushie",
-        "Rarity": 99,
-        "Price": 8000000
-    },
-    {
-        "Name": "Lenny Cookbook",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Lenny Salad",
-        "Rarity": 97,
-        "Price": 880000
-    },
-    {
-        "Name": "Lenny Witchcraft",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
         "Name": "Library Faerie Doll",
         "Rarity": 98,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Light Faerie Backpack",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Little Timmy",
-        "Rarity": 100,
-        "Price": 30000000
-    },
-    {
-        "Name": "Long Glowing Drawer",
-        "Rarity": 99,
-        "Price": 1800000
-    },
-    {
-        "Name": "Lord Kass Card",
-        "Rarity": 99,
-        "Price": 19000000
-    },
-    {
-        "Name": "Lord Kass Gnome",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Lost Desert Quiguki",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Luxury Castle Petpet Bed",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Luxury Faerie Festival Snowglobe",
-        "Rarity": 99,
-        "Price": 12000000
-    },
-    {
-        "Name": "Magical Blue Kacheek Plushie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Magical Blue Kiko Plushie",
-        "Rarity": 99,
-        "Price": 2600000
-    },
-    {
-        "Name": "Magical Blue Nimmo Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Magical Blue Tonu Plushie",
-        "Rarity": 99,
-        "Price": 1800000
-    },
-    {
-        "Name": "Magical Blue Yurble Plushie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Magical Cloud Lenny Plushie",
-        "Rarity": 99,
-        "Price": 10000000
-    },
-    {
-        "Name": "Magical Ghost Marshmallows Plushie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Magical Green Cybunny Plushie",
-        "Rarity": 98,
-        "Price": 2000000
-    },
-    {
-        "Name": "Magical Green Gelert Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Magical Green Kiko Plushie",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Magical Green Koi Plushie",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Magical Green Krawk Plushie",
-        "Rarity": 99,
-        "Price": 5000000
     },
     {
         "Name": "Magical Green Tonu Plushie",
@@ -141275,89 +144630,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Magical Green Yurble Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
         "Name": "Magical Potato Chia Pop",
         "Rarity": 99,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Magical Purple Blumaroo Plushie",
-        "Rarity": 99,
-        "Price": 1860000
-    },
-    {
-        "Name": "Magical Purple Koi Plushie",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Magical Rainbow Aisha Plushie",
-        "Rarity": 99,
-        "Price": 4500000
-    },
-    {
-        "Name": "Magical Rainbow Blumaroo Plushie",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Magical Rainbow Cybunny Plushie",
-        "Rarity": 99,
-        "Price": 7500000
-    },
-    {
-        "Name": "Magical Red Blumaroo Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Magical Red Gelert Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Magical Red Grarrl Plushie",
-        "Rarity": 99,
-        "Price": 3500000
-    },
-    {
-        "Name": "Magical Red Kiko Plushie",
-        "Rarity": 99,
-        "Price": 3200000
-    },
-    {
-        "Name": "Magical Red Koi Plushie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Magical Red Lenny Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Magical Red Skeith Plushie",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Magical Red Wocky Plushie",
-        "Rarity": 99,
-        "Price": 2500000
-    },
-    {
-        "Name": "Magical Red Yurble Plushie",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Magical Spotted Blumaroo Plushie",
-        "Rarity": 99,
-        "Price": 6500000
     },
     {
         "Name": "Magical Yellow Kiko Plushie",
@@ -141365,199 +144640,14 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Magical Yellow Lenny Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Magical Yellow Nimmo Plushie",
-        "Rarity": 99,
-        "Price": 845000
-    },
-    {
-        "Name": "Magical Yellow Skeith Plushie",
-        "Rarity": 99,
-        "Price": 2300000
-    },
-    {
-        "Name": "Magical Yellow Tonu Plushie",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "Magical Yellow Wocky Plushie",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Malice Doll",
-        "Rarity": 98,
-        "Price": 5000000
-    },
-    {
-        "Name": "Maraquan Grarrl Morphing Potion",
-        "Rarity": 99,
-        "Price": 3700000
-    },
-    {
-        "Name": "Maraquan Kacheek Morphing Potion",
-        "Rarity": 99,
-        "Price": 6300000
-    },
-    {
-        "Name": "Marillis Harbane",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Mastermind Plushie",
-        "Rarity": 100,
-        "Price": 48000000
-    },
-    {
-        "Name": "Meepit Muffins",
-        "Rarity": 99,
-        "Price": 12500000
-    },
-    {
-        "Name": "Mega Sandwich",
-        "Rarity": 99,
-        "Price": 20000000
-    },
-    {
-        "Name": "Melatite Dervish Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Meridell Toy Box",
-        "Rarity": 99,
-        "Price": 819999
-    },
-    {
         "Name": "Millennial Pen",
         "Rarity": 100,
         "Price": "Unpriced"
     },
     {
-        "Name": "Mime Quiguki",
-        "Rarity": 99,
-        "Price": 425000
-    },
-    {
-        "Name": "Minty Eyrie Cookie",
-        "Rarity": 99,
-        "Price": 8000000
-    },
-    {
-        "Name": "Misaligned Printer Stamp",
-        "Rarity": 99,
-        "Price": 20000000
-    },
-    {
-        "Name": "Mist Kougra Plushie",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Modern Lupe Magazine",
-        "Rarity": 99,
-        "Price": 15000000
-    },
-    {
-        "Name": "Moehog Matching",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "Mokti Plushie",
-        "Rarity": 99,
-        "Price": 4500000
-    },
-    {
-        "Name": "Monoceraptor Plushie",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Mummified Hot Dog",
-        "Rarity": 100,
-        "Price": 45000000
-    },
-    {
-        "Name": "Mutant Golf Club",
-        "Rarity": 99,
-        "Price": 975000
-    },
-    {
-        "Name": "Mutant Korbat Plushie",
-        "Rarity": 99,
-        "Price": 6500000
-    },
-    {
-        "Name": "Mutant Shoyru Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Need a Better Printer Stamp",
-        "Rarity": 99,
-        "Price": 15000000
-    },
-    {
-        "Name": "Negg Faerie Snowglobe",
-        "Rarity": 98,
-        "Price": 1400000
-    },
-    {
-        "Name": "Nibbled Cooking Pot Stamp",
-        "Rarity": 99,
-        "Price": 18000000
-    },
-    {
-        "Name": "Nimmo Battle Cry",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
         "Name": "Old Beaten Chokato Chia Plushie",
         "Rarity": 99,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Olde Zafara",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Olivetato",
-        "Rarity": 99,
-        "Price": 8000000
-    },
-    {
-        "Name": "Onion and Mustard Pie",
-        "Rarity": 99,
-        "Price": 7500000
-    },
-    {
-        "Name": "Orange Jelly Guitar",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "Orange Lightmite Lollypop",
-        "Rarity": 98,
-        "Price": 999999
-    },
-    {
-        "Name": "Ornate Ivory Love Spoon",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "Ornate Usuki",
-        "Rarity": 99,
-        "Price": 550000
     },
     {
         "Name": "Pea Chia Wings",
@@ -141575,11 +144665,6 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Petfolio",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
         "Name": "Pineapple Chia Wings",
         "Rarity": 89,
         "Price": "Unpriced"
@@ -141595,54 +144680,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Pink Walein T-Shirt",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "Polka Carrot",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Pop Star Quiguki",
-        "Rarity": 99,
-        "Price": 1500000
-    },
-    {
         "Name": "Potato Chia Wings",
         "Rarity": 89,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Princess Vyssas Diary",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Professor Kachevski",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Punchbag Bob",
-        "Rarity": 99,
-        "Price": 4500000
-    },
-    {
-        "Name": "Puzzle Fruit",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Pyramid Strawberry",
-        "Rarity": 99,
-        "Price": 1400000
-    },
-    {
-        "Name": "Queen Fyora Stamp",
-        "Rarity": 99,
-        "Price": 115000000
     },
     {
         "Name": "Queen Fyora Usuki Doll",
@@ -141650,114 +144690,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Quiguki Mermaid",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Quiguki Prom Queen",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Rainbow Bath Tub",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Rainbow Carrot",
-        "Rarity": 99,
-        "Price": 7500000
-    },
-    {
-        "Name": "Rainbow Cybunny Negg",
-        "Rarity": 99,
-        "Price": 25000000
-    },
-    {
-        "Name": "Rainbow Evil Fuzzle",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Rainbow Tuskaninny Plushie",
-        "Rarity": 99,
-        "Price": 7500000
-    },
-    {
-        "Name": "Rainbow Uni Plushie",
-        "Rarity": 99,
-        "Price": 2800000
-    },
-    {
-        "Name": "Red Wocky Balloon",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
         "Name": "Reject Gelert Plushie",
         "Rarity": 99,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Reject Green Acara Plushie",
-        "Rarity": 99,
-        "Price": 1800000
-    },
-    {
-        "Name": "Reject Red Acara Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Reject Yellow Acara Plushie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Rikti Plushie",
-        "Rarity": 99,
-        "Price": 1800000
-    },
-    {
-        "Name": "Robo Blumaroo",
-        "Rarity": 99,
-        "Price": 1500000
-    },
-    {
-        "Name": "Scenic Kreludan Views",
-        "Rarity": 100,
-        "Price": 20000000
-    },
-    {
-        "Name": "Scorchio Calculator",
-        "Rarity": 99,
-        "Price": 985000
-    },
-    {
-        "Name": "Sergeant Brexis",
-        "Rarity": 99,
-        "Price": 12000000
-    },
-    {
-        "Name": "Serpentine Dervish Plushie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Shadow Kougra Plushie",
-        "Rarity": 99,
-        "Price": 8500000
-    },
-    {
-        "Name": "Shock Lizard Plushie",
-        "Rarity": 99,
-        "Price": 4000000
-    },
-    {
-        "Name": "Siona",
-        "Rarity": 99,
-        "Price": 4000000
     },
     {
         "Name": "Skeem on Toast",
@@ -141765,79 +144700,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Skunk Mynci Plushie",
-        "Rarity": 99,
-        "Price": 2500000
-    },
-    {
-        "Name": "Sniddberry Meerca Gobstopper",
-        "Rarity": 99,
-        "Price": 8000000
-    },
-    {
-        "Name": "Snot Blocks",
-        "Rarity": 99,
-        "Price": 975000
-    },
-    {
-        "Name": "Snot Slingshot",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Sophie, A Biography",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Speckled Bruce Plushie",
-        "Rarity": 99,
-        "Price": 3000000
-    },
-    {
-        "Name": "Speckled Nimmo Plushie",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Spotted Gelert Plushie",
-        "Rarity": 99,
-        "Price": 4750000
-    },
-    {
-        "Name": "Spotted Koi Plushie",
-        "Rarity": 99,
-        "Price": 2500000
-    },
-    {
         "Name": "Sroom Chia Wings",
         "Rarity": 89,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Stack It High Cake",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Starry Draik Plushie",
-        "Rarity": 99,
-        "Price": 5500000
-    },
-    {
-        "Name": "Stealthy Pencil Case",
-        "Rarity": 99,
-        "Price": 999999
-    },
-    {
-        "Name": "Steel Golem Neoquest Plushie",
-        "Rarity": 99,
-        "Price": 4500000
-    },
-    {
-        "Name": "Stone Bedside Table",
-        "Rarity": 99,
-        "Price": 2000000
     },
     {
         "Name": "Strange Bulb",
@@ -141855,34 +144720,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "Swamp Ghoul",
-        "Rarity": 99,
-        "Price": 12000000
-    },
-    {
-        "Name": "Swamp Lupe Neoquest Plushie",
-        "Rarity": 99,
-        "Price": 1900000
-    },
-    {
         "Name": "Tax Beast Plushie",
         "Rarity": 99,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Teenage Usuki Reject",
-        "Rarity": 99,
-        "Price": 935000
-    },
-    {
-        "Name": "Terask Stamp",
-        "Rarity": 99,
-        "Price": 75000000
-    },
-    {
-        "Name": "The Bad Skeith",
-        "Rarity": 99,
-        "Price": 4600000
     },
     {
         "Name": "The Green Grundo Invasion",
@@ -141895,64 +144735,9 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "The Magic Staff",
-        "Rarity": 99,
-        "Price": 2500000
-    },
-    {
-        "Name": "The Shadow Usul",
-        "Rarity": 99,
-        "Price": 15000000
-    },
-    {
-        "Name": "The Tax Beast",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "The Three Poster",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Thunder Lizard Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
         "Name": "Tiger Sofa",
         "Rarity": 99,
         "Price": "Unpriced"
-    },
-    {
-        "Name": "Tomato Kebab",
-        "Rarity": 99,
-        "Price": 1200000
-    },
-    {
-        "Name": "Traditional Welsh Quiguki",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Triple Choco-Strawberry Cake",
-        "Rarity": 99,
-        "Price": 6000000
-    },
-    {
-        "Name": "Tyrannian Techo Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "Uni Myths",
-        "Rarity": 99,
-        "Price": 5000000
-    },
-    {
-        "Name": "Vanity Doll",
-        "Rarity": 99,
-        "Price": 25000000
     },
     {
         "Name": "Volcanic Pond",
@@ -141960,2794 +144745,8 @@ var item_db_array = [
         "Price": "Unpriced"
     },
     {
-        "Name": "White Draik Plushie",
-        "Rarity": 99,
-        "Price": 2000000
-    },
-    {
-        "Name": "White Ixi Plushie",
-        "Rarity": 99,
-        "Price": 900000
-    },
-    {
         "Name": "White Wood Pergola",
         "Rarity": 99,
         "Price": "Unpriced"
     },
-    {
-        "Name": "Wrawk the Merciless Plushie",
-        "Rarity": 99,
-        "Price": 7500000
-    },
-    {
-        "Name": "Xantan Stamp",
-        "Rarity": 99,
-        "Price": 30000000
-    },
-    {
-        "Name": "Year 8 Usuki",
-        "Rarity": 99,
-        "Price": 935000
-    },
-    {
-        "Name": "Year 9 Quiguki",
-        "Rarity": 99,
-        "Price": 1500000
-    },
-    {
-        "Name": "Zafara Double Agent",
-        "Rarity": 98,
-        "Price": 2000000
-    },
-    {
-        "Name": "Zafara Lore",
-        "Rarity": 98,
-        "Price": 905000
-    },
-    {
-        "Name": "Zibblifruit",
-        "Rarity": 99,
-        "Price": 2500000
-    },
-    {
-        "Name": "Snowbunny Stamp",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Leaded Elemental Vial",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Igneot Stamp",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Floral Maractite Coin",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fire Faerie Doll",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Upside Down Island Acara Stamp",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "8-bit Power-Up Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Negg Faerie Doll",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Water Faerie Doll",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ice Hissi Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Strale",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dragonfly Nymph",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Anklet of the Deep",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Stealthy Lutari Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Unidentified Petpetpet",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Snowickle",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Techo Statue Collectable Charm",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Count Von Roo Stamp",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Pea Chia Pop",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Money Tree Coin",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Aboogala",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Floral Jelly",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sidney Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mega U-Bend",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Scorchstone",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Zombie Draik Egg",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Maraquan Krawk Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Skuffler",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mini Giant Jelly",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Moltenore",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Morguss Stamp",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Stealthy Krawk Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ramtor Stamp",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Chocolate Cream Biscuit",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cyodrake Collectable Charm",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Darigan Draik Egg",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Gallion Collectable Charm",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Yellow Yurble Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Neoquest Gatekeeper Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kacheek Flour",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Red Usul Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Jahbal Stamp",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cooty",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Heavy Blue Tunic",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Royal Boy Kyrii Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dazzling Blue Mussel Shell",
-        "Rarity": 91,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Desert Blumaroo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ice Draik Egg",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Green Wocky Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Nightsteed Stamp",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pinchit",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Kau Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Kiko Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Scoach",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Grundo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Stealthy Kyrii Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Battle Uni Stamp",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Faerie Ixi Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Red Cybunny Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pofew",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Alchemy Lessons",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Breebly",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cheesy Carrots",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Chokato Bean Bag",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Faerie Birdhouse",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Faerie Pteri Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Flankin",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fleaf",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Graduate Usuki",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Greevix",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Grundo Warehouse Stamp",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Invisible Wocky Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Jhuidah Snowglobe",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kauvara",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Lady Blurg",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Cloud Gelert Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Master Vex",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mega Honeyplume Smoothie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Meridell Usuki",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Official Usuki Battle Set",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pretty Pink Easter Negg",
-        "Rarity": 100,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Quilin",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Apple",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Pool Coin",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Roast Pork",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Space Prom Date Usuki Reject",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Springabee",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Usuki Doll Stamp",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Wormoeba",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Zeirn the Electric Kougra",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Darigan Moehog Stamp",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Halloween Aisha Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Black and Yellow Collectable Scarab",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Darigan Ixi Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Shuriken",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Lucky Coin Stamp",
-        "Rarity": 92,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Bruce Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Chomby Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Golden Dubloon Stamp",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Jiggybug",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Maraquan Draik Maractite Coin",
-        "Rarity": 93,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Grarrl Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Snailien",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Moach",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mozito",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Baby Lupe Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Baby Scorchio Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blood Mole Plant",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Book of Flames",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Itchi",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Carrot Chia Pop",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Marafalop",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rock",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Secrets of Tombola",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Squippit",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Zygorax",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Halloween Meerca Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Onion Chia Pop",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Skidget",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Eventide Gelert Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Tower Shield",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blechy",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Desert Kacheek Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Grey Lenny Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Luxury Chocolate Easter Negg",
-        "Rarity": 100,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Ummagine Chia Pop",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Northern Watch Tower Stamp",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plum",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Purple Scorchstone",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Striped Kau Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Scriblet",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Christmas Pattern Negg",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Strawberry Chia Pop",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "The Pyramid Tablets",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Apple Jelly Club",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Apple Lantern",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Chia Mites",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Chia Statue",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Conquer the Dark",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cutout Violin",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dark Nova Table",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fire Chia Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Golden Coltzan Statue",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Iskha Lightbringer",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Island Ixi Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Jhudora the Dark Faerie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Luxury Dark and Earth Faerie Snowglobe",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mega Tuna Sandwich",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "My Life As A Lenny",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Nova Blade",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pirate Kougra Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Techo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Polkadot Tonu Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rock Golem Neoquest Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Under and Overripe Avocado Bombs",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Winged Shoyru Amulet",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Woodland Tonu Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Youve Been Hexed!",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Darigan Eyrie Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Woolypapith",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "White Chia Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Evil Pinanna",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Capn Threelegs Cutlass Crusade",
-        "Rarity": 100,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fire Xweetok Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Gathow",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Insane Evil Fuzzle",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pirate Spear",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Tonu Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Care of Koi",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mechanoid Warrior",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Lime Chia Pop",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Snow Chia Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Desert Flotsam Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Grotson",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Green Krawk Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Disco Bruce Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "White Chomby Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Red Krawk Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Slimy Tree",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Xweetok Boots Of Speed",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Vile Curse of Pestilence",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Halloween Xweetok Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Amulet of the Unblinking Eye",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fire Bori Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Grey Faerie Usuki Doll",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Purple Draik Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow JubJub Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Shadow Ruki Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Chia Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cheeseburger Slushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Gallery Of Toast",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Green Zafara Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Christmas Zafara Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Lemon Chia Pop",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Wraith Pteri Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Charcoal",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Loretta Fontaines Perfect Pizza",
-        "Rarity": 100,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Vira Pencil Holder",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kacheek Pyjama Gown",
-        "Rarity": 92,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "You Will Get Verrucas!",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Shadow Blumaroo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pootato",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Doughnutfruit",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blugthak Stamp",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Desert Ixi Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Altador Travel Stamp",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie Pteri Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Anshu Fishing Stamp",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "I Love Splyke T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blue Khonsu T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Khonsu",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Skunk Eyrie Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Starry Lupe Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Disco Bruce Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Elixir of the Pirate",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Earth Faerie Token",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Woodland Skeith Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ghost Kiko Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Flotsam Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Shadow Chomby Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "I Love Tenna T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Desert Chomby Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mouldy Cheese",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Bubbling Lupe Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sugar Tonu Skull",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cornupepper",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Culture and History of Faerieland",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Island Kiko Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Zebba T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mega Lemon Blitz Smoothie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Chomby Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Grape Jelly Sword",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Uni Charm",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Koi Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Desert Elephante Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Bone Sword",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sloth Wrap",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Zoomik",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Wibreth Comb",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Plushie JubJub Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Murky Green",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Bread Wreath",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cauliflower Shake",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Snowflake Pendant",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Staff of Supernova",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Vacumatic 9000",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Baby Kiko Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Usuki Buzzer Set",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Staff of Ultranova",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Tooth Faerie Snowglobe",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Strong Berry",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "The Eyrie Guard",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ugly Pinanna",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Skeith Destructo Horn",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Bottled Uni Essence",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dark Faerie Token",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Skunk Draik Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Tigersquash",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Moth Queen Aisha Headdress",
-        "Rarity": 92,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Sunutek T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Bow of the Light Faerie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "JubJub Foot Hardening Lotion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Kookith T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fresh Lobster Tail",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pinanna Plus",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Scroll of the Ancients",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Forbidden Plunder",
-        "Rarity": 100,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Christmas Peophin Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "On the Go Cybunny Makeup",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Taelias Snowball",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Chomby Lucky Charm Bracelet",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dimensional Kougra Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Enchanted Butterfly Book",
-        "Rarity": 90,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blue Bogie T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Island Mynci Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Strength Serum",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mr. Chuckles",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "The Shop Wizard",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ornate Buzz Stinger",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fiery Throwing Marble",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Therapeutic Swamp Water",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Armin Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "I Love Hornsby T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sack of Garlic Powder",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Shadow Ogrin Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Draik Egg",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Jungle Aisha Hat",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Hair Usuki Reject",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Last Avocado Bomb",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Royal Boy Ixi Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Spirkle",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Jahbal",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Uni Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blue Acara Slingshot",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Christmas Blumaroo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Purple Cybunny Negg",
-        "Rarity": 89,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Super Sand Grain",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Wocky Slingshot",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Black Bearog Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cleaning Technology",
-        "Rarity": 89,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Garrox5 The Grundo Trooper",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Green Poogle Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Thornberry",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Decorative Towel Folding",
-        "Rarity": 90,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Purple Tonu Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Staff of Garlicness",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Yellow Flotsam Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Xweetok Popstar Earrings",
-        "Rarity": 90,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Lavaberry",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Meerca Speed Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Striped Korbat Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Treasure Seekers",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "I Love Khamette T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Island Korbat Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Snotty Sword",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blue Acara Bow",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pink Blooky T-Shirt",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "The Magic of The Healing Springs",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Maraquan Draik Cloak",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blue Acara Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Pencil",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Peophin Emblazoned Maractite Shield",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Tigersquash Spectacular",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fire Quiggle Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Draik Sorceress Cloak",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Full Moehog Armour",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Christmas Grundo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "The Pant Devil",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Keel Haul",
-        "Rarity": 100,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Lupe Grabber Jaw",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Purple Aisha Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Flotsam Chestplate of the Champion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Green Kougra Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fiery Spine of Death",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Green Techo Bow",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Meepit",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Light Faerie Dust",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Phear",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mistletoe Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Shadow Axe",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Full Acara Armour",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Gelupepper",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Grey Peophin Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Illusen Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "C430 Autobot",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Diadem of the Deep",
-        "Rarity": 88,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Speckled Shoyru Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cloud Lenny Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Space Faerie Lunch Box",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Curved Wocky Sabre",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kougra Wool Bomb",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Darblat",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Red Kyrii Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ruby Krawk Shield",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Christmas Uni Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sakhmetian Dagger",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Camouflage Lenny Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Christmas Korbat Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Red Eyrie Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ticking Eyrie Bomb",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Snot Helmet",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Silver Shoyru Morphing Potion",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "The Soup Faerie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Asparagus Chia Plushie",
-        "Rarity": 92,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Blumaroo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kiko Helm of Intellect",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Leaded Water Vial",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Emerald Krawk Jacket",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Full Mynci Armour",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Maraquan Pop-Up Book",
-        "Rarity": 90,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sharpened Hook",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Eventide Korbat Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Striped Korbat Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sledge Shield",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cloak of Night",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pink Korbat Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Tylix Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Obliteratoes",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "White Kyrii Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Virtublaster 5000",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Clockwork Nimmo",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Full Draik Armour",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Green Blumaroo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Krawk Wizard Beard",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Roe Sushi",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Snow Eyrie Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Extreme Potato Counting Shower",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Greater Elemental Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Candy Cane Negg",
-        "Rarity": 89,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Electric Moehog Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Gothic Kougra Wig",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mutant Kiko Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Mini Throwing Toasts",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Wooden Krawk Shield",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fire Ball Staff",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Full Shoyru Armour",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sticky Snowflake Stamp",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Red Yurble Boots",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Jalapeno Kacheek Cheese",
-        "Rarity": 93,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Purple Techo Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blue Grarrl Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cocoa Juppie Mocha",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Medieval Armour",
-        "Rarity": 90,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dua",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Koi Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Edna Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Scary Spider",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Roberta Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rollatron",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Grey Lupe Neoquest Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Wanderers Cloak",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Angel Chia Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cherlops, Protector of Garn",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Heavy Robe of Thievery",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kau Waffles",
-        "Rarity": 92,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Lenny Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cloud Pteri Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Woodland Brew",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Island Peophin Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yurble Forest Cloak",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sakhmetian Axe",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Secret Faerie Diary",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Chomby Staff",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Handcrafted Illusen Plushie",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Full Kiko Armour",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Babyca",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Evil Twin Yellow Chia Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Red Grarrl Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Spotted Pteri Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cone-Shaped Lemon",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "ErgyFruit",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Faerie Meerca Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pumpkin Club",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Twisted Potion of Strength",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Tyrannian Concert Hall Background",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ornate Violet Cloak",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Illusens Forest Essence",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "King Roo",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Magical Yellow Kyrii Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sakhmetian Shield",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Collectable Usuki Enthusiast Usuki",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Desert Ixi Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Starry Koi Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "White Linen Tunic",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Draik King Terask Arms",
-        "Rarity": 87,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Essence of Mortog",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Milk Maid Kau Blouse",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pink Pteri Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Usuki Knight",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Exploring Kreludor Background",
-        "Rarity": 88,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Strawberry Pteri Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Wind Up Hannah",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Turned Tooth",
-        "Rarity": 83,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Furry Lupe Staff",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Bori Rainbow Dress",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sakhmetian Spear",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Doctor Plushie",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ultra Eyrie Eye Mask",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Slorg Sea Sculpture",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Snotty Hammer",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Piece of a treasure map",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Moehog Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Yellow Kougra Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Red Buzz Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "JubJub Detective Trench Coat",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Poogle Ballet Shoes",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Spider Grundo Plushie",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Black Frost Cannon",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Exquisite Peophin Ring of the Deep",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Gold Balloon",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kaylas Chemistry Set",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Green Quiggle Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Jake Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Green Meerca Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Robot Kau Plushie",
-        "Rarity": 91,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Shadow Usul Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Full Bruce Armour",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Princess Sankara",
-        "Rarity": 93,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Ruki Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Gruundo Fan Usuki",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Tiki Tack Man Usuki",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Scorchio Plushie",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Red Scorchio Morphing Potion",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fire JubJub Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Super Nova Coin",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blue Buzz Morphing Potion",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Purple Hissi Wig",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sword of Trumpeting",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cherry Mootix Lollypop",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Black Long Sleeved Cape",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Blue Nimmo Boots",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cybunny Balloon Animal",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Uni Cycles",
-        "Rarity": 90,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Buttered Croissant",
-        "Rarity": 78,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ghost Ixi Plushie",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ghostkerfish",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Female Wanderer Koi Crystal Ball",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fancy Uni Bracelets",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Grey Eggs and Bacon",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kacheek Pyjama Slippers",
-        "Rarity": 91,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Staff of Dark Nova",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Fire Koi Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Punk Kiko Shirt",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Kacheek Extinguisher",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Meepit Eyes Slap Bracelet",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Padded Bruce Jacket",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Glyme Plushie",
-        "Rarity": 92,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "The Masked Intruder Plushie",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Hanso Lunchbox",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rohane Plushie",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Baby Elephante Milk Bottle",
-        "Rarity": 93,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Bruce Icicle Spear",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Malkus Vile Plushie",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pretty Kau Cloud Dress",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Darigan Uni Plushie",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Xandra Xweetok Cape",
-        "Rarity": 88,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Feathered Bruce Helm",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Adorable Chomby Trousers",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Midnight Smuggler Kougra Shirt",
-        "Rarity": 87,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Strale Eraser",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Forest Sage Ruki Staff",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Lutari Aristocrat Shoes",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Ugly Bruno Plushie",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Proper Lady Ogrin Dress",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Delightful Poogle Hat",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Carassa Gnome",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "King Altador Kite",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Loving Kadoatie",
-        "Rarity": 85,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Phoenix Pteri Talons",
-        "Rarity": 92,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Maraquan Warrior Peophin Chest Armour",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Rainbow Fruit Tree",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Wolfsbane Mutant Shorts",
-        "Rarity": 88,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dr Sloth Pond",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Vinyl Darigan Cybunny Toy",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Sunflower Kau Collar",
-        "Rarity": 86,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Cybunny Shield",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Lutari Sweet Little Sailor Dress",
-        "Rarity": 96,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pirates Chest",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Pirate Krawk Plushie",
-        "Rarity": 99,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dark Uni Armoured Shirt",
-        "Rarity": 93,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Quiggle Tea Party Shoes",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Illusen Fan Grarrl Plushie",
-        "Rarity": 94,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "King Roo Plushie",
-        "Rarity": 97,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Razul Crayons",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Altador Golf Club",
-        "Rarity": 98,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Chomby Flower Child Rose Glasses",
-        "Rarity": 93,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Groovy Koi Workout Shirt",
-        "Rarity": 93,
-        "Price": "Inflation Notice"
-    },
-    {
-        "Name": "Dirt Golem Neoquest Plushie",
-        "Rarity": 95,
-        "Price": "Inflation Notice"
-    },
-    
 ];
