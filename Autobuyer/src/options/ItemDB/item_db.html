@@ -3,9 +3,9 @@
 <html>
     <head>
         <title>NeoBuyer Item Database</title>
-        <link rel="stylesheet" type="text/css" href="../toolbar.css" />
+        <link rel="stylesheet" type="text/css" href="../../toolbar.css" />
         <link rel="stylesheet" type="text/css" href="item_db.css" />
-        <script src="../../js/jquery.js"></script>
+        <script src="../../../js/jquery.js"></script>
     </head>
 
 	<div class="toolbar">
@@ -17,36 +17,36 @@
             </a>
         </span>
 
-        <img class="logo" src="../logo.png"><a href="../options/index.html"></a></img>
+        <img class="logo" src="../../logo.png"><a href="../../options/index.html"></a></img>
 
         <div class = "toolbar-text">
-            <a href="../options/autobuyer.html">
-                <img  class = "toolbar-icon" src="../../icons/shop-icon.svg" alt="Info Icon"> 
+            <a href="../../options/autobuyer.html">
+                <img  class = "toolbar-icon" src="../../../icons/shop-icon.svg" alt="Info Icon"> 
             AutoBuyer </a>
 
-            <a href="../options/attic.html">
-                <img  class = "toolbar-icon" src="../../icons/mypets-icon.svg" alt="Info Icon"> 
+            <a href="../../options/attic.html">
+                <img  class = "toolbar-icon" src="../../../icons/mypets-icon.svg" alt="Info Icon"> 
             Attic </a>
 
-            <a href="../options/autopricer.html">
-                <img  class = "toolbar-icon" src="../../icons/np-icon.svg" alt="Info Icon"> 
+            <a href="../../options/autopricer.html">
+                <img  class = "toolbar-icon" src="../../../icons/np-icon.svg" alt="Info Icon"> 
             AutoPricer </a>
 
-            <a href="../options/autosdb.html">
-                <img  class = "toolbar-icon" src="../../icons/safetydeposit-icon.svg" alt="Info Icon"> 
+            <a href="../../options/autosdb.html">
+                <img  class = "toolbar-icon" src="../../../icons/safetydeposit-icon.svg" alt="Info Icon"> 
             AutoSDB </a>
 
 
-            <a href="../history/history.html">
-                <img  class = "toolbar-icon" src="../../icons/transferlog-icon.svg" alt="Info Icon"> 
+            <a href="../../history/history.html">
+                <img  class = "toolbar-icon" src="../../../icons/transferlog-icon.svg" alt="Info Icon"> 
             History </a>
 
-            <a href="../options/item_db.html">
-                <img  class = "toolbar-icon" src="../../icons/settings-icon.svg" alt="Info Icon"> 
+            <a href="../../options/item_db.html">
+                <img  class = "toolbar-icon" src="../../../icons/settings-icon.svg" alt="Info Icon"> 
             Database </a>
 
-            <a href="../options/item_db.html">
-                <img  class = "toolbar-icon" src="../../icons/search-icon.svg" alt="Info Icon"> 
+            <a href="../../options/item_db.html">
+                <img  class = "toolbar-icon" src="../../../icons/search-icon.svg" alt="Info Icon"> 
             Info </a>
             <!--<a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">Bug Reporting | </a>
             <a target="_blank" href="https://docs.google.com/document/d/e/2PACX-1vQ1bYmz2o92LG4sVq7CIO7tgCVl-lVreJxpIuDjd9TmFuXX166UZlqQdTWkt7VUyRkF33DvWD8ldVS8/pub">Author's FAQ | </a>
@@ -57,24 +57,25 @@
     <body>
         <div class="center">
             <div class="enter-info">NeoBuyer Item Database</div>
-            <div class="autosaved">(R1-100 - Updated Periodically)</div>
-            <span id="page-indicator"></span> <br>
-            <button id="prev-button">Previous</button>
-            <button id="next-button">Next</button>
-            <div class="autosaved"><span id="itemcount">Loading...</span> items listed. Lastest Update: August 2023</div>
+            <div class="rarity-info">(R1-100 - Updated Periodically)
+                <div class="autosaved"><span id="itemcount">Loading...</span> items listed. Last Update: August 2023</div>
+            </div>
+            
+            <div class="page-navigation">
+                <button id="prev-button" class="button"><< Previous</button>
+                <span id="page-indicator"></span>
+                <button id="next-button" class="button">Next >></button>
+            </div>
 
-            <hr>
             <center>
                 <div id="table-container">
                     <span id="loading">Loading...</span>
-                    <span id="subscribe" style="display:none;">Please Subscribe to See Item Database</span>
                 </div>
             </center>
-            <hr>
             <br><br><br>
         </div>
-        <script src="../../js/ExtPay.js"></script>
-        <script src="../common/item_db_array.js"></script>
+        <script src="../../../js/ExtPay.js"></script>
+        <script src="../../common/item_db_array.js"></script>
         <script src="item_db.js"></script>
     </body>
 

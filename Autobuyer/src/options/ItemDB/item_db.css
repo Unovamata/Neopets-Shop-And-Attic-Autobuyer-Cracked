@@ -1,0 +1,165 @@
+/*CUSTOM CSS*/
+@font-face {
+    font-family: 'Cafeteria';
+    src: local('Cafeteria'), url('../../../fonts/Cafeteria Bold.otf') format('truetype');
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Trebuchet MS', sans-serif;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: white;
+}
+
+.center {
+    width: 80%;
+    height: calc(100% - 50px);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    align-items: center;
+    font-size: 18px;
+    overflow: auto;
+}
+
+.enter-info {
+	margin-top: 30px;
+    font-size: 100px;
+	font-weight: bold;
+    color: #2196F3;
+    font-family: 'Cafeteria', sans-serif;
+}
+
+.rarity-info{
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #2196F3;
+    text-decoration: italic;
+    font-family: 'Cafeteria', sans-serif;
+}
+
+.autosaved,
+.donate {
+    font-size: 14px;
+    text-decoration: italic;
+    margin: 10px;
+}
+
+/* Apply style to the entire table */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+/* Apply alternating row colors */
+.table tr:nth-child(odd) td {
+    background-color: #f0f0f0;
+}
+
+/* Apply style to table headers */
+.table th {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Apply style to table cells */
+.table td {
+    padding: 10px;
+    border-top: none;
+    text-align: center;
+}
+
+
+/* Set the background color of the top bar */
+.banner {
+  background-color: #03a9f4;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+/* Make the text bold and white */
+.banner a {
+  text-decoration: none;
+  color: white !important;
+}
+
+/* Make the top bar always stay at the top of the page */
+.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.feedback {
+    color: darkgrey;
+    font-size: 21px;
+}
+
+a,
+a:visited,
+a:hover,
+.payment-page-link {
+    color: blue;
+    cursor: pointer;
+}
+
+.button {
+    margin: 0px 50px; /* Add space to the top and bottom, and center horizontally */
+    padding: 0;
+    width: 15%;
+    height: 40px;
+    border-radius: 20px;
+    background: #2196F3;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-family: 'Cafeteria', sans-serif;
+    font-size: 20px;
+}
+
+.page-navigation {
+    font-family: 'Cafeteria', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+.class-JellyNeo {
+    width: 70px;
+}
+
+.class-Rarity {
+    width: 10px;
+}
+
+.class-Price {
+    width: 100px;
+}
+
+.class-Name {
+    width: 500px;
+}

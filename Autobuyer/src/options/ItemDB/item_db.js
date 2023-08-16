@@ -1,14 +1,3 @@
-/*function populateTable() {
-    $("#itemcount").text(item_db_array.length)
-    loadTableData(item_db_array);
-    
-    var e = document.createElement("script");
-
-    e.setAttribute("src", "../../js/sortable.js"), document.head.append(e)
-    
-    $("#loading").hide();
-}*/
-
 $("#itemcount").text(item_db_array.length)
 
 const tableContainer = document.getElementById("table-container");
@@ -50,6 +39,8 @@ function LoadTableData(data, chunkSize, currentPage){
     const headers = [];
 
     const headerRow = document.createElement("tr");
+    headerRow.classList.add("header-row"); // Add class for table header row
+    
     for (const row of data) {
         for (const key in row) {
             if (row.hasOwnProperty(key) && headers.indexOf(key) === -1) {
@@ -57,14 +48,25 @@ function LoadTableData(data, chunkSize, currentPage){
                 const headerCell = document.createElement("th");
                 headerCell.textContent = key;
                 headerRow.appendChild(headerCell);
+                headerRow.classList.add(`class-${key}`);
+                console.log(`class-${key}`);
             }
         }
     }
+
+    const jnRow = document.createElement("th");
+    jnRow.classList.add("header-row"); // Add class for table header row
+    jnRow.textContent = "JellyNeo";
+    jnRow.classList.add("class-jellyneo");
+    headerRow.appendChild(jnRow);
+    headers.push("JellyNeo");
+    
+
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
     table.appendChild(tbody);
-    table.classList.add("sortable");
+    table.classList.add("table", "sortable"); // Add classes for styling
     tableContainer.appendChild(table);
 
     LoadChunksOfData(data, chunkSize, currentPage, headers);
@@ -72,7 +74,7 @@ function LoadTableData(data, chunkSize, currentPage){
 
 function LoadChunksOfData(data, chunkSize, currentPage, headers){
     var e = document.createElement("script");
-    e.setAttribute("src", "../../js/sortable.js"), document.head.append(e)
+    e.setAttribute("src", "../../../js/sortable.js"), document.head.append(e)
     
     const startIndex = (currentPage - 1) * chunkSize;
     const endIndex = startIndex + chunkSize;
@@ -82,23 +84,49 @@ function LoadChunksOfData(data, chunkSize, currentPage, headers){
         const row = dataChunk[i];
         const rowElement = document.createElement("tr");
         rowElement.classList.add("item");
+        var lastName = "";
 
         for (const header of headers) {
             const cell = document.createElement("td");
+            cell.classList.add("table-cell"); // Add class for table cells
             let cellValue = row[header] || "";
 
             switch (header) {
                 case "Name":
-                    const link = document.createElement("a");
-                    link.href = `https://items.jellyneo.net/search/?name=${cellValue}&name_type=3`;
-                    link.innerText = cellValue;
-                    link.setAttribute("target", "_blank");
-                    cell.appendChild(link);
-                    break;
-
-                default:
+                    const name = document.createElement("div");
+                    name.innerText = cellValue;
+                    cell.appendChild(name);
+                    lastName = cellValue;
+                    cell.classList.add('class-Name');
+                break;
+                
+                case "Rarity":
                     cell.textContent = NumberWithCommas(cellValue);
-                    break;
+                    cell.classList.add('class-Rarity');
+                break;
+
+                case "Price":
+                    cell.textContent = NumberWithCommas(cellValue);
+                    cell.classList.add('class-Price');
+                break;
+
+                case "JellyNeo":
+                    // Create the <a> element
+                    var linkElement = document.createElement("a");
+                    linkElement.href = `https://items.jellyneo.net/search/?name=${lastName}&name_type=3`;
+
+                    // Create the <img> element
+                    var imgElement = document.createElement("img");
+                    imgElement.src = "JN.png";
+                    imgElement.alt = "Info Icon";
+
+                    linkElement.appendChild(imgElement);
+
+                    cell.appendChild(linkElement);
+                    cell.classList.add('class-JellyNeo');
+                break;
+                
+                
             }
 
             rowElement.appendChild(cell);
@@ -108,7 +136,7 @@ function LoadChunksOfData(data, chunkSize, currentPage, headers){
     }
 
     table.appendChild(tbody);
-    table.classList.add("sortable");
+    table.classList.add("table", "sortable"); // Add classes for styling
     tableContainer.appendChild(table);
 }
 
