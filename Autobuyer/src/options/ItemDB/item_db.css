@@ -128,14 +128,6 @@ body {
     font-size: 21px;
 }
 
-a,
-a:visited,
-a:hover,
-.payment-page-link {
-    color: blue;
-    cursor: pointer;
-}
-
 .button {
     margin: 0px 50px; /* Add space to the top and bottom, and center horizontally */
     padding: 0;

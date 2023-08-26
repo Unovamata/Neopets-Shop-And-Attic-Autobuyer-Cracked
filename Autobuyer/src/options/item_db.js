@@ -18,9 +18,6 @@ function NumberWithCommas(e) {
 }
 
 
-
-
-
 // Calculate the total number of pages
 const totalPages = Math.ceil(data.length / chunkSize);
 

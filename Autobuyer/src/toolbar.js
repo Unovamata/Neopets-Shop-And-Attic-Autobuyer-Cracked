@@ -1,3 +1,33 @@
+// Get the URL of the current script
+const scriptUrl = document.currentScript.src;
+
+// Extract the part before "src"
+const srcPath = scriptUrl.substring(0, scriptUrl.indexOf("src") + 3);
+
+console.log(srcPath);
+
+// Construct the URL for logo.png using the directory path
+const logoUrl = `${srcPath}/logo.png`;
+const shopIconUrl = `${srcPath}/toolbar/shop-icon.svg`;
+const atticIconUrl = `${srcPath}/toolbar/mypets-icon.svg`;
+const npIconUrl = `${srcPath}/toolbar/np-icon.svg`;
+const sdbIconUrl = `${srcPath}/toolbar/safetydeposit-icon.svg`;
+const historyIconUrl = `${srcPath}/toolbar/transferlog-icon.svg`;
+const databaseIconUrl = `${srcPath}/toolbar/settings-icon.svg`;
+const infoIconUrl = `${srcPath}/toolbar/search-icon.svg`;
+
+// Styles
+const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
+
+// Links
+const autobuyerUrl = `${srcPath}/options/Autobuyer/autobuyer.html`;
+const atticUrl = `${srcPath}/options/attic.html`;
+const autopricerUrl = `${srcPath}/options/autopricer.html`;
+const autosdbUrl = `${srcPath}/options/autosdb.html`;
+const historyUrl = `${srcPath}/options/history/history.html`;
+const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
+const infoUrl = `${srcPath}/options/info.html`;
+
 // content.js
 function injectToolbar() {
     const toolbarHTML = `
@@ -10,36 +40,36 @@ function injectToolbar() {
             </a>
         </span>
 
-        <img class="logo" src="logo.png"><a href="../options/index.html"></a></img>
+        <img class="logo" src="${logoUrl}"></img>
 
         <div class = "toolbar-text">
-            <a href="../options/autobuyer.html">
-                <img  class = "toolbar-icon" src="../icons/shop-icon.svg" alt="Info Icon"> 
+            <a href="${autobuyerUrl}">
+                <img  class = "toolbar-icon" src="${shopIconUrl}" alt="Info Icon"> 
             AutoBuyer </a>
 
-            <a href="../options/attic.html">
-                <img  class = "toolbar-icon" src="../icons/mypets-icon.svg" alt="Info Icon"> 
+            <a href="${atticUrl}">
+                <img  class = "toolbar-icon" src="${atticIconUrl}" alt="Info Icon"> 
             Attic </a>
 
-            <a href="../options/autopricer.html">
-                <img  class = "toolbar-icon" src="../icons/np-icon.svg" alt="Info Icon"> 
+            <a href="${autopricerUrl}">
+                <img  class = "toolbar-icon" src="${npIconUrl}" alt="Info Icon"> 
             AutoPricer </a>
 
-            <a href="../options/autosdb.html">
-                <img  class = "toolbar-icon" src="../icons/safetydeposit-icon.svg" alt="Info Icon"> 
+            <a href="${autosdbUrl}">
+                <img  class = "toolbar-icon" src="${sdbIconUrl}" alt="Info Icon"> 
             AutoSDB </a>
 
 
-            <a href="../history/history.html">
-                <img  class = "toolbar-icon" src="../icons/transferlog-icon.svg" alt="Info Icon"> 
+            <a href="${historyUrl}">
+                <img  class = "toolbar-icon" src="${historyIconUrl}" alt="Info Icon"> 
             History </a>
 
-            <a href="../src/options/ItemDB/item_db.html">
-                <img  class = "toolbar-icon" src="../icons/settings-icon.svg" alt="Info Icon"> 
+            <a href="${databaseUrl}">
+                <img  class = "toolbar-icon" src="${databaseIconUrl}" alt="Info Icon"> 
             Database </a>
 
-            <a href="../options/item_db.html">
-                <img  class = "toolbar-icon" src="../icons/search-icon.svg" alt="Info Icon"> 
+            <a href="${databaseUrl}">
+                <img  class = "toolbar-icon" src="${infoIconUrl}" alt="Info Icon"> 
             Info </a>
             <!--<a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">Bug Reporting | </a>
             <a target="_blank" href="https://docs.google.com/document/d/e/2PACX-1vQ1bYmz2o92LG4sVq7CIO7tgCVl-lVreJxpIuDjd9TmFuXX166UZlqQdTWkt7VUyRkF33DvWD8ldVS8/pub">Author's FAQ | </a>
@@ -51,7 +81,7 @@ function injectToolbar() {
         <span class = "notice-text">This extension is not affiliated to Neopets. Names are owned by Neopets. The software is provided as-is. Use it wisely to avoid freezes with your Neopet account(s).</span>
     </div>`;
 
-    const toolbarCSS = `<link rel="stylesheet" type="text/css" href="toolbar.css" />`
+    //const toolbarCSS = `<link rel="stylesheet" type="text/css" href="toolbar.css" />`
 
     // Create a container element for the off-screen rendering
     const offScreenContainer = document.createElement('div');
@@ -66,11 +96,9 @@ function injectToolbar() {
     const cssLink = document.createElement('link');
     cssLink.rel = 'stylesheet';
     cssLink.type = 'text/css';
-    cssLink.href = 'toolbar.css';
+    cssLink.href = toolbarCSS;
     document.head.appendChild(cssLink);
 }
 
 // Wait for the entire page, including CSS, to be fully loaded
-window.onload = function() {
-    injectToolbar();
-};
+injectToolbar();
