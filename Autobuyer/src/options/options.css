@@ -219,7 +219,7 @@ table tr:nth-child(odd) td {
 }
 
 /* Apply style to table headers */
-table th, caption {
+table th, .shop-type {
     background-color: #2196F3;
     color: white;
     padding: 10px;
@@ -227,7 +227,7 @@ table th, caption {
     font-weight: bold;
 }
 
-caption {
+.shop-type {
     border-radius: 10px 10px 0 0;
 }
 
@@ -243,5 +243,5 @@ table td {
 }
 
 .class-Name {
-    width: 100px;
+    width: 200px;
 }
