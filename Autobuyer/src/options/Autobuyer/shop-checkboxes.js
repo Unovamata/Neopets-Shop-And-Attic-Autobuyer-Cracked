@@ -28,45 +28,66 @@ const shopData = [
     { id: 112, name: 'Molten Morsels' },
     { id: 113, name: 'Moltaran Petpets' },
     { id: 114, name: 'Moltaran Books' },
-    { id: 115, name: 'Nothing' },
     { id: 116, name: 'Springy Things' },
     { id: 117, name: 'Ugga Shinies' }
 ];
 
-const shopListContainer = document.getElementById('shop-list'); // Replace with your container ID
 const table = document.createElement('table');
 
-for (let i = 0; i < shopData.length; i += 3) {
+const groups = 3; // Number of groups
+
+const headerLabels = ['Visit', 'Name'];
+
+// Create the caption for the table
+const caption = document.createElement('caption');
+caption.textContent = 'Food Shops';
+table.appendChild(caption);
+
+const headerRow = document.createElement('tr');
+
+for (let group = 0; group < groups; group++) {
+    for (const headerLabel of headerLabels) {
+        const headerCell = document.createElement('th');
+        headerCell.textContent = headerLabel;
+        headerRow.appendChild(headerCell);
+        headerCell.classList.add(`class-${headerLabel}`);
+    }
+}
+
+table.appendChild(headerRow);
+
+const itemsPerGroup = Math.ceil(shopData.length / groups);
+console.log(groups);
+
+for (let i = 0; i < itemsPerGroup; i++) {
     const row = document.createElement('tr');
 
-    for (let j = 0; j < 3; j++) {
-        const dataIndex = i + j;
+    for (let group = 0; group < groups; group++) {
+        const dataIndex = i + group * itemsPerGroup;
         if (dataIndex < shopData.length) {
-            const cell = document.createElement('td');
+            // Checkbox
+            const checkboxCell = document.createElement('td');
+            const checkboxInput = document.createElement('input');
+            checkboxInput.type = 'checkbox';
+            checkboxCell.appendChild(checkboxInput);
             
-            const idSpan = document.createElement('span');
-            idSpan.textContent = shopData[dataIndex].id;
-            
+            // Shop Name
+            const nameCell = document.createElement('td');
             const nameSpan = document.createElement('span');
             const label = document.createElement('label');
-            label.classList.add('shop-toggle');
-            
-            const input = document.createElement('input');
-            input.type = 'checkbox';
-            input.classList.add('shop-checkbox');
             
             const text = document.createTextNode(shopData[dataIndex].name);
-            label.appendChild(input);
             label.appendChild(text);
             nameSpan.appendChild(label);
+            nameCell.appendChild(nameSpan);
             
-            cell.appendChild(idSpan);
-            cell.appendChild(nameSpan);
-            row.appendChild(cell);
+            row.appendChild(checkboxCell);
+            row.appendChild(nameCell);
         }
     }
 
     table.appendChild(row);
 }
 
+const shopListContainer = document.getElementById('shop-list'); // Replace with your container ID
 shopListContainer.appendChild(table);

@@ -68,7 +68,7 @@ function injectToolbar() {
                 <img  class = "toolbar-icon" src="${databaseIconUrl}" alt="Info Icon"> 
             Database </a>
 
-            <a href="${databaseUrl}">
+            <a href="${infoUrl}">
                 <img  class = "toolbar-icon" src="${infoIconUrl}" alt="Info Icon"> 
             Info </a>
             <!--<a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">Bug Reporting | </a>
@@ -101,4 +101,7 @@ function injectToolbar() {
 }
 
 // Wait for the entire page, including CSS, to be fully loaded
-injectToolbar();
+document.addEventListener('DOMContentLoaded', function() {
+    injectToolbar();
+});
+

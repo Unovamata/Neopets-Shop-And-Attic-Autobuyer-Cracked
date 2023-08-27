@@ -1,7 +1,7 @@
 /*CUSTOM CSS*/
 @font-face {
     font-family: 'Cafeteria';
-    src: local('Cafeteria'), url('../fonts/Cafeteria Bold.otf') format('truetype');
+    src: local('Cafeteria'), url('fonts/Cafeteria Bold.otf') format('truetype');
 }
 
 
