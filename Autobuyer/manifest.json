@@ -20,7 +20,7 @@
     {
         "service_worker": "src/bg/background.js"
     },
-    "options_page": "src/options/index.html",
+    "options_page": "src/options/Autobuyer/autobuyer.html",
     "permissions": [
         "storage",
         "webNavigation",

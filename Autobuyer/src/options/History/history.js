@@ -261,26 +261,31 @@ function ProcessItemData(itemArray){
     for(var item of itemArray){
         const itemInfo = item_db[item["Item Name"]];
 
-        // If the item info exists, update price and rarity
-        item.Rarity = itemInfo.Rarity;
+        if(itemInfo == undefined){
+            item.Rarity = "?";
+            item.profit = "?";
+        } else {
+            // If the item info exists, update price and rarity
+            item.Rarity = itemInfo.Rarity;
 
-        const boughtPrice = parseInt(item.Price);
-        const itemValue = parseInt(itemInfo.Price);
-        
-        // Measuring the value of the purchase
-        var value = itemValue;
-        item["Est. Value"] = CheckIsNaNDisplay(value, "-", FormatNPNumber(value));
-        if(!isNaN(value)) totalValue += value;
+            const boughtPrice = parseInt(item.Price);
+            const itemValue = parseInt(itemInfo.Price);
+            
+            // Measuring the value of the purchase
+            var value = itemValue;
+            item["Est. Value"] = CheckIsNaNDisplay(value, "-", FormatNPNumber(value));
+            if(!isNaN(value)) totalValue += value;
 
-        // Measuring the profit from the purchase;
-        var profit = itemValue - boughtPrice;
-        item["Est. Profit"] = CheckIsNaNDisplay(profit, "-", FormatNPNumber(profit));
-        var totalProfitLabel = document.getElementById("total-profit"); 
-        var totalValueLabel = document.getElementById("total-value");
+            // Measuring the profit from the purchase;
+            var profit = itemValue - boughtPrice;
+            item["Est. Profit"] = CheckIsNaNDisplay(profit, "-", FormatNPNumber(profit));
+            var totalProfitLabel = document.getElementById("total-profit"); 
+            var totalValueLabel = document.getElementById("total-value");
 
-        if(!isNaN(profit)) totalProfit += profit;
+            if(!isNaN(profit)) totalProfit += profit;
 
-        item["Price"] = CheckIsNaNDisplay(boughtPrice, "-", boughtPrice);
+            item["Price"] = CheckIsNaNDisplay(boughtPrice, "-", boughtPrice);
+        }
     }
 
     document.getElementById("total-profit").innerText = FormatNPNumber(totalProfit);
