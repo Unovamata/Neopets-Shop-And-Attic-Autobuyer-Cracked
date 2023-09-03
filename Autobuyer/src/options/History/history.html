@@ -16,14 +16,17 @@
         
 
         <div class="center">
-            <div class="enter-info">NeoBuyer Item History</div>
-            <!--<div class="autosaved">(please keep in mind that if you uninstall and re-install NeoBuyer that your puchase history will be deleted)</div>-->
-            <br>
-            <div><span class="sub">Total estimated profit: </span><span id="total-profit">-</span> <span class="sub">Total attempted value: </span><span id="total-value">-</span></div>
-            <div class="tab">
-                <button class="tablinks" id="table">Table</button>
-                <button class="tablinks" id="analytics">Analytics <sup>beta</sup></button>
+            <div class="enter-info">NeoBuyer Item Database</div>
+            <div class="rarity-info">Previous Purchases Database
+                <div class="autosaved">
+                    <span class="sub">Total estimated profit: </span><span id="total-profit"></span><br>
+                    <span class="sub">Total attempted value: </span><span id="total-value"></span>
+                </div>
             </div>
+            
+            <button class="tablinks button" id="table">Table</button>
+            <button class="tablinks button" id="analytics"><sub></sub> Analytics <sup>beta</sup></button>
+
             <hr>
             <center>
                 <!-- Table -->
@@ -52,9 +55,11 @@
                     <br>
                     <span class="sub">If you liked these analytics, please <a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">let us know</a>! We would love to hear your thoughts.</span>
                 </div>
+                <hr><br>
+                <button id="reset" class="reset">Clear Purchase History</button>
             </center>
-            <hr><br>
-            <button id="reset" class="button">Clear Purchase History</button>
+            
+            
             <br><br><br>
         </div>
         <script src="../../common/item_db.js"></script>

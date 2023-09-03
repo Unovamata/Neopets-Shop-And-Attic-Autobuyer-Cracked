@@ -49,7 +49,6 @@ function LoadTableData(data, chunkSize, currentPage){
                 headerCell.textContent = key;
                 headerRow.appendChild(headerCell);
                 headerRow.classList.add(`class-${key}`);
-                console.log(`class-${key}`);
             }
         }
     }
@@ -74,7 +73,7 @@ function LoadTableData(data, chunkSize, currentPage){
 
 function LoadChunksOfData(data, chunkSize, currentPage, headers){
     var e = document.createElement("script");
-    e.setAttribute("src", "../../../js/sortable.js"), document.head.append(e)
+    e.setAttribute("src", "../../js/sortable.js"), document.head.append(e)
     
     const startIndex = (currentPage - 1) * chunkSize;
     const endIndex = startIndex + chunkSize;

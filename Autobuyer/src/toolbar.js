@@ -4,7 +4,7 @@ const scriptUrl = document.currentScript.src;
 // Extract the part before "src"
 const srcPath = scriptUrl.substring(0, scriptUrl.indexOf("src") + 3);
 
-console.log(srcPath);
+//console.log(srcPath);
 
 // Construct the URL for logo.png using the directory path
 const logoUrl = `${srcPath}/logo.png`;
