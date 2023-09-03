@@ -63,44 +63,6 @@ body {
     margin: 10px;
 }
 
-/* Apply style to the entire table */
-.table {
-    border-collapse: collapse;
-    width: 100%;
-    border-radius: 10px;
-}
-
-
-/* Apply alternating row colors */
-.table tr:nth-child(odd) td {
-    background-color: #f0f0f0;
-}
-
-/* Apply style to table headers */
-.table th {
-    background-color: #2196F3;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.table tr th:first-child {
-    border-radius: 10px 0 0 0;
-}
-
-.table tr th:last-child {
-    border-radius: 0 10px 0 0;
-}
-
-/* Apply style to table cells */
-.table td {
-    padding: 10px;
-    border-top: none;
-    text-align: center;
-}
-
-
 /* Set the background color of the top bar */
 .banner {
   background-color: #03a9f4;
