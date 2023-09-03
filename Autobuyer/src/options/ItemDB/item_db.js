@@ -91,6 +91,10 @@ function LoadChunksOfData(data, chunkSize, currentPage, headers){
             let cellValue = row[header] || "";
 
             switch (header) {
+                case "Date & Time":
+                    cell.classList.add('class-DateTime');
+                break;
+
                 case "Name":
                     const name = document.createElement("div");
                     name.innerText = cellValue;
@@ -116,7 +120,7 @@ function LoadChunksOfData(data, chunkSize, currentPage, headers){
 
                     // Create the <img> element
                     var imgElement = document.createElement("img");
-                    imgElement.src = "JN.png";
+                    imgElement.src = "../JN.png";
                     imgElement.alt = "Info Icon";
 
                     linkElement.appendChild(imgElement);

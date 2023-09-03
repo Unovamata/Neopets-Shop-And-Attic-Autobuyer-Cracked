@@ -83,7 +83,14 @@ body {
     padding: 10px;
     text-align: center;
     font-weight: bold;
-    border-radius: 10px 10px 0 0;
+}
+
+.table tr th:first-child {
+    border-radius: 10px 0 0 0;
+}
+
+.table tr th:last-child {
+    border-radius: 0 10px 0 0;
 }
 
 /* Apply style to table cells */

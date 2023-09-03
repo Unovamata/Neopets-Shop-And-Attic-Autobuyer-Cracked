@@ -68,6 +68,8 @@ body {
     border-collapse: collapse;
     width: 100%;
     border-radius: 10px;
+    border-spacing: 0px;
+    padding: 30px 0px;
 }
 
 
@@ -83,7 +85,14 @@ body {
     padding: 10px;
     text-align: center;
     font-weight: bold;
-    border-radius: 10px 10px 0 0;
+}
+
+.table tr th:first-child {
+    border-radius: 10px 0 0 0;
+}
+
+.table tr th:last-child {
+    border-radius: 0 10px 0 0;
 }
 
 /* Apply style to table cells */
@@ -93,38 +102,13 @@ body {
     text-align: center;
 }
 
-
-/* Set the background color of the top bar */
-.banner {
-  background-color: #03a9f4;
-  text-align: center;
-  font-weight: bold;
-  padding: 10px 0;
-}
-
-/* Make the text bold and white */
-.banner a {
-  text-decoration: none;
-  color: white !important;
-}
-
-/* Make the top bar always stay at the top of the page */
-.banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-}
-
 .feedback {
     color: darkgrey;
     font-size: 21px;
 }
 
 .button {
-    margin: 0px 50px; /* Add space to the top and bottom, and center horizontally */
-    padding: 0;
+    margin: 0px 50px; /* Add space to the top and bottom, and center horizontally */    
     width: 15%;
     height: 40px;
     border-radius: 20px;
@@ -171,17 +155,9 @@ body {
 }
 
 .class-JellyNeo {
-    width: 70px;
+    width: 20px;
 }
 
-.class-Rarity {
-    width: 10px;
-}
-
-.class-Price {
+.class-DateTime {
     width: 100px;
-}
-
-.class-Name {
-    width: 500px;
 }

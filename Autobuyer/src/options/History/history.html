@@ -2,12 +2,11 @@
 <html>
     <head>
         <title>NeoBuyer Item History</title>
-        <link rel="stylesheet" type="text/css" href="../../js/chart.css" />
+        //<link rel="stylesheet" type="text/css" href="../../js/chart.css" />
         <link rel="stylesheet" type="text/css" href="history.css" />
         <script src="../../js/jquery.js"></script>
         <script src="../../js/sortable.js"></script>
         <script src="../../js/chart.js"></script>
-        <link rel="stylesheet" type="text/css" href="../toolbar.css" />
     </head>
 
     <script src="../../toolbar.js"></script>
@@ -27,12 +26,12 @@
             <button class="tablinks button" id="table">Table</button>
             <button class="tablinks button" id="analytics"><sub></sub> Analytics <sup>beta</sup></button>
 
-            <hr>
             <center>
                 <!-- Table -->
-                <div id="table-container" class="tabcontent"></div>
+                <div id="table-container" class="tabcontent table"></div>
+                
                 <!-- Analytics -->
-                <div id="analytics-container" display="none" class="tabcontent">
+                <div id="analytics-container" display="none" class="tabcontent table">
                     <br>
                     <div class="chart-label">Profit by store name:</div>
                     <div class="ct-chart ct-golden-section ct-major-twelfth" id="profit-by-store"></div>
@@ -54,8 +53,7 @@
                     <div class="ct-chart ct-golden-section ct-double-octave" id="ratio"></div>
                     <br>
                     <span class="sub">If you liked these analytics, please <a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">let us know</a>! We would love to hear your thoughts.</span>
-                </div>
-                <hr><br>
+                </div><br>
                 <button id="reset" class="reset">Clear Purchase History</button>
             </center>
             

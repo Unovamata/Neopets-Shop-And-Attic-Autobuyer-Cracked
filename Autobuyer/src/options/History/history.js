@@ -96,6 +96,7 @@ function DisplayTableData(dataArray) {
         for (a = 0; a < dataArray.length; ++a) {
             var itemCells = tableRow.cloneNode(false);
             itemCells.classList.add("item");
+            var lastName = "";
 
             // Navigating through the columns;
             for (var s = 0; s < tableRowClone.length; ++s) {
@@ -107,9 +108,17 @@ function DisplayTableData(dataArray) {
                 
                 // Setting the information nodes in the table cells;
                 switch(tableRowClone[s]){
+                    case "Date & Time":
+                        cell.appendChild(document.createTextNode(cellValue));
+                        cell.classList.add('class-DateTime');
+                    break;
+
                     case "Item Name":
-                        var JellyneoLink = CreateJellyneoLink(cellValue);
-                        cell.appendChild(JellyneoLink);
+                        const name = document.createElement("div");
+                        name.innerText = cellValue;
+                        cell.appendChild(name);
+                        lastName = cellValue;
+                        cell.appendChild(name);
                     break;
 
                     case "Status":
@@ -122,6 +131,22 @@ function DisplayTableData(dataArray) {
                         var priceValue = parseInt(cellValue);
                         var priceSpan = CheckIsNaNDisplay(priceValue, "-", FormatNPNumber(priceValue));
                         cell.appendChild(document.createTextNode(priceSpan));
+                    break;
+
+                    case "JN":
+                        // Create the <a> element
+                        var linkElement = document.createElement("a");
+                        linkElement.href = `https://items.jellyneo.net/search/?name=${lastName}&name_type=3`;
+
+                        // Create the <img> element
+                        var imgElement = document.createElement("img");
+                        imgElement.src = "../JN.png";
+                        imgElement.alt = "Info Icon";
+
+                        linkElement.appendChild(imgElement);
+
+                        cell.appendChild(linkElement);
+                        cell.classList.add('class-JellyNeo');
                     break;
 
                     default:
@@ -151,10 +176,21 @@ function DisplayTableData(dataArray) {
                     // Creating the cell and appending it;
                     const headerCell = tableHeader.cloneNode(false);
                     headerCell.appendChild(document.createTextNode(key));
-                    tableRowClone.appendChild(headerCell);
-                }
+                    tableRowClone.appendChild(headerCell);   
+                } else break;
             }
         }
+
+        headerKeys.push("Est. Profit"); // Adding the key;
+        var headerCell = tableHeader.cloneNode(false);
+        headerCell.appendChild(document.createTextNode("Est. Profit"));
+        tableRowClone.appendChild(headerCell);   
+
+        headerKeys.push("JN");
+        headerCell = tableHeader.cloneNode(false);
+        headerCell.appendChild(document.createTextNode("JN"));
+        tableRowClone.appendChild(headerCell);
+        console.log(headerKeys);
         
         //Creating the header rows;
         const headerRow = tableHead.cloneNode(false);
@@ -180,7 +216,7 @@ function CreateJellyneoLink(cellValue){
 
 // Handles the JN link of the item;
 function CreatePurchaseStatusSpan(cellValue){
-    var statusSpan = CreateJellyneoLink(cellValue);
+    var statusSpan = document.createElement("a");
     statusSpan.innerText = cellValue;
 
     // Coloring the span based on the purchase interaction type;
@@ -207,6 +243,7 @@ function MakeSortableTable(){
         // Find sortable elements and make them sortable;
         if (tableElement.className.search(/\bsortable\b/) !== -1) {
             sorttable.makeSortable(tableElement);
+            tableElement.classList.add("table");
         }
     });
 }
@@ -263,7 +300,6 @@ function ProcessItemData(itemArray){
 
         if(itemInfo == undefined){
             item.Rarity = "?";
-            item.profit = "?";
         } else {
             // If the item info exists, update price and rarity
             item.Rarity = itemInfo.Rarity;
