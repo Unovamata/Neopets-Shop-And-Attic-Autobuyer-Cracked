@@ -38,6 +38,17 @@
                     <thead>
                         <th></th><th></th>
                     </thead>
+                    <tr>
+                        <td>Should refresh automatically:
+                            <span class="tooltiptext">This will have the attic buyer refresh itself automatically. You can disable this to refresh the page yourself. Since the attic has special refresh rules (every 7 minutes + 0-15 seconds there is a chance of restock), this is usually preferable for now. In the future, a more sophisticated auto-refresh may come in an update.</span>
+                        </td>
+                        <td>
+                            <label class="switch">
+                                <input id="ATTIC_SHOULD_REFRESH" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                    </tr>
                     <tr class="attic-refresh-hide">
                         <td>Last restock time <b>in NST:</b>
                             <span class="tooltiptext">
@@ -116,17 +127,6 @@
                             </td>
                             <td><input type="number" id="ATTIC_MAX_BUY_TIME"></input><span class="notation">ms</span></td>
                         </tr>
-                        <tr>
-                            <td>Should refresh automatically:
-                                <span class="tooltiptext">This will have the attic buyer refresh itself automatically. You can disable this to refresh the page yourself. Since the attic has special refresh rules (every 7 minutes + 0-15 seconds there is a chance of restock), this is usually preferable for now. In the future, a more sophisticated auto-refresh may come in an update.</span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="ATTIC_SHOULD_REFRESH" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
                         <tr class="click-hide">
                             <td title="Useful for those with slower internet connections">Go for 2nd best item:
                                 <span class="tooltiptext">
@@ -136,6 +136,19 @@
                             <td>
                                 <label class="switch">
                                     <input id="SHOULD_GO_FOR_SECOND_MOST_VALUABLE" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Attempt to refresh through page load failures:
+                                <span class="tooltiptext">
+                                    When the page fails to load because Neopet's server rejected the request, which happens sometimes, this setting will refresh the page anyways instead of stopping on the failed page.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </td>
@@ -256,28 +269,6 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
-
-
-                <div class="subcategory-info">Captcha Handling</div>
-
-                <table>
-                    <thead>
-                        <th></th><th></th>
-                    </thead>
-                    <tr>
-                        <td>Attempt to refresh through page load failures:
-                            <span class="tooltiptext">
-                                When the page fails to load because Neopet's server rejected the request, which happens sometimes, this setting will refresh the page anyways instead of stopping on the failed page.
-                            </span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
                 </table>
 
 

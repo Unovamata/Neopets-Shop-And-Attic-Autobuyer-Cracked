@@ -45,7 +45,7 @@
                                         For example: <br> 11am to 4pm = [11, 16] or All times [0,23]
                                     </span>
                                 </td>
-                                <td><input type="text" id="RUN_BETWEEN_HOURS"></input></td>
+                                <td><input type="text" id="RUN_BETWEEN_HOURS"></input><span class="notation">from, to</span></td>
                             </tr>
                             <tr>
                                 <td><b>Minimum Unstocked</b> Refresh:
@@ -54,7 +54,7 @@
                                         <br><br> 1 second = 1000
                                     </span>
                                 </td>
-                                <td><input type="number" id="MIN_REFRESH"></input></td>
+                                <td><input type="number" id="MIN_REFRESH"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
                                 <td><b>Maximum Unstocked</b> Refresh:
@@ -63,7 +63,7 @@
                                         <br><br> 1 second = 1000
                                     </span>
                                 </td>
-                                <td><input type="number" id="MAX_REFRESH"></input></td>
+                                <td><input type="number" id="MAX_REFRESH"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
                                 <td><b>Minimum Stocked</b> Refresh:
@@ -72,7 +72,7 @@
                                         <br><br> 1 second = 1000
                                     </span>
                                 </td>
-                                <td><input type="number" id="MIN_REFRESH_STOCKED"></input></td>
+                                <td><input type="number" id="MIN_REFRESH_STOCKED"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
                                 <td><b>Maximum Stocked</b> Refresh:
@@ -80,7 +80,7 @@
                                         <br><br> 1 second = 1000
                                     </span>
                                 </td>
-                                <td><input type="number" id="MAX_REFRESH_STOCKED"></input></td>
+                                <td><input type="number" id="MAX_REFRESH_STOCKED"></input><span class="notation">ms</span></td>
                             </tr>
                         </tr>
                     </tbody>
@@ -102,7 +102,7 @@
                                     <a href="https://thedailyneopets.com/articles/list-neopian-shops-of-neopia">Neopian Shops IDs</a>
                                 </span>
                             </td>
-                            <td><input type="text" id="STORES_TO_CYCLE_THROUGH_WHEN_STOCKED"></input></td>
+                            <td><input type="text" id="STORES_TO_CYCLE_THROUGH_WHEN_STOCKED"></input><span class="notation">store IDs</span></td>
                         </tr>
                         <tr>
                             <td>Minimum Items for Store to be Considered Stocked:
@@ -110,7 +110,7 @@
                                     If you input 5 and a store has 5 items, then it's 'stocked'.
                                 </span>
                             </td>
-                            <td><input type="number" id="ITEMS_TO_CONSIDER_STOCKED"></input></td>
+                            <td><input type="number" id="ITEMS_TO_CONSIDER_STOCKED"></input><span class="notation">items = stocked shop</span></td>
                         </tr>
                         <tr>
                             <td>Send Bought Items to the Safety Deposit Box:
@@ -147,7 +147,7 @@
                                     - This only applies while using the item database.
                                 </span>
                             </td>
-                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_NPS"></input></td>
+                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_NPS"></input><span class="notation">NPS</span></td>
                         </tr>
                         <tr class="db-hide">
                             <td>Minimum Profit Percentage to Click Item:
@@ -158,7 +158,7 @@
                                     - Decimals only (0.5).<br>
                                 </span>
                             </td>
-                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input></td>
+                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input><span class="notation">%</span></td>
                         </tr>
                         <tr class="db-hide">
                             <td>
@@ -168,8 +168,8 @@
                                     
                                     This is handy for new, unlisted items.
                                 </span>
-                            </td>Behind the Rainbow Falls Background
-                            <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input></td>
+                            </td>
+                            <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input><span class="notation">NPS</span></td>
                         </tr>
                         <tr class="db-hide">
                             <td>
@@ -181,7 +181,7 @@
                                     - Maximum rarity: 100.
                                 </span>
                             </td>
-                            <td><input type="number" max="100" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
+                            <td><span class="notation">Rarity</span><input type="number" max="100" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
                         </tr>
                         <tr class="db-hide">
                             <td>Provide blacklist of items to never purchase:
@@ -201,7 +201,7 @@
                             <td class="db-hide"><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
                         </tr>
                         <tr class="restock-hide">
-                            <td>Restock List (Used Instead of Item Database):
+                            <td>Restock List:
                                 <span class="tooltiptext">
                                     The list must be ordered from most profitable to least profitable.<br><br>
 
@@ -238,7 +238,7 @@
                                     <br><br> 1 second = 1000
                                 </span>
                             </td>
-                            <td><input type="number" id="MIN_CLICK_ITEM_IMAGE"></input></td>
+                            <td><input type="number" id="MIN_CLICK_ITEM_IMAGE"><span class="notation">ms</span></input></td>
                         </tr>
                         <tr class="click-hide">
                             <td><b>Maximum Click</b> Item Image:
@@ -247,7 +247,7 @@
                                     <br><br> 1 second = 1000
                                 </span>
                             </td>
-                            <td><input type="number" id="MAX_CLICK_ITEM_IMAGE"></input></td>
+                            <td><input type="number" id="MAX_CLICK_ITEM_IMAGE"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr class="click-hide">
                             <td>Go for 2nd Best Item:
@@ -285,7 +285,7 @@
                                     <br><br> 1 second = 1000
                                 </span>
                             </td>
-                            <td><input type="number" id="MIN_CLICK_CONFIRM"></input></td>
+                            <td><input type="number" id="MIN_CLICK_CONFIRM"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr class="confirm-hide">
                             <td><b>Maximum Click</b> Confirm Purchase:
@@ -294,7 +294,7 @@
                                     <br><br> 1 second = 1000
                                 </span>
                             </td>
-                            <td><input type="number" id="MAX_CLICK_CONFIRM"></input></td>
+                            <td><input type="number" id="MAX_CLICK_CONFIRM"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr>
                             <td>Auto Enter Offer:
@@ -356,20 +356,20 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Min Total Time on Captcha Page:
+                            <td>Minimum Total Time on Captcha Page:
                                 <span class="tooltiptext">
                                     In milliseconds. <br><br> For example, 1 second = 1000.
                                 </span>
                             </td>
-                            <td><input type="number" id="MIN_OCR_PAGE"></input></td>
+                            <td><input type="number" id="MIN_OCR_PAGE"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr>
-                            <td>Max Total Time on Captcha Page:
+                            <td>Maximum Total Time on Captcha Page:
                                 <span class="tooltiptext">
                                     In milliseconds. <br><br> For example, 1 second = 1000.
                                 </span>
                             </td>
-                            <td><input type="number" id="MAX_OCR_PAGE"></input></td>
+                            <td><input type="number" id="MAX_OCR_PAGE"></input><span class="notation">ms</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -418,7 +418,7 @@
                                     30 minutes = 1800000 milliseconds.
                                 </span>
                             </td>
-                            <td><input type="number" id="PAUSE_AFTER_BUY_MS"></input></td>
+                            <td><input type="number" id="PAUSE_AFTER_BUY_MS"></input><span class="notation">ms</span></td>
                         </tr>
                     </tbody>
                 </table>
