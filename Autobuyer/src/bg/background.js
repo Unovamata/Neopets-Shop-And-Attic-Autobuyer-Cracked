@@ -34,7 +34,7 @@ setTimeout(() => {
 
 // Open index page when the extension icon is clicked;
 chrome.action.onClicked.addListener(() => {
-	chrome.tabs.create({ url: "../../src/options/index.html" });
+	chrome.tabs.create({ url: "../../src/options/Autobuyer/autobuyer.html" });
 });
 
 chrome.runtime.onInstalled.addListener(function(e) {

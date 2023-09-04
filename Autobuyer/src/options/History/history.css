@@ -27,19 +27,6 @@ body {
     overflow: auto;
 }
 
-.center::-webkit-scrollbar {
-    width: 0.5em;
-}
-  
-/* Track */
-.center::-webkit-scrollbar-track {
-    background: transparent;
-}
-  
-.center::-webkit-scrollbar-thumb:hover {
-    background-color: transparent; /* Set to the desired color */
-}
-
 .enter-info {
 	margin-top: 30px;
     font-size: 100px;

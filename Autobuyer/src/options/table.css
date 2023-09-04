@@ -1,5 +1,5 @@
 /* Apply style to the entire table */
-.table {
+table {
     border-collapse: collapse;
     width: 100%;
     border-radius: 10px;
@@ -8,12 +8,12 @@
 }
 
 /* Apply alternating row colors */
-.table tr:nth-child(odd) td {
+table tr:nth-child(odd) td {
     background-color: #f0f0f0;
 }
 
 /* Apply style to table headers */
-.table th {
+table th {
     background-color: #2196F3;
     color: white;
     padding: 10px;
@@ -21,16 +21,16 @@
     font-weight: bold;
 }
 
-.table tr th:first-child {
+table tr th:first-child {
     border-radius: 10px 0 0 0;
 }
 
-.table tr th:last-child {
+table tr th:last-child {
     border-radius: 0 10px 0 0;
 }
 
 /* Apply style to table cells */
-.table td {
+table td {
     padding: 10px;
     border-top: none;
     text-align: center;
@@ -54,7 +54,7 @@
 
 /* Properties specific to .button */
 .button {
-    margin: 0px 50px; /* Add space to the top and bottom, and center horizontally */    
+    margin: 40px 50px; /* Add space to the top and bottom, and center horizontally */    
     height: 40px;
     font-size: 20px;
 }
@@ -67,4 +67,32 @@
     width: 500px;
     height: 40px;
     font-size: 14px;
+}
+
+
+/* Customize the scrollbar */
+/* Set the width and color of the scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the entire scrollbar */
+}
+
+/* Set the background color of the scrollbar track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Customize the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background: #46acff; /* Color of the thumb */
+    border-radius: 6px; /* Rounded corners of the thumb */
+}
+
+/* Change the appearance of the scrollbar on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #2196F3;
+}
+
+/* Customize the scrollbar buttons (arrows) */
+::-webkit-scrollbar-button {
+    display: none;
 }

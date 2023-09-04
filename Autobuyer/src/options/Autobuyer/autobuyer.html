@@ -50,7 +50,8 @@
                             <tr>
                                 <td><b>Minimum Unstocked</b> Refresh:
                                     <span class="tooltiptext">
-                                        Minimum time in milliseconds between refreshes when the shop is empty. <br><br> 1 second = 1000
+                                        Minimum time in milliseconds between refreshes when the shop is empty. 
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_REFRESH"></input></td>
@@ -123,6 +124,93 @@
                                     <span class="slider round"></span>
                                 </label>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>Use Item Database Value Estimates:
+                                <span class="tooltiptext">
+                                    If active, NeoBuyer+ will target profitable items exclusively based on its custom item database.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="USE_ITEM_DB" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="db-hide">
+                            <td>
+                                Minimum Profit to Click Item:
+                                <span class="tooltiptext">
+                                    Neobuyer+ will buy an item only if its profitability margin is greater than the amount provided.<br><br>
+
+                                    - This only applies while using the item database.
+                                </span>
+                            </td>
+                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_NPS"></input></td>
+                        </tr>
+                        <tr class="db-hide">
+                            <td>Minimum Profit Percentage to Click Item:
+                                <span class="tooltiptext">
+                                    Neobuyer+ will buy an item only if its profitability percentage is greater than the amount provided.<br><br>
+
+                                    - This only applies while using the item database.<br>
+                                    - Decimals only (0.5).<br>
+                                </span>
+                            </td>
+                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input></td>
+                        </tr>
+                        <tr class="db-hide">
+                            <td>
+                                Estimated Profit of Items Not in Item DB:
+                                <span class="tooltiptext">
+                                    For items not in the database, NeoBuyer+ assumes a default profit amount. <br><br>
+                                    
+                                    This is handy for new, unlisted items.
+                                </span>
+                            </td>Behind the Rainbow Falls Background
+                            <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input></td>
+                        </tr>
+                        <tr class="db-hide">
+                            <td>
+                                Minimum Rarity to Click Profitable Items: <span class="subdued">(Not Advised to Modify)</span>:
+                                <span class="tooltiptext">
+                                    NeoBuyer+ will only acquire items over that rarity threshold.<br><br>
+
+                                    - Minimum rarity: 1. <br>
+                                    - Maximum rarity: 100.
+                                </span>
+                            </td>
+                            <td><input type="number" max="100" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
+                        </tr>
+                        <tr class="db-hide">
+                            <td>Provide blacklist of items to never purchase:
+                                <span class="tooltiptext">This can be used to tell the autobuyer to never click on a certain item. It will not click these items even if the other rules say that the item meets the minimum profit guidelines. This is useful if you find that the item DB has an incorrect or out of date price estimate.</span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="USE_BLACKLIST" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="blacklist-hide">
+                            <td class="db-hide">Blacklist of items to never buy:
+                                <span class="tooltiptext">This list will supercede all other settings. If an item is in this list, it will never be clicked on by the Autobuyer. This is useful if you find that the item DB has an incorrect or out of date price estimate. Enter one item per line only.</span>
+                            </td>
+                            <td class="db-hide"><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
+                        </tr>
+                        <tr class="restock-hide">
+                            <td>Restock List (Used Instead of Item Database):
+                                <span class="tooltiptext">
+                                    The list must be ordered from most profitable to least profitable.<br><br>
+
+                                    - You can group by store. <br><br>
+                                    
+                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked">Custom Restock List Creator</a>
+                                </span>
+                            </td>
+                            <td><textarea rows="20" cols="50" id="RESTOCK_LIST"></textarea></td>
                         </tr>
                     </tbody>
                 </table>
@@ -331,109 +419,6 @@
                                 </span>
                             </td>
                             <td><input type="number" id="PAUSE_AFTER_BUY_MS"></input></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="subcategory-info">Data Sources</div>
-
-                <table class="table">
-                    <tbody class="main-shop-settings">
-                        <thead>
-                            <th></th><th></th>
-                        </thead>
-                        <tr>
-                            <td>Use Item Database Value Estimates:
-                                <span class="tooltiptext">
-                                    If active, NeoBuyer+ will target profitable items exclusively based on its custom item database.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="USE_ITEM_DB" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="db-hide">
-                            <td>
-                                Minimum Profit to Click Item:
-                                <span class="tooltiptext">
-                                    Neobuyer+ will buy an item only if its profitability margin is greater than the amount provided.<br><br>
-
-                                    - This only applies while using the item database.
-                                </span>
-                            </td>
-                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_NPS"></input></td>
-                        </tr>
-                        <tr class="db-hide">
-                            <td>Minimum Profit Percentage to Click Item:
-                                <span class="tooltiptext">
-                                    Neobuyer+ will buy an item only if its profitability percentage is greater than the amount provided.<br><br>
-
-                                    - This only applies while using the item database.<br>
-                                    - Decimals only (0.5).<br>
-                                </span>
-                            </td>
-                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input></td>
-                        </tr>
-                        <tr class="">
-                            <td>
-                                Minimum Rarity to Click Profitable Items: <span class="subdued">(Not Advised to Modify)</span>:
-                                <span class="tooltiptext">
-                                    NeoBuyer+ will only acquire items over that rarity threshold.<br><br>
-
-                                    - Minimum rarity: 1. <br>
-                                    - Maximum rarity: 100.
-                                </span>
-                            </td>
-                            <td><input type="number" max="100" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
-                        </tr>
-                        <tr class="restock-hide">
-                            <td>Restock List (Used Instead of Item Database):
-                                <span class="tooltiptext">
-                                    The list must be ordered from most profitable to least profitable.<br><br>
-
-                                    - You can group by store. <br><br>
-                                    
-                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked">Custom Restock List Creator</a>
-                                </span>
-                            </td>
-                            <td><textarea rows="20" cols="50" id="RESTOCK_LIST"></textarea></td>
-                        </tr>
-                        <tr class="">
-                            <td>
-                                Estimated Profit of Items Not in Item DB:
-                                <span class="tooltiptext">
-                                    For items not in the database, NeoBuyer+ assumes a default profit amount. <br><br>
-                                    
-                                    This is handy for new, unlisted items.
-                                </span>
-                            </td>
-                            <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Provide Blacklist of Items to Never Purchase:
-                                <span class="tooltiptext">
-                                    This feature prevents NeoBuyer+ from buying on specific items, regardless of other rules. <br><br>
-
-                                    This is helpful when the item database has inaccurate or outdated price estimates.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="USE_BLACKLIST" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="blacklist-hide">
-                            <td>Blacklist of Items to Never Buy:
-                                <span class="tooltiptext">
-                                    Enter one item per line only.
-                                </span>
-                            </td>
-                            <td><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
                         </tr>
                     </tbody>
                 </table>
