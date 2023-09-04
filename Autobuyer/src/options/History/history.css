@@ -68,41 +68,6 @@ body {
     font-size: 21px;
 }
 
-.button {
-    margin: 0px 50px; /* Add space to the top and bottom, and center horizontally */    
-    width: 15%;
-    height: 40px;
-    border-radius: 20px;
-    background: #2196F3;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    font-family: 'Cafeteria', sans-serif;
-    font-size: 20px;
-}
-
-.reset {
-    display: flex;
-    margin: 20px 0 20px;
-    padding: 0;
-    width: 500px;
-    height: 40px;
-    border-radius: 20px;
-    background: #2196F3;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    border: none;
-}
-
 .page-navigation {
     font-family: 'Cafeteria', sans-serif;
     font-size: 20px;

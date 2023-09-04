@@ -16,14 +16,13 @@ body {
 }
 
 .center {
-	padding: 0;
-    width: 100%;
+    width: 80%;
     height: calc(100vh - 50px);
     position: absolute;
     left: 0;
     right: 0;
     top: 50px;
-    bottom: 45px;
+    bottom: 0;
     margin: auto;
     max-width: 100%;
     max-height: 100%;
@@ -31,6 +30,19 @@ body {
     align-items: center;
     font-size: 18px;
     overflow: auto;
+}
+
+.center::-webkit-scrollbar {
+    width: 0.5em;
+}
+  
+/* Track */
+.center::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+.center::-webkit-scrollbar-thumb:hover {
+    background-color: transparent; /* Set to the desired color */
 }
 
 .enter-info {
@@ -49,13 +61,6 @@ body {
     font-family: 'Cafeteria', sans-serif;
 }
 
-.autosaved,
-.donate {
-    font-size: 14px;
-    text-decoration: italic;
-    margin: 10px;
-}
-
 .row {
     margin-top: 10px;
 }
@@ -64,30 +69,6 @@ input,
 select {
     border-radius: 5px;
     font-size: 18px;
-}
-
-.banner {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 125px;
-	overflow: hidden;
-}
-
-.banner img {
-	height: 400%;
-	width: auto;
-	max-width: 100%;
-	object-fit: contain;
-	filter: brightness(70%) blur(4px) saturate(80%);
-}
-
-.banner h1 {
-  font-size: 30px;
-  font-weight: bold;
-  color: white;
-  margin: 0;
 }
 
 .switch {
@@ -144,7 +125,7 @@ input:checked+.slider:before {
 td .tooltiptext {
     visibility: hidden;
     width: 400px;
-    background-color: darkgrey;
+    background-color: #2196F3;
     color: white;
     text-align: center;
     border-radius: 5px;
@@ -158,8 +139,6 @@ td .tooltiptext {
 td:hover .tooltiptext {
     visibility: visible;
 }
-
-
 
 /* Rounded sliders */
 .slider.round {
@@ -181,24 +160,6 @@ td:hover .tooltiptext {
     color: #2196F3;
 }
 
-.button {
-    display: flex;
-    margin: 20px 0 20px;
-    padding: 0;
-    width: 500px;
-    height: 40px;
-    border-radius: 20px;
-    background: #2196F3;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    border: none;
-}
-
 a {
     font-size: 20px;
     text-decoration: none;
@@ -206,31 +167,8 @@ a {
     font-family: 'Cafeteria', sans-serif;
 }
 
-/* Apply style to the entire table */
-table {
-    border-collapse: collapse;
-    width: 75%;
-    margin: 0 auto; /* Center align the table */
-    table-layout: fixed; /* Prevent the table from adjusting column widths */
-}
-
-
-/* Apply alternating row colors */
-table tr:nth-child(odd) td {
-    background-color: #f0f0f0;
-}
-
-/* Apply style to table headers */
-table th, .shop-type {
-    background-color: #2196F3;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-}
-
 .shop-type {
-    border-radius: 10px 10px 0 0;
+    border-radius: 20px 20px 0 0;
 }
 
 /* Apply style to table cells */
@@ -246,4 +184,8 @@ table td {
 
 .class-Name {
     width: 200px;
+}
+
+b {
+    color: #2196F3;
 }

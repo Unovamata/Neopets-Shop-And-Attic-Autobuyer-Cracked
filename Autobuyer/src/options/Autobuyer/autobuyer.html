@@ -3,6 +3,7 @@
     <head>
 		<title>NeoBuyer+ Options</title>
         <link rel="stylesheet" type="text/css" href="../options.css" />
+        <link rel="stylesheet" type="text/css" href="../table.css" />
     </head>
 
     <body>
@@ -10,13 +11,14 @@
             <div class="enter-info">NeoBuyer+ Options</div>
             <div class="category-info">Main Shop Buyer Settings</div>
             <center>
-                <div class="settings-header">Main Shop Buyer Settings</div>
-
-                
-                <table align="left" class="box">
+                <table class="table">
+                    <thead>
+                        <th>Description</th>
+                        <th>Option</th>
+                    </thead>
                     <tr>
-                        <td>Main shop autobuyer enabled:
-                            <span class="tooltiptext">Disabling will turn off all features for the main shop buyer.</span>
+                        <td>Main Shop Autobuyer Enabled:
+                            <span class="tooltiptext">Enables NeoBuyer+</span>
                         </td>
                         <td>
                             <label class="switch">
@@ -27,30 +29,37 @@
                     </tr>
                     <tbody class="main-shop-settings">
                         <tr>
-                            <td>Only refresh between (e.g. 11am to 4pm = [11,16]):
+                            <td>Refresh Time Window:
                                 <span class="tooltiptext">
-                                    This limits the times that the autobuyer will refresh in the main shops. If you want to run between 8am and 5pm, then you would put here [8,17]. If you want to run at all times when enabled, you would put [0,23].
+                                    Set the time range for refreshing. <br><br>
+                                    For example: <br> NeoBuyer+ active during 11am to 4pm = [11, 16] <br> NeoBuyer+ active at all times [0,23].
                                 </span>
                             </td>
                             <td><input type="text" id="RUN_BETWEEN_HOURS"></input></td>
                         </tr>
                         <tr>
-                            <td>Minimum refresh (unstocked):
-                                <span class="tooltiptext">In milliseconds. For example, 1 second = 1000.
+                            <td><b>Minimum Unstocked</b> Refresh:
+                                <span class="tooltiptext">
+                                    Minimum time between refreshes when the shop is empty.
+                                    In milliseconds. <br><br> 1 second = 1000.
                                 </span>
                             </td>
                             <td><input type="number" id="MIN_REFRESH"></input></td>
                         </tr>
                         <tr>
-                            <td>Maximum refresh (unstocked):
-                                <span class="tooltiptext">In milliseconds. For example, 1 second = 1000.
+                            <td><b>Maximum Unstocked</b> Refresh:
+                                <span class="tooltiptext">
+                                    Maximum time between refreshes when the shop is empty.
+                                    In milliseconds. <br><br> 1 second = 1000.
                                 </span>
                             </td>
                             <td><input type="number" id="MAX_REFRESH"></input></td>
                         </tr>
                         <tr>
-                            <td>Minimum refresh (stocked):
-                                <span class="tooltiptext">In milliseconds. For example, 1 second = 1000.
+                            <td><b>Minimum Stocked</b> Refresh:
+                                <span class="tooltiptext">
+                                    Minimum time between refreshes when the shop is stocked.
+                                    In milliseconds. For example, 1 second = 1000.
                                 </span>
                             </td>
                             <td><input type="number" id="MIN_REFRESH_STOCKED"></input></td>
@@ -237,136 +246,133 @@
                             </td>
                             <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input></td>
                         </tr>
+                        <tr>
+                            <td>Send bought items to SDB:
+                                <span class="tooltiptext">
+                                    If enabled, purchased items will be sent to your safety deposit box.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SEND_TO_SDB_AFTER_PURCHASE" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                Estimated profit of items not in item DB:
+                                <span class="tooltiptext">For items which are not in the item database, the autobuyer will assume that they have a profit of this amount. This is useful for when new items are released and there hasn't been time for the item database to include them yet.</span>
+                            </td>
+                            <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input></td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                Minimum rarity to click profitable items <span class="subdued">(not recommended to change)</span>:
+                                <span class="tooltiptext">If you want the autobuyer to ignore items below a certain rarity, you can enter that here. Only items at or above this rarity will be clicked. This must be a number between 1 and 99. Items which are not in the item database will not be subject to this rule, since their rarity is unknown.</span>
+                            </td>
+                            <td><input type="number" max="99" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
+                        </tr>
+                        <tr>
+                            <td>Provide blacklist of items to never purchase:
+                                <span class="tooltiptext">This can be used to tell the autobuyer to never click on a certain item. It will not click these items even if the other rules say that the item meets the minimum profit guidelines. This is useful if you find that the item DB has an incorrect or out of date price estimate.</span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="USE_BLACKLIST" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="blacklist-hide">
+                            <td>Blacklist of items to never buy:
+                                <span class="tooltiptext">This list will supercede all other settings. If an item is in this list, it will never be clicked on by the Autobuyer. This is useful if you find that the item DB has an incorrect or out of date price estimate. Enter one item per line only.</span>
+                            </td>
+                            <td><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Attempt to refresh through page load failures:
+                                <span class="tooltiptext">
+                                    When the page fails to load because Neopet's server rejected the request, which happens sometimes, this setting will refresh the page anyways instead of stopping on the failed page.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Show Chrome notifications:
+                                <span class="tooltiptext">
+                                    Chrome notifications will appear when important events occur.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHOW_CHROME_NOTIFICATIONS" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sound alerts:
+                                <span class="tooltiptext">
+                                    The autobuyer will read out notifications of what is happening, and sounds beeps when it is taking actions on the page. Especially useful if you have not enabled full autobuying.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SOUND_ALERTS" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Show status banner:
+                                <span class="tooltiptext">
+                                    This setting toggles the banner text shown on the shop pages.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHOW_BANNER" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="email-hide">
+                            <td class="autosaved"><br>To set up emails, read <a target="_blank" href="email.html">these instructions</a><br></td>
+                        </tr>
+                        <tr>
+                            <td>Send email after purchase using emailjs:</td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SEND_EMAIL" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="email-hide">
+                            <td>Emailjs template id:</td>
+                            <td><input type="text" id="EMAIL_TEMPLATE"></input></td>
+                        </tr>
+                        <tr class="email-hide">
+                            <td>Emailjs user id:</td>
+                            <td><input type="text" id="EMAIL_USER_ID"></input></td>
+                        </tr>
+                        <tr class="email-hide">
+                            <td>Emailjs service id:</td>
+                            <td><input type="text" id="EMAIL_SERVICE_ID"></input></td>
+                        </tr>
                     </tbody>
                 </table>
-
-                <!--<div class="settings-header">General Settings (Affects Both Attic and Main Shops)</div>-->
-                <table align="left" class="box">
-                    <tr>
-                        <td>Send bought items to SDB:
-                            <span class="tooltiptext">
-                                If enabled, purchased items will be sent to your safety deposit box.
-                            </span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="SEND_TO_SDB_AFTER_PURCHASE" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="">
-                        <td>
-                            Estimated profit of items not in item DB:
-                            <span class="tooltiptext">For items which are not in the item database, the autobuyer will assume that they have a profit of this amount. This is useful for when new items are released and there hasn't been time for the item database to include them yet.</span>
-                        </td>
-                        <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input></td>
-                    </tr>
-                    <tr class="">
-                        <td>
-                            Minimum rarity to click profitable items <span class="subdued">(not recommended to change)</span>:
-                            <span class="tooltiptext">If you want the autobuyer to ignore items below a certain rarity, you can enter that here. Only items at or above this rarity will be clicked. This must be a number between 1 and 99. Items which are not in the item database will not be subject to this rule, since their rarity is unknown.</span>
-                        </td>
-                        <td><input type="number" max="99" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
-                    </tr>
-                    <tr>
-                        <td>Provide blacklist of items to never purchase:
-                            <span class="tooltiptext">This can be used to tell the autobuyer to never click on a certain item. It will not click these items even if the other rules say that the item meets the minimum profit guidelines. This is useful if you find that the item DB has an incorrect or out of date price estimate.</span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="USE_BLACKLIST" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="blacklist-hide">
-                        <td>Blacklist of items to never buy:
-                            <span class="tooltiptext">This list will supercede all other settings. If an item is in this list, it will never be clicked on by the Autobuyer. This is useful if you find that the item DB has an incorrect or out of date price estimate. Enter one item per line only.</span>
-                        </td>
-                        <td><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Attempt to refresh through page load failures:
-                            <span class="tooltiptext">
-                                When the page fails to load because Neopet's server rejected the request, which happens sometimes, this setting will refresh the page anyways instead of stopping on the failed page.
-                            </span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Show Chrome notifications:
-                            <span class="tooltiptext">
-                                Chrome notifications will appear when important events occur.
-                            </span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="SHOULD_SHOW_CHROME_NOTIFICATIONS" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sound alerts:
-                            <span class="tooltiptext">
-                                The autobuyer will read out notifications of what is happening, and sounds beeps when it is taking actions on the page. Especially useful if you have not enabled full autobuying.
-                            </span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="SHOULD_SOUND_ALERTS" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Show status banner:
-                            <span class="tooltiptext">
-                                This setting toggles the banner text shown on the shop pages.
-                            </span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="SHOULD_SHOW_BANNER" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="email-hide">
-                        <td class="autosaved"><br>To set up emails, read <a target="_blank" href="email.html">these instructions</a><br></td>
-                    </tr>
-                    <tr>
-                        <td>Send email after purchase using emailjs:</td>
-                        <td>
-                            <label class="switch">
-                                <input id="SHOULD_SEND_EMAIL" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr class="email-hide">
-                        <td>Emailjs template id:</td>
-                        <td><input type="text" id="EMAIL_TEMPLATE"></input></td>
-                    </tr>
-                    <tr class="email-hide">
-                        <td>Emailjs user id:</td>
-                        <td><input type="text" id="EMAIL_USER_ID"></input></td>
-                    </tr>
-                    <tr class="email-hide">
-                        <td>Emailjs service id:</td>
-                        <td><input type="text" id="EMAIL_SERVICE_ID"></input></td>
-                    </tr>
-                </table>
-                <button id="reset" class="button">Reset All Settings & Restock List</button>
+                <br><br><br>
+                <button id="reset" class="button reset">Reset All Settings & Restock List</button>
             </center>
             <hr>
-            <br><br><br>
+            
         </div>
         <script src="../../toolbar.js"></script>
         <script src="../../common/default_items.js"></script>

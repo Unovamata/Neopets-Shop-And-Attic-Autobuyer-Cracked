@@ -35,3 +35,36 @@
     border-top: none;
     text-align: center;
 }
+
+/* Common properties for .button and .reset */
+.button,
+.reset {
+    width: 15%;
+    border-radius: 20px;
+    background: #2196F3;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-family: 'Cafeteria', sans-serif;
+}
+
+/* Properties specific to .button */
+.button {
+    margin: 0px 50px; /* Add space to the top and bottom, and center horizontally */    
+    height: 40px;
+    font-size: 20px;
+}
+
+/* Properties specific to .reset */
+.reset {
+    display: flex;
+    margin: 20px 0 20px;
+    padding: 20px;
+    width: 500px;
+    height: 40px;
+    font-size: 14px;
+}
