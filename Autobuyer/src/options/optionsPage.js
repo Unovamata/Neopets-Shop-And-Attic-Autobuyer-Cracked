@@ -113,6 +113,7 @@ function updateLastRefreshMs() {
         .val() && (setATTIC_LAST_REFRESH_MS(getPacificTimeDateObjFromInputs()
             .valueOf()), setATTIC_PREV_NUM_ITEMS(24))
 }
+
 function updateDateTimeInputs(_) {
     var E = moment(_)
         .tz("America/Los_Angeles")
@@ -125,12 +126,14 @@ function updateDateTimeInputs(_) {
         .val(E), $("#ATTIC_LAST_REFRESH_TIME")
         .val(T)
 }
+
 function getPacificTimeDateObjFromInputs() {
     return moment.tz($("#ATTIC_LAST_REFRESH_DATE")
             .val() + " " + $("#ATTIC_LAST_REFRESH_TIME")
             .val(), "America/Los_Angeles")
         .toDate()
 }
+
 function showOrHide() {
     $("#USE_ITEM_DB")
         .is(":checked") ? ($(".db-hide")
@@ -163,6 +166,7 @@ function showOrHide() {
         .show() : $(".main-shop-settings")
         .hide()
 }
+
 $("#PAYMENT_LINK")
     .bind("click", (function() {
         openPaymentPage()
@@ -423,15 +427,19 @@ $("#PAYMENT_LINK")
         setPAUSE_AFTER_BUY_MS($("#PAUSE_AFTER_BUY_MS")
             .val())
     }));
-var resetButton = document.getElementById("reset");
+
 function confirmReset() {
     1 == confirm("Are you sure you want to reset all settings and reset your restock list to the default?") ? resetSettings() : console.log("Action cancelled")
 }
+
 function resetSettings() {
     chrome.storage.local.remove(["SEND_TO_SDB_AFTER_PURCHASE", "BUY_UNKNOWN_ITEMS_PROFIT", "ITEM_DB_MIN_RARITY", "USE_BLACKLIST", "BLACKLIST", "MIN_REFRESH", "MAX_REFRESH", "MIN_REFRESH_STOCKED", "MAX_REFRESH_STOCKED", "SHOULD_CLICK_NEOPET", "ENABLED", "HIGHLIGHT", "CLICK_ITEM", "CLICK_CONFIRM", "SHOULD_SHOW_BANNER", "SHOULD_ANNOTATE_IMAGE", "SHOULD_SOUND_ALERTS", "SHOULD_ENTER_OFFER", "SHOULD_SEND_EMAIL", "SHOULD_GO_FOR_SECOND_MOST_VALUABLE", "STORES_TO_CYCLE_THROUGH_WHEN_STOCKED", "RUN_BETWEEN_HOURS", "ITEMS_TO_CONSIDER_STOCKED", "MIN_CLICK_ITEM_IMAGE", "MAX_CLICK_ITEM_IMAGE", "MIN_CLICK_CONFIRM", "MAX_CLICK_CONFIRM", "MIN_OCR_PAGE", "MAX_OCR_PAGE", "EMAIL_TEMPLATE", "EMAIL_USER_ID", "EMAIL_SERVICE_ID", "RESTOCK_LIST", "USE_ITEM_DB", "ITEM_DB_MIN_PROFIT_NPS", "ITEM_DB_MIN_PROFIT_PERCENT", "SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES", "SHOULD_SHOW_CHROME_NOTIFICATIONS", "ATTIC_ENABLED", "ATTIC_HIGHLIGHT", "ATTIC_CLICK_ITEM", "ATTIC_ITEM_DB_MIN_PROFIT_NPS", "ATTIC_ITEM_DB_MIN_PROFIT_PERCENT", "ATTIC_MIN_BUY_TIME", "ATTIC_MAX_BUY_TIME", "ATTIC_RUN_BETWEEN_HOURS", "ATTIC_MIN_REFRESH", "ATTIC_MAX_REFRESH", "ATTIC_SHOULD_REFRESH", "ATTIC_LAST_REFRESH_MS", "PAUSE_AFTER_BUY_MS"], (function() {
         console.log("Settings cleared"), location.reload()
     }))
 }
+
+var resetButton = document.getElementById("reset");
+
 resetButton.onclick = function(_) {
     confirmReset()
 }, chrome.storage.local.get({
