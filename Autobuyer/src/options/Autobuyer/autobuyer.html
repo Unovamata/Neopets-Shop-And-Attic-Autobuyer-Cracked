@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<title>NeoBuyer+ Options</title>
-        <link rel="stylesheet" type="text/css" href="../options.css" />
+		<title>NeoBuyer+ Options | Main Shop Buyer Settings</title>
         <link rel="stylesheet" type="text/css" href="../table.css" />
+        <link rel="stylesheet" type="text/css" href="../options.css" />
     </head>
 
     <body>
@@ -12,242 +12,107 @@
             <div class="category-info">Main Shop Buyer Settings</div>
             <center>
                 <table class="table">
-                    <thead>
-                        <th>Description</th>
-                        <th>Option</th>
-                    </thead>
-                    <tr>
-                        <td>Main Shop Autobuyer Enabled:
-                            <span class="tooltiptext">Enables NeoBuyer+</span>
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input id="ENABLED" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                    </tr>
                     <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th>
+                        </thead>
                         <tr>
-                            <td>Refresh Time Window:
-                                <span class="tooltiptext">
-                                    Set the time range for refreshing. <br><br>
-                                    For example: <br> NeoBuyer+ active during 11am to 4pm = [11, 16] <br> NeoBuyer+ active at all times [0,23].
-                                </span>
+                            <td>Main Shop Autobuyer Enabled:
+                                <span class="tooltiptext">Enables NeoBuyer+.</span>
                             </td>
-                            <td><input type="text" id="RUN_BETWEEN_HOURS"></input></td>
+                            <td>
+                                <label class="switch">
+                                    <input id="ENABLED" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
                         </tr>
+                    </tbody>
+                </table>
+                
+                <div class="subcategory-info">Refresh Settings</div>
+
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th>
+                        </thead>
                         <tr>
-                            <td><b>Minimum Unstocked</b> Refresh:
-                                <span class="tooltiptext">
-                                    Minimum time between refreshes when the shop is empty.
-                                    In milliseconds. <br><br> 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MIN_REFRESH"></input></td>
+                            <tr>
+                                <td>Refresh Time Window:
+                                    <span class="tooltiptext">
+                                        Set the time range for refreshing. <br><br>
+                                        For example: <br> 11am to 4pm = [11, 16] or All times [0,23]
+                                    </span>
+                                </td>
+                                <td><input type="text" id="RUN_BETWEEN_HOURS"></input></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum Unstocked</b> Refresh:
+                                    <span class="tooltiptext">
+                                        Minimum time in milliseconds between refreshes when the shop is empty. <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MIN_REFRESH"></input></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum Unstocked</b> Refresh:
+                                    <span class="tooltiptext">
+                                        Maximum time in milliseconds between refreshes when the shop is empty.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MAX_REFRESH"></input></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum Stocked</b> Refresh:
+                                    <span class="tooltiptext">
+                                        Minimum time in milliseconds between refreshes when the shop is stocked.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MIN_REFRESH_STOCKED"></input></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum Stocked</b> Refresh:
+                                    <span class="tooltiptext">Maximum time in milliseconds between refreshes when the shop is stocked.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MAX_REFRESH_STOCKED"></input></td>
+                            </tr>
                         </tr>
-                        <tr>
-                            <td><b>Maximum Unstocked</b> Refresh:
-                                <span class="tooltiptext">
-                                    Maximum time between refreshes when the shop is empty.
-                                    In milliseconds. <br><br> 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MAX_REFRESH"></input></td>
-                        </tr>
-                        <tr>
-                            <td><b>Minimum Stocked</b> Refresh:
-                                <span class="tooltiptext">
-                                    Minimum time between refreshes when the shop is stocked.
-                                    In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MIN_REFRESH_STOCKED"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Maximum refresh (stocked):
-                                <span class="tooltiptext">In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MAX_REFRESH_STOCKED"></input></td>
-                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="subcategory-info">Store & Inventory Settings</div>
+
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th>
+                        </thead>
                         <tr>
                             <td>
-                                Store numbers to cycle through when stocked:
+                                Store Numbers to Cycle Through When Stocked:
                                 <span class="tooltiptext">
-                                    If you are in a store in this list, and it is stocked, then the autobuyer will wait the desired number of seconds and then navigate to the next shop in the list. This way, it can cycle through multiple shops until it finds on that is not stocked. Once it does, it will refresh there. For instance, magic, food, and stamp would be [2,1,58].
+                                    If a store in the list is stocked, NeoBuyer+ will wait the specified number of seconds before moving to the next shop.<br><br>
+                                    It cycles through multiple shops until finding one that's not stocked. <br><br>
+                                    <a href="https://thedailyneopets.com/articles/list-neopian-shops-of-neopia">Neopian Shops IDs</a>
                                 </span>
                             </td>
                             <td><input type="text" id="STORES_TO_CYCLE_THROUGH_WHEN_STOCKED"></input></td>
                         </tr>
                         <tr>
-                            <td>Minimum items for store to be considered stocked:
+                            <td>Minimum Items for Store to be Considered Stocked:
                                 <span class="tooltiptext">
-                                    For example, if the store has 5 items, and you enter 5 here, the store is considered 'stocked' and the 'stocked' refresh intervals above will apply.
+                                    If you input 5 and a store has 5 items, then it's 'stocked'.
                                 </span>
                             </td>
                             <td><input type="number" id="ITEMS_TO_CONSIDER_STOCKED"></input></td>
                         </tr>
                         <tr>
-                            <td>Auto-click item to buy:</td>
-                            <td>
-                                <label class="switch">
-                                    <input id="CLICK_ITEM" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="click-hide">
-                            <td title="Useful for those with slower internet connections">Go for 2nd best item:
-                                <span class="tooltiptext">
-                                    This is useful if you have a slow internet connection. Instead of trying to get the best item in stock, the autobuyer will try to get the 2nd-best item, so that you have a higher chance of success. If there is only 1 item in stock worth buying, it will still try to buy that one item.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="SHOULD_GO_FOR_SECOND_MOST_VALUABLE" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="click-hide">
-                            <td>Min click item image:
-                                <span class="tooltiptext">This is the minimum of how fast the autobuyer will click the desired item to purchase after page load (if enabled). In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MIN_CLICK_ITEM_IMAGE"></input></td>
-                        </tr>
-                        <tr class="click-hide">
-                            <td>Max click item image:
-                                <span class="tooltiptext">This is the maximum of how fast the autobuyer will click the desired item to purchase after page load (if enabled). In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MAX_CLICK_ITEM_IMAGE"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Auto-click confirm modal:</td>
-                            <td>
-                                <label class="switch">
-                                    <input id="CLICK_CONFIRM" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="confirm-hide">
-                            <td>Min click confirm purchase:
-                                <span class="tooltiptext">This is the minimum of how fast the autobuyer will click 'confirm' after clicking a desired item to purchase (if enabled). In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MIN_CLICK_CONFIRM"></input></td>
-                        </tr>
-                        <tr class="confirm-hide">
-                            <td>Max click confirm purchase:
-                                <span class="tooltiptext">This is the maximum of how fast the autobuyer will click 'confirm' after clicking a desired item to purchase (if enabled). In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MAX_CLICK_CONFIRM"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Auto enter offer:
-                                <span class="tooltiptext">
-                                    The autobuyer will smartly enter an offer that is slightly different from the actual price to be more human-like. It uses a rand function and then types similar to how a human would.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="SHOULD_ENTER_OFFER" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Auto click captcha:</td>
-                            <td>
-                                <label class="switch">
-                                    <input id="SHOULD_CLICK_NEOPET" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Annotate captcha with neopet's location:
-                                <span class="tooltiptext">
-                                    This will add a red dot to where the neopet is in the captcha, so that it is easier to see.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="SHOULD_ANNOTATE_IMAGE" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Min total time on captcha page:
-                                <span class="tooltiptext">In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MIN_OCR_PAGE"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Max total time on captcha page:
-                                <span class="tooltiptext">In milliseconds. For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MAX_OCR_PAGE"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Highlight desired shop items:
-                                <span class="tooltiptext">
-                                    The best item will be colored orange, any other items on the restock list will be colored green.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="HIGHLIGHT" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Pause extra time after successful purchase:
-                                <span class="tooltiptext">How long the program should pause after a main shop successful purchase. In milliseconds. For example, 30 minutes = 30*60*1000 = 1800000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="PAUSE_AFTER_BUY_MS"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Use item database value estimates:
-                                <span class="tooltiptext">This will smartly purchase profitable items without the need for a restock list. Every restockable item is in the database with an up-to-date price from JellyNeo or the trading post/shop wizard. This database is automatically updated periodically with fresh value estimates for every item.</span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="USE_ITEM_DB" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="restock-hide">
-                            <td>Restock list (will be used instead of item database):
-                                <span class="tooltiptext">Must be in order from most to least profitable. It is ok if items are grouped by store, for example, all magic items most to least profitable, then all stamp items most to least profitable. The default items upon install only include a sample of magic and stamp items. Using a manual list is not recommended. It is recommended that you use the item database option above.</span>
-                            </td>
-                            <td><textarea rows="20" cols="50" id="RESTOCK_LIST"></textarea></td>
-                        </tr>
-                        <tr class="db-hide">
-                            <td>
-                                Minimum profit in neopoints to click item:
-                                <span class="tooltiptext">This only applies when using the item database option. For instance, if the item is worth an estimated 30,000 NPS and it costs 10,000 NPS, then the autobuyer will purchase it if this field is 20,000 or less. Both this condition and the below minimum profit percentage must both be true in order for the autobuyer to click the item.</span>
-                            </td>
-                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_NPS"></input></td>
-                        </tr>
-                        <tr class="db-hide">
-                            <td>Minimum profit percentage to click item:
-                                <span class="tooltiptext">This only applies when using the item database option. For instance, if the item is worth an estimated 15,000 NPS and it costs 10,000 NPS, then the autobuyer will purchase it if this field is 50% (0.5) or less. It is recommened that you leave this at 1.0 or less. Both this condition and the above minimum profit in NPS must both be true in order for the autobuyer to click the item.</span>
-                            </td>
-                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input></td>
-                        </tr>
-                        <tr>
-                            <td>Send bought items to SDB:
+                            <td>Send Bought Items to the Safety Deposit Box:
                                 <span class="tooltiptext">
                                     If enabled, purchased items will be sent to your safety deposit box.
                                 </span>
@@ -259,41 +124,118 @@
                                 </label>
                             </td>
                         </tr>
-                        <tr class="">
-                            <td>
-                                Estimated profit of items not in item DB:
-                                <span class="tooltiptext">For items which are not in the item database, the autobuyer will assume that they have a profit of this amount. This is useful for when new items are released and there hasn't been time for the item database to include them yet.</span>
-                            </td>
-                            <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input></td>
-                        </tr>
-                        <tr class="">
-                            <td>
-                                Minimum rarity to click profitable items <span class="subdued">(not recommended to change)</span>:
-                                <span class="tooltiptext">If you want the autobuyer to ignore items below a certain rarity, you can enter that here. Only items at or above this rarity will be clicked. This must be a number between 1 and 99. Items which are not in the item database will not be subject to this rule, since their rarity is unknown.</span>
-                            </td>
-                            <td><input type="number" max="99" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
-                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="subcategory-info">Auto-Click Settings</div>
+
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th>
+                        </thead>
                         <tr>
-                            <td>Provide blacklist of items to never purchase:
-                                <span class="tooltiptext">This can be used to tell the autobuyer to never click on a certain item. It will not click these items even if the other rules say that the item meets the minimum profit guidelines. This is useful if you find that the item DB has an incorrect or out of date price estimate.</span>
-                            </td>
+                            <td>Auto-Click Item to Buy:</td>
                             <td>
                                 <label class="switch">
-                                    <input id="USE_BLACKLIST" type="checkbox">
+                                    <input id="CLICK_ITEM" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
                             </td>
                         </tr>
-                        <tr class="blacklist-hide">
-                            <td>Blacklist of items to never buy:
-                                <span class="tooltiptext">This list will supercede all other settings. If an item is in this list, it will never be clicked on by the Autobuyer. This is useful if you find that the item DB has an incorrect or out of date price estimate. Enter one item per line only.</span>
+                        <tr class="click-hide">
+                            <td><b>Minimum Click</b> Item Image:
+                                <span class="tooltiptext">
+                                    Minimum click speed in milliseconds for the NeoBuyer+ to click in a desired item after the page loads.
+                                    <br><br> 1 second = 1000
+                                </span>
                             </td>
-                            <td><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
+                            <td><input type="number" id="MIN_CLICK_ITEM_IMAGE"></input></td>
+                        </tr>
+                        <tr class="click-hide">
+                            <td><b>Maximum Click</b> Item Image:
+                                <span class="tooltiptext">
+                                    Minimum click speed in milliseconds for the NeoBuyer+ to click in a desired item after the page loads.
+                                    <br><br> 1 second = 1000
+                                </span>
+                            </td>
+                            <td><input type="number" id="MAX_CLICK_ITEM_IMAGE"></input></td>
+                        </tr>
+                        <tr class="click-hide">
+                            <td>Go for 2nd Best Item:
+                                <span class="tooltiptext">
+                                    Better for slower internet connections. <br><br>
+                                    Instead of aiming for the best item in stock, NeoBuyer+ prioritizes the second-best item for a better chance of success. <br><br>
+
+                                    It will still buy the sole worthwhile item if only one is available.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_GO_FOR_SECOND_MOST_VALUABLE" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Attempt to refresh through page load failures:
+                            <td>Auto-Click Confirm Modal:
                                 <span class="tooltiptext">
-                                    When the page fails to load because Neopet's server rejected the request, which happens sometimes, this setting will refresh the page anyways instead of stopping on the failed page.
+                                    Enables NeoBuyer+ to Auto-Click the Confirm Window Buttons.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="CLICK_CONFIRM" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="confirm-hide">
+                            <td><b>Minimum Click</b> Confirm Purchase:
+                                <span class="tooltiptext">
+                                    Minimum click speed in milliseconds for the NeoBuyer+ to click 'Confirm' after clicking a desired item to purchase if enabled.
+                                    <br><br> 1 second = 1000
+                                </span>
+                            </td>
+                            <td><input type="number" id="MIN_CLICK_CONFIRM"></input></td>
+                        </tr>
+                        <tr class="confirm-hide">
+                            <td><b>Maximum Click</b> Confirm Purchase:
+                                <span class="tooltiptext">
+                                    Maximum click speed in milliseconds for the NeoBuyer+ to click 'Confirm' after clicking a desired item to purchase if enabled.
+                                    <br><br> 1 second = 1000
+                                </span>
+                            </td>
+                            <td><input type="number" id="MAX_CLICK_CONFIRM"></input></td>
+                        </tr>
+                        <tr>
+                            <td>Auto Enter Offer:
+                                <span class="tooltiptext">
+                                    Makes NeoBuyer+ enter offers with slight price variations using a random function, typing in a human-like manner.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_ENTER_OFFER" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <div class="subcategory-info">Captcha Handling</div>
+
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th>
+                        </thead>
+                        <tr>
+                            <td>Attempt to Refresh Through Page Load Failures:
+                                <span class="tooltiptext">
+                                    If Neopet's server rejects the request and the page fails to load, this setting will automatically refresh the page.
                                 </span>
                             </td>
                             <td>
@@ -304,7 +246,208 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Show Chrome notifications:
+                            <td>Auto Click Captcha:</td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_CLICK_NEOPET" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Annotate Captcha with Neopet's Location:
+                                <span class="tooltiptext">
+                                    This will add a red dot to where the neopet is in the captcha.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_ANNOTATE_IMAGE" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Min Total Time on Captcha Page:
+                                <span class="tooltiptext">
+                                    In milliseconds. <br><br> For example, 1 second = 1000.
+                                </span>
+                            </td>
+                            <td><input type="number" id="MIN_OCR_PAGE"></input></td>
+                        </tr>
+                        <tr>
+                            <td>Max Total Time on Captcha Page:
+                                <span class="tooltiptext">
+                                    In milliseconds. <br><br> For example, 1 second = 1000.
+                                </span>
+                            </td>
+                            <td><input type="number" id="MAX_OCR_PAGE"></input></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="subcategory-info">Visual Settings</div>
+
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th>
+                        </thead>
+                        <tr>
+                            <td>Show Status Banner:
+                                <span class="tooltiptext">
+                                    This setting toggles the banner text shown on the shop pages.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHOW_BANNER" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Highlight Desired Shop Items:
+                                <span class="tooltiptext">
+                                    
+                                Neobuyer+ highlights items of interest:<br><br>
+
+                                - The highest valued item in stock is highlighted in orange.<br>
+                                - Other items are highlighted in green.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="HIGHLIGHT" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pause Extra Time After Successful Purchase:
+                                <span class="tooltiptext">
+                                    Determines the pause duration in milliseconds after a successful main shop purchase.<br><br>
+                                    30 minutes = 1800000 milliseconds.
+                                </span>
+                            </td>
+                            <td><input type="number" id="PAUSE_AFTER_BUY_MS"></input></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="subcategory-info">Data Sources</div>
+
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th>
+                        </thead>
+                        <tr>
+                            <td>Use Item Database Value Estimates:
+                                <span class="tooltiptext">
+                                    If active, NeoBuyer+ will target profitable items exclusively based on its custom item database.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="USE_ITEM_DB" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="db-hide">
+                            <td>
+                                Minimum Profit to Click Item:
+                                <span class="tooltiptext">
+                                    Neobuyer+ will buy an item only if its profitability margin is greater than the amount provided.<br><br>
+
+                                    - This only applies while using the item database.
+                                </span>
+                            </td>
+                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_NPS"></input></td>
+                        </tr>
+                        <tr class="db-hide">
+                            <td>Minimum Profit Percentage to Click Item:
+                                <span class="tooltiptext">
+                                    Neobuyer+ will buy an item only if its profitability percentage is greater than the amount provided.<br><br>
+
+                                    - This only applies while using the item database.<br>
+                                    - Decimals only (0.5).<br>
+                                </span>
+                            </td>
+                            <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input></td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                Minimum Rarity to Click Profitable Items: <span class="subdued">(Not Advised to Modify)</span>:
+                                <span class="tooltiptext">
+                                    NeoBuyer+ will only acquire items over that rarity threshold.<br><br>
+
+                                    - Minimum rarity: 1. <br>
+                                    - Maximum rarity: 100.
+                                </span>
+                            </td>
+                            <td><input type="number" max="100" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
+                        </tr>
+                        <tr class="restock-hide">
+                            <td>Restock List (Used Instead of Item Database):
+                                <span class="tooltiptext">
+                                    The list must be ordered from most profitable to least profitable.<br><br>
+
+                                    - You can group by store. <br><br>
+                                    
+                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked">Custom Restock List Creator</a>
+                                </span>
+                            </td>
+                            <td><textarea rows="20" cols="50" id="RESTOCK_LIST"></textarea></td>
+                        </tr>
+                        <tr class="">
+                            <td>
+                                Estimated Profit of Items Not in Item DB:
+                                <span class="tooltiptext">
+                                    For items not in the database, NeoBuyer+ assumes a default profit amount. <br><br>
+                                    
+                                    This is handy for new, unlisted items.
+                                </span>
+                            </td>
+                            <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input></td>
+                        </tr>
+                        <tr>
+                            <td>Provide Blacklist of Items to Never Purchase:
+                                <span class="tooltiptext">
+                                    This feature prevents NeoBuyer+ from buying on specific items, regardless of other rules. <br><br>
+
+                                    This is helpful when the item database has inaccurate or outdated price estimates.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="USE_BLACKLIST" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="blacklist-hide">
+                            <td>Blacklist of Items to Never Buy:
+                                <span class="tooltiptext">
+                                    Enter one item per line only.
+                                </span>
+                            </td>
+                            <td><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="subcategory-info">Email & Alert Settings</div>
+
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th>
+                            <th></th>
+                        </thead>
+                        <tr>
+                            <td>Show Chrome Notifications:
                                 <span class="tooltiptext">
                                     Chrome notifications will appear when important events occur.
                                 </span>
@@ -317,9 +460,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Sound alerts:
+                            <td>Sound Alerts:
                                 <span class="tooltiptext">
-                                    The autobuyer will read out notifications of what is happening, and sounds beeps when it is taking actions on the page. Especially useful if you have not enabled full autobuying.
+                                    The autobuyer provides audible notifications during page actions.
                                 </span>
                             </td>
                             <td>
@@ -330,23 +473,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Show status banner:
+                            <td>Send Email After Purchase Using Emailjs:
+
                                 <span class="tooltiptext">
-                                    This setting toggles the banner text shown on the shop pages.
+                                    Head to the following page if you want to setup Emailjs: <br><br>
+
+                                    <a target="_blank" href="email.html"> Instructions </a>
                                 </span>
                             </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="SHOULD_SHOW_BANNER" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="email-hide">
-                            <td class="autosaved"><br>To set up emails, read <a target="_blank" href="email.html">these instructions</a><br></td>
-                        </tr>
-                        <tr>
-                            <td>Send email after purchase using emailjs:</td>
                             <td>
                                 <label class="switch">
                                     <input id="SHOULD_SEND_EMAIL" type="checkbox">
@@ -376,7 +510,6 @@
         </div>
         <script src="../../toolbar.js"></script>
         <script src="../../common/default_items.js"></script>
-        <script src="../../../js/jquery.js"></script>
         <script src="../../../js/jquery.js"></script>
         <script src="../../../js/moment.js"></script>
         <script src="../../../js/ExtPay.js"></script>

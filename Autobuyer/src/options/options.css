@@ -53,6 +53,14 @@ body {
     font-family: 'Cafeteria', sans-serif;
 }
 
+.subcategory-info{
+    font-size: 20px;
+    margin: 30px 0 30px 0;
+    color: #2196F3;
+    text-decoration: italic;
+    font-family: 'Cafeteria', sans-serif;
+}
+
 .category-info{
     font-size: 20px;
     margin-bottom: 30px;
@@ -67,8 +75,11 @@ body {
 
 input,
 select {
-    border-radius: 5px;
+    border-radius: 30px;
+    border-color: #2196F3;
     font-size: 18px;
+    font-family: 'Cafeteria', sans-serif;
+    color: #2196F3;
 }
 
 .switch {
@@ -124,12 +135,14 @@ input:checked+.slider:before {
 
 td .tooltiptext {
     visibility: hidden;
-    width: 400px;
+    width: 450px;
     background-color: #2196F3;
     color: white;
     text-align: center;
     border-radius: 5px;
     padding: 10px;
+    font-family: 'Cafeteria', sans-serif;
+    opacity: 0.9;
 
     /* Position the tooltip */
     position: absolute;
@@ -138,6 +151,10 @@ td .tooltiptext {
 
 td:hover .tooltiptext {
     visibility: visible;
+}
+
+thead {
+    border-radius: 10px 10px 0 0;
 }
 
 /* Rounded sliders */
@@ -178,14 +195,17 @@ table td {
     text-align: center;
 }
 
-.class-Visit {
-    width: 1px;
-}
-
-.class-Name {
-    width: 200px;
-}
-
 b {
     color: #2196F3;
+}
+
+input{
+    text-align: center;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
 }
