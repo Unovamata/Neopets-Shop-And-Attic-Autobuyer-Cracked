@@ -9,7 +9,13 @@
     <body>
         <div class="center">
             <div class="enter-info">NeoBuyer+ Options</div>
-            <div class="category-info">Main Shop Buyer Settings</div>
+            <div class="category-info">
+                Main Shop Buyer Settings
+                <div class="autosaved">
+                    <span class="sub">To view helpful tooltips, simply hover over the options!</span><span id="total-profit"></span><br>
+                </div>
+            </div>
+            
             <center>
                 <table class="table">
                     <tbody class="main-shop-settings">
@@ -184,8 +190,10 @@
                             <td><span class="notation">Rarity</span><input type="number" max="100" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
                         </tr>
                         <tr class="db-hide">
-                            <td>Provide blacklist of items to never purchase:
-                                <span class="tooltiptext">This can be used to tell the autobuyer to never click on a certain item. It will not click these items even if the other rules say that the item meets the minimum profit guidelines. This is useful if you find that the item DB has an incorrect or out of date price estimate.</span>
+                            <td>Use a Blacklist of Items to not Purchase:
+                                <span class="tooltiptext">
+                                    NeoBuyer+ will be prevented from clicking on specific items inside the blacklist, even if they meet the profit criteria.<br><br>
+                                    This is useful when the item database has inaccurate or outdated price estimates.</span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -195,7 +203,7 @@
                             </td>
                         </tr>
                         <tr class="blacklist-hide">
-                            <td class="db-hide">Blacklist of items to never buy:
+                            <td class="db-hide">Blacklist:
                                 <span class="tooltiptext">This list will supercede all other settings. If an item is in this list, it will never be clicked on by the Autobuyer. This is useful if you find that the item DB has an incorrect or out of date price estimate. Enter one item per line only.</span>
                             </td>
                             <td class="db-hide"><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
@@ -395,13 +403,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Highlight Desired Shop Items:
+                            <td>Highlight Desired <b>Shop</b> Items:
                                 <span class="tooltiptext">
-                                    
-                                Neobuyer+ highlights items of interest:<br><br>
+                                    Neobuyer+ highlights items of interest:<br><br>
 
-                                - The highest valued item in stock is highlighted in orange.<br>
-                                - Other items are highlighted in green.
+                                    - The highest valued item in stock is highlighted in orange.<br>
+                                    - Other items of interest will be highlighted in green.
                                 </span>
                             </td>
                             <td>
@@ -463,7 +470,7 @@
                                 <span class="tooltiptext">
                                     Head to the following page if you want to setup Emailjs: <br><br>
 
-                                    <a target="_blank" href="email.html"> Instructions </a>
+                                    <a target="_blank" href="../email.html"> Instructions </a>
                                 </span>
                             </td>
                             <td>
@@ -474,15 +481,15 @@
                             </td>
                         </tr>
                         <tr class="email-hide">
-                            <td>Emailjs template id:</td>
+                            <td>Emailjs Template ID:</td>
                             <td><input type="text" id="EMAIL_TEMPLATE"></input></td>
                         </tr>
                         <tr class="email-hide">
-                            <td>Emailjs user id:</td>
+                            <td>Emailjs User ID:</td>
                             <td><input type="text" id="EMAIL_USER_ID"></input></td>
                         </tr>
                         <tr class="email-hide">
-                            <td>Emailjs service id:</td>
+                            <td>Emailjs Service ID:</td>
                             <td><input type="text" id="EMAIL_SERVICE_ID"></input></td>
                         </tr>
                     </tbody>

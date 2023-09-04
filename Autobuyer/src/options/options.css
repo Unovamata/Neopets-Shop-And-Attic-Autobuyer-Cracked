@@ -56,6 +56,13 @@ body {
     font-family: 'Cafeteria', sans-serif;
 }
 
+.autosaved,
+.donate {
+    font-size: 14px;
+    text-decoration: italic;
+    margin: 10px;
+}
+
 .row {
     margin-top: 10px;
 }
