@@ -7,11 +7,6 @@ table {
     padding: 30px 0px;
 }
 
-/* Apply alternating row colors */
-table tr:nth-child(odd) td {
-    background-color: #f0f0f0;
-}
-
 /* Apply style to table headers */
 table th {
     background-color: #2196F3;
@@ -95,4 +90,14 @@ table td {
 /* Customize the scrollbar buttons (arrows) */
 ::-webkit-scrollbar-button {
     display: none;
+}
+
+/* Apply alternating row colors */
+table tr:nth-child(odd) td {
+    background-color: #f0f0f0;
+}
+
+/* Apply the checked-row class with higher specificity */
+table tr.checked-row td {
+    background-color: #c0ffb3;
 }
