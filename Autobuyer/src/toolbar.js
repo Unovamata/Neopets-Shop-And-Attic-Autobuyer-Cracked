@@ -22,7 +22,7 @@ const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
 // Links
 const autobuyerUrl = `${srcPath}/options/Autobuyer/autobuyer.html`;
 const atticUrl = `${srcPath}/options/attic.html`;
-const autopricerUrl = `${srcPath}/options/autopricer.html`;
+const autopricerUrl = `${srcPath}/options/Autopricer/autopricer.html`;
 const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;

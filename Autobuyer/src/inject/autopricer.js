@@ -12,27 +12,65 @@ function getSHOP_INVENTORY(callback) {
     });
 }
 
-const item = {
-    Name: '',
-    Price: 0,
-    IsPricing: false
-};
+function setINVENTORY_UPDATED(value) {
+    chrome.storage.local.set({ INVENTORY_UPDATED: value }, function () {});
+}
 
+function getINVENTORY_UPDATED(callback) {
+    chrome.storage.local.get(['INVENTORY_UPDATED'], function (result) {
+        const value = result.INVENTORY_UPDATED;
+
+        if (typeof callback === 'function') {
+        callback(value);
+        }
+    });
+}
+
+function setSTART_AUTOPRICING_PROCESS(value) {
+    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
+}
+
+function getSTART_AUTOPRICING_PROCESS(callback) {
+    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
+        const value = result.START_AUTOPRICING_PROCESS;
+
+        if (typeof callback === 'function') {
+        callback(value);
+        }
+    });
+}
+
+
+//######################################################################################################################################
+
+
+function Item(Name, Price, IsPricing){
+    this.Name = Name;
+    this.Price = Price;
+    this.IsPricing = IsPricing;
+}
+
+
+//######################################################################################################################################
 
 
 const hrefLinks = [];
 
-document.querySelectorAll('p[align="center"] a').forEach(link => {
-  const href = link.getAttribute('href');
-  hrefLinks.push(href);
-});
-
-hrefLinks.shift();
+function LoadPageLinks(){
+    document.querySelectorAll('p[align="center"] a').forEach(link => {
+        const href = link.getAttribute('href');
+        hrefLinks.push(href);
+    });
+    
+    hrefLinks.shift();
+    
+    
+}
 
 var currentPage = 1;
 var rowsItemNames = [];
 
-async function processPageData(pageIndex) {
+async function ProcessPageData(pageIndex) {
     //Loading the page and getting its contents;
     const response = await fetch(hrefLinks[pageIndex]);
     const pageContent = await response.text();
@@ -46,22 +84,35 @@ async function processPageData(pageIndex) {
 
     //Saving all the data in its respective array;
     rows.forEach((row) => {
-        const nameCell = row.querySelector('td:first-child');
-        const priceCell = row.querySelector('td:first-child');
-        const textContent = nameCell.textContent.trim();
+        const nameRow = row.querySelector('td:first-child');
+        const textContent = nameRow.textContent.trim();
+
+        const priceRow = row.querySelector('td:nth-child(5)');
+        var inputElement;
+        const priceContent = 0;
+
+        try{
+            inputElement = priceRow.querySelector('input');
+
+            if(inputElement){
+                priceContent = inputElement.value;
+            }
+        } catch {}
+        
 
         const vetoWords = ['Enter your PIN:', 'Remove All', 'Name'];
         const isVetoWord = vetoWords.includes(textContent);
 
         if (!isVetoWord) {
-            rowsItemNames.push(textContent);
+            const item = new Item(textContent, priceContent, true);
+            rowsItemNames.push(item);
         }
     });
 }
   
-async function processAllPages() {
+async function ProcessAllPages() {
     for (let pageIndex = 0; pageIndex < hrefLinks.length; pageIndex++) {
-        await processPageData(pageIndex);
+        await ProcessPageData(pageIndex);
         console.log(`Processed page ${pageIndex + 1}`);
         if(pageIndex == 3){
             setSHOP_INVENTORY(rowsItemNames);
@@ -78,9 +129,7 @@ async function processAllPages() {
         }
     }
 }
-  
-// Start processing data
-processAllPages();
+
 
 var sleepMin = 3;
 var sleepMax = 8;
@@ -94,3 +143,18 @@ function Sleep() {
 function GetRandomFloat(min, max) {
     return Math.random() * (max - min) + min;
 }
+
+
+//######################################################################################################################################
+
+function StartAutoPricing(value){
+    if(value){
+        LoadPageLinks();
+        ProcessAllPages();
+        setSTART_AUTOPRICING_PROCESS(false);
+    }
+}
+
+
+// Start processing data
+getSTART_AUTOPRICING_PROCESS(StartAutoPricing);
