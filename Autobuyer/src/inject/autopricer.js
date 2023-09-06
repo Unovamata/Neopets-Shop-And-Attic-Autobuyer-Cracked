@@ -63,8 +63,6 @@ function LoadPageLinks(){
     });
     
     hrefLinks.shift();
-    
-    
 }
 
 var currentPage = 1;
@@ -87,18 +85,12 @@ async function ProcessPageData(pageIndex) {
         const nameRow = row.querySelector('td:first-child');
         const textContent = nameRow.textContent.trim();
 
-        const priceRow = row.querySelector('td:nth-child(5)');
-        var inputElement;
-        const priceContent = 0;
-
-        try{
-            inputElement = priceRow.querySelector('input');
-
-            if(inputElement){
-                priceContent = inputElement.value;
-            }
+        //const priceRow = row.querySelector('td:nth-child(5)');
+        const inputElements = row.querySelectorAll('td input[name^="cost_"]');
+        var priceContent = 0;
+        try { 
+            priceContent = inputElements[0].value;
         } catch {}
-        
 
         const vetoWords = ['Enter your PIN:', 'Remove All', 'Name'];
         const isVetoWord = vetoWords.includes(textContent);
@@ -116,7 +108,12 @@ async function ProcessAllPages() {
         console.log(`Processed page ${pageIndex + 1}`);
         if(pageIndex == 3){
             setSHOP_INVENTORY(rowsItemNames);
+            window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
+            setINVENTORY_UPDATED(true);
+            //Sleep(sleepInShopMin, sleepInShopMin);
 
+
+            /*
             // Declare a variable to hold the retrieved SHOP_INVENTORY value
             let mySHOP_INVENTORY;
 
@@ -126,16 +123,20 @@ async function ProcessAllPages() {
 
             console.log(mySHOP_INVENTORY);
             });
+            */
         }
     }
 }
+
+// Simulates the time a real player browses through its entire shop;
+var sleepInShopMin = 10, sleepInShopMin = 60;
 
 
 var sleepMin = 3;
 var sleepMax = 8;
 
-function Sleep() {
-    const milliseconds = GetRandomFloat(sleepMin, sleepMax) * 1000;
+function Sleep(min, max) {
+    const milliseconds = GetRandomFloat(min, max) * 1000;
     console.log(`Sleeping for ${milliseconds / 1000}...`);
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }

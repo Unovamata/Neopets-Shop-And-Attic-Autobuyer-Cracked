@@ -17,9 +17,25 @@
             </div>
             
             <center>
-                <button id="start" class="button reset">Start Shop Auto Pricing Process</button>
+                <button id="start" class="button reset">Load Shop Inventory</button>
+                <button id="start" class="button reset">Start AutoPricing</button>
 
-                <table class="table">
+                <div class="subcategory-info">Shop Inventory</div>
+
+                <table>
+                    <thead>
+                        <th class="name-autopricer">Name</th>
+                        <th class="price-autopricer">Price</th>
+                        <th class="canprice-autopricer">Should be Priced?</th>
+                    </thead>
+                    <tr>
+                        <td>Name</td>
+                        <td><input></input></td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                </table>
+
+                <!--<table class="table">
                     <tbody class="main-shop-settings">
                         <thead>
                             <th></th><th></th>
@@ -495,11 +511,11 @@
                             <td><input type="text" id="EMAIL_SERVICE_ID"></input></td>
                         </tr>
                     </tbody>
-                </table>
+                </table>-->
                 <br><br><br>
                 <button id="reset" class="button reset">Reset All Settings & Restock List</button>
+                <br><br><br>
             </center>
-            <hr>
             
         </div>
         <script src="../../toolbar.js"></script>
@@ -507,6 +523,7 @@
         <script src="../../../js/jquery.js"></script>
         <script src="../../../js/moment.js"></script>
         <script src="../../../js/ExtPay.js"></script>
-        <script src="autopriceroptions.js"></script>
+        <script src="ShopInventoryLoad.js"></script>
+        <script src="autopricer.js"></script>
     </body>
 </html>

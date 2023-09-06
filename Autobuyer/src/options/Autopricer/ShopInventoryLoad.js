@@ -19,8 +19,9 @@ startProcessButton.onclick = function(_) {
 }
 
 function confirmReset() {
-    if (confirm("Do you want to start the shop auto pricing process")) {
+    if (confirm("Do you want to start the shop auto pricing process?")) {
         StartAutoPricingProcess();
+        window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
     }
 }
 
