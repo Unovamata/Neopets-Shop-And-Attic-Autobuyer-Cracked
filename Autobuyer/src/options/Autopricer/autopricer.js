@@ -5,15 +5,47 @@ function setSHOP_INVENTORY(value) {
 var inventoryData = [];
 
 const table = document.getElementById("shop-inventory");
+var shopValueElement = document.getElementById("total-value");
+var shopValue = 0;
+
+// Create the <thead> element
+var thead = document.createElement("thead");
+var headers = ["Name", "Price", "Should be Priced?"];
+
+var shopItemsElement = document.getElementById("total-items");
+
+// Loop through the header text and create <th> elements
+/*for (var i = 0; i < headers.length; i++) {
+    var th = document.createElement("th");
+    
+    // Add a class to each <th> element
+    if (i === 0) {
+        th.className = "name-autopricer";
+    } else if (i === 1) {
+        th.className = "price-autopricer";
+    } else if (i === 2) {
+        th.className = "canprice-autopricer";
+    }
+    
+    // Set the header text
+    th.textContent = headers[i];
+    
+    // Append the <th> element to the <thead>
+    thead.appendChild(th);
+}*/
 
 function ReadInventoryData(){
+    //table.innerHTML = "";
+    shopValue = 0;
+    
+    //table.appendChild(thead);
+
     chrome.storage.local.get(['SHOP_INVENTORY'], function (result) {
         inventoryData = result.SHOP_INVENTORY;
     
         console.log(inventoryData);
     
         inventoryData.forEach( Item => {
-    
             var row = table.insertRow();
     
             var cellName = row.insertCell(0);
@@ -22,15 +54,16 @@ function ReadInventoryData(){
             var cellPrice = row.insertCell(1);
             var priceInput = document.createElement("input");
             priceInput.value = Item.Price;
-    
+            
+            shopValue += parseInt(Item.Price);
+            shopValueElement.innerHTML = `${shopValue} NP`;
+
             cellPrice.appendChild(priceInput);
     
             var cellShouldPrice = row.insertCell(2);
             var shouldPriceInput = document.createElement("input");
             shouldPriceInput.type = "checkbox";
             shouldPriceInput.checked = Item.IsPricing;
-    
-            cellShouldPrice.appendChild(shouldPriceInput);
             
             // Add an event listener to the checkbox for real-time updates
             shouldPriceInput.addEventListener("change", function () {
@@ -41,6 +74,8 @@ function ReadInventoryData(){
                 }
             });
 
+            cellShouldPrice.appendChild(shouldPriceInput);
+
             //console.log(Item.Name);
 
             // Add class to the row based on the checkbox value
@@ -48,12 +83,39 @@ function ReadInventoryData(){
                 row.classList.add("checked-row");
             }
         });
+
+        shopItemsElement.innerHTML = inventoryData.length;
     });
 
     table.classList.add("sortable")
 
     MakeSortableTable();
 }
+
+const checkAll = document.getElementById("check-true");
+checkAll.addEventListener('click', CheckAllCheckboxes);
+
+const uncheckAll = document.getElementById("check-false");
+uncheckAll.addEventListener('click', UncheckAllCheckboxes);
+
+function CheckAllCheckboxes(){
+    var checkboxes = table.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function (checkbox) {
+        checkbox.checked = true;
+        checkbox.closest("tr").classList.add("checked-row");
+    });
+}
+
+function UncheckAllCheckboxes(){
+    var checkboxes = table.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function (checkbox) {
+        checkbox.checked = false;
+        checkbox.closest("tr").classList.remove("checked-row");
+    });
+}
+
 
 function MakeSortableTable(){
     // Loop through all the table elements in the document

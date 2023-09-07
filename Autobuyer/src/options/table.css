@@ -54,6 +54,24 @@ table td {
     font-size: 20px;
 }
 
+/* Common properties for .button and .reset */
+.autobuyerButton {
+    width: 15%;
+    border-radius: 20px;
+    background: #2196F3;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-family: 'Cafeteria', sans-serif;
+    margin: 10px 10px; /* Add space to the top and bottom, and center horizontally */    
+    height: 40px;
+    font-size: 20px;
+}
+
 /* Properties specific to .reset */
 .reset {
     display: flex;
