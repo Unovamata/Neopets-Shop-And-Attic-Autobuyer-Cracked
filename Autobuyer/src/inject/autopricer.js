@@ -147,6 +147,7 @@ function GetRandomFloat(min, max) {
 
 //######################################################################################################################################
 
+
 function StartAutoPricing(value){
     if(value){
         LoadPageLinks();

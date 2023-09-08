@@ -77,6 +77,28 @@ textarea {
     color: #2196F3;
 }
 
+textarea {
+    width: 300px;
+}
+
+input {
+    width: 120px;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(19px);
+    -ms-transform: translateX(19px);
+    transform: translateX(19px);
+}
+
 .switch {
     position: relative;
     display: inline-block;
@@ -112,20 +134,6 @@ textarea {
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-}
-
-input:checked+.slider {
-    background-color: #2196F3;
-}
-
-input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked+.slider:before {
-    -webkit-transform: translateX(19px);
-    -ms-transform: translateX(19px);
-    transform: translateX(19px);
 }
 
 td .tooltiptext {

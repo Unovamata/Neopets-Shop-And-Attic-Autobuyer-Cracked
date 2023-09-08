@@ -117,6 +117,9 @@ function ReadInventoryData(){
             var cellPrice = row.insertCell(1);
             var priceInput = document.createElement("input");
             priceInput.value = Item.Price;
+            priceInput.type = "number";
+            priceInput.max = 999999;
+            priceInput.min = 0;
             
             shopValue += parseInt(Item.Price);
             shopValueElement.innerHTML = `${shopValue} NP`;
@@ -139,12 +142,27 @@ function ReadInventoryData(){
 
             cellShouldPrice.appendChild(shouldPriceInput);
 
-            //console.log(Item.Name);
-
             // Add class to the row based on the checkbox value
             if (Item.IsPricing) {
                 row.classList.add("checked-row");
             }
+
+            var cellJN = row.insertCell(3);
+
+            // Create the <a> element
+            var linkElement = document.createElement("a");
+            linkElement.href = `https://items.jellyneo.net/search/?name=${Item.Name}&name_type=3`;
+
+            // Create the <img> element
+            var imgElement = document.createElement("img");
+            imgElement.src = "../JN.png";
+            imgElement.alt = "Info Icon";
+
+            linkElement.appendChild(imgElement);
+
+            cellJN.appendChild(linkElement);
+
+            //console.log(Item.Name);
         });
 
         shopItemsElement.innerHTML = inventoryData.length;
@@ -154,6 +172,10 @@ function ReadInventoryData(){
 
     MakeSortableTable();
 }
+
+
+//######################################################################################################################################
+
 
 const checkAll = document.getElementById("check-true");
 checkAll.addEventListener('click', CheckAllCheckboxes);
@@ -205,3 +227,38 @@ function UpdateInventoryData() {
 
 // Updates the page's data every half a second when opened and needed;
 setInterval(UpdateInventoryData, 500);
+
+
+//######################################################################################################################################
+
+
+const startAutoPricingButton = document.getElementById("start");
+startAutoPricingButton.addEventListener('click', StartAutoPricer);
+
+var autoPricingList = [];
+
+function StartAutoPricer(){
+    var selectedRows = document.querySelectorAll(".checked-row");
+
+    var name, price;
+
+    selectedRows.forEach((row) => {
+        const nameCell = row.cells[0];
+        const priceCell = row.cells[1];
+        const priceInput = priceCell.querySelector('input[type=number]');
+
+        const name = nameCell.textContent;
+        const price = priceInput.value;
+
+        const item = new Item(name, price, true);
+        autoPricingList.push(item);
+    });
+
+    console.log(autoPricingList);
+}
+
+function Item(Name, Price, IsPricing){
+    this.Name = Name;
+    this.Price = Price;
+    this.IsPricing = IsPricing;
+}
