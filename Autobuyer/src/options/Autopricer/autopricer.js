@@ -75,6 +75,19 @@ function LoadInventoryFromStockPage() {
     }
 }
 
+function HideLoadInventoryButton(){
+    getSTART_AUTOPRICING_PROCESS(function (value) {
+        if(value){
+            loadInventoryButton.style.display = "none";
+        } else {
+            loadInventoryButton.style.display = "inline";
+        }
+    });
+}
+
+
+setInterval(HideLoadInventoryButton, 100);
+
 
 //######################################################################################################################################
 
@@ -181,10 +194,6 @@ function ReadInventoryData(){
 
         shopItemsElement.innerHTML = inventoryData.length;
     });
-
-    table.classList.add("sortable")
-
-    MakeSortableTable();
 }
 
 
@@ -215,18 +224,6 @@ function UncheckAllCheckboxes(){
     });
 }
 
-
-function MakeSortableTable(){
-    // Loop through all the table elements in the document
-    forEach(document.getElementsByTagName("table"), function(tableElement) {
-        // Find sortable elements and make them sortable;
-        if (tableElement.className.search(/\bsortable\b/) !== -1) {
-            sorttable.makeSortable(tableElement);
-            tableElement.classList.add("table");
-        }
-    });
-}
-
 ReadInventoryData();
 
 // Checks constantly if the inventory page needs to update;
@@ -251,6 +248,8 @@ startAutoPricingButton.addEventListener('click', StartAutoPricer);
 
 var autoPricingList = [];
 
+var swTab = null;
+
 function StartAutoPricer(){
     var selectedRows = document.querySelectorAll(".checked-row");
 
@@ -271,8 +270,30 @@ function StartAutoPricer(){
 
     setAUTOPRICER_INVENTORY(autoPricingList);
     setSTART_AUTOPRICING_PROCESS(true);
-    
-    //https://www.neopets.com/shops/wizard.phtml?string=Pretzel+Brush
+
+    // Function to create a new tab if swTab is null
+    function CreateNewTab() {
+        chrome.tabs.create({ url: 'https://example.com', active: false }, function (tab) {
+            swTab = tab;
+            console.log(tab);
+        });
+    }
+
+    // Check if swTab is null and create a new tab if necessary
+    if (swTab === null) {
+        CreateNewTab();
+    } else {
+        window.alert("NeoBuyer's+ AutoPricer is already running.");
+    }
+
+    // Listen for the tab removal event and set swTab to null when the tab is closed
+    chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
+        if (swTab && tabId === swTab.id) {
+            swTab = null;
+        }
+    });
+
+    //setSTART_AUTOPRICING_PROCESS(false);
 }
 
 function Item(Name, Price, IsPricing, Index){
@@ -281,3 +302,28 @@ function Item(Name, Price, IsPricing, Index){
     this.IsPricing = IsPricing;
     this.Index = Index;
 }
+
+
+//######################################################################################################################################
+
+
+const stockContainer = document.getElementById('shop-stock-container');
+const optionsContainer = document.getElementById('autopricer-options-container');
+
+const optionsButton = document.getElementById("options");
+optionsButton.addEventListener('click', ShowOptions);
+
+function ShowOptions(){
+    stockContainer.style.display = 'none';
+    optionsContainer.style.display = 'block';
+}
+
+const stockButton = document.getElementById("stock");
+stockButton.addEventListener('click', ShowShopStock);
+
+function ShowShopStock(){
+    optionsContainer.style.display = 'none';
+    stockContainer.style.display = 'block';
+}
+
+stockContainer.style.display = 'none';

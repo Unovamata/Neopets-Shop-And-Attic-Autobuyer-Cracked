@@ -40,6 +40,22 @@ function getSTART_INVENTORY_PROCESS(callback) {
     });
 }
 
+function setSTART_AUTOPRICING_PROCESS(value) {
+    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
+}
+
+function getSTART_AUTOPRICING_PROCESS(trueCallback, falseCallback) {
+    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
+        const value = result.START_AUTOPRICING_PROCESS;
+
+        if (value === true && typeof trueCallback === 'function') {
+            trueCallback();
+        } else if (value === false && typeof falseCallback === 'function') {
+            falseCallback();
+        }
+    });
+}
+
 //######################################################################################################################################
 
 
@@ -135,7 +151,7 @@ function GetRandomFloat(min, max) {
 //######################################################################################################################################
 
 
-function StartAutoPricing(value){
+function StartInventoryScraping(value){
     if(value){
         LoadPageLinks();
         ProcessAllPages();
@@ -143,6 +159,23 @@ function StartAutoPricing(value){
     }
 }
 
+//getSTART_INVENTORY_PROCESS(StartInventoryScraping);
 
-// Start processing data
-getSTART_INVENTORY_PROCESS(StartAutoPricing);
+// Usage example:
+getSTART_AUTOPRICING_PROCESS(
+    function() {
+        // This code will run if START_AUTOPRICING_PROCESS is true
+        console.log('START_AUTOPRICING_PROCESS is true');
+        window.alert("The AutoPricer is running, the Neobuyer's+ shop inventory will not be updated.\nWait for the AutoPricer to finish or cancel the process.");
+        // Add your code for the true case here
+        // For example, you can call getSTART_INVENTORY_PROCESS(StartInventoryScraping)
+    },
+    function() {
+        console.log('START_AUTOPRICING_PROCESS is false');
+
+        // A user can be inside the SW while also AutoPricing, this circumvents that issue;
+        if(window.location.href.includes("https://www.neopets.com/market.phtml?")){
+            getSTART_INVENTORY_PROCESS(StartInventoryScraping);
+        }
+    }
+);

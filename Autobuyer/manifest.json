@@ -54,7 +54,8 @@
 	{
         "matches": [
             "https://www.neopets.com/market.phtml?type=your",
-			"https://www.neopets.com/market.phtml?*"
+			"https://www.neopets.com/market.phtml?*",
+			"https://www.neopets.com/shops/wizard.phtml?*"
         ],
         "all_frames": true,
         "js": [
