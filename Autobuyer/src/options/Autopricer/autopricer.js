@@ -2,7 +2,68 @@ function setSHOP_INVENTORY(value) {
     chrome.storage.local.set({ SHOP_INVENTORY: value }, function () {});
 }
 
-var inventoryData = [];
+function setINVENTORY_UPDATED(value) {
+    chrome.storage.local.set({ INVENTORY_UPDATED: value }, function () {});
+}
+
+function getINVENTORY_UPDATED(callback) {
+    chrome.storage.local.get(['INVENTORY_UPDATED'], function (result) {
+        const value = result.INVENTORY_UPDATED;
+
+        if (typeof callback === 'function') {
+        callback(value);
+        }
+    });
+}
+
+function setSTART_AUTOPRICING_PROCESS(value) {
+    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
+}
+
+function getSTART_AUTOPRICING_PROCESS(callback) {
+    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
+        const value = result.START_AUTOPRICING_PROCESS;
+
+        if (typeof callback === 'function') {
+        callback(value);
+        }
+    });
+}
+
+function setSTART_INVENTORY_PROCESS(value) {
+    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
+}
+
+function getSTART_INVENTORY_PROCESS(callback) {
+    chrome.storage.local.get(['START_INVENTORY_PROCESS'], function (result) {
+        const value = result.START_INVENTORY_PROCESS;
+
+        if (typeof callback === 'function') {
+        callback(value);
+        }
+    });
+}
+
+
+//######################################################################################################################################
+
+
+var loadInventoryButton = document.getElementById("load");
+
+loadInventoryButton.onclick = function(_) {
+    LoadInventoryFromStockPage();
+}
+
+function LoadInventoryFromStockPage() {
+    if (confirm("Do you want to load your shop stock into NeoBuyer+ for AutoPricing?")) {
+        setSTART_INVENTORY_PROCESS(true);
+        window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
+    }
+}
+
+
+//######################################################################################################################################
+
 
 const table = document.getElementById("shop-inventory");
 var shopValueElement = document.getElementById("total-value");
@@ -33,6 +94,8 @@ var shopItemsElement = document.getElementById("total-items");
     // Append the <th> element to the <thead>
     thead.appendChild(th);
 }*/
+
+var inventoryData = [];
 
 function ReadInventoryData(){
     //table.innerHTML = "";
@@ -130,4 +193,15 @@ function MakeSortableTable(){
 
 ReadInventoryData();
 
-//setInterval(ReadInventoryData, 5000);
+// Checks constantly if the inventory page needs to update;
+function UpdateInventoryData() {
+    getINVENTORY_UPDATED(function (value) {
+        if (value === true) {
+            location.reload();
+            setINVENTORY_UPDATED(false);
+        }
+    });
+}
+
+// Updates the page's data every half a second when opened and needed;
+setInterval(UpdateInventoryData, 500);

@@ -26,13 +26,27 @@ function getINVENTORY_UPDATED(callback) {
     });
 }
 
-function setSTART_AUTOPRICING_PROCESS(value) {
+/*function setSTART_AUTOPRICING_PROCESS(value) {
     chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
 }
 
 function getSTART_AUTOPRICING_PROCESS(callback) {
     chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
         const value = result.START_AUTOPRICING_PROCESS;
+
+        if (typeof callback === 'function') {
+        callback(value);
+        }
+    });
+}*/
+
+function setSTART_INVENTORY_PROCESS(value) {
+    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
+}
+
+function getSTART_INVENTORY_PROCESS(callback) {
+    chrome.storage.local.get(['START_INVENTORY_PROCESS'], function (result) {
+        const value = result.START_INVENTORY_PROCESS;
 
         if (typeof callback === 'function') {
         callback(value);
@@ -109,19 +123,6 @@ async function ProcessAllPages() {
             window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
             setINVENTORY_UPDATED(true);
             //Sleep(sleepInShopMin, sleepInShopMin);
-
-
-            /*
-            // Declare a variable to hold the retrieved SHOP_INVENTORY value
-            let mySHOP_INVENTORY;
-
-            // Use the getSHOP_INVENTORY function to retrieve and assign the value
-            getSHOP_INVENTORY(function (value) {
-            mySHOP_INVENTORY = value;
-
-            console.log(mySHOP_INVENTORY);
-            });
-            */
         }
     }
 }
@@ -150,10 +151,10 @@ function StartAutoPricing(value){
     if(value){
         LoadPageLinks();
         ProcessAllPages();
-        setSTART_AUTOPRICING_PROCESS(false);
+        setSTART_INVENTORY_PROCESS(false);
     }
 }
 
 
 // Start processing data
-getSTART_AUTOPRICING_PROCESS(StartAutoPricing);
+getSTART_INVENTORY_PROCESS(StartAutoPricing);
