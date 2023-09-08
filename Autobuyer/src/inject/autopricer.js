@@ -26,20 +26,6 @@ function getINVENTORY_UPDATED(callback) {
     });
 }
 
-/*function setSTART_AUTOPRICING_PROCESS(value) {
-    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
-}
-
-function getSTART_AUTOPRICING_PROCESS(callback) {
-    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
-        const value = result.START_AUTOPRICING_PROCESS;
-
-        if (typeof callback === 'function') {
-        callback(value);
-        }
-    });
-}*/
-
 function setSTART_INVENTORY_PROCESS(value) {
     chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
 }
@@ -57,10 +43,11 @@ function getSTART_INVENTORY_PROCESS(callback) {
 //######################################################################################################################################
 
 
-function Item(Name, Price, IsPricing){
+function Item(Name, Price, IsPricing, Index){
     this.Name = Name;
     this.Price = Price;
     this.IsPricing = IsPricing;
+    this.Index = Index;
 }
 
 //######################################################################################################################################

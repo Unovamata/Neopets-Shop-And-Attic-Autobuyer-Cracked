@@ -16,13 +16,13 @@ function getINVENTORY_UPDATED(callback) {
     });
 }
 
-function setSTART_AUTOPRICING_PROCESS(value) {
-    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
+function setSTART_INVENTORY_PROCESS(value) {
+    chrome.storage.local.set({ START_INVENTORY_PROCESS: value }, function () {});
 }
 
-function getSTART_AUTOPRICING_PROCESS(callback) {
-    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
-        const value = result.START_AUTOPRICING_PROCESS;
+function getSTART_INVENTORY_PROCESS(callback) {
+    chrome.storage.local.get(['START_INVENTORY_PROCESS'], function (result) {
+        const value = result.START_INVENTORY_PROCESS;
 
         if (typeof callback === 'function') {
         callback(value);
@@ -30,13 +30,27 @@ function getSTART_AUTOPRICING_PROCESS(callback) {
     });
 }
 
-function setSTART_INVENTORY_PROCESS(value) {
+function setAUTOPRICER_INVENTORY(value) {
+    chrome.storage.local.set({ AUTOPRICER_INVENTORY: value }, function () {});
+}
+
+function getAUTOPRICER_INVENTORY(callback) {
+    chrome.storage.local.get(['AUTOPRICER_INVENTORY'], function (result) {
+        const value = result.AUTOPRICER_INVENTORY;
+
+        if (typeof callback === 'function') {
+        callback(value);
+        }
+    });
+}
+
+function setSTART_AUTOPRICING_PROCESS(value) {
     chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
 }
 
-function getSTART_INVENTORY_PROCESS(callback) {
-    chrome.storage.local.get(['START_INVENTORY_PROCESS'], function (result) {
-        const value = result.START_INVENTORY_PROCESS;
+function getSTART_AUTOPRICING_PROCESS(callback) {
+    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
+        const value = result.START_AUTOPRICING_PROCESS;
 
         if (typeof callback === 'function') {
         callback(value);
@@ -249,16 +263,21 @@ function StartAutoPricer(){
 
         const name = nameCell.textContent;
         const price = priceInput.value;
+        const index = row.rowIndex;
 
-        const item = new Item(name, price, true);
+        const item = new Item(name, price, true, index);
         autoPricingList.push(item);
     });
 
-    console.log(autoPricingList);
+    setAUTOPRICER_INVENTORY(autoPricingList);
+    setSTART_AUTOPRICING_PROCESS(true);
+    
+    //https://www.neopets.com/shops/wizard.phtml?string=Pretzel+Brush
 }
 
-function Item(Name, Price, IsPricing){
+function Item(Name, Price, IsPricing, Index){
     this.Name = Name;
     this.Price = Price;
     this.IsPricing = IsPricing;
+    this.Index = Index;
 }

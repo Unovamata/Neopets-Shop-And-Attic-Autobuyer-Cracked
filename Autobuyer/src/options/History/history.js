@@ -588,7 +588,12 @@ function GetTimeFromEntry(dateTime){
 }
 
 // Calculate profit from string;
-function CalculateEstimatedProfit(profit){
+function CalculateEstimatedProfit(profit) {
+    // Check if profit is a valid string
+    if (profit === undefined || profit === null) {
+        return 0; // Return a default value or handle the error as needed
+    }
+
     const numericProfit = Number(profit.replaceAll(",", ""));
     return isNaN(numericProfit) ? 0 : numericProfit;
 }
@@ -607,6 +612,13 @@ function FormatDate(dateString) {
 }
 
 function ParseNumericString(inputString) {
+    console.log(inputString);
+
+    // Check if inputString is valid
+    if (inputString === undefined) {
+        return 0; // Return a default value or handle the error as needed
+    }
+
     const numbersOnly = inputString.replace(",", "");
     const number = isNaN(Number(numbersOnly)) ? 0 : Number(numbersOnly);
     return number;
