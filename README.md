@@ -37,6 +37,7 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 
 ## New Features
 
+- Cracked the multiple paywalls the extension had.
 - Cleaner interfaces with better navigation.
 - [Neon](https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm "Neon") extension integration for quicker SW searches.
 
