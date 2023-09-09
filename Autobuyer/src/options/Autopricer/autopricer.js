@@ -2,6 +2,16 @@ function setSHOP_INVENTORY(value) {
     chrome.storage.local.set({ SHOP_INVENTORY: value }, function () {});
 }
 
+function getSHOP_INVENTORY(callback) {
+    chrome.storage.local.get(['SHOP_INVENTORY'], function (result) {
+        const value = result.SHOP_INVENTORY;
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 function setINVENTORY_UPDATED(value) {
     chrome.storage.local.set({ INVENTORY_UPDATED: value }, function () {});
 }
@@ -122,11 +132,7 @@ var inventoryData = [];
 function ReadInventoryData(){
     shopValue = 0;
 
-    chrome.storage.local.get(['SHOP_INVENTORY'], function (result) {
-        inventoryData = result.SHOP_INVENTORY;
-    
-        console.log(inventoryData);
-    
+    getSHOP_INVENTORY(function (inventoryData){    
         inventoryData.forEach( Item => {
             var row = table.insertRow();
     
@@ -188,6 +194,8 @@ function ReadInventoryData(){
     });
 }
 
+ReadInventoryData();
+
 
 //######################################################################################################################################
 
@@ -215,8 +223,6 @@ function UncheckAllCheckboxes(){
         checkbox.closest("tr").classList.remove("checked-row");
     });
 }
-
-ReadInventoryData();
 
 // Checks constantly if the inventory page needs to update;
 function UpdateInventoryData() {

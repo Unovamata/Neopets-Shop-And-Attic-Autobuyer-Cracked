@@ -169,8 +169,8 @@ var sleepWhileNavigatingToSWMax = 5;
 var sleepInSWPageMin = 2;
 var sleepInSWPageMax = 5;
 
-var sleepThroughSearchesMin = 3;
-var sleepThroughSearchesMax = 6;
+var sleepThroughSearchesMin = 2;
+var sleepThroughSearchesMax = 4;
 
 var sleepNewSearchMin = 1;
 var sleepNewSearchMax = 3;
