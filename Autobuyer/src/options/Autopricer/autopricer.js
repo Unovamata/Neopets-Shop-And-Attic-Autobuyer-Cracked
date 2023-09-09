@@ -58,6 +58,21 @@ function getSTART_AUTOPRICING_PROCESS(callback) {
     });
 }
 
+function setCURRENT_PRICING_INDEX(value) {
+    chrome.storage.local.set({ CURRENT_PRICING_INDEX: value }, function () {});
+}
+
+
+//######################################################################################################################################
+
+
+function Item(Name, Price, IsPricing, Index){
+    this.Name = Name;
+    this.Price = Price;
+    this.IsPricing = IsPricing;
+    this.Index = Index;
+}
+
 
 //######################################################################################################################################
 
@@ -102,33 +117,10 @@ var headers = ["Name", "Price", "Should be Priced?"];
 
 var shopItemsElement = document.getElementById("total-items");
 
-// Loop through the header text and create <th> elements
-/*for (var i = 0; i < headers.length; i++) {
-    var th = document.createElement("th");
-    
-    // Add a class to each <th> element
-    if (i === 0) {
-        th.className = "name-autopricer";
-    } else if (i === 1) {
-        th.className = "price-autopricer";
-    } else if (i === 2) {
-        th.className = "canprice-autopricer";
-    }
-    
-    // Set the header text
-    th.textContent = headers[i];
-    
-    // Append the <th> element to the <thead>
-    thead.appendChild(th);
-}*/
-
 var inventoryData = [];
 
 function ReadInventoryData(){
-    //table.innerHTML = "";
     shopValue = 0;
-    
-    //table.appendChild(thead);
 
     chrome.storage.local.get(['SHOP_INVENTORY'], function (result) {
         inventoryData = result.SHOP_INVENTORY;
@@ -273,7 +265,7 @@ function StartAutoPricer(){
 
     // Function to create a new tab if swTab is null
     function CreateNewTab() {
-        chrome.tabs.create({ url: 'https://example.com', active: false }, function (tab) {
+        chrome.tabs.create({ url: 'https://www.neopets.com/shops/wizard.phtml', active: false }, function (tab) {
             swTab = tab;
             console.log(tab);
         });
@@ -296,12 +288,16 @@ function StartAutoPricer(){
     //setSTART_AUTOPRICING_PROCESS(false);
 }
 
-function Item(Name, Price, IsPricing, Index){
-    this.Name = Name;
-    this.Price = Price;
-    this.IsPricing = IsPricing;
-    this.Index = Index;
+function CancelAutoPricer(){
+    setSTART_AUTOPRICING_PROCESS(false);
+    setAUTOPRICER_INVENTORY([]);
+    setSHOP_INVENTORY([]);
+    setINVENTORY_UPDATED(true);
+    setCURRENT_PRICING_INDEX(0);
 }
+
+const cancelAutoPricingButton = document.getElementById("cancel");
+cancelAutoPricingButton.addEventListener('click', CancelAutoPricer);
 
 
 //######################################################################################################################################

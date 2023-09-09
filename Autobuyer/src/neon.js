@@ -81,7 +81,7 @@ function getShopIndex(shopDom) {
             subShopIndex = subShopIndex % 13;
         } else if (subShopIndex == 95) {
             //underscore
-            console.log("underscore___");
+            //console.log("underscore___");
             subShopIndex = 10;
         }
     }
@@ -145,7 +145,7 @@ var callback = function(mutationsList) {
             if (newSearchItem === searchItem) {
                 //pass
             } else {
-                console.log(newSearchItem);
+                //console.log(newSearchItem);
                 searchItem = newSearchItem;
                 subShops = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 shops.length = 0;
@@ -161,7 +161,7 @@ var callback = function(mutationsList) {
 
         // new subShop
         if (subShops[subShopIndex] == 0) {
-            console.log("New Shop Section");
+            //console.log("New Shop Section");
             subShops[subShopIndex] = 1;
             sectionsSearched++;
 
@@ -202,7 +202,7 @@ var callback = function(mutationsList) {
 
         //Case 1: no users selling item in this shop section:
         if (text == noResults) {
-            console.log("No results");
+            //console.log("No results");
             //print out results found so far anyway
             document.querySelector('.wizard-results__2020')
                 .insertBefore(lastResultsGrid, document.querySelector('.wizard-results__2020')
@@ -212,14 +212,14 @@ var callback = function(mutationsList) {
 
         //Case 2: shop wizard ban
         else if (text.includes(shopBan)) {
-            console.log("Shop Wizard Ban");
+            //console.log("Shop Wizard Ban");
             document.querySelector('.wizard-results__2020')
                 .appendChild(lastResultsGrid);
         }
 
         //Case 3: Item doesn't exist
         else {
-            console.log(text);
+            //console.log(text);
             //Do nothing probably
         }
     }
