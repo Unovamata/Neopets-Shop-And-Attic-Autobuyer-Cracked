@@ -160,8 +160,8 @@ var sleepInShopMin = 10, sleepInShopMin = 60;
 var sleepMin = 3;
 var sleepMax = 8;
 
-var typingSleepMin = 0.03;
-var typingSleepMax = 0.15;
+var typingSleepMin = 0.01;
+var typingSleepMax = 0.1;
 
 var sleepWhileNavigatingToSWMin = 2;
 var sleepWhileNavigatingToSWMax = 5;
@@ -169,8 +169,8 @@ var sleepWhileNavigatingToSWMax = 5;
 var sleepInSWPageMin = 2;
 var sleepInSWPageMax = 5;
 
-var sleepThroughSearchesMin = 1;
-var sleepThroughSearchesMax = 3;
+var sleepThroughSearchesMin = 3;
+var sleepThroughSearchesMax = 6;
 
 var sleepNewSearchMin = 1;
 var sleepNewSearchMax = 3;
@@ -207,8 +207,8 @@ function StartInventoryScraping(value){
 }
 
 var autoPricingList = [];
-var currentResubmitPresses = 1, resubmitPresses = 1;
-var isDeductionFixed = false, isUsingPercentages = false, isRandomPercentage = true;
+var resubmitPresses = 3;
+var isRandomPercentage = true;
 var percentageDeduction = 5;
 var percentageDeductionMin = 3;
 var percentageDeductionMax = 8;
@@ -229,20 +229,6 @@ function getCURRENT_PRICING_INDEX(callback) {
         }
     });
 }
-
-function checkForErrorsAndRefresh() {
-    if (console && console.error) {
-        const origError = console.error; // Store the original console.error function
-
-        console.error = function () {
-            origError.apply(console, arguments); // Call the original console.error
-            location.reload(); // Refresh the page when an error is detected
-        };
-    }
-}
-
-// Call the error checking function at regular intervals
-setInterval(checkForErrorsAndRefresh, 100); // Adjust the interval as needed
 
 getSTART_AUTOPRICING_PROCESS(
     function() {
@@ -275,33 +261,24 @@ getSTART_AUTOPRICING_PROCESS(
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
                     console.log("Search button clicked!");
 
-                    while(currentResubmitPresses <= resubmitPresses){
+                    for(var i = 0; i < resubmitPresses; i++){
                         await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
-                        console.log("Pressed " + currentResubmitPresses + " Times");
+                        console.log("Resubmitted " + i + " Times");
 
-                        WaitForElement("resubmitWizard", true).then((resubmitButton) => {
+                        WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
                             resubmitButton.click();
                         });
-
-                        currentResubmitPresses++;
                     }
 
                     WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
                         var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
                         var deductedPrice = 0;
 
-                        if(isUsingPercentages){
-                            if(isRandomPercentage) {
-                                deductedPrice = bestPrice * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
-                            } else {
-                                deductedPrice = bestPrice * (1 - (percentageDeduction * 0.01));
-                            }
+                        if(isRandomPercentage) {
+                            console.log(bestPrice);
+                            deductedPrice = bestPrice * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
                         } else {
-                            if(isDeductionFixed){
-                                deductedPrice = bestPrice - fixedDeduction;
-                            } else {
-                                deductedPrice = bestPrice - GetRandomInt(priceDeductionMin, priceDeductionMax);
-                            }
+                            deductedPrice = bestPrice * (1 - (percentageDeduction * 0.01));
                         }
 
                         autoPricingList[currentPricingIndex - 1].Price = Math.floor(deductedPrice);
