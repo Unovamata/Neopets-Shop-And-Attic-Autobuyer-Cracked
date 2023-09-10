@@ -76,11 +76,12 @@ function setCURRENT_PRICING_INDEX(value) {
 //######################################################################################################################################
 
 
-function Item(Name, Price, IsPricing, Index){
+function Item(Name, Price, IsPricing, Index, Stock){
     this.Name = Name;
     this.Price = Price;
     this.IsPricing = IsPricing;
     this.Index = Index;
+    this.Stock = Stock
 }
 
 
@@ -126,8 +127,10 @@ var thead = document.createElement("thead");
 var headers = ["Name", "Price", "Should be Priced?"];
 
 var shopItemsElement = document.getElementById("total-items");
+var stockCounter = 0;
 
 var inventoryData = [];
+
 
 function ReadInventoryData(){
     shopValue = 0;
@@ -138,20 +141,24 @@ function ReadInventoryData(){
     
             var cellName = row.insertCell(0);
             cellName.innerHTML = Item.Name;
+
+            var cellStock = row.insertCell(1);
+            cellStock.innerHTML = Item.Stock;
+            stockCounter += Item.Stock;
     
-            var cellPrice = row.insertCell(1);
+            var cellPrice = row.insertCell(2);
             var priceInput = document.createElement("input");
             priceInput.value = Item.Price;
             priceInput.type = "number";
             priceInput.max = 999999;
             priceInput.min = 0;
             
-            shopValue += parseInt(Item.Price);
+            shopValue += parseInt(Item.Price * Item.Stock);
             shopValueElement.innerHTML = `${shopValue} NP`;
 
             cellPrice.appendChild(priceInput);
     
-            var cellShouldPrice = row.insertCell(2);
+            var cellShouldPrice = row.insertCell(3);
             var shouldPriceInput = document.createElement("input");
             shouldPriceInput.type = "checkbox";
             shouldPriceInput.checked = Item.IsPricing;
@@ -172,7 +179,7 @@ function ReadInventoryData(){
                 row.classList.add("checked-row");
             }
 
-            var cellJN = row.insertCell(3);
+            var cellJN = row.insertCell(4);
 
             // Create the <a> element
             var linkElement = document.createElement("a");
@@ -190,7 +197,7 @@ function ReadInventoryData(){
             //console.log(Item.Name);
         });
 
-        shopItemsElement.innerHTML = inventoryData.length;
+        shopItemsElement.innerHTML += stockCounter;
     });
 }
 
@@ -328,4 +335,4 @@ function ShowShopStock(){
     stockContainer.style.display = 'block';
 }
 
-stockContainer.style.display = 'none';
+optionsContainer.style.display = 'none';

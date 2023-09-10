@@ -82,11 +82,12 @@ function getAUTOPRICER_INVENTORY(callback) {
 //######################################################################################################################################
 
 
-function Item(Name, Price, IsPricing, Index){
+function Item(Name, Price, IsPricing, Index, Stock){
     this.Name = Name;
     this.Price = Price;
     this.IsPricing = IsPricing;
     this.Index = Index;
+    this.Stock = Stock
 }
 
 //######################################################################################################################################
@@ -119,7 +120,7 @@ async function ProcessPageData(pageIndex) {
     const rows = table.querySelectorAll('tr');
 
     //Saving all the data in its respective array;
-    rows.forEach((row) => {
+    rows.forEach((row, rowIndex) => {
         const nameRow = row.querySelector('td:first-child');
         const textContent = nameRow.textContent.trim();
 
@@ -134,10 +135,15 @@ async function ProcessPageData(pageIndex) {
         const isVetoWord = vetoWords.includes(textContent);
 
         if (!isVetoWord) {
-            const item = new Item(textContent, priceContent, true);
+            const stockCell = row.querySelector('td:nth-child(3)').querySelector("b");
+            const inStock = parseInt(stockCell.textContent);
+
+            const item = new Item(textContent, priceContent, true, rowIndex, inStock);
             rowsItemNames.push(item);
         }
     });
+
+    console.log(rowsItemNames);
 }
   
 async function ProcessAllPages() {
