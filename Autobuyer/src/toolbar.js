@@ -49,7 +49,7 @@ function injectToolbar() {
 
             <a href="${atticUrl}">
                 <img  class = "toolbar-icon" src="${atticIconUrl}" alt="Info Icon"> 
-            Attic </a>
+            AutoAttic </a>
 
             <a href="${autopricerUrl}">
                 <img  class = "toolbar-icon" src="${npIconUrl}" alt="Info Icon"> 

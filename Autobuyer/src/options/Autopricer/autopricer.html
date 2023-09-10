@@ -8,15 +8,13 @@
 
     <body>
         <div class="center">
-            <div class="enter-info">NeoBuyer+ Options</div>
+            <div class="enter-info">NeoBuyer+ AutoPricer</div>
             <div class="category-info">Shop Auto Pricer Settings
-                
-                <div class="autosaved">
-                    <span class="sub">To view helpful tooltips, simply hover over the options!</span><span id="total-profit"></span><br>
-                </div><br>
-
+                <br><span class="sub autosaved">To view helpful tooltips, simply hover over the options!</span><br>
+                <br>
                 <div class="category-info">Status: <span id="status-tag">Inactive</span>
                     <div class="autosaved">
+                        <span id="total-profit"></span>
                         <span class="sub">Total shop value: </span><span id="total-value"></span><br>
                         <span class="sub">Items in shop: </span><span id="total-items"></span>
                     </div>
@@ -30,10 +28,14 @@
                 <div id="shop-stock-container">
                     <button id="load" class="autobuyerButton">Load Shop Inventory</button>
                     <button id="start" class="autobuyerButton">Start AutoPricing</button>
-                    <button id="cancel" class="autobuyerButton">Cancel AutoPricer</button><br>
-                    <button id="check-true" class="autobuyerButton">Check All Items</button>
-                    <button id="check-false" class="autobuyerButton">Uncheck All Items</button>
-                    <button id="check-false" class="autobuyerButton">Restart Pricing Counter</button>
+                    <button id="cancel" class="autobuyerButton">Cancel AutoPricer</button>
+                    <button id="restart-counter" class="autobuyerButton">Restart Pricing Counter</button><br>
+                    <button id="check-all" class="autobuyerButton">Check All Items</button>
+                    <button id="uncheck-all" class="autobuyerButton">Uncheck All Items</button>
+                    <button id="check-unpriced" class="autobuyerButton">Check Unpriced Items</button>
+                    <button id="uncheck-unpriced" class="autobuyerButton">Uncheck Unpriced Items</button><br>
+                    <button id="check-priced" class="autobuyerButton">Check Priced Items</button>
+                    <button id="uncheck-priced" class="autobuyerButton">Uncheck Priced Items</button>
 
                     <div class="subcategory-info">Shop Inventory</div>
 

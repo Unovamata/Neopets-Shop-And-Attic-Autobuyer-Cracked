@@ -31,7 +31,7 @@ function getINVENTORY_UPDATED(callback) {
 }
 
 function setSTART_INVENTORY_PROCESS(value) {
-    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
+    chrome.storage.local.set({ START_INVENTORY_PROCESS: value }, function () {});
 }
 
 function getSTART_INVENTORY_PROCESS(callback) {
@@ -82,13 +82,15 @@ function getAUTOPRICER_INVENTORY(callback) {
 //######################################################################################################################################
 
 
-function Item(Name, Price, IsPricing, Index, Stock){
+function Item(Name, Price, IsPricing, Index, ListIndex, Stock){
     this.Name = Name;
     this.Price = Price;
     this.IsPricing = IsPricing;
     this.Index = Index;
+    this.ListIndex = ListIndex;
     this.Stock = Stock
 }
+
 
 //######################################################################################################################################
 
@@ -105,6 +107,7 @@ function LoadPageLinks(){
 }
 
 var currentPage = 1;
+var currentIndex = 0;
 var rowsItemNames = [];
 
 async function ProcessPageData(pageIndex) {
@@ -138,7 +141,8 @@ async function ProcessPageData(pageIndex) {
             const stockCell = row.querySelector('td:nth-child(3)').querySelector("b");
             const inStock = parseInt(stockCell.textContent);
 
-            const item = new Item(textContent, priceContent, true, rowIndex, inStock);
+            const item = new Item(textContent, priceContent, true, rowIndex, currentIndex, inStock);
+            currentIndex++;
             rowsItemNames.push(item);
         }
     });
@@ -203,14 +207,6 @@ function Clamp(value, min, max){
 
 //######################################################################################################################################
 
-
-function StartInventoryScraping(value){
-    if(value){
-        LoadPageLinks();
-        ProcessAllPages();
-        setSTART_INVENTORY_PROCESS(false);
-    }
-}
 
 var autoPricingList = [];
 var resubmitPresses = 3;
@@ -309,14 +305,24 @@ getSTART_AUTOPRICING_PROCESS(
         }
     },
     function() {
-        console.log('START_AUTOPRICING_PROCESS is false');
+        console.log('START_AUTOPRICING_PROCESS is false ');
 
         // A user can be inside the SW while also AutoPricing, this circumvents that issue;
         if(window.location.href.includes("https://www.neopets.com/market.phtml?")){
-            getSTART_INVENTORY_PROCESS(StartInventoryScraping);
+            getSTART_INVENTORY_PROCESS(function (canScrapeInventory) {
+                StartInventoryScraping(canScrapeInventory);
+            });
         }
     }
 );
+
+function StartInventoryScraping(value){
+    if(value){
+        LoadPageLinks();
+        ProcessAllPages();
+        setSTART_INVENTORY_PROCESS(false);
+    }
+}
 
 async function TypeLetterByLetter(inputElement, text){
     for (var i = 0; i < text.length; i++) {
