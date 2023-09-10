@@ -142,7 +142,6 @@ var stockCounter = 0;
 
 var inventoryData = [];
 
-
 function ReadInventoryData(){
     shopValue = 0;
 
@@ -163,6 +162,11 @@ function ReadInventoryData(){
             priceInput.type = "number";
             priceInput.max = 999999;
             priceInput.min = 0;
+            
+            priceInput.addEventListener('change', function () {
+                Item.Price = parseInt(priceInput.value);
+                setSHOP_INVENTORY(inventoryData);
+            });
             
             shopValue += parseInt(Item.Price * Item.Stock);
             shopValueElement.innerHTML = `${shopValue} NP`;
