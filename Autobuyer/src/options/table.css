@@ -67,7 +67,7 @@ table td {
     justify-content: center;
     border: none;
     font-family: 'Cafeteria', sans-serif;
-    margin: 10px 10px; /* Add space to the top and bottom, and center horizontally */    
+    margin: 0px 10px 30px; /* Add space to the top and bottom, and center horizontally */    
     height: 40px;
     font-size: 100%;
 }
