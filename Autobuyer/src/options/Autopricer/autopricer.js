@@ -149,14 +149,17 @@ function ReadInventoryData(){
         inventoryData.forEach( Item => {
             var row = table.insertRow();
     
-            var cellName = row.insertCell(0);
+            var indexRow = row.insertCell(0);
+            indexRow.innerHTML = Item.ListIndex + 1;
+
+            var cellName = row.insertCell(1);
             cellName.innerHTML = Item.Name;
 
-            var cellStock = row.insertCell(1);
+            var cellStock = row.insertCell(2);
             cellStock.innerHTML = Item.Stock;
             stockCounter += Item.Stock;
     
-            var cellPrice = row.insertCell(2);
+            var cellPrice = row.insertCell(3);
             var priceInput = document.createElement("input");
             priceInput.value = Item.Price;
             priceInput.type = "number";
@@ -165,6 +168,12 @@ function ReadInventoryData(){
             
             priceInput.addEventListener('change', function () {
                 Item.Price = parseInt(priceInput.value);
+
+                if(Item.Price < 0 || Item.Price > 999999){
+                    Item.Price = 0;
+                    priceInput.value = 0;
+                }
+
                 setSHOP_INVENTORY(inventoryData);
             });
             
@@ -173,7 +182,7 @@ function ReadInventoryData(){
 
             cellPrice.appendChild(priceInput);
     
-            var cellShouldPrice = row.insertCell(3);
+            var cellShouldPrice = row.insertCell(4);
             var shouldPriceInput = document.createElement("input");
             shouldPriceInput.type = "checkbox";
             shouldPriceInput.checked = Item.IsPricing;
@@ -197,7 +206,7 @@ function ReadInventoryData(){
                 row.classList.add("checked-row");
             }
 
-            var cellJN = row.insertCell(4);
+            var cellJN = row.insertCell(5);
 
             // Create the <a> element
             var linkElement = document.createElement("a");
@@ -226,44 +235,86 @@ ReadInventoryData();
 
 
 const checkAll = document.getElementById("check-all");
+checkAll.addEventListener('click', () => UpdateAllCheckboxes(true));
+
 const uncheckAll = document.getElementById("uncheck-all");
-const checkUnpriced = document.getElementById("check-unpriced");
-const uncheckUnpriced = document.getElementById("uncheck-unpriced");
-const checkPriced = document.getElementById("check-priced");
-const uncheckPriced = document.getElementById("uncheck-priced");
+uncheckAll.addEventListener('click', () => UpdateAllCheckboxes(false));
 
-checkAll.addEventListener('click', () => handleCheckboxOperation(true));
-uncheckAll.addEventListener('click', () => handleCheckboxOperation(false));
-checkUnpriced.addEventListener('click', () => handleCheckboxOperation(true, true, 0));
-uncheckUnpriced.addEventListener('click', () => handleCheckboxOperation(false, true, 0));
-checkPriced.addEventListener('click', () => handleCheckboxOperation(true, true, 0, true));
-uncheckPriced.addEventListener('click', () => handleCheckboxOperation(false, true, 0, true));
-
-function handleCheckboxOperation(checked, checkInputValue = false, valueToCheck = 0, inverse = false) {
-    const checkboxes = table.querySelectorAll("input[type='checkbox']");
+function UpdateAllCheckboxes(checked) {
+    const checkboxes = table.querySelectorAll('input[type="checkbox"]');
+    const isChecked = checked ? "checked" : "";
 
     checkboxes.forEach(function (checkbox) {
-        const row = checkbox.closest("tr");
-        const input = row.querySelector('input[type="number"]');
-        const inputValue = input ? parseInt(input.value) : null;
-        const shouldCheck = (checkInputValue && inputValue === valueToCheck) || (!checkInputValue && !inputValue);
-
-        if ((inverse && !shouldCheck) || (!inverse && shouldCheck)) {
-            checkbox.checked = checked;
-            UpdateShouldPriceCheck(checkbox.checked);
-            row.classList.toggle("checked-row", checked);
-        }
+        checkbox.checked = checked;
+        checkbox.closest("tr").classList.toggle("checked-row", checked);
     });
-}
 
-function UpdateShouldPriceCheck(value) {
     getSHOP_INVENTORY(function (inventoryData) {
-        inventoryData.forEach(Item => {
-            Item.IsPricing = value;
+        inventoryData.forEach(function (Item) {
+            Item.IsPricing = checked;
         });
+
         setSHOP_INVENTORY(inventoryData);
     });
 }
+
+
+var tempList = [];
+
+const checkUnpriced = document.getElementById("check-unpriced");
+checkUnpriced.addEventListener('click', () => UpdateAllUnpricedCheckboxes(true));
+
+const uncheckUnpriced = document.getElementById("uncheck-unpriced");
+uncheckUnpriced.addEventListener('click', () => UpdateAllUnpricedCheckboxes(false));
+
+function UpdateAllUnpricedCheckboxes(value, instance = 0){
+    var rows = table.querySelectorAll('tr');
+
+    getSHOP_INVENTORY(function (inventoryData) {
+        tempList = inventoryData;
+        
+        rows.forEach( async function (row){
+            var checkbox = row.querySelector('input[type="checkbox"]');
+            if(checkbox == null) return;
+
+            var input = parseInt(row.querySelector('input[type="number"]').value);
+
+            switch(instance){
+                case 0:
+                    if(input === 0){
+                        if(value) row.classList.add("checked-row");
+                        else row.classList.remove("checked-row");
+        
+                        checkbox.checked = value;
+                    }
+                break;
+
+                default:
+                    if(input !== 0){
+                        if(value) row.classList.add("checked-row");
+                        else row.classList.remove("checked-row");
+        
+                        checkbox.checked = value;
+                    }
+                break;
+            }
+            
+
+            var index = parseInt(row.querySelector("td:first-child").textContent) - 1;
+
+            tempList[index].IsPricing = checkbox.checked;
+
+            setSHOP_INVENTORY(tempList);
+        });
+    });
+}
+
+const checkPriced = document.getElementById("check-priced");
+checkPriced.addEventListener('click', () => UpdateAllUnpricedCheckboxes(true, 1));
+
+const uncheckPriced = document.getElementById("uncheck-priced");
+uncheckPriced.addEventListener('click', () => UpdateAllUnpricedCheckboxes(false, 1));
+
 
 // Checks constantly if the inventory page needs to update;
 function UpdateInventoryData() {
@@ -292,19 +343,20 @@ var swTab = null;
 
 function StartAutoPricer(){
     var selectedRows = document.querySelectorAll(".checked-row");
-
-    var name, price;
+    autoPricingList = [];
 
     selectedRows.forEach((row) => {
         const nameCell = row.cells[0];
-        const priceCell = row.cells[1];
+        const priceCell = row.cells[3];
         const priceInput = priceCell.querySelector('input[type=number]');
-
+        
         const name = nameCell.textContent;
-        const price = priceInput.value;
+        const price = parseInt(priceInput.value);
         const index = row.rowIndex;
 
-        const item = new Item(name, price, true, index);
+        
+        //Item(Name, Price, IsPricing, Index, ListIndex, Stock)
+        const item = new Item(name, price, true, index, 0, 1);
         autoPricingList.push(item);
     });
 

@@ -146,8 +146,6 @@ async function ProcessPageData(pageIndex) {
             rowsItemNames.push(item);
         }
     });
-
-    console.log(rowsItemNames);
 }
   
 async function ProcessAllPages() {
