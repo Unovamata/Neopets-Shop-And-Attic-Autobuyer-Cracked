@@ -25,7 +25,7 @@ function getINVENTORY_UPDATED(callback) {
         const value = result.INVENTORY_UPDATED;
 
         if (typeof callback === 'function') {
-        callback(value);
+            callback(value);
         }
     });
 }
@@ -39,7 +39,7 @@ function getSTART_INVENTORY_PROCESS(callback) {
         const value = result.START_INVENTORY_PROCESS;
 
         if (typeof callback === 'function') {
-        callback(value);
+            callback(value);
         }
     });
 }
@@ -57,7 +57,7 @@ function getAUTOPRICER_INVENTORY(callback) {
         const value = result.AUTOPRICER_INVENTORY;
 
         if (typeof callback === 'function') {
-        callback(value);
+            callback(value);
         }
     });
 }
@@ -80,9 +80,27 @@ function setCURRENT_PRICING_INDEX(value) {
     chrome.storage.local.set({ CURRENT_PRICING_INDEX: value }, function () {});
 }
 
+function setSUBMIT_PRICES_PROCESS(value) {
+    chrome.storage.local.set({ SUBMIT_PRICES_PROCESS: value }, function () {});
+}
+
+function getSUBMIT_PRICES_PROCESS(callback) {
+    chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
+        const value = result.SUBMIT_PRICES_PROCESS;
+
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setSUBMIT_PRICES_PROCESS(false);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 
 //######################################################################################################################################
-
 
 
 function Item(Name, Price, IsPricing, Index, ListIndex, Stock){
@@ -93,7 +111,6 @@ function Item(Name, Price, IsPricing, Index, ListIndex, Stock){
     this.ListIndex = ListIndex;
     this.Stock = Stock
 }
-
 
 
 //######################################################################################################################################
@@ -394,6 +411,7 @@ function CancelAutoPricer(){
     setSHOP_INVENTORY([]);
     setINVENTORY_UPDATED(true);
     setCURRENT_PRICING_INDEX(0);
+    setSUBMIT_PRICES_PROCESS(false);
 }
 
 const cancelAutoPricingButton = document.getElementById("cancel");
@@ -423,3 +441,22 @@ function ShowShopStock(){
 }
 
 optionsContainer.style.display = 'none';
+
+
+//######################################################################################################################################
+
+
+const submitPricesButton = document.getElementById("submit");
+
+submitPricesButton.addEventListener('click', StartPriceSubmittingProcess);
+
+function StartPriceSubmittingProcess(){
+    if (confirm("Do you want to submit your list of prices to your shop?")) {
+        setSUBMIT_PRICES_PROCESS(true);
+        window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
+    }
+}
+
+getSUBMIT_PRICES_PROCESS(function (submit){
+    console.log(submit);
+});

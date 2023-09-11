@@ -11,7 +11,7 @@ function getSHOP_INVENTORY(callback) {
         const value = result.SHOP_INVENTORY;
 
         if (typeof callback === 'function') {
-        callback(value);
+            callback(value);
         }
     });
 }
@@ -25,7 +25,7 @@ function getINVENTORY_UPDATED(callback) {
         const value = result.INVENTORY_UPDATED;
 
         if (typeof callback === 'function') {
-        callback(value);
+            callback(value);
         }
     });
 }
@@ -39,7 +39,7 @@ function getSTART_INVENTORY_PROCESS(callback) {
         const value = result.START_INVENTORY_PROCESS;
 
         if (typeof callback === 'function') {
-        callback(value);
+            callback(value);
         }
     });
 }
@@ -78,6 +78,39 @@ function getAUTOPRICER_INVENTORY(callback) {
     });
 }
 
+function setSUBMIT_PRICES_PROCESS(value) {
+    chrome.storage.local.set({ SUBMIT_PRICES_PROCESS: value }, function () {});
+}
+
+function getSUBMIT_PRICES_PROCESS(callback) {
+    chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
+        const value = result.SUBMIT_PRICES_PROCESS;
+
+        if (typeof callback === 'function') {
+        callback(value);
+        }
+    });
+}
+
+function setSUBMIT_PRICES_PROCESS(value) {
+    chrome.storage.local.set({ SUBMIT_PRICES_PROCESS: value }, function () {});
+}
+
+function getSUBMIT_PRICES_PROCESS(callback) {
+    chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
+        const value = result.SUBMIT_PRICES_PROCESS;
+
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setSUBMIT_PRICES_PROCESS(false);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 
 //######################################################################################################################################
 
@@ -108,7 +141,39 @@ function LoadPageLinks(){
 
 var currentPage = 1;
 var currentIndex = 0;
-var rowsItemNames = [];
+var rowsItems = [];
+var playerPIN = 0000;
+  
+/*async function ProcessAllPages(isInputtingPrices = false) {
+    for (let pageIndex = 0; pageIndex < hrefLinks.length; pageIndex++) {
+        if(isInputtingPrices){
+            currentIndex = 0;
+            await ProcessPageData(pageIndex, isInputtingPrices);
+        } else {
+            await ProcessPageData(pageIndex);
+            console.log(`Processed page ${pageIndex + 1}`);
+
+            if(pageIndex == hrefLinks.length - 1){
+                setSHOP_INVENTORY(rowsItems);
+                window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
+                setINVENTORY_UPDATED(true);
+                //Sleep(sleepInShopMin, sleepInShopMin);
+            }
+        }
+    }
+}*/
+
+async function ProcessAllPages() {
+    for (let pageIndex = 0; pageIndex < hrefLinks.length; pageIndex++) {
+        await ProcessPageData(pageIndex);
+        console.log(`Processed page ${pageIndex + 1}`);
+        if(pageIndex == hrefLinks.length - 1){
+            setSHOP_INVENTORY(rowsItemNames);
+            window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
+            setINVENTORY_UPDATED(true);
+        }
+    }
+}
 
 async function ProcessPageData(pageIndex) {
     //Loading the page and getting its contents;
@@ -147,18 +212,135 @@ async function ProcessPageData(pageIndex) {
         }
     });
 }
-  
-async function ProcessAllPages() {
-    for (let pageIndex = 0; pageIndex < hrefLinks.length; pageIndex++) {
-        await ProcessPageData(pageIndex);
-        console.log(`Processed page ${pageIndex + 1}`);
-        if(pageIndex == 3){
-            setSHOP_INVENTORY(rowsItemNames);
-            window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
-            setINVENTORY_UPDATED(true);
-            //Sleep(sleepInShopMin, sleepInShopMin);
+
+/*async function ProcessPageData(pageIndex, isInputtingPrices = false) {
+    //Loading the page and getting its contents;
+    const response = await fetch(hrefLinks[pageIndex]);
+    const pageContent = await response.text();
+
+    // Parsing the content;
+    const parser = new DOMParser();
+    const pageDocument = parser.parseFromString(pageContent, 'text/html');
+    const form = pageDocument.querySelector('form[action="process_market.phtml"][method="post"]');
+
+    // If the page cannot be reached, try again;
+    try{
+        table = form.querySelector('table[cellspacing="0"][cellpadding="3"][border="0"]');
+    } catch {
+        ProcessPageData(pageIndex, isInputtingPrices);
+        return;
+    }
+    
+    const rows = table.querySelectorAll('tr');
+    const pinInput = document.querySelector('input[type="password"][name="pin"]');
+    const updateButton = document.querySelector('input[type="submit"][value="Update"]');
+    var updatedPrices = false;
+
+    //Saving all the data in its respective array;
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+        const row = rows[rowIndex];
+        const nameRow = row.querySelector('td:first-child');
+        const textContent = nameRow.textContent.trim();
+
+        const inputElements = row.querySelector('td input[name^="cost_"]');
+
+        var priceContent = 0;
+        try { 
+            priceContent = inputElements.value;
+        } catch {}
+
+        const vetoWords = ['Enter your PIN:', 'Remove All', 'Name'];
+        const isVetoWord = vetoWords.includes(textContent);
+
+        if (!isVetoWord) {
+            if(isInputtingPrices){
+                await new Promise(async (resolve) => {
+                    getSHOP_INVENTORY(async function (list){
+                        const item = list.find(item => item.Name === textContent);
+                        const itemPrice = parseInt(item.Price);
+                        
+                        if (itemPrice == parseInt(inputElements.value) || !item.IsPricing) {
+                            resolve(); // Skip the current item and move to the next
+                            return;
+                        }
+
+                        await Sleep(0.5, 2);
+                        // Get a reference to the input element
+                        const inputElement = document.querySelector(`input[name="cost_${rowIndex}"]`);
+
+                        // Clear the current value in the input field
+                        inputElement.value = "";
+
+                        // The value you want to input
+                        const desiredValue = itemPrice.toString();
+
+                        SimulateKeyEvents(inputElement, desiredValue);
+
+                        updatedPrices = true;
+                        resolve(); // Continue to the next item
+                    });
+                });
+            } else {
+                const stockCell = row.querySelector('td:nth-child(3)').querySelector("b");
+                const inStock = parseInt(stockCell.textContent);
+
+                const item = new Item(textContent, priceContent, true, rowIndex, currentIndex, inStock);
+                
+                rowsItems.push(item);
+            }
+
+            currentIndex++;
         }
     }
+    
+    if(isInputtingPrices){
+        console.log(`Pricing done for page ${pageIndex + 1}!`);
+        await Sleep(2, 4);
+
+        if(updatedPrices){
+            SimulateKeyEvents(pinInput, playerPIN);
+            await Sleep(1, 2);
+
+            // Get a reference to the update button element
+            //const updateButton = pageDocument.querySelector('input[type="submit"][value="Update"]');
+
+            updateButton.click();
+
+            console.log(`Prices Updated for page ${pageIndex + 1}!`);
+        }
+    }
+}*/
+
+async function SimulateKeyEvents(inputElement, desiredValue){
+    // Simulate typing the value character by character
+    for (const char of desiredValue.toString()) {
+        const keyEventDown = new KeyboardEvent("keydown", {
+            key: char,
+            bubbles: true,
+            cancelable: true,
+        });
+
+        const keyEventUp = new KeyboardEvent("keyup", {
+            key: char,
+            bubbles: true,
+            cancelable: true,
+        });
+
+        // Dispatch keydown event
+        inputElement.value += char;
+        await Sleep(typingSleepMin, typingSleepMax); // Adjust the min and max sleep times as needed
+
+        // Dispatch keyup event
+        inputElement.dispatchEvent(keyEventUp);
+    }
+
+    // Trigger an input event to simulate user input
+    const inputEvent = new Event("input", {
+        bubbles: true,
+        cancelable: true,
+    });
+
+    inputElement.dispatchEvent(inputEvent);
 }
 
 // Simulates the time a real player browses through its entire shop;
@@ -184,9 +366,9 @@ var sleepNewSearchMin = 1;
 var sleepNewSearchMax = 3;
 
 
-function Sleep(min, max) {
+function Sleep(min, max, showConsoleMessage = false) {
     const milliseconds = GetRandomFloat(min, max) * 1000;
-    //console.log(`Sleeping for ${milliseconds / 1000} seconds...`);
+    if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`);
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
@@ -249,7 +431,13 @@ getSTART_AUTOPRICING_PROCESS(
                     await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
 
                     var searchBox = document.getElementById("shopwizard");
-                    TypeLetterByLetter(searchBox, autoPricingList[currentPricingIndex].Name);
+                    var isInQuest = TypeLetterByLetter(searchBox, autoPricingList[currentPricingIndex].Name);
+
+                    if(isInQuest){
+                        window.alert("You are currently in a faerie quest.\nEither complete it or cancel it to use the AutoPricer.\n\nThe AutoPricer process will now stop...");
+                        CancelAutoPricer();
+                        return;
+                    } 
 
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
@@ -307,14 +495,29 @@ getSTART_AUTOPRICING_PROCESS(
 
         // A user can be inside the SW while also AutoPricing, this circumvents that issue;
         if(window.location.href.includes("https://www.neopets.com/market.phtml?")){
-            getSTART_INVENTORY_PROCESS(function (canScrapeInventory) {
-                StartInventoryScraping(canScrapeInventory);
+            getSUBMIT_PRICES_PROCESS(function (canSubmit){
+                if(!canSubmit){
+                    getSTART_INVENTORY_PROCESS(function (canScrapeInventory) {
+                        StartInventoryScraping();
+                    });
+                    return;
+                }
+
+                StartPriceSubmitting();
             });
+            
         }
     }
 );
 
-function StartInventoryScraping(value){
+function CancelAutoPricer(){
+    setSTART_AUTOPRICING_PROCESS(false);
+    setAUTOPRICER_INVENTORY([]);
+    setINVENTORY_UPDATED(true);
+    setCURRENT_PRICING_INDEX(0);
+}
+
+function StartInventoryScraping(){
     if(value){
         LoadPageLinks();
         ProcessAllPages();
@@ -322,16 +525,26 @@ function StartInventoryScraping(value){
     }
 }
 
+function StartPriceSubmitting(){
+
+}
+
 async function TypeLetterByLetter(inputElement, text){
+    var textResult = "";
+
     for (var i = 0; i < text.length; i++) {
+        if(inputElement == null) return true;
+        
         // Simulate typing a letter
-        inputElement.value += text[i];
+        textResult += text[i];
+        inputElement.value = textResult;
         
         // Trigger an input event to simulate user input
         var inputEvent = new Event('input', {
             bubbles: true,
             cancelable: true,
         });
+
         inputElement.dispatchEvent(inputEvent);
 
         // Wait for a random delay before typing the next letter
@@ -368,4 +581,12 @@ function WaitForElement(selector, index = 0) {
             }
         }, 1000);
     });
+}
+
+
+//######################################################################################################################################
+
+
+function StartPriceSaving(){
+    LoadPageLinks();
 }
