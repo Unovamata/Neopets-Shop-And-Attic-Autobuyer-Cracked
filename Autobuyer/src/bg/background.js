@@ -5,6 +5,7 @@ function setATTIC_SHOULD_REFRESH(e) {
         ATTIC_SHOULD_REFRESH: e
     }, function() {})
 }
+
 function getRandomToken() {
     var e = new Uint8Array(32);
     crypto.getRandomValues(e);

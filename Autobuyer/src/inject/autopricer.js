@@ -288,12 +288,19 @@ getSTART_AUTOPRICING_PROCESS(
 
                     var searchBox = document.getElementById("shopwizard");
                     if(searchBox === null || searchBox === undefined){
-                        window.alert("You are currently in a faerie quest.\nEither complete it or cancel it to use the AutoPricer.\n\nThe AutoPricer process will now stop...");
+                        window.alert(
+                            "You are currently in a Faerie Quest.\n" +
+                            "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +
+                            "To continue, click 'Start AutoPricing' on the AutoPricer page.\n" +
+                            "The AutoPricer will resume from the last priced item.\n" +
+                            "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
+                            "AutoPricer has been stopped.\n"
+                        );
                         CancelAutoPricer();
                         return;
                     }
 
-                    SimulateKeyEvents(searchBox, nameToSearch);
+                    await SimulateKeyEvents(searchBox, nameToSearch);
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
                     WaitForElement(".button-search-white", 0).then((searchButton) => {
@@ -339,6 +346,7 @@ getSTART_AUTOPRICING_PROCESS(
                             var updatedShopList = shopList;
 
                             updatedShopList[itemToSearch.Index - 1].Price = deductedPrice;
+                            updatedShopList[itemToSearch.Index - 1].IsPricing = false;
                             setSHOP_INVENTORY(updatedShopList);
                         });
 
@@ -366,7 +374,7 @@ getSTART_AUTOPRICING_PROCESS(
             getSUBMIT_PRICES_PROCESS(function (canSubmit){
                 if(!canSubmit){
                     getSTART_INVENTORY_PROCESS(function (canScrapeInventory) {
-                        StartInventoryScraping();
+                        if(canScrapeInventory) StartInventoryScraping();
                     });
                     return;
                 } else {
@@ -379,6 +387,7 @@ getSTART_AUTOPRICING_PROCESS(
 );
 
 function CancelAutoPricer(){
+    getSTART_INVENTORY_PROCESS(false);
     setSTART_AUTOPRICING_PROCESS(false);
     setAUTOPRICER_INVENTORY([]);
     setINVENTORY_UPDATED(true);
@@ -490,7 +499,7 @@ async function PriceItemsInPage(){
                     // The value you want to input
                     const desiredValue = itemPrice.toString();
 
-                    SimulateKeyEvents(inputElement, desiredValue);
+                    await SimulateKeyEvents(inputElement, desiredValue);
 
                     updatedPrices = true;
                     resolve(); // Continue to the next item
@@ -502,7 +511,7 @@ async function PriceItemsInPage(){
             await Sleep(sleepAfterPricingMin, sleepAfterPricingMax);
 
             if(pinInput){
-                SimulateKeyEvents(pinInput, playerPIN);
+                await SimulateKeyEvents(pinInput, playerPIN);
                 await Sleep(sleepAfterPinMin, sleepAfterPinMax);
             }
 
@@ -613,24 +622,17 @@ async function SimulateKeyEvents(inputElement, desiredValue){
 //######################################################################################################################################
 
 
-function checkFor504Error() {
-    // Make an asynchronous request to the current URL to check the response status code
-    fetch(window.location.href, { method: 'HEAD' })
-        .then(response => {
-            if (response.status === 504) {
-                console.log("Detected a 504 error. Reloading the page...");
-                location.reload(); // Reload the page
-            } else {
-                console.log("No 504 error detected. Continuing...");
-            }
-        })
-        .catch(error => {
-            console.error("An error occurred while checking the page:", error);
-        });
+function handleServerErrors() {
+    const bodyText = document.body.innerText;
+    var error502 = bodyText.includes("502 Bad Gateway\nopenresty");
+    var error504 = bodyText.includes("504 Gateway Time-out\nopenresty");
+    var captcha = bodyText.includes("Loading site please wait...");
+
+    if (error502 || error504 || captcha) {
+        setTimeout(() => {
+            location.reload();
+        }, 10000); // Reload after 10 seconds
+    }
 }
 
-// Start checking for 504 errors periodically (adjust the interval as needed)
-setInterval(checkFor504Error, 5000); // Check every 5 seconds (5000 milliseconds)
-
-// Start checking for 504 errors
-checkFor504Error();
+handleServerErrors();

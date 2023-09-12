@@ -13,6 +13,7 @@ function topLevelTurbo() {
                 }
             })
     }
+    
     function n(e) {
         chrome.runtime.sendMessage({
             neobuyer: "NeoBuyer",
