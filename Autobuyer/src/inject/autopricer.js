@@ -139,7 +139,6 @@ function LoadPageLinks(){
     hrefLinks.shift();
 }
 
-var currentPage = 1;
 var currentIndex = 0;
 var rowsItems = [];
 var playerPIN = 0000;
@@ -491,7 +490,7 @@ getSTART_AUTOPRICING_PROCESS(
         }
     },
     function() {
-        console.log('START_AUTOPRICING_PROCESS is false ');
+        //console.log('START_AUTOPRICING_PROCESS is false ');
 
         // A user can be inside the SW while also AutoPricing, this circumvents that issue;
         if(window.location.href.includes("https://www.neopets.com/market.phtml?")){
@@ -501,11 +500,11 @@ getSTART_AUTOPRICING_PROCESS(
                         StartInventoryScraping();
                     });
                     return;
+                } else {
+                    console.log("Submitting Prices");
+                    StartPriceSubmitting();
                 }
-
-                StartPriceSubmitting();
             });
-            
         }
     }
 );
@@ -523,10 +522,6 @@ function StartInventoryScraping(){
         ProcessAllPages();
         setSTART_INVENTORY_PROCESS(false);
     }
-}
-
-function StartPriceSubmitting(){
-
 }
 
 async function TypeLetterByLetter(inputElement, text){
@@ -587,6 +582,41 @@ function WaitForElement(selector, index = 0) {
 //######################################################################################################################################
 
 
-function StartPriceSaving(){
+function StartPriceSubmitting(){
     LoadPageLinks();
+    PriceItemsInPage();
+    //setSUBMIT_PRICES_PROCESS(false);
+}
+
+var currentPage = 0;
+var currentPageLink = null;
+
+function setNAVIGATE_TO_NEXT_PAGE(value) {
+    chrome.storage.local.set({ NAVIGATE_TO_NEXT_PAGE: value }, function () {});
+}
+
+function getNAVIGATE_TO_NEXT_PAGE(callback) {
+    chrome.storage.local.get(['NAVIGATE_TO_NEXT_PAGE'], function (result) {
+        const value = result.NAVIGATE_TO_NEXT_PAGE;
+
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setNAVIGATE_TO_NEXT_PAGE(true);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function PriceItemsInPage(){
+    currentPageLink = hrefLinks[currentPage];
+
+    getNAVIGATE_TO_NEXT_PAGE(function (canNavigate){
+        if(canNavigate){
+            window.location.href = currentPageLink;
+            setNAVIGATE_TO_NEXT_PAGE(false);
+        }
+    });
 }

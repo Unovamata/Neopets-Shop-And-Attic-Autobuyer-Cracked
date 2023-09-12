@@ -405,17 +405,19 @@ function StartAutoPricer(){
     //setSTART_AUTOPRICING_PROCESS(false);
 }
 
-function CancelAutoPricer(){
-    setSTART_AUTOPRICING_PROCESS(false);
-    setAUTOPRICER_INVENTORY([]);
-    setSHOP_INVENTORY([]);
-    setINVENTORY_UPDATED(true);
-    setCURRENT_PRICING_INDEX(0);
-    setSUBMIT_PRICES_PROCESS(false);
-}
-
 const cancelAutoPricingButton = document.getElementById("cancel");
 cancelAutoPricingButton.addEventListener('click', CancelAutoPricer);
+
+function CancelAutoPricer(){
+    if(confirm("Do you want to terminate the current AutoPricer process?")){
+        setSTART_AUTOPRICING_PROCESS(false);
+        setAUTOPRICER_INVENTORY([]);
+        //setSHOP_INVENTORY([]);
+        //setINVENTORY_UPDATED(true);
+        setCURRENT_PRICING_INDEX(0);
+        setSUBMIT_PRICES_PROCESS(false);
+    }
+}
 
 
 //######################################################################################################################################
