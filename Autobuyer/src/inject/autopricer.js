@@ -283,7 +283,7 @@ getSTART_AUTOPRICING_PROCESS(
                     var itemToSearch = autoPricingList[currentPricingIndex];
                     var nameToSearch = itemToSearch.Name;
 
-                    console.log(`Navigating to SW, searching for: ${nameToSearch}`);
+                    //console.log(`Navigating to SW, searching for: ${nameToSearch}`);
                     await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
 
                     var searchBox = document.getElementById("shopwizard");
@@ -296,17 +296,25 @@ getSTART_AUTOPRICING_PROCESS(
                     SimulateKeyEvents(searchBox, nameToSearch);
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
-                    // Usage example:
                     WaitForElement(".button-search-white", 0).then((searchButton) => {
                         searchButton.click();
                     });
 
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
                     
+                    WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
+                        var h3Element = resultsTextDiv.querySelector('h3');
+
+                        if(h3Element.textContent === '...'){
+                            window.location.reload();
+                        }
+                    });
+
+                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
                     for(var i = 1; i <= resubmitPresses; i++){
                         await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
-                        console.log("Resubmitted " + i + " Times");
+                        //console.log("Resubmitted " + i + " Times");
 
                         WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
                             resubmitButton.click();
@@ -324,7 +332,6 @@ getSTART_AUTOPRICING_PROCESS(
                         }
 
                         deductedPrice = Math.floor(deductedPrice);
-                        console.log(deductedPrice);
 
                         autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
                         await setAUTOPRICER_INVENTORY(autoPricingList);
@@ -601,3 +608,29 @@ async function SimulateKeyEvents(inputElement, desiredValue){
 
     inputElement.dispatchEvent(inputEvent);
 }
+
+
+//######################################################################################################################################
+
+
+function checkFor504Error() {
+    // Make an asynchronous request to the current URL to check the response status code
+    fetch(window.location.href, { method: 'HEAD' })
+        .then(response => {
+            if (response.status === 504) {
+                console.log("Detected a 504 error. Reloading the page...");
+                location.reload(); // Reload the page
+            } else {
+                console.log("No 504 error detected. Continuing...");
+            }
+        })
+        .catch(error => {
+            console.error("An error occurred while checking the page:", error);
+        });
+}
+
+// Start checking for 504 errors periodically (adjust the interval as needed)
+setInterval(checkFor504Error, 5000); // Check every 5 seconds (5000 milliseconds)
+
+// Start checking for 504 errors
+checkFor504Error();
