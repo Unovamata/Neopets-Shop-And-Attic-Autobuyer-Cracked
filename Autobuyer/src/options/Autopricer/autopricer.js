@@ -99,6 +99,10 @@ function getSUBMIT_PRICES_PROCESS(callback) {
     });
 }
 
+function setNEXT_PAGE_INDEX(value) {
+    chrome.storage.local.set({ NEXT_PAGE_INDEX: value }, function () {});
+}
+
 
 //######################################################################################################################################
 
@@ -125,22 +129,38 @@ loadInventoryButton.onclick = function(_) {
 function LoadInventoryFromStockPage() {
     if (confirm("Do you want to load your shop stock into NeoBuyer+ for AutoPricing?")) {
         setSTART_INVENTORY_PROCESS(true);
+        setSUBMIT_PRICES_PROCESS(false);
         window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
     }
 }
 
-function HideLoadInventoryButton(){
-    getSTART_AUTOPRICING_PROCESS(function (value) {
-        if(value){
+const submitPricesButton = document.getElementById("submit");
+
+submitPricesButton.addEventListener('click', StartPriceSubmittingProcess);
+
+function StartPriceSubmittingProcess(){
+    if (confirm("Do you want to submit your list of prices to your shop?")) {
+        setNEXT_PAGE_INDEX(0);
+        setSUBMIT_PRICES_PROCESS(true);
+        setSTART_INVENTORY_PROCESS(false);
+        window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
+    }
+}
+
+
+function HideButtonsWhenAutoPricing(){
+    getSTART_AUTOPRICING_PROCESS(function (isActive) {
+        if(isActive){
             loadInventoryButton.style.display = "none";
+            submitPricesButton.style.display = "none";
         } else {
             loadInventoryButton.style.display = "inline";
+            submitPricesButton.style.display = "inline";
         }
     });
 }
 
-
-setInterval(HideLoadInventoryButton, 100);
+setInterval(HideButtonsWhenAutoPricing, 100);
 
 
 //######################################################################################################################################
@@ -259,7 +279,6 @@ uncheckAll.addEventListener('click', () => UpdateAllCheckboxes(false));
 
 function UpdateAllCheckboxes(checked) {
     const checkboxes = table.querySelectorAll('input[type="checkbox"]');
-    const isChecked = checked ? "checked" : "";
 
     checkboxes.forEach(function (checkbox) {
         checkbox.checked = checked;
@@ -363,7 +382,7 @@ function StartAutoPricer(){
     autoPricingList = [];
 
     selectedRows.forEach((row) => {
-        const nameCell = row.cells[0];
+        const nameCell = row.cells[1];
         const priceCell = row.cells[3];
         const priceInput = priceCell.querySelector('input[type=number]');
         
@@ -379,6 +398,7 @@ function StartAutoPricer(){
 
     setAUTOPRICER_INVENTORY(autoPricingList);
     setSTART_AUTOPRICING_PROCESS(true);
+    setCURRENT_PRICING_INDEX(0);
 
     // Function to create a new tab if swTab is null
     function CreateNewTab() {
@@ -401,8 +421,6 @@ function StartAutoPricer(){
             swTab = null;
         }
     });
-
-    //setSTART_AUTOPRICING_PROCESS(false);
 }
 
 const cancelAutoPricingButton = document.getElementById("cancel");
@@ -416,6 +434,7 @@ function CancelAutoPricer(){
         //setINVENTORY_UPDATED(true);
         setCURRENT_PRICING_INDEX(0);
         setSUBMIT_PRICES_PROCESS(false);
+        setNEXT_PAGE_INDEX(0);
     }
 }
 
@@ -446,19 +465,3 @@ optionsContainer.style.display = 'none';
 
 
 //######################################################################################################################################
-
-
-const submitPricesButton = document.getElementById("submit");
-
-submitPricesButton.addEventListener('click', StartPriceSubmittingProcess);
-
-function StartPriceSubmittingProcess(){
-    if (confirm("Do you want to submit your list of prices to your shop?")) {
-        setSUBMIT_PRICES_PROCESS(true);
-        window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
-    }
-}
-
-getSUBMIT_PRICES_PROCESS(function (submit){
-    console.log(submit);
-});

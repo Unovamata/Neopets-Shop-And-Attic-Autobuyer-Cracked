@@ -111,6 +111,44 @@ function getSUBMIT_PRICES_PROCESS(callback) {
     });
 }
 
+function setNAVIGATE_TO_NEXT_PAGE(value) {
+    chrome.storage.local.set({ NAVIGATE_TO_NEXT_PAGE: value }, function () {});
+}
+
+function getNAVIGATE_TO_NEXT_PAGE(callback) {
+    chrome.storage.local.get(['NAVIGATE_TO_NEXT_PAGE'], function (result) {
+        const value = result.NAVIGATE_TO_NEXT_PAGE;
+
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setNAVIGATE_TO_NEXT_PAGE(true);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function setNEXT_PAGE_INDEX(value) {
+    chrome.storage.local.set({ NEXT_PAGE_INDEX: value }, function () {});
+}
+
+function getNEXT_PAGE_INDEX(callback) {
+    chrome.storage.local.get(['NEXT_PAGE_INDEX'], function (result) {
+        const value = result.NEXT_PAGE_INDEX;
+
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setNEXT_PAGE_INDEX(0);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 
 //######################################################################################################################################
 
@@ -142,32 +180,13 @@ function LoadPageLinks(){
 var currentIndex = 0;
 var rowsItems = [];
 var playerPIN = 0000;
-  
-/*async function ProcessAllPages(isInputtingPrices = false) {
-    for (let pageIndex = 0; pageIndex < hrefLinks.length; pageIndex++) {
-        if(isInputtingPrices){
-            currentIndex = 0;
-            await ProcessPageData(pageIndex, isInputtingPrices);
-        } else {
-            await ProcessPageData(pageIndex);
-            console.log(`Processed page ${pageIndex + 1}`);
-
-            if(pageIndex == hrefLinks.length - 1){
-                setSHOP_INVENTORY(rowsItems);
-                window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
-                setINVENTORY_UPDATED(true);
-                //Sleep(sleepInShopMin, sleepInShopMin);
-            }
-        }
-    }
-}*/
 
 async function ProcessAllPages() {
     for (let pageIndex = 0; pageIndex < hrefLinks.length; pageIndex++) {
         await ProcessPageData(pageIndex);
         console.log(`Processed page ${pageIndex + 1}`);
         if(pageIndex == hrefLinks.length - 1){
-            setSHOP_INVENTORY(rowsItemNames);
+            setSHOP_INVENTORY(rowsItems);
             window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
             setINVENTORY_UPDATED(true);
         }
@@ -189,7 +208,7 @@ async function ProcessPageData(pageIndex) {
     //Saving all the data in its respective array;
     rows.forEach((row, rowIndex) => {
         const nameRow = row.querySelector('td:first-child');
-        const textContent = nameRow.textContent.trim();
+        const itemName = nameRow.textContent.trim();
 
         //const priceRow = row.querySelector('td:nth-child(5)');
         const inputElements = row.querySelectorAll('td input[name^="cost_"]');
@@ -199,188 +218,23 @@ async function ProcessPageData(pageIndex) {
         } catch {}
 
         const vetoWords = ['Enter your PIN:', 'Remove All', 'Name'];
-        const isVetoWord = vetoWords.includes(textContent);
+        const isVetoWord = vetoWords.includes(itemName);
 
         if (!isVetoWord) {
             const stockCell = row.querySelector('td:nth-child(3)').querySelector("b");
             const inStock = parseInt(stockCell.textContent);
 
-            const item = new Item(textContent, priceContent, true, rowIndex, currentIndex, inStock);
+            const item = new Item(itemName, priceContent, true, rowIndex, currentIndex, inStock);
             currentIndex++;
-            rowsItemNames.push(item);
+            rowsItems.push(item);
         }
     });
 }
 
-/*async function ProcessPageData(pageIndex, isInputtingPrices = false) {
-    //Loading the page and getting its contents;
-    const response = await fetch(hrefLinks[pageIndex]);
-    const pageContent = await response.text();
-
-    // Parsing the content;
-    const parser = new DOMParser();
-    const pageDocument = parser.parseFromString(pageContent, 'text/html');
-    const form = pageDocument.querySelector('form[action="process_market.phtml"][method="post"]');
-
-    // If the page cannot be reached, try again;
-    try{
-        table = form.querySelector('table[cellspacing="0"][cellpadding="3"][border="0"]');
-    } catch {
-        ProcessPageData(pageIndex, isInputtingPrices);
-        return;
-    }
-    
-    const rows = table.querySelectorAll('tr');
-    const pinInput = document.querySelector('input[type="password"][name="pin"]');
-    const updateButton = document.querySelector('input[type="submit"][value="Update"]');
-    var updatedPrices = false;
-
-    //Saving all the data in its respective array;
-    for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
-        const row = rows[rowIndex];
-        const nameRow = row.querySelector('td:first-child');
-        const textContent = nameRow.textContent.trim();
-
-        const inputElements = row.querySelector('td input[name^="cost_"]');
-
-        var priceContent = 0;
-        try { 
-            priceContent = inputElements.value;
-        } catch {}
-
-        const vetoWords = ['Enter your PIN:', 'Remove All', 'Name'];
-        const isVetoWord = vetoWords.includes(textContent);
-
-        if (!isVetoWord) {
-            if(isInputtingPrices){
-                await new Promise(async (resolve) => {
-                    getSHOP_INVENTORY(async function (list){
-                        const item = list.find(item => item.Name === textContent);
-                        const itemPrice = parseInt(item.Price);
-                        
-                        if (itemPrice == parseInt(inputElements.value) || !item.IsPricing) {
-                            resolve(); // Skip the current item and move to the next
-                            return;
-                        }
-
-                        await Sleep(0.5, 2);
-                        // Get a reference to the input element
-                        const inputElement = document.querySelector(`input[name="cost_${rowIndex}"]`);
-
-                        // Clear the current value in the input field
-                        inputElement.value = "";
-
-                        // The value you want to input
-                        const desiredValue = itemPrice.toString();
-
-                        SimulateKeyEvents(inputElement, desiredValue);
-
-                        updatedPrices = true;
-                        resolve(); // Continue to the next item
-                    });
-                });
-            } else {
-                const stockCell = row.querySelector('td:nth-child(3)').querySelector("b");
-                const inStock = parseInt(stockCell.textContent);
-
-                const item = new Item(textContent, priceContent, true, rowIndex, currentIndex, inStock);
-                
-                rowsItems.push(item);
-            }
-
-            currentIndex++;
-        }
-    }
-    
-    if(isInputtingPrices){
-        console.log(`Pricing done for page ${pageIndex + 1}!`);
-        await Sleep(2, 4);
-
-        if(updatedPrices){
-            SimulateKeyEvents(pinInput, playerPIN);
-            await Sleep(1, 2);
-
-            // Get a reference to the update button element
-            //const updateButton = pageDocument.querySelector('input[type="submit"][value="Update"]');
-
-            updateButton.click();
-
-            console.log(`Prices Updated for page ${pageIndex + 1}!`);
-        }
-    }
-}*/
-
-async function SimulateKeyEvents(inputElement, desiredValue){
-    // Simulate typing the value character by character
-    for (const char of desiredValue.toString()) {
-        const keyEventDown = new KeyboardEvent("keydown", {
-            key: char,
-            bubbles: true,
-            cancelable: true,
-        });
-
-        const keyEventUp = new KeyboardEvent("keyup", {
-            key: char,
-            bubbles: true,
-            cancelable: true,
-        });
-
-        // Dispatch keydown event
-        inputElement.value += char;
-        await Sleep(typingSleepMin, typingSleepMax); // Adjust the min and max sleep times as needed
-
-        // Dispatch keyup event
-        inputElement.dispatchEvent(keyEventUp);
-    }
-
-    // Trigger an input event to simulate user input
-    const inputEvent = new Event("input", {
-        bubbles: true,
-        cancelable: true,
-    });
-
-    inputElement.dispatchEvent(inputEvent);
-}
-
-// Simulates the time a real player browses through its entire shop;
-var sleepInShopMin = 10, sleepInShopMin = 60;
-
-
-var sleepMin = 3;
-var sleepMax = 8;
-
-var typingSleepMin = 0.01;
-var typingSleepMax = 0.1;
-
-var sleepWhileNavigatingToSWMin = 2;
-var sleepWhileNavigatingToSWMax = 5;
-
-var sleepInSWPageMin = 2;
-var sleepInSWPageMax = 5;
-
-var sleepThroughSearchesMin = 2;
-var sleepThroughSearchesMax = 4;
-
-var sleepNewSearchMin = 1;
-var sleepNewSearchMax = 3;
-
-
-function Sleep(min, max, showConsoleMessage = false) {
-    const milliseconds = GetRandomFloat(min, max) * 1000;
-    if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`);
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
-}
-
-function GetRandomFloat(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-function GetRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function Clamp(value, min, max){
-    return Math.min(Math.max(value, min), max);
+function StartInventoryScraping(){
+    LoadPageLinks();
+    ProcessAllPages();
+    setSTART_INVENTORY_PROCESS(false);
 }
 
 
@@ -388,7 +242,7 @@ function Clamp(value, min, max){
 
 
 var autoPricingList = [];
-var resubmitPresses = 3;
+var resubmitPresses = 2;
 var isRandomPercentage = true;
 var percentageDeduction = 5;
 var percentageDeductionMin = 3;
@@ -417,27 +271,29 @@ getSTART_AUTOPRICING_PROCESS(
             // Define a callback function to handle the retrieved value
             function handleAUTOPRICER_INVENTORY(list) {
                 getCURRENT_PRICING_INDEX(async function (currentPricingIndex) {
-                    console.log(currentPricingIndex);
                     autoPricingList = list;
 
-                    if(autoPricingList.length < currentPricingIndex){
+                    if(autoPricingList.length - 1 < currentPricingIndex){
+                        setCURRENT_PRICING_INDEX(0);
                         setSTART_AUTOPRICING_PROCESS(false);
-                        console.log("stop");
+                        window.close();
                         return;
                     } 
 
-                    console.log(`Navigating to SW, searching for: ${autoPricingList[currentPricingIndex].Name}`);
+                    var itemToSearch = autoPricingList[currentPricingIndex];
+                    var nameToSearch = itemToSearch.Name;
+
+                    console.log(`Navigating to SW, searching for: ${nameToSearch}`);
                     await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
 
                     var searchBox = document.getElementById("shopwizard");
-                    var isInQuest = TypeLetterByLetter(searchBox, autoPricingList[currentPricingIndex].Name);
-
-                    if(isInQuest){
+                    if(searchBox === null || searchBox === undefined){
                         window.alert("You are currently in a faerie quest.\nEither complete it or cancel it to use the AutoPricer.\n\nThe AutoPricer process will now stop...");
                         CancelAutoPricer();
                         return;
-                    } 
+                    }
 
+                    SimulateKeyEvents(searchBox, nameToSearch);
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
                     // Usage example:
@@ -446,9 +302,9 @@ getSTART_AUTOPRICING_PROCESS(
                     });
 
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
-                    console.log("Search button clicked!");
+                    
 
-                    for(var i = 0; i < resubmitPresses; i++){
+                    for(var i = 1; i <= resubmitPresses; i++){
                         await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
                         console.log("Resubmitted " + i + " Times");
 
@@ -462,15 +318,23 @@ getSTART_AUTOPRICING_PROCESS(
                         var deductedPrice = 0;
 
                         if(isRandomPercentage) {
-                            console.log(bestPrice);
                             deductedPrice = bestPrice * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
                         } else {
                             deductedPrice = bestPrice * (1 - (percentageDeduction * 0.01));
                         }
 
-                        autoPricingList[currentPricingIndex - 1].Price = Math.floor(deductedPrice);
+                        deductedPrice = Math.floor(deductedPrice);
+                        console.log(deductedPrice);
+
+                        autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
                         await setAUTOPRICER_INVENTORY(autoPricingList);
-                        await setSHOP_INVENTORY(autoPricingList);
+                        getSHOP_INVENTORY(function(shopList){
+                            var updatedShopList = shopList;
+
+                            updatedShopList[itemToSearch.Index - 1].Price = deductedPrice;
+                            setSHOP_INVENTORY(updatedShopList);
+                        });
+
                         setINVENTORY_UPDATED(true);
                     });
 
@@ -490,8 +354,6 @@ getSTART_AUTOPRICING_PROCESS(
         }
     },
     function() {
-        //console.log('START_AUTOPRICING_PROCESS is false ');
-
         // A user can be inside the SW while also AutoPricing, this circumvents that issue;
         if(window.location.href.includes("https://www.neopets.com/market.phtml?")){
             getSUBMIT_PRICES_PROCESS(function (canSubmit){
@@ -514,37 +376,7 @@ function CancelAutoPricer(){
     setAUTOPRICER_INVENTORY([]);
     setINVENTORY_UPDATED(true);
     setCURRENT_PRICING_INDEX(0);
-}
-
-function StartInventoryScraping(){
-    if(value){
-        LoadPageLinks();
-        ProcessAllPages();
-        setSTART_INVENTORY_PROCESS(false);
-    }
-}
-
-async function TypeLetterByLetter(inputElement, text){
-    var textResult = "";
-
-    for (var i = 0; i < text.length; i++) {
-        if(inputElement == null) return true;
-        
-        // Simulate typing a letter
-        textResult += text[i];
-        inputElement.value = textResult;
-        
-        // Trigger an input event to simulate user input
-        var inputEvent = new Event('input', {
-            bubbles: true,
-            cancelable: true,
-        });
-
-        inputElement.dispatchEvent(inputEvent);
-
-        // Wait for a random delay before typing the next letter
-        await Sleep(typingSleepMin, typingSleepMax); // Adjust the min and max sleep times as needed
-    }
+    console.log("stop");
 }
 
 function WaitForElement(selector, index = 0) {
@@ -584,39 +416,188 @@ function WaitForElement(selector, index = 0) {
 
 function StartPriceSubmitting(){
     LoadPageLinks();
+    NavigateToNextPage();
     PriceItemsInPage();
-    //setSUBMIT_PRICES_PROCESS(false);
 }
 
-var currentPage = 0;
 var currentPageLink = null;
 
-function setNAVIGATE_TO_NEXT_PAGE(value) {
-    chrome.storage.local.set({ NAVIGATE_TO_NEXT_PAGE: value }, function () {});
-}
-
-function getNAVIGATE_TO_NEXT_PAGE(callback) {
-    chrome.storage.local.get(['NAVIGATE_TO_NEXT_PAGE'], function (result) {
-        const value = result.NAVIGATE_TO_NEXT_PAGE;
-
-        // Check if value is undefined or null, and set it to false
-        if (value === undefined || value === null) {
-            setNAVIGATE_TO_NEXT_PAGE(true);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function PriceItemsInPage(){
-    currentPageLink = hrefLinks[currentPage];
-
+function NavigateToNextPage(){
     getNAVIGATE_TO_NEXT_PAGE(function (canNavigate){
         if(canNavigate){
-            window.location.href = currentPageLink;
-            setNAVIGATE_TO_NEXT_PAGE(false);
+            getNEXT_PAGE_INDEX(function (index){
+                currentPageLink = hrefLinks[index];
+
+                window.location.href = currentPageLink;
+                setNAVIGATE_TO_NEXT_PAGE(false);
+                setNEXT_PAGE_INDEX(++index);
+            });
         }
     });
+}
+
+const vetoWords = ['Enter your PIN:', 'Remove All', 'Name'];
+
+async function PriceItemsInPage(){
+    const form = document.querySelector('form[action="process_market.phtml"][method="post"]');
+    var table = null;
+    
+    try{
+        table = form.querySelector('table[cellspacing="0"][cellpadding="3"][border="0"]');
+    } catch {
+        PriceItemsInPage();
+    }
+
+    const rows = table.querySelectorAll('tr');
+    const pinInput = document.querySelector('input[type="password"][name="pin"]');
+    const updateButton = document.querySelector('input[type="submit"][value="Update"]');
+    var updatedPrices = false;
+
+    //Saving all the data in its respective array;
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+        const row = rows[rowIndex];
+        const nameRow = row.querySelector('td:first-child');
+        const itemName = nameRow.textContent.trim();
+
+        const inputElements = row.querySelector('td input[name^="cost_"]');
+        const isVetoWord = vetoWords.includes(itemName);
+
+        if(!isVetoWord){
+            await new Promise(async (resolve) => {
+                getSHOP_INVENTORY(async function (list){
+                    const item = list.find(item => item.Name === itemName);
+                    const itemPrice = parseInt(item.Price);
+                    
+                    if (itemPrice == parseInt(inputElements.value) || !item.IsPricing) {
+                        resolve(); // Skip the current item and move to the next
+                        return;
+                    }
+
+                    // Get a reference to the input element
+                    const inputElement = document.querySelector(`input[name="cost_${rowIndex}"]`);
+                    await Sleep(sleepSearchPriceInputBoxMin, sleepSearchPriceInputBoxMax);
+
+                    // Clear the current value in the input field
+                    inputElement.value = "";
+
+                    // The value you want to input
+                    const desiredValue = itemPrice.toString();
+
+                    SimulateKeyEvents(inputElement, desiredValue);
+
+                    updatedPrices = true;
+                    resolve(); // Continue to the next item
+                });
+            });
+        }
+
+        if(updatedPrices){
+            await Sleep(sleepAfterPricingMin, sleepAfterPricingMax);
+
+            if(pinInput){
+                SimulateKeyEvents(pinInput, playerPIN);
+                await Sleep(sleepAfterPinMin, sleepAfterPinMax);
+            }
+
+            updateButton.click();
+        }
+
+        getNEXT_PAGE_INDEX(function (index){
+            if(index < hrefLinks.length - 1){
+                setNAVIGATE_TO_NEXT_PAGE(true);
+            } else {
+                getSUBMIT_PRICES_PROCESS(function (isActive){
+                    if(isActive){
+                        setSUBMIT_PRICES_PROCESS(false);
+                        window.alert("The AutoPricing process has completed successfully!");
+                    }
+                });
+            }
+        });
+    }
+}
+
+
+//######################################################################################################################################
+
+
+// Simulates the time a real player browses through its entire shop;
+var sleepInShopMin = 10, sleepInShopMin = 60;
+
+var sleepMin = 3;
+var sleepMax = 8;
+
+var typingSleepMin = 0.03;
+var typingSleepMax = 0.15;
+
+var sleepWhileNavigatingToSWMin = 2;
+var sleepWhileNavigatingToSWMax = 5;
+
+var sleepInSWPageMin = 2;
+var sleepInSWPageMax = 5;
+
+var sleepThroughSearchesMin = 2;
+var sleepThroughSearchesMax = 4;
+
+var sleepNewSearchMin = 1;
+var sleepNewSearchMax = 3;
+
+var sleepSearchPriceInputBoxMin = 1;
+var sleepSearchPriceInputBoxMax = 3;
+
+var sleepAfterPricingMin = 2;
+var sleepAfterPricingMax = 4;
+
+var sleepAfterPinMin = 1;
+var sleepAfterPinMax = 2;
+
+
+function Sleep(min, max, showConsoleMessage = false) {
+    const milliseconds = GetRandomFloat(min, max) * 1000;
+    if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`);
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+function GetRandomFloat(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function GetRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+function Clamp(value, min, max){
+    return Math.min(Math.max(value, min), max);
+}
+
+async function SimulateKeyEvents(inputElement, desiredValue){
+    // Simulate typing the value character by character
+    for (const char of desiredValue.toString()) {
+        const keyEventDown = new KeyboardEvent("keydown", {
+            key: char,
+            bubbles: true,
+            cancelable: true,
+        });
+
+        const keyEventUp = new KeyboardEvent("keyup", {
+            key: char,
+            bubbles: true,
+            cancelable: true,
+        });
+
+        // Dispatch keydown event
+        inputElement.value += char;
+
+        // Dispatch keyup event
+        inputElement.dispatchEvent(keyEventUp);
+        await Sleep(typingSleepMin, typingSleepMax); // Adjust the min and max sleep times as needed
+    }
+
+    // Trigger an input event to simulate user input
+    const inputEvent = new Event("input", {
+        bubbles: true,
+        cancelable: true,
+    });
+
+    inputElement.dispatchEvent(inputEvent);
 }
