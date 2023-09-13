@@ -12,7 +12,6 @@ function getSUBMIT_PRICES_PROCESS(callback) {
     });
 }
 
-// Set the current items in the Shop Stock;
 function setSHOP_INVENTORY(value) {
     return new Promise((resolve) => {
         chrome.storage.local.set({ SHOP_INVENTORY: value }, function () {
@@ -97,7 +96,6 @@ function getSUBMIT_PRICES_PROCESS(callback) {
     chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
         const value = result.SUBMIT_PRICES_PROCESS;
 
-        // Check if value is undefined or null, and set it to false
         if (value === undefined || value === null) {
             setSUBMIT_PRICES_PROCESS(false);
         }
@@ -121,7 +119,6 @@ function getNAVIGATE_TO_NEXT_PAGE(callback) {
     chrome.storage.local.get(['NAVIGATE_TO_NEXT_PAGE'], function (result) {
         const value = result.NAVIGATE_TO_NEXT_PAGE;
 
-        // Check if value is undefined or null, and set it to false
         if (value === undefined || value === null) {
             setNAVIGATE_TO_NEXT_PAGE(true);
         }
@@ -140,7 +137,6 @@ function getNEXT_PAGE_INDEX(callback) {
     chrome.storage.local.get(['NEXT_PAGE_INDEX'], function (result) {
         const value = result.NEXT_PAGE_INDEX;
 
-        // Check if value is undefined or null, and set it to false
         if (value === undefined || value === null) {
             setNEXT_PAGE_INDEX(1);
         }
@@ -171,13 +167,15 @@ function getCURRENT_PRICING_INDEX(callback) {
 //######################################################################################################################################
 
 
-function Item(Name, Price, IsPricing, Index, ListIndex, Stock){
-    this.Name = Name;
-    this.Price = Price;
-    this.IsPricing = IsPricing;
-    this.Index = Index;
-    this.ListIndex = ListIndex;
-    this.Stock = Stock
+class Item {
+    constructor(Name, Price, IsPricing, Index, ListIndex, Stock) {
+        this.Name = Name;
+        this.Price = Price;
+        this.IsPricing = IsPricing;
+        this.Index = Index;
+        this.ListIndex = ListIndex;
+        this.Stock = Stock;
+    }
 }
 
 
@@ -280,129 +278,154 @@ var blacklist = ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of
 
 getSTART_AUTOPRICING_PROCESS(
     function() {
-        if(window.location.href.includes("https://www.neopets.com/shops/wizard.phtml")){
-            // Define a callback function to handle the retrieved value
-            function handleAUTOPRICER_INVENTORY(list) {
-                getCURRENT_PRICING_INDEX(async function (currentPricingIndex) {
-                    autoPricingList = list;
-
-                    if(autoPricingList.length - 1 < currentPricingIndex){
-                        setCURRENT_PRICING_INDEX(0);
-                        setSTART_AUTOPRICING_PROCESS(false);
-                        window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
-                        return;
-                    }
-
-                    var itemToSearch = autoPricingList[currentPricingIndex];
-                    var nameToSearch = itemToSearch.Name;
-
-                    if(blacklist.includes(nameToSearch)){
-                        setCURRENT_PRICING_INDEX(++currentPricingIndex);
-
-                        getSHOP_INVENTORY(function(shopList){
-                            var updatedShopList = shopList;
-
-                            updatedShopList[itemToSearch.Index - 1].Price = 0;
-                            updatedShopList[itemToSearch.Index - 1].IsPricing = false;
-                            setSHOP_INVENTORY(updatedShopList);
-                            setINVENTORY_UPDATED(true);
-                        });
-
-                        window.location.reload();
-                        await Sleep(sleepBlacklistMin, sleepBlacklistMax);
-                        return;
-                    }
-
-                    await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
-
-                    var searchBox = document.getElementById("shopwizard");
-                    if(searchBox === null || searchBox === undefined){
-                        window.alert(
-                            "You are currently in a Faerie Quest.\n" +
-                            "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +
-                            "To continue, click 'Start AutoPricing' on the AutoPricer page.\n" +
-                            "The AutoPricer will resume from the last priced item.\n" +
-                            "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
-                            "AutoPricer has been stopped.\n"
-                        );
-                        CancelAutoPricer();
-                        return;
-                    }
-
-                    await SimulateKeyEvents(searchBox, nameToSearch);
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
-
-                    WaitForElement(".button-search-white", 0).then((searchButton) => {
-                        searchButton.click();
-                    });
-
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
-                    
-                    WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
-                        var h3Element = resultsTextDiv.querySelector('h3');
-
-                        if(h3Element.textContent === '...'){
-                            window.location.reload();
-                        }
-                    });
-
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
-
-                    for(var i = 1; i <= resubmitPresses; i++){
-                        await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
-
-                        WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
-                            resubmitButton.click();
-                        });
-                    }
-
-                    WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
-                        var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
-                        var deductedPrice = 0;
-
-                        if(isRandomPercentage) {
-                            deductedPrice = bestPrice * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
-                        } else {
-                            deductedPrice = bestPrice * (1 - (fixedPercentageDeduction * 0.01));
-                        }
-
-                        deductedPrice = Math.floor(deductedPrice);
-
-                        autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
-                        await setAUTOPRICER_INVENTORY(autoPricingList);
-                        getSHOP_INVENTORY(function(shopList){
-                            var updatedShopList = shopList;
-
-                            updatedShopList[itemToSearch.Index - 1].Price = deductedPrice;
-                            updatedShopList[itemToSearch.Index - 1].IsPricing = false;
-                            setSHOP_INVENTORY(updatedShopList);
-                        });
-
-                        setINVENTORY_UPDATED(true);
-                    });
-
-                    // Increment currentIndex
-                    setCURRENT_PRICING_INDEX(++currentPricingIndex);
-                    await Sleep(sleepNewSearchMin, sleepNewSearchMax);
-
-                    WaitForElement(".button-default__2020.button-blue__2020.wizard-button__2020[type='submit'][value='New Search']", 0).then((newSearchButton) => {
-                        newSearchButton.click();
-                    })
-                });
-            }
-
-            getAUTOPRICER_INVENTORY(handleAUTOPRICER_INVENTORY);
-        } else {
-            window.alert("The AutoPricer is running, the Neobuyer's+ shop inventory will not be updated.\n\nWait for the AutoPricer to finish or cancel the process.");
-        }
-    },
-    function() {
+        /* If the user is inside the SW and the AutoPricing process is active, the extension will begin
+         * pricing the "AutoPricerInventory" list, saving its values and updating them with the lowest
+         * prices available;
+         */
+        StartSWPricing();
+    }, function() {
         /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
          * This function either loads or submits prices depending on the current state of the AutoPricer;
          */
         StartInventoryScrapingOrSubmitting();
     }
 );
+
+var wizardURL = "https://www.neopets.com/shops/wizard.phtml";
+
+// Selects lowest prices to price the currently stocked items in the shop;
+function StartSWPricing(){
+    //If the user is in the Shop Wizard page;
+    if(window.location.href === wizardURL){
+        getAUTOPRICER_INVENTORY(function (list) {
+            // Check the currently priced item;
+            getCURRENT_PRICING_INDEX(async function (currentPricingIndex) {
+                autoPricingList = list;
+
+                //If the pricing list has been completed, end the AutoPricing process;
+                if(autoPricingList.length - 1 < currentPricingIndex){
+                    setCURRENT_PRICING_INDEX(0);
+                    setSTART_AUTOPRICING_PROCESS(false);
+                    window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
+                    return;
+                }
+
+                var itemToSearch = autoPricingList[currentPricingIndex];
+                var nameToSearch = itemToSearch.Name;
+
+                // Checking if an item is inside a blacklist;
+                if(blacklist.includes(nameToSearch)){
+                    setCURRENT_PRICING_INDEX(++currentPricingIndex);
+
+                    UpdateShopInventoryWithValue(itemToSearch, 0);
+
+                    // Reloading the page so the script can continue;
+                    await Sleep(sleepBlacklistMin, sleepBlacklistMax);
+                    window.location.reload();
+                    return;
+                }
+
+                await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
+
+                // Searching the searchbox, if the box doesn't exists, the user is in a Faerie quest;
+                var searchBox = document.getElementById("shopwizard");
+
+                if(searchBox === null || searchBox === undefined){
+                    window.alert(
+                        "You are currently in a Faerie Quest.\n" +
+                        "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +
+                        "To continue, click 'Start AutoPricing' on the AutoPricer page.\n" +
+                        "The AutoPricer will resume from the last priced item.\n" +
+                        "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
+                        "AutoPricer has been stopped.\n"
+                    );
+                    CancelAutoPricer();
+                    return;
+                }
+
+                // If the box exists, then introduce the name on it;
+                await SimulateKeyEvents(searchBox, nameToSearch);
+                await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+
+                // Click the button for the search;
+                WaitForElement(".button-search-white", 0).then((searchButton) => {
+                    searchButton.click();
+                });
+
+                await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+                
+                // Checking if the search was made correctly;
+                WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
+                    var h3Element = resultsTextDiv.querySelector('h3');
+
+                    // If the name introduced was not valid, then refresh;
+                    if(h3Element.textContent === '...'){
+                        window.location.reload();
+                    }
+                });
+
+                await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+
+                // The amount of times the extension should search for lower prices;
+                for(var i = 1; i <= resubmitPresses; i++){
+                    await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
+
+                    WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
+                        resubmitButton.click();
+                    });
+                }
+
+                // Getting the lowest price;
+                WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
+                    // Parsing the string to a number;
+                    var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
+                    var deductedPrice = 0;
+
+                    // Subtracting a percentage of the price, so it's competitive with other results;
+                    if(isRandomPercentage) {
+                        deductedPrice = bestPrice * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
+                    } else { // If the subtracted percentage is fixed;
+                        deductedPrice = bestPrice * (1 - (fixedPercentageDeduction * 0.01));
+                    }
+
+                    deductedPrice = Math.floor(deductedPrice);
+
+                    // Updating the price list;
+                    autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
+                    await setAUTOPRICER_INVENTORY(autoPricingList);
+
+                    UpdateShopInventoryWithValue(itemToSearch, deductedPrice);
+                });
+
+                // Increment currentIndex
+                setCURRENT_PRICING_INDEX(++currentPricingIndex);
+                await Sleep(sleepNewSearchMin, sleepNewSearchMax);
+
+                //Starting a new search;
+                WaitForElement(".button-default__2020.button-blue__2020.wizard-button__2020[type='submit'][value='New Search']", 0).then((newSearchButton) => {
+                    newSearchButton.click();
+                })
+            });
+        });
+    } else {
+        /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
+         * This function either loads or submits prices depending on the current state of the AutoPricer;
+         */
+        window.alert("The AutoPricer is running, the Neobuyer's+ shop inventory will not be updated.\n\nWait for the AutoPricer to finish or cancel the process.");
+    }
+}
+
+// Loads and edits the stored shop inventory and sets a price to items;
+function UpdateShopInventoryWithValue(itemToSearch, price){
+    getSHOP_INVENTORY(function(shopList){
+        var updatedShopList = shopList;
+
+        updatedShopList[itemToSearch.Index - 1].Price = price;
+        updatedShopList[itemToSearch.Index - 1].IsPricing = false;
+        setSHOP_INVENTORY(updatedShopList);
+        setINVENTORY_UPDATED(true);
+    });
+}
 
 var marketURL = "https://www.neopets.com/market.phtml?";
 
@@ -443,9 +466,29 @@ async function StartPriceSubmitting(){
     await NavigateToNextPage();
 }
 
+var currentPageLink = null;
+
+async function NavigateToNextPage(){
+    await Sleep(sleepWaitForUpdateMin, sleepWaitForUpdateMax);
+    return new Promise((resolve) => {
+        getNAVIGATE_TO_NEXT_PAGE(function (canNavigate){
+            getNEXT_PAGE_INDEX(function (index){
+                currentPageLink = hrefLinks[index];
+                if(currentPageLink === undefined || currentPageLink === null) return;
+                window.location.href = currentPageLink;
+                setNAVIGATE_TO_NEXT_PAGE(false);
+                setNEXT_PAGE_INDEX(++index);
+            });
+        });
+
+        resolve();
+    });
+}
+
+
 var playerPIN = "0000";
 
-//
+// Loads elements from the shop page to inject the calculated prices;
 async function PriceItemsInPage(){
     return new Promise(async (resolve) => {
         var form = null;
@@ -468,7 +511,7 @@ async function PriceItemsInPage(){
 
         //Saving all the data in its respective array;
         await InputDataInShop(rows);
-        
+
         GetNextPage();
 
         PressUpdateButton(pinInput, updateButton);
@@ -586,98 +629,71 @@ function WaitForElement(selector, index = 0) {
 //######################################################################################################################################
 
 
-var currentPageLink = null;
-
-async function NavigateToNextPage(){
-    await Sleep(sleepWaitForUpdateMin, sleepWaitForUpdateMax);
-    return new Promise((resolve) => {
-        getNAVIGATE_TO_NEXT_PAGE(function (canNavigate){
-            getNEXT_PAGE_INDEX(function (index){
-                currentPageLink = hrefLinks[index];
-                if(currentPageLink === undefined || currentPageLink === null) return;
-                window.location.href = currentPageLink;
-                setNAVIGATE_TO_NEXT_PAGE(false);
-                setNEXT_PAGE_INDEX(++index);
-            });
-        });
-
-        resolve();
-    });
-}
-
-
-//######################################################################################################################################
-
-
-// Simulates the time a real player browses through its entire shop;
-var sleepInShopMin = 10, sleepInShopMin = 60;
-
-var sleepMin = 3;
-var sleepMax = 8;
-
+// Typing letter-by-letter speed;
 var typingSleepMin = 0.03;
 var typingSleepMax = 0.15;
 
-var sleepWhileNavigatingToSWMin = 2;
-var sleepWhileNavigatingToSWMax = 5;
+// Wait time when the user goes to the SW to AutoPrice after every refresh;
+var sleepWhileNavigatingToSWMin = 3;
+var sleepWhileNavigatingToSWMax = 7;
 
+// Wait time after every action;
 var sleepInSWPageMin = 2;
 var sleepInSWPageMax = 5;
 
+// Wait time between searches;
 var sleepThroughSearchesMin = 2;
 var sleepThroughSearchesMax = 4;
 
-var sleepBlacklistMin = 2;
-var sleepBlacklistMax = 6;
+// Wait time if the extension has to wait because of a blacklisted item;
+var sleepBlacklistMin = 6;
+var sleepBlacklistMax = 12;
 
+// Wait time between new searches;
 var sleepNewSearchMin = 1;
 var sleepNewSearchMax = 3;
 
+// Wait time between each price input in the player's shop;
 var sleepSearchPriceInputBoxMin = 1;
 var sleepSearchPriceInputBoxMax = 3;
 
+// Wait time after pricing an item;
 var sleepAfterPricingMin = 2;
 var sleepAfterPricingMax = 4;
 
+// Wait time after inputting the pin value;
 var sleepAfterPinMin = 1;
 var sleepAfterPinMax = 2;
 
+// Wait time after navigating to the next page in the shop's stock;
 var sleepAfterNavigatingToNextPageMin = 2;
 var sleepAfterNavigatingToNextPageMax = 6;
 
+// Wait time after pressing the update button to refresh;
 var sleepWaitForUpdateMin = 4;
 var sleepWaitForUpdateMax = 6;
 
 
-
+// Waits 'X' amount of milliseconds. 'await Sleep(min, max)';
 function Sleep(min, max, showConsoleMessage = true) {
     const milliseconds = GetRandomFloat(min, max) * 1000;
     if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`);
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-function GetRandomFloat(min, max) {
-    return Math.random() * (max - min) + min;
-}
+function GetRandomFloat(min, max) { return Math.random() * (max - min) + min; }
 
-function GetRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
+function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min) + min); }
 
-function Clamp(value, min, max){
-    return Math.min(Math.max(value, min), max);
-}
+// Limits a value to its minimum or maximum depending on its ceiling or floor;
+function Clamp(value, min, max){ return Math.min(Math.max(value, min), max); }
 
+// Simulates real key presses character-by-character;
 async function SimulateKeyEvents(inputElement, desiredValue){
-    // Simulate typing the value character by character
+    // Extracting characters;
     for (const char of desiredValue.toString()) {
+        // Sending the Keyboard Key Down event;
         const keyEventDown = new KeyboardEvent("keydown", {
-            key: char,
-            bubbles: true,
-            cancelable: true,
-        });
-
-        const keyEventUp = new KeyboardEvent("keyup", {
             key: char,
             bubbles: true,
             cancelable: true,
@@ -685,6 +701,13 @@ async function SimulateKeyEvents(inputElement, desiredValue){
 
         // Dispatch keydown event
         inputElement.value += char;
+
+        // Sending the Keyboard Key Up event;
+        const keyEventUp = new KeyboardEvent("keyup", {
+            key: char,
+            bubbles: true,
+            cancelable: true,
+        });
 
         // Dispatch keyup event
         inputElement.dispatchEvent(keyEventUp);
@@ -704,13 +727,15 @@ async function SimulateKeyEvents(inputElement, desiredValue){
 //######################################################################################################################################
 
 
+// If the Neopets page sends an error, reload;
 function handleServerErrors() {
     const bodyText = document.body.innerText;
     var error502 = bodyText.includes("502 Bad Gateway\nopenresty");
     var error504 = bodyText.includes("504 Gateway Time-out\nopenresty");
     var captcha = bodyText.includes("Loading site please wait...");
-
-    if (error502 || error504 || captcha) {
+    var certError = bodyText.includes("NET::ERR_CERT_COMMON_NAME_INVALID")
+    
+    if (error502 || error504 || captcha || certError) {
         setTimeout(() => {
             location.reload();
         }, 10000); // Reload after 10 seconds

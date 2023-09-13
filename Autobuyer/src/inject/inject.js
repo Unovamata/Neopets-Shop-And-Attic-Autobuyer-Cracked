@@ -22,7 +22,7 @@ function topLevelTurbo() {
         })
     }
     function o() {
-        document.body.innerText.indexOf("502 Bad Gateway\nopenresty") > -1 || document.body.innerText.indexOf("504 Gateway Time-out\nopenresty") > -1 || document.body.innerText.indexOf("Loading site please wait...") > -1 ? setTimeout((function() {
+        document.body.innerText.indexOf("502 Bad Gateway\nopenresty") > -1 || document.body.innerText.indexOf("504 Gateway Time-out\nopenresty") > -1 || document.body.innerText.indexOf("Loading site please wait...") || document.body.innerText.indexOf("NET::ERR_CERT_COMMON_NAME_INVALID")> -1 ? setTimeout((function() {
             location.reload()
         }), 1e4) : t("Captcha page detected", "Captcha page detected. Pausing.")
     }
