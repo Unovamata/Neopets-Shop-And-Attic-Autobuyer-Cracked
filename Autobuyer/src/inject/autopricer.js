@@ -468,30 +468,10 @@ async function PriceItemsInPage(){
 
         //Saving all the data in its respective array;
         await InputDataInShop(rows);
+        
+        GetNextPage();
 
-        getNEXT_PAGE_INDEX(function (index){
-            if(index < hrefLinks.length){
-                setNAVIGATE_TO_NEXT_PAGE(true);
-            } else {
-                getSUBMIT_PRICES_PROCESS(function (isActive){
-                    if(isActive){
-                        setSUBMIT_PRICES_PROCESS(false);
-                        window.alert("The AutoPricing process has completed successfully!");
-                    }
-                });
-            }
-        });
-
-        if(updatedPrices){
-            await Sleep(sleepAfterPricingMin, sleepAfterPricingMax);
-
-            if(pinInput){
-                await SimulateKeyEvents(pinInput, playerPIN);
-                await Sleep(sleepAfterPinMin, sleepAfterPinMax);
-            }
-
-            updateButton.click();
-        }
+        PressUpdateButton(pinInput, updateButton);
 
         resolve();
     });
@@ -538,6 +518,34 @@ async function InputDataInShop(rows){
                 });
             });
         }
+    }
+}
+
+function GetNextPage(){
+    getNEXT_PAGE_INDEX(function (index){
+        if(index < hrefLinks.length){
+            setNAVIGATE_TO_NEXT_PAGE(true);
+        } else {
+            getSUBMIT_PRICES_PROCESS(function (isActive){
+                if(isActive){
+                    setSUBMIT_PRICES_PROCESS(false);
+                    window.alert("The AutoPricing process has completed successfully!");
+                }
+            });
+        }
+    });
+}
+
+async function PressUpdateButton(pinInput, updateButton){
+    if(updatedPrices){
+        await Sleep(sleepAfterPricingMin, sleepAfterPricingMax);
+
+        if(pinInput){
+            await SimulateKeyEvents(pinInput, playerPIN);
+            await Sleep(sleepAfterPinMin, sleepAfterPinMax);
+        }
+
+        updateButton.click();
     }
 }
 
