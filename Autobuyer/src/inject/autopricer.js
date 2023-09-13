@@ -633,6 +633,12 @@ function handleServerErrors() {
             location.reload();
         }, 10000); // Reload after 10 seconds
     }
+
+    window.addEventListener('error', function (event) {
+        if (event.message && event.message.includes('net::ERR_CERT_COMMON_NAME_INVALID')) {
+            window.location.reload();
+        }
+    });
 }
 
 handleServerErrors();
