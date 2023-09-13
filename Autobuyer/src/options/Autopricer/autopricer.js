@@ -140,7 +140,7 @@ submitPricesButton.addEventListener('click', StartPriceSubmittingProcess);
 
 function StartPriceSubmittingProcess(){
     if (confirm("Do you want to submit your list of prices to your shop?")) {
-        setNEXT_PAGE_INDEX(0);
+        setNEXT_PAGE_INDEX(1);
         setSUBMIT_PRICES_PROCESS(true);
         setSTART_INVENTORY_PROCESS(false);
         window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
@@ -291,6 +291,7 @@ function UpdateAllCheckboxes(checked) {
         });
 
         setSHOP_INVENTORY(inventoryData);
+        setINVENTORY_UPDATED(true);
     });
 }
 
@@ -341,6 +342,7 @@ function UpdateAllUnpricedCheckboxes(value, instance = 0){
             tempList[index].IsPricing = checkbox.checked;
 
             setSHOP_INVENTORY(tempList);
+            setINVENTORY_UPDATED(true);
         });
     });
 }
