@@ -482,13 +482,17 @@ function setMIN_SHOP_CLICK_UPDATE(value) { chrome.storage.local.set({ MIN_SHOP_C
 
 function setMAX_SHOP_CLICK_UPDATE(value) { chrome.storage.local.set({ MAX_SHOP_CLICK_UPDATE: Number(value) }, (function () {})) }
 
-function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+function setMIN_TYPING_SPEED(value) { chrome.storage.local.set({ MIN_TYPING_SPEED: Number(value) }, (function () {})) }
 
-function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+function setMAX_TYPING_SPEED(value) { chrome.storage.local.set({ MAX_TYPING_SPEED: Number(value) }, (function () {})) }
 
-function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+function setSHOULD_ENTER_PIN(value) { chrome.storage.local.set({ SHOULD_ENTER_PIN: value }, (function () {})) }
 
-function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+function setNEOPETS_SECURITY_PIN(value) { chrome.storage.local.set({ NEOPETS_SECURITY_PIN: value }, (function () {})) }
+
+function setMIN_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({ MIN_WAIT_BEFORE_UPDATE: value }, (function () {})) }
+
+function setMAX_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({ MAX_WAIT_BEFORE_UPDATE: value }, (function () {})) }
 
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
@@ -600,6 +604,29 @@ $("#MAX_SHOP_CLICK_UPDATE").bind("input propertychange", (function() {
     setMAX_SHOP_CLICK_UPDATE($("#MAX_SHOP_CLICK_UPDATE").val())
 }))
 
+$("#MIN_TYPING_SPEED").bind("input propertychange", (function() {
+    setMIN_TYPING_SPEED($("#MIN_TYPING_SPEED").val())
+}))
+
+$("#MAX_TYPING_SPEED").bind("input propertychange", (function() {
+    setMAX_TYPING_SPEED($("#MAX_TYPING_SPEED").val())
+}))
+
+$("#SHOULD_ENTER_PIN").bind("input propertychange", (function() {
+    setSHOULD_ENTER_PIN($("#SHOULD_ENTER_PIN").val())
+}))
+
+$("#NEOPETS_SECURITY_PIN").bind("input propertychange", (function() {
+    setNEOPETS_SECURITY_PIN($("#NEOPETS_SECURITY_PIN").val())
+}))
+
+$("#MIN_WAIT_BEFORE_UPDATE").bind("input propertychange", (function() {
+    setMIN_WAIT_BEFORE_UPDATE($("#MIN_WAIT_BEFORE_UPDATE").val())
+}))
+
+$("#MAX_WAIT_BEFORE_UPDATE").bind("input propertychange", (function() {
+    setMAX_WAIT_BEFORE_UPDATE($("#MAX_WAIT_BEFORE_UPDATE").val())
+}))
 
 
 
@@ -704,6 +731,13 @@ resetButton.onclick = function(_) {
     MAX_SHOP_SEARCH_FOR_INPUT_BOX: 10,
     MIN_SHOP_CLICK_UPDATE: 10,
     MAX_SHOP_CLICK_UPDATE: 20,
+    MIN_TYPING_SPEED: 1,
+    MAX_TYPING_SPEED: 3,
+    SHOULD_ENTER_PIN: false,
+    NEOPETS_SECURITY_PIN: "0000",
+    MIN_WAIT_BEFORE_UPDATE: 5,
+    MAX_WAIT_BEFORE_UPDATE: 10,
+
 }, (function(_) {
     $("#PAUSE_AFTER_BUY_MS")
         .val(_.PAUSE_AFTER_BUY_MS), $("#SEND_TO_SDB_AFTER_PURCHASE")
@@ -788,14 +822,13 @@ resetButton.onclick = function(_) {
         $("#MIN_SHOP_CLICK_UPDATE").val(_.MIN_SHOP_CLICK_UPDATE),
         $("#MAX_SHOP_CLICK_UPDATE").val(_.MAX_SHOP_CLICK_UPDATE),
 
-        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
-        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
-        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
-        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
-        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
-        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
-        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
-        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
+        // Security Settings;
+        $("#MIN_TYPING_SPEED").val(_.MIN_TYPING_SPEED),
+        $("#MAX_TYPING_SPEED").val(_.MAX_TYPING_SPEED),
+        $("#SHOULD_ENTER_PIN").prop("checked", _.SHOULD_ENTER_PIN),
+        $("#NEOPETS_SECURITY_PIN").val(_.NEOPETS_SECURITY_PIN),
+        $("#MIN_WAIT_BEFORE_UPDATE").val(_.MIN_WAIT_BEFORE_UPDATE),
+        $("#MAX_WAIT_BEFORE_UPDATE").val(_.MAX_WAIT_BEFORE_UPDATE),
 
         showOrHide()
         
