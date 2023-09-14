@@ -564,6 +564,7 @@ async function InputDataInShop(rows){
     }
 }
 
+// Go to the next page in the page for pricing;
 function GetNextPage(){
     getNEXT_PAGE_INDEX(function (index){
         if(index < hrefLinks.length){
@@ -579,6 +580,7 @@ function GetNextPage(){
     });
 }
 
+// Press the 'Update' button in the shop to update its prices;
 async function PressUpdateButton(pinInput, updateButton){
     if(updatedPrices){
         await Sleep(sleepAfterPricingMin, sleepAfterPricingMax);

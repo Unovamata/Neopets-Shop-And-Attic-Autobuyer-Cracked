@@ -12,7 +12,7 @@
             <div class="category-info">Shop Auto Pricer Settings
                 <br><span class="sub autosaved">To view helpful tooltips, simply hover over the options!</span><br>
                 <br>
-                <div class="category-info">Status: <span id="status-tag">Inactive:</span>
+                <div class="category-info">Status: <span id="status-tag">Inactive</span>
                     <div class="autosaved">
                         <span id="total-profit"></span>
                         <span class="sub">Total shop value: </span><span id="total-value"></span><br>
@@ -25,6 +25,7 @@
             <button class="button" id="options">Options</button>
             <br><br>
             <center>
+                <!--AutoPricer-->
                 <div id="shop-stock-container">
                     <div class="category-info">AutoPricer Controllers</div>
                     <button id="load" class="autobuyerButton">Load Shop Inventory</button>
@@ -56,8 +57,320 @@
                     </table>
                 </div>
 
-                <div id="autopricer-options-container"></div>
-                
+                <!--Options-->
+                <div id="autopricer-options-container">
+                    <div class="subcategory-info">Pricing Settings</div>
+
+                    <table class="table">
+                        <tbody class="autopricer-settings">
+                            <thead>
+                                <th></th><th></th>
+                            </thead>
+                            <tr>
+                                <td><b>Random</b> Pricing Percentages:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Fixed</b> Pricing Percentage:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="PIN_NUMBER"></input><span class="notation">%</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Pricing Percentage: 
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="PIN_NUMBER"></input><span class="notation">%</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Pricing Percentage: 
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="PIN_NUMBER"></input><span class="notation">%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subcategory-info">Shop Wizard Settings</div>
+
+                    <table class="table">
+                        <tbody class="main-shop-settings">
+                            <thead>
+                                <th></th><th></th>
+                            </thead>
+                            <tr>
+                                <td><b>Minimum</b> Wait Cooldown per Refresh:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Wait Cooldown per Refresh:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td>Resubmits per Item:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="PIN_NUMBER"></input><span class="notation">Resubmit\s</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Auto-Click <b>'Resubmit'</b> Button:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Auto-Click <b>'Resubmit'</b> Button:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Auto-Click <b>'New Search'</b> Button:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Auto-Click <b>'New Search'</b> Button:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Blacklisted Item Wait:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Blacklisted Item Wait:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td>Use a Blacklist of Items to not Auto Price:
+                                    <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="ENABLED" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Blacklist:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><textarea rows="10" cols="40" id="BLACKLIST_SW"></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="subcategory-info">Shop Stock Page Settings</div>
+
+                    <table class="table">
+                        <tbody class="main-shop-settings">
+                            <thead>
+                                <th></th><th></th>
+                            </thead>
+                            <tr>
+                                <td><b>Maximum</b> Cooldown per Action:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Cooldown per Action:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Cooldown After Pricing Item:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Cooldown After Pricing Item:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Shop Page Navigation Time:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Shop Page Navigation Time:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Price Input Box Search Time:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Price Input Box Search Time:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Auto-Click Update Button Cooldown:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Auto-Click Update Button Cooldown:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subcategory-info">Security Settings</div>
+
+                    <table class="table">
+                        <tbody class="autopricer-settings">
+                            <thead>
+                                <th></th><th></th>
+                            </thead>
+                            <tr>
+                                <td>Attempt to Refresh Through Page Load Failures:
+                                    <span class="tooltiptext">
+                                        If Neopet's server rejects the request and the page fails to load, this setting will automatically refresh the page.
+                                    </span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Typing Speed Cooldown
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Typing Speed Cooldown
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td>Auto-Enter Neopets <b>PIN</b>:
+                                    <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="PIN_ENABLED" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Neopets Security <b>PIN</b>:
+                                    <span class="tooltiptext">
+                                        Set the time range for refreshing. <br><br>
+                                        For example: <br> 11am to 4pm = [11, 16] or All times [0,23]
+                                    </span>
+                                </td>
+                                <td><input type="text" min="0000" max="9999" id="PIN_NUMBER"></input><span class="notation">PIN</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Minimum</b> Cooldown After Typing the <b>PIN</b> Before Updating:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Cooldown After Typing the  <b>PIN</b> Before Updating:
+                                    <span class="tooltiptext">
+                                        Example Tooltip
+                                    </span>
+                                </td>
+                                <td><input type="number" id="PIN_NUMBER"></input><span class="notation">ms</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 <br><br><br>
                 <button id="reset" class="button reset">Reset All Settings & Restock List</button>
                 <br><br><br>
@@ -69,5 +382,9 @@
         <script src="../../../js/ExtPay.js"></script>
         <script src="../../js/sortable.js"></script>
         <script src="autopricer.js"></script>
+
+        <script src="../../../js/jquery.js"></script>
+        <script src="../../../js/moment.js"></script>
+        <script src="../optionsPage.js"></script>
     </body>
 </html>
