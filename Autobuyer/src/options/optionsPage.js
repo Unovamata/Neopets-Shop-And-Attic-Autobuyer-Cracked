@@ -428,6 +428,124 @@ $("#PAYMENT_LINK")
             .val())
     }));
 
+
+//######################################################################################################################################
+
+
+function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+
+function setFIXED_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ FIXED_PRICING_PERCENTAGE: Number(value) }, (function () {})) }
+
+function setMIN_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ MIN_PRICING_PERCENTAGE: Number(value) }, (function () {})) }
+
+function setMAX_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ MAX_PRICING_PERCENTAGE: Number(value) }, (function () {})) }
+
+function setMIN_WAIT_PER_REFRESH(value) { chrome.storage.local.set({ MIN_WAIT_PER_REFRESH: Number(value) }, (function () {})) }
+
+function setMAX_WAIT_PER_REFRESH(value) { chrome.storage.local.set({ MAX_WAIT_PER_REFRESH: Number(value) }, (function () {})) }
+
+function setRESUBMITS_PER_ITEM(value) { chrome.storage.local.set({ RESUBMITS_PER_ITEM: value }, (function () {})) }
+
+function setMIN_RESUBMIT_WAIT_TIME(value) { chrome.storage.local.set({ MIN_RESUBMIT_WAIT_TIME: Number(value) }, (function () {})) }
+
+function setMAX_RESUBMIT_WAIT_TIME(value) { chrome.storage.local.set({ MAX_RESUBMIT_WAIT_TIME: Number(value) }, (function () {})) }
+
+function setMIN_NEW_SEARCH_WAIT_TIME(value) { chrome.storage.local.set({ MIN_NEW_SEARCH_WAIT_TIME: Number(value) }, (function () {})) }
+
+function setMAX_NEW_SEARCH_WAIT_TIME(value) { chrome.storage.local.set({ MAX_NEW_SEARCH_WAIT_TIME: Number(value) }, (function () {})) }
+
+function setMIN_BLACKLIST_ITEM_WAIT(value) { chrome.storage.local.set({ MIN_BLACKLIST_ITEM_WAIT: Number(value) }, (function () {})) }
+
+function setMAX_BLACKLIST_ITEM_WAIT(value) { chrome.storage.local.set({ MAX_BLACKLIST_ITEM_WAIT: Number(value) }, (function () {})) }
+
+function setUSE_AUTOPRICING_BLACKLIST(value) { chrome.storage.local.set({ USE_AUTOPRICING_BLACKLIST: value }, (function () {})) }
+
+function setBLACKLIST_SW(value) { chrome.storage.local.set({ BLACKLIST_SW: value }, (function () {})) }
+
+function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+
+function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+
+function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+
+function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+
+function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+
+$("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
+    const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
+    setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(isChecked);
+});
+
+$("#FIXED_PRICING_PERCENTAGE").bind("input propertychange", (function() {
+    setFIXED_PRICING_PERCENTAGE($("#FIXED_PRICING_PERCENTAGE").val())
+}))
+
+$("#MIN_PRICING_PERCENTAGE").bind("input propertychange", (function() {
+    setMIN_PRICING_PERCENTAGE($("#MIN_PRICING_PERCENTAGE").val())
+}))
+
+$("#MAX_PRICING_PERCENTAGE").bind("input propertychange", (function() {
+    setMAX_PRICING_PERCENTAGE($("#MAX_PRICING_PERCENTAGE").val())
+}))
+
+$("#MIN_WAIT_PER_REFRESH").bind("input propertychange", (function() {
+    setMIN_WAIT_PER_REFRESH($("#MIN_WAIT_PER_REFRESH").val())
+}))
+
+$("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function() {
+    setMAX_WAIT_PER_REFRESH($("#MAX_WAIT_PER_REFRESH").val())
+}))
+
+$("#RESUBMITS_PER_ITEM").bind("input propertychange", (function() {
+    setRESUBMITS_PER_ITEM($("#RESUBMITS_PER_ITEM").val())
+}))
+
+$("#MIN_RESUBMIT_WAIT_TIME").bind("input propertychange", (function() {
+    setMIN_RESUBMIT_WAIT_TIME($("#MIN_RESUBMIT_WAIT_TIME").val())
+}))
+
+$("#MAX_RESUBMIT_WAIT_TIME").bind("input propertychange", (function() {
+    setMAX_RESUBMIT_WAIT_TIME($("#MAX_RESUBMIT_WAIT_TIME").val())
+}))
+
+$("#MIN_NEW_SEARCH_WAIT_TIME").bind("input propertychange", (function() {
+    setMIN_NEW_SEARCH_WAIT_TIME($("#MIN_NEW_SEARCH_WAIT_TIME").val())
+}))
+
+$("#MAX_NEW_SEARCH_WAIT_TIME").bind("input propertychange", (function() {
+    setMAX_NEW_SEARCH_WAIT_TIME($("#MAX_NEW_SEARCH_WAIT_TIME").val())
+}))
+
+$("#MIN_BLACKLIST_ITEM_WAIT").bind("input propertychange", (function() {
+    setMIN_BLACKLIST_ITEM_WAIT($("#MIN_BLACKLIST_ITEM_WAIT").val())
+}))
+
+$("#MAX_BLACKLIST_ITEM_WAIT").bind("input propertychange", (function() {
+    setMAX_BLACKLIST_ITEM_WAIT($("#MAX_BLACKLIST_ITEM_WAIT").val())
+}))
+
+$("#USE_AUTOPRICING_BLACKLIST").bind("input propertychange", (function() {
+    setUSE_AUTOPRICING_BLACKLIST($("#USE_AUTOPRICING_BLACKLIST").val())
+}))
+
+$("#BLACKLIST_SW").bind("input propertychange", (function() {
+    try {
+        setBLACKLIST_SW($("#BLACKLIST_SW")
+            .val()
+            .split("\n")
+            .map((_ => _.trim()))
+            .filter((_ => "" != _)))
+    } catch (_) {
+        window.alert("Error in parsing your blacklist: " + _)
+    }
+}))
+
+
+
+//######################################################################################################################################
+
+
 function confirmReset() {
     1 == confirm("Are you sure you want to reset all settings and reset your restock list to the default?") ? resetSettings() : console.log("Action cancelled")
 }
@@ -493,7 +611,25 @@ resetButton.onclick = function(_) {
     ATTIC_LAST_REFRESH_MS: -1,
     SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES: !0,
     SHOULD_SHOW_CHROME_NOTIFICATIONS: !0,
-    PAUSE_AFTER_BUY_MS: 0
+    PAUSE_AFTER_BUY_MS: 0,
+
+    // AutoPricer;
+    SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
+    FIXED_PRICING_PERCENTAGE: 10,
+    MIN_PRICING_PERCENTAGE: 8,
+    MAX_PRICING_PERCENTAGE: 10,
+    MIN_WAIT_PER_REFRESH: 10,
+    MAX_WAIT_PER_REFRESH: 20,
+    RESUBMITS_PER_ITEM: 6,
+    MIN_RESUBMIT_WAIT_TIME: 15,
+    MAX_RESUBMIT_WAIT_TIME: 30,
+    MIN_NEW_SEARCH_WAIT_TIME: 50,
+    MAX_NEW_SEARCH_WAIT_TIME: 100,
+    MIN_BLACKLIST_ITEM_WAIT: 15,
+    MAX_BLACKLIST_ITEM_WAIT: 30,
+    USE_AUTOPRICING_BLACKLIST: false,
+    USE_BLACKLIST_SW: false,
+    BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece']
 }, (function(_) {
     $("#PAUSE_AFTER_BUY_MS")
         .val(_.PAUSE_AFTER_BUY_MS), $("#SEND_TO_SDB_AFTER_PURCHASE")
@@ -532,9 +668,9 @@ resetButton.onclick = function(_) {
         .val(_.MIN_OCR_PAGE), $("#MAX_OCR_PAGE")
         .val(_.MAX_OCR_PAGE), $("#EMAIL_TEMPLATE")
         .val(_.EMAIL_TEMPLATE), $("#EMAIL_USER_ID")
-        .val(_.EMAIL_USER_ID), $("#EMAIL_SERVICE_ID")
-        .val(_.EMAIL_SERVICE_ID), $("#ENABLED")
-        .prop("checked", _.ENABLED), $("#HIGHLIGHT")
+        .val(_.EMAIL_USER_ID), 
+        $("#EMAIL_SERVICE_ID").val(_.EMAIL_SERVICE_ID), 
+        $("#ENABLED").prop("checked", _.ENABLED), $("#HIGHLIGHT")
         .prop("checked", _.HIGHLIGHT), $("#CLICK_ITEM")
         .prop("checked", _.CLICK_ITEM), $("#CLICK_CONFIRM")
         .prop("checked", _.CLICK_CONFIRM), $("#SHOULD_SHOW_BANNER")
@@ -544,6 +680,27 @@ resetButton.onclick = function(_) {
         .prop("checked", _.SHOULD_SOUND_ALERTS), $("#SHOULD_ENTER_OFFER")
         .prop("checked", _.SHOULD_ENTER_OFFER), $("#SHOULD_SEND_EMAIL")
         .prop("checked", _.SHOULD_SEND_EMAIL), $("#SHOULD_GO_FOR_SECOND_MOST_VALUABLE")
-        .prop("checked", _.SHOULD_GO_FOR_SECOND_MOST_VALUABLE), $("#RESTOCK_LIST")
-        .val(_.RESTOCK_LIST.join("\n")), showOrHide()
+        .prop("checked", _.SHOULD_GO_FOR_SECOND_MOST_VALUABLE), 
+        $("#RESTOCK_LIST").val(_.RESTOCK_LIST.join("\n")), 
+
+        // AutoPricer;
+        $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING),
+        $("#FIXED_PRICING_PERCENTAGE").val(_.FIXED_PRICING_PERCENTAGE),
+        $("#MIN_PRICING_PERCENTAGE").val(_.MIN_PRICING_PERCENTAGE),
+        $("#MAX_PRICING_PERCENTAGE").val(_.MAX_PRICING_PERCENTAGE),
+        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
+        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
+        $("#RESUBMITS_PER_ITEM").val(_.RESUBMITS_PER_ITEM),
+        $("#MIN_RESUBMIT_WAIT_TIME").val(_.MIN_RESUBMIT_WAIT_TIME),
+        $("#MAX_RESUBMIT_WAIT_TIME").val(_.MAX_RESUBMIT_WAIT_TIME),
+        $("#MIN_NEW_SEARCH_WAIT_TIME").val(_.MIN_NEW_SEARCH_WAIT_TIME),
+        $("#MAX_NEW_SEARCH_WAIT_TIME").val(_.MAX_NEW_SEARCH_WAIT_TIME),
+        $("#MIN_BLACKLIST_ITEM_WAIT").val(_.MIN_BLACKLIST_ITEM_WAIT),
+        $("#MAX_BLACKLIST_ITEM_WAIT").val(_.MAX_BLACKLIST_ITEM_WAIT),
+        $("#USE_BLACKLIST_SW").val(_.USE_BLACKLIST_SW),
+        $("#BLACKLIST_SW").val(_.BLACKLIST_SW.join("\n")), 
+        //$("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING)
+        //$("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING)
+        showOrHide()
+        
 }));
