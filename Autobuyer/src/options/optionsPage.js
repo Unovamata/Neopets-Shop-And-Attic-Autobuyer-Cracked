@@ -462,7 +462,25 @@ function setUSE_AUTOPRICING_BLACKLIST(value) { chrome.storage.local.set({ USE_AU
 
 function setBLACKLIST_SW(value) { chrome.storage.local.set({ BLACKLIST_SW: value }, (function () {})) }
 
-function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+function setMIN_WAIT_PER_ACTION(value) { chrome.storage.local.set({ MIN_WAIT_PER_ACTION: Number(value) }, (function () {})) }
+
+function setMAX_WAIT_PER_ACTION(value) { chrome.storage.local.set({ MAX_WAIT_PER_ACTION: Number(value) }, (function () {})) }
+
+function setMIN_WAIT_AFTER_PRICING_ITEM(value) { chrome.storage.local.set({ MIN_WAIT_AFTER_PRICING_ITEM: Number(value) }, (function () {})) }
+
+function setMAX_WAIT_AFTER_PRICING_ITEM(value) { chrome.storage.local.set({ MAX_WAIT_AFTER_PRICING_ITEM: Number(value) }, (function () {})) }
+
+function setMIN_SHOP_NAVIGATION_COOLDOWN(value) { chrome.storage.local.set({ MIN_SHOP_NAVIGATION_COOLDOWN: Number(value) }, (function () {})) }
+
+function setMAX_SHOP_NAVIGATION_COOLDOWN(value) { chrome.storage.local.set({ MAX_SHOP_NAVIGATION_COOLDOWN: Number(value) }, (function () {})) }
+
+function setMIN_SHOP_SEARCH_FOR_INPUT_BOX(value) { chrome.storage.local.set({ MIN_SHOP_SEARCH_FOR_INPUT_BOX: Number(value) }, (function () {})) }
+
+function setMAX_SHOP_SEARCH_FOR_INPUT_BOX(value) { chrome.storage.local.set({ MAX_SHOP_SEARCH_FOR_INPUT_BOX: Number(value) }, (function () {})) }
+
+function setMIN_SHOP_CLICK_UPDATE(value) { chrome.storage.local.set({ MIN_SHOP_CLICK_UPDATE: Number(value) }, (function () {})) }
+
+function setMAX_SHOP_CLICK_UPDATE(value) { chrome.storage.local.set({ MAX_SHOP_CLICK_UPDATE: Number(value) }, (function () {})) }
 
 function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
 
@@ -542,6 +560,48 @@ $("#BLACKLIST_SW").bind("input propertychange", (function() {
 }))
 
 
+$("#MIN_WAIT_PER_ACTION").bind("input propertychange", (function() {
+    setMIN_WAIT_PER_ACTION($("#MIN_WAIT_PER_ACTION").val())
+}))
+
+$("#MAX_WAIT_PER_ACTION").bind("input propertychange", (function() {
+    setMAX_WAIT_PER_ACTION($("#MAX_WAIT_PER_ACTION").val())
+}))
+
+$("#MIN_WAIT_AFTER_PRICING_ITEM").bind("input propertychange", (function() {
+    setMIN_WAIT_AFTER_PRICING_ITEM($("#MIN_WAIT_AFTER_PRICING_ITEM").val())
+}))
+
+$("#MAX_WAIT_AFTER_PRICING_ITEM").bind("input propertychange", (function() {
+    setMAX_WAIT_AFTER_PRICING_ITEM($("#MAX_WAIT_AFTER_PRICING_ITEM").val())
+}))
+
+$("#MIN_SHOP_NAVIGATION_COOLDOWN").bind("input propertychange", (function() {
+    setMIN_SHOP_NAVIGATION_COOLDOWN($("#MIN_SHOP_NAVIGATION_COOLDOWN").val())
+}))
+
+$("#MAX_SHOP_NAVIGATION_COOLDOWN").bind("input propertychange", (function() {
+    setMAX_SHOP_NAVIGATION_COOLDOWN($("#MAX_SHOP_NAVIGATION_COOLDOWN").val())
+}))
+
+$("#MIN_SHOP_SEARCH_FOR_INPUT_BOX").bind("input propertychange", (function() {
+    setMIN_SHOP_SEARCH_FOR_INPUT_BOX($("#MIN_SHOP_SEARCH_FOR_INPUT_BOX").val())
+}))
+
+$("#MAX_SHOP_SEARCH_FOR_INPUT_BOX").bind("input propertychange", (function() {
+    setMAX_SHOP_SEARCH_FOR_INPUT_BOX($("#MAX_SHOP_SEARCH_FOR_INPUT_BOX").val())
+}))
+
+$("#MIN_SHOP_CLICK_UPDATE").bind("input propertychange", (function() {
+    setMIN_SHOP_CLICK_UPDATE($("#MIN_SHOP_CLICK_UPDATE").val())
+}))
+
+$("#MAX_SHOP_CLICK_UPDATE").bind("input propertychange", (function() {
+    setMAX_SHOP_CLICK_UPDATE($("#MAX_SHOP_CLICK_UPDATE").val())
+}))
+
+
+
 
 //######################################################################################################################################
 
@@ -618,6 +678,8 @@ resetButton.onclick = function(_) {
     FIXED_PRICING_PERCENTAGE: 10,
     MIN_PRICING_PERCENTAGE: 8,
     MAX_PRICING_PERCENTAGE: 10,
+
+    // Shop Wizard;
     MIN_WAIT_PER_REFRESH: 10,
     MAX_WAIT_PER_REFRESH: 20,
     RESUBMITS_PER_ITEM: 6,
@@ -629,7 +691,19 @@ resetButton.onclick = function(_) {
     MAX_BLACKLIST_ITEM_WAIT: 30,
     USE_AUTOPRICING_BLACKLIST: false,
     USE_BLACKLIST_SW: false,
-    BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece']
+    BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
+    
+    // Shop Stock Page Settings;
+    MIN_WAIT_PER_ACTION: 5,
+    MAX_WAIT_PER_ACTION: 8,
+    MIN_WAIT_AFTER_PRICING_ITEM: 4,
+    MAX_WAIT_AFTER_PRICING_ITEM: 9,
+    MIN_SHOP_NAVIGATION_COOLDOWN: 10,
+    MAX_SHOP_NAVIGATION_COOLDOWN: 30,
+    MIN_SHOP_SEARCH_FOR_INPUT_BOX: 5,
+    MAX_SHOP_SEARCH_FOR_INPUT_BOX: 10,
+    MIN_SHOP_CLICK_UPDATE: 10,
+    MAX_SHOP_CLICK_UPDATE: 20,
 }, (function(_) {
     $("#PAUSE_AFTER_BUY_MS")
         .val(_.PAUSE_AFTER_BUY_MS), $("#SEND_TO_SDB_AFTER_PURCHASE")
@@ -688,6 +762,8 @@ resetButton.onclick = function(_) {
         $("#FIXED_PRICING_PERCENTAGE").val(_.FIXED_PRICING_PERCENTAGE),
         $("#MIN_PRICING_PERCENTAGE").val(_.MIN_PRICING_PERCENTAGE),
         $("#MAX_PRICING_PERCENTAGE").val(_.MAX_PRICING_PERCENTAGE),
+
+        // SW Settings;
         $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
         $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
         $("#RESUBMITS_PER_ITEM").val(_.RESUBMITS_PER_ITEM),
@@ -699,8 +775,28 @@ resetButton.onclick = function(_) {
         $("#MAX_BLACKLIST_ITEM_WAIT").val(_.MAX_BLACKLIST_ITEM_WAIT),
         $("#USE_BLACKLIST_SW").val(_.USE_BLACKLIST_SW),
         $("#BLACKLIST_SW").val(_.BLACKLIST_SW.join("\n")), 
-        //$("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING)
-        //$("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING)
+
+        // Shop Stock Page Settings;
+        $("#MIN_WAIT_PER_ACTION").val(_.MIN_WAIT_PER_ACTION),
+        $("#MAX_WAIT_PER_ACTION").val(_.MAX_WAIT_PER_ACTION),
+        $("#MIN_WAIT_AFTER_PRICING_ITEM").val(_.MIN_WAIT_AFTER_PRICING_ITEM),
+        $("#MAX_WAIT_AFTER_PRICING_ITEM").val(_.MAX_WAIT_AFTER_PRICING_ITEM),
+        $("#MIN_SHOP_NAVIGATION_COOLDOWN").val(_.MIN_SHOP_NAVIGATION_COOLDOWN),
+        $("#MAX_SHOP_NAVIGATION_COOLDOWN").val(_.MAX_SHOP_NAVIGATION_COOLDOWN),
+        $("#MIN_SHOP_SEARCH_FOR_INPUT_BOX").val(_.MIN_SHOP_SEARCH_FOR_INPUT_BOX),
+        $("#MAX_SHOP_SEARCH_FOR_INPUT_BOX").val(_.MAX_SHOP_SEARCH_FOR_INPUT_BOX),
+        $("#MIN_SHOP_CLICK_UPDATE").val(_.MIN_SHOP_CLICK_UPDATE),
+        $("#MAX_SHOP_CLICK_UPDATE").val(_.MAX_SHOP_CLICK_UPDATE),
+
+        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
+        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
+        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
+        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
+        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
+        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
+        $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
+        $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
+
         showOrHide()
         
 }));
