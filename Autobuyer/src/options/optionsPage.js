@@ -135,36 +135,33 @@ function getPacificTimeDateObjFromInputs() {
 }
 
 function showOrHide() {
-    $("#USE_ITEM_DB")
-        .is(":checked") ? ($(".db-hide")
-            .show(), $(".restock-hide")
-            .hide()) : ($(".restock-hide")
-            .show(), $(".db-hide")
-            .hide()), $("#USE_BLACKLIST")
-        .is(":checked") ? $(".blacklist-hide")
-        .show() : $(".blacklist-hide")
-        .hide(), $("#CLICK_ITEM")
-        .is(":checked") ? $(".click-hide")
-        .show() : $(".click-hide")
-        .hide(), $("#ATTIC_CLICK_ITEM")
-        .is(":checked") ? $(".attic-click-hide")
-        .show() : $(".attic-click-hide")
-        .hide(), $("#ATTIC_SHOULD_REFRESH")
-        .is(":checked") ? $(".attic-refresh-hide")
-        .show() : $(".attic-refresh-hide")
-        .hide(), $("#CLICK_CONFIRM")
-        .is(":checked") ? $(".confirm-hide")
-        .show() : $(".confirm-hide")
-        .hide(), $("#SHOULD_SEND_EMAIL")
-        .is(":checked") ? $(".email-hide")
-        .show() : $(".email-hide")
-        .hide(), $("#ATTIC_ENABLED")
-        .is(":checked") ? $(".attic-settings")
-        .show() : $(".attic-settings")
-        .hide(), $("#ENABLED")
-        .is(":checked") ? $(".main-shop-settings")
-        .show() : $(".main-shop-settings")
-        .hide()
+    $("#USE_ITEM_DB").is(":checked") ? (
+        $(".db-hide").show(),
+        $(".restock-hide").hide()
+    ) : (
+        $(".restock-hide").show(),
+        $(".db-hide").hide()
+    );
+    
+    $("#USE_BLACKLIST").is(":checked") ? $(".blacklist-hide").show() : $(".blacklist-hide").hide();
+    $("#CLICK_ITEM").is(":checked") ? $(".click-hide").show() : $(".click-hide").hide();
+    $("#ATTIC_CLICK_ITEM").is(":checked") ? $(".attic-click-hide").show() : $(".attic-click-hide").hide();
+    $("#ATTIC_SHOULD_REFRESH").is(":checked") ? $(".attic-refresh-hide").show() : $(".attic-refresh-hide").hide();
+    $("#CLICK_CONFIRM").is(":checked") ? $(".confirm-hide").show() : $(".confirm-hide").hide();
+    $("#SHOULD_SEND_EMAIL").is(":checked") ? $(".email-hide").show() : $(".email-hide").hide();
+    $("#ATTIC_ENABLED").is(":checked") ? $(".attic-settings").show() : $(".attic-settings").hide();
+    $("#ENABLED").is(":checked") ? $(".main-shop-settings").show() : $(".main-shop-settings").hide();
+    $("#ENABLED").is(":checked") ? $(".main-shop-settings").show() : $(".main-shop-settings").hide();
+    $("#SHOULD_ENTER_PIN").is(":checked") ? $(".enter-pin").show() : $(".enter-pin").hide();
+    $("#USE_BLACKLIST_SW").is(":checked") ? $(".blacklist-sw").show() : $(".blacklist-sw").hide();
+    if($("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked")){
+        $(".random-percentage").show(); 
+        $(".fixed-percentage").hide(); 
+    } else {
+        $(".random-percentage").hide();
+        $(".fixed-percentage").show(); 
+    }
+    
 }
 
 $("#PAYMENT_LINK")
@@ -458,7 +455,7 @@ function setMIN_BLACKLIST_ITEM_WAIT(value) { chrome.storage.local.set({ MIN_BLAC
 
 function setMAX_BLACKLIST_ITEM_WAIT(value) { chrome.storage.local.set({ MAX_BLACKLIST_ITEM_WAIT: Number(value) }, (function () {})) }
 
-function setUSE_AUTOPRICING_BLACKLIST(value) { chrome.storage.local.set({ USE_AUTOPRICING_BLACKLIST: value }, (function () {})) }
+function setUSE_BLACKLIST_SW(value) { chrome.storage.local.set({ USE_BLACKLIST_SW: value }, (function () {})) }
 
 function setBLACKLIST_SW(value) { chrome.storage.local.set({ BLACKLIST_SW: value }, (function () {})) }
 
@@ -497,6 +494,7 @@ function setMAX_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({ MAX_WAIT_
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
     setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(isChecked);
+    showOrHide();
 });
 
 $("#FIXED_PRICING_PERCENTAGE").bind("input propertychange", (function() {
@@ -547,8 +545,10 @@ $("#MAX_BLACKLIST_ITEM_WAIT").bind("input propertychange", (function() {
     setMAX_BLACKLIST_ITEM_WAIT($("#MAX_BLACKLIST_ITEM_WAIT").val())
 }))
 
-$("#USE_AUTOPRICING_BLACKLIST").bind("input propertychange", (function() {
-    setUSE_AUTOPRICING_BLACKLIST($("#USE_AUTOPRICING_BLACKLIST").val())
+$("#USE_BLACKLIST_SW").bind("input propertychange", (function() {
+    const isChecked = $("#USE_BLACKLIST_SW").is(":checked");
+    setUSE_BLACKLIST_SW(isChecked);
+    showOrHide();
 }))
 
 $("#BLACKLIST_SW").bind("input propertychange", (function() {
@@ -613,7 +613,9 @@ $("#MAX_TYPING_SPEED").bind("input propertychange", (function() {
 }))
 
 $("#SHOULD_ENTER_PIN").bind("input propertychange", (function() {
-    setSHOULD_ENTER_PIN($("#SHOULD_ENTER_PIN").val())
+    const isChecked = $("#SHOULD_ENTER_PIN").is(":checked");
+    setSHOULD_ENTER_PIN(isChecked);
+    showOrHide();
 }))
 
 $("#NEOPETS_SECURITY_PIN").bind("input propertychange", (function() {
@@ -807,7 +809,7 @@ resetButton.onclick = function(_) {
         $("#MAX_NEW_SEARCH_WAIT_TIME").val(_.MAX_NEW_SEARCH_WAIT_TIME),
         $("#MIN_BLACKLIST_ITEM_WAIT").val(_.MIN_BLACKLIST_ITEM_WAIT),
         $("#MAX_BLACKLIST_ITEM_WAIT").val(_.MAX_BLACKLIST_ITEM_WAIT),
-        $("#USE_BLACKLIST_SW").val(_.USE_BLACKLIST_SW),
+        $("#USE_BLACKLIST_SW").prop("checked", _.USE_BLACKLIST_SW),
         $("#BLACKLIST_SW").val(_.BLACKLIST_SW.join("\n")), 
 
         // Shop Stock Page Settings;
