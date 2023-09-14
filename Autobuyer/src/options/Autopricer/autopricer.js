@@ -463,7 +463,7 @@ function ShowShopStock(){
     stockContainer.style.display = 'block';
 }
 
-stockContainer.style.display = 'none';
+optionsContainer.style.display = 'none';
 
 
 //######################################################################################################################################

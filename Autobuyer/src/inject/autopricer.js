@@ -7,7 +7,7 @@ function getSUBMIT_PRICES_PROCESS(callback) {
         const value = result.SUBMIT_PRICES_PROCESS;
 
         if (typeof callback === 'function') {
-        callback(value);
+            callback(value);
         }
     });
 }
@@ -160,6 +160,291 @@ function getCURRENT_PRICING_INDEX(callback) {
         if (typeof callback === 'function') {
             callback(typeof value === 'undefined' ? 0 : value);
         }
+    });
+}
+
+
+//######################################################################################################################################
+
+
+///////# AutoPricer Chrome Settings Getters;
+
+function getSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING'], function (result) {
+            const value = result.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING;
+            resolve(value);
+        });
+    });
+}
+
+function getFIXED_PRICING_PERCENTAGE() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['FIXED_PRICING_PERCENTAGE'], function (result) {
+            const value = result.FIXED_PRICING_PERCENTAGE;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_PRICING_PERCENTAGE() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_PRICING_PERCENTAGE'], function (result) {
+            const value = result.MIN_PRICING_PERCENTAGE;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_PRICING_PERCENTAGE() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_PRICING_PERCENTAGE'], function (result) {
+            const value = result.MAX_PRICING_PERCENTAGE;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_WAIT_PER_REFRESH() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_WAIT_PER_REFRESH'], function (result) {
+            const value = result.MIN_WAIT_PER_REFRESH;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_WAIT_PER_REFRESH() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_WAIT_PER_REFRESH'], function (result) {
+            const value = result.MAX_WAIT_PER_REFRESH;
+            resolve(value);
+        });
+    });
+}
+
+function getRESUBMITS_PER_ITEM() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['RESUBMITS_PER_ITEM'], function (result) {
+            const value = result.RESUBMITS_PER_ITEM;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_RESUBMIT_WAIT_TIME() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_RESUBMIT_WAIT_TIME'], function (result) {
+            const value = result.MIN_RESUBMIT_WAIT_TIME;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_RESUBMIT_WAIT_TIME() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_RESUBMIT_WAIT_TIME'], function (result) {
+            const value = result.MAX_RESUBMIT_WAIT_TIME;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_NEW_SEARCH_WAIT_TIME() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_NEW_SEARCH_WAIT_TIME'], function (result) {
+            const value = result.MIN_NEW_SEARCH_WAIT_TIME;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_NEW_SEARCH_WAIT_TIME() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_NEW_SEARCH_WAIT_TIME'], function (result) {
+            const value = result.MAX_NEW_SEARCH_WAIT_TIME;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_BLACKLIST_ITEM_WAIT() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_BLACKLIST_ITEM_WAIT'], function (result) {
+            const value = result.MIN_BLACKLIST_ITEM_WAIT;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_BLACKLIST_ITEM_WAIT() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_BLACKLIST_ITEM_WAIT'], function (result) {
+            const value = result.MAX_BLACKLIST_ITEM_WAIT;
+            resolve(value);
+        });
+    });
+}
+
+function getUSE_BLACKLIST_SW() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['USE_BLACKLIST_SW'], function (result) {
+            const value = result.USE_BLACKLIST_SW;
+            resolve(value);
+        });
+    });
+}
+
+function getBLACKLIST_SW() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['BLACKLIST_SW'], function (result) {
+            const value = result.BLACKLIST_SW;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_WAIT_PER_ACTION() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_WAIT_PER_ACTION'], function (result) {
+            const value = result.MIN_WAIT_PER_ACTION;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_WAIT_PER_ACTION() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_WAIT_PER_ACTION'], function (result) {
+            const value = result.MAX_WAIT_PER_ACTION;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_WAIT_AFTER_PRICING_ITEM() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_WAIT_AFTER_PRICING_ITEM'], function (result) {
+            const value = result.MIN_WAIT_AFTER_PRICING_ITEM;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_WAIT_AFTER_PRICING_ITEM() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_WAIT_AFTER_PRICING_ITEM'], function (result) {
+            const value = result.MAX_WAIT_AFTER_PRICING_ITEM;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_SHOP_NAVIGATION_COOLDOWN() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_SHOP_NAVIGATION_COOLDOWN'], function (result) {
+            const value = result.MIN_SHOP_NAVIGATION_COOLDOWN;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_SHOP_NAVIGATION_COOLDOWN() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_SHOP_NAVIGATION_COOLDOWN'], function (result) {
+            const value = result.MAX_SHOP_NAVIGATION_COOLDOWN;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_SHOP_SEARCH_FOR_INPUT_BOX() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_SHOP_SEARCH_FOR_INPUT_BOX'], function (result) {
+            const value = Number(result.MIN_SHOP_SEARCH_FOR_INPUT_BOX);
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_SHOP_SEARCH_FOR_INPUT_BOX() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_SHOP_SEARCH_FOR_INPUT_BOX'], function (result) {
+            const value = Number(result.MAX_SHOP_SEARCH_FOR_INPUT_BOX);
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_SHOP_CLICK_UPDATE() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_SHOP_CLICK_UPDATE'], function (result) {
+            const value = Number(result.MIN_SHOP_CLICK_UPDATE);
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_SHOP_CLICK_UPDATE() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_SHOP_CLICK_UPDATE'], function (result) {
+            const value = Number(result.MAX_SHOP_CLICK_UPDATE);
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_TYPING_SPEED() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_TYPING_SPEED'], function (result) {
+            const value = Number(result.MIN_TYPING_SPEED);
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_TYPING_SPEED() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_TYPING_SPEED'], function (result) {
+            const value = Number(result.MAX_TYPING_SPEED);
+            resolve(value);
+        });
+    });
+}
+
+function getSHOULD_ENTER_PIN() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['SHOULD_ENTER_PIN'], function (result) {
+            const value = result.SHOULD_ENTER_PIN;
+            resolve(value);
+        });
+    });
+}
+
+function getNEOPETS_SECURITY_PIN() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['NEOPETS_SECURITY_PIN'], function (result) {
+            const value = result.NEOPETS_SECURITY_PIN;
+            resolve(value);
+        });
+    });
+}
+
+function getMIN_WAIT_BEFORE_UPDATE() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_WAIT_BEFORE_UPDATE'], function (result) {
+            const value = result.MIN_WAIT_BEFORE_UPDATE;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_WAIT_BEFORE_UPDATE() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_WAIT_BEFORE_UPDATE'], function (result) {
+            const value = result.MAX_WAIT_BEFORE_UPDATE;
+            resolve(value);
+        });
     });
 }
 
