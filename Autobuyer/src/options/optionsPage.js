@@ -491,6 +491,8 @@ function setMIN_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({ MIN_WAIT_
 
 function setMAX_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({ MAX_WAIT_BEFORE_UPDATE: value }, (function () {})) }
 
+function setSHOULD_USE_NEON(value) { chrome.storage.local.set({ SHOULD_USE_NEON: value }, (function () {})) }
+
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
     setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(isChecked);
@@ -630,6 +632,11 @@ $("#MAX_WAIT_BEFORE_UPDATE").bind("input propertychange", (function() {
     setMAX_WAIT_BEFORE_UPDATE($("#MAX_WAIT_BEFORE_UPDATE").val())
 }))
 
+$("#SHOULD_USE_NEON").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_USE_NEON").is(":checked");
+    setSHOULD_USE_NEON(isChecked);
+    showOrHide();
+}))
 
 
 //######################################################################################################################################
@@ -703,6 +710,7 @@ resetButton.onclick = function(_) {
     PAUSE_AFTER_BUY_MS: 0,
 
     // AutoPricer;
+    SHOULD_USE_NEON: false,
     SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
     FIXED_PRICING_PERCENTAGE: 10,
     MIN_PRICING_PERCENTAGE: 8,
@@ -794,6 +802,7 @@ resetButton.onclick = function(_) {
         $("#RESTOCK_LIST").val(_.RESTOCK_LIST.join("\n")), 
 
         // AutoPricer;
+        $("#SHOULD_USE_NEON").prop("checked", _.SHOULD_USE_NEON),
         $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING),
         $("#FIXED_PRICING_PERCENTAGE").val(_.FIXED_PRICING_PERCENTAGE),
         $("#MIN_PRICING_PERCENTAGE").val(_.MIN_PRICING_PERCENTAGE),
