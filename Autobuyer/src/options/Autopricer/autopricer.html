@@ -67,6 +67,20 @@
                                 <th></th><th></th>
                             </thead>
                             <tr>
+                                <td>Enable <b>Neon</b> for Shop Wizard:
+                                    <span class="tooltiptext">
+                                        Example Tooltip<br><br>
+                                        <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm">Neopian Shops IDs</a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="SHOULD_USE_NEON" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><b>Random</b> Pricing Percentages:
                                     <span class="tooltiptext">
                                         Example Tooltip
@@ -370,11 +384,13 @@
                             </tr>
                         </tbody>
                     </table>
+            </center>
+
+            <center>
                 <br><br><br>
                 <button id="reset" class="button reset">Reset All Settings & Restock List</button>
                 <br><br><br>
             </center>
-            
         </div>
         <script src="../../toolbar.js"></script>
         <script src="../../common/default_items.js"></script>
