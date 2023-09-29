@@ -40,6 +40,11 @@
             "src/inject/inject.js"
         ]
     },
+	{
+        "matches": [
+			"https://www.neopets.com/quickstock.phtml*"
+        ],
+    },
     {
         "matches": [
             "http://www.neopets.com/shops/wizard.phtml*",
