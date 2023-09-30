@@ -448,7 +448,9 @@ function getMAX_WAIT_BEFORE_UPDATE() {
     });
 }
 
-
+function setAUTOPRICER_STATUS(value) {
+    chrome.storage.local.set({ AUTOPRICER_STATUS: value }, function () {});
+}
 
 //######################################################################################################################################
 
@@ -548,8 +550,7 @@ async function SetAllVariables(){
     isEnteringPINAutomatically = await getSHOULD_ENTER_PIN();
     playerPIN = await getNEOPETS_SECURITY_PIN();
     sleepAfterPinMin = await getMIN_WAIT_BEFORE_UPDATE();
-    sleepAfterPinMin = await getMAX_WAIT_BEFORE_UPDATE();
-
+    sleepAfterPinMax = await getMAX_WAIT_BEFORE_UPDATE();
 
     //######################################################################################################################################
 
@@ -565,6 +566,7 @@ async function SetAllVariables(){
             // If it's the last page, let the user know the process is complete;
             if(pageIndex == hrefLinks.length - 1){
                 setSHOP_INVENTORY(rowsItems);
+                setAUTOPRICER_STATUS("Inactive");
                 window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
                 setINVENTORY_UPDATED(true);
             }
@@ -657,6 +659,8 @@ async function SetAllVariables(){
     function StartSWPricing(){
         //If the user is in the Shop Wizard page;
         if(window.location.href === wizardURL){
+            setAUTOPRICER_STATUS("Navigating to SW...");
+
             getAUTOPRICER_INVENTORY(function (list) {
                 // Check the currently priced item;
                 getCURRENT_PRICING_INDEX(async function (currentPricingIndex) {
@@ -667,6 +671,7 @@ async function SetAllVariables(){
                         setCURRENT_PRICING_INDEX(0);
                         setSTART_AUTOPRICING_PROCESS(false);
                         window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
+                        setAUTOPRICER_STATUS("AutoPricing Complete!");
                         return;
                     }
 
@@ -678,6 +683,7 @@ async function SetAllVariables(){
                         setCURRENT_PRICING_INDEX(++currentPricingIndex);
 
                         UpdateShopInventoryWithValue(itemToSearch, 0);
+                        setAUTOPRICER_STATUS(`${nameToSearch} is Blacklisted, Skipping...`);
 
                         // Reloading the page so the script can continue;
                         await Sleep(sleepBlacklistMin, sleepBlacklistMax);
@@ -699,11 +705,13 @@ async function SetAllVariables(){
                             "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
                             "AutoPricer has been stopped.\n"
                         );
+                        setAUTOPRICER_STATUS("Faerie Quest Detected, Process Stopped.");
                         CancelAutoPricer();
                         return;
                     }
 
                     // If the box exists, then introduce the name on it;
+                    setAUTOPRICER_STATUS(`Searching ${nameToSearch}...`);
                     await SimulateKeyEvents(searchBox, nameToSearch);
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
@@ -755,6 +763,8 @@ async function SetAllVariables(){
                         await setAUTOPRICER_INVENTORY(autoPricingList);
 
                         UpdateShopInventoryWithValue(itemToSearch, deductedPrice);
+
+                        setAUTOPRICER_STATUS(`${nameToSearch} Best Price Found! Priced at ${bestPrice}...`);
                     });
 
                     // Increment currentIndex
@@ -827,14 +837,12 @@ async function SetAllVariables(){
     }
 
     // Loads elements from the shop page to inject the calculated prices;
-    async function PriceItemsInPage(){
+    async function PriceItemsInPage() {
         return new Promise(async (resolve) => {
-            var form = null;
+            setAUTOPRICER_STATUS("Navigating to Shop's Stock...");
 
-            // The shop table is inside a form, we are calling and waiting for it;
-            WaitForElement('form[action="process_market.phtml"][method="post"]', 0).then((extractedForm) => {
-                form = extractedForm;
-            });
+            var form = null;
+            form = await WaitForElement('form[action="process_market.phtml"][method="post"]', 0);
 
             // Extract all the table from the form;
             const table = form.querySelector('table[cellspacing="0"][cellpadding="3"][border="0"]');
@@ -844,16 +852,18 @@ async function SetAllVariables(){
             const pinInput = document.querySelector('input[type="password"][name="pin"]');
             const updateButton = document.querySelector('input[type="submit"][value="Update"]');
 
-            //Saving all the data in its respective array;
+            // Saving all the data in its respective array;
             await InputDataInShop(rows);
 
             GetNextPage();
 
-            PressUpdateButton(pinInput, updateButton);
+            await PressUpdateButton(pinInput, updateButton);
 
-            resolve();
+            resolve(); // Resolve the PriceItemsInPage promise after all operations are done
         });
     }
+
+    var updatedPrices = false;
 
     // Saving the data in the shop input values;
     async function InputDataInShop(rows){
@@ -866,11 +876,13 @@ async function SetAllVariables(){
             // Checking if the name is not a veto word;
             const itemName = nameRow.textContent.trim();
             const isVetoWord = vetoWords.includes(itemName);
+            console.log("Checking values");
 
             if(!isVetoWord){
                 await new Promise(async (resolve) => {
                     getSHOP_INVENTORY(async function (list){
                         // Extracting the items from the list;
+                        
                         const item = list.find(item => item.Name === itemName); // Finding the Item object based on its name in the table;
                         const itemPrice = parseInt(item.Price);
                         
@@ -879,6 +891,8 @@ async function SetAllVariables(){
                             resolve(); // Skip the current item and move to the next
                             return;
                         }
+
+                        setAUTOPRICER_STATUS(`Pricing ${itemName} at ${itemPrice} NPs...`);
 
                         // Get a reference to the input element
                         const inputElement = document.querySelector(`input[name="cost_${rowIndex}"]`);
@@ -909,6 +923,7 @@ async function SetAllVariables(){
                     if(isActive){
                         setSUBMIT_PRICES_PROCESS(false);
                         window.alert("The AutoPricing process has completed successfully!");
+                        setAUTOPRICER_STATUS("AutoPricing Complete!");
                     }
                 });
             }
@@ -920,7 +935,7 @@ async function SetAllVariables(){
         if(!isEnteringPINAutomatically){
             window.alert("Since you deactivated the Auto-Enter PIN option, please Enter your PIN manually.\n\nThe AutoPricing process has finished for this page, please press the 'Update' button and proceed to the next page manually.");
             return;
-        } 
+        }
 
         if(updatedPrices){
             await Sleep(sleepAfterPricingMin, sleepAfterPricingMax);
@@ -931,14 +946,16 @@ async function SetAllVariables(){
             }
 
             updateButton.click();
+            setAUTOPRICER_STATUS(`Prices Updated!`);
         }
     }
 
     var currentPageLink = null;
 
     async function NavigateToNextPage(){
-        await Sleep(sleepWaitForUpdateMin, sleepWaitForUpdateMax);
-        return new Promise((resolve) => {
+        return new Promise(async (resolve) => {
+            await Sleep(sleepWaitForUpdateMin, sleepWaitForUpdateMax);
+
             getNAVIGATE_TO_NEXT_PAGE(function (canNavigate){
                 getNEXT_PAGE_INDEX(function (index){
                     currentPageLink = hrefLinks[index];
@@ -946,6 +963,7 @@ async function SetAllVariables(){
                     window.location.href = currentPageLink;
                     setNAVIGATE_TO_NEXT_PAGE(false);
                     setNEXT_PAGE_INDEX(++index);
+                    if(canNavigate) setAUTOPRICER_STATUS(`Navigating to the Shop's Next Page...`);
                 });
             });
 
@@ -993,8 +1011,8 @@ async function SetAllVariables(){
 
     // Waits 'X' amount of milliseconds. 'await Sleep(min, max)';
     function Sleep(min, max, showConsoleMessage = true) {
-        const milliseconds = GetRandomFloat(min, max) * 1000;
-        if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`);
+        const milliseconds = GetRandomFloat(min, max);
+        //if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`, min, max);
         return new Promise(resolve => setTimeout(resolve, milliseconds));
     }
 

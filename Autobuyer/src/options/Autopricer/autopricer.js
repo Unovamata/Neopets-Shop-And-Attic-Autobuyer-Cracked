@@ -103,6 +103,25 @@ function setNEXT_PAGE_INDEX(value) {
     chrome.storage.local.set({ NEXT_PAGE_INDEX: value }, function () {});
 }
 
+function setAUTOPRICER_STATUS(value) {
+    chrome.storage.local.set({ AUTOPRICER_STATUS: value }, function () {});
+}
+
+function getAUTOPRICER_STATUS(callback) {
+    chrome.storage.local.get(['AUTOPRICER_STATUS'], function (result) {
+        const value = result.AUTOPRICER_STATUS;
+
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setAUTOPRICER_STATUS("Inactive");
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 
 //######################################################################################################################################
 
@@ -130,6 +149,7 @@ function LoadInventoryFromStockPage() {
     if (confirm("Do you want to load your shop stock into NeoBuyer+ for AutoPricing?")) {
         setSTART_INVENTORY_PROCESS(true);
         setSUBMIT_PRICES_PROCESS(false);
+        setAUTOPRICER_STATUS("Loading Shop's Stock...");
         window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
     }
 }
@@ -353,20 +373,42 @@ checkPriced.addEventListener('click', () => UpdateAllUnpricedCheckboxes(true, 1)
 const uncheckPriced = document.getElementById("uncheck-priced");
 uncheckPriced.addEventListener('click', () => UpdateAllUnpricedCheckboxes(false, 1));
 
+const statusTag = document.getElementById("status-tag");
+const loadingIcon = document.getElementById("loading");
+
+getAUTOPRICER_STATUS(function (status){
+    ShowOrHideLoading(status);
+    statusTag.textContent = status;
+});
 
 // Checks constantly if the inventory page needs to update;
-function UpdateInventoryData() {
+function UpdateGUIData() {
     getINVENTORY_UPDATED(function (value) {
         if (value === true) {
             location.reload();
             setINVENTORY_UPDATED(false);
         }
     });
+
+    getAUTOPRICER_STATUS(function (status){
+        ShowOrHideLoading(status);
+        statusTag.textContent = status;
+    });
 }
 
+function ShowOrHideLoading(status){
+    loadingIcon.style.width = '1.6%';
+    loadingIcon.style.height = '1.6%';
+
+    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!")){
+        loadingIcon.style.visibility = 'hidden';
+    } else {
+        loadingIcon.style.visibility = 'visible';
+    }
+}
 
 // Updates the page's data every half a second when opened and needed;
-setInterval(UpdateInventoryData, 500);
+setInterval(UpdateGUIData, 500);
 
 
 //######################################################################################################################################
@@ -423,6 +465,8 @@ function StartAutoPricer(){
             swTab = null;
         }
     });
+
+    setAUTOPRICER_STATUS("AutoPricer Process Running...");
 }
 
 const cancelAutoPricingButton = document.getElementById("cancel");
@@ -437,6 +481,7 @@ function CancelAutoPricer(){
         setCURRENT_PRICING_INDEX(0);
         setSUBMIT_PRICES_PROCESS(false);
         setNEXT_PAGE_INDEX(0);
+        setAUTOPRICER_STATUS("Inactive");
     }
 }
 
