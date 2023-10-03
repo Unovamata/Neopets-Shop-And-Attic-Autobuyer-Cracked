@@ -37,7 +37,8 @@
         "js": [
             "src/common/default_items.js",
             "src/common/item_db.js",
-            "src/inject/inject.js"
+            "src/inject/inject.js",
+			"src/neopets-restock-timer.user.js"
         ]
     },
     {

@@ -557,8 +557,15 @@ async function SetAllVariables(){
 
     ///////# Loading the Shop Stock in the Extension;
 
+    const hrefLinks = [];
+
     // Calling all the shop pages for processing;
     async function ProcessAllPages() {
+        // If there are no other pages, then this is the only page the shop has;
+        if(hrefLinks.length == 0){
+            hrefLinks.push(window.location.href);
+        }
+
         // Checking all links;
         for (let pageIndex = 0; pageIndex < hrefLinks.length; pageIndex++) {
             await ProcessPageData(pageIndex);
@@ -616,8 +623,6 @@ async function SetAllVariables(){
             }
         });
     }
-
-    const hrefLinks = [];
 
     LoadPageLinks();
 
