@@ -41,6 +41,8 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 - Cleaner interfaces with better navigation.
 - [Neon](https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm "Neon") extension integration for quicker SW searches.
 - User's shop auto-pricer.
+- Shop restock timer.
+- Daily update checker.
 
 ## Included Features
 
