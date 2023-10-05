@@ -633,7 +633,8 @@ function wrapper() {
     
     //On click, toggle analytics and its containers;
     document.getElementById("analytics").onclick = function(e) {
-        ToggleTabs("analytics", "analytics-container"), ProcessPurchaseHistory(true)
+        window.alert("Feature currently unavailable.\n\nThanks for your patience!");
+        //ToggleTabs("analytics", "analytics-container"), ProcessPurchaseHistory(true)
     }
     
     //Toggling the main tab;

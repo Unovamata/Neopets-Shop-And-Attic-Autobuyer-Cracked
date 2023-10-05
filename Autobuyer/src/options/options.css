@@ -156,6 +156,13 @@ td:hover .tooltiptext {
     visibility: visible;
 }
 
+.tooltiptext a {
+    font-size: 20px;
+    text-decoration: none;
+    color: white !important;
+    font-family: 'Cafeteria', sans-serif;
+}
+
 .toolbar-bottom {
     z-index: 2;
 }
@@ -182,13 +189,6 @@ thead {
     margin-top: 40px;
     font-weight: bold;
     color: #2196F3;
-}
-
-a {
-    font-size: 20px;
-    text-decoration: none;
-    color: white !important;
-    font-family: 'Cafeteria', sans-serif;
 }
 
 .shop-type {

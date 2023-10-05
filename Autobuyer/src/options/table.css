@@ -36,7 +36,7 @@ table td {
 .reset {
     width: 15%;
     border-radius: 20px;
-    background: #2196F3;
+    background-color: #2196F3;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
@@ -45,6 +45,7 @@ table td {
     justify-content: center;
     border: none;
     font-family: 'Cafeteria', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
 /* Properties specific to .button */
@@ -52,6 +53,10 @@ table td {
     margin: 10px 40px; /* Add space to the top and bottom, and center horizontally */    
     height: 40px;
     font-size: 20px;
+}
+
+.button:hover {
+    background-color: #46acff; /* Grey color on hover */
 }
 
 /* Common properties for .button and .reset */
@@ -79,7 +84,6 @@ table td {
     padding: 20px;
     width: 500px;
     height: 40px;
-    font-size: 14px;
 }
 
 
@@ -87,6 +91,7 @@ table td {
 /* Set the width and color of the scrollbar */
 ::-webkit-scrollbar {
     width: 10px; /* Width of the entire scrollbar */
+    overflow: auto;
 }
 
 /* Set the background color of the scrollbar track */

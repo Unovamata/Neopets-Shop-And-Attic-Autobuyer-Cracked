@@ -53,83 +53,17 @@ th {
     cursor: pointer;
 }
 
-.feedback {
-    color: darkgrey;
-    font-size: 21px;
-}
-
 .big {
-    font-size: 1.2em;
     text-align: justify;
+    font-size: 18px;
 }
 
-button {
-    background-color: #008CBA;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
+.big a {
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: grey;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-a,
-a:visited,
-a:hover,
-.payment-page-link {
-    color: blue;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-#PAYMENT_LINK2 {
-    font-size: 30px;
-}
-
-.important {
-    color: darkred;
+    color: #2196F3;
     font-weight: bold;
 }
 
-.button {
-    background-color: #555555;
-    border: none;
-    color: white;
-    padding: 10px 15px;
+.warning-center {
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-button:disabled,
-button[disabled] {
-    background-color: lightgrey;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
-    cursor: not-allowed;
 }
