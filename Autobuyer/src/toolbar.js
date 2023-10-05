@@ -153,8 +153,6 @@ function UpdateNotification(){
             return;
         }
 
-        setUPDATE_DATE(parsedDate);
-
         // If the version checker has not been run, check the latest version of the extension;
         var currentVersion = chrome.runtime.getManifest().version;
         var apiUrl = "https://api.github.com/repos/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
@@ -196,6 +194,7 @@ function UpdateNotification(){
             default:
                 if(isLatestVersion){
                     updateNotification.style.backgroundColor = successColor;
+                    setUPDATE_DATE(parsedDate);
                 } else {
                     updateNotification.style.backgroundColor = errorColor;
                     updateImage.src = "../../../icons/delete.png";
