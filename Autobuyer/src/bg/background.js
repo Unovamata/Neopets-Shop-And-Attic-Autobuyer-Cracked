@@ -74,5 +74,3 @@ chrome.webNavigation.onErrorOccurred.addListener((function(e) {
 		urlMatches: "(.*neopets.com/halloween/garage.phtml)|(.*neopets.com/objects.phtml?(.)*type=shop(.)*)|(.*neopets.com/objects.phtml?(.)*obj_type=([0-9]+)(.)*)"
 	}]
 });
-
-

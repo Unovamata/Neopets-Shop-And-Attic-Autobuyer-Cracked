@@ -16,8 +16,7 @@
         "default_title": "NeoBuyer+ Settings"
     },
     "default_locale": "en",
-    "background":
-    {
+    "background":{
         "service_worker": "src/bg/background.js"
     },
     "options_page": "src/options/Autobuyer/autobuyer.html",
@@ -28,6 +27,15 @@
         "tts"
     ],
     "content_scripts": [
+	{
+        "matches": [
+            "https://www.neopets.com/quickstock.phtml*"
+        ],
+        "js": [
+			"js/jquery.js",
+            "src/better_quick_stock.user.js"
+        ]
+    },
     {
         "matches": [
             "https://www.neopets.com/halloween/garage.phtml*",
