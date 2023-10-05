@@ -58,9 +58,9 @@ function injectToolbar() {
                 <img  class = "toolbar-icon" src="${npIconUrl}" alt="Info Icon"> 
             AutoPricer </a>
 
-            <a href="${autosdbUrl}">
+            <!--<a href="${autosdbUrl}">
                 <img  class = "toolbar-icon" src="${sdbIconUrl}" alt="Info Icon"> 
-            AutoSDB </a>
+            AutoSDB </a>-->
 
 
             <a href="${historyUrl}">
@@ -136,24 +136,34 @@ function getUPDATE_DATE(callback) {
 
 const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
 
+var successColor = "#2196F3";
+var errorColor = "#f22046";
+var warningColor = "#ff8214";
 
 function UpdateNotification(){
     const currentDate = new Date();
     const parsedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDay()}, ${currentDate.getFullYear()}`;
-    setUPDATE_DATE("");
+    //setUPDATE_DATE(""); //DEBUG!!!!
 
-    getUPDATE_DATE(function (date){
-        // Check if the program has checked for updates today;
+    getUPDATE_DATE(async function (date){
+        // Checking the latest version of the extension daily;
         var hasDoneDailyVersionCheck = date === parsedDate;
 
         if(hasDoneDailyVersionCheck){
             return;
         }
-        
+
         setUPDATE_DATE(parsedDate);
+
+        // If the version checker has not been run, check the latest version of the extension;
+        var currentVersion = chrome.runtime.getManifest().version;
+        var apiUrl = "https://api.github.com/repos/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
+        var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
+        var parsedVersion = githubLatestVersion.replace("v", "");
+        var isLatestVersion = parsedVersion == currentVersion;
+
         const updateNotification = document.createElement("span");
         updateNotification.className = "update-notification";
-        updateNotification.style.backgroundColor = "#2196F3";
 
         // Creating the image component;
         const updateImage = document.createElement("img");
@@ -163,33 +173,86 @@ function UpdateNotification(){
         // Setting the update status;
         const updateStatus = document.createElement("a");
         updateStatus.className = "update-status";
-        updateStatus.textContent = "NeoBuyer+ is up to date!";
-        
+        updateStatus.textContent = "NeoBuyer+ is up to Date!"
+
+        switch(parsedVersion){
+            // Github's API can't be reached;
+            case 'a':
+                updateNotification.style.backgroundColor = warningColor;
+                updateImage.src = "../../../icons/delete.png";
+                updateStatus.textContent = "Unable to Check for Updates...";
+                isLatestVersion = true; // It can be the latest version for all we know;
+            break;
+
+            // Unknown error;
+            case 'b':
+                updateNotification.style.backgroundColor = errorColor;
+                updateImage.src = "../../../icons/delete.png";
+                updateStatus.textContent = " Update Checker Failed...";
+                isLatestVersion = true; // It can be the latest version for all we know;
+            break;
+
+            // Normal version checking;
+            default:
+                if(isLatestVersion){
+                    updateNotification.style.backgroundColor = successColor;
+                } else {
+                    updateNotification.style.backgroundColor = errorColor;
+                    updateImage.src = "../../../icons/delete.png";
+                    updateStatus.textContent = "NeoBuyer+ is Outdated!";
+                    updateStatus.appendChild(document.createElement("br"));
+                    //updateStatus.appendChild(document.createElement("br"));
+                    const updateLink = document.createElement("a");
+                    updateLink.href = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
+                    updateLink.textContent = "Update NeoBuyer";
+                    updateLink.style.fontSize = "26.5px";
+                    updateStatus.appendChild(updateLink);
+                }
+            break;
+        }
+
         updateNotification.appendChild(updateImage);
         updateNotification.appendChild(updateStatus);
         document.body.appendChild(updateNotification);
 
-        // Listen for the animationend event
-        updateNotification.addEventListener("animationend", () => {
-            var canTrigger = true;
+        // If it's the latest version, then animate the popup;
+        if(isLatestVersion){
+            updateNotification.addEventListener("animationend", () => {
+                var canTrigger = true;
 
-            // Check if the event can be triggered
-            if (canTrigger) {
-                // Delay execution by one second
-                setTimeout(() => {
-                    // Change the animation to a new animation
-                    updateNotification.style.animation = "slideUp 2s ease-out";
-                    
-                    // Set the flag to false to prevent further triggers
-                    canTrigger = false;
+                // Change the animation and the opacity to 0;
+                if (canTrigger) {
+                    setTimeout(() => {
+                        updateNotification.style.animation = "slideUp 2s ease-out";
 
-                    updateNotification.style.opacity = 0;
-                }, 1500);
-            }
-        });
+                        canTrigger = false;
 
-        console.log(date);
+                        updateNotification.style.opacity = 0;
+                    }, 1500);
+                }
+            });
+        }
     });
+}
+
+async function FetchLatestGitHubVersion(apiUrl) {
+    try {
+        // Checking the Github API for the latest extension version;
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+            return 'a'; // API can't be reached;
+        }
+
+        // Parsing the data and returning it;
+        const data = await response.json();
+
+        const githubLatestVersion = data.tag_name;
+
+        return githubLatestVersion;
+    } catch (error) {
+        return 'b'; // Error in the execution;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {

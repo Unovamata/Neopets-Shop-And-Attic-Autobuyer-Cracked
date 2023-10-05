@@ -190,7 +190,6 @@ function DisplayTableData(dataArray) {
         headerCell = tableHeader.cloneNode(false);
         headerCell.appendChild(document.createTextNode("JN"));
         tableRowClone.appendChild(headerCell);
-        console.log(headerKeys);
         
         //Creating the header rows;
         const headerRow = tableHead.cloneNode(false);
@@ -612,8 +611,6 @@ function FormatDate(dateString) {
 }
 
 function ParseNumericString(inputString) {
-    console.log(inputString);
-
     // Check if inputString is valid
     if (inputString === undefined) {
         return 0; // Return a default value or handle the error as needed
