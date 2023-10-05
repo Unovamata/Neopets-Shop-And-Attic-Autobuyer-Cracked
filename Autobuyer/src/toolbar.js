@@ -15,6 +15,8 @@ const sdbIconUrl = `${srcPath}/toolbar/safetydeposit-icon.svg`;
 const historyIconUrl = `${srcPath}/toolbar/transferlog-icon.svg`;
 const databaseIconUrl = `${srcPath}/toolbar/settings-icon.svg`;
 const infoIconUrl = `${srcPath}/toolbar/search-icon.svg`;
+const checkIconUrl = `${srcPath}/toolbar/check.png`;
+const crossIconUrl = `${srcPath}/toolbar/delete.png`;
 
 // Styles
 const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
@@ -27,6 +29,7 @@ const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
 const infoUrl = `${srcPath}/options/info.html`;
+
 
 // content.js
 function injectToolbar() {
@@ -105,3 +108,90 @@ document.addEventListener('DOMContentLoaded', function() {
     injectToolbar();
 });
 
+
+//######################################################################################################################################
+
+
+
+function setUPDATE_DATE(value) {
+    chrome.storage.local.set({ UPDATE_DATE: value }, function () {});
+}
+
+function getUPDATE_DATE(callback) {
+    chrome.storage.local.get(['UPDATE_DATE'], function (result) {
+        const value = result.UPDATE_DATE;
+
+        if(value === undefined || value === null){
+            setUPDATE_DATE("");
+        } 
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+
+//######################################################################################################################################
+
+const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+
+
+function UpdateNotification(){
+    const currentDate = new Date();
+    const parsedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDay()}, ${currentDate.getFullYear()}`;
+    setUPDATE_DATE("");
+
+    getUPDATE_DATE(function (date){
+        // Check if the program has checked for updates today;
+        var hasDoneDailyVersionCheck = date === parsedDate;
+
+        if(hasDoneDailyVersionCheck){
+            return;
+        }
+        
+        setUPDATE_DATE(parsedDate);
+        const updateNotification = document.createElement("span");
+        updateNotification.className = "update-notification";
+        updateNotification.style.backgroundColor = "#2196F3";
+
+        // Creating the image component;
+        const updateImage = document.createElement("img");
+        updateImage.className = "update-image";
+        updateImage.src = "../../../icons/check.png"; // Replace with your image URL
+
+        // Setting the update status;
+        const updateStatus = document.createElement("a");
+        updateStatus.className = "update-status";
+        updateStatus.textContent = "NeoBuyer+ is up to date!";
+        
+        updateNotification.appendChild(updateImage);
+        updateNotification.appendChild(updateStatus);
+        document.body.appendChild(updateNotification);
+
+        // Listen for the animationend event
+        updateNotification.addEventListener("animationend", () => {
+            var canTrigger = true;
+
+            // Check if the event can be triggered
+            if (canTrigger) {
+                // Delay execution by one second
+                setTimeout(() => {
+                    // Change the animation to a new animation
+                    updateNotification.style.animation = "slideUp 2s ease-out";
+                    
+                    // Set the flag to false to prevent further triggers
+                    canTrigger = false;
+
+                    updateNotification.style.opacity = 0;
+                }, 1500);
+            }
+        });
+
+        console.log(date);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    UpdateNotification();
+});

@@ -69,8 +69,8 @@
                             <tr>
                                 <td>Enable <b>Neon</b> for Shop Wizard:
                                     <span class="tooltiptext">
-                                        Example Tooltip<br><br>
-                                        <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm">Neopian Shops IDs</a>
+                                        This feature combines Neopets Shop Wizard's searches onto a single page<br><br>
+                                        <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm">Neon Extension</a>
                                     </span>
                                 </td>
                                 <td>
@@ -83,7 +83,7 @@
                             <tr>
                                 <td><b>Random</b> Pricing Percentages:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        If enabled, it automatically prices your items using the lowest Shop Wizard price and subtracts a random percentage of the price.
                                     </span>
                                 </td>
                                 <td>
@@ -96,7 +96,8 @@
                             <tr class="fixed-percentage">
                                 <td><b>Fixed</b> Pricing Percentage:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        The percentage subtracted from the item's lowest price.<br><br>
+                                        Lowest Price = Price - Price Percentage.
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="100" id="FIXED_PRICING_PERCENTAGE"></input><span class="notation">%</span></td>
@@ -104,7 +105,8 @@
                             <tr class="random-percentage">
                                 <td><b>Minimum</b> Pricing Percentage: 
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        The minimum random percentage range subtracted from the item's lowest price.<br><br>
+                                        Lowest Price = Price - Price Percentage.
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="100" id="MIN_PRICING_PERCENTAGE"></input><span class="notation">%</span></td>
@@ -112,7 +114,8 @@
                             <tr class="random-percentage">
                                 <td><b>Maximum</b> Pricing Percentage: 
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        The  minimum random percentage range subtracted from the item's lowest price.<br><br>
+                                        Lowest Price = Price - Price Percentage.
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="100" id="MAX_PRICING_PERCENTAGE"></input><span class="notation">%</span></td>
@@ -130,7 +133,8 @@
                             <tr>
                                 <td><b>Minimum</b> Wait Cooldown per Refresh:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Shop Wizard page.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
@@ -138,7 +142,8 @@
                             <tr>
                                 <td><b>Maximum</b> Wait Cooldown per Refresh:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Shop Wizard page.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
@@ -146,7 +151,7 @@
                             <tr>
                                 <td>Resubmits per Item:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        The amount of times the AutoPricer must press the "Resubmit" button.
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" id="RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
@@ -154,7 +159,8 @@
                             <tr>
                                 <td><b>Minimum</b> Cooldown per Action:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds between actions in the Shop Wizard page.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_PER_ACTION"></input><span class="notation">ms</span></td>
@@ -162,7 +168,8 @@
                             <tr>
                                 <td><b>Maximum</b> Cooldown per Action:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds between actions in the Shop Wizard page.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_PER_ACTION"></input><span class="notation">ms</span></td>
@@ -170,7 +177,8 @@
                             <tr>
                                 <td><b>Minimum</b> Auto-Click <b>'Resubmit'</b> Button:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds between "Resubmit" button clicks.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_RESUBMIT_WAIT_TIME"></input><span class="notation">ms</span></td>
@@ -178,7 +186,8 @@
                             <tr>
                                 <td><b>Maximum</b> Auto-Click <b>'Resubmit'</b> Button:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds between "Resubmit" button clicks.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_RESUBMIT_WAIT_TIME"></input><span class="notation">ms</span></td>
@@ -186,7 +195,8 @@
                             <tr>
                                 <td><b>Minimum</b> Auto-Click <b>'New Search'</b> Button:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds to start a "New Search" after the pricing actions are complete.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_NEW_SEARCH_WAIT_TIME"></input><span class="notation">ms</span></td>
@@ -194,14 +204,16 @@
                             <tr>
                                 <td><b>Maximum</b> Auto-Click <b>'New Search'</b> Button:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds to start a "New Search" after the pricing actions are complete.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_NEW_SEARCH_WAIT_TIME"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
                                 <td>Use a Blacklist of Items to not Auto Price:
-                                    <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                    <span class="tooltiptext">This blacklist skips items with names that match the entries in the list.<br><br>
+                                        This is helpful for avoiding incorrect pricing of items with similar names to others</span>
                                 </td>
                                 <td>
                                     <label class="switch">
@@ -213,7 +225,8 @@
                             <tr class="blacklist-sw">
                                 <td><b>Minimum</b> Blacklisted Item Wait:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds if the AutoPricer is pricing a blacklisted item.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_BLACKLIST_ITEM_WAIT"></input><span class="notation">ms</span></td>
@@ -221,16 +234,14 @@
                             <tr class="blacklist-sw">
                                 <td><b>Maximum</b> Blacklisted Item Wait:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds if the AutoPricer is pricing a blacklisted item.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_BLACKLIST_ITEM_WAIT"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr class="blacklist-sw">
                                 <td>Blacklist:
-                                    <span class="tooltiptext">
-                                        Example Tooltip
-                                    </span>
                                 </td>
                                 <td><textarea rows="10" cols="40" id="BLACKLIST_SW"></textarea></td>
                             </tr>
@@ -247,7 +258,8 @@
                             <tr>
                                 <td><b>Minimum</b> Cooldown After Pricing Item:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds after pricing an item in the Shop.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_AFTER_PRICING_ITEM"></input><span class="notation">ms</span></td>
@@ -255,7 +267,8 @@
                             <tr>
                                 <td><b>Maximum</b> Cooldown After Pricing Item:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds after pricing an item in the Shop.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_AFTER_PRICING_ITEM"></input><span class="notation">ms</span></td>
@@ -263,7 +276,8 @@
                             <tr>
                                 <td><b>Minimum</b> Shop Page Navigation Time:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Player's Shop page.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
@@ -271,7 +285,8 @@
                             <tr>
                                 <td><b>Maximum</b> Shop Page Navigation Time:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Player's Shop page.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
@@ -279,7 +294,8 @@
                             <tr>
                                 <td><b>Minimum</b> Price Input Box Search Time:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds for the AutoPricer to find the price input box in the page.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_SHOP_SEARCH_FOR_INPUT_BOX"></input><span class="notation">ms</span></td>
@@ -287,7 +303,8 @@
                             <tr>
                                 <td><b>Maximum</b> Price Input Box Search Time:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds for the AutoPricer to find the price input box per item to price.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_SHOP_SEARCH_FOR_INPUT_BOX"></input><span class="notation">ms</span></td>
@@ -295,7 +312,8 @@
                             <tr>
                                 <td><b>Minimum</b> Auto-Click Update Button Cooldown:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds after pricing all the items and then clicking the "Update" button.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_SHOP_CLICK_UPDATE"></input><span class="notation">ms</span></td>
@@ -303,7 +321,8 @@
                             <tr>
                                 <td><b>Maximum</b> Auto-Click Update Button Cooldown:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds after pricing all the items and then clicking the "Update" button.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_SHOP_CLICK_UPDATE"></input><span class="notation">ms</span></td>
@@ -334,7 +353,9 @@
                             <tr>
                                 <td><b>Minimum</b> Typing Speed Cooldown
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Minimum wait time in milliseconds per character typed.<br>
+                                        This simulates human-like typing.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_TYPING_SPEED"></input><span class="notation">ms</span></td>
@@ -342,14 +363,21 @@
                             <tr>
                                 <td><b>Maximum</b> Typing Speed Cooldown
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Maximum wait time in milliseconds per character typed.<br>
+                                        This simulates human-like typing.
+                                        <br><br> 1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_TYPING_SPEED"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
                                 <td>Auto-Enter Neopets <b>PIN</b>:
-                                    <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                    <span class="tooltiptext">
+                                        If enabled, the bot will automatically enter your PIN when updating prices in all the pages of your shop.<br><br>
+
+                                        <a>The entered information will never be stored elsewhere.<br> 
+                                        NeoBuyer+ cannot access the internet.</a>
+                                    </span>
                                 </td>
                                 <td>
                                     <label class="switch">
@@ -361,7 +389,7 @@
                             <tr class="enter-pin">
                                 <td>Neopets Security <b>PIN</b>:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        Your Neopets PIN.
                                     </span>
                                 </td>
                                 <td><input type="text" min="0000" max="9999" id="NEOPETS_SECURITY_PIN"></input><span class="notation">PIN</span></td>
@@ -369,15 +397,17 @@
                             <tr class="enter-pin">
                                 <td><b>Minimum</b> Cooldown After Typing the <b>PIN</b> Before Updating:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        To simulate human-like behaviour.<br><br>
+                                        1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_BEFORE_UPDATE"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr class="enter-pin">
-                                <td><b>Maximum</b> Cooldown After Typing the  <b>PIN</b> Before Updating:
+                                <td><b>Maximum</b> Cooldown After Typing the <b>PIN</b> Before Updating:
                                     <span class="tooltiptext">
-                                        Example Tooltip
+                                        To simulate human-like behaviour.<br><br>
+                                        1 second = 1000
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_BEFORE_UPDATE"></input><span class="notation">ms</span></td>
