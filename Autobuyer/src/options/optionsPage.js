@@ -493,6 +493,10 @@ function setMAX_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({ MAX_WAIT_
 
 function setSHOULD_USE_NEON(value) { chrome.storage.local.set({ SHOULD_USE_NEON: value }, (function () {})) }
 
+function setMIN_WAIT_BAN_TIME(value) { chrome.storage.local.set({ MIN_WAIT_BAN_TIME: value }, (function () {})) }
+
+function setMAX_WAIT_BAN_TIME(value) { chrome.storage.local.set({ MAX_WAIT_BAN_TIME: value }, (function () {})) }
+
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
     setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(isChecked);
@@ -638,6 +642,14 @@ $("#SHOULD_USE_NEON").bind("input propertychange", (function() {
     showOrHide();
 }))
 
+$("#MIN_WAIT_BAN_TIME").bind("input propertychange", (function() {
+    setMIN_WAIT_BAN_TIME($("#MIN_WAIT_BAN_TIME").val())
+}))
+
+$("#MAX_WAIT_BAN_TIME").bind("input propertychange", (function() {
+    setMAX_WAIT_BAN_TIME($("#MAX_WAIT_BAN_TIME").val())
+}))
+
 
 //######################################################################################################################################
 
@@ -717,6 +729,8 @@ resetButton.onclick = function(_) {
     MAX_PRICING_PERCENTAGE: 10,
 
     // Shop Wizard;
+    MIN_WAIT_BAN_TIME: 300000,
+    MAX_WAIT_BAN_TIME: 900000,
     MIN_WAIT_PER_REFRESH: 10,
     MAX_WAIT_PER_REFRESH: 20,
     RESUBMITS_PER_ITEM: 6,
@@ -809,6 +823,8 @@ resetButton.onclick = function(_) {
         $("#MAX_PRICING_PERCENTAGE").val(_.MAX_PRICING_PERCENTAGE),
 
         // SW Settings;
+        $("#MIN_WAIT_BAN_TIME").val(_.MIN_WAIT_BAN_TIME),
+        $("#MAX_WAIT_BAN_TIME").val(_.MAX_WAIT_BAN_TIME),
         $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
         $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
         $("#RESUBMITS_PER_ITEM").val(_.RESUBMITS_PER_ITEM),
@@ -842,5 +858,4 @@ resetButton.onclick = function(_) {
         $("#MAX_WAIT_BEFORE_UPDATE").val(_.MAX_WAIT_BEFORE_UPDATE),
 
         showOrHide()
-        
 }));

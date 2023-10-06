@@ -159,7 +159,7 @@ const submitPricesButton = document.getElementById("submit");
 submitPricesButton.addEventListener('click', StartPriceSubmittingProcess);
 
 function StartPriceSubmittingProcess(){
-    if (confirm("Do you want to submit your list of prices to your shop?")) {
+    if (confirm("Do you want to submit your list of prices to your shop?\n\nPlease, make sure the items to submit are checked in the list below).")) {
         setNEXT_PAGE_INDEX(1);
         setSUBMIT_PRICES_PROCESS(true);
         setSTART_INVENTORY_PROCESS(false);
@@ -400,7 +400,7 @@ function ShowOrHideLoading(status){
     loadingIcon.style.width = '1.6%';
     loadingIcon.style.height = '1.6%';
 
-    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!")){
+    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!") || status.includes("Sleep")){
         loadingIcon.style.visibility = 'hidden';
     } else {
         loadingIcon.style.visibility = 'visible';

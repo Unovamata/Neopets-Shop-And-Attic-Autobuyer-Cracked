@@ -131,6 +131,26 @@
                                 <th></th><th></th>
                             </thead>
                             <tr>
+                                <td><b>Minimum</b> Wait Time if Shop Wizard Banned:
+                                    <span class="tooltiptext">
+                                        Minimum wait time in milliseconds added to the Shop Wizard Ban time.<br>
+                                        If you were banned for 30 minutes, this time will be added to the AutoPricer's wait duration before it resumes auto-pricing.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MIN_WAIT_BAN_TIME"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Wait Time if Shop Wizard Banned:
+                                    <span class="tooltiptext">
+                                        Maximum wait time in milliseconds added to the Shop Wizard Ban time.<br>
+                                        If you were banned for 30 minutes, this time will be added to the AutoPricer's wait duration before it resumes auto-pricing.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MAX_WAIT_BAN_TIME"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
                                 <td><b>Minimum</b> Wait Cooldown per Refresh:
                                     <span class="tooltiptext">
                                         Minimum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Shop Wizard page.

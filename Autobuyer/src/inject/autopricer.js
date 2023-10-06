@@ -448,6 +448,24 @@ function getMAX_WAIT_BEFORE_UPDATE() {
     });
 }
 
+function getMIN_WAIT_BAN_TIME() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MIN_WAIT_BAN_TIME'], function (result) {
+            const value = result.MIN_WAIT_BAN_TIME;
+            resolve(value);
+        });
+    });
+}
+
+function getMAX_WAIT_BAN_TIME() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['MAX_WAIT_BAN_TIME'], function (result) {
+            const value = result.MAX_WAIT_BAN_TIME;
+            resolve(value);
+        });
+    });
+}
+
 function setAUTOPRICER_STATUS(value) {
     chrome.storage.local.set({ AUTOPRICER_STATUS: value }, function () {});
 }
@@ -477,6 +495,9 @@ var playerPIN, isEnteringPINAutomatically;
 
 // Typing letter-by-letter speed;
 var typingSleepMin, typingSleepMax;
+
+// Sleep time if Shop Wizard banned;
+var sleepIfBannedMin, sleepIfBannedMax;
 
 // Wait time when the user goes to the SW to AutoPrice after every refresh;
 var sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax;
@@ -518,6 +539,8 @@ async function SetAllVariables(){
     percentageDeductionMax = await getMAX_PRICING_PERCENTAGE();
 
     // Shop Wizard;
+    sleepIfBannedMin = await getMIN_WAIT_BAN_TIME();
+    sleepIfBannedMax = await getMAX_WAIT_BAN_TIME();
     sleepWhileNavigatingToSWMin = await getMIN_WAIT_PER_REFRESH();
     sleepWhileNavigatingToSWMax = await getMAX_WAIT_PER_REFRESH();
     sleepInSWPageMin = await getMIN_WAIT_PER_ACTION();
@@ -741,6 +764,8 @@ async function SetAllVariables(){
 
                     // The amount of times the extension should search for lower prices;
                     for(var i = 1; i <= resubmitPresses; i++){
+                        await CheckForBan();
+
                         await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
 
                         WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
@@ -788,6 +813,29 @@ async function SetAllVariables(){
             */
             window.alert("The AutoPricer is running, the Neobuyer's+ shop inventory will not be updated.\n\nWait for the AutoPricer to finish or cancel the process.");
         }
+    }
+
+    async function CheckForBan(){
+        // Find all paragraphs;
+        const paragraphs = document.querySelectorAll('p');
+        
+        return new Promise(async (resolve) => {
+            for (const paragraph of paragraphs) {
+                const contents = paragraph.textContent;
+        
+                if (contents.includes('I am too busy right now, please come back in about ')) {
+                    var bannedMinutes = contents.replace("I am too busy right now, please come back in about ", "");
+                    bannedMinutes = Number(bannedMinutes.replace(" minutes and I can help you out.", "")) * 6000;
+                    setAUTOPRICER_STATUS(`Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
+
+                    // Sleep for the SW banned minutes and refresh the window;
+                    await Sleep(bannedMinutes + Number(sleepIfBannedMin), bannedMinutes + Number(sleepIfBannedMax))
+                    resolve();
+                    setAUTOPRICER_STATUS(`Shop Wizard is Usable Again! Refreshing...`);
+                    window.location.reload();
+                }
+            }
+        });
     }
 
     // Loads and edits the stored shop inventory and sets a price to items;
@@ -859,10 +907,9 @@ async function SetAllVariables(){
 
             // Saving all the data in its respective array;
             await InputDataInShop(rows);
-
-            GetNextPage();
-
             await PressUpdateButton(pinInput, updateButton);
+            
+            GetNextPage();
 
             resolve(); // Resolve the PriceItemsInPage promise after all operations are done
         });
@@ -927,8 +974,8 @@ async function SetAllVariables(){
                 getSUBMIT_PRICES_PROCESS(function (isActive){
                     if(isActive){
                         setSUBMIT_PRICES_PROCESS(false);
-                        window.alert("The AutoPricing process has completed successfully!");
                         setAUTOPRICER_STATUS("AutoPricing Complete!");
+                        window.alert("The AutoPricing process has completed successfully!");
                     }
                 });
             }
