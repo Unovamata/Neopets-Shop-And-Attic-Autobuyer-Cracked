@@ -1117,7 +1117,7 @@ async function SetAllVariables(){
 
 
 // If the Neopets page sends an error, reload;
-function handleServerErrors() {
+function HandleServerErrors() {
     const bodyText = document.body.innerText;
     var error502 = bodyText.includes("502 Bad Gateway\nopenresty");
     var error504 = bodyText.includes("504 Gateway Time-out\nopenresty");
@@ -1137,4 +1137,4 @@ function handleServerErrors() {
     });
 }
 
-handleServerErrors();
+HandleServerErrors();

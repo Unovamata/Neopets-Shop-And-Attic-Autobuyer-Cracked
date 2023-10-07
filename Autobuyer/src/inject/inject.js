@@ -1,52 +1,83 @@
 function topLevelTurbo() {
-    var e = performance.now();
-    function t(e, t) {
-        document.title = e.toUpperCase(), t = t + " - " + (new Date)
-            .toLocaleString(), console.log(e + " - " + t), chrome.runtime.sendMessage({
-                neobuyer: "NeoBuyer",
-                type: "Notification",
-                notificationObject: {
-                    type: "basic",
-                    title: e,
-                    message: t,
-                    iconUrl: "../../icons/icon48.png"
-                }
-            })
+    // Updates the page's title;
+    function UpdateDocument(title, message) {
+        // Update the document title to uppercase
+        document.title = title.toUpperCase();
+
+        message = `${message} - ${new Date().toLocaleString()}`;
+        
+        // Send a message to the Chrome runtime
+        chrome.runtime.sendMessage({
+            neobuyer: "NeoBuyer",
+            type: "Notification",
+            notificationObject: {
+            type: "basic",
+            title: title,
+            message: message,
+            iconUrl: "../../icons/icon48.png",
+            },
+        });
     }
     
-    function n(e) {
+    var e = performance.now();
+
+    // Opens the quickstock page to auto SDB items;
+    function OpenQuickstockPage(e) {
         chrome.runtime.sendMessage({
             neobuyer: "NeoBuyer",
             type: "OpenQuickstockPage",
             itemName: e
-        })
+        });
     }
-    function o() {
-        document.body.innerText.indexOf("502 Bad Gateway\nopenresty") > -1 || document.body.innerText.indexOf("504 Gateway Time-out\nopenresty") > -1 || document.body.innerText.indexOf("Loading site please wait...") || document.body.innerText.indexOf("NET::ERR_CERT_COMMON_NAME_INVALID")> -1 ? setTimeout((function() {
-            location.reload()
-        }), 1e4) : t("Captcha page detected", "Captcha page detected. Pausing.")
+
+    // Handle page errors by refreshing;
+    function HandleServerErrors() {
+        const errorMessages = [
+          "502 Bad Gateway\nopenresty",
+          "504 Gateway Time-out\nopenresty",
+          "Loading site please wait...",
+          "NET::ERR_CERT_COMMON_NAME_INVALID"
+        ];
+      
+        const pageText = document.body.innerText;
+      
+        // Reload the page after 10 seconds if an error is detected;
+        if (errorMessages.some(message => pageText.includes(message))) {
+            setTimeout(() => { location.reload(); }, 10000);
+
+            UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+        }
     }
-    function r() {
-        if (!(window.location.href.indexOf("neopets.com/halloween/garage") > -1)) return !1;
-        var e = document.body.innerText.indexOf("Almost Abandoned Attic") > -1,
-            t = document.body.innerText.indexOf("I am very happy to have a visitor") > -1,
-            n = document.body.innerText.indexOf("Sorry, but you cannot buy any more items from this shop today! Please come back again tomorrow so that others may have a fair chance.") > -1,
-            r = document.body.innerText.indexOf("Sorry, please try again later.") > -1;
-        return !!(e && t || n || r) || (o(), !1)
+    
+    function CheckNeopetsGarage() {
+        // Check if the user is in the garage;
+        if (!window.location.href.includes("neopets.com/halloween/garage")) return false;
+        
+        const hasAlmostAbandonedAttic = document.body.innerText.includes("Almost Abandoned Attic");
+        const hasVisitorMessage = document.body.innerText.includes("I am very happy to have a visitor");
+        const hasShopLimitMessage = document.body.innerText.includes("Sorry, but you cannot buy any more items from this shop today! Please come back again tomorrow so that others may have a fair chance.");
+        const hasTryAgainLaterMessage = document.body.innerText.includes("Sorry, please try again later.");
+        
+        if (hasAlmostAbandonedAttic && hasVisitorMessage || hasShopLimitMessage || hasTryAgainLaterMessage) return true;
+        else {
+            HandleServerErrors();
+            return false;
+        }
     }
+    
     function i() {
         var e = window.location.href.indexOf("neopets.com/haggle.phtml") > -1,
             t = document.body.innerText.indexOf("Haggle for") > 0;
-        return !!e && (!!t || (o(), !1))
+        return !!e && (!!t || (HandleServerErrors(), !1))
     }
     function a() {
-        return window.location.href.indexOf("neopets.com/objects.phtml") > -1 && (!!(document.body.innerText.indexOf("Neopian Inflation") > 0) || (o(), !1))
+        return window.location.href.indexOf("neopets.com/objects.phtml") > -1 && (!!(document.body.innerText.indexOf("Neopian Inflation") > 0) || (HandleServerErrors(), !1))
     }
     function c() {
         return i() || a()
     }
     function u() {
-        return r() || c()
+        return CheckNeopetsGarage() || c()
     }
     function l() {
         var o, l, m, s, d, f, _, T, E, g, h, p, I, A, y, S, M, C, v, N, R, O, b, w, x, L, D, H, B, P, U, k, F, q, K, G, W, X, Y, j, V, z, $, Q, J, Z, ee, te, ne;
@@ -297,7 +328,7 @@ function topLevelTurbo() {
                                 }), Ee)
                             }
                         }()
-                } else r() > -1 && function() {
+                } else CheckNeopetsGarage() > -1 && function() {
                     if (qe(), function() {
                             var e = "I have placed it in your inventory";
                             return document.body.innerText.indexOf(e) > -1
@@ -308,7 +339,7 @@ function topLevelTurbo() {
                                 item: e,
                                 notes: ""
                             };
-                        ve(t), he(e + " bought", e + " bought from Attic"), be(e, ie, "-", "Bought"), m && n(e);
+                        ve(t), he(e + " bought", e + " bought from Attic"), be(e, ie, "-", "Bought"), m && OpenQuickstockPage(e);
                         setTimeout((function() {
                             Ie()
                         }), 12e5)
@@ -365,7 +396,7 @@ function topLevelTurbo() {
                 var o, c, u
             }
             function he(e, n) {
-                Ke(n), t(e, n)
+                Ke(n), UpdateDocument(e, n)
             }
             function pe(e) {
                 return document.body.innerText.indexOf(e) > -1
@@ -434,7 +465,7 @@ function topLevelTurbo() {
                 var t = document.getElementsByTagName("h1")[0].textContent,
                     o = document.querySelector("p > b")
                     .textContent.split("your offer of ")[1].split(" Neopoints!'")[0];
-                he(e + " bought", e + " bought from " + t + " for " + o + " NPs"), be(e, t, o, "Bought"), m && n(e), Re()
+                he(e + " bought", e + " bought from " + t + " for " + o + " NPs"), be(e, t, o, "Bought"), m && OpenQuickstockPage(e), Re()
             }
             function ve(e) {
                 g && window.emailjs.send(D, x, e, L)
@@ -572,7 +603,7 @@ function topLevelTurbo() {
                 return null == t || (null == t.Rarity || parseInt(t.Rarity) >= Z)
             }
             function Fe() {
-                r() ? Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 0;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ") : Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 68px;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ")
+                CheckNeopetsGarage() ? Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 0;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ") : Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 68px;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ")
             }
             function qe() {
                 if (f && !Te) {
@@ -614,7 +645,7 @@ function topLevelTurbo() {
                     s: r,
                     l: c
                 }
-            }(r() && k || c() && o) && chrome.storage.local.get({
+            }(CheckNeopetsGarage() && k || c() && o) && chrome.storage.local.get({
                 EXT_P_S: !1
             }, (function(e) {
                 if (e.EXT_P_S) ge();
@@ -645,7 +676,7 @@ function topLevelTurbo() {
             SEND_TO_SDB_AFTER_PURCHASE: !0
         }, (function(e) {
             var n;
-            e.SEND_TO_SDB_AFTER_PURCHASE && (t("Sending " + (n = getParameterByName("itemToQuickstock")) + " to SDB", "Sending " + n + " to safety deposit box"), function(e, t) {
+            e.SEND_TO_SDB_AFTER_PURCHASE && (UpdateDocument("Sending " + (n = getParameterByName("itemToQuickstock")) + " to SDB", "Sending " + n + " to safety deposit box"), function(e, t) {
                 ! function(e, t) {
                     for (var n, o = document.querySelectorAll("#content table td form table tbody tr"), r = 0; r < o.length; r++) o[r].innerText.indexOf(e) > -1 && (n = o[r]);
                     n.querySelectorAll("input[value='" + t.toLowerCase() + "']")[0].checked = !0
@@ -657,7 +688,8 @@ function topLevelTurbo() {
         }))
     }
     var s = setInterval((function() {
-        "complete" === document.readyState && (clearInterval(s), u() && l(), window.location.href.indexOf("neopets.com/quickstock.phtml") > -1 && (document.body.innerText.indexOf("This is designed to make life easier when putting items in your deposit box") > 0 || (o(), 0)) && null != getParameterByName("itemToQuickstock") && "" !== getParameterByName("itemToQuickstock") && m())
+        "complete" === document.readyState && (clearInterval(s), u() && l(), window.location.href.indexOf("neopets.com/quickstock.phtml") > -1 && (document.body.innerText.indexOf("This is designed to make life easier when putting items in your deposit box") > 0 || (HandleServerErrors(), 0)) && null != getParameterByName("itemToQuickstock") && "" !== getParameterByName("itemToQuickstock") && m())
     }), 20)
 }
+
 topLevelTurbo();
