@@ -707,17 +707,22 @@ async function SetAllVariables(){
                     var nameToSearch = itemToSearch.Name;
 
                     // Checking if an item is inside a blacklist;
-                    if(blacklist.includes(nameToSearch)){
-                        setCURRENT_PRICING_INDEX(++currentPricingIndex);
-
-                        UpdateShopInventoryWithValue(itemToSearch, 0);
-                        setAUTOPRICER_STATUS(`${nameToSearch} is Blacklisted, Skipping...`);
-
-                        // Reloading the page so the script can continue;
-                        await Sleep(sleepBlacklistMin, sleepBlacklistMax);
-                        window.location.reload();
-                        return;
+                    try{
+                        if(blacklist.includes(nameToSearch)){
+                            setCURRENT_PRICING_INDEX(++currentPricingIndex);
+    
+                            UpdateShopInventoryWithValue(itemToSearch, 0);
+                            setAUTOPRICER_STATUS(`${nameToSearch} is Blacklisted, Skipping...`);
+    
+                            // Reloading the page so the script can continue;
+                            await Sleep(sleepBlacklistMin, sleepBlacklistMax);
+                            window.location.reload();
+                            return;
+                        }
+                    } catch {
+                        console.log("Blacklist not defined...");
                     }
+                    
 
                     await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
 

@@ -49,7 +49,8 @@ function topLevelTurbo() {
         }
     }
     
-    function CheckNeopetsGarage() {
+    // Check the Almost Abandoned Attic;
+    function IsInAlmostAbandonedAttic() {
         // Check if the user is in the garage;
         if (!window.location.href.includes("neopets.com/halloween/garage")) return false;
         
@@ -65,22 +66,48 @@ function topLevelTurbo() {
         }
     }
     
-    function i() {
-        var e = window.location.href.indexOf("neopets.com/haggle.phtml") > -1,
-            t = document.body.innerText.indexOf("Haggle for") > 0;
-        return !!e && (!!t || (HandleServerErrors(), !1))
+    function IsHaggling() {
+        const isHagglePage = window.location.href.includes("neopets.com/haggle.phtml");
+        const isHaggleForItem = document.body.innerText.includes("Haggle for");
+
+        if (isHagglePage) {
+            if (isHaggleForItem) return true;
+            else {
+            HandleServerErrors();
+            return false;
+            }
+        }
+
+        return false;
     }
-    function a() {
-        return window.location.href.indexOf("neopets.com/objects.phtml") > -1 && (!!(document.body.innerText.indexOf("Neopian Inflation") > 0) || (HandleServerErrors(), !1))
+
+    function IsInShop() {
+        const isObjectsPage = window.location.href.includes("neopets.com/objects.phtml");
+        const hasInflationText = document.body.innerText.includes("Neopian Inflation");
+
+        if (isObjectsPage) {
+            if (hasInflationText) {
+            return true;
+            } else {
+            HandleServerErrors();
+            return false;
+            }
+        }
+
+        return false;
     }
-    function c() {
-        return i() || a()
+
+    function IsInNeopianShop() {
+        return IsHaggling() || IsInShop()
     }
-    function u() {
-        return CheckNeopetsGarage() || c()
+    
+    function IsInAtticOrShop() {
+        return IsInAlmostAbandonedAttic() || IsInNeopianShop()
     }
+    
     function l() {
         var o, l, m, s, d, f, _, T, E, g, h, p, I, A, y, S, M, C, v, N, R, O, b, w, x, L, D, H, B, P, U, k, F, q, K, G, W, X, Y, j, V, z, $, Q, J, Z, ee, te, ne;
+        
         chrome.storage.local.get({
             BUY_UNKNOWN_ITEMS_PROFIT: 1e5,
             ITEM_DB_MIN_RARITY: 1,
@@ -132,7 +159,60 @@ function topLevelTurbo() {
             SEND_TO_SDB_AFTER_PURCHASE: !1,
             PAUSE_AFTER_BUY_MS: 0
         }, (function(oe) {
-            ne = oe.PAUSE_AFTER_BUY_MS, m = oe.SEND_TO_SDB_AFTER_PURCHASE, J = oe.BUY_UNKNOWN_ITEMS_PROFIT, Z = oe.ITEM_DB_MIN_RARITY, ee = oe.USE_BLACKLIST, te = oe.BLACKLIST, o = oe.ENABLED, B = oe.USE_ITEM_DB, P = oe.ITEM_DB_MIN_PROFIT_NPS, U = oe.ITEM_DB_MIN_PROFIT_PERCENT, l = oe.HIGHLIGHT, s = oe.CLICK_ITEM, d = oe.CLICK_CONFIRM, f = oe.SHOULD_SHOW_BANNER, _ = oe.SHOULD_CLICK_NEOPET, T = oe.SHOULD_ANNOTATE_IMAGE, E = oe.SHOULD_ENTER_OFFER, g = oe.SHOULD_SEND_EMAIL, h = oe.SHOULD_GO_FOR_SECOND_MOST_VALUABLE, p = oe.STORES_TO_CYCLE_THROUGH_WHEN_STOCKED, I = oe.RUN_BETWEEN_HOURS, A = oe.MIN_REFRESH, y = oe.MAX_REFRESH, S = oe.ITEMS_TO_CONSIDER_STOCKED, M = oe.MIN_REFRESH_STOCKED, C = oe.MAX_REFRESH_STOCKED, v = oe.MIN_CLICK_ITEM_IMAGE, N = oe.MAX_CLICK_ITEM_IMAGE, R = oe.MIN_CLICK_CONFIRM, O = oe.MAX_CLICK_CONFIRM, b = oe.MIN_OCR_PAGE, w = oe.MAX_OCR_PAGE, x = oe.EMAIL_TEMPLATE, L = oe.EMAIL_USER_ID, D = oe.EMAIL_SERVICE_ID, H = oe.RESTOCK_LIST, k = oe.ATTIC_ENABLED, F = oe.ATTIC_HIGHLIGHT, q = oe.ATTIC_CLICK_ITEM, K = oe.ATTIC_ITEM_DB_MIN_PROFIT_NPS, G = oe.ATTIC_ITEM_DB_MIN_PROFIT_PERCENT, W = oe.ATTIC_MIN_BUY_TIME, X = oe.ATTIC_MAX_BUY_TIME, Y = oe.ATTIC_RUN_BETWEEN_HOURS, j = oe.ATTIC_MIN_REFRESH, V = oe.ATTIC_MAX_REFRESH, z = oe.ATTIC_SHOULD_REFRESH, $ = oe.ATTIC_LAST_REFRESH_MS, Q = oe.ATTIC_PREV_NUM_ITEMS;
+
+            // Destructing the variables extracted from the extension;
+            const {
+                PAUSE_AFTER_BUY_MS: ne,
+                SEND_TO_SDB_AFTER_PURCHASE: m,
+                BUY_UNKNOWN_ITEMS_PROFIT: J,
+                ITEM_DB_MIN_RARITY: Z,
+                USE_BLACKLIST: ee,
+                BLACKLIST: te,
+                ENABLED: o,
+                USE_ITEM_DB: B,
+                ITEM_DB_MIN_PROFIT_NPS: P,
+                ITEM_DB_MIN_PROFIT_PERCENT: U,
+                HIGHLIGHT: l,
+                CLICK_ITEM: s,
+                CLICK_CONFIRM: d,
+                SHOULD_SHOW_BANNER: f,
+                SHOULD_CLICK_NEOPET: _,
+                SHOULD_ANNOTATE_IMAGE: T,
+                SHOULD_ENTER_OFFER: E,
+                SHOULD_SEND_EMAIL: g,
+                SHOULD_GO_FOR_SECOND_MOST_VALUABLE: h,
+                STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: p,
+                RUN_BETWEEN_HOURS: I,
+                MIN_REFRESH: A,
+                MAX_REFRESH: y,
+                ITEMS_TO_CONSIDER_STOCKED: S,
+                MIN_REFRESH_STOCKED: M,
+                MAX_REFRESH_STOCKED: C,
+                MIN_CLICK_ITEM_IMAGE: v,
+                MAX_CLICK_ITEM_IMAGE: N,
+                MIN_CLICK_CONFIRM: R,
+                MAX_CLICK_CONFIRM: O,
+                MIN_OCR_PAGE: b,
+                MAX_OCR_PAGE: w,
+                EMAIL_TEMPLATE: x,
+                EMAIL_USER_ID: L,
+                EMAIL_SERVICE_ID: D,
+                RESTOCK_LIST: H,
+                ATTIC_ENABLED: k,
+                ATTIC_HIGHLIGHT: F,
+                ATTIC_CLICK_ITEM: q,
+                ATTIC_ITEM_DB_MIN_PROFIT_NPS: K,
+                ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: G,
+                ATTIC_MIN_BUY_TIME: W,
+                ATTIC_MAX_BUY_TIME: X,
+                ATTIC_RUN_BETWEEN_HOURS: Y,
+                ATTIC_MIN_REFRESH: j,
+                ATTIC_MAX_REFRESH: V,
+                ATTIC_SHOULD_REFRESH: z,
+                ATTIC_LAST_REFRESH_MS: $,
+                ATTIC_PREV_NUM_ITEMS: Q
+            } = oe;
+            
             var re, ie = "Attic",
                 ae = "qpkzsoynerzxsqw",
                 ce = [0, 60],
@@ -145,8 +225,9 @@ function topLevelTurbo() {
                 _e = !1,
                 Te = !1,
                 Ee = 50;
+
             function ge() {
-                if (i()) qe(), De() ? xe() : we() ? Ce() : (document.documentElement.textContent || document.documentElement.innerText)
+                if (IsHaggling()) qe(), De() ? xe() : we() ? Ce() : (document.documentElement.textContent || document.documentElement.innerText)
                     .indexOf("You don't have that kind of money") > -1 ? (o = document.querySelector("h2")
                         .innerText.replaceAll("Haggle for ", ""), c = {
                             status: "missed",
@@ -236,7 +317,7 @@ function topLevelTurbo() {
                             }), t.width, t.height);
                         var t, n
                     }());
-                else if (a())
+                else if (IsInShop())
                     if (qe(), De()) xe();
                     else if (we()) Ce();
                 else {
@@ -328,7 +409,8 @@ function topLevelTurbo() {
                                 }), Ee)
                             }
                         }()
-                } else CheckNeopetsGarage() > -1 && function() {
+                // This may break in the future #TAG; The original line was CheckNeopetsGarage() > -1, meaning the item was found, returning true using includes;
+                } else IsInAlmostAbandonedAttic() && function() {
                     if (qe(), function() {
                             var e = "I have placed it in your inventory";
                             return document.body.innerText.indexOf(e) > -1
@@ -603,7 +685,7 @@ function topLevelTurbo() {
                 return null == t || (null == t.Rarity || parseInt(t.Rarity) >= Z)
             }
             function Fe() {
-                CheckNeopetsGarage() ? Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 0;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ") : Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 68px;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ")
+                IsInAlmostAbandonedAttic() ? Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 0;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ") : Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 68px;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ")
             }
             function qe() {
                 if (f && !Te) {
@@ -645,7 +727,7 @@ function topLevelTurbo() {
                     s: r,
                     l: c
                 }
-            }(CheckNeopetsGarage() && k || c() && o) && chrome.storage.local.get({
+            }(IsInAlmostAbandonedAttic() && k || IsInNeopianShop() && o) && chrome.storage.local.get({
                 EXT_P_S: !1
             }, (function(e) {
                 if (e.EXT_P_S) ge();
@@ -656,22 +738,24 @@ function topLevelTurbo() {
                             e.paid ? (chrome.storage.local.set({
                                 EXT_P_S: !0
                             }, (function() {})), ge()) : (! function() {
-                                if (u()) {
+                                if (IsInAtticOrShop()) {
                                     var e = document.createElement("div");
                                     e.innerText = "Autobuyer Not Running - Please Subscribe", e.id = ae, document.body.appendChild(e), Fe()
                                 }
                             }(), chrome.storage.local.set({
                                 EXT_P_S: !1
-                            }, (function() {})), u() && t.openPaymentPage())
+                            }, (function() {})), IsInAtticOrShop() && t.openPaymentPage())
                         }))
                         .catch((e => {
-                            console.error(e), u() && window.alert("Please try again, it looks like there was an error loading your subscription: " + e)
+                            console.error(e), IsInAtticOrShop() && window.alert("Please try again, it looks like there was an error loading your subscription: " + e)
                         }))
                 }
             }))
         }))
     }
-    function m() {
+
+
+    /*function m() {
         chrome.storage.local.get({
             SEND_TO_SDB_AFTER_PURCHASE: !0
         }, (function(e) {
@@ -686,9 +770,10 @@ function topLevelTurbo() {
                 }), 500)
             }(n))
         }))
-    }
+    }*/
+    
     var s = setInterval((function() {
-        "complete" === document.readyState && (clearInterval(s), u() && l(), window.location.href.indexOf("neopets.com/quickstock.phtml") > -1 && (document.body.innerText.indexOf("This is designed to make life easier when putting items in your deposit box") > 0 || (HandleServerErrors(), 0)) && null != getParameterByName("itemToQuickstock") && "" !== getParameterByName("itemToQuickstock") && m())
+        "complete" === document.readyState && (clearInterval(s), IsInAtticOrShop() && l(), window.location.href.indexOf("neopets.com/quickstock.phtml") > -1 && (document.body.innerText.indexOf("This is designed to make life easier when putting items in your deposit box") > 0 || (HandleServerErrors(), 0)) && null != getParameterByName("itemToQuickstock") && "" !== getParameterByName("itemToQuickstock") && m())
     }), 20)
 }
 
