@@ -33,7 +33,7 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 - Firstly, it's essential not to be too greedy while restocking. It's recommended not to go on ABing for more than 8 hours at a stretch as it may draw Neopets' attention towards your account. So, let's use common sense and not overdo it.
 - In case you fail to buy an expensive item, don't worry. It's better to keep a low profile and aim for normal items that can yield a profit of at least 5-10K NP. You can also choose shops with high profitability or low competition.
 - Before activating the ABer, make sure to check all your options carefully. Most of the options are set in milliseconds, so it's best to be cautious while setting them up.
-- To search for items that you want to buy from specific shops and create your own custom item sniping list, you can use Neocodex or JellyNeo item databases. While Neocodex is currently down, it has an excellent database that you can use.
+- To search for items that you want to buy from specific shops and create your own custom item sniping list, you can use JellyNeo's item database and play around with the filters their database offers.
 
 ## New Features
 
@@ -43,6 +43,7 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 - User's shop auto-pricer.
 - Shop restock timer.
 - Daily update checker.
+- Better Quickstock.
 
 ## Included Features
 
