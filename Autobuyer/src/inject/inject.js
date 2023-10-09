@@ -45,7 +45,12 @@ function topLevelTurbo() {
         if (errorMessages.some(message => pageText.includes(message))) {
             setTimeout(() => { location.reload(); }, 10000);
 
-            UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+            if(message == errorMessages[2]) UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+        } 
+        
+        // If there's a browser related error;
+        else if(window.location.title == "www.neopets.com"){
+            setTimeout(() => { location.reload(); }, 10000);
         }
     }
     
