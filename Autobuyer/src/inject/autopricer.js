@@ -720,7 +720,7 @@ async function SetAllVariables(){
                             return;
                         }
                     } catch {
-                        console.log("Blacklist not defined...");
+                        console.log("Blacklist is not defined... Skipping operation...");
                     }
                     
 
@@ -935,7 +935,6 @@ async function SetAllVariables(){
             // Checking if the name is not a veto word;
             const itemName = nameRow.textContent.trim();
             const isVetoWord = vetoWords.includes(itemName);
-            console.log("Checking values");
 
             if(!isVetoWord){
                 await new Promise(async (resolve) => {
@@ -1071,7 +1070,7 @@ async function SetAllVariables(){
     // Waits 'X' amount of milliseconds. 'await Sleep(min, max)';
     function Sleep(min, max, showConsoleMessage = true) {
         const milliseconds = GetRandomFloat(min, max);
-        if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`, min, max);
+        //if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`, min, max);
         return new Promise(resolve => setTimeout(resolve, milliseconds));
     }
 

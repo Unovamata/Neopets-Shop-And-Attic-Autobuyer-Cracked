@@ -1,7 +1,3 @@
-var extpay = ExtPay("restock-highligher-autobuyer");
-
-function openPaymentPage() { extpay.openPaymentPage() }
-
 function setATTIC_CLICK_ITEM(_) { chrome.storage.local.set({ ATTIC_CLICK_ITEM: _ }, (function () {})) }
 
 function setATTIC_ENABLED(_) { chrome.storage.local.set({ ATTIC_ENABLED: _ }, (function () {})) }
@@ -164,33 +160,7 @@ function showOrHide() {
     
 }
 
-$("#PAYMENT_LINK")
-    .bind("click", (function() {
-        openPaymentPage()
-    })), chrome.storage.local.get({
-        EXT_P_S: !1
-    }, (function(_) {
-        _.EXT_P_S || extpay.getUser()
-            .then((_ => {
-                _.paid ? chrome.storage.local.set({
-                    EXT_P_S: !0
-                }, (function() {})) : chrome.storage.local.set({
-                    EXT_P_S: !1
-                }, (function() {}))
-            }))
-            .catch((_ => {
-                console.error(_)
-            }))
-    })), setTimeout((function() {
-        chrome.storage.local.get({
-            WARNING_ACK: !1,
-            EXT_P_S: !1
-        }, (function(_) {
-            !_.WARNING_ACK && _.EXT_P_S && (setATTIC_SHOULD_REFRESH(!1), chrome.tabs.create({
-                url: "../../src/notes/warning.html"
-            }))
-        }))
-    }), 2e3), $("#USE_BLACKLIST")
+$("#USE_BLACKLIST")
     .on("change", (function() {
         setUSE_BLACKLIST($("#USE_BLACKLIST")
             .is(":checked")), showOrHide()
@@ -724,43 +694,43 @@ resetButton.onclick = function(_) {
     // AutoPricer;
     SHOULD_USE_NEON: false,
     SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
-    FIXED_PRICING_PERCENTAGE: 10,
-    MIN_PRICING_PERCENTAGE: 8,
-    MAX_PRICING_PERCENTAGE: 10,
+    FIXED_PRICING_PERCENTAGE: 15,
+    MIN_PRICING_PERCENTAGE: 10,
+    MAX_PRICING_PERCENTAGE: 20,
 
     // Shop Wizard;
     MIN_WAIT_BAN_TIME: 300000,
     MAX_WAIT_BAN_TIME: 900000,
-    MIN_WAIT_PER_REFRESH: 10,
-    MAX_WAIT_PER_REFRESH: 20,
-    RESUBMITS_PER_ITEM: 6,
-    MIN_RESUBMIT_WAIT_TIME: 15,
-    MAX_RESUBMIT_WAIT_TIME: 30,
-    MIN_NEW_SEARCH_WAIT_TIME: 50,
-    MAX_NEW_SEARCH_WAIT_TIME: 100,
-    MIN_BLACKLIST_ITEM_WAIT: 15,
-    MAX_BLACKLIST_ITEM_WAIT: 30,
+    MIN_WAIT_PER_REFRESH: 10000,
+    MAX_WAIT_PER_REFRESH: 20000,
+    RESUBMITS_PER_ITEM: 5,
+    MIN_WAIT_PER_ACTION: 10000,
+    MAX_WAIT_PER_ACTION: 20000,
+    MIN_RESUBMIT_WAIT_TIME: 10000,
+    MAX_RESUBMIT_WAIT_TIME: 40000,
+    MIN_NEW_SEARCH_WAIT_TIME: 10000,
+    MAX_NEW_SEARCH_WAIT_TIME: 30000,
+    MIN_BLACKLIST_ITEM_WAIT: 10000,
+    MAX_BLACKLIST_ITEM_WAIT: 30000,
     USE_AUTOPRICING_BLACKLIST: false,
     USE_BLACKLIST_SW: false,
     BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
-    
+
     // Shop Stock Page Settings;
-    MIN_WAIT_PER_ACTION: 5,
-    MAX_WAIT_PER_ACTION: 8,
-    MIN_WAIT_AFTER_PRICING_ITEM: 4,
-    MAX_WAIT_AFTER_PRICING_ITEM: 9,
-    MIN_SHOP_NAVIGATION_COOLDOWN: 10,
-    MAX_SHOP_NAVIGATION_COOLDOWN: 30,
-    MIN_SHOP_SEARCH_FOR_INPUT_BOX: 5,
-    MAX_SHOP_SEARCH_FOR_INPUT_BOX: 10,
-    MIN_SHOP_CLICK_UPDATE: 10,
-    MAX_SHOP_CLICK_UPDATE: 20,
-    MIN_TYPING_SPEED: 1,
-    MAX_TYPING_SPEED: 3,
+    MIN_WAIT_AFTER_PRICING_ITEM: 10000,
+    MAX_WAIT_AFTER_PRICING_ITEM: 20000,
+    MIN_SHOP_NAVIGATION_COOLDOWN: 20000,
+    MAX_SHOP_NAVIGATION_COOLDOWN: 40000,
+    MIN_SHOP_SEARCH_FOR_INPUT_BOX: 5000,
+    MAX_SHOP_SEARCH_FOR_INPUT_BOX: 10000,
+    MIN_SHOP_CLICK_UPDATE: 10000,
+    MAX_SHOP_CLICK_UPDATE: 20000,
+    MIN_TYPING_SPEED: 200,
+    MAX_TYPING_SPEED: 500,
     SHOULD_ENTER_PIN: true,
     NEOPETS_SECURITY_PIN: "0000",
-    MIN_WAIT_BEFORE_UPDATE: 5,
-    MAX_WAIT_BEFORE_UPDATE: 10,
+    MIN_WAIT_BEFORE_UPDATE: 10000,
+    MAX_WAIT_BEFORE_UPDATE: 20000,
 
 }, (function(_) {
     $("#PAUSE_AFTER_BUY_MS")

@@ -7,8 +7,12 @@ function setSHOP_INVENTORY(value) {
 }
 
 function getSHOP_INVENTORY(callback) {
-    chrome.storage.local.get(['SHOP_INVENTORY'], function (result) {
+    chrome.storage.local.get(['SHOP_INVENTORY'], async function (result) {
         const value = result.SHOP_INVENTORY;
+
+        if(value == undefined || value == null){
+            await setSHOP_INVENTORY([]);
+        }
 
         if (typeof callback === 'function') {
             callback(value);
@@ -149,6 +153,7 @@ function LoadInventoryFromStockPage() {
     if (confirm("Do you want to load your shop stock into NeoBuyer+ for AutoPricing?")) {
         setSTART_INVENTORY_PROCESS(true);
         setSUBMIT_PRICES_PROCESS(false);
+        setSTART_AUTOPRICING_PROCESS(false);
         setAUTOPRICER_STATUS("Loading Shop's Stock...");
         window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
     }
@@ -226,9 +231,12 @@ function ReadInventoryData(){
             priceInput.addEventListener('change', function () {
                 Item.Price = parseInt(priceInput.value);
 
-                if(Item.Price < 0 || Item.Price > 999999){
+                if(Item.Price < 0 || priceInput.value == ""){
                     Item.Price = 0;
                     priceInput.value = 0;
+                } else if(Item.Price > 999999){
+                    Item.Price = 999999;
+                    priceInput.value = 999999;
                 }
 
                 setSHOP_INVENTORY(inventoryData);
@@ -448,7 +456,6 @@ function StartAutoPricer(){
     function CreateNewTab() {
         chrome.tabs.create({ url: 'https://www.neopets.com/shops/wizard.phtml', active: false }, function (tab) {
             swTab = tab;
-            console.log(tab);
         });
     }
 
