@@ -1,3 +1,34 @@
+var isInErrorPage = false;
+
+// If the Neopets page sends an error, reload;
+function HandleServerErrors() {
+    const bodyText = document.body.innerText;
+    var error502 = bodyText.includes("502 Bad Gateway\nopenresty");
+    var error504 = bodyText.includes("504 Gateway Time-out\nopenresty");
+    var captcha = bodyText.includes("Loading site please wait...");
+    var certError = bodyText.includes("NET::ERR_CERT_COMMON_NAME_INVALID")
+    
+    if (error502 || error504 || captcha || certError) {
+        isInErrorPage = true;
+
+        setTimeout(() => {
+            location.reload();
+        }, 10000); // Reload after 10 seconds
+    }
+
+    window.addEventListener('error', function (event) {
+        if (event.message && event.message.includes('net::ERR_CERT_COMMON_NAME_INVALID')) {
+            window.location.reload();
+        }
+    });
+}
+
+HandleServerErrors();
+
+
+//######################################################################################################################################
+
+
 function setSUBMIT_PRICES_PROCESS(value) {
     chrome.storage.local.set({ SUBMIT_PRICES_PROCESS: value }, function () {});
 }
@@ -685,139 +716,140 @@ async function SetAllVariables(){
 
     // Selects lowest prices to price the currently stocked items in the shop;
     function StartSWPricing(){
+        // Detect page errors;
+        if(isInErrorPage) return;
+
         //If the user is in the Shop Wizard page;
-        if(window.location.href === wizardURL){
-            setAUTOPRICER_STATUS("Navigating to SW...");
-
-            getAUTOPRICER_INVENTORY(function (list) {
-                // Check the currently priced item;
-                getCURRENT_PRICING_INDEX(async function (currentPricingIndex) {
-                    autoPricingList = list;
-
-                    //If the pricing list has been completed, end the AutoPricing process;
-                    if(autoPricingList.length - 1 < currentPricingIndex){
-                        setCURRENT_PRICING_INDEX(0);
-                        setSTART_AUTOPRICING_PROCESS(false);
-                        window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
-                        setAUTOPRICER_STATUS("AutoPricing Complete!");
-                        return;
-                    }
-
-                    var itemToSearch = autoPricingList[currentPricingIndex];
-                    var nameToSearch = itemToSearch.Name;
-
-                    // Checking if an item is inside a blacklist;
-                    try{
-                        if(blacklist.includes(nameToSearch)){
-                            setCURRENT_PRICING_INDEX(++currentPricingIndex);
-    
-                            UpdateShopInventoryWithValue(itemToSearch, 0);
-                            setAUTOPRICER_STATUS(`${nameToSearch} is Blacklisted, Skipping...`);
-    
-                            // Reloading the page so the script can continue;
-                            await Sleep(sleepBlacklistMin, sleepBlacklistMax);
-                            window.location.reload();
-                            return;
-                        }
-                    } catch {
-                        console.log("Blacklist is not defined... Skipping operation...");
-                    }
-                    
-
-                    await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
-
-                    // Searching the searchbox, if the box doesn't exists, the user is in a Faerie quest;
-                    var searchBox = document.getElementById("shopwizard");
-
-                    if(searchBox === null || searchBox === undefined){
-                        window.alert(
-                            "You are currently in a Faerie Quest.\n" +
-                            "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +
-                            "To continue, click 'Start AutoPricing' on the AutoPricer page.\n" +
-                            "The AutoPricer will resume from the last priced item.\n" +
-                            "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
-                            "AutoPricer has been stopped.\n"
-                        );
-                        setAUTOPRICER_STATUS("Faerie Quest Detected, Process Stopped.");
-                        CancelAutoPricer();
-                        return;
-                    }
-
-                    // If the box exists, then introduce the name on it;
-                    setAUTOPRICER_STATUS(`Searching ${nameToSearch}...`);
-                    await SimulateKeyEvents(searchBox, nameToSearch);
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
-
-                    // Click the button for the search;
-                    WaitForElement(".button-search-white", 0).then((searchButton) => {
-                        searchButton.click();
-                    });
-
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
-                    
-                    // Checking if the search was made correctly;
-                    WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
-                        var h3Element = resultsTextDiv.querySelector('h3');
-
-                        // If the name introduced was not valid, then refresh;
-                        if(h3Element.textContent === '...'){
-                            window.location.reload();
-                        }
-                    });
-
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
-
-                    // The amount of times the extension should search for lower prices;
-                    for(var i = 1; i <= resubmitPresses; i++){
-                        await CheckForBan();
-
-                        await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
-
-                        WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
-                            resubmitButton.click();
-                        });
-                    }
-
-                    // Getting the lowest price;
-                    WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
-                        // Parsing the string to a number;
-                        var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
-                        var deductedPrice = 0;
-
-                        // Subtracting a percentage of the price, so it's competitive with other results;
-                        if(isRandomPercentage) {
-                            deductedPrice = bestPrice * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
-                        } else { // If the subtracted percentage is fixed;
-                            deductedPrice = bestPrice * (1 - (fixedPercentageDeduction * 0.01));
-                        }
-
-                        deductedPrice = Math.floor(deductedPrice);
-
-                        // Updating the price list;
-                        autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
-                        await setAUTOPRICER_INVENTORY(autoPricingList);
-
-                        UpdateShopInventoryWithValue(itemToSearch, deductedPrice);
-
-                        setAUTOPRICER_STATUS(`${nameToSearch} Best Price Found! Priced at ${bestPrice}...`);
-                    });
-
-                    // Increment currentIndex
-                    setCURRENT_PRICING_INDEX(++currentPricingIndex);
-                    await Sleep(sleepNewSearchMin, sleepNewSearchMax);
-
-                    //Starting a new search;
-                    WaitForElement(".button-default__2020.button-blue__2020.wizard-button__2020[type='submit'][value='New Search']", 0).then((newSearchButton) => {
-                        newSearchButton.click();
-                    })
-                });
-            });
-        } else {
+        if(window.location.href != wizardURL){
             /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
             * This function either loads or submits prices depending on the current state of the AutoPricer;
             */
             window.alert("The AutoPricer is running, the Neobuyer's+ shop inventory will not be updated.\n\nWait for the AutoPricer to finish or cancel the process.");
+
+            return;
         }
+
+        setAUTOPRICER_STATUS("Navigating to SW...");
+
+        getAUTOPRICER_INVENTORY(function (list) {
+            // Check the currently priced item;
+            getCURRENT_PRICING_INDEX(async function (currentPricingIndex) {
+                autoPricingList = list;
+
+                //If the pricing list has been completed, end the AutoPricing process;
+                if(autoPricingList.length - 1 < currentPricingIndex){
+                    setCURRENT_PRICING_INDEX(0);
+                    setSTART_AUTOPRICING_PROCESS(false);
+                    window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
+                    setAUTOPRICER_STATUS("AutoPricing Complete!");
+                    return;
+                }
+
+                var itemToSearch = autoPricingList[currentPricingIndex];
+                var nameToSearch = itemToSearch.Name;
+
+                // Checking if an item is inside a blacklist;
+                if(blacklist.includes(nameToSearch)){
+                    setCURRENT_PRICING_INDEX(++currentPricingIndex);
+
+                    UpdateShopInventoryWithValue(itemToSearch, 0);
+                    setAUTOPRICER_STATUS(`${nameToSearch} is Blacklisted, Skipping...`);
+
+                    // Reloading the page so the script can continue;
+                    await Sleep(sleepBlacklistMin, sleepBlacklistMax);
+                    window.location.reload();
+                    return;
+                }
+                
+
+                await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
+
+                // Searching the searchbox, if the box doesn't exists, the user is in a Faerie quest;
+                var searchBox = document.getElementById("shopwizard");
+
+                if(searchBox === null || searchBox === undefined && !isInErrorPage){
+                    window.alert(
+                        "You are currently in a Faerie Quest.\n" +
+                        "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +
+                        "To continue, click 'Start AutoPricing' on the AutoPricer page.\n" +
+                        "The AutoPricer will resume from the last priced item.\n" +
+                        "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
+                        "AutoPricer has been stopped.\n"
+                    );
+                    setAUTOPRICER_STATUS("Faerie Quest Detected, Process Stopped.");
+                    CancelAutoPricer();
+                    return;
+                }
+
+                // If the box exists, then introduce the name on it;
+                setAUTOPRICER_STATUS(`Searching ${nameToSearch}...`);
+                await SimulateKeyEvents(searchBox, nameToSearch);
+                await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+
+                // Click the button for the search;
+                WaitForElement(".button-search-white", 0).then((searchButton) => {
+                    searchButton.click();
+                });
+
+                await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+                
+                // Checking if the search was made correctly;
+                WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
+                    var h3Element = resultsTextDiv.querySelector('h3');
+
+                    // If the name introduced was not valid, then refresh;
+                    if(h3Element.textContent === '...'){
+                        window.location.reload();
+                    }
+                });
+
+                await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+
+                // The amount of times the extension should search for lower prices;
+                for(var i = 1; i <= resubmitPresses; i++){
+                    await CheckForBan();
+
+                    await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
+
+                    WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
+                        resubmitButton.click();
+                    });
+                }
+
+                // Getting the lowest price;
+                WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
+                    // Parsing the string to a number;
+                    var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
+                    var deductedPrice = 0;
+
+                    // Subtracting a percentage of the price, so it's competitive with other results;
+                    if(isRandomPercentage) {
+                        deductedPrice = bestPrice * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
+                    } else { // If the subtracted percentage is fixed;
+                        deductedPrice = bestPrice * (1 - (fixedPercentageDeduction * 0.01));
+                    }
+
+                    deductedPrice = Math.floor(deductedPrice);
+
+                    // Updating the price list;
+                    autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
+                    await setAUTOPRICER_INVENTORY(autoPricingList);
+
+                    UpdateShopInventoryWithValue(itemToSearch, deductedPrice);
+
+                    setAUTOPRICER_STATUS(`${nameToSearch} Best Price Found! Priced at ${bestPrice}...`);
+                });
+
+                // Increment currentIndex
+                setCURRENT_PRICING_INDEX(++currentPricingIndex);
+                await Sleep(sleepNewSearchMin, sleepNewSearchMax);
+
+                //Starting a new search;
+                WaitForElement(".button-default__2020.button-blue__2020.wizard-button__2020[type='submit'][value='New Search']", 0).then((newSearchButton) => {
+                    newSearchButton.click();
+                })
+            });
+        });
     }
 
     async function CheckForBan(){
@@ -1116,29 +1148,3 @@ async function SetAllVariables(){
         inputElement.dispatchEvent(inputEvent);
     }
 }
-
-//######################################################################################################################################
-
-
-// If the Neopets page sends an error, reload;
-function HandleServerErrors() {
-    const bodyText = document.body.innerText;
-    var error502 = bodyText.includes("502 Bad Gateway\nopenresty");
-    var error504 = bodyText.includes("504 Gateway Time-out\nopenresty");
-    var captcha = bodyText.includes("Loading site please wait...");
-    var certError = bodyText.includes("NET::ERR_CERT_COMMON_NAME_INVALID")
-    
-    if (error502 || error504 || captcha || certError) {
-        setTimeout(() => {
-            location.reload();
-        }, 10000); // Reload after 10 seconds
-    }
-
-    window.addEventListener('error', function (event) {
-        if (event.message && event.message.includes('net::ERR_CERT_COMMON_NAME_INVALID')) {
-            window.location.reload();
-        }
-    });
-}
-
-HandleServerErrors();

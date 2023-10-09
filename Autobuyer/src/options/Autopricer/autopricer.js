@@ -408,7 +408,7 @@ function ShowOrHideLoading(status){
     loadingIcon.style.width = '1.6%';
     loadingIcon.style.height = '1.6%';
 
-    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!") || status.includes("Sleep")){
+    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!") || status.includes("Sleep") || status.includes("Stopped")){
         loadingIcon.style.visibility = 'hidden';
     } else {
         loadingIcon.style.visibility = 'visible';
