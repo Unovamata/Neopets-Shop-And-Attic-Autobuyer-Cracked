@@ -43,6 +43,7 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 - User's shop auto-pricer.
 - Shop restock timer.
 - Daily update checker.
+- Better Quickstock.
 
 ## Included Features
 
