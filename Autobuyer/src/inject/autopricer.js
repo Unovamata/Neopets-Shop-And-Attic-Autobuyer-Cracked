@@ -865,6 +865,14 @@ async function SetAllVariables(){
                     bannedMinutes = Number(bannedMinutes.replace(" minutes and I can help you out.", "")) * 6000;
                     setAUTOPRICER_STATUS(`Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
 
+                    window.alert(
+                        "You are currently Shop Wizard Banned.\n\n" +
+                        "You will need to wait a certain period of time before the autopricer can continue.\n" +
+                        "The AutoPricer will resume from the last priced item automatically.\n" +
+                        "You can either close this tab or leave it open after confirming this alert, it is up to you.\n\n" +
+                        "The AutoPricer has paused.\n"
+                    );
+
                     // Sleep for the SW banned minutes and refresh the window;
                     await Sleep(bannedMinutes + Number(sleepIfBannedMin), bannedMinutes + Number(sleepIfBannedMax))
                     resolve();

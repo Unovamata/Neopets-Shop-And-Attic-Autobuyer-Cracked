@@ -311,7 +311,7 @@ function topLevelTurbo() {
                                         _ && (e.dispatchEvent(a), Ae()),
                                             function(e, t) {
                                                 if (T) {
-                                                    var n = document.createElement("img");
+                                                    /var n = document.createElement("img");
                                                     n.src = "https://upload.wikimedia.org/wikipedia/commons/3/31/Circle_Burgundy_Solid.svg", n.style.height = "14px", n.style.width = "14px", n.style.position = "absolute", n.style.top = t - 7 + "px", n.style.left = e - 7 + "px", n.style.zIndex = "9999999999", n.style.pointerEvents = "none", document.body.appendChild(n), Ge("\n                          input[type='image'] {\n                            filter: contrast(2) grayscale(1);\n                          }\n                        ")
                                                 }
                                             }(r, i)
@@ -431,11 +431,11 @@ function topLevelTurbo() {
                             Ie()
                         }), 12e5)
                     }(), Se();
-                    else if (pe("Didn't you just buy something?")) he("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes"), setTimeout((function() {
+                    else if (DocumentIncludes("Didn't you just buy something?")) he("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes"), setTimeout((function() {
                         window.location.href = "https://www.neopets.com/halloween/garage.phtml"
                     }), 12e5);
-                    else if (pe("Sorry, please try again later.")) he("Attic is refresh banned", "Pausing NeoBuyer in Attic");
-                    else if (pe("cannot buy any more items from this shop today")) he("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
+                    else if (DocumentIncludes("Sorry, please try again later.")) he("Attic is refresh banned", "Pausing NeoBuyer in Attic");
+                    else if (DocumentIncludes("cannot buy any more items from this shop today")) he("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
                     else {
                         ! function() {
                             if (Q < 0) return;
@@ -448,7 +448,7 @@ function topLevelTurbo() {
                             }, (function() {
                                 he("Attic restocked", "Restock detected in Attic, updating last restock estimate.")
                             }))
-                        }(), pe("Sorry, we just sold out of that.") && he("Sold out", "Item was sold out at the Attic"), Se();
+                        }(), DocumentIncludes("Sorry, we just sold out of that.") && he("Sold out", "Item was sold out at the Attic"), Se();
                         var e = (o = Array.from(document.querySelectorAll("#items li"))
                             .map((e => e.getAttribute("oname"))), r = Array.from(document.querySelectorAll("#items li"))
                             .map((e => e.getAttribute("oprice")
@@ -482,12 +482,15 @@ function topLevelTurbo() {
                 }();
                 var o, c, u
             }
+
             function he(e, n) {
                 Ke(n), UpdateDocument(e, n)
             }
-            function pe(e) {
-                return document.body.innerText.indexOf(e) > -1
+
+            function DocumentIncludes(e) {
+                return document.body.innerText.includes(e)
             }
+
             function Ie() {
                 if (z) {
                     var e = function() {
@@ -699,14 +702,17 @@ function topLevelTurbo() {
                     e.innerText = "Autobuyer Running", e.id = ae, document.body.appendChild(e), Fe()
                 }
             }
+
             function Ke(e) {
                 Te && (document.getElementById(ae)
                     .innerText = "Autobuyer Running: " + e)
             }
+
             function Ge(e) {
                 const t = document.createElement("style");
                 t.textContent = e, document.head.append(t)
             }
+
             function We(e, t, n) {
                 e /= 255, t /= 255, n /= 255;
                 var o, r, i = Math.max(e, t, n),
