@@ -637,12 +637,12 @@ function topLevelTurbo() {
                         ClickToRefreshShop();
                     }, t);
                 } else if (IsItemAddedToInventory()) {
-                    // Handle case when an item is added to the inventory
                     UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxAddedToInventoryRefresh - minAddedToInventoryRefresh) + minAddedToInventoryRefresh + pauseAfterBuy) + " to reload page...");
                     
                     setTimeout(() => {
                         ClickToRefreshShop();
                     }, t);
+
                 } else {
                     // Calculate the number of stocked items
                     currentStockedItems = Array.from(document.querySelectorAll(".item-img")).length;
@@ -651,12 +651,14 @@ function topLevelTurbo() {
                     if (currentStockedItems < minItemsToConsiderStocked) {
                         // Handle case when not enough items are stocked
                         UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxRefreshIntervalUnstocked - minRefreshIntervalUnstocked) + minRefreshIntervalUnstocked) + " to reload page...");
+                        
                         setTimeout(() => {
                             location.reload();
                         }, t);
                     } else {
                         // Handle case when enough items are stocked
                         UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxRefreshIntervalStocked - minRefreshIntervalStocked) + minRefreshIntervalStocked) + " to reload page...");
+                       
                         setTimeout(() => {
                             // Handle cycling through shops
                             if (storesToCycle.length === 0) {
@@ -751,7 +753,7 @@ function topLevelTurbo() {
                 for (const itemID of itemIDs) {
                     const itemData = item_db[itemID];
             
-                    if (!isItemInRarityThresholdToBuy(itemID) || hasUserExcludedItem(itemID)) {
+                    if (!IsItemInRarityThresholdToBuy(itemID) || hasUserExcludedItem(itemID)) {
                         itemProfits.push(-99999999);
                     } else if (itemData === null) {
                         console.warn("Item not found in the database.");
@@ -793,6 +795,7 @@ function topLevelTurbo() {
 
             function IsItemInRarityThresholdToBuy(e) {
                 const item = item_db[e];
+
                 if (!item) {
                     return true;
                 }
