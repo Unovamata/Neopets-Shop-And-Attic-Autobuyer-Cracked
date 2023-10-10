@@ -311,7 +311,7 @@ function topLevelTurbo() {
                                         _ && (e.dispatchEvent(a), Ae()),
                                             function(e, t) {
                                                 if (T) {
-                                                    /var n = document.createElement("img");
+                                                    var n = document.createElement("img");
                                                     n.src = "https://upload.wikimedia.org/wikipedia/commons/3/31/Circle_Burgundy_Solid.svg", n.style.height = "14px", n.style.width = "14px", n.style.position = "absolute", n.style.top = t - 7 + "px", n.style.left = e - 7 + "px", n.style.zIndex = "9999999999", n.style.pointerEvents = "none", document.body.appendChild(n), Ge("\n                          input[type='image'] {\n                            filter: contrast(2) grayscale(1);\n                          }\n                        ")
                                                 }
                                             }(r, i)
