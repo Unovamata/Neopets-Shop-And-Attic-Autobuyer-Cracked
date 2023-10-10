@@ -181,11 +181,6 @@ function DisplayTableData(dataArray) {
             }
         }
 
-        headerKeys.push("Est. Profit"); // Adding the key;
-        var headerCell = tableHeader.cloneNode(false);
-        headerCell.appendChild(document.createTextNode("Est. Profit"));
-        tableRowClone.appendChild(headerCell);   
-
         headerKeys.push("JN");
         headerCell = tableHeader.cloneNode(false);
         headerCell.appendChild(document.createTextNode("JN"));

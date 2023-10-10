@@ -233,13 +233,13 @@ function topLevelTurbo() {
                 MAX_PAGE_LOAD_FAILURES: maxPageReloadTime
             } = autobuyerVariables;
             
-            var re, ie = "Attic",
+            var re, atticString = "Attic",
                 bannerElementID = "qpkzsoynerzxsqw",
                 ce = [0, 60],
-                ue = 50,
-                le = 100,
-                me = 5e3,
-                se = 5100,
+                minSoldOutRefresh = 50,
+                maxSoldOutRefresh = 100,
+                minAddedToInventoryRefresh = 5e3,
+                maxAddedToInventoryRefresh = 5100,
                 de = minOCRDetectionInterval / 2,
                 fe = maxOCRDetectionInterval / 2,
                 _e = !1,
@@ -247,13 +247,13 @@ function topLevelTurbo() {
                 Ee = 50;
 
             function ge() {
-                if (IsHaggling()) DisplayAutoBuyerBanner(), De() ? xe() : we() ? Ce() : (document.documentElement.textContent || document.documentElement.innerText)
+                if (IsHaggling()) DisplayAutoBuyerBanner(), IsSoldOut() ? ProcessSoldOutItem() : IsItemAddedToInventory() ? ProcessPurchase() : (document.documentElement.textContent || document.documentElement.innerText)
                     .indexOf("You don't have that kind of money") > -1 ? (o = document.querySelector("h2")
                         .innerText.replaceAll("Haggle for ", ""), c = {
                             status: "missed",
                             item: o,
                             notes: "You do not have enough neopoints to purchase " + o + ". Program will pause now."
-                        }, u = document.getElementsByTagName("h1")[0].textContent, ve(c), UpdateBannerAndDocument("Not enough NPs", "Not enough NPs to purchase " + o + " from " + u + ". Pausing."), be(o, u, "-", "Not enough neopoints")) : document.body.innerText.indexOf("every five seconds") > -1 ? (be(document.getElementsByTagName("h2")[0].innerText.split("Haggle for ")[1], document.getElementsByTagName("h1")[0].textContent, "-", "Five second rule"), UpdateBannerAndDocument("Five second rule", "Attempted to purchase item within 5 seconds of a different purchase"), window.history.back()) : document.body.innerText.indexOf("Sorry, you can only carry a maximum of") > -1 ? UpdateBannerAndDocument("Inventory full", "Inventory was full. Pausing.") : (UpdateBannerStatus("Entering offer..."), function() {
+                        }, u = document.getElementsByTagName("h1")[0].textContent, SendEmail(c), UpdateBannerAndDocument("Not enough NPs", "Not enough NPs to purchase " + o + " from " + u + ". Pausing."), SaveToPurchaseHistory(o, u, "-", "Not enough neopoints")) : document.body.innerText.indexOf("every five seconds") > -1 ? (SaveToPurchaseHistory(document.getElementsByTagName("h2")[0].innerText.split("Haggle for ")[1], document.getElementsByTagName("h1")[0].textContent, "-", "Five second rule"), UpdateBannerAndDocument("Five second rule", "Attempted to purchase item within 5 seconds of a different purchase"), window.history.back()) : document.body.innerText.indexOf("Sorry, you can only carry a maximum of") > -1 ? UpdateBannerAndDocument("Inventory full", "Inventory was full. Pausing.") : (UpdateBannerStatus("Entering offer..."), function() {
                         (document.documentElement.textContent || document.documentElement.innerText)
                         .indexOf("You must select the correct pet in order to continue") > -1 && console.error("Incorrect click on pet!");
                         isEnteringOffer && setTimeout((function() {
@@ -338,8 +338,8 @@ function topLevelTurbo() {
                         var t, n
                     }());
                 else if (IsInShop())
-                    if (DisplayAutoBuyerBanner(), De()) xe();
-                    else if (we()) Ce();
+                    if (DisplayAutoBuyerBanner(), IsSoldOut()) ProcessSoldOutItem();
+                    else if (IsItemAddedToInventory()) ProcessPurchase();
                 else {
                     ! function() {
                         if (isHighlightingItemsInShops)
@@ -349,7 +349,7 @@ function topLevelTurbo() {
                                     t = Array.from(document.querySelectorAll(".item-img"))
                                     .map((e => parseInt(e.getAttribute("data-price")
                                         .replaceAll(",", "")))),
-                                    n = He(e, t),
+                                    n = CalculateItemProfits(e, t),
                                     o = Be(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy),
                                     r = Pe(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy);
                                 if (null != o) {
@@ -362,8 +362,8 @@ function topLevelTurbo() {
                             else {
                                 var e = new Set(Array.from(document.querySelectorAll(".item-img"))
                                         .map((e => e.getAttribute("data-name")))),
-                                    t = restockList.find((t => e.has(t) && !Ue(t))),
-                                    n = restockList.filter((t => e.has(t) && !Ue(t)));
+                                    t = restockList.find((t => e.has(t) && !IsItemInBlacklist(t))),
+                                    n = restockList.filter((t => e.has(t) && !IsItemInBlacklist(t)));
                                 if (null != t) {
                                     for (var o of n) document.querySelector(`.item-img[data-name="${o}"]`)
                                         .parentElement.style.backgroundColor = "lightgreen";
@@ -379,7 +379,7 @@ function topLevelTurbo() {
                                 for (var e = Array.from(document.querySelectorAll(".item-img"))
                                         .map((e => e.getAttribute("data-name"))), t = Array.from(document.querySelectorAll(".item-img"))
                                         .map((e => parseInt(e.getAttribute("data-price")
-                                            .replaceAll(",", "")))), n = He(e, t), o = null, r = null, i = -1, a = 0; a < n.length; a++) {
+                                            .replaceAll(",", "")))), n = CalculateItemProfits(e, t), o = null, r = null, i = -1, a = 0; a < n.length; a++) {
                                     var c = n[a] > minDBProfitToBuy,
                                         u = n[a] / t[a] > minDBProfitPercentToBuy;
                                     c && u && n[a] > i && (i = n[a], null != r && (o = r), r = e[a])
@@ -391,9 +391,9 @@ function topLevelTurbo() {
                         } else {
                             var n = new Set(Array.from(document.querySelectorAll(".item-img"))
                                     .map((e => e.getAttribute("data-name")))),
-                                o = restockList.find((e => n.has(e) && !Ue(e)));
+                                o = restockList.find((e => n.has(e) && !IsItemInBlacklist(e)));
                             if (e = o, isBuyingSecondMostProfitable) {
-                                var r = restockList.find((e => n.has(e) && e !== o && !Ue(e)));
+                                var r = restockList.find((e => n.has(e) && e !== o && !IsItemInBlacklist(e)));
                                 r && (console.warn("Skipping first most valuable item: " + e), e = r)
                             }
                         }
@@ -415,7 +415,7 @@ function topLevelTurbo() {
                             return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= ce[0] && n <= ce[1]
                         }() ? (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), _e = !0), setTimeout((function() {
                             ge()
-                        }), 3e4)) : Re(),
+                        }), 3e4)) : ReloadPageBasedOnConditions(),
                         function() {
                             if (isClickingConfirm) {
                                 var e = !1;
@@ -441,11 +441,11 @@ function topLevelTurbo() {
                                 item: e,
                                 notes: ""
                             };
-                        ve(t), UpdateBannerAndDocument(e + " bought", e + " bought from Attic"), be(e, ie, "-", "Bought"), m && OpenQuickstockPage(isSendingToSBD);
+                        SendEmail(t), UpdateBannerAndDocument(e + " bought", e + " bought from Attic"), SaveToPurchaseHistory(e, atticString, "-", "Bought"), m && OpenQuickstockPage(isSendingToSBD);
                         setTimeout((function() {
-                            Ie()
+                            AutoRefreshAttic()
                         }), 12e5)
-                    }(), Se();
+                    }(), HighlightItemsInAttic();
                     else if (document.body.innerText.includes("Didn't you just buy something?")) UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes"), setTimeout((function() {
                         window.location.href = "https://www.neopets.com/halloween/garage.phtml"
                     }), 12e5);
@@ -463,19 +463,19 @@ function topLevelTurbo() {
                             }, (function() {
                                 UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.")
                             }))
-                        }(), document.body.innerText.includes("Sorry, we just sold out of that.") && UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic"), Se();
+                        }(), document.body.innerText.includes("Sorry, we just sold out of that.") && UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic"), HighlightItemsInAttic();
                         var e = (o = Array.from(document.querySelectorAll("#items li"))
                             .map((e => e.getAttribute("oname"))), r = Array.from(document.querySelectorAll("#items li"))
                             .map((e => e.getAttribute("oprice")
-                                .replaceAll(",", ""))), i = He(o, r), Be(o, r, i, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic));
+                                .replaceAll(",", ""))), i = CalculateItemProfits(o, r), Be(o, r, i, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic));
                         e ? function(e) {
                             if (isClickingItemsInAttic) {
                                 var t = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
-                                UpdateBannerAndDocument("Attempting " + e + " in Attic", "Attempting to buy " + e + " in Attic in " + Ne(t));
+                                UpdateBannerAndDocument("Attempting " + e + " in Attic", "Attempting to buy " + e + " in Attic in " + FormatMillisecondsToSeconds(t));
                                 var n = document.querySelector(`#items li[oname="${e}"]`),
                                     o = n.getAttribute("oii"),
                                     r = n.getAttribute("oprice");
-                                be(e, ie, r, "Attempted"), setTimeout((function() {
+                                SaveToPurchaseHistory(e, atticString, r, "Attempted"), setTimeout((function() {
                                     document.getElementById("oii")
                                         .value = o, document.getElementById("frm-abandoned-attic")
                                         .submit()
@@ -486,7 +486,7 @@ function topLevelTurbo() {
                                 t = e.getHours();
                             e.getMinutes(), e.getDay();
                             return t >= atticRunBetweenHours[0] && t <= atticRunBetweenHours[1]
-                        }() ? Ie() : (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic"), _e = !0), setTimeout((function() {
+                        }() ? AutoRefreshAttic() : (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic"), _e = !0), setTimeout((function() {
                             ge()
                         }), 3e4)), t = GetStockedItemNumber(), chrome.storage.local.set({
                             ATTIC_PREV_NUM_ITEMS: t
@@ -502,27 +502,54 @@ function topLevelTurbo() {
                 UpdateBannerStatus(n), UpdateDocument(e, n)
             }
 
-            function Ie() {
-                if (isAtticAutoRefreshing) {
-                    var e = function() {
-                            if (atticLastRefresh < 0) return Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic;
-                            var e = Date.now(),
-                                t = 42e4,
-                                n = 0,
-                                o = 8,
-                                r = atticLastRefresh,
-                                i = atticLastRefresh;
-                            for (; r < e && i < e;) r += t + 1e3 * n, i += t + 1e3 * o;
-                            return e <= i && e >= r ? Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic : r - e
-                        }(),
-                        t = "Waiting " + Ne(e) + " to reload...";
-                    if (atticLastRefresh > 0) t += " Last restock: " + moment(atticLastRefresh)
+            function AutoRefreshAttic() {
+                if(!isAtticAutoRefreshing){
+                    UpdateBannerStatus("Attic auto refresh is disabled. Waiting for manual refresh.");
+                    return;
+                }
+
+                // Calculate the time to wait before the next refresh
+                const waitTime = CreateWaitTime();
+                
+                function CreateWaitTime(){
+                    if (atticLastRefresh < 0) {
+                        return Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic;
+                    }
+                    
+                    const now = Date.now();
+                    const baseInterval = 420000; // 7 minutes
+                    const shortInterval = 1000;
+                    const longInterval = 8000;
+                    let startShort = atticLastRefresh;
+                    let startLong = atticLastRefresh;
+        
+                    for (; startShort < now && startLong < now;) {
+                        startShort += baseInterval + shortInterval;
+                        startLong += baseInterval + longInterval;
+                    }
+        
+                    if (now <= startLong && now >= startShort) {
+                        return Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic;
+                    }
+        
+                    return startShort - now;
+                }
+        
+                // Create a message with the wait time and last restock time
+                let message = "Waiting " + FormatMillisecondsToSeconds(waitTime) + " to reload...";
+        
+                if (atticLastRefresh > 0) {
+                    message += " Last restock: " + moment(atticLastRefresh)
                         .tz("America/Los_Angeles")
                         .format("h:mm:ss A") + " NST...";
-                    UpdateBannerStatus(t), setTimeout((function() {
-                        window.location.href = "https://www.neopets.com/halloween/garage.phtml"
-                    }), e)
-                } else UpdateBannerStatus("Attic auto refresh is disabled. Waiting for manual refresh.")
+                }
+        
+                // Update the banner status and initiate the page reload after the wait time
+                UpdateBannerStatus(message);
+
+                setTimeout(() => {
+                    window.location.href = "https://www.neopets.com/halloween/garage.phtml";
+                }, waitTime);
             }
 
             function SendBeepMessage() {
@@ -538,14 +565,14 @@ function topLevelTurbo() {
                     .length
             }
 
-            function Se() {
+            function HighlightItemsInAttic() {
                 if (isHighlightingItemsInAttic) {
                     var e = Array.from(document.querySelectorAll("#items li"))
                         .map((e => e.getAttribute("oname"))),
                         t = Array.from(document.querySelectorAll("#items li"))
                         .map((e => e.getAttribute("oprice")
                             .replaceAll(",", ""))),
-                        n = He(e, t),
+                        n = CalculateItemProfits(e, t),
                         o = Be(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic),
                         r = Pe(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
                     if (null != o) {
@@ -561,65 +588,99 @@ function topLevelTurbo() {
                 itemElement.style.backgroundColor = color;
             }
 
-            function Ce() {
-                var e = document.querySelector("h2")
-                    .innerText.replaceAll("Haggle for ", "");
-                ve({
+            function ProcessPurchase() {
+                var itemName = document.querySelector("h2").innerText.replaceAll("Haggle for ", "");
+            
+                SendEmail({
                     status: "bought",
                     item: e,
                     notes: ""
                 });
-                var t = document.getElementsByTagName("h1")[0].textContent,
-                    o = document.querySelector("p > b")
-                    .textContent.split("your offer of ")[1].split(" Neopoints!'")[0];
-                UpdateBannerAndDocument(e + " bought", e + " bought from " + t + " for " + o + " NPs"), be(e, t, o, "Bought"), m && OpenQuickstockPage(isSendingToSBD), Re()
+
+                // Extract shop name
+                var shopName = document.getElementsByTagName("h1")[0].textContent;
+                var purchaseDetails = document.querySelector("p > b").textContent;
+                var purchaseAmount = purchaseDetails.split("your offer of ")[1].split(" Neopoints!'")[0];
+                
+                UpdateBannerAndDocument(itemName + " bought", itemName + " bought from " + shopName + " for " + purchaseAmount + " NPs");
+                
+                SaveToPurchaseHistory(itemName, shopName, purchaseAmount, "Bought");
+
+                ReloadPageBasedOnConditions();
             }
-            function ve(e) {
-                isSendingEmail && window.emailjs.send(emailServiceID, emailTemplate, e, emailUserID)
-                    .then((function(e) {
-                        console.log("Email sent!", e.status, e.text)
-                    }), (function(e) {
-                        console.error("Failed to send email...", e)
-                    }))
-            }
-            function Ne(e) {
-                return (e / 1e3)
-                    .toFixed(2) + " secs"
-            }
-            function Re() {
-                var e;
-                if (De()) UpdateBannerStatus("Waiting " + Ne(t = Math.random() * (le - ue) + ue) + " to reload page..."), setTimeout((function() {
-                    Le()
-                }), t);
-                else if (we()) {
-                    UpdateBannerStatus("Waiting " + Ne(t = Math.random() * (se - me) + me + pauseAfterBuy) + " to reload page..."), setTimeout((function() {
-                        Le()
-                    }), t)
-                } else if (e = Array.from(document.querySelectorAll(".item-img"))
-                    .length, document.title = e + " stocked items", e < minItemsToConsiderStocked) {
-                    UpdateBannerStatus("Waiting " + Ne(t = Math.random() * (maxRefreshIntervalUnstocked - minRefreshIntervalUnstocked) + minRefreshIntervalUnstocked) + " to reload page..."), setTimeout((function() {
-                        location.reload()
-                    }), t)
-                } else {
-                    var t;
-                    UpdateBannerStatus("Waiting " + Ne(t = Math.random() * (maxRefreshIntervalStocked - minRefreshIntervalStocked) + minRefreshIntervalStocked) + " to reload page..."), setTimeout((function() {
-                        ! function() {
-                            if (0 == storesToCycle.length) location.reload();
-                            else if (1 == storesToCycle.length) window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
-                            else {
-                                var e = !1;
-                                storesToCycle.forEach(((t, n) => {
-                                    if (window.location.toString()
-                                        .match(/obj_type=(\d+)/)[1] == t) {
-                                        var o = n == storesToCycle.length - 1 ? storesToCycle[0] : storesToCycle[n + 1];
-                                        e = !0, window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + o
-                                    }
-                                })), e || (window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0])
+
+            function SendEmail(emailData) {
+                if (isSendingEmail) {
+                    window.emailjs.send(emailServiceID, emailTemplate, emailData, emailUserID)
+                        .then(
+                            function (response) {
+                                console.log("Email sent!", response.status, response.text);
+                            },
+                            function (error) {
+                                console.error("Failed to send email...", error);
                             }
-                        }()
-                    }), t)
+                        );
                 }
             }
+            
+            function FormatMillisecondsToSeconds(milliseconds) {
+                return (milliseconds / 1e3).toFixed(2) + " secs"
+            }
+
+            function ReloadPageBasedOnConditions() {
+                var currentStockedItems;
+
+                if (IsSoldOut()) {
+                    UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxSoldOutRefresh - minSoldOutRefresh) + minSoldOutRefresh) + " to reload page...");
+                    
+                    setTimeout(() => {
+                        ClickToRefreshShop();
+                    }, t);
+                } else if (IsItemAddedToInventory()) {
+                    // Handle case when an item is added to the inventory
+                    UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxAddedToInventoryRefresh - minAddedToInventoryRefresh) + minAddedToInventoryRefresh + pauseAfterBuy) + " to reload page...");
+                    
+                    setTimeout(() => {
+                        ClickToRefreshShop();
+                    }, t);
+                } else {
+                    // Calculate the number of stocked items
+                    currentStockedItems = Array.from(document.querySelectorAll(".item-img")).length;
+                    document.title = currentStockedItems + " stocked items";
+
+                    if (currentStockedItems < minItemsToConsiderStocked) {
+                        // Handle case when not enough items are stocked
+                        UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxRefreshIntervalUnstocked - minRefreshIntervalUnstocked) + minRefreshIntervalUnstocked) + " to reload page...");
+                        setTimeout(() => {
+                            location.reload();
+                        }, t);
+                    } else {
+                        // Handle case when enough items are stocked
+                        UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxRefreshIntervalStocked - minRefreshIntervalStocked) + minRefreshIntervalStocked) + " to reload page...");
+                        setTimeout(() => {
+                            // Handle cycling through shops
+                            if (storesToCycle.length === 0) {
+                                location.reload();
+                            } else if (storesToCycle.length === 1) {
+                                window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
+                            } else {
+                                var e = false;
+                                storesToCycle.forEach((t, n) => {
+                                    if (window.location.toString().match(/obj_type=(\d+)/)[1] == t) {
+                                        var o = n === storesToCycle.length - 1 ? storesToCycle[0] : storesToCycle[n + 1];
+                                        e = true;
+                                        window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + o;
+                                    }
+                                });
+                                if (!e) {
+                                    window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
+                                }
+                            }
+                        }, t);
+                    }
+                }
+            }
+
             function Oe(e) {
                 return 20 - function(e) {
                     let t = 0,
@@ -631,61 +692,84 @@ function topLevelTurbo() {
                     return t
                 }(e)
             }
-            function be(e, t, n, o) {
-                chrome.storage.local.get({
-                    ITEM_HISTORY: []
-                }, (function(r) {
-                    var i, a = r.ITEM_HISTORY;
-                    i = t == ie ? document.querySelector(".user a:nth-of-type(1)")
-                        .innerText : document.getElementsByClassName("nav-profile-dropdown-text")[0].innerText.split("Welcome, ")[1];
-                    var c = {
-                        "Item Name": e,
-                        "Shop Name": t,
-                        Price: n,
-                        Status: o,
-                        "Date & Time": (new Date)
-                            .toLocaleString(),
-                        Account: i
+
+            function SaveToPurchaseHistory(itemName, shopName, price, status) {
+                chrome.storage.local.get({ ITEM_HISTORY: [] }, function (result) {
+                    var itemHistory = result.ITEM_HISTORY;
+                    
+                    // Determine the current user's account
+                    var accountName = "";
+
+                    if(shopName === atticString){
+                        accountName = document.querySelector(".user a:nth-of-type(1)").innerText
+                    } else {
+                        accountName = document.getElementsByClassName("nav-profile-dropdown-text")[0].innerText.split("Welcome, ")[1];
+                    }
+            
+                    var newItem = {
+                        "Item Name": itemName,
+                        "Shop Name": shopName,
+                        "Price": price,
+                        "Status": status,
+                        "Date & Time": new Date().toLocaleString(),
+                        "Account": accountName
                     };
-                    a.push(c), chrome.storage.local.set({
-                        ITEM_HISTORY: a
-                    }, (function() {
-                        console.log("Added item to history")
-                    }))
-                }))
+                    
+                    //Saving the new history;
+                    itemHistory.push(newItem);
+
+                    chrome.storage.local.set({ ITEM_HISTORY: itemHistory }, function () {});
+                });
             }
-            function we() {
-                return (document.documentElement.textContent || document.documentElement.innerText)
-                    .indexOf("has been added to your inventory") > -1
+
+            function IsItemAddedToInventory() {
+                return (document.documentElement.textContent || document.documentElement.innerText).includes("has been added to your inventory");
             }
-            function xe() {
+
+            function ProcessSoldOutItem() {
                 var e = document.querySelector("h2")
                     .innerText.replaceAll("Haggle for ", "");
-                UpdateBannerAndDocument("Sold out", "Sold out of " + e), be(e, document.getElementsByTagName("h1")[0].textContent, "-", "Sold out"), Re()
+                
+                UpdateBannerAndDocument("Sold out", "Sold out of " + e);
+                
+                SaveToPurchaseHistory(e, document.getElementsByTagName("h1")[0].textContent, "-", "Sold out");
+                
+                ReloadPageBasedOnConditions()
             }
-            function Le() {
-                document.querySelector("div.shop-bg")
-                    .click()
+
+            function ClickToRefreshShop() {
+                document.querySelector("div.shop-bg").click()
             }
-            function De() {
-                return (document.documentElement.textContent || document.documentElement.innerText)
-                    .indexOf(" is SOLD OUT!") > -1
+
+            function IsSoldOut() {
+                return (document.documentElement.textContent || document.documentElement.innerText).includes(" is SOLD OUT!");
             }
-            function He(e, t) {
-                var n = [];
-                for (var o of e) {
-                    var r = item_db[o];
-                    if (!IsItemInRarityThresholdToBuy(o) || Ue(o)) n.push(-99999999);
-                    else if (null == r) console.warn("Did not have item in database"), n.push(buyUnknownItemsIfProfitMargin);
-                    else if (null == r.Price || 0 == r.Price) console.warn("Did not have price for item in database"), n.push(buyUnknownItemsIfProfitMargin);
-                    else {
-                        var i = parseInt(r.Price.toString()
-                            .replaceAll(",", "")) - parseInt(t[e.indexOf(o)]);
-                        n.push(i)
+
+            function CalculateItemProfits(itemIDs, itemPrices) {
+                const itemProfits = [];
+            
+                for (const itemID of itemIDs) {
+                    const itemData = item_db[itemID];
+            
+                    if (!isItemInRarityThresholdToBuy(itemID) || hasUserExcludedItem(itemID)) {
+                        itemProfits.push(-99999999);
+                    } else if (itemData === null) {
+                        console.warn("Item not found in the database.");
+                        itemProfits.push(buyUnknownItemsIfProfitMargin);
+                    } else if (itemData.Price === null || itemData.Price === 0) {
+                        console.warn("Item price not available in the database.");
+                        itemProfits.push(buyUnknownItemsIfProfitMargin);
+                    } else {
+                        const itemPrice = parseInt(itemData.Price.toString().replace(",", ""));
+                        const userPrice = parseInt(itemPrices[itemIDs.indexOf(itemID)]);
+                        const profit = itemPrice - userPrice;
+                        itemProfits.push(profit);
                     }
                 }
-                return n
+            
+                return itemProfits;
             }
+
             function Be(e, t, n, o, r) {
                 for (var i = null, a = -1, c = 0; c < n.length; c++) {
                     var u = n[c] >= o,
@@ -703,8 +787,8 @@ function topLevelTurbo() {
                 return i
             }
 
-            function Ue(e) {
-                return !!isBlacklistActive && blacklistToNeverBuy.includes(e)
+            function IsItemInBlacklist(itemName) {
+                return isBlacklistActive && blacklistToNeverBuy.includes(itemName);
             }
 
             function IsItemInRarityThresholdToBuy(e) {
