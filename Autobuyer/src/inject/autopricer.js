@@ -982,7 +982,15 @@ async function SetAllVariables(){
                         // Extracting the items from the list;
                         
                         const item = list.find(item => item.Name === itemName); // Finding the Item object based on its name in the table;
-                        const itemPrice = parseInt(item.Price);
+
+                        var itemPrice;
+
+                        try {
+                            itemPrice = parseInt(item.Price);
+                        } catch {
+                            resolve();
+                            return;
+                        }
                         
                         // If the price is NOT worth changing;
                         if (itemPrice == parseInt(inputElements.value) || !item.IsPricing) {
