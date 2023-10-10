@@ -82,6 +82,8 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			//Miscellaneous;
 			AUTOPRICER_STATUS: "Inactive",
 			SHOP_INVENTORY: [],
+			MIN_PAGE_LOAD_FAILURES: 10000,
+			MAX_PAGE_LOAD_FAILURES: 20000,
 		};
 
 		chrome.storage.local.set(autoPricerDefaultSettings, function (){});

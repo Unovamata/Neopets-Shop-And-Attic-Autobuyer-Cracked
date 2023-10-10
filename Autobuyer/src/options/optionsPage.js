@@ -150,6 +150,8 @@ function showOrHide() {
     $("#ENABLED").is(":checked") ? $(".main-shop-settings").show() : $(".main-shop-settings").hide();
     $("#SHOULD_ENTER_PIN").is(":checked") ? $(".enter-pin").show() : $(".enter-pin").hide();
     $("#USE_BLACKLIST_SW").is(":checked") ? $(".blacklist-sw").show() : $(".blacklist-sw").hide();
+    $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
+
     if($("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked")){
         $(".random-percentage").show(); 
         $(".fixed-percentage").hide(); 
@@ -157,7 +159,6 @@ function showOrHide() {
         $(".random-percentage").hide();
         $(".fixed-percentage").show(); 
     }
-    
 }
 
 $("#USE_BLACKLIST")
@@ -175,7 +176,7 @@ $("#USE_BLACKLIST")
     })), $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES")
     .on("change", (function() {
         setSHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES($("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES")
-            .is(":checked"))
+            .is(":checked")), showOrHide()
     })), $("#ITEM_DB_MIN_RARITY")
     .bind("input propertychange", (function() {
         var _ = $("#ITEM_DB_MIN_RARITY")
@@ -467,6 +468,10 @@ function setMIN_WAIT_BAN_TIME(value) { chrome.storage.local.set({ MIN_WAIT_BAN_T
 
 function setMAX_WAIT_BAN_TIME(value) { chrome.storage.local.set({ MAX_WAIT_BAN_TIME: value }, (function () {})) }
 
+function setMIN_PAGE_LOAD_FAILURES(value) { chrome.storage.local.set({ MIN_PAGE_LOAD_FAILURES: value }, (function () {})) }
+
+function setMAX_PAGE_LOAD_FAILURES(value) { chrome.storage.local.set({ MAX_PAGE_LOAD_FAILURES: value }, (function () {})) }
+
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
     setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(isChecked);
@@ -620,6 +625,15 @@ $("#MAX_WAIT_BAN_TIME").bind("input propertychange", (function() {
     setMAX_WAIT_BAN_TIME($("#MAX_WAIT_BAN_TIME").val())
 }))
 
+$("#MIN_PAGE_LOAD_FAILURES").bind("input propertychange", (function() {
+    setMIN_PAGE_LOAD_FAILURES($("#MIN_PAGE_LOAD_FAILURES").val())
+}))
+
+$("#MAX_PAGE_LOAD_FAILURES").bind("input propertychange", (function() {
+    setMAX_PAGE_LOAD_FAILURES($("#MAX_PAGE_LOAD_FAILURES").val())
+}))
+
+
 
 //######################################################################################################################################
 
@@ -731,6 +745,8 @@ resetButton.onclick = function(_) {
     NEOPETS_SECURITY_PIN: "0000",
     MIN_WAIT_BEFORE_UPDATE: 10000,
     MAX_WAIT_BEFORE_UPDATE: 20000,
+    MIN_PAGE_LOAD_FAILURES: 10000,
+    MAX_PAGE_LOAD_FAILURES: 20000,
 
 }, (function(_) {
     $("#PAUSE_AFTER_BUY_MS")
@@ -826,6 +842,10 @@ resetButton.onclick = function(_) {
         $("#NEOPETS_SECURITY_PIN").val(_.NEOPETS_SECURITY_PIN),
         $("#MIN_WAIT_BEFORE_UPDATE").val(_.MIN_WAIT_BEFORE_UPDATE),
         $("#MAX_WAIT_BEFORE_UPDATE").val(_.MAX_WAIT_BEFORE_UPDATE),
+
+        //AutoBuyer Settings;
+        $("#MIN_PAGE_LOAD_FAILURES").val(_.MIN_PAGE_LOAD_FAILURES),
+        $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES),
 
         showOrHide()
 }));

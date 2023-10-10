@@ -32,28 +32,39 @@ function topLevelTurbo() {
 
     // Handle page errors by refreshing;
     function HandleServerErrors() {
-        const errorMessages = [
-          "502 Bad Gateway\nopenresty",
-          "504 Gateway Time-out\nopenresty",
-          "Loading site please wait...",
-          "NET::ERR_CERT_COMMON_NAME_INVALID"
-        ];
-      
-        const pageText = document.body.innerText;
-      
-        // Reload the page after 10 seconds if an error is detected;
-        if (errorMessages.some(message => pageText.includes(message))) {
-            const indexOfMessage = errorMessages.findIndex(message => pageText.includes(message));
+        chrome.storage.local.get({
+            MIN_PAGE_LOAD_FAILURES: 10000,
+            MAX_PAGE_LOAD_FAILURES: 20000
+        }, (function(autobuyerVariables) {
+            // Destructing the variables extracted from the extension;
+            const {
+                MIN_PAGE_LOAD_FAILURES: minPageReloadTime,
+                MAX_PAGE_LOAD_FAILURES: maxPageReloadTime
+            } = autobuyerVariables;
 
-            if (indexOfMessage === 2) {
-                UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
-            }
-        } 
+            const errorMessages = [
+            "502 Bad Gateway\nopenresty",
+            "504 Gateway Time-out\nopenresty",
+            "Loading site please wait...",
+            "NET::ERR_CERT_COMMON_NAME_INVALID"
+            ];
         
-        // If there's a browser related error;
-        else if(window.location.title == "www.neopets.com"){
-            setTimeout(() => { location.reload(); }, 10000);
-        }
+            const pageText = document.body.innerText;
+        
+            // Reload the page after 10 seconds if an error is detected;
+            if (errorMessages.some(message => pageText.includes(message))) {
+                const indexOfMessage = errorMessages.findIndex(message => pageText.includes(message));
+
+                if (indexOfMessage === 2) {
+                    UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+                }
+            } 
+            
+            // If there's a browser related error;
+            else if(window.location.title == "www.neopets.com"){
+                setTimeout(() => { location.reload(); }, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+            }
+        }));
     }
     
     // Check the Almost Abandoned Attic;
@@ -113,8 +124,6 @@ function topLevelTurbo() {
     }
     
     function l() {
-        var o, l, m, s, d, f, _, T, E, g, h, p, I, A, y, S, M, C, v, N, R, O, b, w, x, L, D, H, B, P, U, k, F, q, K, G, W, X, Y, j, V, z, $, Q, J, Z, ee, te, ne;
-        
         chrome.storage.local.get({
             BUY_UNKNOWN_ITEMS_PROFIT: 1e5,
             ITEM_DB_MIN_RARITY: 1,
@@ -164,7 +173,9 @@ function topLevelTurbo() {
             ATTIC_LAST_REFRESH_MS: -1,
             ATTIC_PREV_NUM_ITEMS: -1,
             SEND_TO_SDB_AFTER_PURCHASE: !1,
-            PAUSE_AFTER_BUY_MS: 0
+            PAUSE_AFTER_BUY_MS: 0,
+            MIN_PAGE_LOAD_FAILURES: 10000,
+            MAX_PAGE_LOAD_FAILURES: 20000
         }, (function(autobuyerVariables) {
 
             // Destructing the variables extracted from the extension;
@@ -217,11 +228,13 @@ function topLevelTurbo() {
                 ATTIC_MAX_REFRESH: maxRefreshIntervalAttic,
                 ATTIC_SHOULD_REFRESH: isAtticAutoRefreshing,
                 ATTIC_LAST_REFRESH_MS: atticLastRefresh,
-                ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems
+                ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems,
+                MIN_PAGE_LOAD_FAILURES: minPageReloadTime,
+                MAX_PAGE_LOAD_FAILURES: maxPageReloadTime
             } = autobuyerVariables;
             
             var re, ie = "Attic",
-                ae = "qpkzsoynerzxsqw",
+                bannerElementID = "qpkzsoynerzxsqw",
                 ce = [0, 60],
                 ue = 50,
                 le = 100,
@@ -230,17 +243,17 @@ function topLevelTurbo() {
                 de = minOCRDetectionInterval / 2,
                 fe = maxOCRDetectionInterval / 2,
                 _e = !1,
-                Te = !1,
+                isBannerDisplaying = !1,
                 Ee = 50;
 
             function ge() {
-                if (IsHaggling()) qe(), De() ? xe() : we() ? Ce() : (document.documentElement.textContent || document.documentElement.innerText)
+                if (IsHaggling()) DisplayAutoBuyerBanner(), De() ? xe() : we() ? Ce() : (document.documentElement.textContent || document.documentElement.innerText)
                     .indexOf("You don't have that kind of money") > -1 ? (o = document.querySelector("h2")
                         .innerText.replaceAll("Haggle for ", ""), c = {
                             status: "missed",
                             item: o,
                             notes: "You do not have enough neopoints to purchase " + o + ". Program will pause now."
-                        }, u = document.getElementsByTagName("h1")[0].textContent, ve(c), he("Not enough NPs", "Not enough NPs to purchase " + o + " from " + u + ". Pausing."), be(o, u, "-", "Not enough neopoints")) : document.body.innerText.indexOf("every five seconds") > -1 ? (be(document.getElementsByTagName("h2")[0].innerText.split("Haggle for ")[1], document.getElementsByTagName("h1")[0].textContent, "-", "Five second rule"), he("Five second rule", "Attempted to purchase item within 5 seconds of a different purchase"), window.history.back()) : document.body.innerText.indexOf("Sorry, you can only carry a maximum of") > -1 ? he("Inventory full", "Inventory was full. Pausing.") : (Ke("Entering offer..."), function() {
+                        }, u = document.getElementsByTagName("h1")[0].textContent, ve(c), UpdateBannerAndDocument("Not enough NPs", "Not enough NPs to purchase " + o + " from " + u + ". Pausing."), be(o, u, "-", "Not enough neopoints")) : document.body.innerText.indexOf("every five seconds") > -1 ? (be(document.getElementsByTagName("h2")[0].innerText.split("Haggle for ")[1], document.getElementsByTagName("h1")[0].textContent, "-", "Five second rule"), UpdateBannerAndDocument("Five second rule", "Attempted to purchase item within 5 seconds of a different purchase"), window.history.back()) : document.body.innerText.indexOf("Sorry, you can only carry a maximum of") > -1 ? UpdateBannerAndDocument("Inventory full", "Inventory was full. Pausing.") : (UpdateBannerStatus("Entering offer..."), function() {
                         (document.documentElement.textContent || document.documentElement.innerText)
                         .indexOf("You must select the correct pet in order to continue") > -1 && console.error("Incorrect click on pet!");
                         isEnteringOffer && setTimeout((function() {
@@ -310,7 +323,7 @@ function topLevelTurbo() {
                                                 clientX: r,
                                                 clientY: i
                                             });
-                                        isClickingCaptcha && (e.dispatchEvent(a), Ae()),
+                                        isClickingCaptcha && (e.dispatchEvent(a), SendBeepMessage()),
                                             function(e, t) {
                                                 if (isAnnotatingImage) {
                                                     var n = document.createElement("img");
@@ -325,7 +338,7 @@ function topLevelTurbo() {
                         var t, n
                     }());
                 else if (IsInShop())
-                    if (qe(), De()) xe();
+                    if (DisplayAutoBuyerBanner(), De()) xe();
                     else if (we()) Ce();
                 else {
                     ! function() {
@@ -384,14 +397,14 @@ function topLevelTurbo() {
                                 r && (console.warn("Skipping first most valuable item: " + e), e = r)
                             }
                         }
-                        e && isClickingItems ? he("Buying " + e, "Buying " + e + " from main shop") : e && he(e + " is in stock", e + " is in stock in main shop");
+                        e && isClickingItems ? UpdateBannerAndDocument("Buying " + e, "Buying " + e + " from main shop") : e && UpdateBannerAndDocument(e + " is in stock", e + " is in stock in main shop");
                         return e
                     }();
                     t ? function(e) {
                             if (isClickingItems) {
                                 var t = document.querySelector(`.item-img[data-name="${e}"]`);
                                 setTimeout((function() {
-                                    t.click(), Ae()
+                                    t.click(), SendBeepMessage()
                                 }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)
                             }
                         }(t) : ! function() {
@@ -400,7 +413,7 @@ function topLevelTurbo() {
                                 n = e.getMinutes();
                             e.getDay();
                             return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= ce[0] && n <= ce[1]
-                        }() ? (_e || (he("Waiting", "Waiting for scheduled time in main shop"), _e = !0), setTimeout((function() {
+                        }() ? (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), _e = !0), setTimeout((function() {
                             ge()
                         }), 3e4)) : Re(),
                         function() {
@@ -411,14 +424,14 @@ function topLevelTurbo() {
                                     ((t = n)
                                         .offsetWidth || t.offsetHeight || t.getClientRects()
                                         .length) && setTimeout((function() {
-                                        e || (n.click(), Ae(), e = !0)
+                                        e || (n.click(), SendBeepMessage(), e = !0)
                                     }), Math.random() * (maxClickConfirmInterval - minClickConfirmInterval) + minClickConfirmInterval)
                                 }), Ee)
                             }
                         }()
                 // This may break in the future #TAG; The original line was CheckNeopetsGarage() > -1, meaning the item was found, returning true using includes;
                 } else IsInAlmostAbandonedAttic() && function() {
-                    if (qe(), function() {
+                    if (DisplayAutoBuyerBanner(), function() {
                             var e = "I have placed it in your inventory";
                             return document.body.innerText.indexOf(e) > -1
                         }()) ! function() {
@@ -428,29 +441,29 @@ function topLevelTurbo() {
                                 item: e,
                                 notes: ""
                             };
-                        ve(t), he(e + " bought", e + " bought from Attic"), be(e, ie, "-", "Bought"), m && OpenQuickstockPage(isSendingToSBD);
+                        ve(t), UpdateBannerAndDocument(e + " bought", e + " bought from Attic"), be(e, ie, "-", "Bought"), m && OpenQuickstockPage(isSendingToSBD);
                         setTimeout((function() {
                             Ie()
                         }), 12e5)
                     }(), Se();
-                    else if (document.body.innerText.includes("Didn't you just buy something?")) he("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes"), setTimeout((function() {
+                    else if (document.body.innerText.includes("Didn't you just buy something?")) UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes"), setTimeout((function() {
                         window.location.href = "https://www.neopets.com/halloween/garage.phtml"
                     }), 12e5);
-                    else if (document.body.innerText.includes("Sorry, please try again later.")) he("Attic is refresh banned", "Pausing NeoBuyer in Attic");
-                    else if (document.body.innerText.includes("cannot buy any more items from this shop today")) he("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
+                    else if (document.body.innerText.includes("Sorry, please try again later.")) UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer in Attic");
+                    else if (document.body.innerText.includes("cannot buy any more items from this shop today")) UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
                     else {
                         ! function() {
                             if (atticPreviousNumberOfItems < 0) return;
                             if (atticLastRefresh < 0) return;
-                            var e = ye(),
+                            var e = GetStockedItemNumber(),
                                 t = Date.now();
                             e > atticPreviousNumberOfItems && chrome.storage.local.set({
                                 ATTIC_PREV_NUM_ITEMS: e,
                                 ATTIC_LAST_REFRESH_MS: t
                             }, (function() {
-                                he("Attic restocked", "Restock detected in Attic, updating last restock estimate.")
+                                UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.")
                             }))
-                        }(), document.body.innerText.includes("Sorry, we just sold out of that.") && he("Sold out", "Item was sold out at the Attic"), Se();
+                        }(), document.body.innerText.includes("Sorry, we just sold out of that.") && UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic"), Se();
                         var e = (o = Array.from(document.querySelectorAll("#items li"))
                             .map((e => e.getAttribute("oname"))), r = Array.from(document.querySelectorAll("#items li"))
                             .map((e => e.getAttribute("oprice")
@@ -458,7 +471,7 @@ function topLevelTurbo() {
                         e ? function(e) {
                             if (isClickingItemsInAttic) {
                                 var t = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
-                                he("Attempting " + e + " in Attic", "Attempting to buy " + e + " in Attic in " + Ne(t));
+                                UpdateBannerAndDocument("Attempting " + e + " in Attic", "Attempting to buy " + e + " in Attic in " + Ne(t));
                                 var n = document.querySelector(`#items li[oname="${e}"]`),
                                     o = n.getAttribute("oii"),
                                     r = n.getAttribute("oprice");
@@ -473,9 +486,9 @@ function topLevelTurbo() {
                                 t = e.getHours();
                             e.getMinutes(), e.getDay();
                             return t >= atticRunBetweenHours[0] && t <= atticRunBetweenHours[1]
-                        }() ? Ie() : (_e || (he("Waiting", "Waiting for scheduled time in Attic"), _e = !0), setTimeout((function() {
+                        }() ? Ie() : (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic"), _e = !0), setTimeout((function() {
                             ge()
-                        }), 3e4)), t = ye(), chrome.storage.local.set({
+                        }), 3e4)), t = GetStockedItemNumber(), chrome.storage.local.set({
                             ATTIC_PREV_NUM_ITEMS: t
                         }, (function() {}))
                     }
@@ -485,8 +498,8 @@ function topLevelTurbo() {
                 var o, c, u
             }
 
-            function he(e, n) {
-                Ke(n), UpdateDocument(e, n)
+            function UpdateBannerAndDocument(e, n) {
+                UpdateBannerStatus(n), UpdateDocument(e, n)
             }
 
             function Ie() {
@@ -506,22 +519,25 @@ function topLevelTurbo() {
                     if (atticLastRefresh > 0) t += " Last restock: " + moment(atticLastRefresh)
                         .tz("America/Los_Angeles")
                         .format("h:mm:ss A") + " NST...";
-                    Ke(t), setTimeout((function() {
+                    UpdateBannerStatus(t), setTimeout((function() {
                         window.location.href = "https://www.neopets.com/halloween/garage.phtml"
                     }), e)
-                } else Ke("Attic auto refresh is disabled. Waiting for manual refresh.")
+                } else UpdateBannerStatus("Attic auto refresh is disabled. Waiting for manual refresh.")
             }
-            function Ae() {
+
+            function SendBeepMessage() {
                 chrome.runtime.sendMessage({
                     neobuyer: "NeoBuyer",
                     type: "Beep"
                 })
             }
-            function ye() {
+
+            function GetStockedItemNumber() {
                 return Array.from(document.querySelectorAll("#items li"))
                     .map((e => e.getAttribute("oname")))
                     .length
             }
+
             function Se() {
                 if (isHighlightingItemsInAttic) {
                     var e = Array.from(document.querySelectorAll("#items li"))
@@ -533,15 +549,18 @@ function topLevelTurbo() {
                         o = Be(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic),
                         r = Pe(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
                     if (null != o) {
-                        for (var i of r) Me(i, "lightgreen");
-                        Me(o, "orangered")
+                        for (var i of r) HighlightItemWithColor(i, "lightgreen");
+                        HighlightItemWithColor(o, "orangered")
                     }
                 }
             }
-            function Me(e, t) {
-                document.querySelector(`#items li[oname="${e}"]`)
-                    .style.backgroundColor = t
+
+            function HighlightItemWithColor(itemName, color) {
+                const itemElement = document.querySelector(`#items li[oname="${itemName}"]`);
+                    
+                itemElement.style.backgroundColor = color;
             }
+
             function Ce() {
                 var e = document.querySelector("h2")
                     .innerText.replaceAll("Haggle for ", "");
@@ -553,7 +572,7 @@ function topLevelTurbo() {
                 var t = document.getElementsByTagName("h1")[0].textContent,
                     o = document.querySelector("p > b")
                     .textContent.split("your offer of ")[1].split(" Neopoints!'")[0];
-                he(e + " bought", e + " bought from " + t + " for " + o + " NPs"), be(e, t, o, "Bought"), m && OpenQuickstockPage(isSendingToSBD), Re()
+                UpdateBannerAndDocument(e + " bought", e + " bought from " + t + " for " + o + " NPs"), be(e, t, o, "Bought"), m && OpenQuickstockPage(isSendingToSBD), Re()
             }
             function ve(e) {
                 isSendingEmail && window.emailjs.send(emailServiceID, emailTemplate, e, emailUserID)
@@ -569,21 +588,21 @@ function topLevelTurbo() {
             }
             function Re() {
                 var e;
-                if (De()) Ke("Waiting " + Ne(t = Math.random() * (le - ue) + ue) + " to reload page..."), setTimeout((function() {
+                if (De()) UpdateBannerStatus("Waiting " + Ne(t = Math.random() * (le - ue) + ue) + " to reload page..."), setTimeout((function() {
                     Le()
                 }), t);
                 else if (we()) {
-                    Ke("Waiting " + Ne(t = Math.random() * (se - me) + me + pauseAfterBuy) + " to reload page..."), setTimeout((function() {
+                    UpdateBannerStatus("Waiting " + Ne(t = Math.random() * (se - me) + me + pauseAfterBuy) + " to reload page..."), setTimeout((function() {
                         Le()
                     }), t)
                 } else if (e = Array.from(document.querySelectorAll(".item-img"))
                     .length, document.title = e + " stocked items", e < minItemsToConsiderStocked) {
-                    Ke("Waiting " + Ne(t = Math.random() * (maxRefreshIntervalUnstocked - minRefreshIntervalUnstocked) + minRefreshIntervalUnstocked) + " to reload page..."), setTimeout((function() {
+                    UpdateBannerStatus("Waiting " + Ne(t = Math.random() * (maxRefreshIntervalUnstocked - minRefreshIntervalUnstocked) + minRefreshIntervalUnstocked) + " to reload page..."), setTimeout((function() {
                         location.reload()
                     }), t)
                 } else {
                     var t;
-                    Ke("Waiting " + Ne(t = Math.random() * (maxRefreshIntervalStocked - minRefreshIntervalStocked) + minRefreshIntervalStocked) + " to reload page..."), setTimeout((function() {
+                    UpdateBannerStatus("Waiting " + Ne(t = Math.random() * (maxRefreshIntervalStocked - minRefreshIntervalStocked) + minRefreshIntervalStocked) + " to reload page..."), setTimeout((function() {
                         ! function() {
                             if (0 == storesToCycle.length) location.reload();
                             else if (1 == storesToCycle.length) window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
@@ -642,7 +661,7 @@ function topLevelTurbo() {
             function xe() {
                 var e = document.querySelector("h2")
                     .innerText.replaceAll("Haggle for ", "");
-                he("Sold out", "Sold out of " + e), be(e, document.getElementsByTagName("h1")[0].textContent, "-", "Sold out"), Re()
+                UpdateBannerAndDocument("Sold out", "Sold out of " + e), be(e, document.getElementsByTagName("h1")[0].textContent, "-", "Sold out"), Re()
             }
             function Le() {
                 document.querySelector("div.shop-bg")
@@ -656,7 +675,7 @@ function topLevelTurbo() {
                 var n = [];
                 for (var o of e) {
                     var r = item_db[o];
-                    if (!ke(o) || Ue(o)) n.push(-99999999);
+                    if (!IsItemInRarityThresholdToBuy(o) || Ue(o)) n.push(-99999999);
                     else if (null == r) console.warn("Did not have item in database"), n.push(buyUnknownItemsIfProfitMargin);
                     else if (null == r.Price || 0 == r.Price) console.warn("Did not have price for item in database"), n.push(buyUnknownItemsIfProfitMargin);
                     else {
@@ -683,12 +702,19 @@ function topLevelTurbo() {
                 }
                 return i
             }
+
             function Ue(e) {
                 return !!isBlacklistActive && blacklistToNeverBuy.includes(e)
             }
-            function ke(e) {
-                var t = item_db[e];
-                return null == t || (null == t.Rarity || parseInt(t.Rarity) >= minDBRarityToBuy)
+
+            function IsItemInRarityThresholdToBuy(e) {
+                const item = item_db[e];
+                if (!item) {
+                    return true;
+                }
+                
+                const itemRarity = parseInt(item.Rarity);
+                return !itemRarity || itemRarity >= minDBRarityToBuy;
             }
 
             function UpdateElementStyle() {
@@ -715,20 +741,32 @@ function topLevelTurbo() {
                     overflow: hidden;
                 `;
 
-                AddCSSStyle("#" + ae + " {" + style + "}");
+                AddCSSStyle("#" + bannerElementID + " {" + style + "}");
             }
 
-            function qe() {
-                if (isShowingBanner && !Te) {
-                    Te = !0;
-                    var e = document.createElement("div");
-                    e.innerText = "Autobuyer Running", e.id = ae, document.body.appendChild(e), UpdateElementStyle()
+            function DisplayAutoBuyerBanner() {
+                if (isShowingBanner && !bannerDisplayed) {
+                    bannerDisplayed = true;
+
+                    // Creating the banner element;
+                    const bannerElement = document.createElement("div");
+                    bannerElement.innerText = "Autobuyer Running";
+                    bannerElement.id = bannerElementID;
+
+                    document.body.appendChild(bannerElement);
+                    UpdateElementStyle();
                 }
             }
 
-            function Ke(e) {
-                Te && (document.getElementById(ae)
-                    .innerText = "Autobuyer Running: " + e)
+            function UpdateBannerStatus(runningStatus) {
+                if (isBannerDisplaying) {
+                    const bannerElement = document.getElementById(bannerElementID);
+                    
+                    if (bannerElement) {
+                        // Update the banner text with the running status
+                        bannerElement.innerText = "Autobuyer Running: " + runningStatus;
+                    }
+                }
             }
 
             function AddCSSStyle(e) {
@@ -774,7 +812,7 @@ function topLevelTurbo() {
                             }, (function() {})), ge()) : (! function() {
                                 if (IsInAtticOrShop()) {
                                     var e = document.createElement("div");
-                                    e.innerText = "Autobuyer Not Running - Please Subscribe", e.id = ae, document.body.appendChild(e), UpdateElementStyle()
+                                    e.innerText = "Autobuyer Not Running - Please Subscribe", e.id = bannerElementID, document.body.appendChild(e), UpdateElementStyle()
                                 }
                             }(), chrome.storage.local.set({
                                 EXT_P_S: !1
@@ -787,28 +825,45 @@ function topLevelTurbo() {
             }))
         }))
     }
-
-
-    /*function m() {
-        chrome.storage.local.get({
-            SEND_TO_SDB_AFTER_PURCHASE: !0
-        }, (function(e) {
-            var n;
-            e.SEND_TO_SDB_AFTER_PURCHASE && (UpdateDocument("Sending " + (n = getParameterByName("itemToQuickstock")) + " to SDB", "Sending " + n + " to safety deposit box"), function(e, t) {
-                ! function(e, t) {
-                    for (var n, o = document.querySelectorAll("#content table td form table tbody tr"), r = 0; r < o.length; r++) o[r].innerText.indexOf(e) > -1 && (n = o[r]);
-                    n.querySelectorAll("input[value='" + t.toLowerCase() + "']")[0].checked = !0
-                }(e, "deposit"), setTimeout((function() {
-                    document.querySelector(".content input[type='submit']")
-                        .click()
-                }), 500)
-            }(n))
-        }))
-    }*/
     
-    var s = setInterval((function() {
-        "complete" === document.readyState && (clearInterval(s), IsInAtticOrShop() && l(), window.location.href.indexOf("neopets.com/quickstock.phtml") > -1 && (document.body.innerText.indexOf("This is designed to make life easier when putting items in your deposit box") > 0 || (HandleServerErrors(), 0)) && null != getParameterByName("itemToQuickstock") && "" !== getParameterByName("itemToQuickstock") && m())
-    }), 20)
+    /*function checkDocumentState() {
+        if (document.readyState !== "complete") {
+            return;
+        }
+    
+        clearInterval(intervalID);
+    
+        if (IsInAtticOrShop()) {
+            l();
+        }
+    
+        if (window.location.href.indexOf("neopets.com/quickstock.phtml") > -1) {
+            const quickstockText = "This is designed to make life easier when putting items in your deposit box";
+            if (document.body.innerText.indexOf(quickstockText) > 0) {
+                HandleServerErrors();
+                return;
+            }
+    
+            if (getParameterByName("itemToQuickstock") !== "" && getParameterByName("itemToQuickstock") != null) {
+                m();
+            }
+        }
+    }*/
+
+    var IntervalID = null;
+
+    function SetAutoBuyer() {
+        if (IsInAtticOrShop()) {
+            l();
+            clearInterval(IntervalID); // Stop the interval when triggered
+        }
+    }
+
+
+    (function () {
+        // Your code here, such as SetAutoBuyer and the interval
+        IntervalID = setInterval(SetAutoBuyer, 20);
+    })();
 }
 
 topLevelTurbo();
