@@ -43,9 +43,11 @@ function topLevelTurbo() {
       
         // Reload the page after 10 seconds if an error is detected;
         if (errorMessages.some(message => pageText.includes(message))) {
-            setTimeout(() => { location.reload(); }, 10000);
+            const indexOfMessage = errorMessages.findIndex(message => pageText.includes(message));
 
-            if(message == errorMessages[2]) UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+            if (indexOfMessage === 2) {
+                UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+            }
         } 
         
         // If there's a browser related error;
@@ -163,60 +165,60 @@ function topLevelTurbo() {
             ATTIC_PREV_NUM_ITEMS: -1,
             SEND_TO_SDB_AFTER_PURCHASE: !1,
             PAUSE_AFTER_BUY_MS: 0
-        }, (function(oe) {
+        }, (function(autobuyerVariables) {
 
             // Destructing the variables extracted from the extension;
             const {
-                PAUSE_AFTER_BUY_MS: ne,
-                SEND_TO_SDB_AFTER_PURCHASE: m,
-                BUY_UNKNOWN_ITEMS_PROFIT: J,
-                ITEM_DB_MIN_RARITY: Z,
-                USE_BLACKLIST: ee,
-                BLACKLIST: te,
-                ENABLED: o,
-                USE_ITEM_DB: B,
-                ITEM_DB_MIN_PROFIT_NPS: P,
-                ITEM_DB_MIN_PROFIT_PERCENT: U,
-                HIGHLIGHT: l,
-                CLICK_ITEM: s,
-                CLICK_CONFIRM: d,
-                SHOULD_SHOW_BANNER: f,
-                SHOULD_CLICK_NEOPET: _,
-                SHOULD_ANNOTATE_IMAGE: T,
-                SHOULD_ENTER_OFFER: E,
-                SHOULD_SEND_EMAIL: g,
-                SHOULD_GO_FOR_SECOND_MOST_VALUABLE: h,
-                STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: p,
-                RUN_BETWEEN_HOURS: I,
-                MIN_REFRESH: A,
-                MAX_REFRESH: y,
-                ITEMS_TO_CONSIDER_STOCKED: S,
-                MIN_REFRESH_STOCKED: M,
-                MAX_REFRESH_STOCKED: C,
-                MIN_CLICK_ITEM_IMAGE: v,
-                MAX_CLICK_ITEM_IMAGE: N,
-                MIN_CLICK_CONFIRM: R,
-                MAX_CLICK_CONFIRM: O,
-                MIN_OCR_PAGE: b,
-                MAX_OCR_PAGE: w,
-                EMAIL_TEMPLATE: x,
-                EMAIL_USER_ID: L,
-                EMAIL_SERVICE_ID: D,
-                RESTOCK_LIST: H,
-                ATTIC_ENABLED: k,
-                ATTIC_HIGHLIGHT: F,
-                ATTIC_CLICK_ITEM: q,
-                ATTIC_ITEM_DB_MIN_PROFIT_NPS: K,
-                ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: G,
-                ATTIC_MIN_BUY_TIME: W,
-                ATTIC_MAX_BUY_TIME: X,
-                ATTIC_RUN_BETWEEN_HOURS: Y,
-                ATTIC_MIN_REFRESH: j,
-                ATTIC_MAX_REFRESH: V,
-                ATTIC_SHOULD_REFRESH: z,
-                ATTIC_LAST_REFRESH_MS: $,
-                ATTIC_PREV_NUM_ITEMS: Q
-            } = oe;
+                PAUSE_AFTER_BUY_MS: pauseAfterBuy,
+                SEND_TO_SDB_AFTER_PURCHASE: isSendingToSBD,
+                BUY_UNKNOWN_ITEMS_PROFIT: buyUnknownItemsIfProfitMargin,
+                ITEM_DB_MIN_RARITY: minDBRarityToBuy,
+                USE_BLACKLIST: isBlacklistActive,
+                BLACKLIST: blacklistToNeverBuy,
+                ENABLED: isAutoBuyerEnabled,
+                USE_ITEM_DB: buyWithItemDB,
+                ITEM_DB_MIN_PROFIT_NPS: minDBProfitToBuy,
+                ITEM_DB_MIN_PROFIT_PERCENT: minDBProfitPercentToBuy,
+                HIGHLIGHT: isHighlightingItemsInShops,
+                CLICK_ITEM: isClickingItems,
+                CLICK_CONFIRM: isClickingConfirm,
+                SHOULD_SHOW_BANNER: isShowingBanner,
+                SHOULD_CLICK_NEOPET: isClickingCaptcha,
+                SHOULD_ANNOTATE_IMAGE: isAnnotatingImage,
+                SHOULD_ENTER_OFFER: isEnteringOffer,
+                SHOULD_SEND_EMAIL: isSendingEmail,
+                SHOULD_GO_FOR_SECOND_MOST_VALUABLE: isBuyingSecondMostProfitable,
+                STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: storesToCycle,
+                RUN_BETWEEN_HOURS: runBetweenHours,
+                MIN_REFRESH: minRefreshIntervalUnstocked,
+                MAX_REFRESH: maxRefreshIntervalUnstocked,
+                ITEMS_TO_CONSIDER_STOCKED: minItemsToConsiderStocked,
+                MIN_REFRESH_STOCKED: minRefreshIntervalStocked,
+                MAX_REFRESH_STOCKED: maxRefreshIntervalStocked,
+                MIN_CLICK_ITEM_IMAGE: minClickImageInterval,
+                MAX_CLICK_ITEM_IMAGE: maxClickImageInterval,
+                MIN_CLICK_CONFIRM: minClickConfirmInterval,
+                MAX_CLICK_CONFIRM: maxClickConfirmInterval,
+                MIN_OCR_PAGE: minOCRDetectionInterval,
+                MAX_OCR_PAGE: maxOCRDetectionInterval,
+                EMAIL_TEMPLATE: emailTemplate,
+                EMAIL_USER_ID: emailUserID,
+                EMAIL_SERVICE_ID: emailServiceID,
+                RESTOCK_LIST: restockList,
+                ATTIC_ENABLED: isAtticEnabled,
+                ATTIC_HIGHLIGHT: isHighlightingItemsInAttic,
+                ATTIC_CLICK_ITEM: isClickingItemsInAttic,
+                ATTIC_ITEM_DB_MIN_PROFIT_NPS: minDBProfitToBuyInAttic,
+                ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: minDBProfitPercentToBuyInAttic,
+                ATTIC_MIN_BUY_TIME: minAtticBuyTime,
+                ATTIC_MAX_BUY_TIME: maxAtticBuyTime,
+                ATTIC_RUN_BETWEEN_HOURS: atticRunBetweenHours,
+                ATTIC_MIN_REFRESH: minRefreshIntervalAttic,
+                ATTIC_MAX_REFRESH: maxRefreshIntervalAttic,
+                ATTIC_SHOULD_REFRESH: isAtticAutoRefreshing,
+                ATTIC_LAST_REFRESH_MS: atticLastRefresh,
+                ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems
+            } = autobuyerVariables;
             
             var re, ie = "Attic",
                 ae = "qpkzsoynerzxsqw",
@@ -225,8 +227,8 @@ function topLevelTurbo() {
                 le = 100,
                 me = 5e3,
                 se = 5100,
-                de = b / 2,
-                fe = w / 2,
+                de = minOCRDetectionInterval / 2,
+                fe = maxOCRDetectionInterval / 2,
                 _e = !1,
                 Te = !1,
                 Ee = 50;
@@ -241,7 +243,7 @@ function topLevelTurbo() {
                         }, u = document.getElementsByTagName("h1")[0].textContent, ve(c), he("Not enough NPs", "Not enough NPs to purchase " + o + " from " + u + ". Pausing."), be(o, u, "-", "Not enough neopoints")) : document.body.innerText.indexOf("every five seconds") > -1 ? (be(document.getElementsByTagName("h2")[0].innerText.split("Haggle for ")[1], document.getElementsByTagName("h1")[0].textContent, "-", "Five second rule"), he("Five second rule", "Attempted to purchase item within 5 seconds of a different purchase"), window.history.back()) : document.body.innerText.indexOf("Sorry, you can only carry a maximum of") > -1 ? he("Inventory full", "Inventory was full. Pausing.") : (Ke("Entering offer..."), function() {
                         (document.documentElement.textContent || document.documentElement.innerText)
                         .indexOf("You must select the correct pet in order to continue") > -1 && console.error("Incorrect click on pet!");
-                        E && setTimeout((function() {
+                        isEnteringOffer && setTimeout((function() {
                             var e, t = new RegExp("[0-9|,]+ Neopoints")
                                 .exec(document.getElementById("shopkeeper_makes_deal")
                                     .innerText)[0].replace(" Neopoints", "")
@@ -287,7 +289,7 @@ function topLevelTurbo() {
                             }(t.src, (function(o, r) {
                                 var i = performance.now(),
                                     a = Math.max(i - e, i - n),
-                                    c = Math.random() * (w - b) + b,
+                                    c = Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval,
                                     u = Math.max(Math.round(c - a), 0);
                                 setTimeout((function() {
                                     var a = performance.now();
@@ -308,11 +310,11 @@ function topLevelTurbo() {
                                                 clientX: r,
                                                 clientY: i
                                             });
-                                        _ && (e.dispatchEvent(a), Ae()),
+                                        isClickingCaptcha && (e.dispatchEvent(a), Ae()),
                                             function(e, t) {
-                                                if (T) {
+                                                if (isAnnotatingImage) {
                                                     var n = document.createElement("img");
-                                                    n.src = "https://upload.wikimedia.org/wikipedia/commons/3/31/Circle_Burgundy_Solid.svg", n.style.height = "14px", n.style.width = "14px", n.style.position = "absolute", n.style.top = t - 7 + "px", n.style.left = e - 7 + "px", n.style.zIndex = "9999999999", n.style.pointerEvents = "none", document.body.appendChild(n), Ge("\n                          input[type='image'] {\n                            filter: contrast(2) grayscale(1);\n                          }\n                        ")
+                                                    n.src = "https://upload.wikimedia.org/wikipedia/commons/3/31/Circle_Burgundy_Solid.svg", n.style.height = "14px", n.style.width = "14px", n.style.position = "absolute", n.style.top = t - 7 + "px", n.style.left = e - 7 + "px", n.style.zIndex = "9999999999", n.style.pointerEvents = "none", document.body.appendChild(n), AddCSSStyle("\n                          input[type='image'] {\n                            filter: contrast(2) grayscale(1);\n                          }\n                        ")
                                                 }
                                             }(r, i)
                                     }(t, o, r);
@@ -327,16 +329,16 @@ function topLevelTurbo() {
                     else if (we()) Ce();
                 else {
                     ! function() {
-                        if (l)
-                            if (B) ! function() {
+                        if (isHighlightingItemsInShops)
+                            if (buyWithItemDB) ! function() {
                                 var e = Array.from(document.querySelectorAll(".item-img"))
                                     .map((e => e.getAttribute("data-name"))),
                                     t = Array.from(document.querySelectorAll(".item-img"))
                                     .map((e => parseInt(e.getAttribute("data-price")
                                         .replaceAll(",", "")))),
                                     n = He(e, t),
-                                    o = Be(e, t, n, P, U),
-                                    r = Pe(e, t, n, P, U);
+                                    o = Be(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy),
+                                    r = Pe(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy);
                                 if (null != o) {
                                     for (var i of r) document.querySelector(`.item-img[data-name="${i}"]`)
                                         .parentElement.style.backgroundColor = "lightgreen";
@@ -347,8 +349,8 @@ function topLevelTurbo() {
                             else {
                                 var e = new Set(Array.from(document.querySelectorAll(".item-img"))
                                         .map((e => e.getAttribute("data-name")))),
-                                    t = H.find((t => e.has(t) && !Ue(t))),
-                                    n = H.filter((t => e.has(t) && !Ue(t)));
+                                    t = restockList.find((t => e.has(t) && !Ue(t))),
+                                    n = restockList.filter((t => e.has(t) && !Ue(t)));
                                 if (null != t) {
                                     for (var o of n) document.querySelector(`.item-img[data-name="${o}"]`)
                                         .parentElement.style.backgroundColor = "lightgreen";
@@ -359,50 +361,50 @@ function topLevelTurbo() {
                     }();
                     var t = function() {
                         var e;
-                        if (B) {
+                        if (buyWithItemDB) {
                             var t = function() {
                                 for (var e = Array.from(document.querySelectorAll(".item-img"))
                                         .map((e => e.getAttribute("data-name"))), t = Array.from(document.querySelectorAll(".item-img"))
                                         .map((e => parseInt(e.getAttribute("data-price")
                                             .replaceAll(",", "")))), n = He(e, t), o = null, r = null, i = -1, a = 0; a < n.length; a++) {
-                                    var c = n[a] > P,
-                                        u = n[a] / t[a] > U;
+                                    var c = n[a] > minDBProfitToBuy,
+                                        u = n[a] / t[a] > minDBProfitPercentToBuy;
                                     c && u && n[a] > i && (i = n[a], null != r && (o = r), r = e[a])
                                 }
                                 return null == r ? [] : null == o ? [r] : [r, o]
                             }();
                             if (0 == t.length) return;
-                            1 == t.length ? e = t[0] : h ? (e = t[1], console.warn("Skipping first most valuable item: " + t[0])) : e = t[0]
+                            1 == t.length ? e = t[0] : isBuyingSecondMostProfitable ? (e = t[1], console.warn("Skipping first most valuable item: " + t[0])) : e = t[0]
                         } else {
                             var n = new Set(Array.from(document.querySelectorAll(".item-img"))
                                     .map((e => e.getAttribute("data-name")))),
-                                o = H.find((e => n.has(e) && !Ue(e)));
-                            if (e = o, h) {
-                                var r = H.find((e => n.has(e) && e !== o && !Ue(e)));
+                                o = restockList.find((e => n.has(e) && !Ue(e)));
+                            if (e = o, isBuyingSecondMostProfitable) {
+                                var r = restockList.find((e => n.has(e) && e !== o && !Ue(e)));
                                 r && (console.warn("Skipping first most valuable item: " + e), e = r)
                             }
                         }
-                        e && s ? he("Buying " + e, "Buying " + e + " from main shop") : e && he(e + " is in stock", e + " is in stock in main shop");
+                        e && isClickingItems ? he("Buying " + e, "Buying " + e + " from main shop") : e && he(e + " is in stock", e + " is in stock in main shop");
                         return e
                     }();
                     t ? function(e) {
-                            if (s) {
+                            if (isClickingItems) {
                                 var t = document.querySelector(`.item-img[data-name="${e}"]`);
                                 setTimeout((function() {
                                     t.click(), Ae()
-                                }), Math.random() * (N - v) + v)
+                                }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)
                             }
                         }(t) : ! function() {
                             var e = new Date,
                                 t = e.getHours(),
                                 n = e.getMinutes();
                             e.getDay();
-                            return t >= I[0] && t <= I[1] && n >= ce[0] && n <= ce[1]
+                            return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= ce[0] && n <= ce[1]
                         }() ? (_e || (he("Waiting", "Waiting for scheduled time in main shop"), _e = !0), setTimeout((function() {
                             ge()
                         }), 3e4)) : Re(),
                         function() {
-                            if (d) {
+                            if (isClickingConfirm) {
                                 var e = !1;
                                 clearInterval(re), re = setInterval((function() {
                                     var t, n = document.getElementById("confirm-link");
@@ -410,7 +412,7 @@ function topLevelTurbo() {
                                         .offsetWidth || t.offsetHeight || t.getClientRects()
                                         .length) && setTimeout((function() {
                                         e || (n.click(), Ae(), e = !0)
-                                    }), Math.random() * (O - R) + R)
+                                    }), Math.random() * (maxClickConfirmInterval - minClickConfirmInterval) + minClickConfirmInterval)
                                 }), Ee)
                             }
                         }()
@@ -426,36 +428,36 @@ function topLevelTurbo() {
                                 item: e,
                                 notes: ""
                             };
-                        ve(t), he(e + " bought", e + " bought from Attic"), be(e, ie, "-", "Bought"), m && OpenQuickstockPage(e);
+                        ve(t), he(e + " bought", e + " bought from Attic"), be(e, ie, "-", "Bought"), m && OpenQuickstockPage(isSendingToSBD);
                         setTimeout((function() {
                             Ie()
                         }), 12e5)
                     }(), Se();
-                    else if (DocumentIncludes("Didn't you just buy something?")) he("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes"), setTimeout((function() {
+                    else if (document.body.innerText.includes("Didn't you just buy something?")) he("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes"), setTimeout((function() {
                         window.location.href = "https://www.neopets.com/halloween/garage.phtml"
                     }), 12e5);
-                    else if (DocumentIncludes("Sorry, please try again later.")) he("Attic is refresh banned", "Pausing NeoBuyer in Attic");
-                    else if (DocumentIncludes("cannot buy any more items from this shop today")) he("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
+                    else if (document.body.innerText.includes("Sorry, please try again later.")) he("Attic is refresh banned", "Pausing NeoBuyer in Attic");
+                    else if (document.body.innerText.includes("cannot buy any more items from this shop today")) he("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
                     else {
                         ! function() {
-                            if (Q < 0) return;
-                            if ($ < 0) return;
+                            if (atticPreviousNumberOfItems < 0) return;
+                            if (atticLastRefresh < 0) return;
                             var e = ye(),
                                 t = Date.now();
-                            e > Q && chrome.storage.local.set({
+                            e > atticPreviousNumberOfItems && chrome.storage.local.set({
                                 ATTIC_PREV_NUM_ITEMS: e,
                                 ATTIC_LAST_REFRESH_MS: t
                             }, (function() {
                                 he("Attic restocked", "Restock detected in Attic, updating last restock estimate.")
                             }))
-                        }(), DocumentIncludes("Sorry, we just sold out of that.") && he("Sold out", "Item was sold out at the Attic"), Se();
+                        }(), document.body.innerText.includes("Sorry, we just sold out of that.") && he("Sold out", "Item was sold out at the Attic"), Se();
                         var e = (o = Array.from(document.querySelectorAll("#items li"))
                             .map((e => e.getAttribute("oname"))), r = Array.from(document.querySelectorAll("#items li"))
                             .map((e => e.getAttribute("oprice")
-                                .replaceAll(",", ""))), i = He(o, r), Be(o, r, i, K, G));
+                                .replaceAll(",", ""))), i = He(o, r), Be(o, r, i, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic));
                         e ? function(e) {
-                            if (q) {
-                                var t = Math.random() * (X - W) + W;
+                            if (isClickingItemsInAttic) {
+                                var t = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
                                 he("Attempting " + e + " in Attic", "Attempting to buy " + e + " in Attic in " + Ne(t));
                                 var n = document.querySelector(`#items li[oname="${e}"]`),
                                     o = n.getAttribute("oii"),
@@ -466,11 +468,11 @@ function topLevelTurbo() {
                                         .submit()
                                 }), t)
                             }
-                        }(e) : !z || function() {
+                        }(e) : !isAtticAutoRefreshing || function() {
                             var e = new Date,
                                 t = e.getHours();
                             e.getMinutes(), e.getDay();
-                            return t >= Y[0] && t <= Y[1]
+                            return t >= atticRunBetweenHours[0] && t <= atticRunBetweenHours[1]
                         }() ? Ie() : (_e || (he("Waiting", "Waiting for scheduled time in Attic"), _e = !0), setTimeout((function() {
                             ge()
                         }), 3e4)), t = ye(), chrome.storage.local.set({
@@ -487,25 +489,21 @@ function topLevelTurbo() {
                 Ke(n), UpdateDocument(e, n)
             }
 
-            function DocumentIncludes(e) {
-                return document.body.innerText.includes(e)
-            }
-
             function Ie() {
-                if (z) {
+                if (isAtticAutoRefreshing) {
                     var e = function() {
-                            if ($ < 0) return Math.random() * (V - j) + j;
+                            if (atticLastRefresh < 0) return Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic;
                             var e = Date.now(),
                                 t = 42e4,
                                 n = 0,
                                 o = 8,
-                                r = $,
-                                i = $;
+                                r = atticLastRefresh,
+                                i = atticLastRefresh;
                             for (; r < e && i < e;) r += t + 1e3 * n, i += t + 1e3 * o;
-                            return e <= i && e >= r ? Math.random() * (V - j) + j : r - e
+                            return e <= i && e >= r ? Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic : r - e
                         }(),
                         t = "Waiting " + Ne(e) + " to reload...";
-                    if ($ > 0) t += " Last restock: " + moment($)
+                    if (atticLastRefresh > 0) t += " Last restock: " + moment(atticLastRefresh)
                         .tz("America/Los_Angeles")
                         .format("h:mm:ss A") + " NST...";
                     Ke(t), setTimeout((function() {
@@ -525,15 +523,15 @@ function topLevelTurbo() {
                     .length
             }
             function Se() {
-                if (F) {
+                if (isHighlightingItemsInAttic) {
                     var e = Array.from(document.querySelectorAll("#items li"))
                         .map((e => e.getAttribute("oname"))),
                         t = Array.from(document.querySelectorAll("#items li"))
                         .map((e => e.getAttribute("oprice")
                             .replaceAll(",", ""))),
                         n = He(e, t),
-                        o = Be(e, t, n, K, G),
-                        r = Pe(e, t, n, K, G);
+                        o = Be(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic),
+                        r = Pe(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
                     if (null != o) {
                         for (var i of r) Me(i, "lightgreen");
                         Me(o, "orangered")
@@ -555,10 +553,10 @@ function topLevelTurbo() {
                 var t = document.getElementsByTagName("h1")[0].textContent,
                     o = document.querySelector("p > b")
                     .textContent.split("your offer of ")[1].split(" Neopoints!'")[0];
-                he(e + " bought", e + " bought from " + t + " for " + o + " NPs"), be(e, t, o, "Bought"), m && OpenQuickstockPage(e), Re()
+                he(e + " bought", e + " bought from " + t + " for " + o + " NPs"), be(e, t, o, "Bought"), m && OpenQuickstockPage(isSendingToSBD), Re()
             }
             function ve(e) {
-                g && window.emailjs.send(D, x, e, L)
+                isSendingEmail && window.emailjs.send(emailServiceID, emailTemplate, e, emailUserID)
                     .then((function(e) {
                         console.log("Email sent!", e.status, e.text)
                     }), (function(e) {
@@ -575,29 +573,29 @@ function topLevelTurbo() {
                     Le()
                 }), t);
                 else if (we()) {
-                    Ke("Waiting " + Ne(t = Math.random() * (se - me) + me + ne) + " to reload page..."), setTimeout((function() {
+                    Ke("Waiting " + Ne(t = Math.random() * (se - me) + me + pauseAfterBuy) + " to reload page..."), setTimeout((function() {
                         Le()
                     }), t)
                 } else if (e = Array.from(document.querySelectorAll(".item-img"))
-                    .length, document.title = e + " stocked items", e < S) {
-                    Ke("Waiting " + Ne(t = Math.random() * (y - A) + A) + " to reload page..."), setTimeout((function() {
+                    .length, document.title = e + " stocked items", e < minItemsToConsiderStocked) {
+                    Ke("Waiting " + Ne(t = Math.random() * (maxRefreshIntervalUnstocked - minRefreshIntervalUnstocked) + minRefreshIntervalUnstocked) + " to reload page..."), setTimeout((function() {
                         location.reload()
                     }), t)
                 } else {
                     var t;
-                    Ke("Waiting " + Ne(t = Math.random() * (C - M) + M) + " to reload page..."), setTimeout((function() {
+                    Ke("Waiting " + Ne(t = Math.random() * (maxRefreshIntervalStocked - minRefreshIntervalStocked) + minRefreshIntervalStocked) + " to reload page..."), setTimeout((function() {
                         ! function() {
-                            if (0 == p.length) location.reload();
-                            else if (1 == p.length) window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + p[0];
+                            if (0 == storesToCycle.length) location.reload();
+                            else if (1 == storesToCycle.length) window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
                             else {
                                 var e = !1;
-                                p.forEach(((t, n) => {
+                                storesToCycle.forEach(((t, n) => {
                                     if (window.location.toString()
                                         .match(/obj_type=(\d+)/)[1] == t) {
-                                        var o = n == p.length - 1 ? p[0] : p[n + 1];
+                                        var o = n == storesToCycle.length - 1 ? storesToCycle[0] : storesToCycle[n + 1];
                                         e = !0, window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + o
                                     }
-                                })), e || (window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + p[0])
+                                })), e || (window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0])
                             }
                         }()
                     }), t)
@@ -659,8 +657,8 @@ function topLevelTurbo() {
                 for (var o of e) {
                     var r = item_db[o];
                     if (!ke(o) || Ue(o)) n.push(-99999999);
-                    else if (null == r) console.warn("Did not have item in database"), n.push(J);
-                    else if (null == r.Price || 0 == r.Price) console.warn("Did not have price for item in database"), n.push(J);
+                    else if (null == r) console.warn("Did not have item in database"), n.push(buyUnknownItemsIfProfitMargin);
+                    else if (null == r.Price || 0 == r.Price) console.warn("Did not have price for item in database"), n.push(buyUnknownItemsIfProfitMargin);
                     else {
                         var i = parseInt(r.Price.toString()
                             .replaceAll(",", "")) - parseInt(t[e.indexOf(o)]);
@@ -686,20 +684,45 @@ function topLevelTurbo() {
                 return i
             }
             function Ue(e) {
-                return !!ee && te.includes(e)
+                return !!isBlacklistActive && blacklistToNeverBuy.includes(e)
             }
             function ke(e) {
                 var t = item_db[e];
-                return null == t || (null == t.Rarity || parseInt(t.Rarity) >= Z)
+                return null == t || (null == t.Rarity || parseInt(t.Rarity) >= minDBRarityToBuy)
             }
-            function Fe() {
-                IsInAlmostAbandonedAttic() ? Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 0;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ") : Ge("#" + ae + " {\n                                    color: white;\n                                    width: 100%;\n                                    position: fixed;\n                                    height: 35px;\n                                    top: 68px;\n                                    left: 0;\n                                    z-index: 11;\n                                    pointer-events: none;\n                                    text-align: center;\n                                    line-height: 35px;\n                                    font-size: 15px;\n                                    font-family: Verdana, Arial, Helvetica, sans-serif;\n                                    background-color: rgba(0,0,0,.8);\n                                    font-weight: bold;\n                                    text-overflow: ellipsis;\n                                    white-space: nowrap;\n                                    overflow: hidden;\n                                }\n                        ")
+
+            function UpdateElementStyle() {
+                const isAlmostAbandonedAttic = IsInAlmostAbandonedAttic();
+                const topPosition = isAlmostAbandonedAttic ? "0" : "68px";
+                
+                const style = `
+                    color: white;
+                    width: 100%;
+                    position: fixed;
+                    height: 35px;
+                    top: ${topPosition};
+                    left: 0;
+                    z-index: 11;
+                    pointer-events: none;
+                    text-align: center;
+                    line-height: 35px;
+                    font-size: 15px;
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    background-color: rgba(0, 0, 0, .8);
+                    font-weight: bold;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                `;
+
+                AddCSSStyle("#" + ae + " {" + style + "}");
             }
+
             function qe() {
-                if (f && !Te) {
+                if (isShowingBanner && !Te) {
                     Te = !0;
                     var e = document.createElement("div");
-                    e.innerText = "Autobuyer Running", e.id = ae, document.body.appendChild(e), Fe()
+                    e.innerText = "Autobuyer Running", e.id = ae, document.body.appendChild(e), UpdateElementStyle()
                 }
             }
 
@@ -708,7 +731,7 @@ function topLevelTurbo() {
                     .innerText = "Autobuyer Running: " + e)
             }
 
-            function Ge(e) {
+            function AddCSSStyle(e) {
                 const t = document.createElement("style");
                 t.textContent = e, document.head.append(t)
             }
@@ -738,7 +761,7 @@ function topLevelTurbo() {
                     s: r,
                     l: c
                 }
-            }(IsInAlmostAbandonedAttic() && k || IsInNeopianShop() && o) && chrome.storage.local.get({
+            }(IsInAlmostAbandonedAttic() && isAtticEnabled || IsInNeopianShop() && isAutoBuyerEnabled) && chrome.storage.local.get({
                 EXT_P_S: !1
             }, (function(e) {
                 if (e.EXT_P_S) ge();
@@ -751,7 +774,7 @@ function topLevelTurbo() {
                             }, (function() {})), ge()) : (! function() {
                                 if (IsInAtticOrShop()) {
                                     var e = document.createElement("div");
-                                    e.innerText = "Autobuyer Not Running - Please Subscribe", e.id = ae, document.body.appendChild(e), Fe()
+                                    e.innerText = "Autobuyer Not Running - Please Subscribe", e.id = ae, document.body.appendChild(e), UpdateElementStyle()
                                 }
                             }(), chrome.storage.local.set({
                                 EXT_P_S: !1
