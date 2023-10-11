@@ -21,15 +21,6 @@ function topLevelTurbo() {
     
     var e = performance.now();
 
-    // Opens the quickstock page to auto SDB items;
-    function OpenQuickstockPage(e) {
-        chrome.runtime.sendMessage({
-            neobuyer: "NeoBuyer",
-            type: "OpenQuickstockPage",
-            itemName: e
-        });
-    }
-
     // Handle page errors by refreshing;
     function HandleServerErrors() {
         chrome.storage.local.get({
@@ -246,9 +237,12 @@ function topLevelTurbo() {
                 isBannerDisplaying = !1,
                 Ee = 50;
 
-            function ge() {
+            // Run the AutoBuyer
+            RunAutoBuyer();
+
+            function RunAutoBuyer() {
                 if (IsHaggling()) DisplayAutoBuyerBanner(), IsSoldOut() ? ProcessSoldOutItem() : IsItemAddedToInventory() ? ProcessPurchase() : (document.documentElement.textContent || document.documentElement.innerText)
-                    .indexOf("You don't have that kind of money") > -1 ? (o = document.querySelector("h2")
+                    .includes("You don't have that kind of money") ? (o = document.querySelector("h2")
                         .innerText.replaceAll("Haggle for ", ""), c = {
                             status: "missed",
                             item: o,
@@ -276,6 +270,7 @@ function topLevelTurbo() {
                             document.querySelector(".haggleForm input[type=text]")
                                 .value = o
                         }), Math.random() * (fe - de) + de);
+
                         t = document.querySelector("input[type='image']"), n = performance.now(),
                             function(e, t, n, o) {
                                 var r = new Image;
@@ -337,9 +332,11 @@ function topLevelTurbo() {
                             }), t.width, t.height);
                         var t, n
                     }());
+                
                 else if (IsInShop())
                     if (DisplayAutoBuyerBanner(), IsSoldOut()) ProcessSoldOutItem();
                     else if (IsItemAddedToInventory()) ProcessPurchase();
+                    
                 else {
                     ! function() {
                         if (isHighlightingItemsInShops)
@@ -414,7 +411,7 @@ function topLevelTurbo() {
                             e.getDay();
                             return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= ce[0] && n <= ce[1]
                         }() ? (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), _e = !0), setTimeout((function() {
-                            ge()
+                            RunAutoBuyer()
                         }), 3e4)) : ReloadPageBasedOnConditions(),
                         function() {
                             if (isClickingConfirm) {
@@ -430,71 +427,110 @@ function topLevelTurbo() {
                             }
                         }()
                 // This may break in the future #TAG; The original line was CheckNeopetsGarage() > -1, meaning the item was found, returning true using includes;
-                } else IsInAlmostAbandonedAttic() && function() {
-                    if (DisplayAutoBuyerBanner(), function() {
-                            var e = "I have placed it in your inventory";
-                            return document.body.innerText.indexOf(e) > -1
-                        }()) ! function() {
-                        var e = document.getElementsByTagName("strong")[0].innerText,
-                            t = {
-                                status: "bought",
-                                item: e,
-                                notes: ""
-                            };
-                        SendEmail(t), UpdateBannerAndDocument(e + " bought", e + " bought from Attic"), SaveToPurchaseHistory(e, atticString, "-", "Bought"), m && OpenQuickstockPage(isSendingToSBD);
-                        setTimeout((function() {
-                            AutoRefreshAttic()
-                        }), 12e5)
-                    }(), HighlightItemsInAttic();
-                    else if (document.body.innerText.includes("Didn't you just buy something?")) UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes"), setTimeout((function() {
-                        window.location.href = "https://www.neopets.com/halloween/garage.phtml"
-                    }), 12e5);
-                    else if (document.body.innerText.includes("Sorry, please try again later.")) UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer in Attic");
-                    else if (document.body.innerText.includes("cannot buy any more items from this shop today")) UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
-                    else {
-                        ! function() {
-                            if (atticPreviousNumberOfItems < 0) return;
-                            if (atticLastRefresh < 0) return;
-                            var e = GetStockedItemNumber(),
-                                t = Date.now();
-                            e > atticPreviousNumberOfItems && chrome.storage.local.set({
-                                ATTIC_PREV_NUM_ITEMS: e,
-                                ATTIC_LAST_REFRESH_MS: t
-                            }, (function() {
-                                UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.")
-                            }))
-                        }(), document.body.innerText.includes("Sorry, we just sold out of that.") && UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic"), HighlightItemsInAttic();
-                        var e = (o = Array.from(document.querySelectorAll("#items li"))
-                            .map((e => e.getAttribute("oname"))), r = Array.from(document.querySelectorAll("#items li"))
-                            .map((e => e.getAttribute("oprice")
-                                .replaceAll(",", ""))), i = CalculateItemProfits(o, r), Be(o, r, i, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic));
-                        e ? function(e) {
-                            if (isClickingItemsInAttic) {
-                                var t = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
-                                UpdateBannerAndDocument("Attempting " + e + " in Attic", "Attempting to buy " + e + " in Attic in " + FormatMillisecondsToSeconds(t));
-                                var n = document.querySelector(`#items li[oname="${e}"]`),
-                                    o = n.getAttribute("oii"),
-                                    r = n.getAttribute("oprice");
-                                SaveToPurchaseHistory(e, atticString, r, "Attempted"), setTimeout((function() {
-                                    document.getElementById("oii")
-                                        .value = o, document.getElementById("frm-abandoned-attic")
-                                        .submit()
-                                }), t)
+                } else if(IsInAlmostAbandonedAttic()){
+                    function handleAlmostAbandonedAttic() {
+                        DisplayAutoBuyerBanner();
+
+                        function IsItemInInventory() {
+                            const message = "I have placed it in your inventory";
+                            return document.body.innerText.indexOf(message) > -1;
+                        }
+
+                        if (IsItemInInventory()) {
+                            var e = document.getElementsByTagName("strong")[0].innerText,
+                                t = {
+                                    status: "bought",
+                                    item: e,
+                                    notes: ""
+                                };
+                            SendEmail(t);
+                            UpdateBannerAndDocument(e + " bought", e + " bought from Attic");
+                            SaveToPurchaseHistory(e, atticString, "-", "Bought");
+
+                            setTimeout(function() {
+                                AutoRefreshAttic();
+                            }, 120000);
+                            HighlightItemsInAttic();
+                        } 
+                        
+                        else if (document.body.innerText.includes("Didn't you just buy something?")) {
+                            UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes");
+                            
+                            setTimeout(function() {
+                                window.location.href = "https://www.neopets.com/halloween/garage.phtml";
+                            }, 120000);
+                        }
+
+
+                        else if (document.body.innerText.includes("Sorry, please try again later.")){
+                            UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer in Attic");
+                        } 
+                        
+
+                        else if (document.body.innerText.includes("cannot buy any more items from this shop today")) {
+                            UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
+                        }
+                        
+                        else {
+                            AtticRestockUpdateChecker();
+
+                            function AtticRestockUpdateChecker(){
+                                if (atticPreviousNumberOfItems < 0) return;
+                                if (atticLastRefresh < 0) return;
+                                var e = GetStockedItemNumber();
+                                var t = Date.now();
+                            
+                                if (e > atticPreviousNumberOfItems) {
+                                    chrome.storage.local.set({
+                                        ATTIC_PREV_NUM_ITEMS: e,
+                                        ATTIC_LAST_REFRESH_MS: t
+                                    }, function() {
+                                        UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
+                                    });
+                                }
                             }
-                        }(e) : !isAtticAutoRefreshing || function() {
-                            var e = new Date,
-                                t = e.getHours();
-                            e.getMinutes(), e.getDay();
-                            return t >= atticRunBetweenHours[0] && t <= atticRunBetweenHours[1]
-                        }() ? AutoRefreshAttic() : (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic"), _e = !0), setTimeout((function() {
-                            ge()
-                        }), 3e4)), t = GetStockedItemNumber(), chrome.storage.local.set({
-                            ATTIC_PREV_NUM_ITEMS: t
-                        }, (function() {}))
+                            
+                            if (document.body.innerText.includes("Sorry, we just sold out of that.")) {
+                                UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
+                            }
+                            
+                            HighlightItemsInAttic();
+                            
+                            var e = (o = Array.from(document.querySelectorAll("#items li")).map((e => e.getAttribute("oname"))), 
+                            r = Array.from(document.querySelectorAll("#items li")).map((e => e.getAttribute("oprice").replaceAll(",", ""))),
+                            i = CalculateItemProfits(o, r), Be(o, r, i, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic));
+                            e ? function(e) {
+                                if (isClickingItemsInAttic) {
+                                    var t = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
+                                    UpdateBannerAndDocument("Attempting " + e + " in Attic", "Attempting to buy " + e + " in Attic in " + FormatMillisecondsToSeconds(t));
+                                    var n = document.querySelector(`#items li[oname="${e}"]`),
+                                        o = n.getAttribute("oii"),
+                                        r = n.getAttribute("oprice");
+                                    SaveToPurchaseHistory(e, atticString, r, "Attempted"), setTimeout((function() {
+                                        document.getElementById("oii")
+                                            .value = o, document.getElementById("frm-abandoned-attic")
+                                            .submit()
+                                    }), t)
+                                }
+                            }(e) : !isAtticAutoRefreshing || function() {
+                                var e = new Date,
+                                    t = e.getHours();
+                                e.getMinutes(), e.getDay();
+                                return t >= atticRunBetweenHours[0] && t <= atticRunBetweenHours[1]
+                            }() ? AutoRefreshAttic() : (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic"), _e = !0), setTimeout((function() {
+                                RunAutoBuyer()
+                            }), 3e4)), t = GetStockedItemNumber(), chrome.storage.local.set({
+                                ATTIC_PREV_NUM_ITEMS: t
+                            }, (function() {}))
+                        }
+                        
+                        var t;
+                        var o, r, i
                     }
-                    var t;
-                    var o, r, i
-                }();
+                    
+                    handleAlmostAbandonedAttic();
+                }
+
                 var o, c, u
             }
 
@@ -886,56 +922,9 @@ function topLevelTurbo() {
                     s: r,
                     l: c
                 }
-            }(IsInAlmostAbandonedAttic() && isAtticEnabled || IsInNeopianShop() && isAutoBuyerEnabled) && chrome.storage.local.get({
-                EXT_P_S: !1
-            }, (function(e) {
-                if (e.EXT_P_S) ge();
-                else {
-                    var t = ExtPay("restock-highligher-autobuyer");
-                    t.getUser()
-                        .then((e => {
-                            e.paid ? (chrome.storage.local.set({
-                                EXT_P_S: !0
-                            }, (function() {})), ge()) : (! function() {
-                                if (IsInAtticOrShop()) {
-                                    var e = document.createElement("div");
-                                    e.innerText = "Autobuyer Not Running - Please Subscribe", e.id = bannerElementID, document.body.appendChild(e), UpdateElementStyle()
-                                }
-                            }(), chrome.storage.local.set({
-                                EXT_P_S: !1
-                            }, (function() {})), IsInAtticOrShop() && t.openPaymentPage())
-                        }))
-                        .catch((e => {
-                            console.error(e), IsInAtticOrShop() && window.alert("Please try again, it looks like there was an error loading your subscription: " + e)
-                        }))
-                }
-            }))
-        }))
+            }
+        }));
     }
-    
-    /*function checkDocumentState() {
-        if (document.readyState !== "complete") {
-            return;
-        }
-    
-        clearInterval(intervalID);
-    
-        if (IsInAtticOrShop()) {
-            l();
-        }
-    
-        if (window.location.href.indexOf("neopets.com/quickstock.phtml") > -1) {
-            const quickstockText = "This is designed to make life easier when putting items in your deposit box";
-            if (document.body.innerText.indexOf(quickstockText) > 0) {
-                HandleServerErrors();
-                return;
-            }
-    
-            if (getParameterByName("itemToQuickstock") !== "" && getParameterByName("itemToQuickstock") != null) {
-                m();
-            }
-        }
-    }*/
 
     var IntervalID = null;
 
@@ -945,7 +934,6 @@ function topLevelTurbo() {
             clearInterval(IntervalID); // Stop the interval when triggered
         }
     }
-
 
     (function () {
         // Your code here, such as SetAutoBuyer and the interval
