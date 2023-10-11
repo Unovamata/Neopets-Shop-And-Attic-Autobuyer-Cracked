@@ -233,7 +233,7 @@ function topLevelTurbo() {
                 maxAddedToInventoryRefresh = 5100,
                 de = minOCRDetectionInterval / 2,
                 fe = maxOCRDetectionInterval / 2,
-                _e = !1,
+                isRunningOnScheduledTime = false,
                 isBannerDisplaying = !1,
                 Ee = 50;
 
@@ -347,8 +347,8 @@ function topLevelTurbo() {
                                     .map((e => parseInt(e.getAttribute("data-price")
                                         .replaceAll(",", "")))),
                                     n = CalculateItemProfits(e, t),
-                                    o = Be(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy),
-                                    r = Pe(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy);
+                                    o = BestItemName(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy),
+                                    r = FilterItemsByProfitCriteria(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy);
                                 if (null != o) {
                                     for (var i of r) document.querySelector(`.item-img[data-name="${i}"]`)
                                         .parentElement.style.backgroundColor = "lightgreen";
@@ -410,7 +410,7 @@ function topLevelTurbo() {
                                 n = e.getMinutes();
                             e.getDay();
                             return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= ce[0] && n <= ce[1]
-                        }() ? (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), _e = !0), setTimeout((function() {
+                        }() ? (isRunningOnScheduledTime || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), isRunningOnScheduledTime = !0), setTimeout((function() {
                             RunAutoBuyer()
                         }), 3e4)) : ReloadPageBasedOnConditions(),
                         function() {
@@ -477,13 +477,13 @@ function topLevelTurbo() {
                             function AtticRestockUpdateChecker(){
                                 if (atticPreviousNumberOfItems < 0) return;
                                 if (atticLastRefresh < 0) return;
-                                var e = GetStockedItemNumber();
-                                var t = Date.now();
+                                var ItemsStocked = GetStockedItemNumber();
+                                var lastRestock = Date.now();
                             
-                                if (e > atticPreviousNumberOfItems) {
+                                if (ItemsStocked > atticPreviousNumberOfItems) {
                                     chrome.storage.local.set({
-                                        ATTIC_PREV_NUM_ITEMS: e,
-                                        ATTIC_LAST_REFRESH_MS: t
+                                        ATTIC_PREV_NUM_ITEMS: ItemsStocked,
+                                        ATTIC_LAST_REFRESH_MS: lastRestock
                                     }, function() {
                                         UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
                                     });
@@ -496,36 +496,55 @@ function topLevelTurbo() {
                             
                             HighlightItemsInAttic();
                             
-                            var e = (o = Array.from(document.querySelectorAll("#items li")).map((e => e.getAttribute("oname"))), 
-                            r = Array.from(document.querySelectorAll("#items li")).map((e => e.getAttribute("oprice").replaceAll(",", ""))),
-                            i = CalculateItemProfits(o, r), Be(o, r, i, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic));
-                            e ? function(e) {
+                            var items = document.querySelectorAll("#items li");
+
+                            // Extract relevant data from 'items'
+                            var itemNames = Array.from(items).map((item) => item.getAttribute("oname"));
+                            var itemPrices = Array.from(items).map((item) => item.getAttribute("oprice").replaceAll(",", ""));
+                            var itemProfits = CalculateItemProfits(itemNames, itemPrices);
+                            var bestItemName = BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
+
+                            if (bestItemName) {
+                                // Attempt to buy the best item in the Attic
                                 if (isClickingItemsInAttic) {
-                                    var t = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
-                                    UpdateBannerAndDocument("Attempting " + e + " in Attic", "Attempting to buy " + e + " in Attic in " + FormatMillisecondsToSeconds(t));
-                                    var n = document.querySelector(`#items li[oname="${e}"]`),
-                                        o = n.getAttribute("oii"),
-                                        r = n.getAttribute("oprice");
-                                    SaveToPurchaseHistory(e, atticString, r, "Attempted"), setTimeout((function() {
-                                        document.getElementById("oii")
-                                            .value = o, document.getElementById("frm-abandoned-attic")
-                                            .submit()
-                                    }), t)
+                                    var randomBuyTime = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
+                                    UpdateBannerAndDocument(
+                                        "Attempting " + bestItemName + " in Attic",
+                                        "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
+                                    );
+                                    var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
+                                    var itemID = selectedLi.getAttribute("oii");
+                                    var itemPrice = selectedLi.getAttribute("oprice");
+                                    SaveToPurchaseHistory(bestItemName, atticString, itemPrice, "Attempted");
+                                    setTimeout(function() {
+                                        document.getElementById("oii").value = itemID;
+                                        document.getElementById("frm-abandoned-attic").submit();
+                                    }, randomBuyTime);
                                 }
-                            }(e) : !isAtticAutoRefreshing || function() {
-                                var e = new Date,
-                                    t = e.getHours();
-                                e.getMinutes(), e.getDay();
-                                return t >= atticRunBetweenHours[0] && t <= atticRunBetweenHours[1]
-                            }() ? AutoRefreshAttic() : (_e || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic"), _e = !0), setTimeout((function() {
-                                RunAutoBuyer()
-                            }), 3e4)), t = GetStockedItemNumber(), chrome.storage.local.set({
-                                ATTIC_PREV_NUM_ITEMS: t
-                            }, (function() {}))
+                            } else if (!isAtticAutoRefreshing || !IsTimeToAutoRefreshAttic()) {
+                                // Wait for the scheduled time or run the AutoBuyer
+                                if (!_e) {
+                                    UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
+                                    _e = true;
+                                }
+                                setTimeout(function() {
+                                    RunAutoBuyer();
+                                }, 30000);
+                            }
+
+                            // Additional function to check if it's time to auto-refresh the Attic
+                            function IsTimeToAutoRefreshAttic() {
+                                var now = new Date();
+                                var currentHour = now.getHours();
+                                return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
+                            }
+
+                            // Update the stored number of items
+                            var numItems = GetStockedItemNumber();
+                            chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
                         }
                         
                         var t;
-                        var o, r, i
                     }
                     
                     handleAlmostAbandonedAttic();
@@ -535,7 +554,7 @@ function topLevelTurbo() {
             }
 
             function UpdateBannerAndDocument(e, n) {
-                UpdateBannerStatus(n), UpdateDocument(e, n)
+                UpdateBannerStatus(), UpdateDocument(e, n)
             }
 
             function AutoRefreshAttic() {
@@ -607,10 +626,11 @@ function topLevelTurbo() {
                         .map((e => e.getAttribute("oname"))),
                         t = Array.from(document.querySelectorAll("#items li"))
                         .map((e => e.getAttribute("oprice")
+                        
                             .replaceAll(",", ""))),
                         n = CalculateItemProfits(e, t),
-                        o = Be(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic),
-                        r = Pe(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
+                        o = BestItemName(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic),
+                        r = FilterItemsByProfitCriteria(e, t, n, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
                     if (null != o) {
                         for (var i of r) HighlightItemWithColor(i, "lightgreen");
                         HighlightItemWithColor(o, "orangered")
@@ -620,7 +640,6 @@ function topLevelTurbo() {
 
             function HighlightItemWithColor(itemName, color) {
                 const itemElement = document.querySelector(`#items li[oname="${itemName}"]`);
-                    
                 itemElement.style.backgroundColor = color;
             }
 
@@ -808,21 +827,39 @@ function topLevelTurbo() {
                 return itemProfits;
             }
 
-            function Be(e, t, n, o, r) {
-                for (var i = null, a = -1, c = 0; c < n.length; c++) {
-                    var u = n[c] >= o,
-                        l = n[c] / t[c] >= r;
-                    u && l && n[c] > a && (a = n[c], i = e[c])
+            function BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuy, minDBProfitPercent) {
+                var bestItemName = null;
+                var maxProfit = -1;
+                var length = itemProfits.length;
+
+                for (var i = 0; i < length; i++) {
+                    var profit = itemProfits[i];
+
+                    var meetsProfitCriteria = profit >= minDBProfitToBuy;
+                    var meetsPercentCriteria = (profit / itemPrices[i]) >= minDBProfitPercent;
+            
+                    if (meetsProfitCriteria && meetsPercentCriteria && profit > maxProfit) {
+                        maxProfit = profit;
+                        bestItemName = itemNames[i];
+                    }
                 }
-                return i
+            
+                return bestItemName;
             }
-            function Pe(e, t, n, o, r) {
-                for (var i = [], a = 0; a < n.length; a++) {
-                    var c = n[a] > o,
-                        u = n[a] / t[a] > r;
-                    c && u && i.push(e[a])
+            
+            function FilterItemsByProfitCriteria(itemNames, itemPrices, itemProfits, minDBProfit, minDBProfitPercent) {
+                var filteredItems = [];
+                
+                for (var i = 0; i < itemProfits.length; i++) {
+                    var meetsProfitCriteria = itemProfits[i] > minDBProfit;
+                    var meetsPercentCriteria = (itemProfits[i] / itemPrices[i]) > minDBProfitPercent;
+
+                    if (meetsProfitCriteria && meetsPercentCriteria) {
+                        filteredItems.push(itemNames[i]);
+                    }
                 }
-                return i
+
+                return filteredItems;
             }
 
             function IsItemInBlacklist(itemName) {
