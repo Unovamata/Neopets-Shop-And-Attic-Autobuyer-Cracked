@@ -34,8 +34,8 @@ function topLevelTurbo() {
             } = autobuyerVariables;
 
             const errorMessages = [
-            "502 Bad Gateway\nopenresty",
-            "504 Gateway Time-out\nopenresty",
+            "502 Bad Gateway",
+            "504 Gateway Time-out",
             "Loading site please wait...",
             "NET::ERR_CERT_COMMON_NAME_INVALID"
             ];
@@ -44,10 +44,14 @@ function topLevelTurbo() {
         
             // Reload the page after 10 seconds if an error is detected;
             if (errorMessages.some(message => pageText.includes(message))) {
+                console.log("Error Detected... Refreshing");
+
                 const indexOfMessage = errorMessages.findIndex(message => pageText.includes(message));
 
                 if (indexOfMessage === 2) {
                     UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+                } else {
+                    setTimeout(() => { location.reload(); }, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
                 }
             } 
             
