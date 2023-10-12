@@ -41,7 +41,7 @@ function topLevelTurbo() {
             ];
         
             const pageText = document.body.innerText;
-        
+            
             // Reload the page after 10 seconds if an error is detected;
             if (errorMessages.some(message => pageText.includes(message))) {
                 console.log("Error Detected... Refreshing");
@@ -51,7 +51,15 @@ function topLevelTurbo() {
                 if (indexOfMessage === 2) {
                     UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
                 } else {
-                    setTimeout(() => { location.reload(); }, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+                    let hasRefreshed = false;
+
+                    if (!hasRefreshed) {
+                        hasRefreshed = true;
+
+                        setTimeout(() => {
+                            location.reload();
+                        }, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+                    }
                 }
             } 
             
