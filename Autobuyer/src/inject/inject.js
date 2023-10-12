@@ -339,37 +339,40 @@ function topLevelTurbo() {
                     else if (IsItemAddedToInventory()) ProcessPurchase();
                     
                 else {
-                    ! function() {
-                        if (isHighlightingItemsInShops)
-                            if (buyWithItemDB) ! function() {
-                                var e = Array.from(document.querySelectorAll(".item-img"))
-                                    .map((e => e.getAttribute("data-name"))),
-                                    t = Array.from(document.querySelectorAll(".item-img"))
-                                    .map((e => parseInt(e.getAttribute("data-price")
-                                        .replaceAll(",", "")))),
-                                    n = CalculateItemProfits(e, t),
-                                    o = BestItemName(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy),
-                                    r = FilterItemsByProfitCriteria(e, t, n, minDBProfitToBuy, minDBProfitPercentToBuy);
-                                if (null != o) {
-                                    for (var i of r) document.querySelector(`.item-img[data-name="${i}"]`)
-                                        .parentElement.style.backgroundColor = "lightgreen";
-                                    document.querySelector(`.item-img[data-name="${o}"]`)
-                                        .parentElement.style.backgroundColor = "orangered"
+                    if (isHighlightingItemsInShops) {
+                        if (buyWithItemDB) {
+                            var items = Array.from(document.querySelectorAll(".item-img")).map((item) => {
+                                var itemName = item.getAttribute("data-name");
+                                var itemPrice = parseInt(item.getAttribute("data-price").replaceAll(",", ""));
+                                return {
+                                    name: itemName,
+                                    price: itemPrice,
+                                };
+                            });
+                    
+                            var itemProfits = CalculateItemProfits(items.map((item) => item.name), items.map((item) => item.price));
+                            var bestItemName = BestItemName(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
+                            var filteredItems = FilterItemsByProfitCriteria(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
+                    
+                            if (bestItemName) {
+                                for (var itemName of filteredItems) {
+                                    document.querySelector(`.item-img[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
                                 }
-                            }();
-                            else {
-                                var e = new Set(Array.from(document.querySelectorAll(".item-img"))
-                                        .map((e => e.getAttribute("data-name")))),
-                                    t = restockList.find((t => e.has(t) && !IsItemInBlacklist(t))),
-                                    n = restockList.filter((t => e.has(t) && !IsItemInBlacklist(t)));
-                                if (null != t) {
-                                    for (var o of n) document.querySelector(`.item-img[data-name="${o}"]`)
-                                        .parentElement.style.backgroundColor = "lightgreen";
-                                    document.querySelector(`.item-img[data-name="${t}"]`)
-                                        .parentElement.style.backgroundColor = "orangered"
-                                }
+                                document.querySelector(`.item-img[data-name="${bestItemName}"]`).parentElement.style.backgroundColor = "orangered";
                             }
-                    }();
+                        } else {
+                            var itemNames = new Set(Array.from(document.querySelectorAll(".item-img")).map((item) => item.getAttribute("data-name")));
+                            var selectedName = restockList.find((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName));
+                            var filteredNames = restockList.filter((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName));
+                    
+                            if (selectedName) {
+                                for (var itemName of filteredNames) {
+                                    document.querySelector(`.item-img[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
+                                }
+                                document.querySelector(`.item-img[data-name="${selectedName}"]`).parentElement.style.backgroundColor = "orangered";
+                            }
+                        }
+                    }
                     
                     var itemToBuyExtracted = function() {
                         var itemToBuy;
@@ -419,18 +422,21 @@ function topLevelTurbo() {
                         //If the user is not using the 
                         else {
                             var itemElements = Array.from(document.querySelectorAll(".item-img")).map((element) => element.getAttribute("data-name"));
-                            var stockToBuy = itemElements.filter((item) => restockList.includes(item) && !IsItemInBlacklist(item));
 
-                            // If there are items to buy, pick the first one;
+                            // Assuming restockList is an array with the desired order
+                            var stockToBuy = restockList.filter((item) => itemElements.includes(item) && !IsItemInBlacklist(item));
+                            console.log(stockToBuy);
+
+                            // If there are items to buy, pick the first one
                             itemToBuy = stockToBuy.length > 0 ? stockToBuy[0] : null;
 
-                            // If there's an item to buy, there may be other options;
+                            // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
                             if (itemToBuy && isBuyingSecondMostProfitable) {
-                                // Get the second best option;
-                                var secondItem = stockToBuy.find((item) => item !== itemToBuy);
-
-                                if (secondItem) {
-                                    itemToBuy = secondItem;
+                                console.log("Going for the second best item");
+                                var remainingItems = stockToBuy.filter((item) => item !== itemToBuy);
+                                
+                                if (remainingItems.length > 0) {
+                                    itemToBuy = remainingItems[0];
                                 }
                             }
                         }
@@ -439,64 +445,36 @@ function topLevelTurbo() {
                         
                         return itemToBuy
                     }();
-
-                    // Clicking the item to buy;
-                    if (itemToBuyExtracted) {
+                    
+                    itemToBuyExtracted ? function(e) {
                         if (isClickingItems) {
-                            var itemImage = document.querySelector(`.item-img[data-name="${itemToBuyExtracted}"]`);
-                            setTimeout(function() {
-                                itemImage.click();
-                                SendBeepMessage();
-                            }, Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval);
+                            var t = document.querySelector(`.item-img[data-name="${e}"]`);
+                            setTimeout((function() {
+                                t.click(), SendBeepMessage()
+                            }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)
                         }
-                    } 
-                    
-                    // Restarting the schedule restocking time on shops;
-                    else if (IsRunningOnScheduledTime()) {
-                        if (!isRunningOnScheduledTime) {
-                            UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop");
-                            isRunningOnScheduledTime = true;
-                        }
-                        setTimeout(function() {
-                            RunAutoBuyer();
-                        }, 30000);
-                    } 
-                    
-                    // Clicking the confirm window;
-                    else {
+                    }(itemToBuyExtracted) : ! function() {
+                        var e = new Date,
+                            t = e.getHours(),
+                            n = e.getMinutes();
+                        e.getDay();
+                        return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= 0 && n <= 60
+                    }() ? (isRunningOnScheduledTime || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), isRunningOnScheduledTime = !0), setTimeout((function() {
+                        RunAutoBuyer()
+                    }), 3e4)) : ReloadPageBasedOnConditions(),
+                    function() {
                         if (isClickingConfirm) {
-                            var clicked = false;
-                            clearInterval(re);
-                            re = setInterval(function() {
-                                var confirmLink = document.getElementById("confirm-link");
-                                if (
-                                    confirmLink.offsetWidth || confirmLink.offsetHeight || confirmLink.getClientRects().length
-                                ) {
-                                    setTimeout(function() {
-                                        if (!clicked) {
-                                            confirmLink.click();
-                                            SendBeepMessage();
-                                            clicked = true;
-                                        }
-                                    }, Math.random() * (maxClickConfirmInterval - minClickConfirmInterval) + minClickConfirmInterval);
-                                }
-                            }, confirmWindowInteral);
+                            var e = !1;
+                            clearInterval(re), re = setInterval((function() {
+                                var t, n = document.getElementById("confirm-link");
+                                ((t = n)
+                                    .offsetWidth || t.offsetHeight || t.getClientRects()
+                                    .length) && setTimeout((function() {
+                                    e || (n.click(), SendBeepMessage(), e = !0)
+                                }), Math.random() * (maxClickConfirmInterval - minClickConfirmInterval) + minClickConfirmInterval)
+                            }), confirmWindowInteral)
                         }
-                    }
-                    
-                    // Additional function to check if it's time to run the AutoBuyer
-                    function IsRunningOnScheduledTime() {
-                        var now = new Date();
-                        var currentHour = now.getHours();
-                        var currentMinutes = now.getMinutes();
-                        //var currentDay = now.getDay();
-                        return (
-                            currentHour >= runBetweenHours[0] &&
-                            currentHour <= runBetweenHours[1] &&
-                            currentMinutes >= 0 &&
-                            currentMinutes <= 60
-                        );
-                    }
+                    }()
                 } 
 
                 
