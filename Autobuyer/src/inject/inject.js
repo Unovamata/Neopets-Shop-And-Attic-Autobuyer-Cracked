@@ -261,99 +261,147 @@ function topLevelTurbo() {
             RunAutoBuyer();
             
             function RunAutoBuyer() {
-                if (IsHaggling()) DisplayAutoBuyerBanner(), IsSoldOut() ? ProcessSoldOutItem() : IsItemAddedToInventory() ? ProcessPurchase() : (document.documentElement.textContent || document.documentElement.innerText)
+                if (IsHaggling()) {
+
+                    DisplayAutoBuyerBanner();
+
+                    if (IsSoldOut()) {
+                        ProcessSoldOutItem();
+                    } else if (IsItemAddedToInventory()) {
+                        ProcessPurchase();
+                    } else {
+                        const pageText = document.documentElement.textContent || document.documentElement.innerText;
+                
+                        if (pageText.includes("You don't have that kind of money")) {
+                            const itemName = document.querySelector("h2").innerText.replaceAll("Haggle for ", "");
+                            const message = "You do not have enough neopoints to purchase " + itemName + ". Program will pause now.";
+                            const seller = document.getElementsByTagName("h1")[0].textContent;
+                
+                            SendEmail({ status: "missed", item: itemName, notes: message });
+                            UpdateBannerAndDocument("Not enough NPs", "Not enough NPs to purchase " + itemName + " from " + seller + ". Pausing.");
+                            SaveToPurchaseHistory(itemName, seller, "-", "Not enough neopoints");
+                        } else if (document.body.innerText.includes("every five seconds")) {
+                            const itemName = document.getElementsByTagName("h2")[0].innerText.split("Haggle for ")[1];
+                            const seller = document.getElementsByTagName("h1")[0].textContent;
+                
+                            SaveToPurchaseHistory(itemName, seller, "-", "Five second rule");
+                            UpdateBannerAndDocument("Five second rule", "Attempted to purchase an item within 5 seconds of a different purchase");
+                            window.history.back();
+                        } else if (document.body.innerText.includes("Sorry, you can only carry a maximum of")) {
+                            UpdateBannerAndDocument("Inventory full", "Inventory was full. Pausing.");
+                        } else {
+                            UpdateBannerStatus("Entering offer...");
+                
+                            if (pageText.includes("You must select the correct pet in order to continue")) {
+                                console.error("Incorrect click on pet!");
+                            }
+
+                            var t, n
+
+                            //Is entering offer;
+                            isEnteringOffer && setTimeout((function() {
+                                var e, t = new RegExp("[0-9|,]+ Neopoints")
+                                    .exec(document.getElementById("shopkeeper_makes_deal")
+                                        .innerText)[0].replace(" Neopoints", "")
+                                    .replaceAll(",", ""),
+                                    n = Number(t),
+                                    o = (e = n, Math.random() > .33 ? function(e) {
+                                        for (var t = 1 - (.015 * Math.random() + .015), n = Math.round(t * e), o = Math.round(e * (1 + .005 * Math.random())), r = n, i = n, a = Oe(n); r <= o;) {
+                                            var c = Oe(r);
+                                            (c > a || c == a && Math.random() < .33) && (a = c, i = r), r += 1
+                                        }
+                                        return i
+                                    }(e) : function(e) {
+                                        var t = 100 * (Math.round(4 * Math.random()) + 1),
+                                            n = Math.round(e / t) * t;
+                                        return e <= 500 && (n = 10 * Math.round(e / 10)), n
+                                    }(e));
+                                document.querySelector(".haggleForm input[type=text]")
+                                    .value = o
+                            }), Math.random() * (fe - de) + de);
+
+                            t = document.querySelector("input[type='image']"), n = performance.now(),
+                                function(e, t, n, o) {
+                                    var r = new Image;
+                                    r.src = e;
+                                    var i = performance.now();
+                                    r.onload = function() {
+                                        var e = performance.now();
+                                        console.log("Image load took " + Math.round(e - i) + " milliseconds.");
+                                        
+                                        var a = document.createElement("canvas");
+                                        a.width = n, a.height = o;
+
+                                        var c = a.getContext("2d");
+
+                                        c.drawImage(r, 0, 0), document.body.append(a);
+                                        for (var u = c.getImageData(0, 0, n, o), l = 0, m = 100, s = 0, d = 1, f = 0; f < u.data.length; f += 4 * d) {
+                                            if (red = u.data[f + 0], green = u.data[f + 1], blue = u.data[f + 2], alpha = u.data[f + 3], 0 != red || 0 != green || 0 != blue) {
+                                                var _ = We(red, green, blue)
+                                                    .l;
+                                                _ < m && (m = _, s = l)
+                                            }
+                                            l += d
+                                        }
+                                        var T = Math.floor(s / n);
+                                        t(s - T * n, T)
+                                    }
+                                }
+                                
+                                (t.src, (function(o, r) {
+                                    var i = performance.now(),
+                                        a = Math.max(i - e, i - n),
+                                        c = Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval,
+                                        u = Math.max(Math.round(c - a), 0);
+                                    setTimeout((function() {
+                                        var a = performance.now();
+                                        ! function(e, t, n) {
+                                            var o = function(e) {
+                                                    for (var t = 0, n = 0; e && !isNaN(e.offsetLeft) && !isNaN(e.offsetTop);) t += e.offsetLeft - e.scrollLeft, n += e.offsetTop - e.scrollTop, e = e.offsetParent;
+                                                    return {
+                                                        top: n,
+                                                        left: t
+                                                    }
+                                                }(e),
+                                                r = Math.round(t + o.left),
+                                                i = Math.round(n + o.top),
+                                                a = new MouseEvent("click", {
+                                                    view: window,
+                                                    bubbles: !0,
+                                                    cancelable: !0,
+                                                    clientX: r,
+                                                    clientY: i
+                                                });
+                                            isClickingCaptcha && (e.dispatchEvent(a), SendBeepMessage()),
+                                                function(e, t) {
+                                                    if (isAnnotatingImage) {
+                                                        var n = document.createElement("img");
+                                                        n.src = "https://upload.wikimedia.org/wikipedia/commons/3/31/Circle_Burgundy_Solid.svg", n.style.height = "14px", n.style.width = "14px", n.style.position = "absolute", n.style.top = t - 7 + "px", n.style.left = e - 7 + "px", n.style.zIndex = "9999999999", n.style.pointerEvents = "none", document.body.appendChild(n), AddCSSStyle("\n                          input[type='image'] {\n                            filter: contrast(2) grayscale(1);\n                          }\n                        ")
+                                                    }
+                                                }(r, i)
+                                        }(t, o, r);
+                                        var c = performance.now();
+                                        console.log("Load script to click image took " + Math.round(performance.now() - e) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(i - n) + "ms. Added " + u + "ms to meet minimum. Click then took " + Math.round(c - a) + "ms.")
+                                    }), u)
+                                }), t.width, t.height);
+                        }
+                    }
+                     
+                    /*DisplayAutoBuyerBanner()
+                    
+                    if (IsHaggling()) DisplayAutoBuyerBanner(), IsSoldOut() ? ProcessSoldOutItem() : IsItemAddedToInventory() ? ProcessPurchase() : (document.documentElement.textContent || document.documentElement.innerText)
                     .includes("You don't have that kind of money") ? (o = document.querySelector("h2")
                         .innerText.replaceAll("Haggle for ", ""), c = {
                             status: "missed",
                             item: o,
                             notes: "You do not have enough neopoints to purchase " + o + ". Program will pause now."
-                        }, u = document.getElementsByTagName("h1")[0].textContent, SendEmail(c), UpdateBannerAndDocument("Not enough NPs", "Not enough NPs to purchase " + o + " from " + u + ". Pausing."), SaveToPurchaseHistory(o, u, "-", "Not enough neopoints")) : document.body.innerText.indexOf("every five seconds") > -1 ? (SaveToPurchaseHistory(document.getElementsByTagName("h2")[0].innerText.split("Haggle for ")[1], document.getElementsByTagName("h1")[0].textContent, "-", "Five second rule"), UpdateBannerAndDocument("Five second rule", "Attempted to purchase item within 5 seconds of a different purchase"), window.history.back()) : document.body.innerText.indexOf("Sorry, you can only carry a maximum of") > -1 ? UpdateBannerAndDocument("Inventory full", "Inventory was full. Pausing.") : (UpdateBannerStatus("Entering offer..."), function() {
-                        (document.documentElement.textContent || document.documentElement.innerText)
-                        .indexOf("You must select the correct pet in order to continue") > -1 && console.error("Incorrect click on pet!");
-                        isEnteringOffer && setTimeout((function() {
-                            var e, t = new RegExp("[0-9|,]+ Neopoints")
-                                .exec(document.getElementById("shopkeeper_makes_deal")
-                                    .innerText)[0].replace(" Neopoints", "")
-                                .replaceAll(",", ""),
-                                n = Number(t),
-                                o = (e = n, Math.random() > .33 ? function(e) {
-                                    for (var t = 1 - (.015 * Math.random() + .015), n = Math.round(t * e), o = Math.round(e * (1 + .005 * Math.random())), r = n, i = n, a = Oe(n); r <= o;) {
-                                        var c = Oe(r);
-                                        (c > a || c == a && Math.random() < .33) && (a = c, i = r), r += 1
-                                    }
-                                    return i
-                                }(e) : function(e) {
-                                    var t = 100 * (Math.round(4 * Math.random()) + 1),
-                                        n = Math.round(e / t) * t;
-                                    return e <= 500 && (n = 10 * Math.round(e / 10)), n
-                                }(e));
-                            document.querySelector(".haggleForm input[type=text]")
-                                .value = o
-                        }), Math.random() * (fe - de) + de);
-
-                        t = document.querySelector("input[type='image']"), n = performance.now(),
-                            function(e, t, n, o) {
-                                var r = new Image;
-                                r.src = e;
-                                var i = performance.now();
-                                r.onload = function() {
-                                    var e = performance.now();
-                                    console.log("Image load took " + Math.round(e - i) + " milliseconds.");
-                                    var a = document.createElement("canvas");
-                                    a.width = n, a.height = o;
-                                    var c = a.getContext("2d");
-                                    c.drawImage(r, 0, 0), document.body.append(a);
-                                    for (var u = c.getImageData(0, 0, n, o), l = 0, m = 100, s = 0, d = 1, f = 0; f < u.data.length; f += 4 * d) {
-                                        if (red = u.data[f + 0], green = u.data[f + 1], blue = u.data[f + 2], alpha = u.data[f + 3], 0 != red || 0 != green || 0 != blue) {
-                                            var _ = We(red, green, blue)
-                                                .l;
-                                            _ < m && (m = _, s = l)
-                                        }
-                                        l += d
-                                    }
-                                    var T = Math.floor(s / n);
-                                    t(s - T * n, T)
-                                }
-                            }(t.src, (function(o, r) {
-                                var i = performance.now(),
-                                    a = Math.max(i - e, i - n),
-                                    c = Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval,
-                                    u = Math.max(Math.round(c - a), 0);
-                                setTimeout((function() {
-                                    var a = performance.now();
-                                    ! function(e, t, n) {
-                                        var o = function(e) {
-                                                for (var t = 0, n = 0; e && !isNaN(e.offsetLeft) && !isNaN(e.offsetTop);) t += e.offsetLeft - e.scrollLeft, n += e.offsetTop - e.scrollTop, e = e.offsetParent;
-                                                return {
-                                                    top: n,
-                                                    left: t
-                                                }
-                                            }(e),
-                                            r = Math.round(t + o.left),
-                                            i = Math.round(n + o.top),
-                                            a = new MouseEvent("click", {
-                                                view: window,
-                                                bubbles: !0,
-                                                cancelable: !0,
-                                                clientX: r,
-                                                clientY: i
-                                            });
-                                        isClickingCaptcha && (e.dispatchEvent(a), SendBeepMessage()),
-                                            function(e, t) {
-                                                if (isAnnotatingImage) {
-                                                    var n = document.createElement("img");
-                                                    n.src = "https://upload.wikimedia.org/wikipedia/commons/3/31/Circle_Burgundy_Solid.svg", n.style.height = "14px", n.style.width = "14px", n.style.position = "absolute", n.style.top = t - 7 + "px", n.style.left = e - 7 + "px", n.style.zIndex = "9999999999", n.style.pointerEvents = "none", document.body.appendChild(n), AddCSSStyle("\n                          input[type='image'] {\n                            filter: contrast(2) grayscale(1);\n                          }\n                        ")
-                                                }
-                                            }(r, i)
-                                    }(t, o, r);
-                                    var c = performance.now();
-                                    console.log("Load script to click image took " + Math.round(performance.now() - e) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(i - n) + "ms. Added " + u + "ms to meet minimum. Click then took " + Math.round(c - a) + "ms.")
-                                }), u)
-                            }), t.width, t.height);
-                        var t, n
-                    }());
+                        }, u = document.getElementsByTagName("h1")[0].textContent, SendEmail(c), UpdateBannerAndDocument("Not enough NPs", "Not enough NPs to purchase " + o + " from " + u + ". Pausing."), SaveToPurchaseHistory(o, u, "-", "Not enough neopoints")) : document.body.innerText.indexOf("every five seconds") > -1 ? (SaveToPurchaseHistory(document.getElementsByTagName("h2")[0].innerText.split("Haggle for ")[1], document.getElementsByTagName("h1")[0].textContent, "-", "Five second rule"), UpdateBannerAndDocument("Five second rule", "Attempted to purchase item within 5 seconds of a different purchase"), window.history.back()) : document.body.innerText.indexOf("Sorry, you can only carry a maximum of") > -1 ? UpdateBannerAndDocument("Inventory full", "Inventory was full. Pausing.") : (UpdateBannerStatus("Entering offer..."), 
+                        
+                        function() {
+                            (document.documentElement.textContent || document.documentElement.innerText)
+                            .indexOf("You must select the correct pet in order to continue") > -1 && console.error("Incorrect click on pet!");*/
                 
-                else if (IsInShop())
+                } else if (IsInShop())
                     if (DisplayAutoBuyerBanner(), IsSoldOut()) ProcessSoldOutItem();
                     else if (IsItemAddedToInventory()) ProcessPurchase();
                     
@@ -444,7 +492,6 @@ function topLevelTurbo() {
 
                             // Assuming restockList is an array with the desired order
                             var stockToBuy = restockList.filter((item) => itemElements.includes(item) && !IsItemInBlacklist(item));
-                            console.log(stockToBuy);
 
                             // If there are items to buy, pick the first one
                             itemToBuy = stockToBuy.length > 0 ? stockToBuy[0] : null;
