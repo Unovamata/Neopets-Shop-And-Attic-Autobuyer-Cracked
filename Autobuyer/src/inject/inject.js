@@ -51,14 +51,21 @@ function topLevelTurbo() {
                 if (indexOfMessage === 2) {
                     UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
                 } else {
-                    let hasRefreshed = false;
+                    var refreshInterval;
+                    
+                    function startRefreshing() {
+                        if (!refreshInterval) {
+                            refreshInterval = setInterval(() => {
+                                location.reload();
+                            }, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+                        }
+                    }
 
-                    if (!hasRefreshed) {
-                        hasRefreshed = true;
+                    startRefreshing();
 
-                        setTimeout(() => {
-                            location.reload();
-                        }, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+                    if (refreshInterval) {
+                        clearInterval(refreshInterval);
+                        refreshInterval = null;
                     }
                 }
             } 
