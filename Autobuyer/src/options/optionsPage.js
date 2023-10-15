@@ -114,6 +114,7 @@ function updateDateTimeInputs(_) {
     var E = moment(_)
         .tz("America/Los_Angeles")
         .format("YYYY-MM-DD"),
+
         T = moment(_)
         .tz("America/Los_Angeles")
         .format("YYYY-MM-DD HH:mm:ss")

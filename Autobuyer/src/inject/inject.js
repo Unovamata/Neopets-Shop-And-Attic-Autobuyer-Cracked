@@ -582,7 +582,7 @@ function topLevelTurbo() {
 
                         function IsItemInInventory() {
                             const message = "I have placed it in your inventory";
-                            return document.body.innerText.indexOf(message) > -1;
+                            return document.body.innerText.includes(message);
                         }
 
                         if (IsItemInInventory()) {
@@ -612,7 +612,6 @@ function topLevelTurbo() {
                                 window.location.href = "https://www.neopets.com/halloween/garage.phtml";
                             }, 120000);
                         }
-
 
                         else if (document.body.innerText.includes("Sorry, please try again later.")){
                             UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer in Attic");
@@ -653,6 +652,7 @@ function topLevelTurbo() {
                             // Extract relevant data from 'items'
                             var itemNames = Array.from(items).map((item) => item.getAttribute("oname"));
                             var itemPrices = Array.from(items).map((item) => item.getAttribute("oprice").replaceAll(",", ""));
+
                             var itemProfits = CalculateItemProfits(itemNames, itemPrices);
                             var bestItemName = BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
 
@@ -787,7 +787,9 @@ function topLevelTurbo() {
                     var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
                     var bestItemName = BestItemName(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
                     var filteredItems = FilterItemsByProfitCriteria(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
-                
+                    
+                    console.log(filteredItems);
+
                     if (bestItemName) {
                         filteredItems.forEach((item) => HighlightItemWithColor(item, "lightgreen"));
                         HighlightItemWithColor(bestItemName, "orangered");
@@ -959,8 +961,6 @@ function topLevelTurbo() {
                             console.warn("Item not found in the database or price not available.");
                             itemProfits.push(buyUnknownItemsIfProfitMargin);
                         } else {
-                            console.log(itemData);
-
                             const itemPrice = itemData.Price;
                             const userPrice = parseInt(itemPrices[itemIDs.indexOf(itemID)]);
                             const profit = itemPrice - userPrice;
