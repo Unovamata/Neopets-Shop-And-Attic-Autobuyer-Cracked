@@ -469,7 +469,7 @@ function topLevelTurbo() {
                         }
                         
                         var itemToBuyExtracted = function() {
-                            var itemToBuy;
+                            var selectedName;
                             var itemElements = Array.from(document.querySelectorAll(".item-img"));
 
                             if (buyWithItemDB) {
@@ -504,12 +504,12 @@ function topLevelTurbo() {
                                 if (bestItemIndices.length === 0) return;
 
                                 if (bestItemIndices.length === 1) {
-                                    itemToBuy = itemData[bestItemIndices[0]].name;
+                                    selectedName = itemData[bestItemIndices[0]].name;
                                 } else if (isBuyingSecondMostProfitable) {
-                                    itemToBuy = itemData[bestItemIndices[1]].name;
+                                    selectedName = itemData[bestItemIndices[1]].name;
                                     console.warn("Skipping the first most valuable item: " + itemData[bestItemIndices[0]].name);
                                 } else {
-                                    itemToBuy = itemData[bestItemIndices[0]].name;
+                                    selectedName = itemData[bestItemIndices[0]].name;
                                 }
                             } 
                             
@@ -518,25 +518,23 @@ function topLevelTurbo() {
                                 var itemElements = Array.from(document.querySelectorAll(".item-img")).map((element) => element.getAttribute("data-name"));
 
                                 // Assuming restockList is an array with the desired order
-                                var stockToBuy = restockList.filter((item) => itemElements.includes(item) && !IsItemInBlacklist(item));
+                                filteredItems = restockList.filter((itemName) => {
+                                    return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName));
+                                });
 
                                 // If there are items to buy, pick the first one
-                                itemToBuy = stockToBuy.length > 0 ? stockToBuy[0] : null;
+                                selectedName = filteredItems.length > 0 ? filteredItems[0] : null;
 
                                 // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
-                                if (itemToBuy && isBuyingSecondMostProfitable) {
-                                    console.log("Going for the second best item");
-                                    var remainingItems = stockToBuy.filter((item) => item !== itemToBuy);
-                                    
-                                    if (remainingItems.length > 0) {
-                                        itemToBuy = remainingItems[0];
-                                    }
+                                if (selectedName && isBuyingSecondMostProfitable && filteredItems.length > 1) {
+                                        console.log("Going for the second best item");
+                                        selectedName = filteredItems[1];
                                 }
                             }
                             
-                            itemToBuy ? (isClickingItems ? UpdateBannerAndDocument(`Buying ${itemToBuy}`, `Buying ${itemToBuy} from the main shop`) : UpdateBannerAndDocument(`${itemToBuy} is in stock`, `${itemToBuy} is in stock in the main shop`)) : null;
+                            selectedName ? (isClickingItems ? UpdateBannerAndDocument(`Buying ${selectedName}`, `Buying ${selectedName} from the main shop`) : UpdateBannerAndDocument(`${selectedName} is in stock`, `${selectedName} is in stock in the main shop`)) : null;
                             
-                            return itemToBuy
+                            return selectedName
                         }();
                         
                         itemToBuyExtracted ? function(e) {
