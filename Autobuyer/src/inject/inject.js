@@ -423,8 +423,7 @@ function topLevelTurbo() {
                                         }
                                     }(t, o, r);
 
-                                    var c = performance.now();
-                                    console.log("Load script to click image took " + Math.round(performance.now() - currentGlobalTime) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(currentTime - imageLoadingTime) + "ms. Added " + adjustedDelay + "ms to meet minimum. Click then took " + Math.round(c - a) + "ms.")
+                                    console.log("Load script to click image took " + Math.round(performance.now() - currentGlobalTime) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(currentTime - imageLoadingTime) + "ms. Added " + adjustedDelay + "ms to meet minimum. Click then took " + Math.round(performance.now() - a) + "ms.")
                                 }), adjustedDelay)
                             }), t.width, t.height);
                         }
@@ -577,136 +576,134 @@ function topLevelTurbo() {
 
                 // Almost Abandoned Attic;
                 } else if(IsInAlmostAbandonedAttic()){
-                    function HandleAlmostAbandonedAttic() {
-                        DisplayAutoBuyerBanner();
+                    DisplayAutoBuyerBanner();
 
-                        function IsItemInInventory() {
-                            const message = "I have placed it in your inventory";
-                            return document.body.innerText.includes(message);
-                        }
+                    function IsItemInInventory() {
+                        const message = "I have placed it in your inventory";
+                        return document.body.innerText.includes(message);
+                    }
 
-                        if (IsItemInInventory()) {
-                            var boughtItemElement = document.getElementsByTagName("strong")[0].innerText;
+                    // Recently bought item;
+                    if (IsItemInInventory()) {
+                        var boughtItemElement = document.getElementsByTagName("strong")[0].innerText;
 
-                            var email = {
-                                status: "bought",
-                                item: boughtItemElement,
-                                notes: ""
-                            };
-                            
-                            UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
-                            SaveToPurchaseHistory(boughtItemElement, atticString, "-", "Bought");
-
-                            setTimeout(function() {
-                                AutoRefreshAttic();
-                            }, 120000);
-                            HighlightItemsInAttic();
-
-                            SendEmail(email);
-                        } 
+                        var email = {
+                            status: "bought",
+                            item: boughtItemElement,
+                            notes: ""
+                        };
                         
-                        else if (document.body.innerText.includes("Didn't you just buy something?")) {
-                            UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes");
-                            
-                            setTimeout(function() {
-                                window.location.href = "https://www.neopets.com/halloween/garage.phtml";
-                            }, 120000);
-                        }
+                        UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
+                        SaveToPurchaseHistory(boughtItemElement, atticString, "-", "Bought");
 
-                        else if (document.body.innerText.includes("Sorry, please try again later.")){
-                            UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer in Attic");
-                        } 
+                        setTimeout(function() {
+                            AutoRefreshAttic();
+                        }, 120000);
+                        HighlightItemsInAttic();
+
+                        SendEmail(email);
+                    } 
+                    
+                    // Purchase cooldown;
+                    else if (document.body.innerText.includes("Didn't you just buy something?")) {
+                        UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes");
                         
+                        setTimeout(function() {
+                            window.location.href = "https://www.neopets.com/halloween/garage.phtml";
+                        }, 120000);
+                    }
 
-                        else if (document.body.innerText.includes("cannot buy any more items from this shop today")) {
-                            UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
-                        }
-                        
-                        else {
-                            AtticRestockUpdateChecker();
+                    else if (document.body.innerText.includes("Sorry, please try again later.")){
+                        UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer in Attic");
+                    } 
+                    
 
-                            function AtticRestockUpdateChecker(){
-                                if (atticPreviousNumberOfItems < 0) return;
-                                if (atticLastRefresh < 0) return;
-                                var ItemsStocked = GetStockedItemNumber();
-                                var lastRestock = Date.now();
-                            
-                                if (ItemsStocked > atticPreviousNumberOfItems) {
-                                    chrome.storage.local.set({
-                                        ATTIC_PREV_NUM_ITEMS: ItemsStocked,
-                                        ATTIC_LAST_REFRESH_MS: lastRestock
-                                    }, function() {
-                                        UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
-                                    });
-                                }
-                            }
-                            
-                            if (document.body.innerText.includes("Sorry, we just sold out of that.")) {
-                                UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
-                            }
-                            
-                            HighlightItemsInAttic();
-                            
-                            var items = document.querySelectorAll("#items li");
-
-                            // Extract relevant data from 'items'
-                            var itemNames = Array.from(items).map((item) => item.getAttribute("oname"));
-                            var itemPrices = Array.from(items).map((item) => item.getAttribute("oprice").replaceAll(",", ""));
-
-                            var itemProfits = CalculateItemProfits(itemNames, itemPrices);
-                            var bestItemName = BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
-
-                            if (bestItemName) {
-                                // Attempt to buy the best item in the Attic
-                                if (isClickingItemsInAttic) {
-                                    var randomBuyTime = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
-
-                                    UpdateBannerAndDocument(
-                                        "Attempting " + bestItemName + " in Attic",
-                                        "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
-                                    );
-
-                                    var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
-                                    var itemID = selectedLi.getAttribute("oii");
-                                    var itemPrice = selectedLi.getAttribute("oprice");
-
-                                    SaveToPurchaseHistory(bestItemName, atticString, itemPrice, "Attempted");
-                                    setTimeout(function() {
-                                        document.getElementById("oii").value = itemID;
-                                        document.getElementById("frm-abandoned-attic").submit();
-                                    }, randomBuyTime);
-                                }
-                            } else if (!isAtticAutoRefreshing || !IsTimeToAutoRefreshAttic()) {
-                                // Wait for the scheduled time or run the AutoBuyer
-                                if (!isRunningOnScheduledTime) {
-                                    UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
-                                    isRunningOnScheduledTime = true;
-                                }
-
-                                setTimeout(function() {
-                                    RunAutoBuyer();
-                                }, 30000);
-                            }
-
-                            // Additional function to check if it's time to auto-refresh the Attic
-                            function IsTimeToAutoRefreshAttic() {
-                                var now = new Date();
-                                var currentHour = now.getHours();
-                                return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
-                            }
-
-                            // Update the stored number of items
-                            var numItems = GetStockedItemNumber();
-                            chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
-                        }
+                    else if (document.body.innerText.includes("cannot buy any more items from this shop today")) {
+                        UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
                     }
                     
-                    HandleAlmostAbandonedAttic();
+                    else {
+                        AtticRestockUpdateChecker();
+
+                        function AtticRestockUpdateChecker(){
+                            if (atticPreviousNumberOfItems < 0) return;
+                            if (atticLastRefresh < 0) return;
+                            var ItemsStocked = GetStockedItemNumber();
+                            var lastRestock = Date.now();
+                        
+                            if (ItemsStocked > atticPreviousNumberOfItems) {
+                                chrome.storage.local.set({
+                                    ATTIC_PREV_NUM_ITEMS: ItemsStocked,
+                                    ATTIC_LAST_REFRESH_MS: lastRestock
+                                }, function() {
+                                    UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
+                                });
+                            }
+                        }
+                        
+                        if (document.body.innerText.includes("Sorry, we just sold out of that.")) {
+                            UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
+                        }
+                        
+                        var bestItemName = HighlightItemsInAttic();
+                        
+                        /*var items = document.querySelectorAll("#items li");
+
+                        // Extract relevant data from 'items'
+                        var itemNames = Array.from(items).map((item) => item.getAttribute("oname"));
+                        var itemPrices = Array.from(items).map((item) => item.getAttribute("oprice").replaceAll(",", ""));
+
+                        var itemProfits = CalculateItemProfits(itemNames, itemPrices);
+                        var bestItemName = BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);*/
+
+                        if (bestItemName) {
+                            // Attempt to buy the best item in the Attic
+                            if (isClickingItemsInAttic) {
+                                var randomBuyTime = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
+
+                                UpdateBannerAndDocument(
+                                    "Attempting " + bestItemName + " in Attic",
+                                    "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
+                                );
+
+                                var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
+                                var itemID = selectedLi.getAttribute("oii");
+                                var itemPrice = selectedLi.getAttribute("oprice");
+
+                                SaveToPurchaseHistory(bestItemName, atticString, itemPrice, "Attempted");
+                                setTimeout(function() {
+                                    document.getElementById("oii").value = itemID;
+                                    document.getElementById("frm-abandoned-attic").submit();
+                                }, randomBuyTime);
+                            }
+                        } else if (!isAtticAutoRefreshing || !IsTimeToAutoRefreshAttic()) {
+                            // Wait for the scheduled time or run the AutoBuyer
+                            if (!isRunningOnScheduledTime) {
+                                UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
+                                isRunningOnScheduledTime = true;
+                            }
+
+                            setTimeout(function() {
+                                RunAutoBuyer();
+                            }, 30000);
+                        }
+
+                        // Additional function to check if it's time to auto-refresh the Attic
+                        function IsTimeToAutoRefreshAttic() {
+                            var now = new Date();
+                            var currentHour = now.getHours();
+                            return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
+                        }
+
+                        // Update the stored number of items
+                        var numItems = GetStockedItemNumber();
+                        chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
+                    }
                 }
             }
 
             function UpdateBannerAndDocument(e, n) {
-                UpdateBannerStatus(), UpdateDocument(e, n)
+                UpdateBannerStatus(e), UpdateDocument(e, n)
             }
 
             function AutoRefreshAttic() {
@@ -783,17 +780,40 @@ function topLevelTurbo() {
                             price: itemPrice,
                         };
                     });
-                
-                    var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
-                    var bestItemName = BestItemName(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
-                    var filteredItems = FilterItemsByProfitCriteria(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
-                    
-                    console.log(filteredItems);
 
-                    if (bestItemName) {
-                        filteredItems.forEach((item) => HighlightItemWithColor(item, "lightgreen"));
-                        HighlightItemWithColor(bestItemName, "orangered");
+                    var filteredItems = null, selectedName = null;
+
+                    if (buyWithItemDB) {
+                        var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
+                        selectedName = BestItemName(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
+                        filteredItems = FilterItemsByProfitCriteria(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
+
+                        if (selectedName) {
+                            filteredItems.forEach((item) => HighlightItemWithColor(item, "lightgreen"));
+                            HighlightItemWithColor(selectedName, "orangered");
+                        }
+                    } else {
+                        // Filtering the items based on the restocking list;
+                        filteredItems = restockList.filter((itemName) => {
+                            return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName));
+                        });
+
+                        // If there are items to buy, pick the first one
+                        selectedName = filteredItems.length > 0 ? filteredItems[0] : null;
+
+                        // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
+                        if (selectedName && isBuyingSecondMostProfitable && filteredItems.length > 1) {
+                            console.log("Going for the second best item");
+                            selectedName = filteredItems[1];
+                        }
+
+                        if(selectedName){
+                            filteredItems.forEach((item) => HighlightItemWithColor(item, "lightgreen"));
+                            HighlightItemWithColor(selectedName, "orangered");
+                        }
                     }
+
+                    return selectedName;
                 }
             }
 

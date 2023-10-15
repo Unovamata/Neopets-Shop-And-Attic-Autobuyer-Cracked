@@ -43,6 +43,8 @@
 			"https://www.neopets.com/haggle.phtml*"
         ],
         "js": [
+			"js/moment.js",
+			"js/moment-timezone-with-data.js",
             "src/common/default_items.js",
             "src/common/item_db.js",
             "src/inject/inject.js",
