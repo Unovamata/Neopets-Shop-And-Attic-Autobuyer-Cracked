@@ -21,7 +21,7 @@ function topLevelTurbo() {
         });
     }
     
-    var e = performance.now();
+    var currentGlobalTime = performance.now();
 
     // Handle page errors by refreshing;
     function HandleServerErrors() {
@@ -232,8 +232,6 @@ function topLevelTurbo() {
                 ATTIC_SHOULD_REFRESH: isAtticAutoRefreshing,
                 ATTIC_LAST_REFRESH_MS: atticLastRefresh,
                 ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems,
-                MIN_PAGE_LOAD_FAILURES: minPageReloadTime,
-                MAX_PAGE_LOAD_FAILURES: maxPageReloadTime
             } = autobuyerVariables;
             
             var shopIntervals, 
@@ -299,7 +297,7 @@ function topLevelTurbo() {
                                 console.error("Incorrect click on pet!");
                             }
 
-                            var t, n
+                            var t, imageLoadingTime
 
                             // Is entering offer;
                             isEnteringOffer && setTimeout((function() {
@@ -343,7 +341,7 @@ function topLevelTurbo() {
                                 document.querySelector(".haggleForm input[type=text]").value = calculateRandomHagglingValue(askedPrice);
                             }), Math.random() * (maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout);
 
-                            t = document.querySelector("input[type='image']"), n = performance.now(),
+                            t = document.querySelector("input[type='image']"), imageLoadingTime = performance.now(),
                             function(e, t, n, o) {
                                 var r = new Image;
                                 r.src = e;
@@ -372,10 +370,11 @@ function topLevelTurbo() {
                             }
                                 
                             (t.src, (function(o, r) {
-                                var i = performance.now(),
-                                    a = Math.max(i - e, i - n),
-                                    c = Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval,
-                                    u = Math.max(Math.round(c - a), 0);
+                                var currentTime = performance.now(),
+                                    timeDifference = Math.max(currentTime - currentGlobalTime, currentTime - imageLoadingTime),
+                                    randomDelay = Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval,
+                                    adjustedDelay = Math.max(Math.round(randomDelay - timeDifference), 0);
+                                
                                 setTimeout((function() {
                                     var a = performance.now();
                                     ! function(e, t, n) {
@@ -395,170 +394,190 @@ function topLevelTurbo() {
                                                 clientX: r,
                                                 clientY: i
                                             });
-                                        isClickingCaptcha && (e.dispatchEvent(a), SendBeepMessage()),
-                                            function(e, t) {
-                                                if (isAnnotatingImage) {
-                                                    var n = document.createElement("img");
-                                                    n.src = "https://upload.wikimedia.org/wikipedia/commons/3/31/Circle_Burgundy_Solid.svg", n.style.height = "14px", n.style.width = "14px", n.style.position = "absolute", n.style.top = t - 7 + "px", n.style.left = e - 7 + "px", n.style.zIndex = "9999999999", n.style.pointerEvents = "none", document.body.appendChild(n), AddCSSStyle("\n                          input[type='image'] {\n                            filter: contrast(2) grayscale(1);\n                          }\n                        ")
-                                                }
-                                            }(r, i)
+
+                                        if(isClickingCaptcha){
+                                            console.log(true);
+                                            e.dispatchEvent(a);
+                                            SendBeepMessage();
+
+                                            if (isAnnotatingImage) {
+                                                var n = document.createElement("img");
+                                                n.src = "circle.svg";
+                                                n.style.height = "14px";
+                                                n.style.width = "14px"; 
+                                                n.style.position = "absolute";
+                                                n.style.top = i - 7 + "px"; 
+                                                n.style.left = r - 7 + "px"; 
+                                                n.style.zIndex = "9999999999";
+                                                n.style.pointerEvents = "none";
+                                                
+                                                document.body.appendChild(n);
+
+                                                const styles = `
+                                                input[type='image'] {
+                                                    filter: contrast(2) grayscale(1);
+                                                }`;
+                                                
+                                                AddCSSStyle(styles);
+                                            }
+                                        }
                                     }(t, o, r);
+
                                     var c = performance.now();
-                                    console.log("Load script to click image took " + Math.round(performance.now() - e) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(i - n) + "ms. Added " + u + "ms to meet minimum. Click then took " + Math.round(c - a) + "ms.")
-                                }), u)
+                                    console.log("Load script to click image took " + Math.round(performance.now() - currentGlobalTime) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(currentTime - imageLoadingTime) + "ms. Added " + adjustedDelay + "ms to meet minimum. Click then took " + Math.round(c - a) + "ms.")
+                                }), adjustedDelay)
                             }), t.width, t.height);
                         }
                     }
                 
-                } else if (IsInShop())
+                } else if (IsInShop()) {
                     if (DisplayAutoBuyerBanner(), IsSoldOut()) ProcessSoldOutItem();
                     else if (IsItemAddedToInventory()) ProcessPurchase();
-                    
-                else {
-                    if (isHighlightingItemsInShops) {
-                        if (buyWithItemDB) {
-                            var items = Array.from(document.querySelectorAll(".item-img")).map((item) => {
-                                var itemName = item.getAttribute("data-name");
-                                var itemPrice = parseInt(item.getAttribute("data-price").replaceAll(",", ""));
-                                return {
-                                    name: itemName,
-                                    price: itemPrice,
-                                };
-                            });
-                    
-                            var itemProfits = CalculateItemProfits(items.map((item) => item.name), items.map((item) => item.price));
-                            var bestItemName = BestItemName(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
-                            var filteredItems = FilterItemsByProfitCriteria(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
-                    
-                            if (bestItemName) {
-                                for (var itemName of filteredItems) {
-                                    document.querySelector(`.item-img[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
+                    else {
+                        if (isHighlightingItemsInShops) {
+                            if (buyWithItemDB) {
+                                var items = Array.from(document.querySelectorAll(".item-img")).map((item) => {
+                                    var itemName = item.getAttribute("data-name");
+                                    var itemPrice = parseInt(item.getAttribute("data-price").replaceAll(",", ""));
+                                    return {
+                                        name: itemName,
+                                        price: itemPrice,
+                                    };
+                                });
+                        
+                                var itemProfits = CalculateItemProfits(items.map((item) => item.name), items.map((item) => item.price));
+                                var bestItemName = BestItemName(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
+                                var filteredItems = FilterItemsByProfitCriteria(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
+                        
+                                if (bestItemName) {
+                                    for (var itemName of filteredItems) {
+                                        document.querySelector(`.item-img[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
+                                    }
+                                    document.querySelector(`.item-img[data-name="${bestItemName}"]`).parentElement.style.backgroundColor = "orangered";
                                 }
-                                document.querySelector(`.item-img[data-name="${bestItemName}"]`).parentElement.style.backgroundColor = "orangered";
-                            }
-                        } else {
-                            var itemNames = new Set(Array.from(document.querySelectorAll(".item-img")).map((item) => item.getAttribute("data-name")));
-                            var selectedName = restockList.find((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName));
-                            var filteredNames = restockList.filter((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName));
-                    
-                            if (selectedName) {
-                                for (var itemName of filteredNames) {
-                                    document.querySelector(`.item-img[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
+                            } else {
+                                var itemNames = new Set(Array.from(document.querySelectorAll(".item-img")).map((item) => item.getAttribute("data-name")));
+                                var selectedName = restockList.find((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName));
+                                var filteredNames = restockList.filter((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName));
+                        
+                                if (selectedName) {
+                                    for (var itemName of filteredNames) {
+                                        document.querySelector(`.item-img[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
+                                    }
+                                    document.querySelector(`.item-img[data-name="${selectedName}"]`).parentElement.style.backgroundColor = "orangered";
                                 }
-                                document.querySelector(`.item-img[data-name="${selectedName}"]`).parentElement.style.backgroundColor = "orangered";
                             }
                         }
-                    }
-                    
-                    var itemToBuyExtracted = function() {
-                        var itemToBuy;
-                        var itemElements = Array.from(document.querySelectorAll(".item-img"));
+                        
+                        var itemToBuyExtracted = function() {
+                            var itemToBuy;
+                            var itemElements = Array.from(document.querySelectorAll(".item-img"));
 
-                        if (buyWithItemDB) {
-                            // From item images, get the name, and price of said items;
-                            var itemData = itemElements.map(element => {
-                                return { name: element.getAttribute("data-name"), price: parseInt(element.getAttribute("data-price").replaceAll(",", "")) };
-                            });
+                            if (buyWithItemDB) {
+                                // From item images, get the name, and price of said items;
+                                var itemData = itemElements.map(element => {
+                                    return { name: element.getAttribute("data-name"), price: parseInt(element.getAttribute("data-price").replaceAll(",", "")) };
+                                });
 
-                            var bestItemIndices = [];
-                            var maxProfit = -Infinity;
+                                var bestItemIndices = [];
+                                var maxProfit = -Infinity;
 
-                            var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
+                                var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
 
-                            for (var index = 0; index < itemData.length; index++) {
-                                var profit = itemProfits[index];
-                                var price = itemData[index].price;
+                                for (var index = 0; index < itemData.length; index++) {
+                                    var profit = itemProfits[index];
+                                    var price = itemData[index].price;
 
-                                var isProfitable = profit > minDBProfitToBuy;
-                                var isProfitablePercent = profit / price > minDBProfitPercentToBuy;
+                                    var isProfitable = profit > minDBProfitToBuy;
+                                    var isProfitablePercent = profit / price > minDBProfitPercentToBuy;
 
-                                if (isProfitable && isProfitablePercent) {
-                                    if (profit > maxProfit) {
-                                        maxProfit = profit;
-                                        bestItemIndices = [index];
-                                    } else if (profit === maxProfit) {
-                                        bestItemIndices.push(index);
+                                    if (isProfitable && isProfitablePercent) {
+                                        if (profit > maxProfit) {
+                                            maxProfit = profit;
+                                            bestItemIndices = [index];
+                                        } else if (profit === maxProfit) {
+                                            bestItemIndices.push(index);
+                                        }
+                                    }
+                                }                            
+
+                                // No best item to buy
+                                if (bestItemIndices.length === 0) return;
+
+                                if (bestItemIndices.length === 1) {
+                                    itemToBuy = itemData[bestItemIndices[0]].name;
+                                } else if (isBuyingSecondMostProfitable) {
+                                    itemToBuy = itemData[bestItemIndices[1]].name;
+                                    console.warn("Skipping the first most valuable item: " + itemData[bestItemIndices[0]].name);
+                                } else {
+                                    itemToBuy = itemData[bestItemIndices[0]].name;
+                                }
+                            } 
+                            
+                            //If the user is not using the 
+                            else {
+                                var itemElements = Array.from(document.querySelectorAll(".item-img")).map((element) => element.getAttribute("data-name"));
+
+                                // Assuming restockList is an array with the desired order
+                                var stockToBuy = restockList.filter((item) => itemElements.includes(item) && !IsItemInBlacklist(item));
+
+                                // If there are items to buy, pick the first one
+                                itemToBuy = stockToBuy.length > 0 ? stockToBuy[0] : null;
+
+                                // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
+                                if (itemToBuy && isBuyingSecondMostProfitable) {
+                                    console.log("Going for the second best item");
+                                    var remainingItems = stockToBuy.filter((item) => item !== itemToBuy);
+                                    
+                                    if (remainingItems.length > 0) {
+                                        itemToBuy = remainingItems[0];
                                     }
                                 }
-                            }                            
-
-                            // No best item to buy
-                            if (bestItemIndices.length === 0) return;
-
-                            if (bestItemIndices.length === 1) {
-                                itemToBuy = itemData[bestItemIndices[0]].name;
-                            } else if (isBuyingSecondMostProfitable) {
-                                itemToBuy = itemData[bestItemIndices[1]].name;
-                                console.warn("Skipping the first most valuable item: " + itemData[bestItemIndices[0]].name);
-                            } else {
-                                itemToBuy = itemData[bestItemIndices[0]].name;
                             }
-                        } 
+                            
+                            itemToBuy ? (isClickingItems ? UpdateBannerAndDocument(`Buying ${itemToBuy}`, `Buying ${itemToBuy} from the main shop`) : UpdateBannerAndDocument(`${itemToBuy} is in stock`, `${itemToBuy} is in stock in the main shop`)) : null;
+                            
+                            return itemToBuy
+                        }();
                         
-                        //If the user is not using the 
-                        else {
-                            var itemElements = Array.from(document.querySelectorAll(".item-img")).map((element) => element.getAttribute("data-name"));
-
-                            // Assuming restockList is an array with the desired order
-                            var stockToBuy = restockList.filter((item) => itemElements.includes(item) && !IsItemInBlacklist(item));
-
-                            // If there are items to buy, pick the first one
-                            itemToBuy = stockToBuy.length > 0 ? stockToBuy[0] : null;
-
-                            // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
-                            if (itemToBuy && isBuyingSecondMostProfitable) {
-                                console.log("Going for the second best item");
-                                var remainingItems = stockToBuy.filter((item) => item !== itemToBuy);
-                                
-                                if (remainingItems.length > 0) {
-                                    itemToBuy = remainingItems[0];
-                                }
+                        itemToBuyExtracted ? function(e) {
+                            if (isClickingItems) {
+                                var t = document.querySelector(`.item-img[data-name="${e}"]`);
+                                setTimeout((function() {
+                                    t.click(), SendBeepMessage()
+                                }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)
                             }
-                        }
-                        
-                        itemToBuy ? (isClickingItems ? UpdateBannerAndDocument(`Buying ${itemToBuy}`, `Buying ${itemToBuy} from the main shop`) : UpdateBannerAndDocument(`${itemToBuy} is in stock`, `${itemToBuy} is in stock in the main shop`)) : null;
-                        
-                        return itemToBuy
-                    }();
-                    
-                    itemToBuyExtracted ? function(e) {
-                        if (isClickingItems) {
-                            var t = document.querySelector(`.item-img[data-name="${e}"]`);
-                            setTimeout((function() {
-                                t.click(), SendBeepMessage()
-                            }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)
-                        }
-                    }(itemToBuyExtracted) : ! function() {
-                        var e = new Date,
-                            t = e.getHours(),
-                            n = e.getMinutes();
-                        e.getDay();
-                        return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= 0 && n <= 60
-                    }() ? (isRunningOnScheduledTime || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), isRunningOnScheduledTime = !0), setTimeout((function() {
-                        RunAutoBuyer()
-                    }), 3e4)) : ReloadPageBasedOnConditions(),
-                    function() {
-                        if (isClickingConfirm) {
-                            var e = !1;
-                            clearInterval(shopIntervals), shopIntervals = setInterval((function() {
-                                var t, n = document.getElementById("confirm-link");
-                                ((t = n)
-                                    .offsetWidth || t.offsetHeight || t.getClientRects()
-                                    .length) && setTimeout((function() {
-                                    e || (n.click(), SendBeepMessage(), e = !0)
-                                }), Math.random() * (maxClickConfirmInterval - minClickConfirmInterval) + minClickConfirmInterval)
-                            }), confirmWindowInteral)
-                        }
-                    }()
-                } 
+                        }(itemToBuyExtracted) : ! function() {
+                            var e = new Date,
+                                t = e.getHours(),
+                                n = e.getMinutes();
+                            e.getDay();
+                            return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= 0 && n <= 60
+                        }() ? (isRunningOnScheduledTime || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), isRunningOnScheduledTime = !0), setTimeout((function() {
+                            RunAutoBuyer()
+                        }), 3e4)) : ReloadPageBasedOnConditions(),
+                        function() {
+                            if (isClickingConfirm) {
+                                var e = !1;
+                                clearInterval(shopIntervals), shopIntervals = setInterval((function() {
+                                    var t, n = document.getElementById("confirm-link");
+                                    ((t = n)
+                                        .offsetWidth || t.offsetHeight || t.getClientRects()
+                                        .length) && setTimeout((function() {
+                                        e || (n.click(), SendBeepMessage(), e = !0)
+                                    }), Math.random() * (maxClickConfirmInterval - minClickConfirmInterval) + minClickConfirmInterval)
+                                }), confirmWindowInteral)
+                            }
+                        }()
+                    }
 
                 
                 //######################################################################################################################################
 
 
                 // Almost Abandoned Attic;
-                else if(IsInAlmostAbandonedAttic()){
-                    function handleAlmostAbandonedAttic() {
+                } else if(IsInAlmostAbandonedAttic()){
+                    function HandleAlmostAbandonedAttic() {
                         DisplayAutoBuyerBanner();
 
                         function IsItemInInventory() {
@@ -682,7 +701,7 @@ function topLevelTurbo() {
                         }
                     }
                     
-                    handleAlmostAbandonedAttic();
+                    HandleAlmostAbandonedAttic();
                 }
             }
 
@@ -931,7 +950,7 @@ function topLevelTurbo() {
                 const itemProfits = [];
             
                 for (const itemID of itemIDs) {
-                    if (!IsItemInRarityThresholdToBuy(itemID) || hasUserExcludedItem(itemID)) {
+                    if (!IsItemInRarityThresholdToBuy(itemID) || IsItemInBlacklist(itemID)) {
                         itemProfits.push(-99999999);
                     } else {
                         const itemData = item_db[itemID];
@@ -940,7 +959,9 @@ function topLevelTurbo() {
                             console.warn("Item not found in the database or price not available.");
                             itemProfits.push(buyUnknownItemsIfProfitMargin);
                         } else {
-                            const itemPrice = parseInt(itemData.Price.replace(",", ""));
+                            console.log(itemData);
+
+                            const itemPrice = itemData.Price;
                             const userPrice = parseInt(itemPrices[itemIDs.indexOf(itemID)]);
                             const profit = itemPrice - userPrice;
                             itemProfits.push(profit);
@@ -1029,8 +1050,8 @@ function topLevelTurbo() {
             }
 
             function DisplayAutoBuyerBanner() {
-                if (isShowingBanner && !bannerDisplayed) {
-                    bannerDisplayed = true;
+                if (isShowingBanner && !isBannerDisplaying) {
+                    isBannerDisplaying = true;
 
                     // Creating the banner element;
                     const bannerElement = document.createElement("div");

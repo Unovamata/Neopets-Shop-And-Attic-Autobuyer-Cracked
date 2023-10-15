@@ -12,6 +12,8 @@
 (function () {
   "use strict";
 
+  if(window.location.href.includes("halloween/garage")) return;
+
   const urlSearchParams = new URLSearchParams(window.location.search);
 
   if (urlSearchParams.get("type") == "shop" || sessionStorage.getItem("refreshTime") == null) {
