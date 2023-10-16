@@ -180,7 +180,7 @@ function topLevelTurbo() {
             MIN_PAGE_LOAD_FAILURES: 10000,
             MAX_PAGE_LOAD_FAILURES: 20000
         }, (function(autobuyerVariables) {
-
+            
             // Destructing the variables extracted from the extension;
             const {
                 PAUSE_AFTER_BUY_MS: pauseAfterBuy,
@@ -252,7 +252,6 @@ function topLevelTurbo() {
             
             function RunAutoBuyer() {
                 if (IsHaggling()) {
-
                     DisplayAutoBuyerBanner();
 
                     if (IsSoldOut()) {
@@ -292,56 +291,65 @@ function topLevelTurbo() {
                         // Haggling;
                         else {
                             UpdateBannerStatus("Entering offer...");
-                
+                            
+                            // Incorrect pet clicked;
                             if (pageText.includes("You must select the correct pet in order to continue")) {
                                 console.error("Incorrect click on pet!");
                             }
 
-                            var t, imageLoadingTime
+                            // Perform haggling choosing between haggling algorithms;
+                            if(isEnteringOffer){
+                                // Haggling action;
+                                var hagglingTimeout = Math.random() * (maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout;
 
-                            // Is entering offer;
-                            isEnteringOffer && setTimeout((function() {
-                                // The asked price message can change, that's why the complexity of this operation;
-                                var askedPrice = Number(new RegExp("[0-9|,]+ Neopoints").exec(document.getElementById("shopkeeper_makes_deal").innerText)[0].replace(" Neopoints", "").replaceAll(",", ""));
+                                setTimeout(PerformHaggling(), hagglingTimeout);
 
-                                // Choose between 2 haggling algorithms;
-                                function calculateRandomHagglingValue(baseValue) {
-                                    return Math.random() > 0.33 ? calculateDynamicHagglingValue(baseValue) : calculateRoundedHagglingValue(baseValue);
-                                }
-                                
-                                // Rounds offers with a lowest value;
-                                function calculateDynamicHagglingValue(baseValue) {
-                                    const lowerBound = 1 - (0.015 * Math.random() + 0.015);
-                                    const upperBound = Math.round(lowerBound * baseValue);
-                                    const maxUpperBound = Math.round(baseValue * (1 + 0.005 * Math.random()));
-                                    let bestValue = upperBound;
-                                
-                                    for (let current = upperBound; current <= maxUpperBound; current++) {
-                                        if (Math.random() > Math.random() || (Math.random() === Math.random() && Math.random() < 0.33)) {
-                                            bestValue = current;
+                                function PerformHaggling(){
+                                    // The asked price message can change, that's why the complexity of this operation;
+                                    var askedPrice = Number(new RegExp("[0-9|,]+ Neopoints").exec(document.getElementById("shopkeeper_makes_deal").innerText)[0].replace(" Neopoints", "").replaceAll(",", ""));
+
+                                    // Choose between 2 haggling algorithms;
+                                    function calculateRandomHagglingValue(baseValue) {
+                                        return Math.random() > 0.33 ? calculateDynamicHagglingValue(baseValue) : calculateRoundedHagglingValue(baseValue);
+                                    }
+                                    
+                                    // Rounds offers with a lowest value;
+                                    function calculateDynamicHagglingValue(baseValue) {
+                                        const lowerBound = 1 - (0.015 * Math.random() + 0.015);
+                                        const upperBound = Math.round(lowerBound * baseValue);
+                                        const maxUpperBound = Math.round(baseValue * (1 + 0.005 * Math.random()));
+                                        let bestValue = upperBound;
+                                    
+                                        for (let current = upperBound; current <= maxUpperBound; current++) {
+                                            if (Math.random() > Math.random() || (Math.random() === Math.random() && Math.random() < 0.33)) {
+                                                bestValue = current;
+                                            }
                                         }
+                                    
+                                        return bestValue;
                                     }
-                                
-                                    return bestValue;
-                                }
-                                
-                                // Rounds offers with zeroes;
-                                function calculateRoundedHagglingValue(baseValue) {
-                                    const randomFactor = 100 * (Math.round(4 * Math.random()) + 1);
-                                    let roundedValue = Math.round(baseValue / randomFactor) * randomFactor;
-                                
-                                    if (baseValue <= 500) {
-                                        roundedValue = 10 * Math.round(baseValue / 10);
+                                    
+                                    // Rounds offers with zeroes;
+                                    function calculateRoundedHagglingValue(baseValue) {
+                                        const randomFactor = 100 * (Math.round(4 * Math.random()) + 1);
+                                        let roundedValue = Math.round(baseValue / randomFactor) * randomFactor;
+                                    
+                                        if (baseValue <= 500) {
+                                            roundedValue = 10 * Math.round(baseValue / 10);
+                                        }
+                                    
+                                        return roundedValue;
                                     }
-                                
-                                    return roundedValue;
+
+                                    // Inputting the haggle offer;
+                                    document.querySelector(".haggleForm input[type=text]").value = calculateRandomHagglingValue(askedPrice);
                                 }
+                            }
 
-                                // Inputting the haggle offer;
-                                document.querySelector(".haggleForm input[type=text]").value = calculateRandomHagglingValue(askedPrice);
-                            }), Math.random() * (maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout);
+                            var captchaImage, imageLoadingTime
 
-                            t = document.querySelector("input[type='image']"), imageLoadingTime = performance.now(),
+                            // Finding the darkest pixel in the captcha image
+                            captchaImage = document.querySelector("input[type='image']"), imageLoadingTime = performance.now(),
                             function(e, t, n, o) {
                                 var r = new Image;
                                 r.src = e;
@@ -368,50 +376,67 @@ function topLevelTurbo() {
                                     t(s - T * n, T)
                                 }
                             }
-                                
-                            (t.src, (function(o, r) {
-                                var currentTime = performance.now(),
-                                    timeDifference = Math.max(currentTime - currentGlobalTime, currentTime - imageLoadingTime),
-                                    randomDelay = Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval,
-                                    adjustedDelay = Math.max(Math.round(randomDelay - timeDifference), 0);
-                                
-                                setTimeout((function() {
-                                    var a = performance.now();
-                                    ! function(e, t, n) {
-                                        var o = function(e) {
-                                                for (var t = 0, n = 0; e && !isNaN(e.offsetLeft) && !isNaN(e.offsetTop);) t += e.offsetLeft - e.scrollLeft, n += e.offsetTop - e.scrollTop, e = e.offsetParent;
-                                                return {
-                                                    top: n,
-                                                    left: t
-                                                }
-                                            }(e),
-                                            r = Math.round(t + o.left),
-                                            i = Math.round(n + o.top),
-                                            a = new MouseEvent("click", {
-                                                view: window,
-                                                bubbles: !0,
-                                                cancelable: !0,
-                                                clientX: r,
-                                                clientY: i
-                                            });
 
+                            // Sending events to the captcha image; IIFE function <-- + ^
+                            (captchaImage.src, (function(o, r) {
+                                var imageLoadStartTime = performance.now(),
+                                adjustedDelay = Math.max(Math.round(Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval - Math.max(imageLoadStartTime - currentGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
+
+                                setTimeout((function() {
+                                    //var currentTime = performance.now();
+                                    
+                                    ManageCaptcha(captchaImage, o, r);
+
+                                    function ManageCaptcha(element, left, highlighter) {
+                                        var o = CalculateCaptchaOffset(element);
+                                        
+                                        // Checking the offset of the captcha image;
+                                        function CalculateCaptchaOffset(element) {
+                                            var left = 0, top = 0;
+
+                                            while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
+                                                left += element.offsetLeft - element.scrollLeft;
+                                                top += element.offsetTop - element.scrollTop;
+                                                element = element.offsetParent;
+                                            }
+
+                                            return {
+                                                top: top,
+                                                left: left
+                                            }
+                                        }
+
+                                        var highlightLeft = Math.round(left + o.left),
+                                            highlightTop = Math.round(highlighter + o.top)
+
+                                        // Setting the click event for the captcha;
+                                        mouseClickEvent = new MouseEvent("click", {
+                                            view: window,
+                                            bubbles: !0,
+                                            cancelable: !0,
+                                            clientX: highlightLeft,
+                                            clientY: highlightTop
+                                        });
+
+                                        // If it's autoclicking the captcha;
                                         if(isClickingCaptcha){
-                                            console.log(true);
-                                            e.dispatchEvent(a);
+                                            // Send the event;
+                                            element.dispatchEvent(mouseClickEvent);
                                             SendBeepMessage();
 
+                                            // And add a small highlighter to the image to analyze;
                                             if (isAnnotatingImage) {
-                                                var n = document.createElement("img");
-                                                n.src = "circle.svg";
-                                                n.style.height = "14px";
-                                                n.style.width = "14px"; 
-                                                n.style.position = "absolute";
-                                                n.style.top = i - 7 + "px"; 
-                                                n.style.left = r - 7 + "px"; 
-                                                n.style.zIndex = "9999999999";
-                                                n.style.pointerEvents = "none";
+                                                var highlighter = document.createElement("img");
+                                                highlighter.src = "circle.svg";
+                                                highlighter.style.height = "14px";
+                                                highlighter.style.width = "14px"; 
+                                                highlighter.style.position = "absolute";
+                                                highlighter.style.top = highlightTop - 7 + "px"; 
+                                                highlighter.style.left = highlightLeft - 7 + "px"; 
+                                                highlighter.style.zIndex = "9999999999";
+                                                highlighter.style.pointerEvents = "none";
                                                 
-                                                document.body.appendChild(n);
+                                                document.body.appendChild(highlighter);
 
                                                 const styles = `
                                                 input[type='image'] {
@@ -421,17 +446,24 @@ function topLevelTurbo() {
                                                 AddCSSStyle(styles);
                                             }
                                         }
-                                    }(t, o, r);
-
-                                    console.log("Load script to click image took " + Math.round(performance.now() - currentGlobalTime) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(currentTime - imageLoadingTime) + "ms. Added " + adjustedDelay + "ms to meet minimum. Click then took " + Math.round(performance.now() - a) + "ms.")
+                                    }
+                                    //console.log("Load script to click image took " + Math.round(performance.now() - currentGlobalTime) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(currentTime - imageLoadingTime) + "ms. Added " + adjustedDelay + "ms to meet minimum. Click then took " + Math.round(performance.now() - currentTime) + "ms.")
                                 }), adjustedDelay)
-                            }), t.width, t.height);
+                            }), captchaImage.width, captchaImage.height);
                         }
                     }
+                } 
                 
-                } else if (IsInShop()) {
-                    if (DisplayAutoBuyerBanner(), IsSoldOut()) ProcessSoldOutItem();
+                // Check if the user is in a main shop;
+                else if (IsInShop()) {
+                    DisplayAutoBuyerBanner()
+                    
+                    if (IsSoldOut()) ProcessSoldOutItem();
+
+                    // Bought item;
                     else if (IsItemAddedToInventory()) ProcessPurchase();
+
+                    // Auto Buying;
                     else {
                         if (isHighlightingItemsInShops) {
                             if (buyWithItemDB) {
@@ -597,6 +629,7 @@ function topLevelTurbo() {
                         setTimeout(function() {
                             AutoRefreshAttic();
                         }, 120000);
+
                         HighlightItemsInAttic();
 
                         SendEmail(email);
@@ -611,15 +644,17 @@ function topLevelTurbo() {
                         }, 120000);
                     }
 
+                    // Pausing if the user is AAA banned;
                     else if (document.body.innerText.includes("Sorry, please try again later.")){
                         UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer in Attic");
                     } 
                     
-
+                    // 5 item limit per day;
                     else if (document.body.innerText.includes("cannot buy any more items from this shop today")) {
                         UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
                     }
                     
+                    // Buying items from the attick;
                     else {
                         AtticRestockUpdateChecker();
 
@@ -639,23 +674,15 @@ function topLevelTurbo() {
                             }
                         }
                         
+                        // Sold out;
                         if (document.body.innerText.includes("Sorry, we just sold out of that.")) {
                             UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
                         }
                         
+                        // Selecting the best item to buy;
                         var bestItemName = HighlightItemsInAttic();
-                        
-                        /*var items = document.querySelectorAll("#items li");
-
-                        // Extract relevant data from 'items'
-                        var itemNames = Array.from(items).map((item) => item.getAttribute("oname"));
-                        var itemPrices = Array.from(items).map((item) => item.getAttribute("oprice").replaceAll(",", ""));
-
-                        var itemProfits = CalculateItemProfits(itemNames, itemPrices);
-                        var bestItemName = BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);*/
 
                         if (bestItemName) {
-                            // Attempt to buy the best item in the Attic
                             if (isClickingItemsInAttic) {
                                 var randomBuyTime = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
 
@@ -663,19 +690,23 @@ function topLevelTurbo() {
                                     "Attempting " + bestItemName + " in Attic",
                                     "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
                                 );
-
+                                
+                                // Getting item data for submission;
                                 var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
                                 var itemID = selectedLi.getAttribute("oii");
-                                var itemPrice = selectedLi.getAttribute("oprice");
+                                var itemPrice = selectedLi.getAttribute("oprice").replaceAll(",","");
 
                                 SaveToPurchaseHistory(bestItemName, atticString, itemPrice, "Attempted");
+
                                 setTimeout(function() {
                                     document.getElementById("oii").value = itemID;
                                     document.getElementById("frm-abandoned-attic").submit();
                                 }, randomBuyTime);
                             }
-                        } else if (!isAtticAutoRefreshing || !IsTimeToAutoRefreshAttic()) {
-                            // Wait for the scheduled time or run the AutoBuyer
+                        } 
+                        
+                        // Wait for the scheduled time or run the AutoBuyer
+                        else if (!isAtticAutoRefreshing || !IsTimeToAutoRefreshAttic()) {
                             if (!isRunningOnScheduledTime) {
                                 UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
                                 isRunningOnScheduledTime = true;
