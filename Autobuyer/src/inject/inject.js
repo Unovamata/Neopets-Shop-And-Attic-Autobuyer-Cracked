@@ -252,6 +252,8 @@ function topLevelTurbo() {
             
             function RunAutoBuyer() {
                 if (IsHaggling()) {
+                    if(!isAutoBuyerEnabled) return;
+                    
                     DisplayAutoBuyerBanner();
 
                     if (IsSoldOut()) {
@@ -457,6 +459,8 @@ function topLevelTurbo() {
                 
                 // Check if the user is in a main shop;
                 else if (IsInShop()) {
+                    if(!isAutoBuyerEnabled) return;
+
                     DisplayAutoBuyerBanner()
                     
                     if (IsSoldOut()) ProcessSoldOutItem();
@@ -606,6 +610,8 @@ function topLevelTurbo() {
 
                 // Almost Abandoned Attic;
                 } else if(IsInAlmostAbandonedAttic()){
+                    if(!isAtticEnabled) return;
+
                     DisplayAutoBuyerBanner();
 
                     function IsItemInInventory() {
