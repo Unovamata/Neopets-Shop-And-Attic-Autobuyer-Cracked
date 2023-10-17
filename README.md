@@ -3,17 +3,17 @@
 # [Neopets Shop & Attic Highlighter & Autobuyer Crack](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "Neopets Shop & Attic Highlighter & Autobuyer")
 > Code optimized and adapted by: [Unovamata](https://github.com/Unovamata "Unovamata"). Original developer: autobuyerneopets.
 
-I have been using this Auto-Buyer tool since its release. It supports lists and specific shops to snipe and outperforms the Neocodex Auto-buyer. I removed the pay-wall needed, making it available to all. I will continue to optimize the speed and buy-times offered by the extension.
+I have been using this Auto-Buyer tool since its release. It supports lists and specific shops to snipe. I removed the pay-wall needed, making it available to all. I will continue to optimize the speed and buy-times offered by the extension.
 
 **Table of Contents**
 
-* [How to install:](#how-to-install)
+* [How to install](#how-to-install)
 * [Tips](#tips)
 * [New Features](#new-features)
 * [Included Features](#included-features)
 * [End Notes](#end-notes)
 
-## How to install:
+## How to install
 - Download the extension files and save them to a location on your computer.
 - Open Google Chrome.
 - Click on the three dots in the upper-right corner of the screen to open the Chrome menu.
