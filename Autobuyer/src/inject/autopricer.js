@@ -1040,8 +1040,6 @@ async function RunAutoPricer(){
 
     // Press the 'Update' button in the shop to update its prices;
     async function PressUpdateButton(pinInput, updateButton){
-        console.log(updatedPrices);
-
         if(!isEnteringPINAutomatically){
             window.alert("Since you deactivated the Auto-Enter PIN option, please Enter your PIN manually.\n\nThe AutoPricing process has finished for this page, fill the PIN input box with your PIN and the system will continue to the next page automatically.");
             
