@@ -350,7 +350,8 @@ function topLevelTurbo() {
 
                             // Finding the darkest pixel in the captcha image
                             captchaImage = document.querySelector("input[type='image']"), imageLoadingTime = performance.now(),
-                            function(e, t, n, o) {
+
+                            function(e, TriggerClickEventAndCSSCaptcha, n, o) {
                                 var r = new Image;
                                 r.src = e;
                                 var i = performance.now();
@@ -373,7 +374,7 @@ function topLevelTurbo() {
                                         l += d
                                     }
                                     var T = Math.floor(s / n);
-                                    t(s - T * n, T)
+                                    TriggerClickEventAndCSSCaptcha(s - T * n, T)
                                 }
                             }
 
@@ -550,17 +551,15 @@ function topLevelTurbo() {
                                 var itemElements = Array.from(document.querySelectorAll(".item-img")).map((element) => element.getAttribute("data-name"));
 
                                 // Assuming restockList is an array with the desired order
-                                filteredItems = restockList.filter((itemName) => {
-                                    return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName));
-                                });
+                                filteredNames = restockList.filter((itemName) => itemElements.includes(itemName) && !IsItemInBlacklist(itemName));
 
                                 // If there are items to buy, pick the first one
-                                selectedName = filteredItems.length > 0 ? filteredItems[0] : null;
+                                selectedName = filteredNames.length > 0 ? filteredNames[0] : null;
 
                                 // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
                                 if (selectedName && isBuyingSecondMostProfitable && filteredItems.length > 1) {
-                                        console.log("Going for the second best item");
-                                        selectedName = filteredItems[1];
+                                    console.log("Going for the second best item");
+                                    selectedName = filteredItems[1];
                                 }
                             }
                             
@@ -572,6 +571,7 @@ function topLevelTurbo() {
                         itemToBuyExtracted ? function(e) {
                             if (isClickingItems) {
                                 var t = document.querySelector(`.item-img[data-name="${e}"]`);
+                                console.log(t);
                                 setTimeout((function() {
                                     t.click(), SendBeepMessage()
                                 }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)

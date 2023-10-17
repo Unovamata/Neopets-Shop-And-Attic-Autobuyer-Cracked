@@ -560,9 +560,13 @@ var sleepAfterNavigatingToNextPageMin, sleepAfterNavigatingToNextPageMax;
 // Wait time after pressing the update button to refresh;
 var sleepWaitForUpdateMin, sleepWaitForUpdateMax;
 
-SetAllVariables();
+RunAutoPricer();
 
-async function SetAllVariables(){
+async function RunAutoPricer(){
+    if(window.location.href.includes("market.phtml?type=sales") 
+    || window.location.href.includes("market.phtml?type=till")
+    || window.location.href.includes("market.phtml?type=edit")) return;
+
     // AutoPricer;
     isRandomPercentage = await getSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING();
     fixedPercentageDeduction = await getFIXED_PRICING_PERCENTAGE();
@@ -955,8 +959,6 @@ async function SetAllVariables(){
             // Saving all the data in its respective array;
             await InputDataInShop(rows);
             await PressUpdateButton(pinInput, updateButton);
-            
-            GetNextPage();
 
             resolve(); // Resolve the PriceItemsInPage promise after all operations are done
         });
@@ -1038,22 +1040,39 @@ async function SetAllVariables(){
 
     // Press the 'Update' button in the shop to update its prices;
     async function PressUpdateButton(pinInput, updateButton){
+        console.log(updatedPrices);
+
         if(!isEnteringPINAutomatically){
-            window.alert("Since you deactivated the Auto-Enter PIN option, please Enter your PIN manually.\n\nThe AutoPricing process has finished for this page, please press the 'Update' button and proceed to the next page manually.");
-            return;
+            window.alert("Since you deactivated the Auto-Enter PIN option, please Enter your PIN manually.\n\nThe AutoPricing process has finished for this page, fill the PIN input box with your PIN and the system will continue to the next page automatically.");
+            
+            async function WaitForPIN(pinInput){
+                return new Promise(async (resolve) => {
+                    var intervalID = setInterval(() => {
+                        var isValidPIN = pinInput.value.length === 4;
+
+                        if (isValidPIN) {
+                            clearInterval(intervalID);
+                            resolve();
+                        }
+                    }, 100);
+                });
+            }
+
+            await WaitForPIN(pinInput);
         }
 
         if(updatedPrices){
             await Sleep(sleepAfterPricingMin, sleepAfterPricingMax);
 
-            if(pinInput){
+            if(pinInput && isEnteringPINAutomatically){
                 await SimulateKeyEvents(pinInput, playerPIN);
                 await Sleep(sleepAfterPinMin, sleepAfterPinMax);
             }
-
-            updateButton.click();
-            setAUTOPRICER_STATUS(`Prices Updated!`);
         }
+
+        if(pinInput.value != "") updateButton.click();
+        GetNextPage();
+        setAUTOPRICER_STATUS(`Prices Updated!`);
     }
 
     var currentPageLink = null;
