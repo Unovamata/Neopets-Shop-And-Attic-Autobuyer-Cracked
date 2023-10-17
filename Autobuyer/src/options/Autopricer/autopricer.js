@@ -381,6 +381,45 @@ checkPriced.addEventListener('click', () => UpdateAllUnpricedCheckboxes(true, 1)
 const uncheckPriced = document.getElementById("uncheck-priced");
 uncheckPriced.addEventListener('click', () => UpdateAllUnpricedCheckboxes(false, 1));
 
+const checkUpdated = document.getElementById("check-updated");
+checkUpdated.addEventListener('click', () => UpdateAllUpdatedItemCheckboxes(true));
+
+const uncheckUpdated = document.getElementById("uncheck-updated");
+uncheckUpdated.addEventListener('click', () => UpdateAllUpdatedItemCheckboxes(false));
+
+
+function UpdateAllUpdatedItemCheckboxes(input){
+    var rows = document.querySelectorAll("tr");
+
+    getAUTOPRICER_INVENTORY(function (autoPricerInventory){
+        getSHOP_INVENTORY(function (shopInventory){
+            var namesList = autoPricerInventory.map((item) => item.Name);
+
+            rows.forEach(async function (row){
+                var checkbox = row.querySelector('input[type="checkbox"]');
+                if(!checkbox) return;
+
+                var itemName = row.cells[1].textContent; //Name cell;
+
+                if(namesList.includes(itemName)){
+                    if(input) row.classList.add("checked-row");
+                    else row.classList.remove("checked-row");
+
+                    checkbox.checked = input;
+
+                    var index = parseInt(row.querySelector("td:first-child").textContent) - 1;
+
+                    shopInventory[index].IsPricing = checkbox.checked;
+                }
+            });
+
+            setSHOP_INVENTORY(shopInventory);
+            setINVENTORY_UPDATED(true);
+        });
+    });
+}
+
+
 const statusTag = document.getElementById("status-tag");
 const loadingIcon = document.getElementById("loading");
 
@@ -460,18 +499,7 @@ function StartAutoPricer(){
     }
 
     // Check if swTab is null and create a new tab if necessary
-    if (swTab === null) {
-        CreateNewTab();
-    } else {
-        window.alert("NeoBuyer's+ AutoPricer is already running.");
-    }
-
-    // Listen for the tab removal event and set swTab to null when the tab is closed
-    chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
-        if (swTab && tabId === swTab.id) {
-            swTab = null;
-        }
-    });
+    CreateNewTab();
 
     setAUTOPRICER_STATUS("AutoPricer Process Running...");
 }
