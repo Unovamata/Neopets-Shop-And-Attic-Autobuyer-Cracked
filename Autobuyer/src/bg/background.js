@@ -40,10 +40,16 @@ chrome.runtime.onInstalled.addListener(function(e) {
 		const autoPricerDefaultSettings = {
 			// AutoPricer;
 			SHOULD_USE_NEON: false,
+			PRICING_TYPE: "Percentage",
 			SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
+			PERCENTAGE_PRICING_ALGORITHM_TYPE: "Zeroes",
 			FIXED_PRICING_PERCENTAGE: 15,
 			MIN_PRICING_PERCENTAGE: 10,
 			MAX_PRICING_PERCENTAGE: 20,
+			FIXED_PRICING_ALGORITHM_TYPE: "Fixed",
+			FIXED_PRICING_VALUE: 1000,
+			MIN_FIXED_PRICING: 200,
+			MAX_FIXED_PRICING: 800,
 		
 			// Shop Wizard;
 			MIN_WAIT_BAN_TIME: 300000,
