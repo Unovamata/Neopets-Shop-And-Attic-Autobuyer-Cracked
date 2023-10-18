@@ -156,17 +156,42 @@ function showOrHide() {
     if($("#PRICING_TYPE").val() === "Absolute"){
         $(".percentage").hide();
         $(".absolute").show();
-    } else {
+
+        HideFixedPricingSections();
+    } else if($("#PRICING_TYPE").val() === "Percentage"){
         $(".percentage").show();
         $(".absolute").hide();
+        
+        HidePricingPercentageSections();
+    } else {
+        $(".percentage").show();
+        $(".absolute").show();
 
-        if($("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked")){
-            $(".random-percentage").show(); 
-            $(".fixed-percentage").hide(); 
-        } else {
-            $(".random-percentage").hide();
-            $(".fixed-percentage").show(); 
-        }
+        HidePricingPercentageSections();
+        HideFixedPricingSections();
+    }
+}
+
+function HidePricingPercentageSections(){
+    if($("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked")){
+        $(".random-percentage").show(); 
+        $(".fixed-percentage").hide(); 
+    } else {
+        $(".random-percentage").hide();
+        $(".fixed-percentage").show(); 
+    }
+}
+
+function HideFixedPricingSections(){
+    if($("#FIXED_PRICING_ALGORITHM_TYPE").val() === "Fixed"){
+        $(".fixed-absolute").show();
+        $(".random-absolute").hide();
+    }  else if($("#FIXED_PRICING_ALGORITHM_TYPE").val() === "Random Absolute"){
+        $(".random-absolute").show();
+        $(".fixed-absolute").hide();
+    } else {
+        $(".random-absolute").show();
+        $(".fixed-absolute").show();
     }
 }
 
@@ -414,7 +439,7 @@ function setPRICING_TYPE(value) { chrome.storage.local.set({ PRICING_TYPE: value
 
 function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
 
-function setPRICING_ALGORITHM_TYPE(value) { chrome.storage.local.set({ PRICING_ALGORITHM_TYPE: value }, (function () {})) }
+function setPERCENTAGE_PRICING_ALGORITHM_TYPE(value) { chrome.storage.local.set({ PERCENTAGE_PRICING_ALGORITHM_TYPE: value }, (function () {})) }
 
 function setFIXED_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ FIXED_PRICING_PERCENTAGE: Number(value) }, (function () {})) }
 
@@ -422,7 +447,7 @@ function setMIN_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ MIN_PRICI
 
 function setMAX_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ MAX_PRICING_PERCENTAGE: Number(value) }, (function () {})) }
 
-function setSHOULD_USE_RANDOM_FIXED_RANGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_FIXED_RANGES_FOR_PRICING: value }, (function () {})) }
+function setFIXED_PRICING_ALGORITHM_TYPE(value) { chrome.storage.local.set({ FIXED_PRICING_ALGORITHM_TYPE: value }, (function () {})) }
 
 function setFIXED_PRICING_VALUE(value) { chrome.storage.local.set({ FIXED_PRICING_VALUE: Number(value) }, (function () {})) }
 
@@ -658,8 +683,25 @@ $("#PRICING_TYPE").on("change", (function() {
     showOrHide();
 }))
 
-$("#PRICING_ALGORITHM_TYPE").on("change", (function() {
-    setPRICING_ALGORITHM_TYPE($("#PRICING_ALGORITHM_TYPE").val())
+$("#PERCENTAGE_PRICING_ALGORITHM_TYPE").on("change", (function() {
+    setPERCENTAGE_PRICING_ALGORITHM_TYPE($("#PERCENTAGE_PRICING_ALGORITHM_TYPE").val())
+}))
+
+$("#FIXED_PRICING_ALGORITHM_TYPE").on("change", (function() {
+    setFIXED_PRICING_ALGORITHM_TYPE($("#FIXED_PRICING_ALGORITHM_TYPE").val())
+    showOrHide();
+}))
+
+$("#FIXED_PRICING_VALUE").bind("input propertychange", (function() {
+    setFIXED_PRICING_VALUE($("#FIXED_PRICING_VALUE").val())
+}))
+
+$("#MIN_FIXED_PRICING").bind("input propertychange", (function() {
+    setMIN_FIXED_PRICING($("#MIN_FIXED_PRICING").val())
+}))
+
+$("#MAX_FIXED_PRICING").bind("input propertychange", (function() {
+    setMAX_FIXED_PRICING($("#MAX_FIXED_PRICING").val())
 }))
 
 
@@ -737,10 +779,14 @@ resetButton.onclick = function(_) {
     SHOULD_USE_NEON: false,
     PRICING_TYPE: "Percentage",
     SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
-    PRICING_ALGORITHM_TYPE: "Zeroes",
+    PERCENTAGE_PRICING_ALGORITHM_TYPE: "Zeroes",
     FIXED_PRICING_PERCENTAGE: 15,
     MIN_PRICING_PERCENTAGE: 10,
     MAX_PRICING_PERCENTAGE: 20,
+    FIXED_PRICING_ALGORITHM_TYPE: "Fixed",
+    FIXED_PRICING_VALUE: 1000,
+    MIN_FIXED_PRICING: 200,
+    MAX_FIXED_PRICING: 800,
 
     // Shop Wizard;
     MIN_WAIT_BAN_TIME: 300000,
@@ -835,10 +881,14 @@ resetButton.onclick = function(_) {
         $("#SHOULD_USE_NEON").prop("checked", _.SHOULD_USE_NEON),
         $("#PRICING_TYPE").val(_.PRICING_TYPE);
         $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING),
-        $("#PRICING_ALGORITHM_TYPE").val(_.PRICING_ALGORITHM_TYPE),
+        $("#PERCENTAGE_PRICING_ALGORITHM_TYPE").val(_.PERCENTAGE_PRICING_ALGORITHM_TYPE),
         $("#FIXED_PRICING_PERCENTAGE").val(_.FIXED_PRICING_PERCENTAGE),
         $("#MIN_PRICING_PERCENTAGE").val(_.MIN_PRICING_PERCENTAGE),
         $("#MAX_PRICING_PERCENTAGE").val(_.MAX_PRICING_PERCENTAGE),
+        $("#FIXED_PRICING_ALGORITHM_TYPE").val(_.FIXED_PRICING_ALGORITHM_TYPE),
+        $("#FIXED_PRICING_VALUE").val(_.FIXED_PRICING_VALUE),
+        $("#MIN_FIXED_PRICING").val(_.MIN_FIXED_PRICING),
+        $("#MAX_FIXED_PRICING").val(_.MAX_FIXED_PRICING),
 
         // SW Settings;
         $("#MIN_WAIT_BAN_TIME").val(_.MIN_WAIT_BAN_TIME),
