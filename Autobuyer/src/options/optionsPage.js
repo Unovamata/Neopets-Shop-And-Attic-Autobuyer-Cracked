@@ -190,7 +190,7 @@ function HidePricingPercentageSections(){
 
 function HideFixedPricingSections(){
     switch($("#FIXED_PRICING_ALGORITHM_TYPE").val()){
-        case "Fixed":
+        case "True Absolute":
             $(".fixed-absolute").show();
             $(".random-absolute").hide();
         break;
@@ -796,7 +796,7 @@ resetButton.onclick = function(_) {
     FIXED_PRICING_PERCENTAGE: 15,
     MIN_PRICING_PERCENTAGE: 10,
     MAX_PRICING_PERCENTAGE: 20,
-    FIXED_PRICING_ALGORITHM_TYPE: "Fixed",
+    FIXED_PRICING_ALGORITHM_TYPE: "True Absolute",
     FIXED_PRICING_VALUE: 1000,
     MIN_FIXED_PRICING: 200,
     MAX_FIXED_PRICING: 800,

@@ -63,6 +63,15 @@
     font-family: "MuseoSansRounded700", 'Arial Bold', sans-serif;
 }
 
+.version-text {
+    position: absolute;
+    right: 0.5%;
+    bottom: 5%;
+    font-size: 15px;
+    color: white;
+    font-family: "Cafeteria", 'Arial Bold', sans-serif;
+}
+
 .gh-btn{
     padding: 2px 5px 2px 4px;
     color: #333;

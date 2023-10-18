@@ -4,7 +4,7 @@ async function RunAutoPricer(){
     || window.location.href.includes("market.phtml?type=edit")) return;
     
     chrome.storage.local.get({
-        // AutoBuyer Default Variables;
+        // AutoPricer;
         SHOULD_USE_NEON: false,
         PRICING_TYPE: "Percentage",
         SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
@@ -12,10 +12,46 @@ async function RunAutoPricer(){
         FIXED_PRICING_PERCENTAGE: 15,
         MIN_PRICING_PERCENTAGE: 10,
         MAX_PRICING_PERCENTAGE: 20,
-        FIXED_PRICING_ALGORITHM_TYPE: "Fixed",
+        FIXED_PRICING_ALGORITHM_TYPE: "True Absolute",
         FIXED_PRICING_VALUE: 1000,
         MIN_FIXED_PRICING: 200,
         MAX_FIXED_PRICING: 800,
+
+        // Shop Wizard;
+        MIN_WAIT_BAN_TIME: 300000,
+        MAX_WAIT_BAN_TIME: 900000,
+        MIN_WAIT_PER_REFRESH: 10000,
+        MAX_WAIT_PER_REFRESH: 20000,
+        RESUBMITS_PER_ITEM: 5,
+        MIN_WAIT_PER_ACTION: 10000,
+        MAX_WAIT_PER_ACTION: 20000,
+        MIN_RESUBMIT_WAIT_TIME: 10000,
+        MAX_RESUBMIT_WAIT_TIME: 40000,
+        MIN_NEW_SEARCH_WAIT_TIME: 10000,
+        MAX_NEW_SEARCH_WAIT_TIME: 30000,
+        MIN_BLACKLIST_ITEM_WAIT: 10000,
+        MAX_BLACKLIST_ITEM_WAIT: 30000,
+        USE_AUTOPRICING_BLACKLIST: false,
+        USE_BLACKLIST_SW: false,
+        BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
+
+        // Shop Stock Page Settings;
+        MIN_WAIT_AFTER_PRICING_ITEM: 10000,
+        MAX_WAIT_AFTER_PRICING_ITEM: 20000,
+        MIN_SHOP_NAVIGATION_COOLDOWN: 20000,
+        MAX_SHOP_NAVIGATION_COOLDOWN: 40000,
+        MIN_SHOP_SEARCH_FOR_INPUT_BOX: 5000,
+        MAX_SHOP_SEARCH_FOR_INPUT_BOX: 10000,
+        MIN_SHOP_CLICK_UPDATE: 10000,
+        MAX_SHOP_CLICK_UPDATE: 20000,
+        MIN_TYPING_SPEED: 200,
+        MAX_TYPING_SPEED: 500,
+        SHOULD_ENTER_PIN: true,
+        NEOPETS_SECURITY_PIN: "0000",
+        MIN_WAIT_BEFORE_UPDATE: 10000,
+        MAX_WAIT_BEFORE_UPDATE: 20000,
+        MIN_PAGE_LOAD_FAILURES: 10000,
+        MAX_PAGE_LOAD_FAILURES: 20000,
     }, (async function(autobuyerVariables) {
         
         // Destructing the variables extracted from the extension;
@@ -280,14 +316,46 @@ async function RunAutoPricer(){
 
                     // Getting the lowest price;
                     WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
+                        const username = document.querySelector('a.text-muted').textContent;
+                        var ownerName = searchResults.parentNode.firstElementChild;
+
+                        //Don't change the price if it's already the cheapest item in the list;
+                        if(username == ownerName) return;
+
                         // Parsing the string to a number;
                         var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
                         var deductedPrice = 0;
 
-                        if(pricingType == "Percentage"){
+                        switch(pricingType){
+                            case "Percentage":
+                                PercentagePricingCalculation();
+                            break;
+
+                            case "Absolute":
+                                AbsolutePricingCalculation();
+                            break;
+
+                            case "Random":
+                                var options = ["Percentage", "Absolute"];
+                                var randomIndex = Math.floor(Math.random() * options.length - 1);
+
+                                switch(options[randomIndex]){
+                                    case "Percentage":
+                                        PercentagePricingCalculation();
+                                    break;
+
+                                    case "Absolute":
+                                        AbsolutePricingCalculation();
+                                    break;
+                                }
+                            break;
+                        }
+                        
+                        function PercentagePricingCalculation(){
                             switch(percentageAlgorithmType){
                                 case "Zeroes":
                                     deductedPrice = RoundToNearestUnit(bestPrice);
+                                    console.log(RoundToNearestUnit(bestPrice));
                                 break;
 
                                 case "Nines":
@@ -296,7 +364,7 @@ async function RunAutoPricer(){
 
                                 case "Random":
                                     var options = ["Zeroes", "Nines", "Unchanged"];
-                                    var randomIndex = Math.floor(Math.random() * options.length);
+                                    var randomIndex = Math.floor(Math.random() * options.length - 1);
                                     console.log(options[randomIndex]);
 
                                     switch(options[randomIndex]){
@@ -312,6 +380,33 @@ async function RunAutoPricer(){
                             }
                         }
 
+                        function AbsolutePricingCalculation(){
+                            switch(fixedAlgorithmType){
+                                case "True Absolute":
+                                    deductedPrice = Clamp(bestPrice - fixedPricingDeduction, 0, 999999);
+                                break;
+
+                                case "Random Absolute":
+                                    deductedPrice = Clamp(bestPrice - GetRandomInt(minFixedPricingDeduction, maxFixedPricingDeduction), 0, 999999);
+                                break;
+
+                                case "Both":
+                                    var options = ["True Absolute", "Random Absolute"];
+                                    var randomIndex = Math.floor(Math.random() * options.length - 1);
+
+                                    switch(options[randomIndex]){
+                                        case "True Absolute":
+                                            deductedPrice = Clamp(bestPrice - fixedPricingDeduction, 0, 999999);
+                                        break;
+
+                                        case "Random Absolute":
+                                            deductedPrice = Clamp(bestPrice - GetRandomInt(minFixedPricingDeduction, maxFixedPricingDeduction), 0, 999999);
+                                        break;
+                                    }
+                                break;
+                            }
+                        }
+
                         function RoundToNearestUnit(number, hasNines = false, isCustom = false){
                             var zeroesToAdd = number.toString().length - 1;
                             var unitString = "1" + "0".repeat(zeroesToAdd);
@@ -322,7 +417,7 @@ async function RunAutoPricer(){
                         }
 
                         function CalculateThousand(number, unit, subtraction = 0){
-                            Math.floor(number / unit) * unit - subtraction;
+                            return Math.floor(number / unit) * unit - subtraction;
                         }
 
                         function CalculatePercentagePrices(number){
@@ -334,6 +429,7 @@ async function RunAutoPricer(){
                         }
 
                         deductedPrice = Math.floor(deductedPrice);
+                        console.log(deductedPrice);
                         autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
 
                         await setAUTOPRICER_INVENTORY(autoPricingList);

@@ -74,14 +74,12 @@ function injectToolbar() {
             <a href="${infoUrl}">
                 <img  class = "toolbar-icon" src="${infoIconUrl}" alt="Info Icon"> 
             Info </a>
-            <!--<a target="_blank" href="https://forms.gle/zwvVoE7KYxKWJHuU6">Bug Reporting | </a>
-            <a target="_blank" href="https://docs.google.com/document/d/e/2PACX-1vQ1bYmz2o92LG4sVq7CIO7tgCVl-lVreJxpIuDjd9TmFuXX166UZlqQdTWkt7VUyRkF33DvWD8ldVS8/pub">Author's FAQ | </a>
-            <a target="_blank" href="https://chrome.google.com/webstore/detail/neobuyer-main-shop-autobu/gcoedojijoejlngkneocccmnjkbbbfmd">Original Extension</a>-->
         </div>
     </div>
 
     <div class="toolbar-bottom">
         <span class = "notice-text">This extension is not affiliated to Neopets. Names are owned by Neopets. The software is provided as-is. Use it wisely to avoid freezes with your Neopet account(s).</span>
+        <span class = "version-text">${chrome.runtime.getManifest().version}v</span>
     </div>`;
 
     //const toolbarCSS = `<link rel="stylesheet" type="text/css" href="toolbar.css" />`
