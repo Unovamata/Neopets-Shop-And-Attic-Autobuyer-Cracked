@@ -1,216 +1,10 @@
-var isInErrorPage = false;
-
-// If the Neopets page sends an error, reload;
-function HandleServerErrors() {
-    const bodyText = document.body.innerText;
-    var error502 = bodyText.includes("502 Bad Gateway\nopenresty");
-    var error504 = bodyText.includes("504 Gateway Time-out\nopenresty");
-    var captcha = bodyText.includes("Loading site please wait...");
-    var certError = bodyText.includes("NET::ERR_CERT_COMMON_NAME_INVALID")
-    
-    if (error502 || error504 || captcha || certError) {
-        isInErrorPage = true;
-
-        setTimeout(() => {
-            location.reload();
-        }, 10000); // Reload after 10 seconds
-    }
-
-    window.addEventListener('error', function (event) {
-        if (event.message && event.message.includes('net::ERR_CERT_COMMON_NAME_INVALID')) {
-            window.location.reload();
-        }
-    });
-}
-
-HandleServerErrors();
-
-
-//######################################################################################################################################
-
-
-function setSUBMIT_PRICES_PROCESS(value) {
-    chrome.storage.local.set({ SUBMIT_PRICES_PROCESS: value }, function () {});
-}
-
-function getSUBMIT_PRICES_PROCESS(callback) {
-    chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
-        const value = result.SUBMIT_PRICES_PROCESS;
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setSHOP_INVENTORY(value) {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({ SHOP_INVENTORY: value }, function () {
-            resolve();
-        });
-    });
-}
-
-function getSHOP_INVENTORY(callback) {
-    chrome.storage.local.get(['SHOP_INVENTORY'], function (result) {
-        const value = result.SHOP_INVENTORY;
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setINVENTORY_UPDATED(value) {
-    chrome.storage.local.set({ INVENTORY_UPDATED: value }, function () {});
-}
-
-function getINVENTORY_UPDATED(callback) {
-    chrome.storage.local.get(['INVENTORY_UPDATED'], function (result) {
-        const value = result.INVENTORY_UPDATED;
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setSTART_INVENTORY_PROCESS(value) {
-    chrome.storage.local.set({ START_INVENTORY_PROCESS: value }, function () {});
-}
-
-function getSTART_INVENTORY_PROCESS(callback) {
-    chrome.storage.local.get(['START_INVENTORY_PROCESS'], function (result) {
-        const value = result.START_INVENTORY_PROCESS;
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setSTART_AUTOPRICING_PROCESS(value) {
-    chrome.storage.local.set({ START_AUTOPRICING_PROCESS: value }, function () {});
-}
-
-function getSTART_AUTOPRICING_PROCESS(trueCallback, falseCallback) {
-    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
-        const value = result.START_AUTOPRICING_PROCESS;
-
-        if (value === true && typeof trueCallback === 'function') {
-            trueCallback();
-        } else if (value === false && typeof falseCallback === 'function') {
-            falseCallback();
-        }
-    });
-}
-
-function setAUTOPRICER_INVENTORY(value) {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({ AUTOPRICER_INVENTORY: value }, function () {
-            resolve();
-        });
-    });
-}
-
-function getAUTOPRICER_INVENTORY(callback) {
-    chrome.storage.local.get(['AUTOPRICER_INVENTORY'], function (result) {
-        const value = result.AUTOPRICER_INVENTORY;
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function getSUBMIT_PRICES_PROCESS(callback) {
-    chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
-        const value = result.SUBMIT_PRICES_PROCESS;
-
-        if (value === undefined || value === null) {
-            setSUBMIT_PRICES_PROCESS(false);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setNAVIGATE_TO_NEXT_PAGE(value) {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({ NAVIGATE_TO_NEXT_PAGE: value }, function () {
-            resolve();
-        });
-    });
-    
-}
-
-function getNAVIGATE_TO_NEXT_PAGE(callback) {
-    chrome.storage.local.get(['NAVIGATE_TO_NEXT_PAGE'], function (result) {
-        const value = result.NAVIGATE_TO_NEXT_PAGE;
-
-        if (value === undefined || value === null) {
-            setNAVIGATE_TO_NEXT_PAGE(true);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setNEXT_PAGE_INDEX(value) {
-    chrome.storage.local.set({ NEXT_PAGE_INDEX: value }, function () {});
-}
-
-function getNEXT_PAGE_INDEX(callback) {
-    chrome.storage.local.get(['NEXT_PAGE_INDEX'], function (result) {
-        const value = result.NEXT_PAGE_INDEX;
-
-        if (value === undefined || value === null) {
-            setNEXT_PAGE_INDEX(1);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setCURRENT_PRICING_INDEX(value) {
-    chrome.storage.local.set({ CURRENT_PRICING_INDEX: value }, function () {});
-}
-
-function getCURRENT_PRICING_INDEX(callback) {
-    chrome.storage.local.get(['CURRENT_PRICING_INDEX'], function (result) {
-        const value = result.CURRENT_PRICING_INDEX;
-
-        if(value === undefined || value === null) value = 0;
-
-        if (typeof callback === 'function') {
-            callback(typeof value === 'undefined' ? 0 : value);
-        }
-    });
-}
-
-function setAUTOPRICER_STATUS(value) {
-    chrome.storage.local.set({ AUTOPRICER_STATUS: value }, function () {});
-}
-
-
-//######################################################################################################################################
-
-
-RunAutoPricer();
-
 async function RunAutoPricer(){
     if(window.location.href.includes("market.phtml?type=sales") 
     || window.location.href.includes("market.phtml?type=till")
     || window.location.href.includes("market.phtml?type=edit")) return;
     
     chrome.storage.local.get({
-        // AutoPricer;
+        // AutoBuyer Default Variables;
         SHOULD_USE_NEON: false,
         PRICING_TYPE: "Percentage",
         SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
@@ -490,22 +284,64 @@ async function RunAutoPricer(){
                         var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
                         var deductedPrice = 0;
 
-                        // Subtracting a percentage of the price, so it's competitive with other results;
-                        if(isRandomPercentage) {
-                            deductedPrice = bestPrice * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
-                        } else { // If the subtracted percentage is fixed;
-                            deductedPrice = bestPrice * (1 - (fixedPercentageDeduction * 0.01));
+                        if(pricingType == "Percentage"){
+                            switch(percentageAlgorithmType){
+                                case "Zeroes":
+                                    deductedPrice = RoundToNearestUnit(bestPrice);
+                                break;
+
+                                case "Nines":
+                                    deductedPrice = RoundToNearestUnit(bestPrice, true);
+                                break;
+
+                                case "Random":
+                                    var options = ["Zeroes", "Nines", "Unchanged"];
+                                    var randomIndex = Math.floor(Math.random() * options.length);
+                                    console.log(options[randomIndex]);
+
+                                    switch(options[randomIndex]){
+                                        case "Zeroes": deductedPrice = RoundToNearestUnit(bestPrice); break;
+                                        case "Nines": deductedPrice = RoundToNearestUnit(bestPrice, true); break;
+                                        case "Unchanged": CalculatePercentagePrices(bestPrice); break;
+                                    }
+                                break;
+
+                                case "Unchanged":
+                                    CalculatePercentagePrices(bestPrice);
+                                break;
+                            }
+                        }
+
+                        function RoundToNearestUnit(number, hasNines = false, isCustom = false){
+                            var zeroesToAdd = number.toString().length - 1;
+                            var unitString = "1" + "0".repeat(zeroesToAdd);
+                            var unit = Number(unitString);
+
+                            if(hasNines) return CalculateThousand(number, unit, 1);
+                            return CalculateThousand(number, unit);
+                        }
+
+                        function CalculateThousand(number, unit, subtraction = 0){
+                            Math.floor(number / unit) * unit - subtraction;
+                        }
+
+                        function CalculatePercentagePrices(number){
+                            if(isRandomPercentage) {
+                                return number * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
+                            } else { // If the subtracted percentage is fixed;
+                                return number * (1 - (fixedPercentageDeduction * 0.01));
+                            }
                         }
 
                         deductedPrice = Math.floor(deductedPrice);
-
-                        // Updating the price list;
                         autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
+
                         await setAUTOPRICER_INVENTORY(autoPricingList);
 
                         UpdateShopInventoryWithValue(itemToSearch, deductedPrice);
 
                         setAUTOPRICER_STATUS(`${nameToSearch} Best Price Found! Priced at ${bestPrice}...`);
+                        
                     });
 
                     // Increment currentIndex
@@ -846,3 +682,6 @@ async function RunAutoPricer(){
         }
     }));
 }
+
+// Exectute AutoPricer;
+RunAutoPricer();

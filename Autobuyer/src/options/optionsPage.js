@@ -153,22 +153,28 @@ function showOrHide() {
     $("#USE_BLACKLIST_SW").is(":checked") ? $(".blacklist-sw").show() : $(".blacklist-sw").hide();
     $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
     
-    if($("#PRICING_TYPE").val() === "Absolute"){
-        $(".percentage").hide();
-        $(".absolute").show();
+    switch($("#PRICING_TYPE").val()){
+        case "Absolute":
+            $(".percentage").hide();
+            $(".absolute").show();
 
-        HideFixedPricingSections();
-    } else if($("#PRICING_TYPE").val() === "Percentage"){
-        $(".percentage").show();
-        $(".absolute").hide();
-        
-        HidePricingPercentageSections();
-    } else {
-        $(".percentage").show();
-        $(".absolute").show();
+            HideFixedPricingSections();
+        break;
 
-        HidePricingPercentageSections();
-        HideFixedPricingSections();
+        case "Percentage":
+            $(".percentage").show();
+            $(".absolute").hide();
+            
+            HidePricingPercentageSections();
+        break;
+
+        default:
+            $(".percentage").show();
+            $(".absolute").show();
+
+            HidePricingPercentageSections();
+            HideFixedPricingSections();
+        break;
     }
 }
 
@@ -183,15 +189,21 @@ function HidePricingPercentageSections(){
 }
 
 function HideFixedPricingSections(){
-    if($("#FIXED_PRICING_ALGORITHM_TYPE").val() === "Fixed"){
-        $(".fixed-absolute").show();
-        $(".random-absolute").hide();
-    }  else if($("#FIXED_PRICING_ALGORITHM_TYPE").val() === "Random Absolute"){
-        $(".random-absolute").show();
-        $(".fixed-absolute").hide();
-    } else {
-        $(".random-absolute").show();
-        $(".fixed-absolute").show();
+    switch($("#FIXED_PRICING_ALGORITHM_TYPE").val()){
+        case "Fixed":
+            $(".fixed-absolute").show();
+            $(".random-absolute").hide();
+        break;
+
+        case "Random Absolute":
+            $(".random-absolute").show();
+            $(".fixed-absolute").hide();
+        break;
+
+        default:
+            $(".random-absolute").show();
+            $(".fixed-absolute").show();
+        break;
     }
 }
 
@@ -685,6 +697,7 @@ $("#PRICING_TYPE").on("change", (function() {
 
 $("#PERCENTAGE_PRICING_ALGORITHM_TYPE").on("change", (function() {
     setPERCENTAGE_PRICING_ALGORITHM_TYPE($("#PERCENTAGE_PRICING_ALGORITHM_TYPE").val())
+    showOrHide();
 }))
 
 $("#FIXED_PRICING_ALGORITHM_TYPE").on("change", (function() {

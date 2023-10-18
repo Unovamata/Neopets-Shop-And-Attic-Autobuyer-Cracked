@@ -13,12 +13,8 @@ var currentPage = 1;
 
 
 function NumberWithCommas(e) {
-    return e.toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return e.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
-
-
-
 
 
 // Calculate the total number of pages
