@@ -68,8 +68,8 @@ body {
 }
 
 input,
-select,
-textarea {
+textarea,
+select {
     border-radius: 15px;
     border-color: #2196F3;
     font-size: 18px;
@@ -83,6 +83,7 @@ textarea {
 
 input {
     width: 120px;
+    text-align: center;
 }
 
 input:checked+.slider {
@@ -97,6 +98,21 @@ input:checked+.slider:before {
     -webkit-transform: translateX(19px);
     -ms-transform: translateX(19px);
     transform: translateX(19px);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+select {
+    padding: 10px;
+    border: 2px solid #2196F3;
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
 }
 
 .switch {
@@ -204,17 +220,6 @@ table td {
 
 b {
     color: #2196F3;
-}
-
-input{
-    text-align: center;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
 }
 
 .notation {

@@ -83,6 +83,20 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Pricing Type:
+                                    <span class="tooltiptext">
+                                        If enabled, it automatically prices your items using the lowest Shop Wizard price and subtracts a random percentage of the price.
+                                    </span>
+                                </td>
+                                <td>
+                                    <select id="PRICING_TYPE">
+                                        <option value="Percentage">Percentage</option>
+                                        <option value="Absolute">Absolute</option>
+                                        <option value="Random">Random</option>
+                                    </select>                                        
+                                </td>
+                            </tr>
+                            <tr class="percentage">
                                 <td><b>Random</b> Pricing Percentages:
                                     <span class="tooltiptext">
                                         If enabled, it automatically prices your items using the lowest Shop Wizard price and subtracts a random percentage of the price.
@@ -95,7 +109,22 @@
                                     </label>
                                 </td>
                             </tr>
-                            <tr class="fixed-percentage">
+                            <tr class="percentage">
+                                <td>Pricing Algorithm Type:
+                                    <span class="tooltiptext">
+                                        If enabled, it automatically prices your items using the lowest Shop Wizard price and subtracts a random percentage of the price.
+                                    </span>
+                                </td>
+                                <td>
+                                    <select id="PRICING_ALGORITHM_TYPE">
+                                        <option value="Zeroes">Zeroes</option>
+                                        <option value="Nines">Nines</option>
+                                        <option value="Unchanged">Unchanged</option>
+                                        <option value="Random">Random</option>
+                                    </select>                                        
+                                </td>
+                            </tr>
+                            <tr class="fixed-percentage percentage">
                                 <td><b>Fixed</b> Pricing Percentage:
                                     <span class="tooltiptext">
                                         The percentage subtracted from the item's lowest price.<br><br>
@@ -104,7 +133,7 @@
                                 </td>
                                 <td><input type="number" min="0" max="100" id="FIXED_PRICING_PERCENTAGE"></input><span class="notation">%</span></td>
                             </tr>
-                            <tr class="random-percentage">
+                            <tr class="random-percentage percentage">
                                 <td><b>Minimum</b> Pricing Percentage: 
                                     <span class="tooltiptext">
                                         The minimum random percentage range subtracted from the item's lowest price.<br><br>
@@ -113,7 +142,7 @@
                                 </td>
                                 <td><input type="number" min="0" max="100" id="MIN_PRICING_PERCENTAGE"></input><span class="notation">%</span></td>
                             </tr>
-                            <tr class="random-percentage">
+                            <tr class="random-percentage percentage">
                                 <td><b>Maximum</b> Pricing Percentage: 
                                     <span class="tooltiptext">
                                         The  minimum random percentage range subtracted from the item's lowest price.<br><br>
@@ -121,6 +150,61 @@
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="100" id="MAX_PRICING_PERCENTAGE"></input><span class="notation">%</span></td>
+                            </tr>
+
+                            <tr class="absolute">
+                                <td><b>Random</b> Fixed Pricing:
+                                    <span class="tooltiptext">
+                                        If enabled, it automatically prices your items using the lowest Shop Wizard price and subtracts a random percentage of the price.
+                                    </span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="SHOULD_USE_RANDOM_FIXED_RANGES_FOR_PRICING" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="absolute">
+                                <td>Pricing Algorithm Type:
+                                    <span class="tooltiptext">
+                                        If enabled, it automatically prices your items using the lowest Shop Wizard price and subtracts a random percentage of the price.
+                                    </span>
+                                </td>
+                                <td>
+                                    <select id="PRICING_END_NUMBER_TYPE">
+                                        <option value="Absolute">Absolute</option>
+                                        <option value="Random Absolute">Random Absolute</option>
+                                        <option value="Both">Both</option>
+                                    </select>                                        
+                                </td>
+                            </tr>
+                            <tr class="fixed-absolute absolute">
+                                <td><b>Fixed</b> Neopoint Pricing Subtraction:
+                                    <span class="tooltiptext">
+                                        The percentage subtracted from the item's lowest price.<br><br>
+                                        Lowest Price = Price - Price Percentage.
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="FIXED_PRICING_VALUE"></input><span class="notation">NPs</span></td>
+                            </tr>
+                            <tr class="random-absolute absolute">
+                                <td><b>Minimum</b> Neopoint Pricing Subtraction: 
+                                    <span class="tooltiptext">
+                                        The minimum random percentage range subtracted from the item's lowest price.<br><br>
+                                        Lowest Price = Price - Price Percentage.
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="MIN_FIXED_PRICING"></input><span class="notation">NPs</span></td>
+                            </tr>
+                            <tr class="random-absolute absolute">
+                                <td><b>Maximum</b> Neopoint Pricing Subtraction: 
+                                    <span class="tooltiptext">
+                                        The  minimum random percentage range subtracted from the item's lowest price.<br><br>
+                                        Lowest Price = Price - Price Percentage.
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="MAX_FIXED_PRICING"></input><span class="notation">NPs</span></td>
                             </tr>
                         </tbody>
                     </table>

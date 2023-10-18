@@ -152,13 +152,21 @@ function showOrHide() {
     $("#SHOULD_ENTER_PIN").is(":checked") ? $(".enter-pin").show() : $(".enter-pin").hide();
     $("#USE_BLACKLIST_SW").is(":checked") ? $(".blacklist-sw").show() : $(".blacklist-sw").hide();
     $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
-
-    if($("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked")){
-        $(".random-percentage").show(); 
-        $(".fixed-percentage").hide(); 
+    
+    if($("#PRICING_TYPE").val() === "Absolute"){
+        $(".percentage").hide();
+        $(".absolute").show();
     } else {
-        $(".random-percentage").hide();
-        $(".fixed-percentage").show(); 
+        $(".percentage").show();
+        $(".absolute").hide();
+
+        if($("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked")){
+            $(".random-percentage").show(); 
+            $(".fixed-percentage").hide(); 
+        } else {
+            $(".random-percentage").hide();
+            $(".fixed-percentage").show(); 
+        }
     }
 }
 
@@ -400,14 +408,27 @@ $("#USE_BLACKLIST")
 
 //######################################################################################################################################
 
+function setSHOULD_USE_NEON(value) { chrome.storage.local.set({ SHOULD_USE_NEON: value }, (function () {})) }
+
+function setPRICING_TYPE(value) { chrome.storage.local.set({ PRICING_TYPE: value }, (function () {})) }
 
 function setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: value }, (function () {})) }
+
+function setPRICING_ALGORITHM_TYPE(value) { chrome.storage.local.set({ PRICING_ALGORITHM_TYPE: value }, (function () {})) }
 
 function setFIXED_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ FIXED_PRICING_PERCENTAGE: Number(value) }, (function () {})) }
 
 function setMIN_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ MIN_PRICING_PERCENTAGE: Number(value) }, (function () {})) }
 
 function setMAX_PRICING_PERCENTAGE(value) { chrome.storage.local.set({ MAX_PRICING_PERCENTAGE: Number(value) }, (function () {})) }
+
+function setSHOULD_USE_RANDOM_FIXED_RANGES_FOR_PRICING(value) { chrome.storage.local.set({ SHOULD_USE_RANDOM_FIXED_RANGES_FOR_PRICING: value }, (function () {})) }
+
+function setFIXED_PRICING_VALUE(value) { chrome.storage.local.set({ FIXED_PRICING_VALUE: Number(value) }, (function () {})) }
+
+function setMIN_FIXED_PRICING(value) { chrome.storage.local.set({ MIN_FIXED_PRICING: Number(value) }, (function () {})) }
+
+function setMAX_FIXED_PRICING(value) { chrome.storage.local.set({ MAX_FIXED_PRICING: Number(value) }, (function () {})) }
 
 function setMIN_WAIT_PER_REFRESH(value) { chrome.storage.local.set({ MIN_WAIT_PER_REFRESH: Number(value) }, (function () {})) }
 
@@ -462,8 +483,6 @@ function setNEOPETS_SECURITY_PIN(value) { chrome.storage.local.set({ NEOPETS_SEC
 function setMIN_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({ MIN_WAIT_BEFORE_UPDATE: value }, (function () {})) }
 
 function setMAX_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({ MAX_WAIT_BEFORE_UPDATE: value }, (function () {})) }
-
-function setSHOULD_USE_NEON(value) { chrome.storage.local.set({ SHOULD_USE_NEON: value }, (function () {})) }
 
 function setMIN_WAIT_BAN_TIME(value) { chrome.storage.local.set({ MIN_WAIT_BAN_TIME: value }, (function () {})) }
 
@@ -634,6 +653,14 @@ $("#MAX_PAGE_LOAD_FAILURES").bind("input propertychange", (function() {
     setMAX_PAGE_LOAD_FAILURES($("#MAX_PAGE_LOAD_FAILURES").val())
 }))
 
+$("#PRICING_TYPE").on("change", (function() {
+    setPRICING_TYPE($("#PRICING_TYPE").val())
+    showOrHide();
+}))
+
+$("#PRICING_ALGORITHM_TYPE").on("change", (function() {
+    setPRICING_ALGORITHM_TYPE($("#PRICING_ALGORITHM_TYPE").val())
+}))
 
 
 //######################################################################################################################################
@@ -708,7 +735,9 @@ resetButton.onclick = function(_) {
 
     // AutoPricer;
     SHOULD_USE_NEON: false,
+    PRICING_TYPE: "Percentage",
     SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
+    PRICING_ALGORITHM_TYPE: "Zeroes",
     FIXED_PRICING_PERCENTAGE: 15,
     MIN_PRICING_PERCENTAGE: 10,
     MAX_PRICING_PERCENTAGE: 20,
@@ -804,7 +833,9 @@ resetButton.onclick = function(_) {
 
         // AutoPricer;
         $("#SHOULD_USE_NEON").prop("checked", _.SHOULD_USE_NEON),
+        $("#PRICING_TYPE").val(_.PRICING_TYPE);
         $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING),
+        $("#PRICING_ALGORITHM_TYPE").val(_.PRICING_ALGORITHM_TYPE),
         $("#FIXED_PRICING_PERCENTAGE").val(_.FIXED_PRICING_PERCENTAGE),
         $("#MIN_PRICING_PERCENTAGE").val(_.MIN_PRICING_PERCENTAGE),
         $("#MAX_PRICING_PERCENTAGE").val(_.MAX_PRICING_PERCENTAGE),
