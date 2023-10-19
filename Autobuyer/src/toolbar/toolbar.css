@@ -94,6 +94,7 @@
     cursor: pointer;
     border-radius: 3px;
 
+    font-family: 'Cafeteria', sans-serif;
     background-color: #eee;
     background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fcfcfc),to(#eee));
     background-image: linear-gradient(to bottom,#fcfcfc 0,#eee 100%);

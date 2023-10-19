@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>NeoBuyer+ Information</title>
-        <link rel="stylesheet" type="text/css" href="table.css" />
-        <link rel="stylesheet" type="text/css" href="options.css" />
+        <link rel="stylesheet" type="text/css" href="../table.css" />
+        <link rel="stylesheet" type="text/css" href="../options.css" />
         <style>
 
         .button {
@@ -25,7 +25,7 @@
         </style>
     </head>
 
-	<script src="../toolbar.js"></script>
+	<script src="../../toolbar.js"></script>
 
     <body>
         <div class="center">
@@ -34,12 +34,8 @@
 
             <center>
                 <div class="category-info">Save & Load Configuration</div>
-                <a href="https://docs.google.com/document/d/e/2PACX-1vQ1bYmz2o92LG4sVq7CIO7tgCVl-lVreJxpIuDjd9TmFuXX166UZlqQdTWkt7VUyRkF33DvWD8ldVS8/pub" target="_blank">
-                    <button class="autobuyerButton">Save Preset</button>
-                </a>
-                <a href="https://docs.google.com/document/d/e/2PACX-1vQ1bYmz2o92LG4sVq7CIO7tgCVl-lVreJxpIuDjd9TmFuXX166UZlqQdTWkt7VUyRkF33DvWD8ldVS8/pub" target="_blank">
-                    <button class="autobuyerButton">Load Preset</button>
-                </a>
+                <button class="autobuyerButton" id="save">Save Preset</button> 
+                <button class="autobuyerButton" id="load">Load Preset</button>
 
                 <!--<div class="category-info">Tools</div>
                 
@@ -58,7 +54,7 @@
                 
 
                 <div class="category-info">Miscellaneous</div>
-                <a href="../options/faq.html" target="_blank">
+                <a href="faq.html" target="_blank">
                     <button class="autobuyerButton"> NeoBuyer+'s FAQ </button>
                 </a>
                 <a href="https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd" target="_blank">
@@ -70,4 +66,6 @@
             </center>
         </div>
     </body>
+
+    <script src="configPresets.js"></script>
 </html>

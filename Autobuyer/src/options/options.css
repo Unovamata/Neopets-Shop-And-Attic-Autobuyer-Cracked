@@ -68,6 +68,41 @@ a{
     font-family: 'Cafeteria', sans-serif;
 }
 
+.faq-question {
+    font-size: 25px;
+    color: #2196F3;
+    text-decoration: italic;
+    font-family: 'Cafeteria', sans-serif;
+    text-align: left;
+    margin-left: 20%;
+    margin-bottom: 1%;
+    max-width: 60%;
+}
+  
+.faq-answer {
+    font-size: 14px;
+    font-family: "MuseoSansRounded700", 'Arial Bold', sans-serif;
+    text-align: left;
+    margin-left: 23%;
+    max-width: 55%;
+    text-align: justify;
+    line-height: 2;
+    margin-bottom: 3%;
+}
+  
+.faq-answer:before {
+    content: '\2022'; /* Unicode character for a bullet point */
+    text-indent: -26px;
+    display: inline-block;
+    width: 4%;
+    color: #2196F3;
+}
+
+.gh-btn-star {
+    position: absolute;
+    left:50%;
+}
+
 .autosaved,
 .donate {
     font-size: 14px;
@@ -245,6 +280,18 @@ b {
 .loading {
     font-family: 'Cafeteria', sans-serif;
     font-size: 20px;
+}
+
+.class-Name {
+    width: 300px;
+}
+
+.class-Rarity {
+    width: 10px;
+}
+
+.class-Price {
+    width: 200px;
 }
 
 .class-JellyNeo {

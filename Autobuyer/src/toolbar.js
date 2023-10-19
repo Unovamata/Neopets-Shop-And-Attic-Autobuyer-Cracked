@@ -28,7 +28,7 @@ const autopricerUrl = `${srcPath}/options/Autopricer/autopricer.html`;
 const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
-const infoUrl = `${srcPath}/options/info.html`;
+const infoUrl = `${srcPath}/options/Tools/info.html`;
 
 
 // content.js

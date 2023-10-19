@@ -71,6 +71,7 @@ function DisplayTableData(dataArray) {
     var tableContainer = document.getElementById("table-container");
 
     if (dataArray.length === 0) {
+        tableContainer.classList.add("rarity-info");
         tableContainer.textContent = "No items purchased yet.";
         clearButton.setAttribute("disabled", true);
         return;
@@ -260,7 +261,7 @@ function ProcessPurchaseHistory(forceUpdateHistory) {
         if (forceUpdateHistory || currentHistorySize != historySize) {
             currentHistorySize = historySize;
             DisplayTableData(purchaseManager);
-            Analytics(purchaseManager, itemData, totalProfit)
+            //Analytics(purchaseManager, itemData, totalProfit)
         }
     }))
 }
@@ -627,10 +628,10 @@ function wrapper() {
     } 
     
     //On click, toggle analytics and its containers;
-    document.getElementById("analytics").onclick = function(e) {
+    /*document.getElementById("analytics").onclick = function(e) {
         window.alert("Feature currently unavailable.\n\nThanks for your patience!");
         //ToggleTabs("analytics", "analytics-container"), ProcessPurchaseHistory(true)
-    }
+    }*/
     
     //Toggling the main tab;
     ToggleTabs("table", "table-container");
