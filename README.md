@@ -1,9 +1,12 @@
-![alt text](https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/icons/logo.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/icons/logo.png" />
+</p>
 
-# [Neopets Shop & Attic Highlighter & Autobuyer Crack](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "Neopets Shop & Attic Highlighter & Autobuyer")
-> Code optimized and adapted by: [Unovamata](https://github.com/Unovamata "Unovamata"). Original developer: autobuyerneopets.
+# [NeoBuyer+ / Neopets Shop & Attic Highlighter & Autobuyer Crack](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "Neopets Shop & Attic Highlighter & Autobuyer")
+> Code optimized and improved by: [Unovamata](https://github.com/Unovamata "Unovamata"). Original developer: autobuyerneopets.
 
-I have been using this Auto-Buyer tool since its release. It supports lists and specific shops to snipe. I removed the pay-wall needed, making it available to all. I will continue to optimize the speed and buy-times offered by the extension.
+I have been using this Auto-Buyer tool since its release. From auto-pricing to auto-buying, I removed the pay-wall imposed by the original developer, NeoBuyer+ is 
+a free project, with the mission of making restocking accessible to all Neopets users.
 
 **Table of Contents**
 
@@ -14,16 +17,17 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 * [End Notes](#end-notes)
 
 ## How to install
-- Download the extension files and save them to a location on your computer.
-- Open Google Chrome.
+- Download the [Latest Version of NeoBuyer+](github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest) from the releases page and save these files to any location on your computer.
+- Extract the downloaded files from the compressed .ZIP / .RAR package.
+- Open your Chronium based browser.
 - Click on the three dots in the upper-right corner of the screen to open the Chrome menu.
 - Select "More tools" from the drop-down menu, then click on "Extensions."
 - Make sure the "Developer mode" option is turned on by toggling the switch in the upper-right corner of the screen.
 - Click the "Load unpacked" button in the upper-left corner of the screen.
-- In the file explorer window that appears, navigate to the location where you saved the extension files and select the folder containing them.
+- In the file explorer window, navigate to the location where you saved the extension files and select the folder containing them.
 - Click the "Select Folder" button to install the extension.
 - The extension will now appear in your list of installed extensions in Google Chrome.
-- Navigate to the option page the Neobuyer has and configure the parameters you want to use.
+- Navigate to the options page the Neobuyer has and configure the parameters you want to use after acknowledging the warning that triggers as soon as the extension is installed.
 
 > **Use the tool at your own risk, do not be greedy.** Research legitimate times and adjust settings based on your ping. Lower the Autobuyer's times if you lose out on too many items, but use the tool responsibly.
 
@@ -31,9 +35,9 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 
 - I have not yet received any warnings or experienced account freezing while using this AutoBuyer extension. However, I would suggest some tips and guidelines to help prevent potential issues with Neopets.
 - Firstly, it's essential not to be too greedy while restocking. It's recommended not to go on ABing for more than 8 hours at a stretch as it may draw Neopets' attention towards your account. So, let's use common sense and not overdo it.
-- In case you fail to buy an expensive item, don't worry. It's better to keep a low profile and aim for normal items that can yield a profit of at least 5-10K NP. You can also choose shops with high profitability or low competition.
+- In case you fail to buy an expensive item, don't worry. It's better to keep a low profile and aim for less profitable items. It's not what you stock but how many items you stock. You can choose shops with high profitability or low competition.
 - Before activating the ABer, make sure to check all your options carefully. Most of the options are set in milliseconds, so it's best to be cautious while setting them up.
-- To search for items that you want to buy from specific shops and create your own custom item sniping list, you can use JellyNeo's item database and play around with the filters their database offers.
+- To search for items that you want to buy from specific shops and create your own custom item sniping list, you can use JellyNeo's item databases and play around with the filters their database offers. In the future, we will offer a tool that allows for the extraction of this data so you can parse correctly in the extension.
 
 ## New Features
 
@@ -44,6 +48,8 @@ I have been using this Auto-Buyer tool since its release. It supports lists and 
 - Shop restock timer.
 - Daily update checker.
 - Better Quickstock.
+- Save and load configuration presets.
+- Almost Abandoned Attic auto-buyer.
 
 ## Included Features
 
@@ -66,4 +72,4 @@ Based on the original developer:
 
 ## End Notes
 
-In the future I plan to add better interfaces and optimizing the code in general to make it faster while ABing, as always thanks to the [original developer.](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "original developer.")
+As always thanks to the [original developer.](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "original developer.") that allowed NeoBuyer to work as a foundation for this project.
