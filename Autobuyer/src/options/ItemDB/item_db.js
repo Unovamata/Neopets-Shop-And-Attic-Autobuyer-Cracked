@@ -170,5 +170,19 @@ document.getElementById("next-button").addEventListener("click", () => {
     LoadCurrentPage();
 });
 
+// Event listener for next button
+document.getElementById("first-button").addEventListener("click", () => {
+    currentPage = 1;
+
+    LoadCurrentPage();
+});
+
+// Event listener for next button
+document.getElementById("last-button").addEventListener("click", () => {
+    currentPage = totalPages;
+
+    LoadCurrentPage();
+});
+
 // Initial load
 LoadCurrentPage();

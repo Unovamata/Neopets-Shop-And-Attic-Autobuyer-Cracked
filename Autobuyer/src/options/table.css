@@ -1,10 +1,10 @@
 /* Apply style to the entire table */
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 80%;
     border-radius: 10px;
     border-spacing: 0px;
-    padding: 30px 0px;
+    padding: 40px 0px;
 }
 
 /* Apply style to table headers */

@@ -239,8 +239,8 @@ function topLevelTurbo() {
                 bannerElementID = "qpkzsoynerzxsqw",
                 minSoldOutRefresh = 50,
                 maxSoldOutRefresh = 100,
-                minAddedToInventoryRefresh = 5e3,
-                maxAddedToInventoryRefresh = 5100,
+                minInventoryRefreshInterval = 5000; // 5 seconds
+                maxInventoryRefreshInterval = 5100; // 5.1 seconds
                 minHagglingTimeout = minOCRDetectionInterval / 2,
                 maxHagglingTimeout = maxOCRDetectionInterval / 2,
                 isRunningOnScheduledTime = false,

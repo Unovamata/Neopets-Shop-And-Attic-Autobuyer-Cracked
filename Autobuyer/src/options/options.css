@@ -16,13 +16,13 @@ body {
 }
 
 .center {
-    width: 80%;
-    height: calc(100vh - 50px);
+    width: 100%;
+    height: calc(100vh - 100px);
     position: absolute;
     left: 0;
     right: 0;
-    top: 50px;
-    bottom: 0;
+    top: 15.7%;
+    bottom: 15%;
     margin: auto;
     max-width: 100%;
     max-height: 100%;
@@ -49,6 +49,14 @@ body {
 }
 
 .category-info{
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #2196F3;
+    text-decoration: italic;
+    font-family: 'Cafeteria', sans-serif;
+}
+
+.rarity-info{
     font-size: 20px;
     margin-bottom: 30px;
     color: #2196F3;
@@ -228,4 +236,17 @@ b {
     font-family: 'Cafeteria', sans-serif;
     padding-left: 7px;
     padding-right: 7px;
+}
+
+.loading {
+    font-family: 'Cafeteria', sans-serif;
+    font-size: 20px;
+}
+
+.class-JellyNeo {
+    width: 20px;
+}
+
+.class-DateTime {
+    width: 100px;
 }
