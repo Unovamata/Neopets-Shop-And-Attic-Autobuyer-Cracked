@@ -50,7 +50,7 @@ table td {
 
 /* Properties specific to .button */
 .button {
-    margin: 10px 40px; /* Add space to the top and bottom, and center horizontally */    
+    margin: 10px 10px; /* Add space to the top and bottom, and center horizontally */    
     height: 40px;
     font-size: 20px;
 }

@@ -229,6 +229,9 @@ async function RunAutoPricer(){
 
             setAUTOPRICER_STATUS("Navigating to SW...");
 
+            const usernameElement = document.querySelector('a.text-muted');
+            const username = usernameElement.textContent;
+
             getAUTOPRICER_INVENTORY(function (list) {
                 // Check the currently priced item;
                 getCURRENT_PRICING_INDEX(async function (currentPricingIndex) {
@@ -316,11 +319,13 @@ async function RunAutoPricer(){
 
                     // Getting the lowest price;
                     WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
-                        const username = document.querySelector('a.text-muted').textContent;
-                        var ownerName = searchResults.parentNode.firstElementChild;
+                        var ownerName = searchResults.parentNode.firstElementChild.textContent;
 
                         //Don't change the price if it's already the cheapest item in the list;
-                        if(username == ownerName) return;
+                        if(username == ownerName){
+                            setAUTOPRICER_STATUS(`${username} Already has the Lowest Price Available! Skipping...`);
+                            return;
+                        }
 
                         // Parsing the string to a number;
                         var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
@@ -336,10 +341,10 @@ async function RunAutoPricer(){
                             break;
 
                             case "Random":
-                                var options = ["Percentage", "Absolute"];
-                                var randomIndex = Math.floor(Math.random() * options.length - 1);
+                                var pricingAlgorithmOptions = ["Percentage", "Absolute"];
+                                var randomIndex = GetRandomInt(0, pricingAlgorithmOptions.length);
 
-                                switch(options[randomIndex]){
+                                switch(pricingAlgorithmOptions[randomIndex]){
                                     case "Percentage":
                                         PercentagePricingCalculation();
                                     break;
@@ -355,7 +360,6 @@ async function RunAutoPricer(){
                             switch(percentageAlgorithmType){
                                 case "Zeroes":
                                     deductedPrice = RoundToNearestUnit(bestPrice);
-                                    console.log(RoundToNearestUnit(bestPrice));
                                 break;
 
                                 case "Nines":
@@ -363,19 +367,18 @@ async function RunAutoPricer(){
                                 break;
 
                                 case "Random":
-                                    var options = ["Zeroes", "Nines", "Unchanged"];
-                                    var randomIndex = Math.floor(Math.random() * options.length - 1);
-                                    console.log(options[randomIndex]);
+                                    var percentagePricingOptions = ["Zeroes", "Nines", "Unchanged"];
+                                    var randomIndex = GetRandomInt(0, percentagePricingOptions.length);
 
-                                    switch(options[randomIndex]){
+                                    switch(percentagePricingOptions[randomIndex]){
                                         case "Zeroes": deductedPrice = RoundToNearestUnit(bestPrice); break;
                                         case "Nines": deductedPrice = RoundToNearestUnit(bestPrice, true); break;
-                                        case "Unchanged": CalculatePercentagePrices(bestPrice); break;
+                                        case "Unchanged": deductedPrice = CalculatePercentagePrices(bestPrice); break;
                                     }
                                 break;
 
                                 case "Unchanged":
-                                    CalculatePercentagePrices(bestPrice);
+                                    deductedPrice = CalculatePercentagePrices(bestPrice);
                                 break;
                             }
                         }
@@ -391,10 +394,10 @@ async function RunAutoPricer(){
                                 break;
 
                                 case "Both":
-                                    var options = ["True Absolute", "Random Absolute"];
-                                    var randomIndex = Math.floor(Math.random() * options.length - 1);
+                                    var absolutePricingOptions = ["True Absolute", "Random Absolute"];
+                                    var randomIndex = GetRandomInt(0, absolutePricingOptions.length);
 
-                                    switch(options[randomIndex]){
+                                    switch(absolutePricingOptions[randomIndex]){
                                         case "True Absolute":
                                             deductedPrice = Clamp(bestPrice - fixedPricingDeduction, 0, 999999);
                                         break;
@@ -417,7 +420,7 @@ async function RunAutoPricer(){
                         }
 
                         function CalculateThousand(number, unit, subtraction = 0){
-                            return Math.floor(number / unit) * unit - subtraction;
+                            return Math.round(number / unit) * unit - subtraction;
                         }
 
                         function CalculatePercentagePrices(number){
@@ -429,7 +432,6 @@ async function RunAutoPricer(){
                         }
 
                         deductedPrice = Math.floor(deductedPrice);
-                        console.log(deductedPrice);
                         autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
 
                         await setAUTOPRICER_INVENTORY(autoPricingList);
