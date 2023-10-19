@@ -324,6 +324,7 @@ async function RunAutoPricer(){
                         //Don't change the price if it's already the cheapest item in the list;
                         if(username == ownerName){
                             setAUTOPRICER_STATUS(`${username} Already has the Lowest Price Available! Skipping...`);
+                            UpdateShopInventoryWithValue(itemToSearch, itemToSearch.Price);
                             return;
                         }
 

@@ -46,34 +46,34 @@ function injectToolbar() {
         <img class="logo" src="${logoUrl}"></img>
 
         <div class = "toolbar-text">
-            <a href="${autobuyerUrl}">
-                <img  class = "toolbar-icon" src="${shopIconUrl}" alt="Info Icon"> 
+            <a href="${autobuyerUrl}" class = "toolbar-category">
+                <img  class = "toolbar-icon" src="${shopIconUrl}"> 
             AutoBuyer </a>
 
-            <a href="${atticUrl}">
-                <img  class = "toolbar-icon" src="${atticIconUrl}" alt="Info Icon"> 
+            <a href="${atticUrl}" class = "toolbar-category">
+                <img  class = "toolbar-icon" src="${atticIconUrl}"> 
             AutoAttic </a>
 
-            <a href="${autopricerUrl}">
-                <img  class = "toolbar-icon" src="${npIconUrl}" alt="Info Icon"> 
+            <a href="${autopricerUrl}" class = "toolbar-category">
+                <img  class = "toolbar-icon" src="${npIconUrl}"> 
             AutoPricer </a>
 
-            <!--<a href="${autosdbUrl}">
-                <img  class = "toolbar-icon" src="${sdbIconUrl}" alt="Info Icon"> 
+            <!--<a href="${autosdbUrl}" class = "toolbar-category"> 
+                <img  class = "toolbar-icon" src="${sdbIconUrl}"> 
             AutoSDB </a>-->
 
 
-            <a href="${historyUrl}">
-                <img  class = "toolbar-icon" src="${historyIconUrl}" alt="Info Icon"> 
+            <a href="${historyUrl}" class = "toolbar-category"> 
+                <img  class = "toolbar-icon" src="${historyIconUrl}"> 
             History </a>
 
-            <a href="${databaseUrl}">
-                <img  class = "toolbar-icon" src="${databaseIconUrl}" alt="Info Icon"> 
+            <a href="${databaseUrl}" class = "toolbar-category">
+                <img  class = "toolbar-icon" src="${databaseIconUrl}"> 
             Database </a>
 
-            <a href="${infoUrl}">
-                <img  class = "toolbar-icon" src="${infoIconUrl}" alt="Info Icon"> 
-            Info </a>
+            <a href="${infoUrl}" class = "toolbar-category">
+                <img  class = "toolbar-icon" src="${infoIconUrl}"> 
+            Tools </a>
         </div>
     </div>
 

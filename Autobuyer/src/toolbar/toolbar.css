@@ -42,6 +42,21 @@
     vertical-align: middle;
 }
 
+.toolbar-icon {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+
+/**/
+
+.toolbar-category:hover .toolbar-icon {
+    transform: rotate(-20deg);
+    transition: transform 0.2s ease-in-out infinite;
+}
+
+
+
 /* Set the background color of the top bar */
 .toolbar-bottom {
     background-color: #03a9f4;
@@ -89,6 +104,19 @@
     line-height: 22px;
 
     float: right;
+}
+
+.gh-btn:hover {
+    animation: bounce 0.2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-8deg);
+    }
 }
 
 .gh-ico {

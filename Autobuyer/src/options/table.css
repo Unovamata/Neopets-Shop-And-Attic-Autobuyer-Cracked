@@ -77,6 +77,10 @@ table td {
     font-size: 100%;
 }
 
+.autobuyerButton a {
+    visibility: hidden;
+}
+
 /* Properties specific to .reset */
 .reset {
     display: flex;
