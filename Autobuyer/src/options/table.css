@@ -75,6 +75,10 @@ table td {
     margin: 0px 10px 30px; /* Add space to the top and bottom, and center horizontally */    
     height: 40px;
     font-size: 100%;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
 }
 
 .autobuyerButton a {

@@ -35,7 +35,12 @@
             <center>
                 <div class="category-info">Save & Load Configuration</div>
                 <button class="autobuyerButton" id="save">Save Preset</button> 
-                <button class="autobuyerButton" id="load">Load Preset</button>
+
+                <button class="autobuyerButton">Load Preset
+                    <input type="file" id="load" accept=".json"></input>
+                </button>
+
+                
 
                 <!--<div class="category-info">Tools</div>
                 
@@ -67,5 +72,6 @@
         </div>
     </body>
 
+    <script src = "../../common/default_items.js"></script>
     <script src="configPresets.js"></script>
 </html>

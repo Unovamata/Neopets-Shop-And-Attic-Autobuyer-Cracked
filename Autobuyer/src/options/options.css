@@ -68,6 +68,16 @@ a{
     font-family: 'Cafeteria', sans-serif;
 }
 
+#load {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
 .faq-question {
     font-size: 25px;
     color: #2196F3;
