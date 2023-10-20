@@ -527,7 +527,13 @@ function setMAX_WAIT_BAN_TIME(value) { chrome.storage.local.set({ MAX_WAIT_BAN_T
 
 function setMIN_PAGE_LOAD_FAILURES(value) { chrome.storage.local.set({ MIN_PAGE_LOAD_FAILURES: value }, (function () {})) }
 
-function setMAX_PAGE_LOAD_FAILURES(value) { chrome.storage.local.set({ MAX_PAGE_LOAD_FAILURES: value }, (function () {})) }
+function setSHOULD_SHARE_HISTORY(value) { chrome.storage.local.set({ SHOULD_SHARE_HISTORY: value }, (function () {})) }
+
+function setSHOULD_SHARE_SHOP_STOCK(value) { chrome.storage.local.set({ SHOULD_SHARE_SHOP_STOCK: value }, (function () {})) }
+
+function setSHOULD_SHARE_RESTOCK_LIST(value) { chrome.storage.local.set({ SHOULD_SHARE_RESTOCK_LIST: value }, (function () {})) }
+
+function setSHOULD_SHARE_STORES_TO_VISIT(value) { chrome.storage.local.set({ SHOULD_SHARE_STORES_TO_VISIT: value }, (function () {})) }
 
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
@@ -717,6 +723,26 @@ $("#MAX_FIXED_PRICING").bind("input propertychange", (function() {
     setMAX_FIXED_PRICING($("#MAX_FIXED_PRICING").val())
 }))
 
+$("#SHOULD_SHARE_HISTORY").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_HISTORY").is(":checked");
+    setSHOULD_SHARE_HISTORY(isChecked);
+}))
+
+$("#SHOULD_SHARE_SHOP_STOCK").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_SHOP_STOCK").is(":checked");
+    setSHOULD_SHARE_SHOP_STOCK(isChecked);
+}))
+
+$("#SHOULD_SHARE_RESTOCK_LIST").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_RESTOCK_LIST").is(":checked");
+    setSHOULD_SHARE_RESTOCK_LIST(isChecked);
+}))
+
+$("#SHOULD_SHARE_STORES_TO_VISIT").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_STORES_TO_VISIT").is(":checked");
+    setSHOULD_SHARE_STORES_TO_VISIT(isChecked);
+}))
+
 
 //######################################################################################################################################
 
@@ -836,6 +862,14 @@ resetButton.onclick = function(_) {
     MAX_WAIT_BEFORE_UPDATE: 20000,
     MIN_PAGE_LOAD_FAILURES: 10000,
     MAX_PAGE_LOAD_FAILURES: 20000,
+    AUTOPRICER_STATUS: "Inactive",
+    SHOP_INVENTORY: [],
+
+    // Save and load;
+    SHOULD_SHARE_HISTORY: false,
+    SHOULD_SHARE_SHOP_STOCK: false,
+    SHOULD_SHARE_RESTOCK_LIST: false,
+    SHOULD_SHARE_STORES_TO_VISIT: false,
 
 }, (function(_) {
     $("#PAUSE_AFTER_BUY_MS")
@@ -941,6 +975,13 @@ resetButton.onclick = function(_) {
         //AutoBuyer Settings;
         $("#MIN_PAGE_LOAD_FAILURES").val(_.MIN_PAGE_LOAD_FAILURES),
         $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES),
+
+        //Load and save;
+        $("#SHOULD_SHARE_HISTORY").prop("checked", _.SHOULD_SHARE_HISTORY),
+        $("#SHOULD_SHARE_SHOP_STOCK").prop("checked", _.SHOULD_SHARE_SHOP_STOCK),
+        $("#SHOULD_SHARE_RESTOCK_LIST").prop("checked", _.SHOULD_SHARE_RESTOCK_LIST),
+        $("#SHOULD_SHARE_STORES_TO_VISIT").prop("checked", _.SHOULD_SHARE_STORES_TO_VISIT),
+
 
         showOrHide()
 }));

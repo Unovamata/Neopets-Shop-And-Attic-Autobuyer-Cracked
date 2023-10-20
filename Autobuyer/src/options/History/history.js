@@ -248,9 +248,6 @@ function MakeSortableTable(){
 var currentHistorySize = -1;
 
 function ProcessPurchaseHistory(forceUpdateHistory) {
-    //Getting the item history from the cache;
-    var chromeItemHistory = chrome.storage.local.get({ ITEM_HISTORY: [] });
-
     chrome.storage.local.get({
         ITEM_HISTORY: [],
     }, (function(t) {

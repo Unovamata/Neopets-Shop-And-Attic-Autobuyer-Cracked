@@ -90,6 +90,12 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOP_INVENTORY: [],
 			MIN_PAGE_LOAD_FAILURES: 10000,
 			MAX_PAGE_LOAD_FAILURES: 20000,
+
+			// Save and load;
+			SHOULD_SHARE_HISTORY: false,
+			SHOULD_SHARE_SHOP_STOCK: false,
+			SHOULD_SHARE_RESTOCK_LIST: false,
+			SHOULD_SHARE_STORES_TO_VISIT: false,
 		};
 
 		chrome.storage.local.set(autoPricerDefaultSettings, function (){});

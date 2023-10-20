@@ -13,6 +13,10 @@ chrome.storage.local.get(null, function(items) {
     }
 
     document.getElementById("save").addEventListener("click", function(){
+        var itemsCopy = items;
+
+        
+
         const jsonString = JSON.stringify(items);
         const blob = new Blob([jsonString], {type : "application/json"});
         const currentDate = FormatDateToCustomFormat(new Date());

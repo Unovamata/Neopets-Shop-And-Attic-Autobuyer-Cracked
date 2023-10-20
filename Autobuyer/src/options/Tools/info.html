@@ -34,13 +34,66 @@
 
             <center>
                 <div class="category-info">Save & Load Configuration</div>
+
                 <button class="autobuyerButton" id="save">Save Preset</button> 
 
                 <button class="autobuyerButton">Load Preset
                     <input type="file" id="load" accept=".json"></input>
                 </button>
 
-                
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th>
+                        </thead>
+                        <tr>
+                            <td>Share Purchased Items History:
+                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHARE_HISTORY" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Share Shop Stock:
+                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHARE_SHOP_STOCK" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Share Buyable Items List:
+                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHARE_RESTOCK_LIST" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Share Store Numbers to Cycle:
+                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHARE_STORES_TO_VISIT" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><br><br>
+                <button id="reset" class="button reset">Reset All Settings</button>
+                <br><br>
 
                 <!--<div class="category-info">Tools</div>
                 
@@ -72,6 +125,10 @@
         </div>
     </body>
 
+    <script src = "../../../js/jquery.js"></script>
+    <script src = "../../../js/moment.js"></script>
+    <script src = "../../../js/moment-timezone-with-data.js"></script>
     <script src = "../../common/default_items.js"></script>
+    <script src = "../optionsPage.js"></script>
     <script src="configPresets.js"></script>
 </html>

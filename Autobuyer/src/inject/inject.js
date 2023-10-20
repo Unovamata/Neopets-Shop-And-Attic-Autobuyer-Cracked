@@ -239,8 +239,8 @@ function topLevelTurbo() {
                 bannerElementID = "qpkzsoynerzxsqw",
                 minSoldOutRefresh = 50,
                 maxSoldOutRefresh = 100,
-                minInventoryRefreshInterval = 5000; // 5 seconds
-                maxInventoryRefreshInterval = 5100; // 5.1 seconds
+                minInventoryRefreshInterval = 5000, // 5 seconds
+                maxInventoryRefreshInterval = 5100, // 5.1 seconds
                 minHagglingTimeout = minOCRDetectionInterval / 2,
                 maxHagglingTimeout = maxOCRDetectionInterval / 2,
                 isRunningOnScheduledTime = false,
@@ -905,7 +905,7 @@ function topLevelTurbo() {
                         ClickToRefreshShop();
                     }, t);
                 } else if (IsItemAddedToInventory()) {
-                    UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxAddedToInventoryRefresh - minAddedToInventoryRefresh) + minAddedToInventoryRefresh + pauseAfterBuy) + " to reload page...");
+                    UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxInventoryRefreshInterval - minInventoryRefreshInterval) + minInventoryRefreshInterval + pauseAfterBuy) + " to reload page...");
                     
                     setTimeout(() => {
                         ClickToRefreshShop();
