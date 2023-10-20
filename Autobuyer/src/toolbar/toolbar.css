@@ -42,19 +42,20 @@
     vertical-align: middle;
 }
 
-.toolbar-icon {
+.toolbar-icon, .dropdown-icon {
     transform: rotate(0deg);
     transition: transform 0.2s ease-in-out;
 }
-
-
-/**/
 
 .toolbar-category:hover .toolbar-icon {
     transform: rotate(-20deg);
     transition: transform 0.2s ease-in-out infinite;
 }
 
+.dropdown-category:hover .dropdown-icon {
+    transform: rotate(-20deg);
+    transition: transform 0.2s ease-in-out infinite;
+}
 
 
 /* Set the background color of the top bar */
@@ -130,4 +131,62 @@
 
 .gh-text{
     color: #03a9f4;
+}
+
+.toolbar-category {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-menu {
+    display: none;
+    position: absolute;
+    background-color: #03a9f4; /* Background color for the menu */
+    box-shadow: 0 4px 6px #03a8f435; /* Box shadow for the menu */
+    width: 150px;
+    border-radius: 10%;
+}
+
+.toolbar-category:hover .hover-menu {
+    display: block;
+}
+
+/* Style the list items to remove default list styling */
+.hover-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+/* Style the links within list items */
+.hover-menu ul li a {
+    text-decoration: none;
+    color: #000000; /* Adjust the color as needed */
+    display: block;
+}
+
+.hover-menu .toolbar-category {
+    margin: 0 0px 10px;
+}
+
+/* Change link color on hover */
+.hover-menu ul li a:hover {
+    background-color: #24bdf8; /* Adjust the color as needed */
+}
+
+
+.dropdown-arrow {
+    transition: transform 0.3s ease-in-out;
+    width: 10px;
+    transform: rotate(0deg);
+}
+
+.toolbar-category:hover .dropdown-arrow {
+    animation: flipOnSelection 0.3s ease-in-out;
+    transform: rotate(180deg);
+}
+
+.gradient-div {
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #24bdf8);
 }

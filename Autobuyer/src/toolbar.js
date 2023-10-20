@@ -4,8 +4,6 @@ const scriptUrl = document.currentScript.src;
 // Extract the part before "src"
 const srcPath = scriptUrl.substring(0, scriptUrl.indexOf("src") + 3);
 
-//console.log(srcPath);
-
 // Construct the URL for logo.png using the directory path
 const logoUrl = `${srcPath}/logo.png`;
 const shopIconUrl = `${srcPath}/toolbar/shop-icon.svg`;
@@ -13,10 +11,13 @@ const atticIconUrl = `${srcPath}/toolbar/mypets-icon.svg`;
 const npIconUrl = `${srcPath}/toolbar/np-icon.svg`;
 const sdbIconUrl = `${srcPath}/toolbar/safetydeposit-icon.svg`;
 const historyIconUrl = `${srcPath}/toolbar/transferlog-icon.svg`;
-const databaseIconUrl = `${srcPath}/toolbar/settings-icon.svg`;
+const toolsIconUrl = `${srcPath}/toolbar/settings-icon.svg`;
+const databaseIconUrl = `${srcPath}/toolbar/database-icon.svg`;
 const infoIconUrl = `${srcPath}/toolbar/search-icon.svg`;
 const checkIconUrl = `${srcPath}/toolbar/check.png`;
 const crossIconUrl = `${srcPath}/toolbar/delete.png`;
+const mailIconUrl = `${srcPath}/toolbar/neomail.svg`;
+const dropdownIconUrl = `${srcPath}/toolbar/dropdown-arrow.png`;
 
 // Styles
 const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
@@ -29,6 +30,7 @@ const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
 const infoUrl = `${srcPath}/options/Tools/info.html`;
+const mailUrl = `${srcPath}/options/Mail/mail.html`;
 
 
 // content.js
@@ -62,18 +64,33 @@ function injectToolbar() {
                 <img  class = "toolbar-icon" src="${sdbIconUrl}"> 
             AutoSDB </a>-->
 
+            <div class="toolbar-category">
+                <a>
+                    <img class="toolbar-icon" src="${toolsIconUrl}">
+                    Tools
+                    <img  class = "dropdown-arrow" src="${dropdownIconUrl}">
+                </a>
+                <div class="hover-menu">
+                    <ul>
+                        <li><a href="${historyUrl}" class = "toolbar-category dropdown-category"> 
+                            <img  class = "dropdown-icon" src="${historyIconUrl}"> 
+                            History </a>
+                        </li>
+                        <li><a href="${databaseUrl}" class = "toolbar-category dropdown-category">
+                            <img  class = "dropdown-icon" src="${databaseIconUrl}"> 
+                            Database </a>
+                        </li>
+                        <li><a href="${infoUrl}" class = "toolbar-category dropdown-category">
+                            <img  class = "dropdown-icon" src="${infoIconUrl}"> 
+                            Miscellaneous </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-            <a href="${historyUrl}" class = "toolbar-category"> 
-                <img  class = "toolbar-icon" src="${historyIconUrl}"> 
-            History </a>
-
-            <a href="${databaseUrl}" class = "toolbar-category">
-                <img  class = "toolbar-icon" src="${databaseIconUrl}"> 
-            Database </a>
-
-            <a href="${infoUrl}" class = "toolbar-category">
-                <img  class = "toolbar-icon" src="${infoIconUrl}"> 
-            Tools </a>
+            <a href="${mailUrl}" class = "toolbar-category">
+                <img  class = "toolbar-icon" src="${mailIconUrl}"> 
+            Mail </a>
         </div>
     </div>
 
