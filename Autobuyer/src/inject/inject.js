@@ -50,6 +50,7 @@ function topLevelTurbo() {
                 // Captcha;
                 if (indexOfMessage === 2) {
                     UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+                    return;
                 } else { // Refresh on page errors;
                     function executeOnceAndPreventReexecution() {
                         if (!errorRefreshed) {
@@ -348,111 +349,126 @@ function topLevelTurbo() {
                                 }
                             }
 
-                            var captchaImage, imageLoadingTime
+                            var captchaElement, imageLoadingTime;
 
                             // Finding the darkest pixel in the captcha image
-                            captchaImage = document.querySelector("input[type='image']"), imageLoadingTime = performance.now(),
+                            captchaElement = document.querySelector('input[type="image"]'), imageLoadingTime = performance.now(),
 
-                            function(e, TriggerClickEventAndCSSCaptcha, n, o) {
-                                var r = new Image;
-                                r.src = e;
-                                var i = performance.now();
-                                r.onload = function() {
-                                    var e = performance.now();
-                                    console.log("Image load took " + Math.round(e - i) + " milliseconds.");
-                                    
-                                    var a = document.createElement("canvas");
-                                    a.width = n, a.height = o;
-
-                                    var c = a.getContext("2d");
-
-                                    c.drawImage(r, 0, 0), document.body.append(a);
-                                    for (var u = c.getImageData(0, 0, n, o), l = 0, m = 100, s = 0, d = 1, f = 0; f < u.data.length; f += 4 * d) {
-                                        if (red = u.data[f + 0], green = u.data[f + 1], blue = u.data[f + 2], alpha = u.data[f + 3], 0 != red || 0 != green || 0 != blue) {
-                                            var _ = We(red, green, blue)
-                                                .l;
-                                            _ < m && (m = _, s = l)
+                            function(captchaElement, TriggerClickEventCaptcha) {
+                                var captchaImage = new Image();
+                                captchaImage.src = captchaElement;
+                            
+                                captchaImage.onload = function() {
+                                    var canvas = document.createElement("canvas");
+                                    canvas.width = captchaImage.width;
+                                    canvas.height = captchaImage.height;
+                                    var context = canvas.getContext("2d");
+                                    context.drawImage(captchaImage, 0, 0);
+                            
+                                    var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                                    var minLuminance = 100; // Minimum luminance threshold
+                                    var darkestPixelIndex = 0;
+                            
+                                    for (var i = 0; i < imageData.data.length; i += 4) {
+                                        /* First, we're taking the RBG values of the image and then converting them to HSV values,
+                                         * The sum of these values represents darkest and brightest colors,
+                                         * After that, we normalize the sum by dividing it to 510, making the values range from 0 to 1,
+                                         * Lastly, we take the number closest to 0, where 1 is the brightest color and 0 the darkest 
+                                         * colors respectively.
+                                         */
+                                        var luminance = (Math.max(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2]) +
+                                            Math.min(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])) / 510;
+                                        
+                                        // Getting the darkest pixel;
+                                        if (luminance < minLuminance) {
+                                            minLuminance = luminance;
+                                            darkestPixelIndex = i / 4; // Dividing by 4 because we're doing + 4 increments;
                                         }
-                                        l += d
                                     }
-                                    var T = Math.floor(s / n);
-                                    TriggerClickEventAndCSSCaptcha(s - T * n, T)
-                                }
+                                    
+                                    // X & Y coordinates to trigger the click event;
+                                    TriggerClickEventCaptcha(darkestPixelIndex % canvas.width, Math.floor(darkestPixelIndex / canvas.width));
+                                };
                             }
 
                             // Sending events to the captcha image; IIFE function <-- + ^
-                            (captchaImage.src, (function(o, r) {
+                            (captchaElement.src, (function(o, r) {
                                 var imageLoadStartTime = performance.now(),
                                 adjustedDelay = Math.max(Math.round(Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval - Math.max(imageLoadStartTime - currentGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
 
                                 setTimeout((function() {
+                                    var startCaptchaTime = performance.now();
                                     //var currentTime = performance.now();
                                     
-                                    ManageCaptcha(captchaImage, o, r);
+                                    ManageCaptcha(o, r);
 
-                                    function ManageCaptcha(element, left, highlighter) {
-                                        var o = CalculateCaptchaOffset(element);
-                                        
+                                    function ManageCaptcha(left, highlighter) {
+                                         // Cache the frequently used elements
+                                        const element = captchaElement;
+                                        const offset = CalculateCaptchaOffset(element);
+                                        const highlightLeft = Math.round(left + offset.left);
+                                        const highlightTop = Math.round(highlighter + offset.top);
+
                                         // Checking the offset of the captcha image;
                                         function CalculateCaptchaOffset(element) {
-                                            var left = 0, top = 0;
+                                            let left = 0, top = 0;
 
                                             while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
-                                                left += element.offsetLeft - element.scrollLeft;
-                                                top += element.offsetTop - element.scrollTop;
-                                                element = element.offsetParent;
+                                            left += element.offsetLeft - element.scrollLeft;
+                                            top += element.offsetTop - element.scrollTop;
+                                            element = element.offsetParent;
                                             }
 
                                             return {
-                                                top: top,
-                                                left: left
-                                            }
+                                            top: top,
+                                            left: left
+                                            };
                                         }
-
-                                        var highlightLeft = Math.round(left + o.left),
-                                            highlightTop = Math.round(highlighter + o.top)
 
                                         // Setting the click event for the captcha;
-                                        mouseClickEvent = new MouseEvent("click", {
+                                        const mouseClickEvent = new MouseEvent("click", {
                                             view: window,
-                                            bubbles: !0,
-                                            cancelable: !0,
-                                            clientX: highlightLeft,
-                                            clientY: highlightTop
+                                            bubbles: true,
+                                            cancelable: true,
+                                            clientX: Math.round(highlightLeft),
+                                            clientY: Math.round(highlightTop)
                                         });
 
-                                        // If it's autoclicking the captcha;
-                                        if(isClickingCaptcha){
-                                            // Send the event;
+                                        // If it's autoclicking the captcha, send the event and beep message
+                                        if (isClickingCaptcha) {
                                             element.dispatchEvent(mouseClickEvent);
                                             SendBeepMessage();
+                                        }
 
-                                            // And add a small highlighter to the image to analyze;
-                                            if (isAnnotatingImage) {
-                                                var highlighter = document.createElement("img");
-                                                highlighter.src = "circle.svg";
-                                                highlighter.style.height = "14px";
-                                                highlighter.style.width = "14px"; 
-                                                highlighter.style.position = "absolute";
-                                                highlighter.style.top = highlightTop - 7 + "px"; 
-                                                highlighter.style.left = highlightLeft - 7 + "px"; 
-                                                highlighter.style.zIndex = "9999999999";
-                                                highlighter.style.pointerEvents = "none";
-                                                
-                                                document.body.appendChild(highlighter);
-
-                                                const styles = `
+                                        // And add a small highlighter to the image to analyze;
+                                        if (isAnnotatingImage) {
+                                            // Create the highlighter element
+                                            const highlighter = document.createElement("img");
+                                            highlighter.src = chrome.runtime.getURL("icons/circle.svg");
+                                            highlighter.style.height = "14px";
+                                            highlighter.style.width = "14px";
+                                            highlighter.style.position = "absolute";
+                                            highlighter.style.top = Math.round(highlightTop - 7) + "px";
+                                            highlighter.style.left = Math.round(highlightLeft - 7) + "px";
+                                            highlighter.style.zIndex = "9999999999";
+                                            highlighter.style.pointerEvents = "none";
+                                            
+                                            document.body.appendChild(highlighter);
+                                        
+                                            const styles = `
                                                 input[type='image'] {
-                                                    filter: contrast(2) grayscale(1);
+                                                filter: contrast(2) grayscale(1);
                                                 }`;
-                                                
-                                                AddCSSStyle(styles);
-                                            }
+                                            
+                                            AddCSSStyle(styles);
                                         }
                                     }
+
+                                    var endCaptchaTime = performance.now();
+                                    console.log("Image load took " + Math.round(endCaptchaTime - startCaptchaTime) + " milliseconds.");
                                     //console.log("Load script to click image took " + Math.round(performance.now() - currentGlobalTime) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(currentTime - imageLoadingTime) + "ms. Added " + adjustedDelay + "ms to meet minimum. Click then took " + Math.round(performance.now() - currentTime) + "ms.")
                                 }), adjustedDelay)
-                            }), captchaImage.width, captchaImage.height);
+                            }));
                         }
                     }
                 } 
@@ -470,6 +486,8 @@ function topLevelTurbo() {
 
                     // Auto Buying;
                     else {
+                        var itemProfits = CalculateItemProfits(items.map((item) => item.name), items.map((item) => item.price));
+
                         if (isHighlightingItemsInShops) {
                             if (buyWithItemDB) {
                                 var items = Array.from(document.querySelectorAll(".item-img")).map((item) => {
@@ -480,8 +498,7 @@ function topLevelTurbo() {
                                         price: itemPrice,
                                     };
                                 });
-                        
-                                var itemProfits = CalculateItemProfits(items.map((item) => item.name), items.map((item) => item.price));
+                                
                                 var bestItemName = BestItemName(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
                                 var filteredItems = FilterItemsByProfitCriteria(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
                         
@@ -518,7 +535,7 @@ function topLevelTurbo() {
                                 var bestItemIndices = [];
                                 var maxProfit = -Infinity;
 
-                                var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
+                                itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
 
                                 for (var index = 0; index < itemData.length; index++) {
                                     var profit = itemProfits[index];
@@ -575,7 +592,7 @@ function topLevelTurbo() {
                         itemToBuyExtracted ? function(e) {
                             if (isClickingItems) {
                                 var t = document.querySelector(`.item-img[data-name="${e}"]`);
-                                console.log(t);
+                                //console.log(t);
                                 setTimeout((function() {
                                     t.click(), SendBeepMessage()
                                 }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)
@@ -1011,8 +1028,9 @@ function topLevelTurbo() {
                         itemProfits.push(-99999999);
                     } else {
                         const itemData = item_db[itemID];
-                        
-                        if (itemData === null || itemData.Price === null || itemData.Price === 0) {
+                        console.log(itemData["Price"]);
+
+                        if (itemData["Rarity"] == undefined || itemData["Price"] == undefined) {
                             console.warn("Item not found in the database or price not available.");
                             itemProfits.push(buyUnknownItemsIfProfitMargin);
                         } else {

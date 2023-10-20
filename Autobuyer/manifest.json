@@ -27,6 +27,12 @@
         "tts",
 		"downloads"
     ],
+	"web_accessible_resources": [
+		{
+		  "resources": ["icons/circle.svg"],
+		  "matches": ["<all_urls>"]
+		}
+	  ],
     "content_scripts": [
 	{
         "matches": [
