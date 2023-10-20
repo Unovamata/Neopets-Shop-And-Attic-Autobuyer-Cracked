@@ -1,2 +1,5 @@
 // Ignoring the AC script;
 AC.js
+
+//Ignoring benchmarking scripts
+benchmark.js

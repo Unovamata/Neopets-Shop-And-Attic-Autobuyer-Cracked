@@ -20,8 +20,8 @@ function topLevelTurbo() {
             },
         });
     }
-    
-    var currentGlobalTime = performance.now();
+
+    var startGlobalTime = performance.now();
 
     // Handle page errors by refreshing;
     function HandleServerErrors() {
@@ -394,12 +394,9 @@ function topLevelTurbo() {
                             // Sending events to the captcha image; IIFE function <-- + ^
                             (captchaElement.src, (function(o, r) {
                                 var imageLoadStartTime = performance.now(),
-                                adjustedDelay = Math.max(Math.round(Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval - Math.max(imageLoadStartTime - currentGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
+                                adjustedDelay = Math.max(Math.round(Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval - Math.max(imageLoadStartTime - startGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
 
                                 setTimeout((function() {
-                                    var startCaptchaTime = performance.now();
-                                    //var currentTime = performance.now();
-                                    
                                     ManageCaptcha(o, r);
 
                                     function ManageCaptcha(left, highlighter) {
@@ -464,8 +461,6 @@ function topLevelTurbo() {
                                         }
                                     }
 
-                                    var endCaptchaTime = performance.now();
-                                    console.log("Image load took " + Math.round(endCaptchaTime - startCaptchaTime) + " milliseconds.");
                                     //console.log("Load script to click image took " + Math.round(performance.now() - currentGlobalTime) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(currentTime - imageLoadingTime) + "ms. Added " + adjustedDelay + "ms to meet minimum. Click then took " + Math.round(performance.now() - currentTime) + "ms.")
                                 }), adjustedDelay)
                             }));
@@ -486,19 +481,21 @@ function topLevelTurbo() {
 
                     // Auto Buying;
                     else {
+                        var itemElements = Array.from(document.querySelectorAll(".item-img"));
+
+                        var items = itemElements.map(element => {
+                            var itemName = element.getAttribute("data-name");
+                            var itemPrice = parseInt(element.getAttribute("data-price").replaceAll(",", ""));
+                            return {
+                                name: itemName,
+                                price: itemPrice,
+                            };
+                        });
+
                         var itemProfits = CalculateItemProfits(items.map((item) => item.name), items.map((item) => item.price));
 
                         if (isHighlightingItemsInShops) {
                             if (buyWithItemDB) {
-                                var items = Array.from(document.querySelectorAll(".item-img")).map((item) => {
-                                    var itemName = item.getAttribute("data-name");
-                                    var itemPrice = parseInt(item.getAttribute("data-price").replaceAll(",", ""));
-                                    return {
-                                        name: itemName,
-                                        price: itemPrice,
-                                    };
-                                });
-                                
                                 var bestItemName = BestItemName(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
                                 var filteredItems = FilterItemsByProfitCriteria(items.map((item) => item.name), items.map((item) => item.price), itemProfits, minDBProfitToBuy, minDBProfitPercentToBuy);
                         
@@ -524,22 +521,14 @@ function topLevelTurbo() {
                         
                         var itemToBuyExtracted = function() {
                             var selectedName;
-                            var itemElements = Array.from(document.querySelectorAll(".item-img"));
 
                             if (buyWithItemDB) {
-                                // From item images, get the name, and price of said items;
-                                var itemData = itemElements.map(element => {
-                                    return { name: element.getAttribute("data-name"), price: parseInt(element.getAttribute("data-price").replaceAll(",", "")) };
-                                });
-
                                 var bestItemIndices = [];
                                 var maxProfit = -Infinity;
 
-                                itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
-
-                                for (var index = 0; index < itemData.length; index++) {
+                                for (var index = 0; index < items.length; index++) {
                                     var profit = itemProfits[index];
-                                    var price = itemData[index].price;
+                                    var price = items[index].price;
 
                                     var isProfitable = profit > minDBProfitToBuy;
                                     var isProfitablePercent = profit / price > minDBProfitPercentToBuy;
@@ -558,12 +547,12 @@ function topLevelTurbo() {
                                 if (bestItemIndices.length === 0) return;
 
                                 if (bestItemIndices.length === 1) {
-                                    selectedName = itemData[bestItemIndices[0]].name;
+                                    selectedName = items[bestItemIndices[0]].name;
                                 } else if (isBuyingSecondMostProfitable) {
-                                    selectedName = itemData[bestItemIndices[1]].name;
-                                    console.warn("Skipping the first most valuable item: " + itemData[bestItemIndices[0]].name);
+                                    selectedName = items[bestItemIndices[1]].name;
+                                    console.warn("Skipping the first most valuable item: " + items[bestItemIndices[0]].name);
                                 } else {
-                                    selectedName = itemData[bestItemIndices[0]].name;
+                                    selectedName = items[bestItemIndices[0]].name;
                                 }
                             } 
                             

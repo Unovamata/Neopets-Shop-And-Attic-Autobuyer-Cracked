@@ -94,6 +94,7 @@ chrome.storage.local.get(null, function(items) {
                 var jsonData = JSON.parse(fileContent);
                 chrome.storage.local.set(jsonData);
                 window.alert("All options have imported successfully!\n\nThank you for continuing to use NeoBuyer+!");
+                window.location.reload();
             } catch {
                 window.alert("There was an error parsing the data back into NeoBuyer+...\n\nPlease make sure you're loading the correct file or try again.");
             }
@@ -102,4 +103,3 @@ chrome.storage.local.get(null, function(items) {
         reader.readAsText(selectedFile); // Read the file as text
     })
 });
-
