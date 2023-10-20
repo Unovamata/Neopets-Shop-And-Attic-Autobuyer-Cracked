@@ -130,20 +130,7 @@ function getAUTOPRICER_STATUS(callback) {
 //######################################################################################################################################
 
 
-function Item(Name, Price, IsPricing, Index, ListIndex, Stock){
-    this.Name = Name;
-    this.Price = Price;
-    this.IsPricing = IsPricing;
-    this.Index = Index;
-    this.ListIndex = ListIndex;
-    this.Stock = Stock
-}
-
-
-//######################################################################################################################################
-
-
-var loadInventoryButton = document.getElementById("load");
+var loadInventoryButton = document.getElementById("load-inventory");
 
 loadInventoryButton.onclick = function(_) {
     LoadInventoryFromStockPage();

@@ -126,7 +126,7 @@ function topLevelTurbo() {
         return IsInAlmostAbandonedAttic() || IsInNeopianShop()
     }
     
-    function l() {
+    function InjectAutoPricer() {
         chrome.storage.local.get({
             BUY_UNKNOWN_ITEMS_PROFIT: 1e5,
             ITEM_DB_MIN_RARITY: 1,
@@ -1167,7 +1167,7 @@ function topLevelTurbo() {
 
     function SetAutoBuyer() {
         if (IsInAtticOrShop()) {
-            l();
+            InjectAutoPricer();
             clearInterval(IntervalID); // Stop the interval when triggered
         }
     }

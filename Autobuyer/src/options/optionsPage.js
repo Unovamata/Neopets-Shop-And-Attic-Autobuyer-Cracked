@@ -527,13 +527,19 @@ function setMAX_WAIT_BAN_TIME(value) { chrome.storage.local.set({ MAX_WAIT_BAN_T
 
 function setMIN_PAGE_LOAD_FAILURES(value) { chrome.storage.local.set({ MIN_PAGE_LOAD_FAILURES: value }, (function () {})) }
 
-function setSHOULD_SHARE_HISTORY(value) { chrome.storage.local.set({ SHOULD_SHARE_HISTORY: value }, (function () {})) }
-
-function setSHOULD_SHARE_SHOP_STOCK(value) { chrome.storage.local.set({ SHOULD_SHARE_SHOP_STOCK: value }, (function () {})) }
+function setSHOULD_SHARE_STORES_TO_VISIT(value) { chrome.storage.local.set({ SHOULD_SHARE_STORES_TO_VISIT: value }, (function () {})) }
 
 function setSHOULD_SHARE_RESTOCK_LIST(value) { chrome.storage.local.set({ SHOULD_SHARE_RESTOCK_LIST: value }, (function () {})) }
 
-function setSHOULD_SHARE_STORES_TO_VISIT(value) { chrome.storage.local.set({ SHOULD_SHARE_STORES_TO_VISIT: value }, (function () {})) }
+function setSHOULD_SHARE_SHOP_STOCK(value) { chrome.storage.local.set({ SHOULD_SHARE_SHOP_STOCK: value }, (function () {})) }
+
+function setSHOULD_SHARE_BLACKLISTS(value) { chrome.storage.local.set({ SHOULD_SHARE_BLACKLISTS: value }, (function () {})) }
+
+function setSHOULD_SHARE_ATTIC_LAST_REFRESH(value) { chrome.storage.local.set({ SHOULD_SHARE_ATTIC_LAST_REFRESH: value }, (function () {})) }
+
+function setSHOULD_SHARE_EMAIL(value) { chrome.storage.local.set({ SHOULD_SHARE_EMAIL: value }, (function () {})) }
+
+function setSHOULD_SHARE_HISTORY(value) { chrome.storage.local.set({ SHOULD_SHARE_HISTORY: value }, (function () {})) }
 
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
@@ -723,14 +729,9 @@ $("#MAX_FIXED_PRICING").bind("input propertychange", (function() {
     setMAX_FIXED_PRICING($("#MAX_FIXED_PRICING").val())
 }))
 
-$("#SHOULD_SHARE_HISTORY").bind("input propertychange", (function() {
-    const isChecked = $("#SHOULD_SHARE_HISTORY").is(":checked");
-    setSHOULD_SHARE_HISTORY(isChecked);
-}))
-
-$("#SHOULD_SHARE_SHOP_STOCK").bind("input propertychange", (function() {
-    const isChecked = $("#SHOULD_SHARE_SHOP_STOCK").is(":checked");
-    setSHOULD_SHARE_SHOP_STOCK(isChecked);
+$("#SHOULD_SHARE_STORES_TO_VISIT").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_STORES_TO_VISIT").is(":checked");
+    setSHOULD_SHARE_STORES_TO_VISIT(isChecked);
 }))
 
 $("#SHOULD_SHARE_RESTOCK_LIST").bind("input propertychange", (function() {
@@ -738,9 +739,29 @@ $("#SHOULD_SHARE_RESTOCK_LIST").bind("input propertychange", (function() {
     setSHOULD_SHARE_RESTOCK_LIST(isChecked);
 }))
 
-$("#SHOULD_SHARE_STORES_TO_VISIT").bind("input propertychange", (function() {
-    const isChecked = $("#SHOULD_SHARE_STORES_TO_VISIT").is(":checked");
-    setSHOULD_SHARE_STORES_TO_VISIT(isChecked);
+$("#SHOULD_SHARE_SHOP_STOCK").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_SHOP_STOCK").is(":checked");
+    setSHOULD_SHARE_SHOP_STOCK(isChecked);
+}))
+
+$("#SHOULD_SHARE_BLACKLISTS").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_BLACKLISTS").is(":checked");
+    setSHOULD_SHARE_BLACKLISTS(isChecked);
+}))
+
+$("#SHOULD_SHARE_ATTIC_LAST_REFRESH").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").is(":checked");
+    setSHOULD_SHARE_ATTIC_LAST_REFRESH(isChecked);
+}))
+
+$("#SHOULD_SHARE_EMAIL").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_EMAIL").is(":checked");
+    setSHOULD_SHARE_EMAIL(isChecked);
+}))
+
+$("#SHOULD_SHARE_HISTORY").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_HISTORY").is(":checked");
+    setSHOULD_SHARE_HISTORY(isChecked);
 }))
 
 
@@ -841,7 +862,6 @@ resetButton.onclick = function(_) {
     MAX_NEW_SEARCH_WAIT_TIME: 30000,
     MIN_BLACKLIST_ITEM_WAIT: 10000,
     MAX_BLACKLIST_ITEM_WAIT: 30000,
-    USE_AUTOPRICING_BLACKLIST: false,
     USE_BLACKLIST_SW: false,
     BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
 
@@ -866,10 +886,13 @@ resetButton.onclick = function(_) {
     SHOP_INVENTORY: [],
 
     // Save and load;
-    SHOULD_SHARE_HISTORY: false,
-    SHOULD_SHARE_SHOP_STOCK: false,
-    SHOULD_SHARE_RESTOCK_LIST: false,
     SHOULD_SHARE_STORES_TO_VISIT: false,
+    SHOULD_SHARE_RESTOCK_LIST: false,
+    SHOULD_SHARE_SHOP_STOCK: false,
+    SHOULD_SHARE_BLACKLISTS: false,
+    SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
+    SHOULD_SHARE_EMAIL: false,
+    SHOULD_SHARE_HISTORY: false,
 
 }, (function(_) {
     $("#PAUSE_AFTER_BUY_MS")
@@ -977,11 +1000,13 @@ resetButton.onclick = function(_) {
         $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES),
 
         //Load and save;
-        $("#SHOULD_SHARE_HISTORY").prop("checked", _.SHOULD_SHARE_HISTORY),
-        $("#SHOULD_SHARE_SHOP_STOCK").prop("checked", _.SHOULD_SHARE_SHOP_STOCK),
-        $("#SHOULD_SHARE_RESTOCK_LIST").prop("checked", _.SHOULD_SHARE_RESTOCK_LIST),
         $("#SHOULD_SHARE_STORES_TO_VISIT").prop("checked", _.SHOULD_SHARE_STORES_TO_VISIT),
-
+        $("#SHOULD_SHARE_RESTOCK_LIST").prop("checked", _.SHOULD_SHARE_RESTOCK_LIST),
+        $("#SHOULD_SHARE_SHOP_STOCK").prop("checked", _.SHOULD_SHARE_SHOP_STOCK),
+        $("#SHOULD_SHARE_BLACKLISTS").prop("checked", _.SHOULD_SHARE_BLACKLISTS),
+        $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").prop("checked", _.SHOULD_SHARE_ATTIC_LAST_REFRESH),
+        $("#SHOULD_SHARE_EMAIL").prop("checked", _.SHOULD_SHARE_EMAIL),
+        $("#SHOULD_SHARE_HISTORY").prop("checked", _.SHOULD_SHARE_HISTORY),
 
         showOrHide()
 }));

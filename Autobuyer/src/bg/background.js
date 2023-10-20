@@ -65,7 +65,6 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_NEW_SEARCH_WAIT_TIME: 30000,
 			MIN_BLACKLIST_ITEM_WAIT: 10000,
 			MAX_BLACKLIST_ITEM_WAIT: 30000,
-			USE_AUTOPRICING_BLACKLIST: false,
 			USE_BLACKLIST_SW: false,
 			BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
 			
@@ -92,10 +91,13 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_PAGE_LOAD_FAILURES: 20000,
 
 			// Save and load;
-			SHOULD_SHARE_HISTORY: false,
-			SHOULD_SHARE_SHOP_STOCK: false,
-			SHOULD_SHARE_RESTOCK_LIST: false,
 			SHOULD_SHARE_STORES_TO_VISIT: false,
+			SHOULD_SHARE_RESTOCK_LIST: false,
+			SHOULD_SHARE_SHOP_STOCK: false,
+			SHOULD_SHARE_BLACKLISTS: false,
+			SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
+			SHOULD_SHARE_EMAIL: false,
+			SHOULD_SHARE_HISTORY: false,
 		};
 
 		chrome.storage.local.set(autoPricerDefaultSettings, function (){});

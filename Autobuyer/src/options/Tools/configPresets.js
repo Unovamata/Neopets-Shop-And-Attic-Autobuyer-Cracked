@@ -15,9 +15,54 @@ chrome.storage.local.get(null, function(items) {
     document.getElementById("save").addEventListener("click", function(){
         var itemsCopy = items;
 
-        
+        if(!items.SHOULD_SHARE_RESTOCK_LIST){
+            itemsCopy.RESTOCK_LIST = [];
+        }
 
-        const jsonString = JSON.stringify(items);
+        if(!items.SHOULD_SHARE_STORES_TO_VISIT){
+            itemsCopy.STORES_TO_CYCLE_THROUGH_WHEN_STOCKED = [];
+        }
+
+        // Resetting the Auto Pricer and data sharing;
+        if(!items.SHOULD_SHARE_SHOP_STOCK){
+            itemsCopy.SHOP_INVENTORY = [];
+            itemsCopy.AUTOPRICER_INVENTORY = [];
+        }
+
+        if(!items.SHOULD_SHARE_BLACKLISTS){
+            // Resetting blacklists to their default value;
+            itemsCopy.BLACKLIST = ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
+            itemsCopy.BLACKLIST_SW = [];
+        }
+        
+        itemsCopy.CURRENT_PRICING_INDEX = 0;
+        itemsCopy.SUBMIT_PRICES_PROCESS = false;
+        itemsCopy.NEXT_PAGE_INDEX = 0;
+        itemsCopy.AUTOPRICER_STATUS = "Inactive";
+        itemsCopy.START_AUTOPRICING_PROCESS = false;
+        itemsCopy.NEOPETS_SECURITY_PIN = "";
+
+        if(!items.SHOULD_SHARE_ATTIC_LAST_REFRESH){
+            itemsCopy.ATTIC_LAST_REFRESH_MS = undefined;
+        }
+
+        itemsCopy.ATTIC_PREV_NUM_ITEMS = 0;
+
+        // Sharing item history;
+        if(!items.SHOULD_SHARE_EMAIL){
+            itemsCopy.EMAIL_TEMPLATE = "";
+            itemsCopy.EMAIL_USER_ID = "";
+            itemsCopy.EMAIL_SERVICE_ID = "";
+        }
+
+        // Sharing item history;
+        if(!items.SHOULD_SHARE_HISTORY){
+            itemsCopy.ITEM_HISTORY = [];
+        }
+
+        itemsCopy.UPDATE_DATE = "";
+
+        const jsonString = JSON.stringify(itemsCopy);
         const blob = new Blob([jsonString], {type : "application/json"});
         const currentDate = FormatDateToCustomFormat(new Date());
 
@@ -42,7 +87,6 @@ chrome.storage.local.get(null, function(items) {
 
             try {
                 var jsonData = JSON.parse(fileContent);
-                console.log(jsonData == items);
                 chrome.storage.local.set(jsonData);
                 window.alert("All options have imported successfully!\n\nThank you for continuing to use NeoBuyer+!");
             } catch {
@@ -53,3 +97,4 @@ chrome.storage.local.get(null, function(items) {
         reader.readAsText(selectedFile); // Read the file as text
     })
 });
+
