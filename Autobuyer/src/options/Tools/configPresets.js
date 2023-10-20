@@ -40,8 +40,13 @@ chrome.storage.local.get(null, function(items) {
         itemsCopy.NEXT_PAGE_INDEX = 0;
         itemsCopy.AUTOPRICER_STATUS = "Inactive";
         itemsCopy.START_AUTOPRICING_PROCESS = false;
-        itemsCopy.NEOPETS_SECURITY_PIN = "";
 
+        // Sharing PIN;
+        if(!items.SHOULD_SHARE_PIN){
+            itemsCopy.NEOPETS_SECURITY_PIN = "";
+        }
+
+        // Sharing last refresh time;
         if(!items.SHOULD_SHARE_ATTIC_LAST_REFRESH){
             itemsCopy.ATTIC_LAST_REFRESH_MS = undefined;
         }

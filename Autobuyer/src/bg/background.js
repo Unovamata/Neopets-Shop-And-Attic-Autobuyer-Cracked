@@ -95,6 +95,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_SHARE_RESTOCK_LIST: false,
 			SHOULD_SHARE_SHOP_STOCK: false,
 			SHOULD_SHARE_BLACKLISTS: false,
+			SHOULD_SHARE_PIN: false,
 			SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
 			SHOULD_SHARE_EMAIL: false,
 			SHOULD_SHARE_HISTORY: false,

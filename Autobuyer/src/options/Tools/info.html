@@ -48,7 +48,13 @@
                         </thead>
                         <tr>
                             <td>Share Store Numbers to Cycle:
-                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include the 'Store Numbers to Cycle Through When Stocked' data.
+                                    <br><br>
+                                    This option is only included if you are concerned about sharing this information, as users may be able to match your shop's stock with the stores you browse.
+                                    <br><br>
+                                    <a>This data may be considered potentially identifiable.<a>
+                                </span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -59,7 +65,11 @@
                         </tr>
                         <tr>
                             <td>Share Buyable Items List:
-                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include your 'Restock List' data.
+                                    <br><br>
+                                    <a>This is not identifiable information.</a>
+                                </span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -70,7 +80,11 @@
                         </tr>
                         <tr>
                             <td>Share Shop Stock:
-                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include your entire 'Shop Inventory' data.
+                                    <br><br>
+                                    <a>This is HIGHLY identifiable information.</a>
+                                </span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -81,7 +95,11 @@
                         </tr>
                         <tr>
                             <td>Share Blacklists:
-                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include your 'Blacklist' data.
+                                    <br><br>
+                                    <a>This is not identifiable information.</a>
+                                </span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -91,8 +109,33 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>Share Neopets Security PIN:
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include your Neopets' account PIN.
+                                    <br><br>
+                                    Only share this information between local sessions of NeoBuyer+ if possible.
+                                    <br><br>
+                                    <a>This is HIGHLY identifiable information.</a><br><br>
+                                    <a>You could potentially get frozen if you share this!</a><br><br>
+                                    <a>Please proceed with caution.</a>
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHARE_PIN" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Share Attic Last Refresh Time:
-                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include the 'Last Restock Time in NST' data.
+                                    <br><br>
+                                    This option is only included if you are concerned about sharing this information, as users may be able to match your account based on Trading Post lots.
+                                    <br><br>
+                                    <a>This data may be considered potentially identifiable.<a>
+                                </span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -103,7 +146,13 @@
                         </tr>
                         <tr>
                             <td>Share Emailjs Data:
-                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include the 'Send Email After Purchase Using Emailjs'.
+                                    <br><br>
+                                    To be clear, this is NOT your email address, this is the data you loaded into the Emailjs fields in the AutoBuyer pages.
+                                    <br><br>
+                                    <a>This is not identifiable information.</a>
+                                </span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -114,7 +163,13 @@
                         </tr>
                         <tr>
                             <td>Share Purchased Items History:
-                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include your entire 'Purchase History'.
+                                    <br><br>
+                                    <a>This is HIGHLY identifiable information as it includes your username and purchase dates.</a><br><br>
+                                    <a>You could potentially get frozen if you share this!</a><br><br>
+                                    <a>Please proceed with caution.</a>
+                                </span>
                             </td>
                             <td>
                                 <label class="switch">

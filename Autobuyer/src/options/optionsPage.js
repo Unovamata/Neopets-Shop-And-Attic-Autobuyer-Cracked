@@ -535,6 +535,8 @@ function setSHOULD_SHARE_SHOP_STOCK(value) { chrome.storage.local.set({ SHOULD_S
 
 function setSHOULD_SHARE_BLACKLISTS(value) { chrome.storage.local.set({ SHOULD_SHARE_BLACKLISTS: value }, (function () {})) }
 
+function setSHOULD_SHARE_PIN(value) { chrome.storage.local.set({ SHOULD_SHARE_PIN: value }, (function () {})) }
+
 function setSHOULD_SHARE_ATTIC_LAST_REFRESH(value) { chrome.storage.local.set({ SHOULD_SHARE_ATTIC_LAST_REFRESH: value }, (function () {})) }
 
 function setSHOULD_SHARE_EMAIL(value) { chrome.storage.local.set({ SHOULD_SHARE_EMAIL: value }, (function () {})) }
@@ -749,6 +751,11 @@ $("#SHOULD_SHARE_BLACKLISTS").bind("input propertychange", (function() {
     setSHOULD_SHARE_BLACKLISTS(isChecked);
 }))
 
+$("#SHOULD_SHARE_PIN").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_PIN").is(":checked");
+    setSHOULD_SHARE_PIN(isChecked);
+}))
+
 $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").bind("input propertychange", (function() {
     const isChecked = $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").is(":checked");
     setSHOULD_SHARE_ATTIC_LAST_REFRESH(isChecked);
@@ -890,6 +897,7 @@ resetButton.onclick = function(_) {
     SHOULD_SHARE_RESTOCK_LIST: false,
     SHOULD_SHARE_SHOP_STOCK: false,
     SHOULD_SHARE_BLACKLISTS: false,
+    SHOULD_SHARE_PIN: false,
     SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
     SHOULD_SHARE_EMAIL: false,
     SHOULD_SHARE_HISTORY: false,
@@ -1004,6 +1012,7 @@ resetButton.onclick = function(_) {
         $("#SHOULD_SHARE_RESTOCK_LIST").prop("checked", _.SHOULD_SHARE_RESTOCK_LIST),
         $("#SHOULD_SHARE_SHOP_STOCK").prop("checked", _.SHOULD_SHARE_SHOP_STOCK),
         $("#SHOULD_SHARE_BLACKLISTS").prop("checked", _.SHOULD_SHARE_BLACKLISTS),
+        $("#SHOULD_SHARE_PIN").prop("checked", _.SHOULD_SHARE_PIN),
         $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").prop("checked", _.SHOULD_SHARE_ATTIC_LAST_REFRESH),
         $("#SHOULD_SHARE_EMAIL").prop("checked", _.SHOULD_SHARE_EMAIL),
         $("#SHOULD_SHARE_HISTORY").prop("checked", _.SHOULD_SHARE_HISTORY),
