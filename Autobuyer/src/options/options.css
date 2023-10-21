@@ -291,23 +291,3 @@ b {
     font-family: 'Cafeteria', sans-serif;
     font-size: 20px;
 }
-
-.class-Name {
-    width: 300px;
-}
-
-.class-Rarity {
-    width: 10px;
-}
-
-.class-Price {
-    width: 200px;
-}
-
-.class-JellyNeo {
-    width: 20px;
-}
-
-.class-DateTime {
-    width: 100px;
-}

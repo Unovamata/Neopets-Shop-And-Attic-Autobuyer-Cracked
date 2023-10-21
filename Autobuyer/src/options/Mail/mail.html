@@ -15,20 +15,46 @@
                     Whenever you see a notification in your mail, it means a new message from the developer.<br>
                     <i>Please read these messages promptly</i> as they contain vital information about the extension, including TNT policy changes, updates, and important reminders.
                 </span>
+
                 <br><br>
 
-                
-                <div class="message">
-                    <a>Friday, October 20 2023</a><br>
-
-                    Test message...
-
+                <div>
+                    <button class="button" id="stock"><sub></sub> Inbox <sup>beta</sup></button>
+                    <button class="tablinks button" id="message-open">Message</button>
                 </div>
+                
+                <center>
+                    <table id="inbox">
+                        <thead>
+                            <th class="mail-id">ID</th>
+                            <th class="mail-author">Author</th>
+                            <th class="mail-date">Date</th>
+                            <th class="mail-subject">Subject</th>
+                            <th class="mail-read">Read</th>
+                        </thead>
+                        <tr class="percentage">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>10/20/2023</td>
+                            <td>Test Subject</td>
+                            <td>
+                                <a>Read</a>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                </center>
+                
 
+                <div id="message">
+                    Checking For New NeoBuyer+ Mail...<img id="loading" style="width: 1.6%; display: inline-block;" src ="../../toolbar/loading.gif"></img>
+                </div>
             </div>
         </div>
     </body>
 
+    <script src="neoBuyerMail.js"></script>
     <script src="../../toolbar.js"></script>
+    
 
 </html>
