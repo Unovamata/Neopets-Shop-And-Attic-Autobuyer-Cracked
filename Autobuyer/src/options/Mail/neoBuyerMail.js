@@ -1,18 +1,4 @@
-const url = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html"; // Replace with the URL you want to ping
-
-fetch(url)
-  .then(response => response.text())
-  .then(htmlContent => {
-    // 'html' contains the HTML content of the site
-    console.log(htmlContent);
-
-    var message = document.getElementById("message");
-
-    message.innerHTML = htmlContent;
-
-}).catch(error => {
-    console.error("Error:", error);
-});
+const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html"; // Replace with the URL you want to ping
 
 class Email {
     constructor(ID, Author, Date, Subject, Contents){
@@ -24,26 +10,48 @@ class Email {
     }
 }
 
-var testEmail = new Email(0, "Unovamata", "10/20/2023", "Test", "Test");
 
-var inbox = document.getElementById("inbox");
+fetch(emailURL)
+  .then(response => response.text())
+  .then(htmlContent => {
+    // 'html' contains the HTML content of the site
+    console.log(htmlContent);
 
-var newEmailRow = inbox.insertRow();
+    var ID = document.getElementById("id");
+    var author = document.getElementById("author");
+    var date = document.getElementById("date");
+    var subject = document.getElementById("subject");
+    var contents = document.getElementById("contents");
 
-var emailIDCell = newEmailRow.insertCell(0);
-emailIDCell.textContent = testEmail.ID;
+    //message.innerHTML = htmlContent;
 
-var emailAuthorCell = newEmailRow.insertCell(1);
-emailAuthorCell.textContent = testEmail.Author;
+    var testEmail = new Email(ID, author, date, subject, contents);
+    
+    InsertNewEmailRow(testEmail);
 
-var emailDateCell = newEmailRow.insertCell(2);
-emailDateCell.textContent = testEmail.Date;
+}).catch(error => {
+    console.error("Error:", error);
+});
 
-var emailSubjectCell = newEmailRow.insertCell(3);
-emailSubjectCell.textContent = testEmail.Subject;
+function InsertNewEmailRow(email){
+    var inbox = document.getElementById("inbox");
 
-var emailReadCell = newEmailRow.insertCell(4);
-emailReadCell.textContent = "Read";
+    var newEmailRow = inbox.insertRow();
 
+    var emailIDCell = newEmailRow.insertCell(0);
+    emailIDCell.textContent = email.ID;
 
-inbox.appendChild(newEmailRow);
+    var emailAuthorCell = newEmailRow.insertCell(1);
+    emailAuthorCell.textContent = email.Author;
+
+    var emailDateCell = newEmailRow.insertCell(2);
+    emailDateCell.textContent = email.Date;
+
+    var emailSubjectCell = newEmailRow.insertCell(3);
+    emailSubjectCell.textContent = email.Subject;
+
+    var emailReadCell = newEmailRow.insertCell(4);
+    emailReadCell.textContent = "Read";
+
+    inbox.appendChild(newEmailRow);
+}
