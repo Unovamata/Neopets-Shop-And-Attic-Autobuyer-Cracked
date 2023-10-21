@@ -212,12 +212,16 @@ table tr.checked-row td {
     width: 100px;
 }
 
+.mail-entry{
+    max-width: 0.5px;
+}
+
 .mail-id{
     max-width: 0.5px;
 }
 
 .mail-author{
-    max-width: 0.5px;
+    max-width: 0.1px;
 }
 
 .mail-date{
@@ -230,4 +234,9 @@ table tr.checked-row td {
 
 .mail-read{
     width: 100px;
+}
+
+.mail-inbox{
+    width: 30%;
+    height: 30%;
 }

@@ -9,24 +9,27 @@
 </head>
     <body>
         <div class="center">
-            <div class="enter-info">NeoBuyer+ Mail</div><br>
-            <div class="category-info">NeoBuyer+ Notifications
-                <br><span class="sub autosaved">
+            <div class="enter-info">NeoBuyer+ Mail <sub></sub><sup>beta</sup></div>
+            <div class="category-info">NeoBuyer+ Notifications<br>
+                <span class="sub autosaved">
                     Whenever you see a notification in your mail, it means a new message from the developer.<br>
                     <i>Please read these messages promptly</i> as they contain vital information about the extension, including TNT policy changes, updates, and important reminders.
-                </span>
+                </span><br><br>
 
-                <br><br>
+                <a id="loading-messages">
+                    Checking For New NeoBuyer+ Mail...<img id="loading" style="width: 1.6%; display: inline-block;" src ="../../toolbar/loading.gif"></img>
+                </a>
 
-                <div>
-                    <button class="button" id="stock"><sub></sub> Inbox <sup>beta</sup></button>
-                    <button class="tablinks button" id="message-open">Message</button>
+                <div id="message-container">
+                    <div id="message"></div>
+
+                    <button class="autobuyerButton" id="return-to-inbox">Go Back to Inbox</button>
                 </div>
-                
+
                 <center>
                     <table id="inbox">
                         <thead>
-                            <th class="mail-id">ID</th>
+                            <th class="mail-entry">Entry</th>
                             <th class="mail-author">Author</th>
                             <th class="mail-date">Date</th>
                             <th class="mail-subject">Subject</th>
@@ -34,12 +37,10 @@
                         </thead>
                     </table>
                 </center>
-                
-
-                <div id="message">
-                    Checking For New NeoBuyer+ Mail...<img id="loading" style="width: 1.6%; display: inline-block;" src ="../../toolbar/loading.gif"></img>
-                </div>
             </div>
+
+            <br><br>
+            <center><button id="reset" class="button reset">Delete All Emails</button></center>
         </div>
     </body>
 
