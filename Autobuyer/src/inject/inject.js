@@ -242,8 +242,8 @@ function topLevelTurbo() {
                 maxSoldOutRefresh = 100,
                 minInventoryRefreshInterval = 5000, // 5 seconds
                 maxInventoryRefreshInterval = 5100, // 5.1 seconds
-                minHagglingTimeout = minOCRDetectionInterval / 2,
-                maxHagglingTimeout = maxOCRDetectionInterval / 2,
+                minHagglingTimeout = minOCRDetectionInterval,
+                maxHagglingTimeout = maxOCRDetectionInterval,
                 isRunningOnScheduledTime = false,
                 isBannerDisplaying = !1,
                 confirmWindowInteral = 50;
@@ -304,8 +304,9 @@ function topLevelTurbo() {
                             if(isEnteringOffer){
                                 // Haggling action;
                                 var hagglingTimeout = Math.random() * (maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout;
+                                console.log(hagglingTimeout);
 
-                                setTimeout(PerformHaggling(), hagglingTimeout);
+                                setTimeout(PerformHaggling, hagglingTimeout);
 
                                 function PerformHaggling(){
                                     // The asked price message can change, that's why the complexity of this operation;
@@ -400,7 +401,7 @@ function topLevelTurbo() {
 
                                     // Define weights for moving coordinates based on darkness
                                     var weightMedium = 3.37; // Medium adjustment for medium darkness
-                                    var weightDark = 0.65; // Heavily adjust for darkest pixels
+                                    var weightDark = 0.68; // Heavily adjust for darkest pixels
 
                                     // Calculate the x and y coordinates based on the darkest pixel
                                     var x = darkestPixelIndex % canvas.width;
@@ -464,7 +465,7 @@ function topLevelTurbo() {
 
                                         // If it's autoclicking the captcha, send the event and beep message
                                         if (isClickingCaptcha) {
-                                            /*element.dispatchEvent(mouseClickEvent);*/
+                                            element.dispatchEvent(mouseClickEvent);
                                             SendBeepMessage();
                                         }
 
