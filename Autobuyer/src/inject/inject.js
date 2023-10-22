@@ -357,49 +357,68 @@ function topLevelTurbo() {
                             function(captchaElement, TriggerClickEventCaptcha) {
                                 var captchaImage = new Image();
                                 captchaImage.src = captchaElement;
-                            
+                                
                                 captchaImage.onload = function() {
-                                    imageLoadingTime = performance.now();
                                     var canvas = document.createElement("canvas");
                                     canvas.width = captchaImage.width;
                                     canvas.height = captchaImage.height;
                                     var context = canvas.getContext("2d");
                                     context.drawImage(captchaImage, 0, 0);
-                                    
+
                                     var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
                                     var minLuminance = 100; // Minimum luminance threshold
                                     var darkestPixelIndex = 0;
-                                    var influencePower = 0.5; // Adjust this value for influence strength
-                                    
+                                    var maxDarkness = 0; // Track the maximum darkness found
+                                    var maxAdjustmentDistance = 17; // Adjust this value as needed
+
                                     for (var i = 0; i < imageData.data.length; i += 4) {
+                                        // Calculate luminance based on RGB values.
                                         var luminance = (Math.max(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2]) +
-                                            Math.min(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])) / 510;
+                                                        Math.min(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])) / 510;
                                     
+                                        // Check if the current pixel is darker than the darkest found so far.
                                         if (luminance < minLuminance) {
                                             minLuminance = luminance;
-                                            darkestPixelIndex = i / 4; // Dividing by 4 because we're doing +4 increments;
+                                            darkestPixelIndex = i / 4; // Dividing by 4 because we're iterating over RGBA values.
+                                        }
                                     
-                                            var x = darkestPixelIndex % canvas.width;
-                                            var y = Math.floor(darkestPixelIndex / canvas.width);
+                                        // Calculate the x and y coordinates of the current pixel
+                                        var xCurrent = i / 4 % canvas.width;
+                                        var yCurrent = Math.floor(i / 4 / canvas.width);
                                     
-                                            // Calculate the influence on the main pixel
-                                            var deltaX = (x - mainPixelX) * influencePower;
-                                            var deltaY = (y - mainPixelY) * influencePower;
+                                        // Calculate the distance between the current pixel and the darkest pixel
+                                        var distance = Math.sqrt(Math.pow(xCurrent - x, 2) + Math.pow(yCurrent - y, 2));
                                     
-                                            // Apply the influence
-                                            mainPixelX += deltaX;
-                                            mainPixelY += deltaY;
+                                        // Check if the pixel is within the maximum adjustment distance
+                                        if (distance <= maxAdjustmentDistance) {
+                                            // Update maxDarkness
+                                            if (luminance < maxDarkness) {
+                                                maxDarkness = luminance;
+                                            }
                                         }
                                     }
-                                    
-                                    // X & Y coordinates to trigger the click event;
-                                    var mainPixelX = darkestPixelIndex % canvas.width;
-                                    var mainPixelY = Math.floor(darkestPixelIndex / canvas.width);
-                                    
-                                    TriggerClickEventCaptcha(mainPixelX, mainPixelY);
 
-                                    var endTime = performance.now();
-                                    console.log("Loading took: " + (endTime - imageLoadingTime) + "ms...");
+                                    // Define weights for moving coordinates based on darkness
+                                    var weightMedium = 3.37; // Medium adjustment for medium darkness
+                                    var weightDark = 0.65; // Heavily adjust for darkest pixels
+
+                                    // Calculate the x and y coordinates based on the darkest pixel
+                                    var x = darkestPixelIndex % canvas.width;
+                                    var y = Math.floor(darkestPixelIndex / canvas.width);
+
+                                    // Calculate the adjustment factor based on darkness
+                                    var adjustmentFactor = (luminance - maxDarkness) < 0.51 ? weightMedium : weightDark;
+
+                                    // Adjust x and y coordinates
+                                    x += adjustmentFactor;
+                                    y += adjustmentFactor;
+
+                                    // Ensure x and y are within bounds
+                                    x = Math.max(0, Math.min(x, canvas.width - 1));
+                                    y = Math.max(0, Math.min(y, canvas.height - 1));
+
+                                    // X & Y coordinates to trigger the click event;
+                                    TriggerClickEventCaptcha(x, y);
                                 };
                             }
 
@@ -445,7 +464,7 @@ function topLevelTurbo() {
 
                                         // If it's autoclicking the captcha, send the event and beep message
                                         if (isClickingCaptcha) {
-                                            element.dispatchEvent(mouseClickEvent);
+                                            /*element.dispatchEvent(mouseClickEvent);*/
                                             SendBeepMessage();
                                         }
 
@@ -454,8 +473,8 @@ function topLevelTurbo() {
                                             // Create the highlighter element
                                             const highlighter = document.createElement("img");
                                             highlighter.src = chrome.runtime.getURL("icons/circle.svg");
-                                            highlighter.style.height = "14px";
-                                            highlighter.style.width = "14px";
+                                            highlighter.style.height = "4px";
+                                            highlighter.style.width = "4px";
                                             highlighter.style.position = "absolute";
                                             highlighter.style.top = Math.round(highlightTop - 7) + "px";
                                             highlighter.style.left = Math.round(highlightLeft - 7) + "px";
@@ -1029,17 +1048,20 @@ function topLevelTurbo() {
                         itemProfits.push(-99999999);
                     } else {
                         const itemData = item_db[itemID];
-                        console.log(itemData["Price"]);
-
-                        if (itemData["Rarity"] == undefined || itemData["Price"] == undefined) {
-                            console.warn("Item not found in the database or price not available.");
+                        
+                        try{
+                            if (itemData["Rarity"] == undefined || itemData["Price"] == undefined) {
+                                console.warn("Item not found in the database or price not available.");
+                                itemProfits.push(buyUnknownItemsIfProfitMargin);
+                            } else {
+                                const itemPrice = itemData.Price;
+                                const userPrice = parseInt(itemPrices[itemIDs.indexOf(itemID)]);
+                                const profit = itemPrice - userPrice;
+                                itemProfits.push(profit);
+                            }
+                        } catch {
                             itemProfits.push(buyUnknownItemsIfProfitMargin);
-                        } else {
-                            const itemPrice = itemData.Price;
-                            const userPrice = parseInt(itemPrices[itemIDs.indexOf(itemID)]);
-                            const profit = itemPrice - userPrice;
-                            itemProfits.push(profit);
-                        }
+                        }  
                     }
                 }
             
