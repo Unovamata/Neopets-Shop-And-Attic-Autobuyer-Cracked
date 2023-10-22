@@ -359,35 +359,47 @@ function topLevelTurbo() {
                                 captchaImage.src = captchaElement;
                             
                                 captchaImage.onload = function() {
+                                    imageLoadingTime = performance.now();
                                     var canvas = document.createElement("canvas");
                                     canvas.width = captchaImage.width;
                                     canvas.height = captchaImage.height;
                                     var context = canvas.getContext("2d");
                                     context.drawImage(captchaImage, 0, 0);
-                            
+                                    
                                     var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
                                     var minLuminance = 100; // Minimum luminance threshold
                                     var darkestPixelIndex = 0;
-                            
+                                    var influencePower = 0.5; // Adjust this value for influence strength
+                                    
                                     for (var i = 0; i < imageData.data.length; i += 4) {
-                                        /* First, we're taking the RBG values of the image and then converting them to HSV values,
-                                         * The sum of these values represents darkest and brightest colors,
-                                         * After that, we normalize the sum by dividing it to 510, making the values range from 0 to 1,
-                                         * Lastly, we take the number closest to 0, where 1 is the brightest color and 0 the darkest 
-                                         * colors respectively.
-                                         */
                                         var luminance = (Math.max(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2]) +
                                             Math.min(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])) / 510;
-                                        
-                                        // Getting the darkest pixel;
+                                    
                                         if (luminance < minLuminance) {
                                             minLuminance = luminance;
-                                            darkestPixelIndex = i / 4; // Dividing by 4 because we're doing + 4 increments;
+                                            darkestPixelIndex = i / 4; // Dividing by 4 because we're doing +4 increments;
+                                    
+                                            var x = darkestPixelIndex % canvas.width;
+                                            var y = Math.floor(darkestPixelIndex / canvas.width);
+                                    
+                                            // Calculate the influence on the main pixel
+                                            var deltaX = (x - mainPixelX) * influencePower;
+                                            var deltaY = (y - mainPixelY) * influencePower;
+                                    
+                                            // Apply the influence
+                                            mainPixelX += deltaX;
+                                            mainPixelY += deltaY;
                                         }
                                     }
                                     
                                     // X & Y coordinates to trigger the click event;
-                                    TriggerClickEventCaptcha(darkestPixelIndex % canvas.width, Math.floor(darkestPixelIndex / canvas.width));
+                                    var mainPixelX = darkestPixelIndex % canvas.width;
+                                    var mainPixelY = Math.floor(darkestPixelIndex / canvas.width);
+                                    
+                                    TriggerClickEventCaptcha(mainPixelX, mainPixelY);
+
+                                    var endTime = performance.now();
+                                    console.log("Loading took: " + (endTime - imageLoadingTime) + "ms...");
                                 };
                             }
 
@@ -1139,33 +1151,6 @@ function topLevelTurbo() {
             function AddCSSStyle(e) {
                 const t = document.createElement("style");
                 t.textContent = e, document.head.append(t)
-            }
-
-            function We(e, t, n) {
-                e /= 255, t /= 255, n /= 255;
-                var o, r, i = Math.max(e, t, n),
-                    a = Math.min(e, t, n),
-                    c = (i + a) / 2;
-                if (i == a) o = r = 0;
-                else {
-                    var u = i - a;
-                    switch (r = c > .5 ? u / (2 - i - a) : u / (i + a), i) {
-                        case e:
-                            o = (t - n) / u + (t < n ? 6 : 0);
-                            break;
-                        case t:
-                            o = (n - e) / u + 2;
-                            break;
-                        case n:
-                            o = (e - t) / u + 4
-                    }
-                    o /= 6
-                }
-                return {
-                    h: o,
-                    s: r,
-                    l: c
-                }
             }
         }));
     }
