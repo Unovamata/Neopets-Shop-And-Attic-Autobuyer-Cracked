@@ -304,13 +304,15 @@ function topLevelTurbo() {
                             if(isEnteringOffer){
                                 // Haggling action;
                                 var hagglingTimeout = Math.random() * (maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout;
-                                console.log(hagglingTimeout);
 
                                 setTimeout(PerformHaggling, hagglingTimeout);
 
                                 function PerformHaggling(){
                                     // The asked price message can change, that's why the complexity of this operation;
-                                    var askedPrice = Number(new RegExp("[0-9|,]+ Neopoints").exec(document.getElementById("shopkeeper_makes_deal").innerText)[0].replace(" Neopoints", "").replaceAll(",", ""));
+                                    var shopkeeperElement = document.getElementById("shopkeeper_makes_deal");
+                                    var boldElement = shopkeeperElement.querySelector("b");
+
+                                    var askedPrice = Number(new RegExp("[0-9|,]+ Neopoints").exec(boldElement.textContent).replace(" Neopoints", "").replaceAll(",", ""));
 
                                     // Choose between 2 haggling algorithms;
                                     function calculateRandomHagglingValue(baseValue) {
@@ -360,140 +362,128 @@ function topLevelTurbo() {
                                 captchaImage.src = captchaElement;
                                 
                                 captchaImage.onload = function() {
+                                    // Creating a new image for reference;
                                     var canvas = document.createElement("canvas");
                                     canvas.width = captchaImage.width;
                                     canvas.height = captchaImage.height;
+
                                     var context = canvas.getContext("2d");
                                     context.drawImage(captchaImage, 0, 0);
-
                                     var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                                    var minLuminance = 100; // Minimum luminance threshold
-                                    var darkestPixelIndex = 0;
-                                    var maxDarkness = 0; // Track the maximum darkness found
-                                    var maxAdjustmentDistance = 17; // Adjust this value as needed
+
+                                    // Color reading and control;
+                                    var minLuminance = 100; // Minimum luminance threshold;
+                                    var adjustmentFactor = 3; // Adjust the darkest pixel by some units;
+
+                                    var x = 0;
+                                    var y = 0;
 
                                     for (var i = 0; i < imageData.data.length; i += 4) {
-                                        // Calculate luminance based on RGB values.
-                                        var luminance = (Math.max(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2]) +
-                                                        Math.min(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])) / 510;
-                                    
-                                        // Check if the current pixel is darker than the darkest found so far.
+                                        var r = imageData.data[i];
+                                        var g = imageData.data[i + 1];
+                                        var b = imageData.data[i + 2];
+
+                                        // Luminance searching with the highest and lowest color thresholds possible;
+                                        var luminance = (Math.max(r, g, b) + Math.min(r, g, b)) / 255;
+
+                                        // Check if the current pixel is darker than the darkest found.
                                         if (luminance < minLuminance) {
                                             minLuminance = luminance;
-                                            darkestPixelIndex = i / 4; // Dividing by 4 because we're iterating over RGBA values.
-                                        }
-                                    
-                                        // Calculate the x and y coordinates of the current pixel
-                                        var xCurrent = i / 4 % canvas.width;
-                                        var yCurrent = Math.floor(i / 4 / canvas.width);
-                                    
-                                        // Calculate the distance between the current pixel and the darkest pixel
-                                        var distance = Math.sqrt(Math.pow(xCurrent - x, 2) + Math.pow(yCurrent - y, 2));
-                                    
-                                        // Check if the pixel is within the maximum adjustment distance
-                                        if (distance <= maxAdjustmentDistance) {
-                                            // Update maxDarkness
-                                            if (luminance < maxDarkness) {
-                                                maxDarkness = luminance;
-                                            }
+
+                                            // Update coordinates;
+                                            x = i / 4 % canvas.width;
+                                            y = Math.floor(i / 4 / canvas.width);
                                         }
                                     }
 
-                                    // Define weights for moving coordinates based on darkness
-                                    var weightMedium = 3.37; // Medium adjustment for medium darkness
-                                    var weightDark = 0.68; // Heavily adjust for darkest pixels
-
-                                    // Calculate the x and y coordinates based on the darkest pixel
-                                    var x = darkestPixelIndex % canvas.width;
-                                    var y = Math.floor(darkestPixelIndex / canvas.width);
-
-                                    // Calculate the adjustment factor based on darkness
-                                    var adjustmentFactor = (luminance - maxDarkness) < 0.51 ? weightMedium : weightDark;
-
-                                    // Adjust x and y coordinates
+                                    // Adjust x and y coordinates;
                                     x += adjustmentFactor;
                                     y += adjustmentFactor;
 
-                                    // Ensure x and y are within bounds
                                     x = Math.max(0, Math.min(x, canvas.width - 1));
                                     y = Math.max(0, Math.min(y, canvas.height - 1));
 
+                                    console.log(x, y);
+
                                     // X & Y coordinates to trigger the click event;
                                     TriggerClickEventCaptcha(x, y);
+
                                 };
                             }
 
                             // Sending events to the captcha image; IIFE function <-- + ^
-                            (captchaElement.src, (function(o, r) {
+                            (captchaElement.src, (function(x, y) {
                                 var imageLoadStartTime = performance.now(),
                                 adjustedDelay = Math.max(Math.round(Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval - Math.max(imageLoadStartTime - startGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
 
+                                // Clicking the captcha pet;
                                 setTimeout((function() {
-                                    ManageCaptcha(o, r);
+                                    if (isClickingCaptcha) {
+                                        var captchaOffset = CalculateCaptchaOffset(captchaElement);
+                                    
+                                        // Calculating the relative position of the catpcha element;
+                                        var clickX = captchaOffset.x + x;
+                                        var clickY = captchaOffset.y + y;
 
-                                    function ManageCaptcha(left, highlighter) {
-                                         // Cache the frequently used elements
-                                        const element = captchaElement;
-                                        const offset = CalculateCaptchaOffset(element);
-                                        const highlightLeft = Math.round(left + offset.left);
-                                        const highlightTop = Math.round(highlighter + offset.top);
-
-                                        // Checking the offset of the captcha image;
-                                        function CalculateCaptchaOffset(element) {
-                                            let left = 0, top = 0;
-
-                                            while (element && !isNaN(element.offsetLeft) && !isNaN(element.offsetTop)) {
-                                            left += element.offsetLeft - element.scrollLeft;
-                                            top += element.offsetTop - element.scrollTop;
-                                            element = element.offsetParent;
-                                            }
-
-                                            return {
-                                            top: top,
-                                            left: left
-                                            };
-                                        }
-
-                                        // Setting the click event for the captcha;
-                                        const mouseClickEvent = new MouseEvent("click", {
+                                        // Sending the click element;
+                                        var event = new MouseEvent("click", {
                                             view: window,
                                             bubbles: true,
                                             cancelable: true,
-                                            clientX: Math.round(highlightLeft),
-                                            clientY: Math.round(highlightTop)
+                                            clientX: clickX,
+                                            clientY: clickY
                                         });
-
-                                        // If it's autoclicking the captcha, send the event and beep message
-                                        if (isClickingCaptcha) {
-                                            element.dispatchEvent(mouseClickEvent);
-                                            SendBeepMessage();
-                                        }
-
-                                        // And add a small highlighter to the image to analyze;
-                                        if (isAnnotatingImage) {
-                                            // Create the highlighter element
-                                            const highlighter = document.createElement("img");
-                                            highlighter.src = chrome.runtime.getURL("icons/circle.svg");
-                                            highlighter.style.height = "4px";
-                                            highlighter.style.width = "4px";
-                                            highlighter.style.position = "absolute";
-                                            highlighter.style.top = Math.round(highlightTop - 7) + "px";
-                                            highlighter.style.left = Math.round(highlightLeft - 7) + "px";
-                                            highlighter.style.zIndex = "9999999999";
-                                            highlighter.style.pointerEvents = "none";
-                                            
-                                            document.body.appendChild(highlighter);
                                         
-                                            const styles = `
-                                                input[type='image'] {
-                                                filter: contrast(2) grayscale(1);
-                                                }`;
-                                            
-                                            AddCSSStyle(styles);
+                                        var marker = document.createElement("div");
+                                        marker.style.width = "4px";
+                                        marker.style.height = "4px";
+                                        marker.style.background = "red";
+                                        marker.style.borderRadius = "50%";
+                                        marker.style.position = "absolute";
+                                        marker.style.top = clickY + "px";
+                                        marker.style.left = clickX + "px";
+                                        marker.style.zIndex = "9999"; // Ensure it's above other elements
+                                        marker.style.pointerEvents = "none"; // Allow click events to pass through
+
+                                        document.body.appendChild(marker);
+
+                                        //captchaElement.dispatchEvent(event);
+                                    }
+                                    
+                                    // Getting the offset inside the page for the captcha element;
+                                    function CalculateCaptchaOffset(element) {
+                                        let x = 0, y = 0;
+                                    
+                                        while (element) {
+                                            x += element.offsetLeft - element.scrollLeft;
+                                            y += element.offsetTop - element.scrollTop;
+                                            element = element.offsetParent;
                                         }
+                                    
+                                        return { x, y };
                                     }
 
-                                    //console.log("Load script to click image took " + Math.round(performance.now() - currentGlobalTime) + "ms [X: " + o + ", Y: " + r + "]. Image solve took " + Math.round(currentTime - imageLoadingTime) + "ms. Added " + adjustedDelay + "ms to meet minimum. Click then took " + Math.round(performance.now() - currentTime) + "ms.")
+                                    /*if (isAnnotatingImage) {
+                                        // Create the highlighter element
+                                        const highlighter = document.createElement("img");
+                                        highlighter.src = chrome.runtime.getURL("icons/circle.svg");
+                                        highlighter.style.height = "4px";
+                                        highlighter.style.width = "4px";
+                                        highlighter.style.position = "absolute";
+                                        highlighter.style.top = Math.round(clickX) + "px";
+                                        highlighter.style.left = Math.round(clickY) + "px";
+                                        highlighter.style.zIndex = "9999999999";
+                                        highlighter.style.pointerEvents = "none";
+                                        
+                                        document.body.appendChild(highlighter);
+                                    
+                                        const styles = `
+                                            input[type='image'] {
+                                            filter: contrast(2) grayscale(1);
+                                            }`;
+                                        
+                                        AddCSSStyle(styles);
+                                    }*/
                                 }), adjustedDelay)
                             }));
                         }
