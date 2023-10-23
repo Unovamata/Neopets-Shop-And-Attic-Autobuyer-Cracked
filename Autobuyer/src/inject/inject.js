@@ -309,10 +309,10 @@ function topLevelTurbo() {
 
                                 function PerformHaggling(){
                                     // The asked price message can change, that's why the complexity of this operation;
-                                    var shopkeeperElement = document.getElementById("shopkeeper_makes_deal");
-                                    var boldElement = shopkeeperElement.querySelector("b");
-
-                                    var askedPrice = Number(new RegExp("[0-9|,]+ Neopoints").exec(boldElement.textContent).replace(" Neopoints", "").replaceAll(",", ""));
+                                    var shopkeeperElement = document.getElementById("shopkeeper_makes_deal"),
+                                    textInsideElement = shopkeeperElement.textContent,
+                                    match = textInsideElement.match("[0-9|,]+ Neopoints"),
+                                    askedPrice = match[0].replace("Neopoints", "").replaceAll(",", "");
 
                                     // Choose between 2 haggling algorithms;
                                     function calculateRandomHagglingValue(baseValue) {
@@ -356,10 +356,11 @@ function topLevelTurbo() {
 
                             // Finding the darkest pixel in the captcha image
                             captchaElement = document.querySelector('input[type="image"]'), imageLoadingTime = performance.now(),
-
+                            
                             function(captchaElement, TriggerClickEventCaptcha) {
                                 var captchaImage = new Image();
                                 captchaImage.src = captchaElement;
+                                
                                 
                                 captchaImage.onload = function() {
                                     // Creating a new image for reference;
@@ -372,9 +373,8 @@ function topLevelTurbo() {
                                     var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
                                     // Color reading and control;
-                                    var minLuminance = 100; // Minimum luminance threshold;
-                                    var adjustmentFactor = 3; // Adjust the darkest pixel by some units;
-
+                                    var minLuminance = 100; // Minimum luminance threshold;;
+                                    
                                     var x = 0;
                                     var y = 0;
 
@@ -396,14 +396,8 @@ function topLevelTurbo() {
                                         }
                                     }
 
-                                    // Adjust x and y coordinates;
-                                    x += adjustmentFactor;
-                                    y += adjustmentFactor;
-
                                     x = Math.max(0, Math.min(x, canvas.width - 1));
                                     y = Math.max(0, Math.min(y, canvas.height - 1));
-
-                                    console.log(x, y);
 
                                     // X & Y coordinates to trigger the click event;
                                     TriggerClickEventCaptcha(x, y);
@@ -418,12 +412,31 @@ function topLevelTurbo() {
 
                                 // Clicking the captcha pet;
                                 setTimeout((function() {
-                                    if (isClickingCaptcha) {
-                                        var captchaOffset = CalculateCaptchaOffset(captchaElement);
+                                    var captchaOffset = CalculateCaptchaOffset(captchaElement);
                                     
-                                        // Calculating the relative position of the catpcha element;
-                                        var clickX = captchaOffset.x + x;
-                                        var clickY = captchaOffset.y + y;
+                                    // Calculating the relative position of the catpcha element;
+                                    var clickX = captchaOffset.x + x;
+                                    var clickY = captchaOffset.y + y;
+
+                                    if (isClickingCaptcha) {
+                                        var form = document.querySelector('form[action="haggle.phtml"][name="haggleform"]');
+
+                                        var newInput = document.createElement("input");
+                                        newInput.type="hidden";
+                                        newInput.name="x";
+                                        newInput.value=x;
+                                        form.appendChild(newInput);
+                                    
+                                        var newInput = document.createElement("input");
+                                        newInput.type="hidden";
+                                        newInput.name="y";
+                                        newInput.value=y;
+                                        form.appendChild(newInput);
+
+                                        form.addEventListener('submit', function(event) {
+                                            event.preventDefault(); // Prevent the form from actually submitting
+                                            form.submit();
+                                        });
 
                                         // Sending the click element;
                                         var event = new MouseEvent("click", {
@@ -433,57 +446,45 @@ function topLevelTurbo() {
                                             clientX: clickX,
                                             clientY: clickY
                                         });
-                                        
-                                        var marker = document.createElement("div");
-                                        marker.style.width = "4px";
-                                        marker.style.height = "4px";
-                                        marker.style.background = "red";
-                                        marker.style.borderRadius = "50%";
-                                        marker.style.position = "absolute";
-                                        marker.style.top = clickY + "px";
-                                        marker.style.left = clickX + "px";
-                                        marker.style.zIndex = "9999"; // Ensure it's above other elements
-                                        marker.style.pointerEvents = "none"; // Allow click events to pass through
 
-                                        document.body.appendChild(marker);
-
-                                        //captchaElement.dispatchEvent(event);
+                                        captchaElement.dispatchEvent(event);
                                     }
-                                    
-                                    // Getting the offset inside the page for the captcha element;
+
+                                    if (isAnnotatingImage) {
+                                        // Create the highlighter element
+                                        const highlighter = document.createElement("div");
+                                        highlighter.style.width = "12px";
+                                        highlighter.style.height = "12px";
+                                        highlighter.style.background = "red";
+                                        highlighter.style.color = "red";
+                                        highlighter.style.borderRadius = "50%";
+                                        highlighter.style.position = "absolute";
+                                        highlighter.style.top = clickY + "px";
+                                        highlighter.style.left = clickX + "px";
+                                        highlighter.style.zIndex = "9999"; // Ensure it's above other elements
+                                        highlighter.style.pointerEvents = "none"; // Allow click events to pass through
+                                        
+                                        document.body.appendChild(highlighter);
+
+                                        const styles = `
+                                            input[type='image'] {
+                                            filter: contrast(3) grayscale(1);
+                                            }`;
+                                        
+                                        AddCSSStyle(styles);
+                                    }
+
                                     function CalculateCaptchaOffset(element) {
                                         let x = 0, y = 0;
-                                    
+
                                         while (element) {
                                             x += element.offsetLeft - element.scrollLeft;
                                             y += element.offsetTop - element.scrollTop;
                                             element = element.offsetParent;
                                         }
-                                    
+
                                         return { x, y };
                                     }
-
-                                    /*if (isAnnotatingImage) {
-                                        // Create the highlighter element
-                                        const highlighter = document.createElement("img");
-                                        highlighter.src = chrome.runtime.getURL("icons/circle.svg");
-                                        highlighter.style.height = "4px";
-                                        highlighter.style.width = "4px";
-                                        highlighter.style.position = "absolute";
-                                        highlighter.style.top = Math.round(clickX) + "px";
-                                        highlighter.style.left = Math.round(clickY) + "px";
-                                        highlighter.style.zIndex = "9999999999";
-                                        highlighter.style.pointerEvents = "none";
-                                        
-                                        document.body.appendChild(highlighter);
-                                    
-                                        const styles = `
-                                            input[type='image'] {
-                                            filter: contrast(2) grayscale(1);
-                                            }`;
-                                        
-                                        AddCSSStyle(styles);
-                                    }*/
                                 }), adjustedDelay)
                             }));
                         }
@@ -820,10 +821,10 @@ function topLevelTurbo() {
             }
 
             function SendBeepMessage() {
-                chrome.runtime.sendMessage({
+                /*chrome.runtime.sendMessage({
                     neobuyer: "NeoBuyer",
                     type: "Beep"
-                })
+                })*/
             }
 
             function GetStockedItemNumber() {
