@@ -361,47 +361,67 @@ function topLevelTurbo() {
                                 var captchaImage = new Image();
                                 captchaImage.src = captchaElement;
                                 
-                                
                                 captchaImage.onload = function() {
-                                    // Creating a new image for reference;
                                     var canvas = document.createElement("canvas");
                                     canvas.width = captchaImage.width;
                                     canvas.height = captchaImage.height;
-
                                     var context = canvas.getContext("2d");
                                     context.drawImage(captchaImage, 0, 0);
-                                    var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-                                    // Color reading and control;
-                                    var minLuminance = 100; // Minimum luminance threshold;;
-                                    
-                                    var x = 0;
-                                    var y = 0;
+                                    var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                                    var minLuminance = 100; // Minimum luminance threshold
+                                    var darkestPixelIndex = 0;
+                                    var maxDarkness = 0; // Track the maximum darkness found
+                                    var maxAdjustmentDistance = 17; // Adjust this value as needed
 
                                     for (var i = 0; i < imageData.data.length; i += 4) {
-                                        var r = imageData.data[i];
-                                        var g = imageData.data[i + 1];
-                                        var b = imageData.data[i + 2];
+                                        // Calculate luminance based on RGB values.
+                                        var luminance = (Math.max(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2]) +
+                                                        Math.min(imageData.data[i], imageData.data[i + 1], imageData.data[i + 2])) / 510;
 
-                                        // Luminance searching with the highest and lowest color thresholds possible;
-                                        var luminance = (Math.max(r, g, b) + Math.min(r, g, b)) / 255;
-
-                                        // Check if the current pixel is darker than the darkest found.
+                                        // Check if the current pixel is darker than the darkest found so far.
                                         if (luminance < minLuminance) {
                                             minLuminance = luminance;
+                                            darkestPixelIndex = i / 4; // Dividing by 4 because we're iterating over RGBA values.
+                                        }
 
-                                            // Update coordinates;
-                                            x = i / 4 % canvas.width;
-                                            y = Math.floor(i / 4 / canvas.width);
+                                        // Calculate the x and y coordinates of the current pixel
+                                        var xCurrent = i / 4 % canvas.width;
+                                        var yCurrent = Math.floor(i / 4 / canvas.width);
+
+                                        // Calculate the distance between the current pixel and the darkest pixel
+                                        var distance = Math.sqrt(Math.pow(xCurrent - x, 2) + Math.pow(yCurrent - y, 2));
+
+                                        // Check if the pixel is within the maximum adjustment distance
+                                        if (distance <= maxAdjustmentDistance) {
+                                            // Update maxDarkness
+                                            if (luminance < maxDarkness) {
+                                                maxDarkness = luminance;
+                                            }
                                         }
                                     }
 
+                                    // Define weights for moving coordinates based on darkness
+                                    var weightMedium = 3.37; // Medium adjustment for medium darkness
+                                    var weightDark = 0.65; // Heavily adjust for darkest pixels
+
+                                    // Calculate the x and y coordinates based on the darkest pixel
+                                    var x = darkestPixelIndex % canvas.width;
+                                    var y = Math.floor(darkestPixelIndex / canvas.width);
+
+                                    // Calculate the adjustment factor based on darkness
+                                    var adjustmentFactor = (luminance - maxDarkness) < 0.51 ? weightMedium : weightDark;
+
+                                    // Adjust x and y coordinates
+                                    x += adjustmentFactor;
+                                    y += adjustmentFactor;
+
+                                    // Ensure x and y are within bounds
                                     x = Math.max(0, Math.min(x, canvas.width - 1));
                                     y = Math.max(0, Math.min(y, canvas.height - 1));
 
                                     // X & Y coordinates to trigger the click event;
                                     TriggerClickEventCaptcha(x, y);
-
                                 };
                             }
 
@@ -447,14 +467,14 @@ function topLevelTurbo() {
                                             clientY: clickY
                                         });
 
-                                        captchaElement.dispatchEvent(event);
+                                        //captchaElement.dispatchEvent(event);
                                     }
 
                                     if (isAnnotatingImage) {
                                         // Create the highlighter element
                                         const highlighter = document.createElement("div");
-                                        highlighter.style.width = "12px";
-                                        highlighter.style.height = "12px";
+                                        highlighter.style.width = "4px";
+                                        highlighter.style.height = "4px";
                                         highlighter.style.background = "red";
                                         highlighter.style.color = "red";
                                         highlighter.style.borderRadius = "50%";
