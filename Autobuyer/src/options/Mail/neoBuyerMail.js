@@ -38,7 +38,7 @@ fetch(emailURL)
     var author = githubDocument.getElementById("author").textContent;
     var date = githubDocument.getElementById("date").textContent;
     var subject = githubDocument.getElementById("subject").textContent;
-    var title = githubDocument.getElementById("title").textContent;
+    var title = githubDocument.getElementById("title").innerHTML;
     var contents = githubDocument.getElementById("contents").innerHTML;
 
     console.log(title);
