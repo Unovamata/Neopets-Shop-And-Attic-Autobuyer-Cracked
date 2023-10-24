@@ -40,6 +40,8 @@ fetch(emailURL)
     var subject = githubDocument.getElementById("subject").textContent;
     var title = githubDocument.getElementById("title").textContent;
     var contents = githubDocument.getElementById("contents").innerHTML;
+
+    console.log(title);
     
     var extractedEmail = new Email(0, ID, author, date, subject, title, contents);
 
@@ -109,6 +111,7 @@ function InsertNewEmailRow(email){
             authorBox.innerHTML = activeEmail.Author;
             sentDateBox.innerHTML = activeEmail.Date;
             subjectBox.innerHTML = activeEmail.Subject;
+            titleBox.innerHTML = activeEmail.Title;
             messageBox.innerHTML = activeEmail.Contents;
         });
     });
@@ -120,6 +123,7 @@ var messageContainer = document.getElementById("message-container");
 var authorBox = document.getElementById("author");
 var sentDateBox = document.getElementById("sent-date");
 var subjectBox = document.getElementById("subject");
+var titleBox = document.getElementById("message-title");
 var messageBox = document.getElementById("message");
 
 var returnToInboxButton = document.getElementById("return-to-inbox");
