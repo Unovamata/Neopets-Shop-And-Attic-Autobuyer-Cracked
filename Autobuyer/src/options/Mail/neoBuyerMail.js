@@ -1,12 +1,13 @@
 const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html"; // Replace with the URL you want to ping
 
 class Email {
-    constructor(Entry, ID, Author, Date, Subject, Contents){
+    constructor(Entry, ID, Author, Date, Subject, Title, Contents){
         this.Entry = Entry;
         this.ID = ID;
         this.Author = Author;
         this.Date = Date;
         this.Subject = Subject;
+        this.Title = Title;
         this.Contents = Contents;
     }
 }
@@ -33,34 +34,29 @@ fetch(emailURL)
     const parser = new DOMParser();
     const githubDocument = parser.parseFromString(htmlContent, 'text/html');
 
-    // 'html' contains the HTML content of the site
-    console.log(htmlContent);
-
     var ID = githubDocument.getElementById("id").textContent;
     var author = githubDocument.getElementById("author").textContent;
     var date = githubDocument.getElementById("date").textContent;
     var subject = githubDocument.getElementById("subject").textContent;
-    var contents = githubDocument.getElementById("contents").textContent;
-
-    var extractedEmail = new Email(0, ID, author, date, subject, contents);
+    var title = githubDocument.getElementById("title").textContent;
+    var contents = githubDocument.getElementById("contents").innerHTML;
+    
+    var extractedEmail = new Email(0, ID, author, date, subject, title, contents);
 
     getEMAIL_LIST(function (emailList){
-        console.log(emailList);
-
-        for(var i = 0; i < emailList.length; i++){
+        const hasEmail = emailList.some(email => email.ID === ID);
+    
+        if (!hasEmail) {
+            extractedEmail.Entry = emailList.length + 1; // Update the entry number
+            emailList.unshift(extractedEmail); // Add the new email to the beginning of the list
+            console.log(extractedEmail);
+            setEMAIL_LIST(emailList); // Update the storage
+        }
+    
+        for(var i = 0; i < emailList.length; i++) {
             var email = emailList[i];
-            email.Entry = i + 1;
             InsertNewEmailRow(email);
         }
-
-        const hasEmail = [...emailList].some(email => email.ID == ID);
-
-        if(hasEmail){
-            return;
-        }
-
-        emailList.unshift(extractedEmail);
-        setEMAIL_LIST(emailList);
     });
 
     var loading = document.getElementById("loading-messages");
@@ -71,7 +67,7 @@ fetch(emailURL)
 });
 
 var inbox = document.getElementById("inbox");
-var activeEmail= null;
+var activeEmail = null;
 
 function InsertNewEmailRow(email){
     var newEmailRow = inbox.insertRow();
@@ -105,19 +101,26 @@ function InsertNewEmailRow(email){
 
         getEMAIL_LIST(function (emailList){
             activeEmail = emailList[cellIndex - 1];
-
+            
             inbox.style.visibility = "hidden";
             messageContainer.style.visibility = "visible";
             returnToInboxButton.style.visibility = "visible";
-            messageContainer.textContent = activeEmail.Contents;
+            
+            authorBox.innerHTML = activeEmail.Author;
+            sentDateBox.innerHTML = activeEmail.Date;
+            subjectBox.innerHTML = activeEmail.Subject;
+            messageBox.innerHTML = activeEmail.Contents;
         });
     });
 
     inbox.appendChild(newEmailRow);
 }
 
-var messageContainer = document.getElementById("message");
-messageContainer.style.visibility = "hidden";
+var messageContainer = document.getElementById("message-container");
+var authorBox = document.getElementById("author");
+var sentDateBox = document.getElementById("sent-date");
+var subjectBox = document.getElementById("subject");
+var messageBox = document.getElementById("message");
 
 var returnToInboxButton = document.getElementById("return-to-inbox");
 
@@ -126,8 +129,7 @@ returnToInboxButton.addEventListener("click", ShowInbox);
 ShowInbox();
 
 function ShowInbox(){
-    messageContainer.style.visibility = "hidden";
-    messageContainer.textContent = "";
+    //messageContainer.style.visibility = "hidden";
     inbox.style.visibility = "visible";
     returnToInboxButton.style.visibility = "hidden";
 }

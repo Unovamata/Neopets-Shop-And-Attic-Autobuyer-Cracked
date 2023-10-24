@@ -14,19 +14,59 @@
                 <span class="sub autosaved">
                     Whenever you see a notification in your mail, it means a new message from the developer.<br>
                     <i>Please read these messages promptly</i> as they contain vital information about the extension, including TNT policy changes, updates, and important reminders.
-                </span><br><br>
+                </span><br>
 
                 <a id="loading-messages">
                     Checking For New NeoBuyer+ Mail...<img id="loading" style="width: 1.6%; display: inline-block;" src ="../../toolbar/loading.gif"></img>
                 </a>
 
-                <div id="message-container">
-                    <div id="message"></div>
-
-                    <button class="autobuyerButton" id="return-to-inbox">Go Back to Inbox</button>
-                </div>
-
                 <center>
+                    <div id="message-container">
+                        <table class="ignore-alternate-rows" width="100%" cellpadding="6" cellspacing="1" border="0" style="border: 1px solid #000000;">
+                            <tbody>
+                                <tr>
+                                    <td width="100">
+                                        <a>From:</a>
+                                    </td>
+                                    <td bgcolor="#F6F6F6" class="medText">
+                                        <div class="image-container">
+                                            <img src="suap.gif" class="avatar-image">
+                                        </div>
+                                        <div class="text-container">
+                                            [?] <span style="font-weight: bold; color: #FF0000;"><a id="author"></a></span>
+                                            <br>
+                                            <span class="pointer">>></span> This user is a Neofriend.
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a>Sent:</a>
+                                    </td>
+                                    <td bgcolor="#FFFFFF"  class="text-container"><b id="sent-date"><b></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a>Subject:</a>
+                                    </td>
+                                    <td bgcolor="#F6F6F6"  class="text-container"><b id="subject"></b></td>
+                                </tr>
+                                <tr>
+                                    <td nowrap=""><a>Message:</a>
+                                </td>
+                                    <td bgcolor="#FFFFFF" valign="top">
+                                        <div id="message-title"></div>
+                                        <div id="message"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <button class="autobuyerButton" id="return-to-inbox">Go Back to Inbox</button>
+                    </div>
+
+                
                     <table id="inbox">
                         <thead>
                             <th class="mail-entry">Entry</th>

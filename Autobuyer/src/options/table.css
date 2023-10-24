@@ -31,6 +31,16 @@ table td {
     text-align: center;
 }
 
+/* Apply alternating row colors */
+table:not(.ignore-alternate-rows) tr:nth-child(odd) td {
+    background-color: #f0f0f0;
+}
+
+/* Apply the checked-row class with higher specificity */
+table:not(.ignore-alternate-rows) tr.checked-row td {
+    background-color: #c0ffb3;
+}
+
 /* Common properties for .button and .reset */
 .button,
 .reset {
@@ -121,16 +131,6 @@ table td {
 /* Customize the scrollbar buttons (arrows) */
 ::-webkit-scrollbar-button {
     display: none;
-}
-
-/* Apply alternating row colors */
-table tr:nth-child(odd) td {
-    background-color: #f0f0f0;
-}
-
-/* Apply the checked-row class with higher specificity */
-table tr.checked-row td {
-    background-color: #c0ffb3;
 }
 
 .update-notification {
@@ -239,4 +239,31 @@ table tr.checked-row td {
 .mail-inbox{
     width: 30%;
     height: 30%;
+}
+
+table.ignore-alternate-rows td:first-child {
+    background-color: #2196F3;
+    color: white;
+}
+
+.image-container {
+    text-align: center;
+    position: relative;
+    height: 100%;
+}
+  
+.avatar-image {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -6%)
+}
+
+.neofriend-message {
+    
+}
+
+.text-container {
+    text-align: left;
+    padding-left: 7%;
 }
