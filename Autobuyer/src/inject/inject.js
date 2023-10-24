@@ -245,7 +245,7 @@ function topLevelTurbo() {
                 minHagglingTimeout = minOCRDetectionInterval,
                 maxHagglingTimeout = maxOCRDetectionInterval,
                 isRunningOnScheduledTime = false,
-                isBannerDisplaying = !1,
+                isBannerDisplaying = false,
                 confirmWindowInteral = 50;
 
             // Run the AutoBuyer
@@ -621,12 +621,14 @@ function topLevelTurbo() {
                             return selectedName
                         }();
                         
+                        // This code is better to not touch it as it breaks with any change made to it;
                         itemToBuyExtracted ? function(e) {
+                            //Clicking the selected item;
                             if (isClickingItems) {
-                                var t = document.querySelector(`.item-img[data-name="${e}"]`);
-                                //console.log(t);
+                                var itemToBuyElement = document.querySelector(`.item-img[data-name="${e}"]`);
+
                                 setTimeout((function() {
-                                    t.click(), SendBeepMessage()
+                                    itemToBuyElement.click();
                                 }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)
                             }
                         }(itemToBuyExtracted) : ! function() {
@@ -983,16 +985,15 @@ function topLevelTurbo() {
                             } else if (storesToCycle.length === 1) {
                                 window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
                             } else {
-                                var e = false;
-                                storesToCycle.forEach((t, n) => {
-                                    if (window.location.toString().match(/obj_type=(\d+)/)[1] == t) {
-                                        var o = n === storesToCycle.length - 1 ? storesToCycle[0] : storesToCycle[n + 1];
-                                        e = true;
-                                        window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + o;
-                                    }
-                                });
-                                if (!e) {
-                                    window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
+                                const currentShopId = window.location.toString().match(/obj_type=(\d+)/)[1];
+                                const currentIndex = storesToCycle.findIndex(shopId => shopId == currentShopId);
+
+                                if (currentIndex === -1) {
+                                    window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${storesToCycle[0]}`;
+                                } else {
+                                    const nextIndex = currentIndex === storesToCycle.length - 1 ? 0 : currentIndex + 1;
+                                    const nextShopId = storesToCycle[nextIndex];
+                                    window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${nextShopId}`;
                                 }
                             }
                         }, t);
