@@ -133,65 +133,6 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
     display: none;
 }
 
-.update-notification {
-    width: 450px;
-    color: white;
-    text-align: center;
-    border-radius: 5px;
-    padding: 10px;
-    font-family: 'Cafeteria', sans-serif;
-
-    /* Position the tooltip */
-    position: fixed;
-    z-index: 1;
-    right: 10px;
-    bottom: 55px;
-    opacity: 1;
-    animation: slideRight 0.2s ease-out;
-
-    font-size: 20px;
-    text-decoration: none;
-    color: white !important;
-    font-family: 'Cafeteria', sans-serif;
-}
-
-.update-notification a {
-    text-decoration: none;
-    color: white !important;
-    font-family: 'Cafeteria', sans-serif;
-}
-
-@keyframes slideRight {
-    0% {
-        right: -300px;
-        opacity: 1;
-    }
-    100% {
-        right: 0px;
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    0% {
-        opacity: 1;
-        bottom: 55px;
-    }
-    100% {
-        opacity: 0;
-        bottom: 100px;
-        visibility: hidden;
-    }
-}
-
-.update-image {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 15px;
-    width: 20px;
-}
-
 .class-Name {
     width: 300px;
 }

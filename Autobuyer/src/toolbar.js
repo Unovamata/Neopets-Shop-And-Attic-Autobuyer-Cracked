@@ -32,6 +32,9 @@ const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
 const infoUrl = `${srcPath}/options/Tools/info.html`;
 const mailUrl = `${srcPath}/options/Mail/mail.html`;
 
+// Scripts
+const utilsScriptUrl = `${srcPath}/common/utils.js`
+
 
 // content.js
 function injectToolbar() {
@@ -90,7 +93,7 @@ function injectToolbar() {
 
             <a href="${mailUrl}" class = "toolbar-category">
                 <img class="toolbar-icon" src="${mailIconUrl}">
-                <span class="red-dot"></span>
+                <span class="notification-dot"></span>
             Mail </a>
         </div>
     </div>
@@ -98,7 +101,8 @@ function injectToolbar() {
     <div class="toolbar-bottom">
         <span class = "notice-text">This extension is not affiliated to Neopets. Names are owned by Neopets. The software is provided as-is. Use it wisely to avoid freezes with your Neopet account(s).</span>
         <span class = "version-text">${chrome.runtime.getManifest().version}v</span>
-    </div>`;
+    </div>
+    `;
 
     //const toolbarCSS = `<link rel="stylesheet" type="text/css" href="toolbar.css" />`
 
@@ -147,8 +151,27 @@ function getUPDATE_DATE(callback) {
     });
 }
 
+function setIS_NEW_MAIL_INBOX(value) {
+    chrome.storage.local.set({ IS_NEW_MAIL_INBOX: value }, function () {});
+}
+
+function getIS_NEW_MAIL_INBOX(callback) {
+    chrome.storage.local.get(['IS_NEW_MAIL_INBOX'], function (result) {
+        const value = result.IS_NEW_MAIL_INBOX;
+
+        if(value === undefined || value === null){
+            setIS_NEW_MAIL_INBOX("");
+        } 
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 
 //######################################################################################################################################
+
 
 const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
 
@@ -159,7 +182,7 @@ var warningColor = "#ff8214";
 function UpdateNotification(){
     const currentDate = new Date();
     const parsedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDay()}, ${currentDate.getFullYear()}`;
-    //setUPDATE_DATE(""); //DEBUG!!!!
+    setUPDATE_DATE(""); //DEBUG!!!!
 
     getUPDATE_DATE(async function (date){
         // Checking the latest version of the extension daily;
@@ -176,76 +199,28 @@ function UpdateNotification(){
         var parsedVersion = githubLatestVersion.replace("v", "");
         var isLatestVersion = parsedVersion == currentVersion;
 
-        const updateNotification = document.createElement("span");
-        updateNotification.className = "update-notification";
-
-        // Creating the image component;
-        const updateImage = document.createElement("img");
-        updateImage.className = "update-image";
-        updateImage.src = "../../../icons/check.png"; // Replace with your image URL
-
-        // Setting the update status;
-        const updateStatus = document.createElement("a");
-        updateStatus.className = "update-status";
-        updateStatus.textContent = "NeoBuyer+ is up to Date!"
-
         switch(parsedVersion){
             // Github's API can't be reached;
             case 'a':
-                updateNotification.style.backgroundColor = warningColor;
-                updateImage.src = "../../../icons/delete.png";
-                updateStatus.textContent = "Unable to Check for Updates...";
+                CreateNotificationElement(isLatestVersion, warningColor, "Unable to Check for Updates...", "../../../icons/delete.png");
                 isLatestVersion = true; // It can be the latest version for all we know;
             break;
 
             // Unknown error;
             case 'b':
-                updateNotification.style.backgroundColor = errorColor;
-                updateImage.src = "../../../icons/delete.png";
-                updateStatus.textContent = " Update Checker Failed...";
+                CreateNotificationElement(isLatestVersion, errorColor, "Update Checker Failed...", "../../../icons/delete.png");
                 isLatestVersion = true; // It can be the latest version for all we know;
             break;
 
             // Normal version checking;
             default:
                 if(isLatestVersion){
-                    updateNotification.style.backgroundColor = successColor;
+                    CreateNotificationElement(isLatestVersion, successColor);
                     setUPDATE_DATE(parsedDate);
                 } else {
-                    updateNotification.style.backgroundColor = errorColor;
-                    updateImage.src = "../../../icons/delete.png";
-                    updateStatus.textContent = "NeoBuyer+ is Outdated!";
-                    updateStatus.appendChild(document.createElement("br"));
-                    //updateStatus.appendChild(document.createElement("br"));
-                    const updateLink = document.createElement("a");
-                    updateLink.href = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
-                    updateLink.textContent = "Update NeoBuyer";
-                    updateLink.style.fontSize = "26.5px";
-                    updateStatus.appendChild(updateLink);
+                    CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ is Outdated!", "../../../icons/delete.png", true);
                 }
             break;
-        }
-
-        updateNotification.appendChild(updateImage);
-        updateNotification.appendChild(updateStatus);
-        document.body.appendChild(updateNotification);
-
-        // If it's the latest version, then animate the popup;
-        if(isLatestVersion){
-            updateNotification.addEventListener("animationend", () => {
-                var canTrigger = true;
-
-                // Change the animation and the opacity to 0;
-                if (canTrigger) {
-                    setTimeout(() => {
-                        updateNotification.style.animation = "slideUp 2s ease-out";
-
-                        canTrigger = false;
-
-                        updateNotification.style.opacity = 0;
-                    }, 1500);
-                }
-            });
         }
     });
 }
@@ -268,6 +243,120 @@ async function FetchLatestGitHubVersion(apiUrl) {
     } catch (error) {
         return 'b'; // Error in the execution;
     }
+}
+
+var notifications = 0;
+
+function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is up to Date!", imageSrc = "../../../icons/check.png", isOutdated = false){
+    
+    setTimeout(() => {
+        const updateNotification = document.createElement("span");
+        updateNotification.className = "update-notification";
+        notifications += 1.5;
+        /*var animationDelay = 3;
+        updateNotification.style.animationDelay = `${notifications * animationDelay}s`;
+        notifications++;*/
+
+        // Creating the image component;
+        const updateImage = document.createElement("img");
+        updateImage.className = "update-image";
+        updateImage.src = imageSrc; //"../../../icons/check.png"; // Replace with your image URL
+
+        // Setting the update status;
+        const updateStatus = document.createElement("a");
+        updateStatus.className = "update-status";
+        updateStatus.textContent = text;
+
+        updateNotification.style.backgroundColor = color;
+
+        if(isOutdated){
+            updateStatus.appendChild(document.createElement("br"));
+            const updateLink = document.createElement("a");
+            updateLink.href = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
+            updateLink.textContent = "Update NeoBuyer";
+            updateLink.style.fontSize = "26.5px";
+            updateStatus.appendChild(updateLink);
+            
+        }
+
+        updateNotification.appendChild(updateStatus);
+        updateNotification.appendChild(updateImage);
+        document.body.appendChild(updateNotification);
+
+        // If it's the latest version, then animate the popup;
+        if(isLatestVersion){
+            updateNotification.addEventListener("animationend", () => {
+                var canTrigger = true;
+
+                // Change the animation and the opacity to 0;
+                if (canTrigger) {
+                    setTimeout(() => {
+                        updateNotification.style.animation = "slideUp 2s ease-out";
+
+                        canTrigger = false;
+
+                        updateNotification.style.opacity = 0;
+                    }, 1500);
+                }
+            });
+        }
+    }, 1500 * notifications);
+}
+
+const emailCheckURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
+var mailSuccessColor = "#2de52d";
+
+CheckNewMail();
+
+function CheckNewMail(){
+    // Fetching the data from the URL to check for new mails;
+    fetch(emailCheckURL)
+    .then(response => response.text())
+    .then(htmlContent => {
+        const parser = new DOMParser();
+        const githubDocument = parser.parseFromString(htmlContent, 'text/html');
+
+        // Reading the email contents;
+        var ID = githubDocument.getElementById("id").textContent;
+        var author = githubDocument.getElementById("author").textContent;
+        var date = githubDocument.getElementById("date").textContent;
+        var subject = githubDocument.getElementById("subject").textContent;
+        var title = githubDocument.getElementById("title").innerHTML;
+        var contents = githubDocument.getElementById("contents").innerHTML;
+        
+        var extractedEmail = new Email(0, ID, author, date, subject, title, contents);
+
+        getEMAIL_LIST(function (emailList){
+            const hasEmail = emailList.some(email => email.ID === ID);
+        
+            if (!hasEmail) {
+                getSKIP_CURRENT_MAIL(function(skipCurrentEmail){
+                    getCURRENT_MAIL_INDEX(function (currentIndex){
+                        console.log(currentIndex);
+
+                        if(ID != currentIndex){
+                            setSKIP_CURRENT_MAIL(false);
+                            setCURRENT_MAIL_INDEX(ID);
+                        } else {
+                            if(skipCurrentEmail) return;
+                        }
+
+                        CreateNotificationElement(true, mailSuccessColor, "You've Got Mail!");
+                        extractedEmail.Entry = emailList.length + 1; // Update the entry number
+                        emailList.unshift(extractedEmail); // Add the new email to the beginning of the list
+                        setEMAIL_LIST(emailList); // Update the storage
+
+                        var notification = document.getElementsByClassName("notification-dot")[0];
+                        notification.style.visibility = "visible";
+                    });
+                })
+            } else {
+                
+            }
+        });
+    }).catch(error => {
+        console.error("An error ocurred during the execution... Try again later...", error);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {

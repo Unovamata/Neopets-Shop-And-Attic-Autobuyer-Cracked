@@ -99,6 +99,13 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
 			SHOULD_SHARE_EMAIL: false,
 			SHOULD_SHARE_HISTORY: false,
+			SHOULD_SHARE_NEOBUYER_MAILS: false,
+
+			// NeoBuyer+ Mail;
+			EMAIL_LIST: [],
+			IS_NEW_MAIL_INBOX: false,
+			SKIP_CURRENT_MAIL: false,
+			CURRENT_MAIL_INDEX: -1,
 		};
 
 		chrome.storage.local.set(autoPricerDefaultSettings, function (){});

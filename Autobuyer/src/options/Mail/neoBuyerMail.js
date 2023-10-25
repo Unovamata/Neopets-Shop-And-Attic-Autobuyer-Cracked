@@ -3,38 +3,19 @@ const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-A
 fetch(emailURL)
   .then(response => response.text())
   .then(htmlContent => {
-    const parser = new DOMParser();
-    const githubDocument = parser.parseFromString(htmlContent, 'text/html');
+    getSKIP_CURRENT_MAIL(function (isSkippingCurrentMail){
+        var loading = document.getElementById("loading-messages");
+        loading.style.visibility = "hidden";
+        
+        if(isSkippingCurrentMail) return;
 
-    var ID = githubDocument.getElementById("id").textContent;
-    var author = githubDocument.getElementById("author").textContent;
-    var date = githubDocument.getElementById("date").textContent;
-    var subject = githubDocument.getElementById("subject").textContent;
-    var title = githubDocument.getElementById("title").innerHTML;
-    var contents = githubDocument.getElementById("contents").innerHTML;
-
-    console.log(title);
-    
-    var extractedEmail = new Email(0, ID, author, date, subject, title, contents);
-
-    getEMAIL_LIST(function (emailList){
-        const hasEmail = emailList.some(email => email.ID === ID);
-    
-        if (!hasEmail) {
-            extractedEmail.Entry = emailList.length + 1; // Update the entry number
-            emailList.unshift(extractedEmail); // Add the new email to the beginning of the list
-            console.log(extractedEmail);
-            setEMAIL_LIST(emailList); // Update the storage
-        }
-    
-        for(var i = 0; i < emailList.length; i++) {
-            var email = emailList[i];
-            InsertNewEmailRow(email);
-        }
-    });
-
-    var loading = document.getElementById("loading-messages");
-    loading.style.visibility = "hidden";
+        getEMAIL_LIST(function (emailList){
+            for(var i = 0; i < emailList.length; i++) {
+                var email = emailList[i];
+                InsertNewEmailRow(email);
+            }
+        });
+});
 
 }).catch(error => {
     console.error("An error ocurred during the execution... Try again later...", error);
@@ -114,7 +95,18 @@ var deleteEmailsButton = document.getElementById("reset");
 deleteEmailsButton.addEventListener("click", DeleteMails);
 
 function DeleteMails(){
+    getEMAIL_LIST( function (mails){
+        console.log(mails[0]);
+
+        try {
+            setCURRENT_MAIL_INDEX(mails[0].ID);
+        } catch {
+            setCURRENT_MAIL_INDEX(-1);
+        }
+    });
+
     setEMAIL_LIST([]);
+    setSKIP_CURRENT_MAIL(true);
     window.alert("All NeoBuyer+ mails have been successfully deleted!");
     window.location.reload();
 }

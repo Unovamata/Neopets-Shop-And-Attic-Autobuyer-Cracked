@@ -241,7 +241,6 @@ HandleServerErrors();
 //######################################################################################################################################
 // Email management;
 
-
 class Email {
     constructor(Entry, ID, Author, Date, Subject, Title, Contents){
         this.Entry = Entry;
@@ -268,4 +267,37 @@ function getEMAIL_LIST(callback) {
 
 function setEMAIL_LIST(value) {
     chrome.storage.local.set({ EMAIL_LIST: value }, function () {});
+}
+
+// Current Mail Skipping;
+function getSKIP_CURRENT_MAIL(callback) {
+    chrome.storage.local.get(['SKIP_CURRENT_MAIL'], function (result) {
+        var value = result.SKIP_CURRENT_MAIL;
+
+        if(value == undefined) value = false;
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function setSKIP_CURRENT_MAIL(value) {
+    chrome.storage.local.set({ SKIP_CURRENT_MAIL: value }, function () {});
+}
+
+function getCURRENT_MAIL_INDEX(callback) {
+    chrome.storage.local.get(['CURRENT_MAIL_INDEX'], function (result) {
+        var value = result.CURRENT_MAIL_INDEX;
+
+        if(value == undefined) value = -1;
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function setCURRENT_MAIL_INDEX(value) {
+    chrome.storage.local.set({ CURRENT_MAIL_INDEX: value }, function () {});
 }
