@@ -427,6 +427,7 @@ function topLevelTurbo() {
 
                             // Sending events to the captcha image; IIFE function <-- + ^
                             (captchaElement.src, (function(x, y) {
+
                                 var imageLoadStartTime = performance.now(),
                                 adjustedDelay = Math.max(Math.round(Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval - Math.max(imageLoadStartTime - startGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
 
@@ -439,25 +440,6 @@ function topLevelTurbo() {
                                     var clickY = captchaOffset.y + y;
 
                                     if (isClickingCaptcha) {
-                                        var form = document.querySelector('form[action="haggle.phtml"][name="haggleform"]');
-
-                                        var newInput = document.createElement("input");
-                                        newInput.type="hidden";
-                                        newInput.name="x";
-                                        newInput.value=x;
-                                        form.appendChild(newInput);
-                                    
-                                        var newInput = document.createElement("input");
-                                        newInput.type="hidden";
-                                        newInput.name="y";
-                                        newInput.value=y;
-                                        form.appendChild(newInput);
-
-                                        form.addEventListener('submit', function(event) {
-                                            event.preventDefault(); // Prevent the form from actually submitting
-                                            form.submit();
-                                        });
-
                                         // Sending the click element;
                                         var event = new MouseEvent("click", {
                                             view: window,
@@ -467,7 +449,7 @@ function topLevelTurbo() {
                                             clientY: clickY
                                         });
 
-                                        //captchaElement.dispatchEvent(event);
+                                        captchaElement.dispatchEvent(event);
                                     }
 
                                     if (isAnnotatingImage) {
@@ -1031,7 +1013,7 @@ function topLevelTurbo() {
             }
 
             function IsItemAddedToInventory() {
-                return (document.documentElement.textContent || document.documentElement.innerText).includes("has been added to your inventory");
+                return document.documentElement.innerText.includes("has been added to your inventory");
             }
 
             function ProcessSoldOutItem() {
