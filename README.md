@@ -50,6 +50,7 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Better Quickstock.
 - Save and load configuration presets.
 - Almost Abandoned Attic auto-buyer.
+- NeoBuyer+ Mail updates on development.
 
 ## Included Features
 
