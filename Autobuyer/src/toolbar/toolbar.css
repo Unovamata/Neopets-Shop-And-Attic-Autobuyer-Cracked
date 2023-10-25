@@ -190,3 +190,26 @@
     height: 100%;
     background: linear-gradient(to bottom, transparent, #24bdf8);
 }
+  
+.red-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%; /* Creates a circular dot */
+    bottom: 0;
+    right: 0;
+    transform: translate(-540%, 10%);
+    animation: blink 0.9s infinite;
+    display: block;
+}
+
+@keyframes blink{
+    0%, 100%{
+        opacity: 100%;
+        background-color: red;
+    } 50% {
+        opacity: 30%;
+        background-color: rgb(255, 118, 118);
+    }
+}

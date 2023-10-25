@@ -21,6 +21,16 @@
                 </a>
 
                 <center>
+                    <table id="inbox">
+                        <thead>
+                            <th class="mail-entry">Entry</th>
+                            <th class="mail-author">Author</th>
+                            <th class="mail-date">Date</th>
+                            <th class="mail-subject">Subject</th>
+                            <th class="mail-read">Read</th>
+                        </thead>
+                    </table>
+
                     <div id="message-container">
                         <table class="ignore-alternate-rows" width="100%" cellpadding="6" cellspacing="1" border="0" style="border: 1px solid #000000;">
                             <tbody>
@@ -35,7 +45,9 @@
                                         <div class="text-container">
                                             [?] <span style="font-weight: bold; color: #FF0000;"><a id="author"></a></span>
                                             <br>
-                                            <span class="pointer">>></span> This user is a Neofriend.
+                                            <div class="neofriend-message">
+                                                <span class="pointer">>></span> This user is a Neofriend.
+                                            </div>
                                         </div>
                                         
                                     </td>
@@ -62,28 +74,17 @@
                                 </tr>
                             </tbody>
                         </table>
-
-                        <button class="autobuyerButton" id="return-to-inbox">Go Back to Inbox</button>
+                        <div class="inboxButton">
+                            <button class="autobuyerButton" id="return-to-inbox">Go Back to Inbox</button>
+                        </div>
                     </div>
-
-                
-                    <table id="inbox">
-                        <thead>
-                            <th class="mail-entry">Entry</th>
-                            <th class="mail-author">Author</th>
-                            <th class="mail-date">Date</th>
-                            <th class="mail-subject">Subject</th>
-                            <th class="mail-read">Read</th>
-                        </thead>
-                    </table>
                 </center>
             </div>
-
-            <br><br>
             <center><button id="reset" class="button reset">Delete All Emails</button></center>
         </div>
     </body>
 
+    <script src="../../common/utils.js"></script>
     <script src="neoBuyerMail.js"></script>
     <script src="../../toolbar.js"></script>
     

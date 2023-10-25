@@ -236,3 +236,36 @@ function HandleServerErrors() {
 }
 
 HandleServerErrors();
+
+
+//######################################################################################################################################
+// Email management;
+
+
+class Email {
+    constructor(Entry, ID, Author, Date, Subject, Title, Contents){
+        this.Entry = Entry;
+        this.ID = ID;
+        this.Author = Author;
+        this.Date = Date;
+        this.Subject = Subject;
+        this.Title = Title;
+        this.Contents = Contents;
+    }
+}
+
+function getEMAIL_LIST(callback) {
+    chrome.storage.local.get(['EMAIL_LIST'], function (result) {
+        var value = result.EMAIL_LIST;
+
+        if(value == undefined) value = [];
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function setEMAIL_LIST(value) {
+    chrome.storage.local.set({ EMAIL_LIST: value }, function () {});
+}

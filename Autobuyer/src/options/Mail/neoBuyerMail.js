@@ -1,32 +1,4 @@
-const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html"; // Replace with the URL you want to ping
-
-class Email {
-    constructor(Entry, ID, Author, Date, Subject, Title, Contents){
-        this.Entry = Entry;
-        this.ID = ID;
-        this.Author = Author;
-        this.Date = Date;
-        this.Subject = Subject;
-        this.Title = Title;
-        this.Contents = Contents;
-    }
-}
-
-function getEMAIL_LIST(callback) {
-    chrome.storage.local.get(['EMAIL_LIST'], function (result) {
-        var value = result.EMAIL_LIST;
-
-        if(value == undefined) value = [];
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setEMAIL_LIST(value) {
-    chrome.storage.local.set({ EMAIL_LIST: value }, function () {});
-}
+const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
 
 fetch(emailURL)
   .then(response => response.text())
@@ -104,9 +76,9 @@ function InsertNewEmailRow(email){
         getEMAIL_LIST(function (emailList){
             activeEmail = emailList[cellIndex - 1];
             
-            inbox.style.visibility = "hidden";
-            messageContainer.style.visibility = "visible";
-            returnToInboxButton.style.visibility = "visible";
+            inbox.style.display = "none";
+            messageContainer.style.display = "block";
+            returnToInboxButton.style.display = "block";
             
             authorBox.innerHTML = activeEmail.Author;
             sentDateBox.innerHTML = activeEmail.Date;
@@ -133,9 +105,9 @@ returnToInboxButton.addEventListener("click", ShowInbox);
 ShowInbox();
 
 function ShowInbox(){
-    //messageContainer.style.visibility = "hidden";
-    inbox.style.visibility = "visible";
-    returnToInboxButton.style.visibility = "hidden";
+    inbox.style.removeProperty("display");
+    messageContainer.style.display = "none";
+    returnToInboxButton.style.display = "none";
 }
 
 var deleteEmailsButton = document.getElementById("reset");

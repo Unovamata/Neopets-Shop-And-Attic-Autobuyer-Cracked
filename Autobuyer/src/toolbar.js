@@ -89,7 +89,8 @@ function injectToolbar() {
             </div>
 
             <a href="${mailUrl}" class = "toolbar-category">
-                <img  class = "toolbar-icon" src="${mailIconUrl}"> 
+                <img class="toolbar-icon" src="${mailIconUrl}">
+                <span class="red-dot"></span>
             Mail </a>
         </div>
     </div>

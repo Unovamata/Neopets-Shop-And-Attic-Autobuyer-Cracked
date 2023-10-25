@@ -228,10 +228,6 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
     width: 50px;
 }
 
-.Subject{
-    width: 70px;
-}
-
 .mail-read{
     width: 100px;
 }
@@ -239,6 +235,10 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
 .mail-inbox{
     width: 30%;
     height: 30%;
+}
+
+.neofriend-message{
+    font-size: 14px;
 }
 
 table.ignore-alternate-rows td:first-child {
@@ -259,11 +259,21 @@ table.ignore-alternate-rows td:first-child {
     transform: translate(0, -6%)
 }
 
-.neofriend-message {
-
+.inboxButton {
+    padding-top: 40px;
 }
 
 .text-container {
     text-align: left;
     padding-left: 60px;
+}
+
+#message-title{
+    padding-bottom: 2%;
+    font-size: 30px;
+}
+
+#message {
+    text-align: justify;
+    padding-bottom: 2%;
 }
