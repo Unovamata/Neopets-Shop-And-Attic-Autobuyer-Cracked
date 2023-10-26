@@ -47,10 +47,11 @@ function InsertNewEmailRow(email){
     emailReadCell.style.cursor = "pointer";
 
     emailReadCell.addEventListener("click", function(event){
-        var cellIndex = Number(newEmailRow.querySelector("td:first-child").textContent);
-
         getEMAIL_LIST(function (emailList){
-            activeEmail = emailList[cellIndex - 1];
+            var cellIndex = Number(newEmailRow.querySelector("td:first-child").textContent) - 1;
+            var emailIndex = (emailList.length - 1) - cellIndex;
+
+            activeEmail = emailList[emailIndex];
             activeEmail.Read = true;
             setEMAIL_LIST(emailList);
             
@@ -59,6 +60,7 @@ function InsertNewEmailRow(email){
             returnToInboxButton.style.display = "block";
             
             authorBox.innerHTML = activeEmail.Author;
+            idBox.textContent = activeEmail.Entry;
             sentDateBox.innerHTML = activeEmail.Date;
             subjectBox.innerHTML = activeEmail.Subject;
             titleBox.innerHTML = activeEmail.Title;
@@ -75,6 +77,7 @@ var sentDateBox = document.getElementById("sent-date");
 var subjectBox = document.getElementById("subject");
 var titleBox = document.getElementById("message-title");
 var messageBox = document.getElementById("message");
+var idBox = document.getElementById("id-mail");
 
 var returnToInboxButton = document.getElementById("return-to-inbox");
 
@@ -117,7 +120,7 @@ function DeleteMails(){
 
 getCURRENT_MAIL_INDEX(function (currentIndex){
     if(currentIndex != -1){
-        deleteEmailsButton.textContent = "Retrieve Current Latest Email Next Update Check";
+        deleteEmailsButton.textContent = "Get the Latest Email for Next Update Check";
     }
 });
 

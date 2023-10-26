@@ -143,12 +143,10 @@ var successColor = "#2196F3";
 var errorColor = "#f22046";
 var warningColor = "#ff8214";
 
-//setEMAIL_LIST([]);
-
 function UpdateNotification(){
     const currentDate = new Date();
     const parsedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDay()}, ${currentDate.getFullYear()}`;
-    setUPDATE_DATE(""); //DEBUG!!!!
+    //setUPDATE_DATE(""); //DEBUG!!!!
 
     getUPDATE_DATE(async function (date){
         // Checking the latest version of the extension daily;
