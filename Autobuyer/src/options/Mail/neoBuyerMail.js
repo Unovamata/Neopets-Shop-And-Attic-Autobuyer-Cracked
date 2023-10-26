@@ -64,7 +64,7 @@ function InsertNewEmailRow(email){
             returnToInboxButton.style.display = "block";
             
             authorBox.innerHTML = activeEmail.Author;
-            idBox.textContent = activeEmail.Entry;
+            idBox.textContent = activeEmail.ID;
             sentDateBox.innerHTML = activeEmail.Date;
             subjectBox.innerHTML = activeEmail.Subject;
             titleBox.innerHTML = activeEmail.Title;
