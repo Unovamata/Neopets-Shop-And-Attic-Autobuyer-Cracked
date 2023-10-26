@@ -589,13 +589,7 @@ function topLevelTurbo() {
                                 filteredNames = restockList.filter((itemName) => itemElements.includes(itemName) && !IsItemInBlacklist(itemName));
 
                                 // If there are items to buy, pick the first one
-                                selectedName = filteredNames.length > 0 ? filteredNames[0] : null;
-
-                                // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
-                                if (selectedName && isBuyingSecondMostProfitable && filteredItems.length > 1) {
-                                    console.log("Going for the second best item");
-                                    selectedName = filteredItems[1];
-                                }
+                                selectedName = PickSecondBestItem(filteredNames);
                             }
                             
                             selectedName ? (isClickingItems ? UpdateBannerAndDocument(`Buying ${selectedName}`, `Buying ${selectedName} from the main shop`) : UpdateBannerAndDocument(`${selectedName} is in stock`, `${selectedName} is in stock in the main shop`)) : null;
@@ -866,14 +860,7 @@ function topLevelTurbo() {
                             return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName));
                         });
 
-                        // If there are items to buy, pick the first one
-                        selectedName = filteredItems.length > 0 ? filteredItems[0] : null;
-
-                        // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
-                        if (selectedName && isBuyingSecondMostProfitable && filteredItems.length > 1) {
-                            console.log("Going for the second best item");
-                            selectedName = filteredItems[1];
-                        }
+                        selectedName = PickSecondBestItem(filteredItems);
 
                         if(selectedName){
                             filteredItems.forEach((item) => HighlightItemWithColor(item, "lightgreen"));
@@ -883,6 +870,22 @@ function topLevelTurbo() {
 
                     return selectedName;
                 }
+            }
+
+            function PickSecondBestItem(filteredItems){
+                var selectedName = filteredItems.length > 0 ? filteredItems[0] : null;
+
+                // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
+                if(selectedName && isBuyingSecondMostProfitable){
+                    if(filteredItems.length > 1){
+                        selectedName = filteredItems[1];
+                        console.log("Going for the second best item");
+                    } else if (filteredItems.length == 1){
+                        selectedName = filteredItems[0];
+                    }
+                }
+
+                return selectedName;
             }
 
             function HighlightItemWithColor(itemName, color) {
