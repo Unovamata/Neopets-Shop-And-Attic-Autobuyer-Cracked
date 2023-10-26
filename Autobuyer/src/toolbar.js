@@ -132,11 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
 //######################################################################################################################################
 
 
-
-
-//######################################################################################################################################
-
-
 const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
 
 var successColor = "#2196F3";
