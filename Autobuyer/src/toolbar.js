@@ -146,7 +146,7 @@ var warningColor = "#ff8214";
 function UpdateNotification(){
     const currentDate = new Date();
     const parsedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDay()}, ${currentDate.getFullYear()}`;
-    //setUPDATE_DATE(""); //DEBUG!!!!
+    setUPDATE_DATE(""); //DEBUG!!!!
 
     getUPDATE_DATE(async function (date){
         // Checking the latest version of the extension daily;
