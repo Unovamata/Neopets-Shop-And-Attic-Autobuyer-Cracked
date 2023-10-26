@@ -239,10 +239,10 @@ HandleServerErrors();
 
 
 //######################################################################################################################################
-// Email management;
 
+// Email management;
 class Email {
-    constructor(Entry, ID, Author, Date, Subject, Title, Contents){
+    constructor(Entry, ID, Author, Date, Subject, Title, Contents, Read){
         this.Entry = Entry;
         this.ID = ID;
         this.Author = Author;
@@ -250,6 +250,7 @@ class Email {
         this.Subject = Subject;
         this.Title = Title;
         this.Contents = Contents;
+        this.Read = Read;
     }
 }
 
@@ -300,4 +301,61 @@ function getCURRENT_MAIL_INDEX(callback) {
 
 function setCURRENT_MAIL_INDEX(value) {
     chrome.storage.local.set({ CURRENT_MAIL_INDEX: value }, function () {});
+}
+
+function getRETRIEVED_NEWEST_EMAIL(callback) {
+    chrome.storage.local.get(['RETRIEVED_NEWEST_EMAIL'], function (result) {
+        var value = result.RETRIEVED_NEWEST_EMAIL;
+
+        if(value == undefined) value = -1;
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+
+//######################################################################################################################################
+
+
+//Toolbar management;
+function setRETRIEVED_NEWEST_EMAIL(value) {
+    chrome.storage.local.set({ RETRIEVED_NEWEST_EMAIL: value }, function () {});
+}
+
+function setUPDATE_DATE(value) {
+    chrome.storage.local.set({ UPDATE_DATE: value }, function () {});
+}
+
+function getUPDATE_DATE(callback) {
+    chrome.storage.local.get(['UPDATE_DATE'], function (result) {
+        const value = result.UPDATE_DATE;
+
+        if(value === undefined || value === null){
+            setUPDATE_DATE("");
+        } 
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function setIS_NEW_MAIL_INBOX(value) {
+    chrome.storage.local.set({ IS_NEW_MAIL_INBOX: value }, function () {});
+}
+
+function getIS_NEW_MAIL_INBOX(callback) {
+    chrome.storage.local.get(['IS_NEW_MAIL_INBOX'], function (result) {
+        const value = result.IS_NEW_MAIL_INBOX;
+
+        if(value === undefined || value === null){
+            setIS_NEW_MAIL_INBOX("");
+        } 
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
 }

@@ -106,6 +106,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			IS_NEW_MAIL_INBOX: false,
 			SKIP_CURRENT_MAIL: false,
 			CURRENT_MAIL_INDEX: -1,
+			RETRIEVED_NEWEST_EMAIL: false,
 		};
 
 		chrome.storage.local.set(autoPricerDefaultSettings, function (){});

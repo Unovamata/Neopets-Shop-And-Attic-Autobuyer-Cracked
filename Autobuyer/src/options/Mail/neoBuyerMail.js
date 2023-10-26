@@ -1,25 +1,20 @@
 const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
 
-fetch(emailURL)
-  .then(response => response.text())
-  .then(htmlContent => {
-    getSKIP_CURRENT_MAIL(function (isSkippingCurrentMail){
-        var loading = document.getElementById("loading-messages");
-        loading.style.visibility = "hidden";
-        
-        if(isSkippingCurrentMail) return;
 
-        getEMAIL_LIST(function (emailList){
-            for(var i = 0; i < emailList.length; i++) {
-                var email = emailList[i];
-                InsertNewEmailRow(email);
-            }
-        });
+getSKIP_CURRENT_MAIL(function (isSkippingCurrentMail){
+    var loading = document.getElementById("loading-messages");
+    loading.style.visibility = "hidden";
+    
+    if(isSkippingCurrentMail) return;
+
+    getEMAIL_LIST(function (emailList){
+        for(var i = 0; i < emailList.length; i++) {
+            var email = emailList[i];
+            InsertNewEmailRow(email);
+        }
+    });
 });
 
-}).catch(error => {
-    console.error("An error ocurred during the execution... Try again later...", error);
-});
 
 var inbox = document.getElementById("inbox");
 var activeEmail = null;
@@ -56,6 +51,8 @@ function InsertNewEmailRow(email){
 
         getEMAIL_LIST(function (emailList){
             activeEmail = emailList[cellIndex - 1];
+            activeEmail.Read = true;
+            setEMAIL_LIST(emailList);
             
             inbox.style.display = "none";
             messageContainer.style.display = "block";
@@ -95,9 +92,7 @@ var deleteEmailsButton = document.getElementById("reset");
 deleteEmailsButton.addEventListener("click", DeleteMails);
 
 function DeleteMails(){
-    getEMAIL_LIST( function (mails){
-        console.log(mails[0]);
-
+    getEMAIL_LIST(function (mails){
         try {
             setCURRENT_MAIL_INDEX(mails[0].ID);
         } catch {
@@ -107,6 +102,33 @@ function DeleteMails(){
 
     setEMAIL_LIST([]);
     setSKIP_CURRENT_MAIL(true);
-    window.alert("All NeoBuyer+ mails have been successfully deleted!");
+
+    getCURRENT_MAIL_INDEX(function (currentIndex){
+        if(currentIndex == -1){
+            window.alert("All NeoBuyer+ mails have been successfully deleted!");
+        } else {
+            CheckNewMail();
+            setRETRIEVED_NEWEST_EMAIL(true);
+        }
+    });
+
     window.location.reload();
 }
+
+getCURRENT_MAIL_INDEX(function (currentIndex){
+    if(currentIndex != -1){
+        deleteEmailsButton.textContent = "Retrieve Current Latest Email Next Update Check";
+    }
+});
+
+// Checks constantly if the inventory page needs to update;
+function UpdateGUIData() {
+    getRETRIEVED_NEWEST_EMAIL(function (newestRetrieved) {
+        if (newestRetrieved) {
+            location.reload();
+            setRETRIEVED_NEWEST_EMAIL(false);
+        }
+    });
+}
+
+setInterval(UpdateGUIData, 1000);

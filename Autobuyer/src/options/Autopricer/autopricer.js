@@ -417,8 +417,8 @@ getAUTOPRICER_STATUS(function (status){
 
 // Checks constantly if the inventory page needs to update;
 function UpdateGUIData() {
-    getINVENTORY_UPDATED(function (value) {
-        if (value === true) {
+    getINVENTORY_UPDATED(function (hasUpdated) {
+        if (hasUpdated) {
             location.reload();
             setINVENTORY_UPDATED(false);
         }

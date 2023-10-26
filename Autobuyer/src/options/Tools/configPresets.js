@@ -65,6 +65,14 @@ chrome.storage.local.get(null, function(items) {
             itemsCopy.ITEM_HISTORY = [];
         }
 
+        // Sharing NeoBuyer+ emails;
+        if(!items.SHOULD_SHARE_NEOBUYER_MAILS){
+            itemsCopy.SKIP_CURRENT_MAIL = false;
+            itemsCopy.EMAIL_LIST = [];
+            itemsCopy.RETRIEVED_NEWEST_EMAIL = false;
+            itemsCopy.CURRENT_MAIL_INDEX = -1;
+        }
+
         itemsCopy.UPDATE_DATE = "";
 
         const jsonString = JSON.stringify(itemsCopy);

@@ -10,8 +10,12 @@ body {
     overflow: hidden;
 }
 
-a{
+a {
     text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
 }
 
 .subdued {

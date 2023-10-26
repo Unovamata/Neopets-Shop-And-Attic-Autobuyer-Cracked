@@ -197,7 +197,7 @@ table.ignore-alternate-rows td:first-child {
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(0, -6%)
+    transform: translate(0, -12%)
 }
 
 .inboxButton {

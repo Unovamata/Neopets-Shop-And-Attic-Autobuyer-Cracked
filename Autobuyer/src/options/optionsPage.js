@@ -543,6 +543,8 @@ function setSHOULD_SHARE_EMAIL(value) { chrome.storage.local.set({ SHOULD_SHARE_
 
 function setSHOULD_SHARE_HISTORY(value) { chrome.storage.local.set({ SHOULD_SHARE_HISTORY: value }, (function () {})) }
 
+function setSHOULD_SHARE_NEOBUYER_MAILS(value) { chrome.storage.local.set({ SHOULD_SHARE_NEOBUYER_MAILS: value }, (function () {})) }
+
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
     setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(isChecked);
@@ -771,6 +773,11 @@ $("#SHOULD_SHARE_HISTORY").bind("input propertychange", (function() {
     setSHOULD_SHARE_HISTORY(isChecked);
 }))
 
+$("#SHOULD_SHARE_NEOBUYER_MAILS").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_NEOBUYER_MAILS").is(":checked");
+    setSHOULD_SHARE_NEOBUYER_MAILS(isChecked);
+}))
+
 
 //######################################################################################################################################
 
@@ -901,6 +908,7 @@ resetButton.onclick = function(_) {
     SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
     SHOULD_SHARE_EMAIL: false,
     SHOULD_SHARE_HISTORY: false,
+    SHOULD_SHARE_NEOBUYER_MAILS: false,
 
 }, (function(_) {
     $("#PAUSE_AFTER_BUY_MS")
@@ -1016,6 +1024,7 @@ resetButton.onclick = function(_) {
         $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").prop("checked", _.SHOULD_SHARE_ATTIC_LAST_REFRESH),
         $("#SHOULD_SHARE_EMAIL").prop("checked", _.SHOULD_SHARE_EMAIL),
         $("#SHOULD_SHARE_HISTORY").prop("checked", _.SHOULD_SHARE_HISTORY),
+        $("#SHOULD_SHARE_NEOBUYER_MAILS").prop("checked", _.SHOULD_SHARE_NEOBUYER_MAILS),
 
         showOrHide()
 }));

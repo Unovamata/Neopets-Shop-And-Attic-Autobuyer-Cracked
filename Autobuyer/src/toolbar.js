@@ -133,42 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-function setUPDATE_DATE(value) {
-    chrome.storage.local.set({ UPDATE_DATE: value }, function () {});
-}
-
-function getUPDATE_DATE(callback) {
-    chrome.storage.local.get(['UPDATE_DATE'], function (result) {
-        const value = result.UPDATE_DATE;
-
-        if(value === undefined || value === null){
-            setUPDATE_DATE("");
-        } 
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setIS_NEW_MAIL_INBOX(value) {
-    chrome.storage.local.set({ IS_NEW_MAIL_INBOX: value }, function () {});
-}
-
-function getIS_NEW_MAIL_INBOX(callback) {
-    chrome.storage.local.get(['IS_NEW_MAIL_INBOX'], function (result) {
-        const value = result.IS_NEW_MAIL_INBOX;
-
-        if(value === undefined || value === null){
-            setIS_NEW_MAIL_INBOX("");
-        } 
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
 
 //######################################################################################################################################
 
@@ -178,6 +142,8 @@ const monthNames = ["January", "February", "March", "April", "May", "June","July
 var successColor = "#2196F3";
 var errorColor = "#f22046";
 var warningColor = "#ff8214";
+
+//setEMAIL_LIST([]);
 
 function UpdateNotification(){
     const currentDate = new Date();
@@ -222,6 +188,9 @@ function UpdateNotification(){
                 }
             break;
         }
+
+        // Check for new NeoBuyer+ mail updates;
+        CheckNewMail();
     });
 }
 
@@ -248,14 +217,10 @@ async function FetchLatestGitHubVersion(apiUrl) {
 var notifications = 0;
 
 function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is up to Date!", imageSrc = "../../../icons/check.png", isOutdated = false){
-    
     setTimeout(() => {
         const updateNotification = document.createElement("span");
         updateNotification.className = "update-notification";
-        notifications += 1.5;
-        /*var animationDelay = 3;
-        updateNotification.style.animationDelay = `${notifications * animationDelay}s`;
-        notifications++;*/
+        notifications += 1.5; // For time delays per notifications;
 
         // Creating the image component;
         const updateImage = document.createElement("img");
@@ -269,6 +234,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
 
         updateNotification.style.backgroundColor = color;
 
+        // For outdated versions of the extension;
         if(isOutdated){
             updateStatus.appendChild(document.createElement("br"));
             const updateLink = document.createElement("a");
@@ -306,8 +272,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
 const emailCheckURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
 var mailSuccessColor = "#2de52d";
 
-CheckNewMail();
-
+// Checks for new NeoBuyer+ mails daily;
 function CheckNewMail(){
     // Fetching the data from the URL to check for new mails;
     fetch(emailCheckURL)
@@ -323,35 +288,31 @@ function CheckNewMail(){
         var subject = githubDocument.getElementById("subject").textContent;
         var title = githubDocument.getElementById("title").innerHTML;
         var contents = githubDocument.getElementById("contents").innerHTML;
+        var read = false;
         
-        var extractedEmail = new Email(0, ID, author, date, subject, title, contents);
+        var extractedEmail = new Email(0, ID, author, date, subject, title, contents, read);
 
         getEMAIL_LIST(function (emailList){
             const hasEmail = emailList.some(email => email.ID === ID);
-        
+
             if (!hasEmail) {
                 getSKIP_CURRENT_MAIL(function(skipCurrentEmail){
                     getCURRENT_MAIL_INDEX(function (currentIndex){
-                        console.log(currentIndex);
-
+                        // If the user opted-out from receiving the current message active;
                         if(ID != currentIndex){
                             setSKIP_CURRENT_MAIL(false);
-                            setCURRENT_MAIL_INDEX(ID);
+                            setCURRENT_MAIL_INDEX(currentIndex);
                         } else {
                             if(skipCurrentEmail) return;
                         }
 
+                        // Notificate the user for new mails while also updating the mail list;
                         CreateNotificationElement(true, mailSuccessColor, "You've Got Mail!");
-                        extractedEmail.Entry = emailList.length + 1; // Update the entry number
-                        emailList.unshift(extractedEmail); // Add the new email to the beginning of the list
-                        setEMAIL_LIST(emailList); // Update the storage
-
-                        var notification = document.getElementsByClassName("notification-dot")[0];
-                        notification.style.visibility = "visible";
+                        extractedEmail.Entry = emailList.length + 1;
+                        emailList.unshift(extractedEmail);
+                        setEMAIL_LIST(emailList);
                     });
                 })
-            } else {
-                
             }
         });
     }).catch(error => {
@@ -359,6 +320,20 @@ function CheckNewMail(){
     });
 }
 
+// Activates the red dot notification whenever a new mail arrives;
+function ActivateNewMailNotification(){
+    getEMAIL_LIST(function (emailList){
+        const isUnread = emailList.some(email => email.Read === false);
+        var notification = document.getElementsByClassName("notification-dot")[0];
+
+        if(isUnread) notification.style.visibility = "visible";
+        else notification.style.visibility = "hidden";
+    });
+}
+
+setInterval(ActivateNewMailNotification, 500);
+
+// Load the notifications as soon as the page has finished loading;
 document.addEventListener("DOMContentLoaded", function () {
     UpdateNotification();
 });
