@@ -1,4 +1,6 @@
+// Calling all variables of the extension;
 chrome.storage.local.get(null, function(items) {
+    // Gets today's date for naming the configuration file;
     function FormatDateToCustomFormat(date) {
         const months = [
             "January", "February", "March", "April", "May", "June",
@@ -12,24 +14,25 @@ chrome.storage.local.get(null, function(items) {
         return `${month} ${day}, ${year}`;
     }
 
+    // On click, save and download options;
     document.getElementById("save").addEventListener("click", function(){
         var itemsCopy = items;
-
-        if(!items.SHOULD_SHARE_RESTOCK_LIST){
+        
+        if(!$("#SHOULD_SHARE_RESTOCK_LIST").is(":checked")){
             itemsCopy.RESTOCK_LIST = [];
         }
-
-        if(!items.SHOULD_SHARE_STORES_TO_VISIT){
+        
+        if(!$("#SHOULD_SHARE_STORES_TO_VISIT").is(":checked")){
             itemsCopy.STORES_TO_CYCLE_THROUGH_WHEN_STOCKED = [];
         }
 
         // Resetting the Auto Pricer and data sharing;
-        if(!items.SHOULD_SHARE_SHOP_STOCK){
+        if(!$("#SHOULD_SHARE_SHOP_STOCK").is(":checked")){
             itemsCopy.SHOP_INVENTORY = [];
             itemsCopy.AUTOPRICER_INVENTORY = [];
         }
-
-        if(!items.SHOULD_SHARE_BLACKLISTS){
+        
+        if(!$("#SHOULD_SHARE_BLACKLISTS").is(":checked")){
             // Resetting blacklists to their default value;
             itemsCopy.BLACKLIST = ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
             itemsCopy.BLACKLIST_SW = [];
@@ -42,31 +45,31 @@ chrome.storage.local.get(null, function(items) {
         itemsCopy.START_AUTOPRICING_PROCESS = false;
 
         // Sharing PIN;
-        if(!items.SHOULD_SHARE_PIN){
+        if($("#SHOULD_SHARE_PIN").is(":checked")){
             itemsCopy.NEOPETS_SECURITY_PIN = "";
         }
 
         // Sharing last refresh time;
-        if(!items.SHOULD_SHARE_ATTIC_LAST_REFRESH){
+        if(!$("#SHOULD_SHARE_ATTIC_LAST_REFRESH").is(":checked")){
             itemsCopy.ATTIC_LAST_REFRESH_MS = undefined;
         }
 
         itemsCopy.ATTIC_PREV_NUM_ITEMS = 0;
 
         // Sharing item history;
-        if(!items.SHOULD_SHARE_EMAIL){
+        if(!$("#SHOULD_SHARE_EMAIL").is(":checked")){
             itemsCopy.EMAIL_TEMPLATE = "";
             itemsCopy.EMAIL_USER_ID = "";
             itemsCopy.EMAIL_SERVICE_ID = "";
         }
 
         // Sharing item history;
-        if(!items.SHOULD_SHARE_HISTORY){
+        if(!$("#SHOULD_SHARE_HISTORY").is(":checked")){
             itemsCopy.ITEM_HISTORY = [];
         }
 
         // Sharing NeoBuyer+ emails;
-        if(!items.SHOULD_SHARE_NEOBUYER_MAILS){
+        if(!$("#SHOULD_SHARE_NEOBUYER_MAILS").is(":checked")){
             itemsCopy.SKIP_CURRENT_MAIL = false;
             itemsCopy.EMAIL_LIST = [];
             itemsCopy.RETRIEVED_NEWEST_EMAIL = false;
@@ -87,14 +90,15 @@ chrome.storage.local.get(null, function(items) {
         });
     });
 
+    // On load, open the file explorer and load the settings;
     document.getElementById("load").addEventListener("change" , function(event){
         if(event.target.files.length == 0) return;
 
         var selectedFile = event.target.files[0];
 
-
         const reader = new FileReader();
 
+        // Parse all the JSON configurations inside the extension;
         reader.onload = function (e) {
             const fileContent = e.target.result;
 
@@ -107,7 +111,7 @@ chrome.storage.local.get(null, function(items) {
                 window.alert("There was an error parsing the data back into NeoBuyer+...\n\nPlease make sure you're loading the correct file or try again.");
             }
         };
-
+        
         reader.readAsText(selectedFile); // Read the file as text
     })
 });

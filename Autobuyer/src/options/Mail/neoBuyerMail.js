@@ -1,6 +1,7 @@
+// URL to fetch emails;
 const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
 
-
+// Loading the email list if not skipping the current most recent email;
 getSKIP_CURRENT_MAIL(function (isSkippingCurrentMail){
     var loading = document.getElementById("loading-messages");
     loading.style.visibility = "hidden";
@@ -15,10 +16,10 @@ getSKIP_CURRENT_MAIL(function (isSkippingCurrentMail){
     });
 });
 
-
 var inbox = document.getElementById("inbox");
 var activeEmail = null;
 
+// Inserting rows inside the inbox;
 function InsertNewEmailRow(email){
     var newEmailRow = inbox.insertRow();
 
@@ -46,8 +47,10 @@ function InsertNewEmailRow(email){
     emailReadCell.appendChild(aElement);
     emailReadCell.style.cursor = "pointer";
 
+    // If the envelope is clicked, it will load the information from the email;
     emailReadCell.addEventListener("click", function(event){
         getEMAIL_LIST(function (emailList){
+            // Formatting the email to load as they are organized on more recent first;
             var cellIndex = Number(newEmailRow.querySelector("td:first-child").textContent) - 1;
             var emailIndex = (emailList.length - 1) - cellIndex;
 
@@ -55,6 +58,7 @@ function InsertNewEmailRow(email){
             activeEmail.Read = true;
             setEMAIL_LIST(emailList);
             
+            // Hiding elements and filling other fields;
             inbox.style.display = "none";
             messageContainer.style.display = "block";
             returnToInboxButton.style.display = "block";
@@ -71,6 +75,7 @@ function InsertNewEmailRow(email){
     inbox.appendChild(newEmailRow);
 }
 
+// Message input fields;
 var messageContainer = document.getElementById("message-container");
 var authorBox = document.getElementById("author");
 var sentDateBox = document.getElementById("sent-date");
@@ -78,23 +83,26 @@ var subjectBox = document.getElementById("subject");
 var titleBox = document.getElementById("message-title");
 var messageBox = document.getElementById("message");
 var idBox = document.getElementById("id-mail");
-
 var returnToInboxButton = document.getElementById("return-to-inbox");
 
+// Show the inbox initially;
 returnToInboxButton.addEventListener("click", ShowInbox);
 
 ShowInbox();
 
+// Hides the message box and displays the inbox;
 function ShowInbox(){
     inbox.style.removeProperty("display");
     messageContainer.style.display = "none";
     returnToInboxButton.style.display = "none";
 }
 
+// Deleting the emails;
 var deleteEmailsButton = document.getElementById("reset");
 deleteEmailsButton.addEventListener("click", DeleteMails);
 
 function DeleteMails(){
+    // Getting the email list for deletion and telling the system to not receive the newest email if its ID is equal to 'X';
     getEMAIL_LIST(function (mails){
         try {
             setCURRENT_MAIL_INDEX(mails[0].ID);
@@ -103,9 +111,11 @@ function DeleteMails(){
         }
     });
 
+    // Resetting the data;
     setEMAIL_LIST([]);
     setSKIP_CURRENT_MAIL(true);
 
+    // And alerting the user;
     getCURRENT_MAIL_INDEX(function (currentIndex){
         if(currentIndex == -1){
             window.alert("All NeoBuyer+ mails have been successfully deleted!");

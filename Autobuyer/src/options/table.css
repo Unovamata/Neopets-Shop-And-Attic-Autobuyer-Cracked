@@ -218,3 +218,7 @@ table.ignore-alternate-rows td:first-child {
     text-align: justify;
     padding-bottom: 2%;
 }
+
+.message-container{
+    display: none;
+}
