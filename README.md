@@ -10,29 +10,39 @@ a free project, with the mission of making restocking accessible to all Neopets 
 
 **Table of Contents**
 
-* [How to install](#how-to-install)
-* [Tips](#tips)
-* [New Features](#new-features)
-* [Included Features](#included-features)
-* [End Notes](#end-notes)
++ [How to install](#how-to-install)
+  * [RAR File](#rar-file)
+  * [CRX File](#crx-file)
++ [Tips](#tips)
++ [New Features](#new-features)
++ [Included Features](#included-features)
++ [End Notes](#end-notes)
 
 ## How to install
 - Download the [Latest Version of NeoBuyer+](github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest) from the releases page and save these files to any location on your computer.
-- Extract the downloaded files from the compressed .ZIP / .RAR package.
 - Open your Chronium based browser.
 - Click on the three dots in the upper-right corner of the screen to open the Chrome menu.
 - Select "More tools" from the drop-down menu, then click on "Extensions."
-- Make sure the "Developer mode" option is turned on by toggling the switch in the upper-right corner of the screen.
-- Click the "Load unpacked" button in the upper-left corner of the screen.
+- Make sure the "Developer mode" option is turned on by toggling the switch in the upper-right corner of the screen and refresh the tab.
+- Follow the instructions based on whether you have chosen the .rar or .crx file.
+- The extension will now appear in your list of installed extensions in your Chronium based browser.
+- Navigate to the options page the Neobuyer has and configure the parameters you want to use after acknowledging the warning that triggers as soon as the extension is installed.
+  
+### RAR File
+- Extract the downloaded files from the compressed .ZIP / .RAR package.
+- Click the "Load unpacked" button in the upper-left corner of the screen inside the "Extensions" menu.
 - In the file explorer window, navigate to the location where you saved the extension files and select the folder containing them.
 - Click the "Select Folder" button to install the extension.
-- The extension will now appear in your list of installed extensions in Google Chrome.
-- Navigate to the options page the Neobuyer has and configure the parameters you want to use after acknowledging the warning that triggers as soon as the extension is installed.
+
+### CRX File
+- Click and hold the .crx file you downloaded and drag it inside the extensions menu.
+- A pop-up window will appear asking you for permission to install the extension. NeoBuyer+ depends on the user's browser history to return back to main shops, so do not fret. We do not store any data.
 
 > **Use the tool at your own risk, do not be greedy.** Research legitimate times and adjust settings based on your ping. Lower the Autobuyer's times if you lose out on too many items, but use the tool responsibly.
 
 ## Tips
 
+- Read the FAQs that comes along the extension in the Tools > Miscellaneous > NeoBuyer+'s FAQs for more information.
 - I have not yet received any warnings or experienced account freezing while using this AutoBuyer extension. However, I would suggest some tips and guidelines to help prevent potential issues with Neopets.
 - Firstly, it's essential not to be too greedy while restocking. It's recommended not to go on ABing for more than 8 hours at a stretch as it may draw Neopets' attention towards your account. So, let's use common sense and not overdo it.
 - In case you fail to buy an expensive item, don't worry. It's better to keep a low profile and aim for less profitable items. It's not what you stock but how many items you stock. You can choose shops with high profitability or low competition.
