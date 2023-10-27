@@ -691,6 +691,8 @@ function topLevelTurbo() {
                     else {
                         AtticRestockUpdateChecker();
 
+                        console.log(IsTimeToAutoRefreshAttic(), isAtticAutoRefreshing);
+
                         function AtticRestockUpdateChecker(){
                             if (atticPreviousNumberOfItems < 0) return;
                             if (atticLastRefresh < 0) return;
@@ -736,18 +738,18 @@ function topLevelTurbo() {
                                     document.getElementById("frm-abandoned-attic").submit();
                                 }, randomBuyTime);
                             }
-                        } 
+                        }
                         
                         // Wait for the scheduled time or run the AutoBuyer
-                        else if (!isAtticAutoRefreshing || !IsTimeToAutoRefreshAttic()) {
-                            if (!isRunningOnScheduledTime) {
+                        if(isAtticAutoRefreshing){
+                            if(IsTimeToAutoRefreshAttic() && isRunningOnScheduledTime){
                                 UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
                                 isRunningOnScheduledTime = true;
-                            }
 
-                            setTimeout(function() {
                                 RunAutoBuyer();
-                            }, 30000);
+                            } else {
+                                AutoRefreshAttic();
+                            }
                         }
 
                         // Additional function to check if it's time to auto-refresh the Attic
@@ -776,29 +778,29 @@ function topLevelTurbo() {
 
                 // Calculate the time to wait before the next refresh
                 const waitTime = CreateWaitTime();
-                
-                function CreateWaitTime(){
+
+                function CreateWaitTime() {
                     if (atticLastRefresh < 0) {
                         return Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic;
                     }
-                    
+                
                     const now = Date.now();
-                    const baseInterval = 420000; // 7 minutes
-                    const shortInterval = 1000;
-                    const longInterval = 8000;
-                    let startShort = atticLastRefresh;
-                    let startLong = atticLastRefresh;
-        
-                    for (; startShort < now && startLong < now;) {
-                        startShort += baseInterval + shortInterval;
-                        startLong += baseInterval + longInterval;
+                    const baseInterval = 7 * 60 * 1000; // 7 minutes in ms;
+                    const minTimeFrame = 10 * 1000; // 10 seconds in ms;
+                    const maxTimeFrame = 30 * 1000; // 30 seconds in ms;
+                
+                    // Calculate the start of the current 7-minute interval;
+                    const intervalStart = Math.floor((now - atticLastRefresh) / baseInterval) * baseInterval + atticLastRefresh;
+                
+                    // Calculate the expected refresh time within the time frame
+                    const expectedRefreshTime = intervalStart + baseInterval + minTimeFrame + Math.random() * (maxTimeFrame - minTimeFrame);
+                
+                    if (now <= expectedRefreshTime) {
+                        return expectedRefreshTime - now;
+                    } else {
+                        // The current interval has passed; schedule the next one
+                        return baseInterval - (now - intervalStart) + expectedRefreshTime - now;
                     }
-        
-                    if (now <= startLong && now >= startShort) {
-                        return Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic;
-                    }
-        
-                    return startShort - now;
                 }
         
                 // Create a message with the wait time and last restock time
