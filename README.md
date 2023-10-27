@@ -42,6 +42,7 @@ a free project, with the mission of making restocking accessible to all Neopets 
 
 ## Tips
 
+- Read the FAQs that comes along the extension in the Tools > Miscellaneous > NeoBuyer+'s FAQs for more information.
 - I have not yet received any warnings or experienced account freezing while using this AutoBuyer extension. However, I would suggest some tips and guidelines to help prevent potential issues with Neopets.
 - Firstly, it's essential not to be too greedy while restocking. It's recommended not to go on ABing for more than 8 hours at a stretch as it may draw Neopets' attention towards your account. So, let's use common sense and not overdo it.
 - In case you fail to buy an expensive item, don't worry. It's better to keep a low profile and aim for less profitable items. It's not what you stock but how many items you stock. You can choose shops with high profitability or low competition.
