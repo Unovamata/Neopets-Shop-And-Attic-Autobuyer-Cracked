@@ -691,8 +691,6 @@ function topLevelTurbo() {
                     else {
                         AtticRestockUpdateChecker();
 
-                        console.log(IsTimeToAutoRefreshAttic(), isAtticAutoRefreshing);
-
                         function AtticRestockUpdateChecker(){
                             if (atticPreviousNumberOfItems < 0) return;
                             if (atticLastRefresh < 0) return;
