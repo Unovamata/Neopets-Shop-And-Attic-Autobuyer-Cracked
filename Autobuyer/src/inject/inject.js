@@ -338,18 +338,18 @@ function topLevelTurbo() {
                                             // 11111 Pattern; Fastest Approach;
                                             case 0:
                                             case 1:
-                                                return startingNumber.repeat(length);
+                                                return "0" + startingNumber.repeat(length);
                                             break;
 
                                             // 12121 Pattern;
                                             case 2:
                                                 const numRepetitions = Math.ceil(length / 2);
-                                                return (startingNumber + selectedNumber).repeat(numRepetitions).slice(0, length);
+                                                return "0" + (startingNumber + selectedNumber).repeat(numRepetitions).slice(0, length);
                                             break;
 
                                             // 12222 Pattern;
                                             case 3:
-                                                return (startingNumber + (selectedNumber.repeat(length))).slice(0, length);
+                                                return "0" + (startingNumber + (selectedNumber.repeat(length))).slice(0, length);
                                             break;
 
                                             // Random patterns based on the first and second value chosen for the price;
@@ -362,7 +362,7 @@ function topLevelTurbo() {
                                                     variation += numberChosen;
                                                 }
 
-                                                return variation;
+                                                return "0" + variation;
                                             break;
 
                                             default: return null; 
@@ -373,7 +373,7 @@ function topLevelTurbo() {
                                     }
 
                                     // Inputting the haggle offer;
-                                    haggleInput.value += HumanLikeHaggling(askedPrice);
+                                    haggleInput.value = HumanLikeHaggling(askedPrice);
                                 }
                             }
 
@@ -381,6 +381,8 @@ function topLevelTurbo() {
 
                             var captchaElement, imageLoadingTime;
 
+                            /*
+                            // DEBUG!!!!
                             const form = document.forms["haggleform"];
 
                             // Add an event listener to the form's submit event
@@ -393,7 +395,7 @@ function topLevelTurbo() {
                                 formData.forEach(function(value, key) {
                                     console.log(key, value);
                                 });
-                            });
+                            });*/
 
                             // Finding the darkest pixel in the captcha image
                             captchaElement = document.querySelector('input[type="image"]'), imageLoadingTime = performance.now(),
@@ -481,42 +483,6 @@ function topLevelTurbo() {
                                     var clickY = captchaOffset.y + y;
 
                                     if (isClickingCaptcha) {
-                                        // Moving to the X & Y position;
-                                        var moveEvent = new MouseEvent("mousemove", {
-                                            view: window,
-                                            bubbles: true,
-                                            cancelable: true,
-                                            clientX: clickX,
-                                            clientY: clickY,
-                                        });
-                                    
-                                        // Dispatch the mousemove event
-                                        captchaElement.dispatchEvent(moveEvent);
-                                    
-                                        // Create a mousedown event
-                                        var downEvent = new MouseEvent("mousedown", {
-                                            view: window,
-                                            bubbles: true,
-                                            cancelable: true,
-                                            clientX: clickX,
-                                            clientY: clickY,
-                                        });
-                                    
-                                        // Dispatch the mousedown event
-                                        captchaElement.dispatchEvent(downEvent);
-                                    
-                                        // Create a mouseup event
-                                        var upEvent = new MouseEvent("mouseup", {
-                                            view: window,
-                                            bubbles: true,
-                                            cancelable: true,
-                                            clientX: clickX,
-                                            clientY: clickY,
-                                        });
-                                    
-                                        // Dispatch the mouseup event
-                                        captchaElement.dispatchEvent(upEvent);
-                                    
                                         // Create a click event
                                         var clickEvent = new MouseEvent("click", {
                                             view: window,
