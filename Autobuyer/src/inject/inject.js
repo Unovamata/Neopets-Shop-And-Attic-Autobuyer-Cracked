@@ -483,7 +483,7 @@ function topLevelTurbo() {
 
                                     if (isClickingCaptcha) {
                                         // Moving to the X & Y position;
-                                        /*var moveEvent = new MouseEvent("mousemove", {
+                                        var moveEvent = new MouseEvent("mousemove", {
                                             view: window,
                                             bubbles: true,
                                             cancelable: true,
@@ -516,7 +516,7 @@ function topLevelTurbo() {
                                         });
                                     
                                         // Dispatch the mouseup event
-                                        captchaElement.dispatchEvent(upEvent);*/
+                                        captchaElement.dispatchEvent(upEvent);
                                     
                                         // Create a click event
                                         var clickEvent = new MouseEvent("click", {
