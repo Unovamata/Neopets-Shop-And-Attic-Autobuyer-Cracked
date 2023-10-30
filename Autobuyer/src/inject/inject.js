@@ -300,6 +300,8 @@ function topLevelTurbo() {
                                 console.error("Incorrect click on pet!");
                             }
 
+                            var haggleInput = document.querySelector(".haggleForm input[type=text]");
+
                             // Perform haggling choosing between haggling algorithms;
                             if(isEnteringOffer){
                                 // Haggling action;
@@ -312,13 +314,17 @@ function topLevelTurbo() {
                                     var shopkeeperElement = document.getElementById("shopkeeper_makes_deal"),
                                     textInsideElement = shopkeeperElement.textContent,
                                     match = textInsideElement.match("[0-9|,]+ Neopoints"),
-                                    askedPrice = match[0].replace("Neopoints", "").replaceAll(",", "");
+                                    askedPrice = match[0].replace(" Neopoints", "").replaceAll(",", "");
 
                                     // Choose between 2 haggling algorithms;
                                     function calculateRandomHagglingValue(baseValue) {
                                         return Math.random() > 0.33 ? calculateDynamicHagglingValue(baseValue) : calculateRoundedHagglingValue(baseValue);
                                     }
                                     
+                                    console.log("Dynamic: " + calculateDynamicHagglingValue(askedPrice));
+                                    console.log("Rounded: " + calculateRoundedHagglingValue(askedPrice));
+                                    console.log("Human: " + HumanLikeHaggling(askedPrice));
+
                                     // Rounds offers with a lowest value;
                                     function calculateDynamicHagglingValue(baseValue) {
                                         const lowerBound = 1 - (0.015 * Math.random() + 0.015);
@@ -347,12 +353,83 @@ function topLevelTurbo() {
                                         return roundedValue;
                                     }
 
+                                    function HumanLikeHaggling(input) {
+                                        const numpadVariations = {
+                                            '1': ['1', '2', '4'],
+                                            '2': ['1', '2', '3', '5'],
+                                            '3': ['2', '3', '6'],
+                                            '4': ['1', '4', '5', '7'],
+                                            '5': ['2', '4', '5', '6', '8'],
+                                            '6': ['3', '5', '6', '9'],
+                                            '7': ['4', '7', '8'],
+                                            '8': ['5', '7', '8', '9'],
+                                            '9': ['6', '8', '9'],
+                                        };
+                                    
+                                        const length = input.length;
+                                        const startingNumber = input[0];
+                                        const selectedNumber = numpadVariations[startingNumber][GetRandomInt(0, length)]; // Choose the first number from numpadVariations
+                                        const selectedAlgorithm = GetRandomInt(0, 4);
+                                        var variation = "0";
+
+                                        switch(selectedAlgorithm){
+                                            // 12121 Pattern;
+                                            case 0:
+                                                const numRepetitions = Math.ceil(length / 2); // Repeat the first number enough times to reach or exceed the desired length
+                                                variation = (startingNumber + selectedNumber).repeat(numRepetitions).slice(0, length);
+                                            break;
+
+                                            // 12222 Pattern;
+                                            case 1:
+                                                variation = (startingNumber + (selectedNumber.repeat(length))).slice(0, length);
+                                            break;
+
+                                            // 11111 Pattern;
+                                            case 2:
+                                                variation = startingNumber.repeat(length);
+                                            break;
+
+                                            // Random patterns based on the first and second value chosen for the price;
+                                            case 3:
+                                                const priceSample = [startingNumber, selectedNumber];
+
+                                                for(var i = 0; i < length; i++){
+                                                    if(i == 0){
+                                                        variation += startingNumber;
+                                                        continue;
+                                                    }
+
+                                                    var numberChosen = priceSample[GetRandomInt(0, 2)];
+                                                    variation += numberChosen;
+                                                }
+                                            break;
+                                        }
+                                    
+                                        return variation;
+                                    }
+
                                     // Inputting the haggle offer;
-                                    document.querySelector(".haggleForm input[type=text]").value = calculateRandomHagglingValue(askedPrice);
+                                    haggleInput.value = calculateRandomHagglingValue(askedPrice);
                                 }
                             }
 
+                            function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min) + min); }
+
                             var captchaElement, imageLoadingTime;
+
+                            const form = document.forms["haggleform"];
+
+                            // Add an event listener to the form's submit event
+                            form.addEventListener("submit", function(event) {
+                                // Prevent the default form submission
+                                event.preventDefault();
+
+                                // Display the form data in the console
+                                const formData = new FormData(form);
+                                formData.forEach(function(value, key) {
+                                    console.log(key, value);
+                                });
+                            });
 
                             // Finding the darkest pixel in the captcha image
                             captchaElement = document.querySelector('input[type="image"]'), imageLoadingTime = performance.now(),
@@ -440,16 +517,53 @@ function topLevelTurbo() {
                                     var clickY = captchaOffset.y + y;
 
                                     if (isClickingCaptcha) {
-                                        // Sending the click element;
-                                        var event = new MouseEvent("click", {
+                                        // Moving to the X & Y position;
+                                        /*var moveEvent = new MouseEvent("mousemove", {
                                             view: window,
                                             bubbles: true,
                                             cancelable: true,
                                             clientX: clickX,
-                                            clientY: clickY
+                                            clientY: clickY,
                                         });
-
-                                        captchaElement.dispatchEvent(event);
+                                    
+                                        // Dispatch the mousemove event
+                                        captchaElement.dispatchEvent(moveEvent);
+                                    
+                                        // Create a mousedown event
+                                        var downEvent = new MouseEvent("mousedown", {
+                                            view: window,
+                                            bubbles: true,
+                                            cancelable: true,
+                                            clientX: clickX,
+                                            clientY: clickY,
+                                        });
+                                    
+                                        // Dispatch the mousedown event
+                                        captchaElement.dispatchEvent(downEvent);
+                                    
+                                        // Create a mouseup event
+                                        var upEvent = new MouseEvent("mouseup", {
+                                            view: window,
+                                            bubbles: true,
+                                            cancelable: true,
+                                            clientX: clickX,
+                                            clientY: clickY,
+                                        });
+                                    
+                                        // Dispatch the mouseup event
+                                        captchaElement.dispatchEvent(upEvent);*/
+                                    
+                                        // Create a click event
+                                        var clickEvent = new MouseEvent("click", {
+                                            view: window,
+                                            bubbles: true,
+                                            cancelable: true,
+                                            clientX: clickX,
+                                            clientY: clickY,
+                                        });
+                                    
+                                        // Dispatch the click event
+                                        captchaElement.dispatchEvent(clickEvent);
                                     }
 
                                     if (isAnnotatingImage) {
