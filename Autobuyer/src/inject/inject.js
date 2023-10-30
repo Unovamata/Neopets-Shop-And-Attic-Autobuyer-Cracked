@@ -305,7 +305,7 @@ function topLevelTurbo() {
                             // Perform haggling choosing between haggling algorithms;
                             if(isEnteringOffer){
                                 // Haggling action;
-                                var hagglingTimeout = Math.random() * (maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout;
+                                var hagglingTimeout = Math.random() * (((maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout) / 2);
 
                                 setTimeout(PerformHaggling, hagglingTimeout);
 
@@ -332,29 +332,28 @@ function topLevelTurbo() {
                                         const length = input.length;
                                         const startingNumber = input[0];
                                         const selectedNumber = numpadVariations[startingNumber][GetRandomInt(0, numpadVariations[startingNumber].length)];
-                                        const selectedAlgorithm = GetRandomInt(0, 6);
+                                        const selectedAlgorithm = GetRandomInt(0, 5);
 
                                         switch (selectedAlgorithm) {
                                             // 11111 Pattern; Fastest Approach;
                                             case 0:
                                             case 1:
-                                            case 2:
                                                 return startingNumber.repeat(length);
                                             break;
 
                                             // 12121 Pattern;
-                                            case 3:
+                                            case 2:
                                                 const numRepetitions = Math.ceil(length / 2);
                                                 return (startingNumber + selectedNumber).repeat(numRepetitions).slice(0, length);
                                             break;
 
                                             // 12222 Pattern;
-                                            case 4:
+                                            case 3:
                                                 return (startingNumber + (selectedNumber.repeat(length))).slice(0, length);
                                             break;
 
                                             // Random patterns based on the first and second value chosen for the price;
-                                            case 5:
+                                            case 4:
                                                 const priceSample = [startingNumber, selectedNumber];
                                                 let variation = startingNumber;
 
@@ -471,7 +470,7 @@ function topLevelTurbo() {
                             (captchaElement.src, (function(x, y) {
 
                                 var imageLoadStartTime = performance.now(),
-                                adjustedDelay = Math.max(Math.round(Math.random() * (maxOCRDetectionInterval - minOCRDetectionInterval) + minOCRDetectionInterval - Math.max(imageLoadStartTime - startGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
+                                adjustedDelay = Math.max(Math.round(Math.random() * (maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout - Math.max(imageLoadStartTime - startGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
 
                                 // Clicking the captcha pet;
                                 setTimeout((function() {
