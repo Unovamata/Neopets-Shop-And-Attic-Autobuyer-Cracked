@@ -316,100 +316,65 @@ function topLevelTurbo() {
                                     match = textInsideElement.match("[0-9|,]+ Neopoints"),
                                     askedPrice = match[0].replace(" Neopoints", "").replaceAll(",", "");
 
-                                    // Choose between 2 haggling algorithms;
-                                    function calculateRandomHagglingValue(baseValue) {
-                                        return Math.random() > 0.33 ? calculateDynamicHagglingValue(baseValue) : calculateRoundedHagglingValue(baseValue);
-                                    }
-                                    
-                                    console.log("Dynamic: " + calculateDynamicHagglingValue(askedPrice));
-                                    console.log("Rounded: " + calculateRoundedHagglingValue(askedPrice));
-                                    console.log("Human: " + HumanLikeHaggling(askedPrice));
-
-                                    // Rounds offers with a lowest value;
-                                    function calculateDynamicHagglingValue(baseValue) {
-                                        const lowerBound = 1 - (0.015 * Math.random() + 0.015);
-                                        const upperBound = Math.round(lowerBound * baseValue);
-                                        const maxUpperBound = Math.round(baseValue * (1 + 0.005 * Math.random()));
-                                        let bestValue = upperBound;
-                                    
-                                        for (let current = upperBound; current <= maxUpperBound; current++) {
-                                            if (Math.random() > Math.random() || (Math.random() === Math.random() && Math.random() < 0.33)) {
-                                                bestValue = current;
-                                            }
-                                        }
-                                    
-                                        return bestValue;
-                                    }
-                                    
-                                    // Rounds offers with zeroes;
-                                    function calculateRoundedHagglingValue(baseValue) {
-                                        const randomFactor = 100 * (Math.round(4 * Math.random()) + 1);
-                                        let roundedValue = Math.round(baseValue / randomFactor) * randomFactor;
-                                    
-                                        if (baseValue <= 500) {
-                                            roundedValue = 10 * Math.round(baseValue / 10);
-                                        }
-                                    
-                                        return roundedValue;
-                                    }
-
                                     function HumanLikeHaggling(input) {
                                         const numpadVariations = {
-                                            '1': ['1', '2', '4'],
-                                            '2': ['1', '2', '3', '5'],
-                                            '3': ['2', '3', '6'],
-                                            '4': ['1', '4', '5', '7'],
-                                            '5': ['2', '4', '5', '6', '8'],
+                                            '1': ['0', '1', '2', '4'],
+                                            '2': ['0', '1', '2', '3', '5'],
+                                            '3': ['0', '2', '3', '6'],
+                                            '4': ['0', '1', '4', '5', '7'],
+                                            '5': ['0', '2', '4', '5', '6', '8'],
                                             '6': ['3', '5', '6', '9'],
                                             '7': ['4', '7', '8'],
                                             '8': ['5', '7', '8', '9'],
                                             '9': ['6', '8', '9'],
                                         };
-                                    
+
                                         const length = input.length;
                                         const startingNumber = input[0];
-                                        const selectedNumber = numpadVariations[startingNumber][GetRandomInt(0, length)]; // Choose the first number from numpadVariations
-                                        const selectedAlgorithm = GetRandomInt(0, 4);
-                                        var variation = "0";
+                                        const selectedNumber = numpadVariations[startingNumber][GetRandomInt(0, numpadVariations[startingNumber].length)];
+                                        const selectedAlgorithm = GetRandomInt(0, 6);
 
-                                        switch(selectedAlgorithm){
-                                            // 12121 Pattern;
+                                        switch (selectedAlgorithm) {
+                                            // 11111 Pattern; Fastest Approach;
                                             case 0:
-                                                const numRepetitions = Math.ceil(length / 2); // Repeat the first number enough times to reach or exceed the desired length
-                                                variation = (startingNumber + selectedNumber).repeat(numRepetitions).slice(0, length);
+                                            case 1:
+                                            case 2:
+                                                return startingNumber.repeat(length);
+                                            break;
+
+                                            // 12121 Pattern;
+                                            case 3:
+                                                const numRepetitions = Math.ceil(length / 2);
+                                                return (startingNumber + selectedNumber).repeat(numRepetitions).slice(0, length);
                                             break;
 
                                             // 12222 Pattern;
-                                            case 1:
-                                                variation = (startingNumber + (selectedNumber.repeat(length))).slice(0, length);
-                                            break;
-
-                                            // 11111 Pattern;
-                                            case 2:
-                                                variation = startingNumber.repeat(length);
+                                            case 4:
+                                                return (startingNumber + (selectedNumber.repeat(length))).slice(0, length);
                                             break;
 
                                             // Random patterns based on the first and second value chosen for the price;
-                                            case 3:
+                                            case 5:
                                                 const priceSample = [startingNumber, selectedNumber];
+                                                let variation = startingNumber;
 
-                                                for(var i = 0; i < length; i++){
-                                                    if(i == 0){
-                                                        variation += startingNumber;
-                                                        continue;
-                                                    }
-
-                                                    var numberChosen = priceSample[GetRandomInt(0, 2)];
+                                                for (let i = 1; i < length; i++) {
+                                                    const numberChosen = priceSample[GetRandomInt(0, 2)];
                                                     variation += numberChosen;
                                                 }
+
+                                                return variation;
                                             break;
+
+                                            default: return null; 
                                         }
-                                    
-                                        return variation;
+
+                                        // Default case
+                                        return '';
                                     }
 
                                     // Inputting the haggle offer;
-                                    haggleInput.value = calculateRandomHagglingValue(askedPrice);
+                                    haggleInput.value += HumanLikeHaggling(askedPrice);
                                 }
                             }
 
