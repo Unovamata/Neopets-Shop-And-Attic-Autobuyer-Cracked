@@ -81,6 +81,18 @@
             "src/inject/autopricer.js"
         ],
         "run_at": "document_end"
+    },
+	{
+        "matches": [
+            "https://www.neopets.com/genie.phtml*",
+			"https://www.neopets.com/auctions.phtml",
+			"https://www.neopets.com/auctions.phtml?auction_counter=*"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/neopets_auctions_comma_separate.js"
+        ],
+        "run_at": "document_end"
     }
 	]
 }
