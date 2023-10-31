@@ -326,7 +326,11 @@ function topLevelTurbo() {
                                             // 11111 Pattern; Fastest Approach;
                                             case 0:
                                             case 1:
-                                                return "0" + startingNumber.repeat(length - 1);
+                                                if(startingNumber > selectedNumber){
+                                                    return "0" + startingNumber.repeat(length);
+                                                } else {
+                                                    return "0" + startingNumber + selectedNumber + startingNumber.repeat(length - 2);
+                                                }
                                             break;
 
                                             // 12121 Pattern;
