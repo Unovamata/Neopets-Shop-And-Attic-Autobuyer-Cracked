@@ -317,36 +317,16 @@ function topLevelTurbo() {
                                     askedPrice = match[0].replace(" Neopoints", "").replaceAll(",", "");
 
                                     function HumanLikeHaggling(input) {
-                                        const numpadVariations = {
-                                            '1': ['0', '1', '2', '4'],
-                                            '2': ['0', '1', '2', '3', '5'],
-                                            '3': ['0', '2', '3', '6'],
-                                            '4': ['0', '1', '4', '5', '7'],
-                                            '5': ['0', '2', '4', '5', '6', '8'],
-                                            '6': ['3', '5', '6', '9'],
-                                            '7': ['4', '7', '8'],
-                                            '8': ['5', '7', '8', '9'],
-                                            '9': ['6', '8', '9'],
-                                        };
-
                                         const length = input.length;
                                         const startingNumber = input[0];
-                                        const secondNumber = input[1];
-                                        var selectedNumber = numpadVariations[startingNumber][GetRandomInt(0, numpadVariations[startingNumber].length)];
-                                        
-                                        // If the number is not reachable in the numpad, then go for the second number asked for;
-                                        if(!numpadVariations[startingNumber].includes(secondNumber)){
-                                            selectedNumber = secondNumber;
-                                            console.log("Number out of reach, go for second number instead... " + selectedNumber);
-                                        }
-
+                                        var selectedNumber = GetClosestSecondNumber(input);
                                         const selectedAlgorithm = GetRandomInt(0, 5);
 
                                         switch (selectedAlgorithm) {
                                             // 11111 Pattern; Fastest Approach;
                                             case 0:
                                             case 1:
-                                                return "0" + startingNumber.repeat(length);
+                                                return "0" + startingNumber.repeat(length - 1);
                                             break;
 
                                             // 12121 Pattern;
@@ -382,7 +362,59 @@ function topLevelTurbo() {
                                 }
                             }
 
+                            // Gets the closest second number in the numpad for the haggle;
+                            function GetClosestSecondNumber(input){
+                                const numpadLayout = [
+                                    ['0'],
+                                    ['1', '2', '3'],
+                                    ['4', '5', '6'],
+                                    ['7', '8', '9']
+                                ];
+                                
+                                const firstDigit = input[0];
+                                const secondDigit = input[1];
+                            
+                                if (firstDigit >= secondDigit) return firstDigit;
+                            
+                                // Find the row and column of the firstDigit in the numpadLayout
+                                let row, col;
+
+                                // Getting the row and column position for the numpad key;
+                                for (let i = 0; i < numpadLayout.length; i++) {
+                                    const columnIndex = numpadLayout[i].indexOf(firstDigit);
+                                    if (columnIndex !== -1) {
+                                        row = i;
+                                        col = columnIndex;
+                                        break;
+                                    }
+                                }
+                            
+                                // Find the closest available digit based on the first digit's position;
+                                let closestDigit = '';
+                                let minDistance = Number.MAX_VALUE;
+                            
+                                for (let i = 0; i < numpadLayout.length; i++) {
+                                    for (let j = 0; j < numpadLayout[i].length; j++) {
+                                        const digit = numpadLayout[i][j];
+                                        // Skipping the first digit, as it was returned before, and checking if it's greater;
+                                        if (digit !== firstDigit && digit >= secondDigit) {
+                                            // Calculating the closest distance to the number we need based on the first number;
+                                            const distance = Math.abs(i - row) + Math.abs(j - col);
+
+                                            if (distance < minDistance) {
+                                                closestDigit = digit;
+                                                minDistance = distance;
+                                            }
+                                        }
+                                    }
+                                }
+                            
+                                return closestDigit;
+                            }
+
                             function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min) + min); }
+
+                            
 
                             var captchaElement, imageLoadingTime;
 
