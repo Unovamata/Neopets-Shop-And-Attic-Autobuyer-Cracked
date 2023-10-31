@@ -347,9 +347,9 @@ function topLevelTurbo() {
                                             // Random patterns based on the first and second value chosen for the price;
                                             case 4:
                                                 const priceSample = [startingNumber, selectedNumber];
-                                                let variation = startingNumber;
+                                                let variation = startingNumber + selectedNumber;
 
-                                                for (let i = 1; i < length; i++) {
+                                                for (let i = 1; i < length - variation.length; i++) {
                                                     const numberChosen = priceSample[GetRandomInt(0, 2)];
                                                     variation += numberChosen;
                                                 }
