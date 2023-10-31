@@ -331,7 +331,15 @@ function topLevelTurbo() {
 
                                         const length = input.length;
                                         const startingNumber = input[0];
-                                        const selectedNumber = numpadVariations[startingNumber][GetRandomInt(0, numpadVariations[startingNumber].length)];
+                                        const secondNumber = input[1];
+                                        var selectedNumber = numpadVariations[startingNumber][GetRandomInt(0, numpadVariations[startingNumber].length)];
+                                        
+                                        // If the number is not reachable in the numpad, then go for the second number asked for;
+                                        if(!numpadVariations[startingNumber].includes(secondNumber)){
+                                            selectedNumber = secondNumber;
+                                            console.log("Number out of reach, go for second number instead... " + selectedNumber);
+                                        }
+
                                         const selectedAlgorithm = GetRandomInt(0, 5);
 
                                         switch (selectedAlgorithm) {
@@ -365,11 +373,8 @@ function topLevelTurbo() {
                                                 return "0" + variation;
                                             break;
 
-                                            default: return null; 
+                                            default: return null; break;
                                         }
-
-                                        // Default case
-                                        return '';
                                     }
 
                                     // Inputting the haggle offer;
