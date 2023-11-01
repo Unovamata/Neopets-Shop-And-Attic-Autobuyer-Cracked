@@ -320,7 +320,7 @@ function topLevelTurbo() {
                                         const length = input.length;
                                         const startingNumber = input[0];
                                         var selectedNumber = GetClosestSecondNumber(input);
-                                        const selectedAlgorithm = 4; //GetRandomInt(0, 5);
+                                        const selectedAlgorithm = GetRandomInt(0, 5);
 
                                         switch (selectedAlgorithm) {
                                             // 11111 Pattern; Fastest Approach;
