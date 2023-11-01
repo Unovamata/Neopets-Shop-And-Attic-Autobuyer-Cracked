@@ -349,7 +349,7 @@ function topLevelTurbo() {
                                                 const priceSample = [startingNumber, selectedNumber];
                                                 let variation = startingNumber + selectedNumber;
 
-                                                for (let i = 1; i < length - variation.length; i++) {
+                                                for (let i = 1; i < length - variation.length + 1; i++) {
                                                     const numberChosen = priceSample[GetRandomInt(0, 2)];
                                                     variation += numberChosen;
                                                 }
