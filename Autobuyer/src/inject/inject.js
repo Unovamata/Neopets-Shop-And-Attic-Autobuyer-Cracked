@@ -320,7 +320,7 @@ function topLevelTurbo() {
                                         const length = input.length;
                                         const startingNumber = input[0];
                                         var selectedNumber = GetClosestSecondNumber(input);
-                                        const selectedAlgorithm = GetRandomInt(0, 5);
+                                        const selectedAlgorithm = 4; //GetRandomInt(0, 5);
 
                                         switch (selectedAlgorithm) {
                                             // 11111 Pattern; Fastest Approach;
@@ -349,7 +349,7 @@ function topLevelTurbo() {
                                                 const priceSample = [startingNumber, selectedNumber];
                                                 let variation = startingNumber + selectedNumber;
 
-                                                for (let i = 1; i < length - variation.length + 1; i++) {
+                                                for (let i = 1; i < length - 1; i++) {
                                                     const numberChosen = priceSample[GetRandomInt(0, 2)];
                                                     variation += numberChosen;
                                                 }
