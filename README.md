@@ -19,7 +19,7 @@ a free project, with the mission of making restocking accessible to all Neopets 
 + [End Notes](#end-notes)
 
 ## How to install
-- Download the [Latest Version of NeoBuyer+](github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest) from the releases page and save these files to any location on your computer.
+- Download the [Latest Version of NeoBuyer+](https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases) from the releases page and save these files to any location on your computer.
 - Open your Chronium based browser.
 - Click on the three dots in the upper-right corner of the screen to open the Chrome menu.
 - Select "More tools" from the drop-down menu, then click on "Extensions."
