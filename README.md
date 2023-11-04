@@ -5,7 +5,7 @@
 # [NeoBuyer+ / Neopets Shop & Attic Highlighter & Autobuyer Crack](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "Neopets Shop & Attic Highlighter & Autobuyer")
 > Code optimized and improved by: [Unovamata](https://github.com/Unovamata "Unovamata"). Original developer: autobuyerneopets.
 
-I have been using this Auto-Buyer tool since its release. From auto-pricing to auto-buying, I removed the pay-wall imposed by the original developer, NeoBuyer+ is 
+I have been using this Auto-Buyer tool since its release. From auto-pricing to auto-buying, I have removed every pay-wall imposed by the original developer, NeoBuyer+ is 
 a free project, with the mission of making restocking accessible to all Neopets users.
 
 **Table of Contents**
@@ -61,6 +61,7 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Save and load configuration presets.
 - Almost Abandoned Attic auto-buyer.
 - NeoBuyer+ Mail updates on development.
+- Safety Deposit Box Pricer [made by lucca180](https://github.com/lucca180/itemdb).
 
 ## Included Features
 
