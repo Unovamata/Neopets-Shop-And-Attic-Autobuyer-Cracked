@@ -425,7 +425,7 @@ async function RunAutoPricer(){
                         }
 
                         function RoundToNearestUnit(number, hasNines = false){
-                            var zeroesToAdd = number.toString().length - 1;
+                            var zeroesToAdd = number.toString().length - 2;
                             var unitString = "1" + "0".repeat(zeroesToAdd);
                             var unit = Number(unitString);
 
