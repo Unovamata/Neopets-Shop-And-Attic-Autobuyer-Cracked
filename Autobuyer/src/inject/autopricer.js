@@ -367,7 +367,7 @@ async function RunAutoPricer(){
                         }
                         
                         function PercentagePricingCalculation(){
-                            var percentageBestPrice = CalculatePercentagePrices(bestPrice);
+                            var percentageBestPrice = CalculatePercentagePrices(bestPrice, true);
 
                             switch(percentageAlgorithmType){
                                 case "Zeroes":
@@ -423,8 +423,8 @@ async function RunAutoPricer(){
                         }
 
                         function RoundToNearestUnit(number, hasNines = false, isCustom = false){
-                            var zeroesToAdd = number.toString().length - 1;
-                            var unitString = "1" + "0".repeat(zeroesToAdd - 1);
+                            var zeroesToAdd = number.toString().length - 2;
+                            var unitString = "1" + "0".repeat(zeroesToAdd);
                             var unit = Number(unitString);
 
                             if(hasNines) return CalculateThousand(number, unit, 1);
@@ -432,11 +432,11 @@ async function RunAutoPricer(){
                         }
 
                         function CalculateThousand(number, unit, subtraction = 0){
-                            return Math.round(number / unit) * unit - subtraction;
+                            return Math.floor(number / unit) * unit - subtraction;
                         }
 
-                        function CalculatePercentagePrices(number){
-                            if(isRandomPercentage) {
+                        function CalculatePercentagePrices(number, isSubtractingPercentage = false){
+                            if(isRandomPercentage || isSubtractingPercentage) {
                                 return number * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
                             } else { // If the subtracted percentage is fixed;
                                 return number * (1 - (fixedPercentageDeduction * 0.01));
