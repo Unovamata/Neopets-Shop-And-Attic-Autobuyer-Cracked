@@ -367,28 +367,30 @@ async function RunAutoPricer(){
                         }
                         
                         function PercentagePricingCalculation(){
+                            var percentageBestPrice = CalculatePercentagePrices(bestPrice);
+
                             switch(percentageAlgorithmType){
                                 case "Zeroes":
-                                    deductedPrice = RoundToNearestUnit(bestPrice);
+                                    deductedPrice = RoundToNearestUnit(percentageBestPrice);
                                 break;
 
                                 case "Nines":
-                                    deductedPrice = RoundToNearestUnit(bestPrice, true);
+                                    deductedPrice = RoundToNearestUnit(percentageBestPrice, true);
                                 break;
 
                                 case "Random":
                                     var percentagePricingOptions = ["Zeroes", "Nines", "Unchanged"];
                                     var randomIndex = GetRandomInt(0, percentagePricingOptions.length);
-
+                                    
                                     switch(percentagePricingOptions[randomIndex]){
-                                        case "Zeroes": deductedPrice = RoundToNearestUnit(bestPrice); break;
-                                        case "Nines": deductedPrice = RoundToNearestUnit(bestPrice, true); break;
-                                        case "Unchanged": deductedPrice = CalculatePercentagePrices(bestPrice); break;
+                                        case "Zeroes": deductedPrice = RoundToNearestUnit(percentageBestPrice); break;
+                                        case "Nines": deductedPrice = RoundToNearestUnit(percentageBestPrice, true); break;
+                                        case "Unchanged": deductedPrice = percentageBestPrice; break;
                                     }
                                 break;
 
                                 case "Unchanged":
-                                    deductedPrice = CalculatePercentagePrices(bestPrice);
+                                    deductedPrice = percentageBestPrice;
                                 break;
                             }
                         }
