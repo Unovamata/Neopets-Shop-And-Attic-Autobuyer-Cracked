@@ -39,6 +39,7 @@
             "*://www.neopets.com/quickstock.phtml*"
         ],
         "js": [
+			"js/jquery.js",
             "src/better_quick_stock.user.js"
         ]
     },

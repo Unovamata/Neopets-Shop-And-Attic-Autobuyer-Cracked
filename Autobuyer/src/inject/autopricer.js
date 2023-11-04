@@ -367,7 +367,7 @@ async function RunAutoPricer(){
                         }
                         
                         function PercentagePricingCalculation(){
-                            var percentageBestPrice = CalculatePercentagePrices(bestPrice, true);
+                            var percentageBestPrice = Math.floor(CalculatePercentagePrices(bestPrice, true));
 
                             switch(percentageAlgorithmType){
                                 case "Zeroes":
@@ -387,6 +387,8 @@ async function RunAutoPricer(){
                                         case "Nines": deductedPrice = RoundToNearestUnit(percentageBestPrice, true); break;
                                         case "Unchanged": deductedPrice = percentageBestPrice; break;
                                     }
+
+                                    console.log(percentagePricingOptions[randomIndex]);
                                 break;
 
                                 case "Unchanged":
@@ -422,8 +424,8 @@ async function RunAutoPricer(){
                             }
                         }
 
-                        function RoundToNearestUnit(number, hasNines = false, isCustom = false){
-                            var zeroesToAdd = number.toString().length - 2;
+                        function RoundToNearestUnit(number, hasNines = false){
+                            var zeroesToAdd = number.toString().length - 1;
                             var unitString = "1" + "0".repeat(zeroesToAdd);
                             var unit = Number(unitString);
 
@@ -432,7 +434,7 @@ async function RunAutoPricer(){
                         }
 
                         function CalculateThousand(number, unit, subtraction = 0){
-                            return Math.floor(number / unit) * unit - subtraction;
+                            return Math.round(number / unit) * unit - subtraction;
                         }
 
                         function CalculatePercentagePrices(number, isSubtractingPercentage = false){
@@ -442,8 +444,6 @@ async function RunAutoPricer(){
                                 return number * (1 - (fixedPercentageDeduction * 0.01));
                             }
                         }
-
-                        if(deductedPrice == -1) deductedPrice = 0;
 
                         deductedPrice = Math.floor(deductedPrice);
                         autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
