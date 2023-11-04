@@ -69,10 +69,11 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
 			
 			// Shop Stock Page Settings;
-			MIN_WAIT_AFTER_PRICING_ITEM: 10000,
-			MAX_WAIT_AFTER_PRICING_ITEM: 20000,
+			SHOULD_SUBMIT_AUTOMATICALLY: false,
 			MIN_SHOP_NAVIGATION_COOLDOWN: 20000,
 			MAX_SHOP_NAVIGATION_COOLDOWN: 40000,
+			MIN_WAIT_AFTER_PRICING_ITEM: 10000,
+			MAX_WAIT_AFTER_PRICING_ITEM: 20000,
 			MIN_SHOP_SEARCH_FOR_INPUT_BOX: 5000,
 			MAX_SHOP_SEARCH_FOR_INPUT_BOX: 10000,
 			MIN_SHOP_CLICK_UPDATE: 10000,

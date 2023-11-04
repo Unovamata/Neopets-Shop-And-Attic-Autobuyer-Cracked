@@ -2,7 +2,7 @@
 "update_url": "https://clients2.google.com/service/update2/crx",
 
     "name": "NeoBuyer+",
-    "version": "0.61.7",
+    "version": "0.63.8",
     "manifest_version": 3,
     "description": "NeoBuyer+ Main Shop & Almost Abandoned Attic Autobuyer for Neopets.com",
     "icons":
@@ -36,18 +36,17 @@
     "content_scripts": [
 	{
         "matches": [
-            "https://www.neopets.com/quickstock.phtml*"
+            "*://www.neopets.com/quickstock.phtml*"
         ],
         "js": [
-			"js/jquery.js",
             "src/better_quick_stock.user.js"
         ]
     },
     {
         "matches": [
-            "https://www.neopets.com/halloween/garage.phtml*",
-            "https://www.neopets.com/objects.phtml*",
-			"https://www.neopets.com/haggle.phtml*"
+            "*://www.neopets.com/halloween/garage.phtml*",
+            "*://www.neopets.com/objects.phtml*",
+			"*://www.neopets.com/haggle.phtml*"
         ],
         "js": [
 			"js/moment.js",
@@ -60,8 +59,8 @@
     },
     {
         "matches": [
-            "http://www.neopets.com/shops/wizard.phtml*",
-            "https://www.neopets.com/shops/wizard.phtml*"
+            "*://www.neopets.com/shops/wizard.phtml*",
+            "*://www.neopets.com/shops/wizard.phtml*"
         ],
         "all_frames": true,
         "js": [
@@ -71,9 +70,9 @@
     },
 	{
         "matches": [
-            "https://www.neopets.com/market.phtml?type=your",
-			"https://www.neopets.com/market.phtml?*",
-			"https://www.neopets.com/shops/wizard.phtml*"
+            "*://www.neopets.com/market.phtml?type=your",
+			"*://www.neopets.com/market.phtml?*",
+			"*://www.neopets.com/shops/wizard.phtml*"
         ],
         "all_frames": true,
         "js": [
@@ -84,15 +83,27 @@
     },
 	{
         "matches": [
-            "https://www.neopets.com/genie.phtml*",
-			"https://www.neopets.com/auctions.phtml",
-			"https://www.neopets.com/auctions.phtml?auction_counter=*"
+            "*://www.neopets.com/genie.phtml*",
+			"*://www.neopets.com/auctions.phtml?show=*",
+			"*://www.neopets.com/auctions.phtml",
+			"*://www.neopets.com/auctions.phtml?auction_counter=*"
         ],
         "all_frames": true,
         "js": [
 			"src/neopets_auctions_comma_separate.js"
         ],
         "run_at": "document_end"
-    }
+    },
+	{
+		"matches": [
+			"*://*.neopets.com/safetydeposit.phtml*"
+		],
+		"all_frames": true,
+		"js": [
+			"js/jquery.js",
+			"src/itemdb - Safety Deposit Box Pricer.js"
+		],
+		"run_at": "document_end"
+	}
 	]
 }

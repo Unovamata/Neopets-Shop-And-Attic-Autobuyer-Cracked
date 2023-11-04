@@ -148,9 +148,9 @@ function showOrHide() {
     $("#SHOULD_SEND_EMAIL").is(":checked") ? $(".email-hide").show() : $(".email-hide").hide();
     $("#ATTIC_ENABLED").is(":checked") ? $(".attic-settings").show() : $(".attic-settings").hide();
     $("#ENABLED").is(":checked") ? $(".main-shop-settings").show() : $(".main-shop-settings").hide();
-    $("#ENABLED").is(":checked") ? $(".main-shop-settings").show() : $(".main-shop-settings").hide();
     $("#SHOULD_ENTER_PIN").is(":checked") ? $(".enter-pin").show() : $(".enter-pin").hide();
     $("#USE_BLACKLIST_SW").is(":checked") ? $(".blacklist-sw").show() : $(".blacklist-sw").hide();
+    $("#SHOULD_SUBMIT_AUTOMATICALLY").is(":checked") ? $(".submit-automatically").show() : $(".submit-automatically").hide();
     $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
     
     switch($("#PRICING_TYPE").val()){
@@ -489,6 +489,8 @@ function setUSE_BLACKLIST_SW(value) { chrome.storage.local.set({ USE_BLACKLIST_S
 
 function setBLACKLIST_SW(value) { chrome.storage.local.set({ BLACKLIST_SW: value }, (function () {})) }
 
+function setSHOULD_SUBMIT_AUTOMATICALLY(value) { chrome.storage.local.set({ SHOULD_SUBMIT_AUTOMATICALLY: value }, (function () {})) }
+
 function setMIN_WAIT_PER_ACTION(value) { chrome.storage.local.set({ MIN_WAIT_PER_ACTION: Number(value) }, (function () {})) }
 
 function setMAX_WAIT_PER_ACTION(value) { chrome.storage.local.set({ MAX_WAIT_PER_ACTION: Number(value) }, (function () {})) }
@@ -615,6 +617,12 @@ $("#BLACKLIST_SW").bind("input propertychange", (function() {
     } catch (_) {
         window.alert("Error in parsing your blacklist: " + _)
     }
+}))
+
+$("#SHOULD_SUBMIT_AUTOMATICALLY").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SUBMIT_AUTOMATICALLY").is(":checked");
+    setSHOULD_SUBMIT_AUTOMATICALLY(isChecked);
+    showOrHide();
 }))
 
 
@@ -880,10 +888,11 @@ resetButton.onclick = function(_) {
     BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
 
     // Shop Stock Page Settings;
-    MIN_WAIT_AFTER_PRICING_ITEM: 10000,
-    MAX_WAIT_AFTER_PRICING_ITEM: 20000,
+    SHOULD_SUBMIT_AUTOMATICALLY: false,
     MIN_SHOP_NAVIGATION_COOLDOWN: 20000,
     MAX_SHOP_NAVIGATION_COOLDOWN: 40000,
+    MIN_WAIT_AFTER_PRICING_ITEM: 10000,
+    MAX_WAIT_AFTER_PRICING_ITEM: 20000,
     MIN_SHOP_SEARCH_FOR_INPUT_BOX: 5000,
     MAX_SHOP_SEARCH_FOR_INPUT_BOX: 10000,
     MIN_SHOP_CLICK_UPDATE: 10000,
@@ -992,12 +1001,13 @@ resetButton.onclick = function(_) {
         $("#BLACKLIST_SW").val(_.BLACKLIST_SW.join("\n")), 
 
         // Shop Stock Page Settings;
+        $("#SHOULD_SUBMIT_AUTOMATICALLY").prop("checked", _.SHOULD_SUBMIT_AUTOMATICALLY),
+        $("#MIN_SHOP_NAVIGATION_COOLDOWN").val(_.MIN_SHOP_NAVIGATION_COOLDOWN),
+        $("#MAX_SHOP_NAVIGATION_COOLDOWN").val(_.MAX_SHOP_NAVIGATION_COOLDOWN),
         $("#MIN_WAIT_PER_ACTION").val(_.MIN_WAIT_PER_ACTION),
         $("#MAX_WAIT_PER_ACTION").val(_.MAX_WAIT_PER_ACTION),
         $("#MIN_WAIT_AFTER_PRICING_ITEM").val(_.MIN_WAIT_AFTER_PRICING_ITEM),
         $("#MAX_WAIT_AFTER_PRICING_ITEM").val(_.MAX_WAIT_AFTER_PRICING_ITEM),
-        $("#MIN_SHOP_NAVIGATION_COOLDOWN").val(_.MIN_SHOP_NAVIGATION_COOLDOWN),
-        $("#MAX_SHOP_NAVIGATION_COOLDOWN").val(_.MAX_SHOP_NAVIGATION_COOLDOWN),
         $("#MIN_SHOP_SEARCH_FOR_INPUT_BOX").val(_.MIN_SHOP_SEARCH_FOR_INPUT_BOX),
         $("#MAX_SHOP_SEARCH_FOR_INPUT_BOX").val(_.MAX_SHOP_SEARCH_FOR_INPUT_BOX),
         $("#MIN_SHOP_CLICK_UPDATE").val(_.MIN_SHOP_CLICK_UPDATE),

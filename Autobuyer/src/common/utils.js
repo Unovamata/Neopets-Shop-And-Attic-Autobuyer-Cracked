@@ -182,6 +182,17 @@ function setAUTOPRICER_STATUS(value) {
     chrome.storage.local.set({ AUTOPRICER_STATUS: value }, function () {});
 }
 
+function getSHOULD_SUBMIT_AUTOMATICALLY(callback) { 
+    chrome.storage.local.get(['SHOULD_SUBMIT_AUTOMATICALLY'], function (result) {
+        const value = result.SHOULD_SUBMIT_AUTOMATICALLY;
+
+        if(value === undefined || value === null) value = 0;
+
+        if (typeof callback === 'function') {
+            callback(typeof value === 'undefined' ? 0 : value);
+        }
+    });
+}
 
 //######################################################################################################################################
 // Page Error Handling;

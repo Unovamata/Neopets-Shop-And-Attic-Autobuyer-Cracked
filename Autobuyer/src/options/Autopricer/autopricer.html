@@ -361,6 +361,37 @@
                                 <th></th><th></th>
                             </thead>
                             <tr>
+                                <td>Submit Prices <b>Automatically</b> After Auto-Pricing Stock:
+                                    <span class="tooltiptext">
+                                        If you enable this option, the Auto-Pricer process will submit automatically all the stock prices to the player's shop after a certain cooldown.
+                                    </span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="SHOULD_SUBMIT_AUTOMATICALLY" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="submit-automatically">
+                                <td><b>Minimum</b> Shop Page Navigation Time:
+                                    <span class="tooltiptext">
+                                        Minimum wait time in milliseconds the AutoPricer navigates to the Player's Shop page for automatic price submission.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MIN_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr class="submit-automatically">
+                                <td><b>Maximum</b> Shop Page Navigation Time:
+                                    <span class="tooltiptext">
+                                        Maximum wait time in milliseconds the AutoPricer navigates to the Player's Shop page for automatic price submission.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MAX_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
                                 <td><b>Minimum</b> Cooldown After Pricing Item:
                                     <span class="tooltiptext">
                                         Minimum wait time in milliseconds after pricing an item in the Shop.
@@ -377,24 +408,6 @@
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_AFTER_PRICING_ITEM"></input><span class="notation">ms</span></td>
-                            </tr>
-                            <tr>
-                                <td><b>Minimum</b> Shop Page Navigation Time:
-                                    <span class="tooltiptext">
-                                        Minimum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Player's Shop page.
-                                        <br><br> 1 second = 1000
-                                    </span>
-                                </td>
-                                <td><input type="number" id="MIN_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
-                            </tr>
-                            <tr>
-                                <td><b>Maximum</b> Shop Page Navigation Time:
-                                    <span class="tooltiptext">
-                                        Maximum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Player's Shop page.
-                                        <br><br> 1 second = 1000
-                                    </span>
-                                </td>
-                                <td><input type="number" id="MAX_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
                                 <td><b>Minimum</b> Price Input Box Search Time:

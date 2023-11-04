@@ -87,8 +87,8 @@ async function RunAutoPricer(){
             // Shop Stock Page Settings;
             MIN_WAIT_AFTER_PRICING_ITEM: sleepAfterPricingMin,
             MAX_WAIT_AFTER_PRICING_ITEM: sleepAfterPricingMax,
-            MIN_SHOP_NAVIGATION_COOLDOWN: sleepAfterNavigatingToNextPageMin,
-            MAX_SHOP_NAVIGATION_COOLDOWN: sleepAfterNavigatingToNextPageMax,
+            MIN_SHOP_NAVIGATION_COOLDOWN: sleepBeforeNavigatingToNextPageMin,
+            MAX_SHOP_NAVIGATION_COOLDOWN: sleepBeforeNavigatingToNextPageMax,
             MIN_SHOP_SEARCH_FOR_INPUT_BOX: sleepSearchPriceInputBoxMin,
             MAX_SHOP_SEARCH_FOR_INPUT_BOX: sleepSearchPriceInputBoxMax,
             MIN_SHOP_CLICK_UPDATE: sleepWaitForUpdateMin,
@@ -241,8 +241,17 @@ async function RunAutoPricer(){
                     if(autoPricingList.length - 1 < currentPricingIndex){
                         setCURRENT_PRICING_INDEX(0);
                         setSTART_AUTOPRICING_PROCESS(false);
-                        window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
                         setAUTOPRICER_STATUS("AutoPricing Complete!");
+
+                        // Submitting the prices automatically;
+                        getSHOULD_SUBMIT_AUTOMATICALLY(async function (isSubmittingAutomatically){
+                            if(isSubmittingAutomatically){
+                                await Sleep(sleepBeforeNavigatingToNextPageMin, sleepBeforeNavigatingToNextPageMax);
+                            } else {
+                                window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
+                            }
+                        });
+
                         return;
                     }
 
@@ -413,7 +422,7 @@ async function RunAutoPricer(){
 
                         function RoundToNearestUnit(number, hasNines = false, isCustom = false){
                             var zeroesToAdd = number.toString().length - 1;
-                            var unitString = "1" + "0".repeat(zeroesToAdd);
+                            var unitString = "1" + "0".repeat(zeroesToAdd - 1);
                             var unit = Number(unitString);
 
                             if(hasNines) return CalculateThousand(number, unit, 1);
