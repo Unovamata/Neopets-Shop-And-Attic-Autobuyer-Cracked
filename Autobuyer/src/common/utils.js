@@ -21,6 +21,11 @@ function getSUBMIT_PRICES_PROCESS(callback) {
     chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
         const value = result.SUBMIT_PRICES_PROCESS;
 
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setSUBMIT_PRICES_PROCESS(false);
+        }
+
         if (typeof callback === 'function') {
             callback(value);
         }
@@ -36,8 +41,12 @@ function setSHOP_INVENTORY(value) {
 }
 
 function getSHOP_INVENTORY(callback) {
-    chrome.storage.local.get(['SHOP_INVENTORY'], function (result) {
+    chrome.storage.local.get(['SHOP_INVENTORY'], async function (result) {
         const value = result.SHOP_INVENTORY;
+
+        if(value == undefined || value == null){
+            await setSHOP_INVENTORY([]);
+        }
 
         if (typeof callback === 'function') {
             callback(value);
@@ -107,20 +116,6 @@ function getAUTOPRICER_INVENTORY(callback) {
     });
 }
 
-function getSUBMIT_PRICES_PROCESS(callback) {
-    chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
-        const value = result.SUBMIT_PRICES_PROCESS;
-
-        if (value === undefined || value === null) {
-            setSUBMIT_PRICES_PROCESS(false);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
 function setNAVIGATE_TO_NEXT_PAGE(value) {
     return new Promise((resolve) => {
         chrome.storage.local.set({ NAVIGATE_TO_NEXT_PAGE: value }, function () {
@@ -180,6 +175,21 @@ function getCURRENT_PRICING_INDEX(callback) {
 
 function setAUTOPRICER_STATUS(value) {
     chrome.storage.local.set({ AUTOPRICER_STATUS: value }, function () {});
+}
+
+function getAUTOPRICER_STATUS(callback) {
+    chrome.storage.local.get(['AUTOPRICER_STATUS'], function (result) {
+        const value = result.AUTOPRICER_STATUS;
+
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setAUTOPRICER_STATUS("Inactive");
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
 }
 
 function getSHOULD_SUBMIT_AUTOMATICALLY(callback) { 

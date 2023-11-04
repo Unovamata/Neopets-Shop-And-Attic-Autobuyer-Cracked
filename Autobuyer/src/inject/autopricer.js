@@ -247,6 +247,19 @@ async function RunAutoPricer(){
                         getSHOULD_SUBMIT_AUTOMATICALLY(async function (isSubmittingAutomatically){
                             if(isSubmittingAutomatically){
                                 await Sleep(sleepBeforeNavigatingToNextPageMin, sleepBeforeNavigatingToNextPageMax);
+                                setNEXT_PAGE_INDEX(1);
+                                setSUBMIT_PRICES_PROCESS(true);
+                                setSTART_INVENTORY_PROCESS(false);
+
+                                getSHOP_INVENTORY(function (entireShopStock){
+                                    for(var i = 0; i < entireShopStock.length; i++){
+                                        entireShopStock[i].IsPricing = true;
+                                    }
+    
+                                    setINVENTORY_UPDATED(true);
+                                    setSHOP_INVENTORY(entireShopStock);
+                                    window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
+                                })
                             } else {
                                 window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
                             }
