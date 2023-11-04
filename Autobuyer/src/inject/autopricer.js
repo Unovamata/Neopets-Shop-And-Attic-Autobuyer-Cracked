@@ -443,6 +443,8 @@ async function RunAutoPricer(){
                             }
                         }
 
+                        if(deductedPrice == -1) deductedPrice = 0;
+
                         deductedPrice = Math.floor(deductedPrice);
                         autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
 
