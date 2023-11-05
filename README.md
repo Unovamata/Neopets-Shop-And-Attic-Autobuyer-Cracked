@@ -35,7 +35,7 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Click the "Select Folder" button to install the extension.
 
 ### CRX File
-- Click and hold the .crx file you downloaded and drag it inside the extensions menu.
+- Click and hold the .crx file you downloaded inside the .RAR file and drag it inside the extensions menu.
 - A pop-up window will appear asking you for permission to install the extension. NeoBuyer+ depends on the user's browser history to return back to main shops, so do not fret. We do not store any data.
 
 > **Use the tool at your own risk, do not be greedy.** Research legitimate times and adjust settings based on your ping. Lower the Autobuyer's times if you lose out on too many items, but use the tool responsibly.
