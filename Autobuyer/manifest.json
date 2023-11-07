@@ -102,7 +102,7 @@
 		"all_frames": true,
 		"js": [
 			"js/jquery.js",
-			"src/itemdb - Safety Deposit Box Pricer.js"
+			"src/SDBPricer.js"
 		],
 		"run_at": "document_end"
 	}

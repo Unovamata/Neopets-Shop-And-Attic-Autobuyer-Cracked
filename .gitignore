@@ -1,5 +1,7 @@
-// Ignoring the AC script;
+// Ignoring the AC script
 AC.js
 
 //Ignoring benchmarking scripts
 benchmark.js
+
+SDBPricer.js
