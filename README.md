@@ -61,7 +61,6 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Save and load configuration presets.
 - Almost Abandoned Attic auto-buyer.
 - NeoBuyer+ Mail updates on development.
-- Safety Deposit Box Pricer [made by lucca180](https://github.com/lucca180/itemdb).
 
 ## Included Features
 
