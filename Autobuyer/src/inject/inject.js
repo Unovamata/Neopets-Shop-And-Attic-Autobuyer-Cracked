@@ -60,13 +60,13 @@ function topLevelTurbo() {
                         }
                     }
 
-                    setTimeout(executeOnceAndPreventReexecution, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+                    setTimeout(executeOnceAndPreventReexecution, GetRandomFloat(minPageReloadTime, maxPageReloadTime));
                 }
             }
             
             // Browser errors;
             else if(window.location.title == "www.neopets.com"){
-                setTimeout(() => { location.reload(); }, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+                setTimeout(() => { location.reload(); }, GetRandomFloat(minPageReloadTime, maxPageReloadTime));
             }
         }));
     }
@@ -254,7 +254,7 @@ function topLevelTurbo() {
             // Run the AutoBuyer
             RunAutoBuyer();
             
-            function GetRandomFloat(min, max) { return Math.floor(Math.random() * (max - min) + min); }
+            function GetRandomFloat(min, max) { return Math.random() * (max - min) + min; }
 
             function RunAutoBuyer() {
                 if (IsHaggling()) {
@@ -313,7 +313,7 @@ function topLevelTurbo() {
                             // Perform haggling choosing between haggling algorithms;
                             if(isEnteringOffer){
                                 // Haggling action;
-                                var hagglingTimeout = Math.random() * (((maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout) / 2);
+                                var hagglingTimeout = GetRandomFloat(minHagglingTimeout, maxHagglingTimeout) / 2;
 
                                 setTimeout(PerformHaggling, hagglingTimeout);
 
@@ -698,7 +698,7 @@ function topLevelTurbo() {
 
                                 setTimeout((function() {
                                     itemToBuyElement.click();
-                                }), Math.random() * (maxClickImageInterval - minClickImageInterval) + minClickImageInterval)
+                                }), GetRandomFloat(minClickImageInterval, maxClickImageInterval));
                             }
                         }(itemToBuyExtracted) : ! function() {
                             var e = new Date,
@@ -718,7 +718,7 @@ function topLevelTurbo() {
                                         .offsetWidth || t.offsetHeight || t.getClientRects()
                                         .length) && setTimeout((function() {
                                         e || (n.click(), SendBeepMessage(), e = !0)
-                                    }), Math.random() * (maxClickConfirmInterval - minClickConfirmInterval) + minClickConfirmInterval)
+                                    }), GetRandomFloat(minClickConfirmInterval, maxClickConfirmInterval));
                                 }), confirmWindowInteral)
                             }
                         }()
@@ -810,7 +810,7 @@ function topLevelTurbo() {
 
                         if (bestItemName) {
                             if (isClickingItemsInAttic) {
-                                var randomBuyTime = Math.random() * (maxAtticBuyTime - minAtticBuyTime) + minAtticBuyTime;
+                                var randomBuyTime = GetRandomFloat(minAtticBuyTime, maxAtticBuyTime);
 
                                 UpdateBannerAndDocument(
                                     "Attempting " + bestItemName + " in Attic",
@@ -872,7 +872,7 @@ function topLevelTurbo() {
 
                 function CreateWaitTime() {
                     if (atticLastRefresh < 0) {
-                        return Math.random() * (maxRefreshIntervalAttic - minRefreshIntervalAttic) + minRefreshIntervalAttic;
+                        return GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
                     }
                 
                     const now = Date.now();
@@ -1028,13 +1028,13 @@ function topLevelTurbo() {
                 var currentStockedItems;
 
                 if (IsSoldOut()) {
-                    UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxSoldOutRefresh - minSoldOutRefresh) + minSoldOutRefresh) + " to reload page...");
+                    UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minSoldOutRefresh, maxSoldOutRefresh)) + " to reload page...");
                     
                     setTimeout(() => {
                         ClickToRefreshShop();
                     }, t);
                 } else if (IsItemAddedToInventory()) {
-                    UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxInventoryRefreshInterval - minInventoryRefreshInterval) + minInventoryRefreshInterval + pauseAfterBuy) + " to reload page...");
+                    UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minInventoryRefreshInterval, maxInventoryRefreshInterval) + pauseAfterBuy) + " to reload page...");
                     
                     setTimeout(() => {
                         ClickToRefreshShop();
@@ -1047,14 +1047,14 @@ function topLevelTurbo() {
 
                     if (currentStockedItems < minItemsToConsiderStocked) {
                         // Handle case when not enough items are stocked
-                        UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxRefreshIntervalUnstocked - minRefreshIntervalUnstocked) + minRefreshIntervalUnstocked) + " to reload page...");
+                        UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minRefreshIntervalUnstocked, maxRefreshIntervalUnstocked)) + " to reload page...");
                         
                         setTimeout(() => {
                             location.reload();
                         }, t);
                     } else {
                         // Handle case when enough items are stocked
-                        UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = Math.random() * (maxRefreshIntervalStocked - minRefreshIntervalStocked) + minRefreshIntervalStocked) + " to reload page...");
+                        UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minRefreshIntervalStocked, maxRefreshIntervalStocked)) + " to reload page...");
                        
                         setTimeout(() => {
                             // Handle cycling through shops
