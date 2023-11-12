@@ -11,8 +11,6 @@ a free project, with the mission of making restocking accessible to all Neopets 
 **Table of Contents**
 
 + [How to install](#how-to-install)
-  * [RAR File](#rar-file)
-  * [CRX File](#crx-file)
 + [Tips](#tips)
 + [New Features](#new-features)
 + [Included Features](#included-features)
@@ -24,19 +22,12 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Click on the three dots in the upper-right corner of the screen to open the Chrome menu.
 - Select "More tools" from the drop-down menu, then click on "Extensions."
 - Make sure the "Developer mode" option is turned on by toggling the switch in the upper-right corner of the screen and refresh the tab.
-- Follow the instructions based on whether you have chosen the .rar or .crx file.
-- The extension will now appear in your list of installed extensions in your Chronium based browser.
-- Navigate to the options page the Neobuyer has and configure the parameters you want to use after acknowledging the warning that triggers as soon as the extension is installed.
-  
-### RAR File
 - Extract the downloaded files from the compressed .ZIP / .RAR package.
 - Click the "Load unpacked" button in the upper-left corner of the screen inside the "Extensions" menu.
 - In the file explorer window, navigate to the location where you saved the extension files and select the folder containing them.
 - Click the "Select Folder" button to install the extension.
-
-### CRX File
-- Click and hold the .crx file you downloaded inside the .RAR file and drag it inside the extensions menu.
-- A pop-up window will appear asking you for permission to install the extension. NeoBuyer+ depends on the user's browser history to return back to main shops, so do not fret. We do not store any data.
+- The extension will now appear in your list of installed extensions in your Chronium based browser.
+- Navigate to the options page the Neobuyer has and configure the parameters you want to use after acknowledging the warning that triggers as soon as the extension is installed.
 
 > **Use the tool at your own risk, do not be greedy.** Research legitimate times and adjust settings based on your ping. Lower the Autobuyer's times if you lose out on too many items, but use the tool responsibly.
 
