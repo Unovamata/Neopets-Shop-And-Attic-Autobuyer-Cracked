@@ -145,6 +145,9 @@ function topLevelTurbo() {
             MAX_REFRESH: 5e3,
             MIN_REFRESH_STOCKED: 37500,
             MAX_REFRESH_STOCKED: 45e3,
+            MIN_FIVE_SECOND_RULE_REFRESH: 5000,
+            MAX_FIVE_SECOND_RULE_REFRESH: 10000,
+            SHOULD_ONLY_REFRESH_ON_CLEAR: false,
             ITEMS_TO_CONSIDER_STOCKED: 1,
             MIN_CLICK_ITEM_IMAGE: 500,
             MAX_CLICK_ITEM_IMAGE: 1e3,
@@ -249,7 +252,7 @@ function topLevelTurbo() {
                 maxHagglingTimeout = maxOCRDetectionInterval,
                 isRunningOnScheduledTime = false,
                 isBannerDisplaying = false,
-                confirmWindowInteral = 50,
+                confirmWindowInteral = 50;
 
             // Run the AutoBuyer
             RunAutoBuyer();
@@ -302,11 +305,6 @@ function topLevelTurbo() {
                         // Haggling;
                         else {
                             UpdateBannerStatus("Entering offer...");
-                            
-                            // Incorrect pet clicked;
-                            if (pageText.includes("You must select the correct pet in order to continue")) {
-                                console.error("Incorrect click on pet!");
-                            }
 
                             var haggleInput = document.querySelector(".haggleForm input[type=text]");
 
@@ -429,22 +427,6 @@ function topLevelTurbo() {
                             
 
                             var captchaElement, imageLoadingTime;
-
-                            /*
-                            // DEBUG!!!!
-                            const form = document.forms["haggleform"];
-
-                            // Add an event listener to the form's submit event
-                            form.addEventListener("submit", function(event) {
-                                // Prevent the default form submission
-                                event.preventDefault();
-
-                                // Display the form data in the console
-                                const formData = new FormData(form);
-                                formData.forEach(function(value, key) {
-                                    console.log(key, value);
-                                });
-                            });*/
 
                             // Finding the darkest pixel in the captcha image
                             captchaElement = document.querySelector('input[type="image"]'), imageLoadingTime = performance.now(),
@@ -1045,6 +1027,14 @@ function topLevelTurbo() {
                     currentStockedItems = Array.from(document.querySelectorAll(".item-img")).length;
                     document.title = currentStockedItems + " stocked items";
 
+                    // If the bot should only refresh if the shop is cleared and the shop is not cleared, then stop refreshing;
+                    if(shouldOnlyRefreshOnClear){
+                        if(currentStockedItems > 0){
+                            UpdateBannerStatus("Shop Stocked, Stopping. Refreshing Only on Clears.");
+                            return;
+                        }
+                    }
+
                     if (currentStockedItems < minItemsToConsiderStocked) {
                         // Handle case when not enough items are stocked
                         UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minRefreshIntervalUnstocked, maxRefreshIntervalUnstocked)) + " to reload page...");
@@ -1057,14 +1047,6 @@ function topLevelTurbo() {
                         UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minRefreshIntervalStocked, maxRefreshIntervalStocked)) + " to reload page...");
                        
                         setTimeout(() => {
-                            // If the bot should only refresh if the shop is cleared and the shop is not cleared, then stop refreshing;
-                            if(shouldOnlyRefreshOnClear){
-                                if(currentStockedItems > 0){
-                                    UpdateBannerStatus("Shop Stocked, Stopping. Refreshing Only on Clears.");
-                                    return;
-                                }
-                            }
-
                             // Handle cycling through shops
                             if (storesToCycle.length === 0) {
                                 location.reload();

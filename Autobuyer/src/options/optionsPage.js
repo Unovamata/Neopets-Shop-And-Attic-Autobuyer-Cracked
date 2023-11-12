@@ -446,9 +446,9 @@ $("#USE_BLACKLIST")
 //######################################################################################################################################
 
 
-function setMIN_FIVE_SECOND_RULE_REFRESH(_) { chrome.storage.local.set({ MIN_FIVE_SECOND_RULE_REFRESH: Number(_) }, (function () {})) }
+function setMIN_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({ MIN_FIVE_SECOND_RULE_REFRESH: Number(value) }, (function () {})) }
 
-function setMAX_FIVE_SECOND_RULE_REFRESH(_) { chrome.storage.local.set({ MAX_FIVE_SECOND_RULE_REFRESH: Number(_) }, (function () {})) }
+function setMAX_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({ MAX_FIVE_SECOND_RULE_REFRESH: Number(value) }, (function () {})) }
 
 function setSHOULD_ONLY_REFRESH_ON_CLEAR(value) { chrome.storage.local.set({ SHOULD_ONLY_REFRESH_ON_CLEAR: value }, (function () {})) }
 
