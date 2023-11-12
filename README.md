@@ -52,6 +52,8 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Save and load configuration presets.
 - Almost Abandoned Attic auto-buyer.
 - NeoBuyer+ Mail updates on development.
+- Wait times to circumvent 5 second rule desyncs.
+- Restock only on shop clears.
 
 ## Included Features
 
