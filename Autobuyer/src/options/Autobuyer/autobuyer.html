@@ -43,7 +43,6 @@
                         <thead>
                             <th></th><th></th>
                         </thead>
-                        <tr>
                             <tr>
                                 <td>Refresh Time Window:
                                     <span class="tooltiptext">
@@ -88,6 +87,157 @@
                                 </td>
                                 <td><input type="number" id="MAX_REFRESH_STOCKED"></input><span class="notation">ms</span></td>
                             </tr>
+                            <tr>
+                                <td><b>Minimum</b> Five Second Rule Refresh:
+                                    <span class="tooltiptext">Maximum time in milliseconds between refreshes when the shop is stocked.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MIN_FIVE_SECOND_RULE_REFRESH"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Maximum</b> Five Second Rule Refresh:
+                                    <span class="tooltiptext">Maximum time in milliseconds between refreshes when the shop is stocked.
+                                        <br><br> 1 second = 1000
+                                    </span>
+                                </td>
+                                <td><input type="number" id="MAX_FIVE_SECOND_RULE_REFRESH"></input><span class="notation">ms</span></td>
+                            </tr>
+                    </tbody>
+                </table>
+
+                <div class="subcategory-info">Main Shop AutoBuyer Settings</div>
+
+                <table class="table">
+                    <tbody class="main-shop-settings">
+                        <thead>
+                            <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+                        </thead>
+                        <tr>
+                            <td>
+                                Select a Shop to Stock:
+                                <span class="tooltiptext">
+                                    If a store in the list is stocked, NeoBuyer+ will wait the specified number of seconds before moving to the next shop.<br><br>
+                                    It cycles through multiple shops until finding one that's not stocked. <br><br>
+                                    <a href="https://thedailyneopets.com/articles/list-neopian-shops-of-neopia">Neopian Shops IDs</a>
+                                </span>
+                            </td>
+                            <td>
+                                <select id="shopdropdown">
+                                    <option value="1">Food Shop</option>
+                                    <option value="2">Magical Shop</option>
+                                    <option value="3">Toy Shop</option>
+                                    <option value="4">Clothes Shop</option>
+                                    <option value="5">Grooming Shop</option>
+                                    <option value="7">Book Shop</option>
+                                    <option value="8">Collectable Card Shop</option>
+                                    <option value="9">Battle Magic Shop</option>
+                                    <option value="10">Defense Magic Shop</option>
+                                    <option value="12">Garden Centre</option>
+                                    <option value="13">Neopian Pharmacy</option>
+                                    <option value="14">Chocolate Factory</option>
+                                    <option value="15">Bakery</option>
+                                    <option value="16">Healtly Food</option>
+                                    <option value="17">Neopian Gift Shop</option>
+                                    <option value="18">Smoothie Store</option>
+                                    <option value="20">Tropical Food</option>
+                                    <option value="21">Tiki Tack</option>
+                                    <option value="22">Grundos</option>
+                                    <option value="23">Space Weaponry</option>
+                                    <option value="24">Space Armour</option>
+                                    <option value="25">Neopian Petpet Shop</option>
+                                    <option value="26">Robopet Shop</option>
+                                    <option value="27">Rock Pool</option>
+                                    <option value="30">Spooky Food</option>
+                                    <option value="31">Spooky Pets</option>
+                                    <option value="34">Ye Olde Coffee Shop</option>
+                                    <option value="35">Slushie Shop</option>
+                                    <option value="36">Ice Crystal Shop</option>
+                                    <option value="37">	Icy Fun Snow Shop</option>
+                                    <option value="38">Faerieland Bookshop</option>
+                                    <option value="39">Faerie Food</option>
+                                    <option value="40">Faerieland Petpets</option>
+                                    <option value="41">Neopian Furniture</option>
+                                    <option value="42">Tyrannian Food</option>
+                                    <option value="43">Tyrannian Furniture</option>
+                                    <option value="44">Tyrannian Petpets</option>
+                                    <option value="45">Tyrannian Weaponry</option>
+                                    <option value="46">Hubert's Hot Dog</option>
+                                    <option value="47">Pizzaroo</option>
+                                    <option value="48">Usuki Land</option>
+                                    <option value="49">Food of the Lost Desert</option>
+                                    <option value="50">Peopatra's Pet Pets</option>
+                                    <option value="51">Sutek's Scrolls</option>
+                                    <option value="53">Back to School Shop</option>
+                                    <option value="54">Battle Supplies</option>
+                                    <option value="55">Osiri's Pottery</option>
+                                    <option value="56">Merifoods</option>
+                                    <option value="57">Ye Olde Petpets</option>
+                                    <option value="58">Neopian Post Office Kiosk</option>
+                                    <option value="59">Haunted Weaponry</option>
+                                    <option value="60">Spooky Furniture</option>
+                                    <option value="61">Wintery Petpet</option>
+                                    <option value="62">Jelly Food</option>
+                                    <option value="63">Refreshments</option>
+                                    <option value="66">Kiko Lake Treats</option>
+                                    <option value="67">Kiko Lake Carpentry</option>
+                                    <option value="68">Collectable Coins</option>
+                                    <option value="69">Petpet Supplies</option>
+                                    <option value="70">Booktastic Books</option>
+                                    <option value="71">Kreludan Homes</option>
+                                    <option value="72">Cafe Kreludor</option>
+                                    <option value="73">Kayla's Potion Shop</option>
+                                    <option value="74">Darigan Toys</option>
+                                    <option value="75">Faerie Furniture</option>
+                                    <option value="76">Roo Island Marchandise Shop</option>
+                                    <option value="77">Brightvale Books</option>
+                                    <option value="78">The Scrollery</option>
+                                    <option value="79">Brightvale Glaziers</option>
+                                    <option value="80">Brightvale Armoury</option>
+                                    <option value="81">Brightvale Fruits</option>
+                                    <option value="82">Brightvale Motery</option>
+                                    <option value="83">Royal Potionery</option>
+                                    <option value="84">Neopian Music Shop</option>
+                                    <option value="85">Lost Desert Medicine</option>
+                                    <option value="86">Collectable Sea Shells</option>
+                                    <option value="87">Maractite Marvels</option>
+                                    <option value="88">Maraquan Petpets</option>
+                                    <option value="89">Geraptiku Petpets</option>
+                                    <option value="90">Qasalan Delights</option>
+                                    <option value="91">Desert Arms</option>
+                                    <option value="92">Words of Antiquity</option>
+                                    <option value="93">Faerie Weapon Shop</option>
+                                    <option value="94">Illustrious Armoury</option>
+                                    <option value="95">Exquisite Ambrosia</option>
+                                    <option value="96">Magical Marvels</option>
+                                    <option value="97">Legendary Petpets</option>
+                                    <option value="98">Plushie Palace</option>
+                                    <option value="99">Altador Cup Souvenirs</option>
+                                    <option value="100">Wonderous Weaponry</option>
+                                    <option value="101">Exotic Foods</option>
+                                    <option value="102">Remarkable Restoratives</option>
+                                    <option value="103">Fanciful Fauna</option>
+                                    <option value="104">Chesterdrawers' Antiques</option>
+                                    <option value="105">The Crumpetmonger</option>
+                                    <option value="106">Neovian Printing Press</option>
+                                    <option value="107">Prigpants & Swolthy, Tailors</option>
+                                    <option value="108">Mystical Surroundings</option>
+                                    <option value="110">Lampwyck's Lights Fantastic</option>
+                                    <option value="111">Cog's Togs</option>
+                                    <option value="112">Molten Morsels</option>
+                                    <option value="113">Moltaran Petpets</option>
+                                    <option value="114">Moltaran Books</option>
+                                    <option value="116">Springy Things</option>
+                                    <option value="117">Ugga Shinies</option>
+                                </select>
+                            </td>
+                            <td>or</td>
+                            <td><input type="number" id="shopidinput"></input><span class="notation">ID</span></td>
+                            <td>or</td>
+                            <td><input type="number" id="shopnameinput"></input><span class="notation">Name</span></td>
+                            <td colspan="2">
+                                <button class="shopAddButton">+</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

@@ -445,6 +445,11 @@ $("#USE_BLACKLIST")
 
 //######################################################################################################################################
 
+
+function setMIN_FIVE_SECOND_RULE_REFRESH(_) { chrome.storage.local.set({ MIN_FIVE_SECOND_RULE_REFRESH: Number(_) }, (function () {})) }
+
+function setMAX_FIVE_SECOND_RULE_REFRESH(_) { chrome.storage.local.set({ MAX_FIVE_SECOND_RULE_REFRESH: Number(_) }, (function () {})) }
+
 function setSHOULD_USE_NEON(value) { chrome.storage.local.set({ SHOULD_USE_NEON: value }, (function () {})) }
 
 function setPRICING_TYPE(value) { chrome.storage.local.set({ PRICING_TYPE: value }, (function () {})) }
@@ -546,6 +551,18 @@ function setSHOULD_SHARE_EMAIL(value) { chrome.storage.local.set({ SHOULD_SHARE_
 function setSHOULD_SHARE_HISTORY(value) { chrome.storage.local.set({ SHOULD_SHARE_HISTORY: value }, (function () {})) }
 
 function setSHOULD_SHARE_NEOBUYER_MAILS(value) { chrome.storage.local.set({ SHOULD_SHARE_NEOBUYER_MAILS: value }, (function () {})) }
+
+$("#MIN_FIVE_SECOND_RULE_REFRESH").bind("input propertychange", (function() {
+    setMIN_FIVE_SECOND_RULE_REFRESH($("#MIN_FIVE_SECOND_RULE_REFRESH").val())
+}))
+
+$("#MAX_FIVE_SECOND_RULE_REFRESH").bind("input propertychange", (function() {
+    setMAX_FIVE_SECOND_RULE_REFRESH($("#MAX_FIVE_SECOND_RULE_REFRESH").val())
+}))
+
+$("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function() {
+    setMAX_WAIT_PER_REFRESH($("#MAX_WAIT_PER_REFRESH").val())
+}))
 
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function() {
     const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
@@ -857,6 +874,10 @@ resetButton.onclick = function(_) {
     SHOULD_SHOW_CHROME_NOTIFICATIONS: !0,
     PAUSE_AFTER_BUY_MS: 0,
 
+    // AutoBuyer;
+    MIN_FIVE_SECOND_RULE_REFRESH: 5000,
+    MAX_FIVE_SECOND_RULE_REFRESH: 10000,
+
     // AutoPricer;
     SHOULD_USE_NEON: false,
     PRICING_TYPE: "Percentage",
@@ -972,6 +993,12 @@ resetButton.onclick = function(_) {
         .prop("checked", _.SHOULD_GO_FOR_SECOND_MOST_VALUABLE), 
         $("#RESTOCK_LIST").val(_.RESTOCK_LIST.join("\n")), 
 
+        //AutoBuyer Settings;
+        $("#MIN_FIVE_SECOND_RULE_REFRESH").val(_.MIN_FIVE_SECOND_RULE_REFRESH),
+        $("#MAX_FIVE_SECOND_RULE_REFRESH").val(_.MAX_FIVE_SECOND_RULE_REFRESH),
+        $("#MIN_PAGE_LOAD_FAILURES").val(_.MIN_PAGE_LOAD_FAILURES),
+        $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES),
+
         // AutoPricer;
         $("#SHOULD_USE_NEON").prop("checked", _.SHOULD_USE_NEON),
         $("#PRICING_TYPE").val(_.PRICING_TYPE);
@@ -1020,10 +1047,6 @@ resetButton.onclick = function(_) {
         $("#NEOPETS_SECURITY_PIN").val(_.NEOPETS_SECURITY_PIN),
         $("#MIN_WAIT_BEFORE_UPDATE").val(_.MIN_WAIT_BEFORE_UPDATE),
         $("#MAX_WAIT_BEFORE_UPDATE").val(_.MAX_WAIT_BEFORE_UPDATE),
-
-        //AutoBuyer Settings;
-        $("#MIN_PAGE_LOAD_FAILURES").val(_.MIN_PAGE_LOAD_FAILURES),
-        $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES),
 
         //Load and save;
         $("#SHOULD_SHARE_STORES_TO_VISIT").prop("checked", _.SHOULD_SHARE_STORES_TO_VISIT),

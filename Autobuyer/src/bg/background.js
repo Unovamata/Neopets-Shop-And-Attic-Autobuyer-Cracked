@@ -38,6 +38,10 @@ chrome.runtime.onInstalled.addListener(function(e) {
 
 	if(e.reason == "install") {
 		const autoPricerDefaultSettings = {
+			// AutoBuyer;
+			MIN_FIVE_SECOND_RULE_REFRESH: 5000,
+			MAX_FIVE_SECOND_RULE_REFRESH: 10000,
+
 			// AutoPricer;
 			SHOULD_USE_NEON: false,
 			PRICING_TYPE: "Percentage",

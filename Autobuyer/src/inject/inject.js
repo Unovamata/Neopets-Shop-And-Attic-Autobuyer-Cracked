@@ -210,6 +210,8 @@ function topLevelTurbo() {
                 ITEMS_TO_CONSIDER_STOCKED: minItemsToConsiderStocked,
                 MIN_REFRESH_STOCKED: minRefreshIntervalStocked,
                 MAX_REFRESH_STOCKED: maxRefreshIntervalStocked,
+                MIN_FIVE_SECOND_RULE_REFRESH: minFiveSecondRuleRefresh,
+                MAX_FIVE_SECOND_RULE_REFRESH: maxFiveSecondRuleRefresh,
                 MIN_CLICK_ITEM_IMAGE: minClickImageInterval,
                 MAX_CLICK_ITEM_IMAGE: maxClickImageInterval,
                 MIN_CLICK_CONFIRM: minClickConfirmInterval,
@@ -246,11 +248,14 @@ function topLevelTurbo() {
                 maxHagglingTimeout = maxOCRDetectionInterval,
                 isRunningOnScheduledTime = false,
                 isBannerDisplaying = false,
-                confirmWindowInteral = 50;
+                confirmWindowInteral = 50,
+                refreshIfCleared = false;
 
             // Run the AutoBuyer
             RunAutoBuyer();
             
+            function GetRandomFloat(min, max) { return Math.floor(Math.random() * (max - min) + min); }
+
             function RunAutoBuyer() {
                 if (IsHaggling()) {
                     if(!isAutoBuyerEnabled) return;
@@ -283,7 +288,10 @@ function topLevelTurbo() {
                             SaveToPurchaseHistory(itemName, seller, "-", "Five second rule");
                             UpdateBannerAndDocument("Five second rule", "Attempted to purchase an item within 5 seconds of a different purchase");
 
-                            window.history.back();
+                            // Wait time for five second rules as they are desynced;
+                            setTimeout(() => {
+                                window.history.back();
+                            }, GetRandomFloat(minFiveSecondRuleRefresh, maxFiveSecondRuleRefresh));
                         } 
                         
                         // Inventory full;
@@ -417,7 +425,7 @@ function topLevelTurbo() {
                             }
 
                             function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min) + min); }
-
+                            
                             
 
                             var captchaElement, imageLoadingTime;

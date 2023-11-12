@@ -60,13 +60,35 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
 
 /* Properties specific to .button */
 .button {
-    margin: 10px 10px; /* Add space to the top and bottom, and center horizontally */    
+    margin: 10px 10px;
     height: 40px;
     font-size: 20px;
 }
 
 .button:hover {
     background-color: #46acff; /* Grey color on hover */
+}
+
+/* Common properties for .button and .reset */
+.shopAddButton {
+    width: 60%;
+    border-radius: 100px;
+    background-color: #2196F3;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-family: 'Cafeteria', sans-serif;
+    transition: background-color 0.3s ease;
+    height: 50%;
+    font-size: 22px;
+}
+
+.shopAddButton:hover {
+    background-color: #46acff;
 }
 
 /* Common properties for .button and .reset */
