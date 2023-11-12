@@ -250,6 +250,19 @@
                             <th></th><th></th>
                         </thead>
                         <tr>
+                            <td>Refresh Shop <b>Only</b> When Cleared:
+                                <span class="tooltiptext">
+                                    If active, NeoBuyer+ will target profitable items exclusively based on its custom item database.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_ONLY_REFRESH_ON_CLEAR" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 Store Numbers to Cycle Through When Stocked:
                                 <span class="tooltiptext">
@@ -268,19 +281,6 @@
                             </td>
                             <td><input type="number" id="ITEMS_TO_CONSIDER_STOCKED"></input><span class="notation">items = stocked shop</span></td>
                         </tr>
-                        <!--<tr>
-                            <td>Send Bought Items to the Safety Deposit Box:
-                                <span class="tooltiptext">
-                                    If enabled, purchased items will be sent to your safety deposit box.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="SEND_TO_SDB_AFTER_PURCHASE" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                        </tr>-->
                         <tr>
                             <td>Use Item Database Value Estimates:
                                 <span class="tooltiptext">

@@ -212,6 +212,7 @@ function topLevelTurbo() {
                 MAX_REFRESH_STOCKED: maxRefreshIntervalStocked,
                 MIN_FIVE_SECOND_RULE_REFRESH: minFiveSecondRuleRefresh,
                 MAX_FIVE_SECOND_RULE_REFRESH: maxFiveSecondRuleRefresh,
+                SHOULD_ONLY_REFRESH_ON_CLEAR: shouldOnlyRefreshOnClear,
                 MIN_CLICK_ITEM_IMAGE: minClickImageInterval,
                 MAX_CLICK_ITEM_IMAGE: maxClickImageInterval,
                 MIN_CLICK_CONFIRM: minClickConfirmInterval,
@@ -249,7 +250,6 @@ function topLevelTurbo() {
                 isRunningOnScheduledTime = false,
                 isBannerDisplaying = false,
                 confirmWindowInteral = 50,
-                refreshIfCleared = false;
 
             // Run the AutoBuyer
             RunAutoBuyer();
@@ -1057,6 +1057,14 @@ function topLevelTurbo() {
                         UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minRefreshIntervalStocked, maxRefreshIntervalStocked)) + " to reload page...");
                        
                         setTimeout(() => {
+                            // If the bot should only refresh if the shop is cleared and the shop is not cleared, then stop refreshing;
+                            if(shouldOnlyRefreshOnClear){
+                                if(currentStockedItems > 0){
+                                    UpdateBannerStatus("Shop Stocked, Stopping. Refreshing Only on Clears.");
+                                    return;
+                                }
+                            }
+
                             // Handle cycling through shops
                             if (storesToCycle.length === 0) {
                                 location.reload();

@@ -41,6 +41,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			// AutoBuyer;
 			MIN_FIVE_SECOND_RULE_REFRESH: 5000,
 			MAX_FIVE_SECOND_RULE_REFRESH: 10000,
+			SHOULD_ONLY_REFRESH_ON_CLEAR: false,
 
 			// AutoPricer;
 			SHOULD_USE_NEON: false,

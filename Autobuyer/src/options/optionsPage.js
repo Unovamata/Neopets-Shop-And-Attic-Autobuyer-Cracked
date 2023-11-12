@@ -450,6 +450,8 @@ function setMIN_FIVE_SECOND_RULE_REFRESH(_) { chrome.storage.local.set({ MIN_FIV
 
 function setMAX_FIVE_SECOND_RULE_REFRESH(_) { chrome.storage.local.set({ MAX_FIVE_SECOND_RULE_REFRESH: Number(_) }, (function () {})) }
 
+function setSHOULD_ONLY_REFRESH_ON_CLEAR(value) { chrome.storage.local.set({ SHOULD_ONLY_REFRESH_ON_CLEAR: value }, (function () {})) }
+
 function setSHOULD_USE_NEON(value) { chrome.storage.local.set({ SHOULD_USE_NEON: value }, (function () {})) }
 
 function setPRICING_TYPE(value) { chrome.storage.local.set({ PRICING_TYPE: value }, (function () {})) }
@@ -559,6 +561,11 @@ $("#MIN_FIVE_SECOND_RULE_REFRESH").bind("input propertychange", (function() {
 $("#MAX_FIVE_SECOND_RULE_REFRESH").bind("input propertychange", (function() {
     setMAX_FIVE_SECOND_RULE_REFRESH($("#MAX_FIVE_SECOND_RULE_REFRESH").val())
 }))
+
+$("#SHOULD_ONLY_REFRESH_ON_CLEAR").on("change", function() {
+    const isChecked = $("#SHOULD_ONLY_REFRESH_ON_CLEAR").is(":checked");
+    setSHOULD_ONLY_REFRESH_ON_CLEAR(isChecked);
+});
 
 $("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function() {
     setMAX_WAIT_PER_REFRESH($("#MAX_WAIT_PER_REFRESH").val())
@@ -877,6 +884,7 @@ resetButton.onclick = function(_) {
     // AutoBuyer;
     MIN_FIVE_SECOND_RULE_REFRESH: 5000,
     MAX_FIVE_SECOND_RULE_REFRESH: 10000,
+    SHOULD_ONLY_REFRESH_ON_CLEAR: false,
 
     // AutoPricer;
     SHOULD_USE_NEON: false,
@@ -996,6 +1004,7 @@ resetButton.onclick = function(_) {
         //AutoBuyer Settings;
         $("#MIN_FIVE_SECOND_RULE_REFRESH").val(_.MIN_FIVE_SECOND_RULE_REFRESH),
         $("#MAX_FIVE_SECOND_RULE_REFRESH").val(_.MAX_FIVE_SECOND_RULE_REFRESH),
+        $("#SHOULD_ONLY_REFRESH_ON_CLEAR").prop("checked", _.SHOULD_ONLY_REFRESH_ON_CLEAR),
         $("#MIN_PAGE_LOAD_FAILURES").val(_.MIN_PAGE_LOAD_FAILURES),
         $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES),
 
