@@ -1,5 +1,8 @@
 var errorRefreshed = false;
 
+function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min) + min); }
+function GetRandomFloat(min, max) { return Math.random() * (max - min) + min; }
+
 function topLevelTurbo() {
     // Updates the page's title;
     function UpdateDocument(title, message) {
@@ -257,7 +260,7 @@ function topLevelTurbo() {
             // Run the AutoBuyer
             RunAutoBuyer();
             
-            function GetRandomFloat(min, max) { return Math.random() * (max - min) + min; }
+            
 
             function RunAutoBuyer() {
                 if (IsHaggling()) {
@@ -421,10 +424,6 @@ function topLevelTurbo() {
                             
                                 return closestDigit;
                             }
-
-                            function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min) + min); }
-                            
-                            
 
                             var captchaElement, imageLoadingTime;
 
