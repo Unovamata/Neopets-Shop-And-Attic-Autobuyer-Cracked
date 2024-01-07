@@ -42,9 +42,15 @@ function injectToolbar() {
     <div class="toolbar">
         <div class = "toolbar-pattern"></div>
         <span class="github-btn">
-            <a class="gh-btn" href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked" rel="noopener noreferrer" target="_blank" aria-label="Star Star Unovamata/https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked On Github">
+            <a class="gh-btn" href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked" rel="noopener noreferrer" target="_blank" aria-label="Star Unovamata/https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked On Github">
                 <span class="gh-ico" aria-hidden="true"></span>
                 <span class="gh-text">Star</span>
+            </a>
+        </span>
+        <span class="github-btn">
+            <a class="gh-btn" href="https://www.buymeacoffee.com/unovamata" rel="noopener noreferrer" target="_blank" aria-label="Buy Me A Coffee">
+                <span class="coffee-ico" aria-hidden="true"></span>
+                <span class="gh-text">Donate</span>
             </a>
         </span>
 
@@ -58,7 +64,7 @@ function injectToolbar() {
             <a href="${atticUrl}" class = "toolbar-category">
                 <img  class = "toolbar-icon" src="${atticIconUrl}"> 
             AutoAttic </a>
-
+            
             <a href="${autopricerUrl}" class = "toolbar-category">
                 <img  class = "toolbar-icon" src="${npIconUrl}"> 
             AutoPricer </a>
