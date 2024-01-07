@@ -55,6 +55,13 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			FIXED_PRICING_VALUE: 1000,
 			MIN_FIXED_PRICING: 200,
 			MAX_FIXED_PRICING: 800,
+
+			// AutoKQ;
+
+			START_AUTOKQ_PROCESS: false,
+			AUTOKQ_STATUS: "Inactive",
+			KQ_INVENTORY: [],
+
 		
 			// Shop Wizard;
 			MIN_WAIT_BAN_TIME: 300000,

@@ -65,20 +65,32 @@
         ],
         "all_frames": true,
         "js": [
-            "src/neon.js"
+            "src/neon.js",
+			"src/common/utils.js",
+            "src/inject/autopricer.js"
         ],
         "run_at": "document_end"
     },
 	{
         "matches": [
             "*://www.neopets.com/market.phtml?type=your",
-			"*://www.neopets.com/market.phtml?*",
-			"*://www.neopets.com/shops/wizard.phtml*"
+			"*://www.neopets.com/market.phtml?*"
         ],
         "all_frames": true,
         "js": [
 			"src/common/utils.js",
             "src/inject/autopricer.js"
+        ],
+        "run_at": "document_end"
+    },
+	{
+        "matches": [
+            "*://www.neopets.com/island/kitchen.phtml*"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+            "src/inject/kq.js"
         ],
         "run_at": "document_end"
     },

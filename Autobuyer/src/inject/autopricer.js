@@ -723,40 +723,6 @@ async function RunAutoPricer(){
         //######################################################################################################################################
 
 
-        // Waits for an element to appear on the page. Can search JQuery and IDs;
-        function WaitForElement(selector, index = 0) {
-            return new Promise((resolve) => {
-                const intervalId = setInterval(() => {
-                    let element;
-
-                    // Choosing between JQuery or ID selection;
-                    switch (index) {
-                        default:
-                            element = document.querySelector(selector);
-                            break;
-
-                        case 1:
-                            element = document.getElementById(selector);
-                            break;
-
-                        case 2:
-                            // This case returns a NodeList, not a single element
-                            const elements = document.querySelectorAll(selector);
-                            if (elements.length > 0) {
-                                element = elements[0];
-                            }
-                            break;
-                    }
-
-                    if (element) {
-                        clearInterval(intervalId);
-                        resolve(element); // Resolve with the found element
-                    }
-                }, 1000);
-            });
-        }
-
-
         // Waits 'X' amount of milliseconds. 'await Sleep(min, max)';
         function Sleep(min, max, showConsoleMessage = true) {
             const milliseconds = GetRandomFloat(min, max);

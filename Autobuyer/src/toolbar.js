@@ -8,7 +8,9 @@ const srcPath = scriptUrl.substring(0, scriptUrl.indexOf("src") + 3);
 const logoUrl = `${srcPath}/logo.png`;
 const shopIconUrl = `${srcPath}/toolbar/shop-icon.svg`;
 const atticIconUrl = `${srcPath}/toolbar/mypets-icon.svg`;
+const swIconUrl = `${srcPath}/toolbar/sw-icon.svg`;
 const npIconUrl = `${srcPath}/toolbar/np-icon.svg`;
+const tpIconUrl = `${srcPath}/toolbar/tradingpost-icon.png`;
 const sdbIconUrl = `${srcPath}/toolbar/safetydeposit-icon.svg`;
 const historyIconUrl = `${srcPath}/toolbar/transferlog-icon.svg`;
 const toolsIconUrl = `${srcPath}/toolbar/settings-icon.svg`;
@@ -26,6 +28,7 @@ const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
 const autobuyerUrl = `${srcPath}/options/Autobuyer/autobuyer.html`;
 const atticUrl = `${srcPath}/options/attic.html`;
 const autopricerUrl = `${srcPath}/options/Autopricer/autopricer.html`;
+const autoKQURL = `${srcPath}/options/AutoKQ/autokq.html`;
 const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
@@ -65,9 +68,26 @@ function injectToolbar() {
                 <img  class = "toolbar-icon" src="${atticIconUrl}"> 
             AutoAttic </a>
             
-            <a href="${autopricerUrl}" class = "toolbar-category">
-                <img  class = "toolbar-icon" src="${npIconUrl}"> 
-            AutoPricer </a>
+            <div class="toolbar-category">
+                <a>
+                    <img class="toolbar-icon" src="${swIconUrl}">
+                    AutoSW
+                    <img  class = "dropdown-arrow" src="${dropdownIconUrl}">
+                </a>
+                <div class="hover-menu">
+                    <ul>
+                        <li>
+                            <a href="${autopricerUrl}" class = "toolbar-category dropdown-category">
+                                <img  class = "dropdown-icon" src="${npIconUrl}"> 
+                            AutoPricer </a>
+                        </li>
+                        <li><a href="${autoKQURL}" class = "toolbar-category dropdown-category">
+                            <img  class = "dropdown-icon" src="${tpIconUrl}"> 
+                            AutoKQ </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
             <!--<a href="${autosdbUrl}" class = "toolbar-category"> 
                 <img  class = "toolbar-icon" src="${sdbIconUrl}"> 

@@ -204,6 +204,68 @@ function getSHOULD_SUBMIT_AUTOMATICALLY(callback) {
     });
 }
 
+
+//######################################################################################################################################
+//// AutoKQ Variable Calling
+
+function setAUTOKQ_STATUS(value) {
+    chrome.storage.local.set({ AUTOKQ_STATUS: value }, function () {});
+}
+
+function getAUTOKQ_STATUS(callback) {
+    chrome.storage.local.get(['AUTOKQ_STATUS'], function (result) {
+        const value = result.AUTOKQ_STATUS;
+
+        // Check if value is undefined or null, and set it to false
+        if (value === undefined || value === null) {
+            setAUTOKQ_STATUS("Inactive");
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function setSTART_AUTOKQ_PROCESS(value) {
+    chrome.storage.local.set({ START_AUTOKQ_PROCESS: value }, function () {});
+}
+
+function getSTART_AUTOKQ_PROCESS(trueCallback, falseCallback) {
+    chrome.storage.local.get(['START_AUTOKQ_PROCESS'], function (result) {
+        const value = result.START_AUTOKQ_PROCESS;
+
+        if (value === true && typeof trueCallback === 'function') {
+            trueCallback();
+        } else if (value === false && typeof falseCallback === 'function') {
+            falseCallback();
+        }
+    });
+}
+
+function setKQ_INVENTORY(value) {
+    return new Promise((resolve) => {
+        chrome.storage.local.set({ KQ_INVENTORY: value }, function () {
+            resolve();
+        });
+    });
+}
+
+function getKQ_INVENTORY(callback) {
+    chrome.storage.local.get(['KQ_INVENTORY'], async function (result) {
+        const value = result.KQ_INVENTORY;
+
+        if(value == undefined || value == null){
+            await setKQ_INVENTORY([]);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+
 //######################################################################################################################################
 // Page Error Handling;
 
@@ -257,6 +319,39 @@ function HandleServerErrors() {
 }
 
 HandleServerErrors();
+
+// Waits for an element to appear on the page. Can search JQuery and IDs;
+function WaitForElement(selector, index = 0) {
+    return new Promise((resolve) => {
+        const intervalId = setInterval(() => {
+            let element;
+
+            // Choosing between JQuery or ID selection;
+            switch (index) {
+                default:
+                    element = document.querySelector(selector);
+                    break;
+
+                case 1:
+                    element = document.getElementById(selector);
+                    break;
+
+                case 2:
+                    // This case returns a NodeList, not a single element
+                    const elements = document.querySelectorAll(selector);
+                    if (elements.length > 0) {
+                        element = elements[0];
+                    }
+                    break;
+            }
+
+            if (element) {
+                clearInterval(intervalId);
+                resolve(element); // Resolve with the found element
+            }
+        }, 1000);
+    });
+}
 
 
 //######################################################################################################################################

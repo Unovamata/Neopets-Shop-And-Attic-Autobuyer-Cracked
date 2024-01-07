@@ -3,7 +3,7 @@ function getSTART_AUTOPRICING_PROCESS(callback) {
         const value = result.START_AUTOPRICING_PROCESS;
 
         if (typeof callback === 'function') {
-        callback(value);
+            callback(value);
         }
     });
 }
