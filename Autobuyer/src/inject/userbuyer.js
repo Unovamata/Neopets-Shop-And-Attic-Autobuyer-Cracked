@@ -4,7 +4,12 @@ getSTART_AUTOKQ_PROCESS(async function(isActive){
     await getKQ_INVENTORY(async function(ingredients){
         if(document.body.textContent.includes("Item not found!") || 
         document.body.textContent.includes("Sorry - The owner of this shop has been frozen!")) {
-            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${ingredients[0]}`;
+            if(ingredients.length > 0){
+                window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${ingredients[0]}`;
+            } else {
+                setSUBMIT_AUTOKQ_PROCESS(true);
+                window.location.href = 'https://www.neopets.com/island/kitchen.phtml';
+            }
         }
 
         // Find the anchor element
@@ -20,7 +25,7 @@ getSTART_AUTOKQ_PROCESS(async function(isActive){
         if (buyLink) {
             const buyIngredientURL = DecodeLink(buyLink.href);
 
-            if (ingredients.length > 1) {
+            if (ingredients.length > 0) {
                 var newIngredientsList = [...ingredients];
                 var removedIngredient = newIngredientsList.shift();
 
