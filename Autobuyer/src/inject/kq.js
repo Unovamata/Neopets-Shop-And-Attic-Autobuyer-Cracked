@@ -36,8 +36,7 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
 
             await setKQ_INVENTORY(itemArray);
 
-            const url = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
-            window.open(url, '_blank');
+            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
             setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
         });
 
