@@ -480,6 +480,7 @@ async function RunAutoPricer(){
             });
         }
 
+        // PressSearch(); Press the search button in the SW page;
         async function PressSearch(){
             // Click the button for the search;
             WaitForElement(".button-search-white", 0).then((searchButton) => {
@@ -489,6 +490,7 @@ async function RunAutoPricer(){
             await Sleep(sleepInSWPageMin, sleepInSWPageMax);
         }
 
+        // PressResubmit(); Press the "Resubmit" button in the SW page;
         async function PressResubmit(){
             // The amount of times the extension should search for lower prices;
             for(var i = 1; i <= resubmitPresses; i++){
@@ -514,6 +516,7 @@ async function RunAutoPricer(){
                         var bannedMinutes = contents.replace("I am too busy right now, please come back in about ", "");
                         bannedMinutes = Number(bannedMinutes.replace(" minutes and I can help you out.", "")) * 6000;
                         setAUTOPRICER_STATUS(`Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
+                        setAUTOKQ_STATUS("Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...");
 
                         window.alert(
                             "You are currently Shop Wizard Banned.\n\n" +
@@ -526,7 +529,8 @@ async function RunAutoPricer(){
                         // Sleep for the SW banned minutes and refresh the window;
                         await Sleep(bannedMinutes + Number(sleepIfBannedMin), bannedMinutes + Number(sleepIfBannedMax))
                         resolve();
-                        setAUTOPRICER_STATUS(`Shop Wizard is Usable Again! Refreshing...`);
+                        setAUTOPRICER_STATUS(`Shop Wizard is Usable Again!`);
+                        setAUTOKQ_STATUS("Shop Wizard is Usable Again!");
                         window.location.reload();
                     }
                 }
@@ -740,13 +744,18 @@ async function RunAutoPricer(){
             });
         }
 
+        // Setting KQ Searches for AutoBuying;
         async function KQSearch(){
+            await CheckForBan();
+            
             await PressSearch();
 
             await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
             // The amount of times the extension should search for lower prices;
             await PressResubmit();
+
+            setAUTOKQ_STATUS("Search Successful! Choosing Lowest Price...");
 
             // Getting the lowest price;
             WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
