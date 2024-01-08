@@ -19,8 +19,6 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
 
         if(!submitIngredients) window.location.reload();
         getSUBMIT_AUTOKQ_PROCESS(async function(isDone){
-            console.log(isDone);
-
             if(isDone){
                 submitIngredients.click();
                 setSUBMIT_AUTOKQ_PROCESS(false);
@@ -38,7 +36,8 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
 
             await setKQ_INVENTORY(itemArray);
 
-            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
+            const url = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
+            window.open(url, '_blank');
             setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
         });
 

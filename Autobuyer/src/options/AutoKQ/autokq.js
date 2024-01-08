@@ -66,7 +66,7 @@ function StartAutoKQ(){
     setSUBMIT_AUTOKQ_PROCESS(false);
     setAUTOKQ_STATUS("Navigating to the KQ Page...");
 
-    chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: false });
+    chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: true });
 
     setAUTOKQ_STATUS("AutoKQ Process Running...");
 }
