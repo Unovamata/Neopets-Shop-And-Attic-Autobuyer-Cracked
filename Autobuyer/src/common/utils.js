@@ -231,14 +231,16 @@ function setSTART_AUTOKQ_PROCESS(value) {
     chrome.storage.local.set({ START_AUTOKQ_PROCESS: value }, function () {});
 }
 
-function getSTART_AUTOKQ_PROCESS(trueCallback, falseCallback) {
+function getSTART_AUTOKQ_PROCESS(callback) {
     chrome.storage.local.get(['START_AUTOKQ_PROCESS'], function (result) {
         const value = result.START_AUTOKQ_PROCESS;
 
-        if (value === true && typeof trueCallback === 'function') {
-            trueCallback();
-        } else if (value === false && typeof falseCallback === 'function') {
-            falseCallback();
+        if(value == undefined || value == null){
+            setSTART_AUTOKQ_PROCESS(false);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
         }
     });
 }

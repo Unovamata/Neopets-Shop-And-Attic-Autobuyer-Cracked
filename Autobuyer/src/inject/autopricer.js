@@ -17,6 +17,9 @@ async function RunAutoPricer(){
         MIN_FIXED_PRICING: 200,
         MAX_FIXED_PRICING: 800,
 
+        // AutoKQ;
+        START_AUTOKQ_PROCESS: false,
+
         // Shop Wizard;
         MIN_WAIT_BAN_TIME: 300000,
         MAX_WAIT_BAN_TIME: 900000,
@@ -67,6 +70,9 @@ async function RunAutoPricer(){
 			FIXED_PRICING_VALUE: fixedPricingDeduction,
 			MIN_FIXED_PRICING: minFixedPricingDeduction,
 			MAX_FIXED_PRICING: maxFixedPricingDeduction,
+
+            // AutoKQ;
+            START_AUTOKQ_PROCESS: isKQRunning,
 
             // Shop Wizard;
             MIN_WAIT_BAN_TIME: sleepIfBannedMin,
@@ -193,7 +199,7 @@ async function RunAutoPricer(){
 
 
         // A list separated from the shop list so the system knows what to price;
-        var autoPricingList = []; 
+        var autoPricingList = [];   
 
         getSTART_AUTOPRICING_PROCESS(
             function() {
@@ -201,12 +207,17 @@ async function RunAutoPricer(){
                 * pricing the "AutoPricerInventory" list, saving its values and updating them with the lowest
                 * prices available;
                 */
-                StartSWPricing();
-            }, function() {
+                StartSWPricing();      
+            }, async function() {
                 /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
                 * This function either loads or submits prices depending on the current state of the AutoPricer;
                 */
-                StartInventoryScrapingOrSubmitting();
+                if(isKQRunning){
+                    await KQSearch();
+                } else {
+                    StartInventoryScrapingOrSubmitting();
+                }
+                
             }
         );
 
@@ -310,11 +321,7 @@ async function RunAutoPricer(){
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
                     // Click the button for the search;
-                    WaitForElement(".button-search-white", 0).then((searchButton) => {
-                        searchButton.click();
-                    });
-
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+                    PressSearch();
                     
                     // Checking if the search was made correctly;
                     WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
@@ -329,15 +336,7 @@ async function RunAutoPricer(){
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
                     // The amount of times the extension should search for lower prices;
-                    for(var i = 1; i <= resubmitPresses; i++){
-                        await CheckForBan();
-
-                        await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
-
-                        WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
-                            resubmitButton.click();
-                        });
-                    }
+                    PressResubmit();
 
                     // Getting the lowest price;
                     WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
@@ -479,6 +478,28 @@ async function RunAutoPricer(){
                     })
                 });
             });
+        }
+
+        async function PressSearch(){
+            // Click the button for the search;
+            WaitForElement(".button-search-white", 0).then((searchButton) => {
+                searchButton.click();
+            });
+
+            await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+        }
+
+        async function PressResubmit(){
+            // The amount of times the extension should search for lower prices;
+            for(var i = 1; i <= resubmitPresses; i++){
+                await CheckForBan();
+
+                await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
+
+                WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
+                    resubmitButton.click();
+                });
+            }
         }
 
         async function CheckForBan(){
@@ -716,6 +737,24 @@ async function RunAutoPricer(){
                 });
 
                 resolve();
+            });
+        }
+
+        async function KQSearch(){
+            await PressSearch();
+
+            await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+
+            // The amount of times the extension should search for lower prices;
+            await PressResubmit();
+
+            // Getting the lowest price;
+            WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
+                var aElement = searchResults.parentElement.querySelector('a');
+
+                aElement.click();
+
+                console.log(aElement);
             });
         }
 

@@ -106,6 +106,17 @@
 			"src/neopets_auctions_comma_separate.js"
         ],
         "run_at": "document_end"
+    },
+	{
+        "matches": [
+            "*://www.neopets.com/browseshop.phtml?owner=*"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+			"src/inject/userbuyer.js"
+        ],
+        "run_at": "document_end"
     }
 	]
 }
