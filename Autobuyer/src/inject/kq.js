@@ -1,5 +1,9 @@
 getSTART_AUTOKQ_PROCESS(function(isActive){
     if(!isActive) return;
+    if(document.body.textContent.includes("Sorry, there is a limit of 10 quests per day.")){
+        setSTART_AUTOKQ_PROCESS(false);
+        return;
+    }
 
     // Kitchen Quest Auto Solver
     startButton = document.getElementById("kitchen2");
