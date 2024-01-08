@@ -45,6 +45,12 @@ setInterval(UpdateGUIData, 500);
 
 //######################################################################################################################################
 
+const KQpageButton = document.getElementById("page");
+
+KQpageButton.addEventListener('click', function() {
+    chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: true });
+});
+
 
 const startAutoPricingButton = document.getElementById("start");
 startAutoPricingButton.addEventListener('click', StartAutoKQ);

@@ -19,6 +19,8 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
 
         if(!submitIngredients) window.location.reload();
         getSUBMIT_AUTOKQ_PROCESS(async function(isDone){
+            console.log(isDone);
+
             if(isDone){
                 submitIngredients.click();
                 setSUBMIT_AUTOKQ_PROCESS(false);
