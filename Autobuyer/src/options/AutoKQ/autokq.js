@@ -57,6 +57,7 @@ function StartAutoKQ(){
     setSUBMIT_PRICES_PROCESS(false);
     setSTART_AUTOPRICING_PROCESS(false);
     setSTART_AUTOKQ_PROCESS(true);
+    setSUBMIT_AUTOKQ_PROCESS(false);
     setAUTOKQ_STATUS("Navigating to the KQ Page...");
 
     chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: false });
@@ -75,6 +76,7 @@ function CancelAutoPricer(){
         setSUBMIT_PRICES_PROCESS(false);
         setNEXT_PAGE_INDEX(0);
 
+        setSUBMIT_AUTOKQ_PROCESS(false);
         setSTART_AUTOKQ_PROCESS(false);
         setAUTOKQ_STATUS("Inactive");
     }

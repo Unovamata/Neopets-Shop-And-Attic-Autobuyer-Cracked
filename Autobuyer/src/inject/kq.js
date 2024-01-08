@@ -18,19 +18,29 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
         setAUTOKQ_STATUS("Waiting for Ingredients...");
 
         if(!submitIngredients) window.location.reload();
+        getSUBMIT_AUTOKQ_PROCESS(async function(isDone){
+            if(isDone){
+                submitIngredients.click();
+                setSUBMIT_AUTOKQ_PROCESS(false);
+                window.location.reload();
+                return;
+            }
 
-        var ingredients = await WaitForElement('.ingredient-grid', 0);
-        var items = ingredients.querySelectorAll("b");
-        var itemArray = [];
+            var ingredients = await WaitForElement('.ingredient-grid', 0);
+            var items = ingredients.querySelectorAll("b");
+            var itemArray = [];
 
-        items.forEach(function(element) {
-            itemArray.push(element.innerText);
+            items.forEach(function(element) {
+                itemArray.push(element.innerText);
+            });
+
+            await setKQ_INVENTORY(itemArray);
+
+            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
+            setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
         });
 
-        await setKQ_INVENTORY(itemArray);
-
-        window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
-        setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
+        
     }
 
 

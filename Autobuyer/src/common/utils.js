@@ -245,6 +245,24 @@ function getSTART_AUTOKQ_PROCESS(callback) {
     });
 }
 
+function setSUBMIT_AUTOKQ_PROCESS(value) {
+    chrome.storage.local.set({ SUBMIT_AUTOKQ_PROCESS: value }, function () {});
+}
+
+function getSUBMIT_AUTOKQ_PROCESS(callback) {
+    chrome.storage.local.get(['SUBMIT_AUTOKQ_PROCESS'], function (result) {
+        const value = result.SUBMIT_AUTOKQ_PROCESS;
+
+        if(value == undefined || value == null){
+            setSUBMIT_AUTOKQ_PROCESS(false);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 function setKQ_INVENTORY(value) {
     return new Promise((resolve) => {
         chrome.storage.local.set({ KQ_INVENTORY: value }, function () {

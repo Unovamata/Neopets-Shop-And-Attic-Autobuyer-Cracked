@@ -61,6 +61,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			START_AUTOKQ_PROCESS: false,
 			AUTOKQ_STATUS: "Inactive",
 			KQ_INVENTORY: [],
+			SUBMIT_AUTOKQ_PROCESS: false,
 
 		
 			// Shop Wizard;
