@@ -4,9 +4,14 @@ getSTART_AUTOKQ_PROCESS(async function(isActive){
     
     await getKQ_INVENTORY(async function(ingredients){
 
+        function PageIncludes(input){
+            return document.body.textContent.includes(input);
+        }
+
         // If the item has been sold out or the owner has been frozen, search them again;
-        if(document.body.textContent.includes("Item not found!") || 
-        document.body.textContent.includes("Sorry - The owner of this shop has been frozen!")) {
+        if(PageIncludes("Item not found!") || 
+        PageIncludes("Sorry - The owner of this shop has been frozen!") ||
+        PageIncludes("There are no items for sale in this shop!")) {
             setAUTOKQ_STATUS("Shop Owner Either Frozen or the Item Just Sold Out, Restarting Search...");
 
             // If there are ingredients to search left, then go to the SW after purchase;
