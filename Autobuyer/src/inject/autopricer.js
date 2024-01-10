@@ -321,7 +321,7 @@ async function RunAutoPricer(){
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
                     // Click the button for the search;
-                    PressSearch();
+                    await PressSearch();
                     
                     // Checking if the search was made correctly;
                     WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
@@ -336,7 +336,7 @@ async function RunAutoPricer(){
                     await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
                     // The amount of times the extension should search for lower prices;
-                    PressResubmit();
+                    await PressResubmit();
 
                     // Getting the lowest price;
                     WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {

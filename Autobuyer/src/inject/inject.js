@@ -5,23 +5,30 @@ function GetRandomFloat(min, max) { return Math.random() * (max - min) + min; }
 
 function topLevelTurbo() {
     // Updates the page's title;
-    function UpdateDocument(title, message) {
+    function UpdateDocument(title, message, shouldSendMessage) {
         // Update the document title to uppercase
-        document.title = title.toUpperCase();
+        chrome.storage.local.get({
+            SHOULD_CHANGE_DOCUMENT_DATA: false,
+        }, (function(autobuyerVariables) {
+            // Update the document title to uppercase
+            if(autobuyerVariables.SHOULD_CHANGE_DOCUMENT_DATA) document.title = title.toUpperCase();
 
-        message = `${message} - ${new Date().toLocaleString()}`;
+            if(shouldSendMessage){
+                message = `${message} - ${new Date().toLocaleString()}`;
         
-        // Send a message to the Chrome runtime
-        chrome.runtime.sendMessage({
-            neobuyer: "NeoBuyer",
-            type: "Notification",
-            notificationObject: {
-            type: "basic",
-            title: title,
-            message: message,
-            iconUrl: "../../icons/icon48.png",
-            },
-        });
+                // Send a message to the Chrome runtime
+                chrome.runtime.sendMessage({
+                    neobuyer: "NeoBuyer",
+                    type: "Notification",
+                    notificationObject: {
+                    type: "basic",
+                    title: title,
+                    message: message,
+                    iconUrl: "../../icons/icon48.png",
+                    },
+                });
+            }
+        }));
     }
 
     var startGlobalTime = performance.now();
@@ -52,7 +59,7 @@ function topLevelTurbo() {
 
                 // Captcha;
                 if (indexOfMessage === 2) {
-                    UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+                    UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.", true);
                     return;
                 } else { // Refresh on page errors;
                     function executeOnceAndPreventReexecution() {
@@ -649,7 +656,7 @@ function topLevelTurbo() {
                                     selectedName = items[bestItemIndices[0]].name;
                                 } else if (isBuyingSecondMostProfitable) {
                                     selectedName = items[bestItemIndices[1]].name;
-                                    console.warn("Skipping the first most valuable item: " + items[bestItemIndices[0]].name);
+                                    //console.warn("Skipping the first most valuable item: " + items[bestItemIndices[0]].name);
                                 } else {
                                     selectedName = items[bestItemIndices[0]].name;
                                 }
@@ -838,8 +845,8 @@ function topLevelTurbo() {
                 }
             }
 
-            function UpdateBannerAndDocument(e, n) {
-                UpdateBannerStatus(e), UpdateDocument(e, n)
+            function UpdateBannerAndDocument(title, message) {
+                UpdateBannerStatus(title), UpdateDocument(title, message, true);
             }
 
             function AutoRefreshAttic() {
@@ -953,7 +960,7 @@ function topLevelTurbo() {
                 if(selectedName && isBuyingSecondMostProfitable){
                     if(filteredItems.length > 1){
                         selectedName = filteredItems[1];
-                        console.log("Going for the second best item");
+                        //console.log("Going for the second best item");
                     } else if (filteredItems.length == 1){
                         selectedName = filteredItems[0];
                     }
@@ -992,10 +999,10 @@ function topLevelTurbo() {
                 if (isSendingEmail) {
                     window.emailjs.send(emailServiceID, emailTemplate, emailData, emailUserID).then(
                         function (response) {
-                            console.log("Email sent!", response.status, response.text);
+                            //console.log("Email sent!", response.status, response.text);
                         },
                         function (error) {
-                            console.error("Failed to send email...", error);
+                            //console.error("Failed to send email...", error);
                         }
                     );
                 }
@@ -1024,7 +1031,7 @@ function topLevelTurbo() {
                 } else {
                     // Calculate the number of stocked items
                     currentStockedItems = Array.from(document.querySelectorAll(".item-img")).length;
-                    document.title = currentStockedItems + " stocked items";
+                    UpdateDocument(currentStockedItems + " stocked items", "", false);
 
                     // If the bot should only refresh if the shop is cleared and the shop is not cleared, then stop refreshing;
                     if(shouldOnlyRefreshOnClear){
@@ -1131,7 +1138,7 @@ function topLevelTurbo() {
                         
                         try{
                             if (itemData["Rarity"] == undefined || itemData["Price"] == undefined) {
-                                console.warn("Item not found in the database or price not available.");
+                                //console.warn("Item not found in the database or price not available.");
                                 itemProfits.push(buyUnknownItemsIfProfitMargin);
                             } else {
                                 const itemPrice = itemData.Price;
