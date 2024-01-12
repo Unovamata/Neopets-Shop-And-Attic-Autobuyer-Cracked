@@ -150,6 +150,7 @@ function showOrHide() {
     $("#ENABLED").is(":checked") ? $(".main-shop-settings").show() : $(".main-shop-settings").hide();
     $("#SHOULD_ENTER_PIN").is(":checked") ? $(".enter-pin").show() : $(".enter-pin").hide();
     $("#USE_BLACKLIST_SW").is(":checked") ? $(".blacklist-sw").show() : $(".blacklist-sw").hide();
+    $("#USE_BLACKLIST_KQ").is(":checked") ? $(".blacklist-kq").show() : $(".blacklist-kq").hide();
     $("#SHOULD_SUBMIT_AUTOMATICALLY").is(":checked") ? $(".submit-automatically").show() : $(".submit-automatically").hide();
     $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
     
@@ -445,6 +446,7 @@ $("#USE_BLACKLIST")
 
 //######################################################################################################################################
 
+// AutoBuyer Setters;
 
 function setMIN_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({ MIN_FIVE_SECOND_RULE_REFRESH: Number(value) }, (function () {})) }
 
@@ -453,6 +455,8 @@ function setMAX_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({ MAX
 function setSHOULD_ONLY_REFRESH_ON_CLEAR(value) { chrome.storage.local.set({ SHOULD_ONLY_REFRESH_ON_CLEAR: value }, (function () {})) }
 
 function setSHOULD_CHANGE_DOCUMENT_DATA(value) { chrome.storage.local.set({ SHOULD_CHANGE_DOCUMENT_DATA: value }, (function () {})) }
+
+// AutoPricer Setters;
 
 function setSHOULD_USE_NEON(value) { chrome.storage.local.set({ SHOULD_USE_NEON: value }, (function () {})) }
 
@@ -538,6 +542,16 @@ function setMAX_WAIT_BAN_TIME(value) { chrome.storage.local.set({ MAX_WAIT_BAN_T
 
 function setMIN_PAGE_LOAD_FAILURES(value) { chrome.storage.local.set({ MIN_PAGE_LOAD_FAILURES: value }, (function () {})) }
 
+// AutoKQ Setters;
+
+function setKQ_RESUBMITS_PER_ITEM(value) { chrome.storage.local.set({ KQ_RESUBMITS_PER_ITEM: value }, (function () {})) }
+
+function setUSE_BLACKLIST_KQ(value) { chrome.storage.local.set({ USE_BLACKLIST_KQ: value }, (function () {})) }
+
+function setBLACKLIST_KQ(value) { chrome.storage.local.set({ BLACKLIST_KQ: value }, (function () {})) }
+
+// Miscellaneous Setters;
+
 function setSHOULD_SHARE_STORES_TO_VISIT(value) { chrome.storage.local.set({ SHOULD_SHARE_STORES_TO_VISIT: value }, (function () {})) }
 
 function setSHOULD_SHARE_RESTOCK_LIST(value) { chrome.storage.local.set({ SHOULD_SHARE_RESTOCK_LIST: value }, (function () {})) }
@@ -556,6 +570,8 @@ function setSHOULD_SHARE_HISTORY(value) { chrome.storage.local.set({ SHOULD_SHAR
 
 function setSHOULD_SHARE_NEOBUYER_MAILS(value) { chrome.storage.local.set({ SHOULD_SHARE_NEOBUYER_MAILS: value }, (function () {})) }
 
+// AutoBuyer Setters;
+
 $("#MIN_FIVE_SECOND_RULE_REFRESH").bind("input propertychange", (function() {
     setMIN_FIVE_SECOND_RULE_REFRESH($("#MIN_FIVE_SECOND_RULE_REFRESH").val())
 }))
@@ -573,6 +589,8 @@ $("#SHOULD_CHANGE_DOCUMENT_DATA").on("change", function() {
     const isChecked = $("#SHOULD_CHANGE_DOCUMENT_DATA").is(":checked");
     setSHOULD_CHANGE_DOCUMENT_DATA(isChecked);
 });
+
+// AutoPricer Data Binding;
 
 $("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function() {
     setMAX_WAIT_PER_REFRESH($("#MAX_WAIT_PER_REFRESH").val())
@@ -772,6 +790,33 @@ $("#MAX_FIXED_PRICING").bind("input propertychange", (function() {
     setMAX_FIXED_PRICING($("#MAX_FIXED_PRICING").val())
 }))
 
+// AutoKQ Data Binding;
+
+$("#KQ_RESUBMITS_PER_ITEM").bind("input propertychange", (function() {
+    setRESUBMITS_PER_ITEM($("#KQ_RESUBMITS_PER_ITEM").val())
+}))
+
+$("#USE_BLACKLIST_KQ").bind("input propertychange", (function() {
+    const isChecked = $("#USE_BLACKLIST_KQ").is(":checked");
+    setUSE_BLACKLIST_SW(isChecked);
+    showOrHide();
+}))
+
+$("#BLACKLIST_KQ").bind("input propertychange", (function() {
+    try {
+        setBLACKLIST_SW($("#BLACKLIST_KQ")
+            .val()
+            .split("\n")
+            .map((_ => _.trim()))
+            .filter((_ => "" != _)))
+    } catch (_) {
+        window.alert("Error in parsing your blacklist: " + _)
+    }
+}))
+
+
+// Miscellaneous Data Binding;
+
 $("#SHOULD_SHARE_STORES_TO_VISIT").bind("input propertychange", (function() {
     const isChecked = $("#SHOULD_SHARE_STORES_TO_VISIT").is(":checked");
     setSHOULD_SHARE_STORES_TO_VISIT(isChecked);
@@ -906,6 +951,11 @@ resetButton.onclick = function(_) {
     FIXED_PRICING_VALUE: 1000,
     MIN_FIXED_PRICING: 200,
     MAX_FIXED_PRICING: 800,
+
+    // AutoKQ
+    KQ_RESUBMITS_PER_ITEM: 3,
+    USE_BLACKLIST_KQ: false,
+    BLACKLIST_KQ: ["Yellow Negg", "Purple Negg", "Green Negg", "Partitioned Negg", "Super Icy Negg"],
 
     // Shop Wizard;
     MIN_WAIT_BAN_TIME: 300000,
@@ -1044,6 +1094,11 @@ resetButton.onclick = function(_) {
         $("#MAX_BLACKLIST_ITEM_WAIT").val(_.MAX_BLACKLIST_ITEM_WAIT),
         $("#USE_BLACKLIST_SW").prop("checked", _.USE_BLACKLIST_SW),
         $("#BLACKLIST_SW").val(_.BLACKLIST_SW.join("\n")), 
+
+        // SW Settings;
+        $("#KQ_RESUBMITS_PER_ITEM").val(_.KQ_RESUBMITS_PER_ITEM),
+        $("#USE_BLACKLIST_KQ").prop("checked", _.USE_BLACKLIST_KQ),
+        $("#BLACKLIST_KQ").val(_.BLACKLIST_KQ.join("\n")), 
 
         // Shop Stock Page Settings;
         $("#SHOULD_SUBMIT_AUTOMATICALLY").prop("checked", _.SHOULD_SUBMIT_AUTOMATICALLY),

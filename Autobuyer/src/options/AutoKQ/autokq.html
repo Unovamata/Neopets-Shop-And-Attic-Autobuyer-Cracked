@@ -29,10 +29,11 @@
 
                 <!--Options-->
                 <div id="autopricer-options-container">
-                    <div class="subcategory-info">Pricing Settings</div>
+
+                    <div class="subcategory-info">Shop Wizard Settings</div>
 
                     <table class="table">
-                        <tbody class="autopricer-settings">
+                        <tbody class="main-shop-settings">
                             <thead>
                                 <th></th><th></th>
                             </thead>
@@ -50,16 +51,6 @@
                                     </label>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="subcategory-info">Shop Wizard Settings</div>
-
-                    <table class="table">
-                        <tbody class="main-shop-settings">
-                            <thead>
-                                <th></th><th></th>
-                            </thead>
                             <tr>
                                 <td><b>Minimum</b> Wait Time if Shop Wizard Banned:
                                     <span class="tooltiptext">
@@ -99,12 +90,12 @@
                                 <td><input type="number" id="MAX_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td>Resubmits per Item:
+                                <td><b>AutoKQ</b> Resubmits per Item:
                                     <span class="tooltiptext">
                                         The amount of times the AutoPricer must press the "Resubmit" button.
                                     </span>
                                 </td>
-                                <td><input type="number" min="0" id="RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
+                                <td><input type="number" min="0" id="KQ_RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
                             </tr>
                             <tr>
                                 <td><b>Minimum</b> Cooldown per Action:
@@ -159,6 +150,23 @@
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_NEW_SEARCH_WAIT_TIME"></input><span class="notation">ms</span></td>
+                            </tr>
+                            <tr>
+                                <td>Use a Blacklist of Items to not Auto Price:
+                                    <span class="tooltiptext">This blacklist skips items with names that match the entries in the list.<br><br>
+                                        This is helpful for avoiding incorrect pricing of items with similar names to others</span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="USE_BLACKLIST_KQ" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="blacklist-kq">
+                                <td>Blacklist:
+                                </td>
+                                <td><textarea rows="10" cols="40" id="BLACKLIST_KQ"></textarea></td>
                             </tr>
                         </tbody>
                     </table>
