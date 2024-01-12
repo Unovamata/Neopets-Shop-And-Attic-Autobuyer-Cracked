@@ -45,21 +45,26 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
             setAUTOKQ_STATUS("Waiting for Ingredients...");
 
             // Adding the ingredients to a search list;
-
             items.forEach(function(element) {
                 itemArray.push(element.innerText);
             });
             
-            await setKQ_INVENTORY(itemArray);
-
+            
             var questContainsBlacklistedItem = false;
 
             getBLACKLIST_KQ(function(blacklist){
-                var questContainsBlacklistedItem = false;
-                if(ArrayHasCommonElement(itemArray, blacklist)){
-
-                }
+                questContainsBlacklistedItem = ArrayHasCommonElement(itemArray, blacklist);
             });
+
+            // If the quest asks for blacklisted items, halt the process;
+            if(questContainsBlacklistedItem){
+                window.alert("Blacklisted Item Detected in Quest!\n\nThis quest involves a blacklisted item and as a result, the AutoKQ process will be halted. You may consider reactivating AutoKQ once the quest expires or, alternatively, removing the blacklisted item to proceed with this specific quest.")
+                setAUTOKQ_STATUS("Blacklisted Item Detected... Quest Cancelled!");
+                setSUBMIT_AUTOKQ_PROCESS(false);
+                return;
+            }
+
+            await setKQ_INVENTORY(itemArray);
             
 
             // Launching the SW;
