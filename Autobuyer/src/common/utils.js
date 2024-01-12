@@ -529,3 +529,20 @@ function getIS_NEW_MAIL_INBOX(callback) {
         }
     });
 }
+
+//######################################################################################################################################
+
+
+//Page management;
+function ShowOrHideLoading(status){
+    const loadingIcon = document.getElementById("loading");
+
+    loadingIcon.style.width = '1.6%';
+    loadingIcon.style.height = '1.6%';
+
+    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!") || status.includes("Sleep") || status.includes("Stopped") || status.includes("Cancelled")){
+        loadingIcon.style.visibility = 'hidden';
+    } else {
+        loadingIcon.style.visibility = 'visible';
+    }
+}

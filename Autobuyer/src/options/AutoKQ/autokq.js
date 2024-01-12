@@ -12,7 +12,7 @@ function getSTART_AUTOKQ_PROCESS(callback) {
 
 
 const statusTag = document.getElementById("status-tag");
-const loadingIcon = document.getElementById("loading");
+
 
 getAUTOKQ_STATUS(function (status){
     ShowOrHideLoading(status);
@@ -25,17 +25,6 @@ function UpdateGUIData() {
         ShowOrHideLoading(status);
         statusTag.textContent = status;
     });
-}
-
-function ShowOrHideLoading(status){
-    loadingIcon.style.width = '1.6%';
-    loadingIcon.style.height = '1.6%';
-
-    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!") || status.includes("Sleep") || status.includes("Stopped")){
-        loadingIcon.style.visibility = 'hidden';
-    } else {
-        loadingIcon.style.visibility = 'visible';
-    }
 }
 
 // Updates the page's data every half a second when opened and needed;

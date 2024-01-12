@@ -52,24 +52,24 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
             
             var questContainsBlacklistedItem = false;
 
-            getBLACKLIST_KQ(function(blacklist){
+            getBLACKLIST_KQ(async function(blacklist){
                 questContainsBlacklistedItem = ArrayHasCommonElement(itemArray, blacklist);
+
+                // If the quest asks for blacklisted items, halt the process;
+                if(questContainsBlacklistedItem){
+                    setAUTOKQ_STATUS("Blacklisted Item Detected... Quest Cancelled!");
+                    setSUBMIT_AUTOKQ_PROCESS(false);
+                    window.alert("Blacklisted Item Detected in Quest!\n\nThis quest involves a blacklisted item and as a result, the AutoKQ process will be halted. You may consider reactivating AutoKQ once the quest expires or, alternatively, removing the blacklisted item to proceed with this specific quest.")
+                    return;
+                }
+
+                await setKQ_INVENTORY(itemArray);
+                
+
+                // Launching the SW;
+                window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
+                setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
             });
-
-            // If the quest asks for blacklisted items, halt the process;
-            if(questContainsBlacklistedItem){
-                window.alert("Blacklisted Item Detected in Quest!\n\nThis quest involves a blacklisted item and as a result, the AutoKQ process will be halted. You may consider reactivating AutoKQ once the quest expires or, alternatively, removing the blacklisted item to proceed with this specific quest.")
-                setAUTOKQ_STATUS("Blacklisted Item Detected... Quest Cancelled!");
-                setSUBMIT_AUTOKQ_PROCESS(false);
-                return;
-            }
-
-            await setKQ_INVENTORY(itemArray);
-            
-
-            // Launching the SW;
-            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
-            setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
         });
     }
 });

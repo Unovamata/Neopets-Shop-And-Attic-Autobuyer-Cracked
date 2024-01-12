@@ -311,17 +311,6 @@ function UpdateGUIData() {
     });
 }
 
-function ShowOrHideLoading(status){
-    loadingIcon.style.width = '1.6%';
-    loadingIcon.style.height = '1.6%';
-
-    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!") || status.includes("Sleep") || status.includes("Stopped")){
-        loadingIcon.style.visibility = 'hidden';
-    } else {
-        loadingIcon.style.visibility = 'visible';
-    }
-}
-
 // Updates the page's data every half a second when opened and needed;
 setInterval(UpdateGUIData, 500);
 
@@ -359,15 +348,11 @@ function StartAutoPricer(){
     setSTART_AUTOPRICING_PROCESS(true);
     setCURRENT_PRICING_INDEX(0);
 
-    // Function to create a new tab if swTab is null
-    function CreateNewTab() {
-        chrome.tabs.create({ url: 'https://www.neopets.com/shops/wizard.phtml', active: false }, function (tab) {
-            swTab = tab;
-        });
-    }
+    setSUBMIT_AUTOKQ_PROCESS(false);
+    setSTART_AUTOKQ_PROCESS(false);
 
-    // Check if swTab is null and create a new tab if necessary
-    CreateNewTab();
+    // Function to create a new tab if swTab is null
+    chrome.tabs.create({ url: 'https://www.neopets.com/shops/wizard.phtml', active: true });
 
     setAUTOPRICER_STATUS("AutoPricer Process Running...");
 }
@@ -384,6 +369,8 @@ function CancelAutoPricer(){
         setCURRENT_PRICING_INDEX(0);
         setSUBMIT_PRICES_PROCESS(false);
         setNEXT_PAGE_INDEX(0);
+        setSUBMIT_AUTOKQ_PROCESS(false);
+        setSTART_AUTOKQ_PROCESS(false);
         setAUTOPRICER_STATUS("Inactive");
     }
 }
