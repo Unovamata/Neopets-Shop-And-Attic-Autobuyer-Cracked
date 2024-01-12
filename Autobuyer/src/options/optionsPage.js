@@ -798,13 +798,13 @@ $("#KQ_RESUBMITS_PER_ITEM").bind("input propertychange", (function() {
 
 $("#USE_BLACKLIST_KQ").bind("input propertychange", (function() {
     const isChecked = $("#USE_BLACKLIST_KQ").is(":checked");
-    setUSE_BLACKLIST_SW(isChecked);
+    setUSE_BLACKLIST_KQ(isChecked);
     showOrHide();
 }))
 
 $("#BLACKLIST_KQ").bind("input propertychange", (function() {
     try {
-        setBLACKLIST_SW($("#BLACKLIST_KQ")
+        setBLACKLIST_KQ($("#BLACKLIST_KQ")
             .val()
             .split("\n")
             .map((_ => _.trim()))
