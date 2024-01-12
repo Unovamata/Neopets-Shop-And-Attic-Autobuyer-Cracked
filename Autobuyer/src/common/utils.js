@@ -285,6 +285,20 @@ function getKQ_INVENTORY(callback) {
     });
 }
 
+function getBLACKLIST_KQ(callback) {
+    chrome.storage.local.get(['BLACKLIST_KQ'], async function (result) {
+        const value = result.BLACKLIST_KQ;
+
+        if(value == undefined || value == null){
+            value = [];
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 
 //######################################################################################################################################
 // Page Error Handling;
@@ -362,7 +376,23 @@ function WaitForElement(selector, index = 0) {
                     if (elements.length > 0) {
                         element = elements[0];
                     }
-                    break;
+                break;
+
+                case 3:
+                    // This case returns a NodeList, not a single element
+                    element = document.querySelectorAll(selector);
+                break;
+
+                case 4:
+                    const allElements = document.querySelectorAll('*');
+
+                    for (const selectedElement of allElements) {
+                        // Check if the element's text content contains the target text
+                        if (selectedElement.textContent.includes(selector)) {
+                            element = selectedElement;
+                        }
+                    }
+                break;
             }
 
             if (element) {
@@ -371,6 +401,10 @@ function WaitForElement(selector, index = 0) {
             }
         }, 1000);
     });
+}
+
+function ArrayHasCommonElement(arrayA, arrayB) {
+    return arrayA.some(element => arrayB.includes(element));
 }
 
 

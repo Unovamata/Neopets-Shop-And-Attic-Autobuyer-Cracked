@@ -33,6 +33,7 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
                 submitIngredients.click();
                 setSUBMIT_AUTOKQ_PROCESS(false);
                 setAUTOKQ_STATUS("Quest Completed!");
+                ReadPrizeElement();
                 window.location.reload();
                 return;
             }
@@ -51,13 +52,49 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
             
             await setKQ_INVENTORY(itemArray);
 
+            var questContainsBlacklistedItem = false;
+
+            getBLACKLIST_KQ(function(blacklist){
+                var questContainsBlacklistedItem = false;
+                if(ArrayHasCommonElement(itemArray, blacklist)){
+
+                }
+            });
+            
+
             // Launching the SW;
             window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
             setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
         });
-
-        
     }
-
-
 });
+
+async function ReadPrizeElement(){
+    var prizeElement = await SearchInAllElements(" has gained a ", "You get a", "Neopoints");
+    console.log(prizeElement.textContent);
+}
+
+async function SearchInAllElements(selectorA, selectorB, selectorC){
+    return new Promise((resolve) => {
+        const intervalId = setInterval(async () => {
+            const allElements = await WaitForElement('p', 3);
+            let element;
+
+            for (const selectedElement of allElements) {
+                // Check if the element's text content contains the target text
+                if (selectedElement.textContent.includes(selectorA) ||
+                    selectedElement.textContent.includes(selectorB) ||
+                    selectedElement.textContent.includes(selectorC)) {
+                    element = selectedElement;
+                }
+            }
+
+            clearInterval(intervalId);
+            resolve(element); // Resolve with the found element
+        }, 1000);
+    });
+}
+
+
+
+
