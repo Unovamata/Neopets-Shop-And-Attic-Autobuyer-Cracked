@@ -19,6 +19,7 @@ async function RunAutoPricer(){
 
         // AutoKQ;
         START_AUTOKQ_PROCESS: false,
+        MAX_INSTA_BUY_PRICE: 0,
 
         // Shop Wizard;
         MIN_WAIT_BAN_TIME: 300000,
@@ -73,6 +74,7 @@ async function RunAutoPricer(){
 
             // AutoKQ;
             START_AUTOKQ_PROCESS: isKQRunning,
+            MAX_INSTA_BUY_PRICE: maxInstaBuyPrice,
 
             // Shop Wizard;
             MIN_WAIT_BAN_TIME: sleepIfBannedMin,
@@ -495,6 +497,8 @@ async function RunAutoPricer(){
             // The amount of times the extension should search for lower prices;
             for(var i = 1; i <= resubmitPresses; i++){
                 await CheckForBan();
+                
+                FindLowestPricedShop();
 
                 await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
 
@@ -755,16 +759,31 @@ async function RunAutoPricer(){
             // The amount of times the extension should search for lower prices;
             await PressResubmit();
 
-            setAUTOKQ_STATUS("Search Successful! Choosing Lowest Price...");
+            FindLowestPricedShop(true);
+        }
 
-            // Getting the lowest price;
-            WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
-                var aElement = searchResults.parentElement.querySelector('a');
+        async function FindLowestPricedShop(mustTriggerNavigation = false){
 
-                aElement.click();
+            // Automatically buys an item if its below a certain price threshold;
+            if(isKQRunning){
+                // Getting the lowest price;
+                await WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
+                    // Parsing the string to a number;
+                    var lowestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
+                    // If the price is lower than the insta buy threshold or ultimately the script has to choose a shop, go to the lowest priced shop;
+                    if(lowestPrice <= maxInstaBuyPrice || mustTriggerNavigation){
+                        GoToLowestPricedShop();
+                    }
 
-                console.log(aElement);
-            });
+                    // Choose the 'a' tag to navigate to the shop;
+                    function GoToLowestPricedShop(){
+                        setAUTOKQ_STATUS("Search Successful! Choosing Lowest Price...");
+                        var aElement = searchResults.parentElement.querySelector('a');
+
+                        aElement.click();
+                    }
+                });
+            }
         }
 
 
