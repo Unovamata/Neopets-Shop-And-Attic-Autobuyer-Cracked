@@ -63,6 +63,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			AUTOKQ_STATUS: "Inactive",
 			KQ_INVENTORY: [],
 			SUBMIT_AUTOKQ_PROCESS: false,
+			MAX_INSTA_BUY_PRICE: 0, 
 			KQ_RESUBMITS_PER_ITEM: 3,
     		USE_BLACKLIST_KQ: false,
     		BLACKLIST_KQ: ["Yellow Negg", "Purple Negg", "Green Negg", "Partitioned Negg", "Super Icy Negg"],

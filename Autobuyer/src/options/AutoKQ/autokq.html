@@ -52,6 +52,14 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Maximum Price to <b>Insta-Buying</b>:
+                                    <span class="tooltiptext">
+                                        The amount of times the AutoKQ must press the "Resubmit" button.
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" id="MAX_INSTA_BUY_PRICE"></input><span class="notation">NPs</span></td>
+                            </tr>
+                            <tr>
                                 <td><b>Minimum</b> Wait Time if Shop Wizard Banned:
                                     <span class="tooltiptext">
                                         Minimum wait time in milliseconds added to the Shop Wizard Ban time.<br>
@@ -70,24 +78,6 @@
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_BAN_TIME"></input><span class="notation">ms</span></td>
-                            </tr>
-                            <tr>
-                                <td><b>Minimum</b> Wait Cooldown per Refresh:
-                                    <span class="tooltiptext">
-                                        Minimum wait time in milliseconds between refreshes every time the AutoKQ navigates to the Shop Wizard page.
-                                        <br><br> 1 second = 1000
-                                    </span>
-                                </td>
-                                <td><input type="number" id="MIN_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
-                            </tr>
-                            <tr>
-                                <td><b>Maximum</b> Wait Cooldown per Refresh:
-                                    <span class="tooltiptext">
-                                        Maximum wait time in milliseconds between refreshes every time the AutoKQ navigates to the Shop Wizard page.
-                                        <br><br> 1 second = 1000
-                                    </span>
-                                </td>
-                                <td><input type="number" id="MAX_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
                                 <td><b>AutoKQ</b> Resubmits per Item:
@@ -152,7 +142,7 @@
                                 <td><input type="number" id="MAX_NEW_SEARCH_WAIT_TIME"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td>Use a Blacklist of Items to not Auto Price:
+                                <td>Use a Blacklist of Items to not Buy:
                                     <span class="tooltiptext">This blacklist skips items with names that match the entries in the list.<br><br>
                                         This is helpful for avoiding incorrect pricing of items with similar names to others</span>
                                 </td>
@@ -190,26 +180,6 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td><b>Minimum</b> Typing Speed Cooldown
-                                    <span class="tooltiptext">
-                                        Minimum wait time in milliseconds per character typed.<br>
-                                        This simulates human-like typing.
-                                        <br><br> 1 second = 1000
-                                    </span>
-                                </td>
-                                <td><input type="number" id="MIN_TYPING_SPEED"></input><span class="notation">ms</span></td>
-                            </tr>
-                            <tr>
-                                <td><b>Maximum</b> Typing Speed Cooldown
-                                    <span class="tooltiptext">
-                                        Maximum wait time in milliseconds per character typed.<br>
-                                        This simulates human-like typing.
-                                        <br><br> 1 second = 1000
-                                    </span>
-                                </td>
-                                <td><input type="number" id="MAX_TYPING_SPEED"></input><span class="notation">ms</span></td>
                             </tr>
                         </tbody>
                     </table>

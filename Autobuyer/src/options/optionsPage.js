@@ -550,6 +550,8 @@ function setUSE_BLACKLIST_KQ(value) { chrome.storage.local.set({ USE_BLACKLIST_K
 
 function setBLACKLIST_KQ(value) { chrome.storage.local.set({ BLACKLIST_KQ: value }, (function () {})) }
 
+function setMAX_INSTA_BUY_PRICE(value) { chrome.storage.local.set({ MAX_INSTA_BUY_PRICE: Number(value) }, (function () {})) }
+
 // Miscellaneous Setters;
 
 function setSHOULD_SHARE_STORES_TO_VISIT(value) { chrome.storage.local.set({ SHOULD_SHARE_STORES_TO_VISIT: value }, (function () {})) }
@@ -792,6 +794,10 @@ $("#MAX_FIXED_PRICING").bind("input propertychange", (function() {
 
 // AutoKQ Data Binding;
 
+$("#MAX_INSTA_BUY_PRICE").bind("input propertychange", (function() {
+    setMAX_INSTA_BUY_PRICE($("#MAX_INSTA_BUY_PRICE").val())
+}))
+
 $("#KQ_RESUBMITS_PER_ITEM").bind("input propertychange", (function() {
     setRESUBMITS_PER_ITEM($("#KQ_RESUBMITS_PER_ITEM").val())
 }))
@@ -953,6 +959,7 @@ resetButton.onclick = function(_) {
     MAX_FIXED_PRICING: 800,
 
     // AutoKQ
+    MAX_INSTA_BUY_PRICE: 0, 
     KQ_RESUBMITS_PER_ITEM: 3,
     USE_BLACKLIST_KQ: false,
     BLACKLIST_KQ: ["Yellow Negg", "Purple Negg", "Green Negg", "Partitioned Negg", "Super Icy Negg"],
@@ -1095,7 +1102,8 @@ resetButton.onclick = function(_) {
         $("#USE_BLACKLIST_SW").prop("checked", _.USE_BLACKLIST_SW),
         $("#BLACKLIST_SW").val(_.BLACKLIST_SW.join("\n")), 
 
-        // SW Settings;
+        // KQ Settings;
+        $("#MAX_INSTA_BUY_PRICE").val(_.MAX_INSTA_BUY_PRICE),
         $("#KQ_RESUBMITS_PER_ITEM").val(_.KQ_RESUBMITS_PER_ITEM),
         $("#USE_BLACKLIST_KQ").prop("checked", _.USE_BLACKLIST_KQ),
         $("#BLACKLIST_KQ").val(_.BLACKLIST_KQ.join("\n")), 
