@@ -2,6 +2,7 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
     // Checking if the AutoKQs can be done;
     if(!isActive) return;
     if(document.body.textContent.includes("Sorry, there is a limit of 10 quests per day.")){
+        setAUTOKQ_STATUS("AutoKQ's Tasks have been Completed!");
         setSTART_AUTOKQ_PROCESS(false);
         return;
     }
@@ -75,23 +76,100 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
     }
 });
 
-async function ReadPrizeElement(){
-    var prizeElement = await SearchInAllElements(" has gained a ", "You get a", "Neopoints");
-    console.log(prizeElement.textContent);
+function ReadPrizeElement(){
+    getKQ_TRACKER(async function(tracker){
+        var levelOrHitPointText = " has gained a ", statText = " has become better at ", itemText = "You get a ", neopointsText = "Neopoints";
+        var prizeElement = await SearchInAllElements(levelOrHitPointText, statText, itemText, neopointsText);
+        var prizeText = prizeElement.textContent;
+
+        /* [Level, Hit Points, Strength, Defence, Agility, Items, Neopoints];
+         * KQ_TRACKER: [
+            0 - Level, 
+            1 - Hit Points, 
+            2 - Strength, 
+            3 - Defence, 
+            4 - Agility, 
+            5 - Items,
+            6 - Neopoints]; */
+
+        
+        if(prizeText.includes(levelOrHitPointText)){
+            var statType = ExtractStatGained(prizeText, levelOrHitPointText);
+
+            //Levels;
+            if(statType == "level"){
+                tracker[0] = tracker[0] + 1;
+                console.log("HP attained");
+            } 
+
+            // Hit points;
+            else { 
+                tracker[1] = tracker[1] + 1;
+                console.log("Level attained");
+            }
+        } else if(prizeText.includes(statText)){
+            var statType = ExtractStatGained(prizeText, statText);
+
+            switch(statType){
+                case "strength":
+                    tracker[2] = tracker[2] + 1;
+                    console.log("strength attained");
+                break;
+
+                case "defence":
+                    tracker[3] = tracker[3] + 1;
+                    console.log("defence attained");
+                break;
+
+                case "agility":
+                    tracker[4] = tracker[4] + 1;
+                    console.log("agility attained");
+                break;
+            }
+        } else if(prizeText.includes(itemText)){
+            tracker[5] = tracker[5] + 1;
+            console.log("item attained");
+        } else if(prizeText.includes(neopointsText)){
+            tracker[6] = tracker[6] + 1;
+            console.log("neopoints attained");
+        } else {
+            window.alert("An error occured in the processing of the KQ tracker...")
+        }
+
+        setKQ_TRACKER(tracker);
+
+        function ExtractStatGained(text, keyword) {
+            const index = text.indexOf(keyword);
+            
+            if (index !== -1) {
+                // Remove everything before and including the keyword
+                const result = text.substring(index + keyword.length).trim().replace(".", "").replace("!!!", "");
+                return result;
+            } else {
+                // If the keyword is not found, return the original text
+                return text;
+            }
+        }
+
+        console.log(prizeElement.textContent);
+    });
 }
 
-async function SearchInAllElements(selectorA, selectorB, selectorC){
+async function SearchInAllElements(selectorA, selectorB, selectorC, selectorD) {
     return new Promise((resolve) => {
         const intervalId = setInterval(async () => {
-            const allElements = await WaitForElement('p', 3);
+            const allElements = document.querySelectorAll('p');
             let element;
 
             for (const selectedElement of allElements) {
-                // Check if the element's text content contains the target text
-                if (selectedElement.textContent.includes(selectorA) ||
-                    selectedElement.textContent.includes(selectorB) ||
-                    selectedElement.textContent.includes(selectorC)) {
+                // Check if the element is defined and its text content contains the target text
+                if (selectedElement && 
+                    (selectedElement.textContent.includes(selectorA) ||
+                     selectedElement.textContent.includes(selectorB) ||
+                     selectedElement.textContent.includes(selectorC) || 
+                     selectedElement.textContent.includes(selectorD))) {
                     element = selectedElement;
+                    break; // Stop the loop once a matching element is found
                 }
             }
 
@@ -100,7 +178,3 @@ async function SearchInAllElements(selectorA, selectorB, selectorC){
         }, 1000);
     });
 }
-
-
-
-

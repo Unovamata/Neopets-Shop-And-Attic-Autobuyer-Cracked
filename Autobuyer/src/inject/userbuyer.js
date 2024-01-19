@@ -11,7 +11,8 @@ getSTART_AUTOKQ_PROCESS(async function(isActive){
         // If the item has been sold out or the owner has been frozen, search them again;
         if(PageIncludes("Item not found!") || 
         PageIncludes("Sorry - The owner of this shop has been frozen!") ||
-        PageIncludes("There are no items for sale in this shop!")) {
+        PageIncludes("There are no items for sale in this shop!") ||
+        PageIncludes("This transaction has expired!")) {
             setAUTOKQ_STATUS("Shop Owner Either Frozen or the Item Just Sold Out, Restarting Search...");
 
             // If there are ingredients to search left, then go to the SW after purchase;

@@ -407,6 +407,27 @@ function ArrayHasCommonElement(arrayA, arrayB) {
     return arrayA.some(element => arrayB.includes(element));
 }
 
+function getKQ_TRACKER(){
+    chrome.storage.local.get(['KQ_TRACKER'], async function (result) {
+        var value = result.KQ_TRACKER;
+
+        if(value == undefined || value == null){
+            value = [0, 0, 0, 0, 0, 0, 0];
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function setKQ_TRACKER(value) {
+    return new Promise((resolve) => {
+        chrome.storage.local.set({ KQ_TRACKER: value }, function () {
+            resolve();
+        });
+    });
+}
 
 //######################################################################################################################################
 

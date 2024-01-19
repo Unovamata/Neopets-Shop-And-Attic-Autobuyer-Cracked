@@ -54,7 +54,9 @@
                             <tr>
                                 <td>Maximum Price to <b>Insta-Buying</b>:
                                     <span class="tooltiptext">
-                                        The amount of times the AutoKQ must press the "Resubmit" button.
+                                        When the price of an item falls below this specified amount in a user's shop, the AutoKQ system will purchase that item without any further searches, minimizing the risk of Shop Wizard bans.
+                                        <br><br>If the AutoKQ cannot find a price below this threshold, it will continue searching until an item's price is below this threshold or the amount of resubmits per item has been reached. The SW AutoBuyer will always buy the cheapest item out of all searches done.
+                                        <br><br>If you want to disable this option, set this value to 0.
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" id="MAX_INSTA_BUY_PRICE"></input><span class="notation">NPs</span></td>
