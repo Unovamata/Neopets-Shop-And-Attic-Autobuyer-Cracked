@@ -165,13 +165,9 @@ function topLevelTurbo() {
             MAX_CLICK_CONFIRM: 200,
             MIN_OCR_PAGE: 750,
             MAX_OCR_PAGE: 1100,
-            EMAIL_TEMPLATE: "",
-            EMAIL_USER_ID: "",
-            EMAIL_SERVICE_ID: "",
             SHOULD_CLICK_NEOPET: !0,
             SHOULD_ANNOTATE_IMAGE: !0,
             SHOULD_ENTER_OFFER: !0,
-            SHOULD_SEND_EMAIL: !1,
             SHOULD_GO_FOR_SECOND_MOST_VALUABLE: !1,
             STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
             RUN_BETWEEN_HOURS: [0, 23],
@@ -214,7 +210,6 @@ function topLevelTurbo() {
                 SHOULD_CLICK_NEOPET: isClickingCaptcha,
                 SHOULD_ANNOTATE_IMAGE: isAnnotatingImage,
                 SHOULD_ENTER_OFFER: isEnteringOffer,
-                SHOULD_SEND_EMAIL: isSendingEmail,
                 SHOULD_GO_FOR_SECOND_MOST_VALUABLE: isBuyingSecondMostProfitable,
                 STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: storesToCycle,
                 RUN_BETWEEN_HOURS: runBetweenHours,
@@ -232,9 +227,6 @@ function topLevelTurbo() {
                 MAX_CLICK_CONFIRM: maxClickConfirmInterval,
                 MIN_OCR_PAGE: minOCRDetectionInterval,
                 MAX_OCR_PAGE: maxOCRDetectionInterval,
-                EMAIL_TEMPLATE: emailTemplate,
-                EMAIL_USER_ID: emailUserID,
-                EMAIL_SERVICE_ID: emailServiceID,
                 RESTOCK_LIST: restockList,
                 ATTIC_ENABLED: isAtticEnabled,
                 ATTIC_HIGHLIGHT: isHighlightingItemsInAttic,
@@ -292,8 +284,6 @@ function topLevelTurbo() {
 
                             UpdateBannerAndDocument("Not enough NPs", "Not enough NPs to purchase " + itemName + " from " + seller + ". Pausing.");
                             SaveToPurchaseHistory(itemName, seller, "-", "Not enough neopoints");
-
-                            SendEmail({ status: "missed", item: itemName, notes: message });
                         } 
                         
                         // Five second rule;
@@ -730,12 +720,6 @@ function topLevelTurbo() {
                     // Recently bought item;
                     if (IsItemInInventory()) {
                         var boughtItemElement = document.getElementsByTagName("strong")[0].innerText;
-
-                        var email = {
-                            status: "bought",
-                            item: boughtItemElement,
-                            notes: ""
-                        };
                         
                         UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
                         SaveToPurchaseHistory(boughtItemElement, atticString, "-", "Bought");
@@ -745,8 +729,6 @@ function topLevelTurbo() {
                         }, 120000);
 
                         HighlightItemsInAttic();
-
-                        SendEmail(email);
                     } 
                     
                     // Purchase cooldown;
@@ -976,12 +958,6 @@ function topLevelTurbo() {
 
             function ProcessPurchase() {
                 var itemName = document.querySelector("h2").innerText.replaceAll("Haggle for ", "");
-            
-                SendEmail({
-                    status: "bought",
-                    item: itemName,
-                    notes: ""
-                });
 
                 // Extract shop name
                 var shopName = document.getElementsByTagName("h1")[0].textContent;
@@ -993,19 +969,6 @@ function topLevelTurbo() {
                 SaveToPurchaseHistory(itemName, shopName, purchaseAmount, "Bought");
 
                 ReloadPageBasedOnConditions();
-            }
-
-            function SendEmail(emailData) {
-                if (isSendingEmail) {
-                    window.emailjs.send(emailServiceID, emailTemplate, emailData, emailUserID).then(
-                        function (response) {
-                            //console.log("Email sent!", response.status, response.text);
-                        },
-                        function (error) {
-                            //console.error("Failed to send email...", error);
-                        }
-                    );
-                }
             }
             
             function FormatMillisecondsToSeconds(milliseconds) {

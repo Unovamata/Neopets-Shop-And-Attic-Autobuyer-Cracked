@@ -56,8 +56,6 @@ function setSHOULD_SOUND_ALERTS(_) { chrome.storage.local.set({ SHOULD_SOUND_ALE
 
 function setSHOULD_ENTER_OFFER(_) { chrome.storage.local.set({ SHOULD_ENTER_OFFER: _ }, (function () {})) }
 
-function setSHOULD_SEND_EMAIL(_) { chrome.storage.local.set({ SHOULD_SEND_EMAIL: _ }, (function () {})) }
-
 function setSHOULD_GO_FOR_SECOND_MOST_VALUABLE(_) { chrome.storage.local.set({ SHOULD_GO_FOR_SECOND_MOST_VALUABLE: _ }, (function () {})) }
 
 function setSTORES_TO_CYCLE_THROUGH_WHEN_STOCKED(_) { chrome.storage.local.set({ STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: _ }, (function () {})) }
@@ -77,12 +75,6 @@ function setMAX_CLICK_CONFIRM(_) { chrome.storage.local.set({ MAX_CLICK_CONFIRM:
 function setMIN_OCR_PAGE(_) { chrome.storage.local.set({ MIN_OCR_PAGE: Number(_) }, (function () {})) }
 
 function setMAX_OCR_PAGE(_) { chrome.storage.local.set({ MAX_OCR_PAGE: Number(_) }, (function () {})) }
-
-function setEMAIL_TEMPLATE(_) { chrome.storage.local.set({ EMAIL_TEMPLATE: _ }, (function () {})) }
-
-function setEMAIL_USER_ID(_) { chrome.storage.local.set({ EMAIL_USER_ID: _ }, (function () {})) }
-
-function setEMAIL_SERVICE_ID(_) { chrome.storage.local.set({ EMAIL_SERVICE_ID: _ }, (function () {})) }
 
 function setRESTOCK_LIST(_) { chrome.storage.local.set({ RESTOCK_LIST: _ }, (function () {})) }
 
@@ -145,7 +137,6 @@ function showOrHide() {
     $("#ATTIC_CLICK_ITEM").is(":checked") ? $(".attic-click-hide").show() : $(".attic-click-hide").hide();
     $("#ATTIC_SHOULD_REFRESH").is(":checked") ? $(".attic-refresh-hide").show() : $(".attic-refresh-hide").hide();
     $("#CLICK_CONFIRM").is(":checked") ? $(".confirm-hide").show() : $(".confirm-hide").hide();
-    $("#SHOULD_SEND_EMAIL").is(":checked") ? $(".email-hide").show() : $(".email-hide").hide();
     $("#ATTIC_ENABLED").is(":checked") ? $(".attic-settings").show() : $(".attic-settings").hide();
     $("#ENABLED").is(":checked") ? $(".main-shop-settings").show() : $(".main-shop-settings").hide();
     $("#SHOULD_ENTER_PIN").is(":checked") ? $(".enter-pin").show() : $(".enter-pin").hide();
@@ -360,18 +351,6 @@ $("#USE_BLACKLIST")
     .bind("input propertychange", (function() {
         setMAX_OCR_PAGE($("#MAX_OCR_PAGE")
             .val())
-    })), $("#EMAIL_TEMPLATE")
-    .bind("input propertychange", (function() {
-        setEMAIL_TEMPLATE($("#EMAIL_TEMPLATE")
-            .val())
-    })), $("#EMAIL_USER_ID")
-    .bind("input propertychange", (function() {
-        setEMAIL_USER_ID($("#EMAIL_USER_ID")
-            .val())
-    })), $("#EMAIL_SERVICE_ID")
-    .bind("input propertychange", (function() {
-        setEMAIL_SERVICE_ID($("#EMAIL_SERVICE_ID")
-            .val())
     })), $("#RUN_BETWEEN_HOURS")
     .bind("input propertychange", (function() {
         try {
@@ -433,10 +412,6 @@ $("#USE_BLACKLIST")
     .on("change", (function() {
         setSHOULD_ENTER_OFFER($("#SHOULD_ENTER_OFFER")
             .is(":checked"))
-    })), $("#SHOULD_SEND_EMAIL")
-    .on("change", (function() {
-        setSHOULD_SEND_EMAIL($("#SHOULD_SEND_EMAIL")
-            .is(":checked")), showOrHide()
     })), $("#PAUSE_AFTER_BUY_MS")
     .bind("input propertychange", (function() {
         setPAUSE_AFTER_BUY_MS($("#PAUSE_AFTER_BUY_MS")
@@ -873,14 +848,21 @@ $("#SHOULD_SHARE_NEOBUYER_MAILS").bind("input propertychange", (function() {
 
 
 function confirmReset() {
-    1 == confirm("Are you sure you want to reset all settings and reset your restock list to the default?") ? resetSettings() : console.log("Action cancelled")
+    if (confirm("Are you sure you want to reset all settings and reset your restock list to the default?")) {
+        resetSettings();
+    }
 }
 
 function resetSettings() {
-    chrome.storage.local.remove(["SEND_TO_SDB_AFTER_PURCHASE", "BUY_UNKNOWN_ITEMS_PROFIT", "ITEM_DB_MIN_RARITY", "USE_BLACKLIST", "BLACKLIST", "MIN_REFRESH", "MAX_REFRESH", "MIN_REFRESH_STOCKED", "MAX_REFRESH_STOCKED", "SHOULD_CLICK_NEOPET", "ENABLED", "HIGHLIGHT", "CLICK_ITEM", "CLICK_CONFIRM", "SHOULD_SHOW_BANNER", "SHOULD_ANNOTATE_IMAGE", "SHOULD_SOUND_ALERTS", "SHOULD_ENTER_OFFER", "SHOULD_SEND_EMAIL", "SHOULD_GO_FOR_SECOND_MOST_VALUABLE", "STORES_TO_CYCLE_THROUGH_WHEN_STOCKED", "RUN_BETWEEN_HOURS", "ITEMS_TO_CONSIDER_STOCKED", "MIN_CLICK_ITEM_IMAGE", "MAX_CLICK_ITEM_IMAGE", "MIN_CLICK_CONFIRM", "MAX_CLICK_CONFIRM", "MIN_OCR_PAGE", "MAX_OCR_PAGE", "EMAIL_TEMPLATE", "EMAIL_USER_ID", "EMAIL_SERVICE_ID", "RESTOCK_LIST", "USE_ITEM_DB", "ITEM_DB_MIN_PROFIT_NPS", "ITEM_DB_MIN_PROFIT_PERCENT", "SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES", "SHOULD_SHOW_CHROME_NOTIFICATIONS", "ATTIC_ENABLED", "ATTIC_HIGHLIGHT", "ATTIC_CLICK_ITEM", "ATTIC_ITEM_DB_MIN_PROFIT_NPS", "ATTIC_ITEM_DB_MIN_PROFIT_PERCENT", "ATTIC_MIN_BUY_TIME", "ATTIC_MAX_BUY_TIME", "ATTIC_RUN_BETWEEN_HOURS", "ATTIC_MIN_REFRESH", "ATTIC_MAX_REFRESH", "ATTIC_SHOULD_REFRESH", "ATTIC_LAST_REFRESH_MS", "PAUSE_AFTER_BUY_MS"], (function() {
-        console.log("Settings cleared"), location.reload()
-    }))
+    chrome.storage.local.get(null, function(items) {
+        var keysToRemove = Object.keys(items);
+        chrome.storage.local.remove(keysToRemove, function() {
+            console.log("Settings cleared");
+            location.reload();
+        });
+    });
 }
+
 
 var resetButton = document.getElementById("reset");
 
@@ -911,14 +893,10 @@ resetButton.onclick = function(_) {
     MAX_CLICK_CONFIRM: 200,
     MIN_OCR_PAGE: 750,
     MAX_OCR_PAGE: 1100,
-    EMAIL_TEMPLATE: "",
-    EMAIL_USER_ID: "",
-    EMAIL_SERVICE_ID: "",
     SHOULD_CLICK_NEOPET: !0,
     SHOULD_ANNOTATE_IMAGE: !0,
     SHOULD_SOUND_ALERTS: !0,
     SHOULD_ENTER_OFFER: !0,
-    SHOULD_SEND_EMAIL: !1,
     SHOULD_GO_FOR_SECOND_MOST_VALUABLE: !1,
     STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
     RUN_BETWEEN_HOURS: [0, 23],
@@ -1049,10 +1027,7 @@ resetButton.onclick = function(_) {
         .val(_.MIN_CLICK_CONFIRM), $("#MAX_CLICK_CONFIRM")
         .val(_.MAX_CLICK_CONFIRM), $("#MIN_OCR_PAGE")
         .val(_.MIN_OCR_PAGE), $("#MAX_OCR_PAGE")
-        .val(_.MAX_OCR_PAGE), $("#EMAIL_TEMPLATE")
-        .val(_.EMAIL_TEMPLATE), $("#EMAIL_USER_ID")
-        .val(_.EMAIL_USER_ID), 
-        $("#EMAIL_SERVICE_ID").val(_.EMAIL_SERVICE_ID), 
+        .val(_.MAX_OCR_PAGE), 
         $("#ENABLED").prop("checked", _.ENABLED), $("#HIGHLIGHT")
         .prop("checked", _.HIGHLIGHT), $("#CLICK_ITEM")
         .prop("checked", _.CLICK_ITEM), $("#CLICK_CONFIRM")
@@ -1061,8 +1036,7 @@ resetButton.onclick = function(_) {
         .prop("checked", _.SHOULD_CLICK_NEOPET), $("#SHOULD_ANNOTATE_IMAGE")
         .prop("checked", _.SHOULD_ANNOTATE_IMAGE), $("#SHOULD_SOUND_ALERTS")
         .prop("checked", _.SHOULD_SOUND_ALERTS), $("#SHOULD_ENTER_OFFER")
-        .prop("checked", _.SHOULD_ENTER_OFFER), $("#SHOULD_SEND_EMAIL")
-        .prop("checked", _.SHOULD_SEND_EMAIL), $("#SHOULD_GO_FOR_SECOND_MOST_VALUABLE")
+        .prop("checked", _.SHOULD_ENTER_OFFER), $("#SHOULD_GO_FOR_SECOND_MOST_VALUABLE")
         .prop("checked", _.SHOULD_GO_FOR_SECOND_MOST_VALUABLE), 
         $("#RESTOCK_LIST").val(_.RESTOCK_LIST.join("\n")), 
 
