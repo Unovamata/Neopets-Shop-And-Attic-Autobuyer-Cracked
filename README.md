@@ -70,7 +70,6 @@ Based on the original developer:
 - Scheduled operation between certain hours
 - Ability to view current item database
 - Minimum profit percentage and NPS threshold for purchasing items
-- Email notification for purchased items
 
 
 
