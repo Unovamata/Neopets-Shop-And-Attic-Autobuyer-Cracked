@@ -16,20 +16,20 @@
                 </div>
             </div>
 
-            <button class="button" id="stock"><sub></sub> Kitchen Quester <sup>beta</sup></button>
+            <!--AutoKQ-->
+            <div class="category-info">AutoKQ Controllers</div>
+            <button class="button" id="options"><sub></sub> AutoKQ Options <sup>beta</sup></button>
+            <!--<button class="button" id="history"><sub></sub> History <sup>beta</sup></button>-->
+            <button id="start" class="button">Start AutoKQ</button>
+            <button id="cancel" class="button">Cancel AutoKQ</button>
+            <button id="page" class="button">KQ Page</button>
             <br><br>
+
             <center>
-                <!--AutoKQ-->
-                <div id="shop-stock-container">
-                    <div class="category-info">AutoKQ Controllers</div>
-                    <button id="start" class="autobuyerButton button">Start AutoKQ</button>
-                    <button id="cancel" class="autobuyerButton button">Cancel AutoKQ</button>
-                    <button id="page" class="autobuyerButton button">Kitchen Quest Page</button>
-                </div>
+                <!--<div id="table-container" class="tabcontent table"></div>-->
 
                 <!--Options-->
-                <div id="autopricer-options-container">
-
+                <div id="autokq-options-container">
                     <div class="subcategory-info">Shop Wizard Settings</div>
 
                     <table class="table">
@@ -185,6 +185,7 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
             </center>
 
             <center>
@@ -201,6 +202,8 @@
         <script src="../../toolbar.js"></script>
         <script src="../../common/default_items.js"></script>
         <script src="../../../js/ExtPay.js"></script>
+        <script src="../../../js/sortable.js"></script>
+        <script src="../../common/item_db.js"></script>
         <script src="autokq.js"></script>
         <script src="../optionsPage.js"></script>
     </body>

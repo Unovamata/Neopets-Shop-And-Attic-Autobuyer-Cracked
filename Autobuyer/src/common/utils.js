@@ -407,8 +407,8 @@ function ArrayHasCommonElement(arrayA, arrayB) {
     return arrayA.some(element => arrayB.includes(element));
 }
 
-function getKQ_TRACKER(){
-    chrome.storage.local.get(['KQ_TRACKER'], async function (result) {
+function getKQ_TRACKER(callback){
+    chrome.storage.local.get(['KQ_TRACKER'], function (result) {
         var value = result.KQ_TRACKER;
 
         if(value == undefined || value == null){
