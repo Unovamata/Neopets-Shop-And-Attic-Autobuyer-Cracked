@@ -32,6 +32,7 @@ const autoKQURL = `${srcPath}/options/AutoKQ/autokq.html`;
 const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
+const faqUrl = `${srcPath}/options/Tools/faq.html`;
 const infoUrl = `${srcPath}/options/Tools/info.html`;
 const mailUrl = `${srcPath}/options/Mail/mail.html`;
 
@@ -108,6 +109,10 @@ function injectToolbar() {
                         <li><a href="${databaseUrl}" class = "toolbar-category dropdown-category">
                             <img  class = "dropdown-icon" src="${databaseIconUrl}"> 
                             Database </a>
+                        </li>
+                        <li><a href="${faqUrl}" class = "toolbar-category dropdown-category"> 
+                            <img  class = "dropdown-icon" src="${mailIconUrl}"> 
+                            FAQs </a>
                         </li>
                         <li><a href="${infoUrl}" class = "toolbar-category dropdown-category">
                             <img  class = "dropdown-icon" src="${infoIconUrl}"> 

@@ -77,119 +77,74 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
 });
 
 async function ReadPrizeElement(){
-    return new Promise((resolve) => {
-        getKQ_TRACKER(async function(tracker){
-            var levelOrHitPointText = " has gained a ", statText = " has become better at ", itemText = "You get a ", neopointsText = "Neopoints";
-            var prizeElement = await SearchInAllElements(levelOrHitPointText, statText, itemText, neopointsText);
-            var prizeText = prizeElement.textContent;
-            var petName = document.querySelectorAll('.profile-dropdown-link')[0].textContent;
-            
+    return new Promise(async (resolve) => {
+        var levelOrHitPointText = " has gained a ", statText = " has become better at ", itemText = "You get a ", neopointsText = "Neopoints";
+        var prizeElement = await SearchInAllElements(levelOrHitPointText, statText, itemText, neopointsText);
+        var prizeText = prizeElement.textContent;
+        var petName = document.querySelectorAll('.profile-dropdown-link')[0].textContent;
 
-            /* [Level, Hit Points, Strength, Defence, Agility, Items, Neopoints];
-            * KQ_TRACKER: [
-                0 - Level, 
-                1 - Hit Points, 
-                2 - Strength, 
-                3 - Defence, 
-                4 - Agility, 
-                5 - Items,
-                6 - Neopoints]; */
+        
+        if(prizeText.includes(levelOrHitPointText) || prizeText.includes(statText)){
+            var statType = ExtractStatData(prizeText, levelOrHitPointText);
 
-            
-            if(prizeText.includes(levelOrHitPointText)){
-                var statType = ExtractStatData(prizeText, levelOrHitPointText);
+            SaveToKQTracker(petName, "Stat", statType);
+        } else if(prizeText.includes(itemText)){
+            tracker[5] = tracker[5] + 1;
+            console.log("item attained");
+        } else if(prizeText.includes(neopointsText)){
+            tracker[6] = tracker[6] + 1;
+            console.log("neopoints attained");
+        } else {
+            window.alert("An error occured in the processing of the KQ tracker...")
+        }
 
-                //Levels;
-                if(statType == "Level"){
-                    tracker[0] = tracker[0] + 1;
-                    console.log("HP attained");
-                } 
-
-                // Hit points;
-                else { 
-                    tracker[1] = tracker[1] + 1;
-                    console.log("Level attained");
-                }
-            } else if(prizeText.includes(statText)){
-                var statType = ExtractStatData(prizeText, statText);
-
-                switch(statType){
-                    case "Strength":
-                        SaveToKQTracker();
-                        tracker[2] = tracker[2] + 1;
-                        console.log("strength attained");
-                    break;
-
-                    case "Defence":
-                        tracker[3] = tracker[3] + 1;
-                        console.log("defence attained");
-                    break;
-
-                    case "Agility":
-                        tracker[4] = tracker[4] + 1;
-                        console.log("agility attained");
-                    break;
-                }
-            } else if(prizeText.includes(itemText)){
-                tracker[5] = tracker[5] + 1;
-                console.log("item attained");
-            } else if(prizeText.includes(neopointsText)){
-                tracker[6] = tracker[6] + 1;
-                console.log("neopoints attained");
-            } else {
-                window.alert("An error occured in the processing of the KQ tracker...")
-            }
-
-            setKQ_TRACKER(tracker);
-
-            function SaveToKQTracker(petName, prizeType, prizeName) {
-                getKQ_TRACKER(async function(tracker){
-                    var kqTracker = tracker;
-                    
-                    // Determine the current user's account
-                    const usernameElement = document.querySelector('a.text-muted');
-                    const username = usernameElement.textContent;
-            
-                    var newEntry = {
-                        "Account": username,
-                        "Date & Time": new Date().toLocaleString(),
-                        "Pet Name": petName,
-                        "Type": prizeType,
-                        "Prize": prizeName,
-                    };
-                    
-                    //Saving the new history;
-                    kqTracker.push(newEntry);
-            
-                    await setKQ_TRACKER(kqTracker);
-                });
-            }
-
-            function ExtractStatData(text, keyword) {
-                const index = text.indexOf(keyword);
+        function SaveToKQTracker(petName, prizeType, prizeName) {
+            getKQ_TRACKER(async function(tracker){
+                var kqTracker = tracker;
                 
-                if (index !== -1) {
-                    var result;
+                // Determine the current user's account
+                const usernameElement = document.querySelector('a.text-muted');
+                const username = usernameElement.textContent;
+        
+                var newEntry = {
+                    "Account": username,
+                    "Date & Time": new Date().toLocaleString(),
+                    "Pet Name": petName,
+                    "Type": prizeType,
+                    "Prize": prizeName,
+                };
+                
+                //Saving the new history;
+                kqTracker.push(newEntry);
 
-                    // Remove everything before and including the keyword
-                    result = text.substring(index + keyword.length).trim().replace(".", "").replace("!!!", "");
+                await setKQ_TRACKER(kqTracker);
+            });
+        }
 
-                    return CapitalizeFirstLetter(result);
-                } 
-                // If the keyword is not found, return the original text;
-                else {
-                    return text;
-                }
+        function ExtractStatData(text, keyword) {
+            const index = text.indexOf(keyword);
+            
+            if (index !== -1) {
+                var result;
+
+                // Remove everything before and including the keyword
+                result = text.substring(index + keyword.length).trim().replace(".", "").replace("!!!", "");
+
+                return CapitalizeFirstLetter(result);
+            } 
+            // If the keyword is not found, return the original text;
+            else {
+                return text;
             }
+        }
 
-            function CapitalizeFirstLetter(string) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
-            }
+        function CapitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
 
-            console.log(prizeElement.textContent);
+        console.log(prizeElement.textContent);
 
-            resolve(prizeElement);
-        });
+        resolve(prizeElement);
     }, 1000);
 }
 

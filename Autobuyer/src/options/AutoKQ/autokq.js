@@ -411,9 +411,7 @@ function ProcessItemData(itemArray){
     for(var item of itemArray){
         const itemInfo = item_db[item["Item Name"]];
 
-        if(itemInfo == undefined){
-            item.Rarity = "?";
-        } else {
+        if(itemInfo != undefined){
             // If the item info exists, update price and rarity
             item.Rarity = itemInfo.Rarity;
 
@@ -428,8 +426,6 @@ function ProcessItemData(itemArray){
             // Measuring the profit from the purchase;
             var profit = itemValue - boughtPrice;
             item["Est. Profit"] = CheckIsNaNDisplay(profit, "-", FormatNPNumber(profit));
-            var totalProfitLabel = document.getElementById("total-profit"); 
-            var totalValueLabel = document.getElementById("total-value");
 
             if(!isNaN(profit)) totalProfit += profit;
 
