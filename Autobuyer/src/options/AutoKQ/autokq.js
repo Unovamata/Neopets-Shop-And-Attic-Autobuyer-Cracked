@@ -94,8 +94,8 @@ setInterval(HideKQButtons, 100);
 
 //######################################################################################################################################
 
-/*
-const stockContainer = document.getElementById('table-container');
+
+const stockContainer = document.getElementById('history-container');
 const optionsContainer = document.getElementById('autokq-options-container');
 
 const optionsButton = document.getElementById("options");
@@ -179,7 +179,6 @@ function FormatNPNumber(input) {
 //######################################################################################################################################
 
 
-
 var clearButton = document.getElementById("reset");
 var newTable = document.createElement("table");
 var tableBody = document.createElement("tbody");
@@ -194,7 +193,7 @@ function DisplayTableData(dataArray) {
 
     if (dataArray.length === 0) {
         tableContainer.classList.add("rarity-info");
-        tableContainer.textContent = "No items purchased yet.";
+        tableContainer.textContent = "No Kitchen Quests done yet.";
         clearButton.setAttribute("disabled", true);
         return;
     }
@@ -371,10 +370,10 @@ var currentHistorySize = -1;
 
 function ProcessPurchaseHistory(forceUpdateHistory) {
     chrome.storage.local.get({
-        ITEM_HISTORY: [],
+        KQ_TRACKER: [],
     }, (function(t) {
-        const historySize = t.ITEM_HISTORY.length;
-        var purchaseManager = ManagePurchases(t.ITEM_HISTORY)
+        const historySize = t.KQ_TRACKER.length;
+        var purchaseManager = ManagePurchases(t.KQ_TRACKER)
         var itemData = ProcessItemData(purchaseManager);
 
         if (forceUpdateHistory || currentHistorySize != historySize) {
@@ -538,4 +537,4 @@ function ParseNumericString(inputString) {
 //Update the history data every 5 seconds;
 ProcessPurchaseHistory(false), setInterval((function() {
     ProcessPurchaseHistory(false)
-}), 5e3)*/
+}), 5e3)

@@ -567,3 +567,11 @@ function ShowOrHideLoading(status){
         loadingIcon.style.visibility = 'visible';
     }
 }
+
+
+//######################################################################################################################################
+
+
+function setITEM_HISTORY(itemHistory){
+    chrome.storage.local.set({ ITEM_HISTORY: itemHistory }, function () {});
+}

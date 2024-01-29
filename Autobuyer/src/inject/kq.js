@@ -1,7 +1,3 @@
-getKQ_TRACKER(async function(tracker){
-    console.log(tracker);
-});
-
 getSTART_AUTOKQ_PROCESS(function(isActive){
     // Checking if the AutoKQs can be done;
     if(!isActive) return;
@@ -86,6 +82,8 @@ async function ReadPrizeElement(){
             var levelOrHitPointText = " has gained a ", statText = " has become better at ", itemText = "You get a ", neopointsText = "Neopoints";
             var prizeElement = await SearchInAllElements(levelOrHitPointText, statText, itemText, neopointsText);
             var prizeText = prizeElement.textContent;
+            var petName = document.querySelectorAll('.profile-dropdown-link')[0].textContent;
+            
 
             /* [Level, Hit Points, Strength, Defence, Agility, Items, Neopoints];
             * KQ_TRACKER: [
@@ -99,10 +97,10 @@ async function ReadPrizeElement(){
 
             
             if(prizeText.includes(levelOrHitPointText)){
-                var statType = ExtractStatGained(prizeText, levelOrHitPointText);
+                var statType = ExtractStatData(prizeText, levelOrHitPointText);
 
                 //Levels;
-                if(statType == "level"){
+                if(statType == "Level"){
                     tracker[0] = tracker[0] + 1;
                     console.log("HP attained");
                 } 
@@ -113,20 +111,21 @@ async function ReadPrizeElement(){
                     console.log("Level attained");
                 }
             } else if(prizeText.includes(statText)){
-                var statType = ExtractStatGained(prizeText, statText);
+                var statType = ExtractStatData(prizeText, statText);
 
                 switch(statType){
-                    case "strength":
+                    case "Strength":
+                        SaveToKQTracker();
                         tracker[2] = tracker[2] + 1;
                         console.log("strength attained");
                     break;
 
-                    case "defence":
+                    case "Defence":
                         tracker[3] = tracker[3] + 1;
                         console.log("defence attained");
                     break;
 
-                    case "agility":
+                    case "Agility":
                         tracker[4] = tracker[4] + 1;
                         console.log("agility attained");
                     break;
@@ -143,17 +142,48 @@ async function ReadPrizeElement(){
 
             setKQ_TRACKER(tracker);
 
-            function ExtractStatGained(text, keyword) {
+            function SaveToKQTracker(petName, prizeType, prizeName) {
+                getKQ_TRACKER(async function(tracker){
+                    var kqTracker = tracker;
+                    
+                    // Determine the current user's account
+                    const usernameElement = document.querySelector('a.text-muted');
+                    const username = usernameElement.textContent;
+            
+                    var newEntry = {
+                        "Account": username,
+                        "Date & Time": new Date().toLocaleString(),
+                        "Pet Name": petName,
+                        "Type": prizeType,
+                        "Prize": prizeName,
+                    };
+                    
+                    //Saving the new history;
+                    kqTracker.push(newEntry);
+            
+                    await setKQ_TRACKER(kqTracker);
+                });
+            }
+
+            function ExtractStatData(text, keyword) {
                 const index = text.indexOf(keyword);
                 
                 if (index !== -1) {
+                    var result;
+
                     // Remove everything before and including the keyword
-                    const result = text.substring(index + keyword.length).trim().replace(".", "").replace("!!!", "");
-                    return result;
-                } else {
-                    // If the keyword is not found, return the original text
+                    result = text.substring(index + keyword.length).trim().replace(".", "").replace("!!!", "");
+
+                    return CapitalizeFirstLetter(result);
+                } 
+                // If the keyword is not found, return the original text;
+                else {
                     return text;
                 }
+            }
+
+            function CapitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
             }
 
             console.log(prizeElement.textContent);

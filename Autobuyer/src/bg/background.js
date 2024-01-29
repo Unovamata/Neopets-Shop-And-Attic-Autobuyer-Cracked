@@ -69,7 +69,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
     		BLACKLIST_KQ: ["Yellow Negg", "Purple Negg", "Green Negg", "Partitioned Negg", "Super Icy Negg"],
 
 			// [Level, Hit Points, Strength, Defence, Agility, Items, Neopoints];
-			KQ_TRACKER: [0, 0, 0, 0, 0, 0, 0],
+			KQ_TRACKER: [],
 		
 			// Shop Wizard;
 			MIN_WAIT_BAN_TIME: 300000,

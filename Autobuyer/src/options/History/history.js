@@ -58,7 +58,18 @@ function FormatNPNumber(input) {
 
 
 
-var clearButton = document.getElementById("reset");
+const clearButton = document.getElementById("reset");
+clearButton.addEventListener('click', ClearHistory);
+
+function ClearHistory(){
+    if(confirm("Do you want to delete all entries in your item purchase history?")){
+        if(confirm("Are you sure you want to clear your purchase history? This action cannot be undone unless you have a backup of you configuration presets.")){
+            setITEM_HISTORY([])
+        }
+    }
+}
+
+
 var newTable = document.createElement("table");
 var tableBody = document.createElement("tbody");
 var tableRow = document.createElement("tr");
@@ -632,13 +643,6 @@ function wrapper() {
     
     //Toggling the main tab;
     ToggleTabs("table", "table-container");
-
-    //Clearing purchase history;
-    clearButton.onclick = function(e) {
-        1 == confirm("Are you sure you want to clear your purchase history? This action cannot be undone.") && chrome.storage.local.remove(["ITEM_HISTORY"], (function() {
-            location.reload()
-        }))
-    };
     
     //Update the history data every 5 seconds;
     ProcessPurchaseHistory(false), setInterval((function() {
