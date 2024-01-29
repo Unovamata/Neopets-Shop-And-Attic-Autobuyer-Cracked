@@ -179,7 +179,17 @@ function FormatNPNumber(input) {
 //######################################################################################################################################
 
 
-var clearButton = document.getElementById("reset");
+const clearButton = document.getElementById("resetKQ");
+clearButton.addEventListener('click', ClearKQLog);
+
+function ClearKQLog(){
+    if(confirm("Do you want to delete all entries in your Kitchen Quest Log?")){
+        if(confirm("Are you sure you want to clear your Kitchen Quest Log? This action cannot be undone unless you have a backup of you configuration presets.")){
+            setKQ_TRACKER([])
+        }
+    }
+}
+
 var newTable = document.createElement("table");
 var tableBody = document.createElement("tbody");
 var tableRow = document.createElement("tr");
@@ -227,7 +237,8 @@ function DisplayTableData(dataArray) {
                 
                 // Get the value of the current cell or assign an empty string if undefined
                 var cellValue = dataArray[a][tableRowClone[s]] || "";
-                
+                var prizeType = dataArray[a].Type;
+
                 // Setting the information nodes in the table cells;
                 switch(tableRowClone[s]){
                     case "Date & Time":
@@ -249,26 +260,34 @@ function DisplayTableData(dataArray) {
                         cell.appendChild(statusSpan);
                     break;
 
-                    case "Price":
-                        var priceValue = parseInt(cellValue);
-                        var priceSpan = CheckIsNaNDisplay(priceValue, "-", FormatNPNumber(priceValue));
-                        cell.appendChild(document.createTextNode(priceSpan));
+                    case "Prize":
+                        if(prizeType == "Neopoints"){
+                            var priceValue = parseInt(cellValue);
+                            var priceSpan = CheckIsNaNDisplay(priceValue, "-", FormatNPNumber(priceValue));
+                            cell.appendChild(document.createTextNode(priceSpan));
+                        } else {
+                            cell.appendChild(document.createTextNode(cellValue));
+                        }
                     break;
 
                     case "JN":
-                        // Create the <a> element
-                        var linkElement = document.createElement("a");
-                        linkElement.href = `https://items.jellyneo.net/search/?name=${lastName}&name_type=3`;
+                        if(prizeType == "Item"){
+                            var itemName = dataArray[a].Prize;
 
-                        // Create the <img> element
-                        var imgElement = document.createElement("img");
-                        imgElement.src = "../JN.png";
-                        imgElement.alt = "Info Icon";
+                            // Create the <a> element
+                            var linkElement = document.createElement("a");
+                            linkElement.href = `https://items.jellyneo.net/search/?name=${itemName}&name_type=3`;
 
-                        linkElement.appendChild(imgElement);
+                            // Create the <img> element
+                            var imgElement = document.createElement("img");
+                            imgElement.src = "../JN.png";
+                            imgElement.alt = "Info Icon";
 
-                        cell.appendChild(linkElement);
-                        cell.classList.add('class-JellyNeo');
+                            linkElement.appendChild(imgElement);
+
+                            cell.appendChild(linkElement);
+                            cell.classList.add('class-JellyNeo');
+                        }
                     break;
 
                     default:
@@ -368,13 +387,12 @@ function MakeSortableTable(){
 
 var currentHistorySize = -1;
 
-function ProcessPurchaseHistory(forceUpdateHistory) {
+function ProcessAutoKQLog(forceUpdateHistory) {
     chrome.storage.local.get({
         KQ_TRACKER: [],
     }, (function(t) {
         const historySize = t.KQ_TRACKER.length;
         var purchaseManager = ManagePurchases(t.KQ_TRACKER)
-        var itemData = ProcessItemData(purchaseManager);
 
         if (forceUpdateHistory || currentHistorySize != historySize) {
             currentHistorySize = historySize;
@@ -401,43 +419,6 @@ function ManagePurchases(purchases){
 
 //--------------------------------
 
-var totalProfit = 0, totalValue = 0;
-
-// Processes and formats the item data in the table;
-function ProcessItemData(itemArray){
-    totalProfit = 0;
-    totalValue = 0;
-
-    for(var item of itemArray){
-        const itemInfo = item_db[item["Item Name"]];
-
-        if(itemInfo != undefined){
-            // If the item info exists, update price and rarity
-            item.Rarity = itemInfo.Rarity;
-
-            const boughtPrice = parseInt(item.Price);
-            const itemValue = parseInt(itemInfo.Price);
-            
-            // Measuring the value of the purchase
-            var value = itemValue;
-            item["Est. Value"] = CheckIsNaNDisplay(value, "-", FormatNPNumber(value));
-            if(!isNaN(value)) totalValue += value;
-
-            // Measuring the profit from the purchase;
-            var profit = itemValue - boughtPrice;
-            item["Est. Profit"] = CheckIsNaNDisplay(profit, "-", FormatNPNumber(profit));
-
-            if(!isNaN(profit)) totalProfit += profit;
-
-            item["Price"] = CheckIsNaNDisplay(boughtPrice, "-", boughtPrice);
-        }
-    }
-
-    return totalProfit;
-}
-
-//--------------------------------
-
 //If a value is NaN or not, then it'll display one option or the other;
 function CheckIsNaNDisplay(input, outputTrue, outputFalse){
     return isNaN(input) ? outputTrue : outputFalse;
@@ -446,91 +427,8 @@ function CheckIsNaNDisplay(input, outputTrue, outputFalse){
 
 //######################################################################################################################################
 
-// Calculates profits by time by sorting them;
-function CalculateProfitsByTime(entries, entryType) {
-    const timeProfitMap = new Map;
-
-    // Add profits by time;
-    for(const entry of entries){
-        const time = GetTimeFromEntry(entry["Date & Time"]);
-        // Set to 0 non existant entries, update profits for a specific timeframe;
-        timeProfitMap.set(time, (timeProfitMap.get(time) || 0) + CalculateEstimatedProfit(entry[entryType]));
-    }
-
-    // Creating the sorted graph;
-    const sortedTimeProfitMap = new Map([...timeProfitMap.entries()].sort((entryA, entryB) => {
-        const timeA = entryA[0];
-        const timeB = entryB[0];
-
-        // Checking profits between AM and PM times;
-        if(timeA.includes("A") && !timeB.includes("A")){
-            return -1;
-        } else if(!timeA.includes("A") && timeB.includes("A")){
-            return 1;
-        } else{
-            //Extracting numeric hours;
-            const regex = /(\d+)/;
-            const numericTimeA = Number(timeA.match(regex)[0]);
-            const numericTimeB = Number(timeB.match(regex)[0]);
-
-            if(numericTimeA === 12){
-                return -1;
-            } else if(numericTimeB === 12){
-                return 1;
-            } else {
-                return numericTimeA - numericTimeB;
-            }
-        }
-    }));
-
-    return sortedTimeProfitMap;
-}
-
-// Extract the date and time from a string;
-function GetTimeFromEntry(dateTime){
-    return dateTime.split(" ")[1].split(":")[0] + dateTime.split(" ")[2];
-}
-
-// Calculate profit from string;
-function CalculateEstimatedProfit(profit) {
-    // Check if profit is a valid string
-    if (profit === undefined || profit === null) {
-        return 0; // Return a default value or handle the error as needed
-    }
-
-    const numericProfit = Number(profit.replaceAll(",", ""));
-    return isNaN(numericProfit) ? 0 : numericProfit;
-}
-
-// Parses a date to a specific format;
-function FormatDate(dateString) {
-    const dateComponents = dateString.split("/");
-
-    const month = dateComponents[0];
-    const year = dateComponents[2];
-
-    // Keeping the last two digits from the year;
-    const formattedYear = year.replace(",", "".substring(2));
-
-    return month + "/" + formattedYear;
-}
-
-function ParseNumericString(inputString) {
-    // Check if inputString is valid
-    if (inputString === undefined) {
-        return 0; // Return a default value or handle the error as needed
-    }
-
-    const numbersOnly = inputString.replace(",", "");
-    const number = isNaN(Number(numbersOnly)) ? 0 : Number(numbersOnly);
-    return number;
-}
-
-
-//######################################################################################################################################
-
 
 //Update the history data every 5 seconds;
-ProcessPurchaseHistory(false), setInterval((function() {
-    ProcessPurchaseHistory(false)
+ProcessAutoKQLog(false), setInterval((function() {
+    ProcessAutoKQLog(false)
 }), 5e3)

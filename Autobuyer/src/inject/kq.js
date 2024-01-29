@@ -78,22 +78,34 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
 
 async function ReadPrizeElement(){
     return new Promise(async (resolve) => {
-        var levelOrHitPointText = " has gained a ", statText = " has become better at ", itemText = "You get a ", neopointsText = "Neopoints";
+        var levelOrHitPointText = " has gained a ", statText = " has become better at ", itemText = "You get a ", neopointsText = "You have been given ";
         var prizeElement = await SearchInAllElements(levelOrHitPointText, statText, itemText, neopointsText);
         var prizeText = prizeElement.textContent;
         var petName = document.querySelectorAll('.profile-dropdown-link')[0].textContent;
 
         
-        if(prizeText.includes(levelOrHitPointText) || prizeText.includes(statText)){
-            var statType = ExtractStatData(prizeText, levelOrHitPointText);
+        if(prizeText.includes(levelOrHitPointText)){
+            var statType = ExtractPrizeData(prizeText, levelOrHitPointText);
 
             SaveToKQTracker(petName, "Stat", statType);
-        } else if(prizeText.includes(itemText)){
-            tracker[5] = tracker[5] + 1;
-            console.log("item attained");
-        } else if(prizeText.includes(neopointsText)){
-            tracker[6] = tracker[6] + 1;
-            console.log("neopoints attained");
+        } 
+        
+        else if(prizeText.includes(statText)){
+            var statType = ExtractPrizeData(prizeText, statText);
+
+            SaveToKQTracker(petName, "Stat", statType);
+        }
+        
+        else if(prizeText.includes(itemText)){
+            var itemGiven = ExtractPrizeData(prizeText, itemText);
+
+            SaveToKQTracker("", "Item", itemGiven);
+        } 
+        
+        else if(prizeText.includes(neopointsText)){
+            var neopointsGiven = ExtractPrizeData(prizeText, neopointsText);
+
+            SaveToKQTracker("", "Neopoints", neopointsGiven);
         } else {
             window.alert("An error occured in the processing of the KQ tracker...")
         }
@@ -121,14 +133,14 @@ async function ReadPrizeElement(){
             });
         }
 
-        function ExtractStatData(text, keyword) {
+        function ExtractPrizeData(text, keyword) {
             const index = text.indexOf(keyword);
             
             if (index !== -1) {
                 var result;
 
                 // Remove everything before and including the keyword
-                result = text.substring(index + keyword.length).trim().replace(".", "").replace("!!!", "");
+                result = text.substring(index + keyword.length).trim().replace(".", "").replace("!!!", "").replace(" Neopoints as a reward!", "");
 
                 return CapitalizeFirstLetter(result);
             } 
@@ -141,8 +153,6 @@ async function ReadPrizeElement(){
         function CapitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
-
-        console.log(prizeElement.textContent);
 
         resolve(prizeElement);
     }, 1000);

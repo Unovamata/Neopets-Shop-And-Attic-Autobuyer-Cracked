@@ -848,8 +848,10 @@ $("#SHOULD_SHARE_NEOBUYER_MAILS").bind("input propertychange", (function() {
 
 
 function confirmReset() {
-    if (confirm("Are you sure you want to reset all settings and reset your restock list to the default?")) {
-        resetSettings();
+    if(confirm("Do you want to reset all your NeoBuyer+ settings?")){
+        if(confirm("Are you sure you want reset all your NeoBuyer+ settings? This action cannot be undone unless you have a backup of you configuration presets.")){
+            resetSettings();
+        }
     }
 }
 
@@ -862,7 +864,6 @@ function resetSettings() {
         });
     });
 }
-
 
 var resetButton = document.getElementById("reset");
 
