@@ -20,6 +20,9 @@ const checkIconUrl = `${srcPath}/toolbar/check.png`;
 const crossIconUrl = `${srcPath}/toolbar/delete.png`;
 const mailIconUrl = `${srcPath}/toolbar/neomail.svg`;
 const dropdownIconUrl = `${srcPath}/toolbar/dropdown-arrow.png`;
+const faqIconUrl = `${srcPath}/toolbar/community-icon.svg`;
+
+
 
 // Styles
 const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
@@ -111,7 +114,7 @@ function injectToolbar() {
                             Database </a>
                         </li>
                         <li><a href="${faqUrl}" class = "toolbar-category dropdown-category"> 
-                            <img  class = "dropdown-icon" src="${mailIconUrl}"> 
+                            <img  class = "dropdown-icon" src="${faqIconUrl}"> 
                             FAQs </a>
                         </li>
                         <li><a href="${infoUrl}" class = "toolbar-category dropdown-category">

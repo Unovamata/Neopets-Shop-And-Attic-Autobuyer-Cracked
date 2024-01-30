@@ -160,6 +160,9 @@ async function ReadPrizeElement(){
 
 async function SearchInAllElements(selectorA, selectorB, selectorC, selectorD) {
     return new Promise((resolve) => {
+        const maxRetries = 10; // Maximum number of retries
+        let retries = 0;
+
         const intervalId = setInterval(async () => {
             const allElements = document.querySelectorAll('p');
             let element;
@@ -176,8 +179,15 @@ async function SearchInAllElements(selectorA, selectorB, selectorC, selectorD) {
                 }
             }
 
-            clearInterval(intervalId);
-            resolve(element); // Resolve with the found element
-        }, 1000);
+            if (element) {
+                clearInterval(intervalId);
+                resolve(element); // Resolve with the found element
+            } else if (retries >= maxRetries) {
+                clearInterval(intervalId);
+                resolve(null); // Resolve with null if max retries reached
+            }
+
+            retries++;
+        }, 1000); // Retry every second
     });
 }
