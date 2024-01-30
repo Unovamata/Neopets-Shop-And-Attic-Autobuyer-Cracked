@@ -311,7 +311,7 @@ function topLevelTurbo() {
                             // Perform haggling choosing between haggling algorithms;
                             if(isEnteringOffer){
                                 // Haggling action;
-                                var hagglingTimeout = GetRandomFloat(minHagglingTimeout, maxHagglingTimeout) / 2;
+                                var hagglingTimeout = GetRandomFloat(minHagglingTimeout, maxHagglingTimeout) / 3;
                                 
                                 setTimeout(PerformHaggling, hagglingTimeout);
 
