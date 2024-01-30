@@ -313,6 +313,48 @@ function topLevelTurbo() {
                                 // Haggling action;
                                 var hagglingTimeout = GetRandomFloat(minHagglingTimeout, maxHagglingTimeout) / 2;
                                 
+                                setTimeout(PerformHaggling, hagglingTimeout);
+
+                                // Main haggling fuction to call the data from the GUI to the bot;
+                                function PerformHaggling() {
+                                    // Matching the shopkeeper's deal, adding a random price percentage to the price for haggling;
+                                    var shopkeeperDeal = document.getElementById("shopkeeper_makes_deal").textContent,
+                                        match = shopkeeperDeal.match("[0-9|,]+ Neopoints"),
+                                        askingPrice = parseInt(match[0].replace(" Neopoints", "").replace(/,/g, ""));
+                                        thresholdPrice = "" + Math.round(Number(askingPrice) + (Number(askingPrice) * (GetRandomFloat(0.5, 1.6) * 0.1)));
+
+                                        // Creating the haggle;
+                                        haggleInput.value = "0" + GenerateHagglePrice(thresholdPrice);
+                                }
+                                
+                                // Generates the haggle amount based on a numpad position heat-map;
+                                function GenerateHagglePrice(askedPrice) {
+                                    let haggledPrice = "";
+                                    let heatMap, closestNumber;
+                                
+                                    // Checking all the digits in the possible haggle offer;
+                                    for (let i = 0; i < askedPrice.length; i++) {
+                                        const selectedNumber = parseInt(askedPrice[i]);
+                                
+                                        /* In this part of the process, we preset the first 2 numbers in the haggle value
+                                         * As these 2 numbers are the most important for the haggle to go through.
+                                         * After that, based on the numbers pre-generated, we generate a random number
+                                         * for the rest of the haggle offer based on the heat-maps and their numpad position
+                                         * to create a more cohesive and natural haggle amount. */
+                                        if (i <= 1) {
+                                            heatMap = GenerateHeatMap(selectedNumber.toString());
+                                            closestNumber = GetClosestNumber(heatMap, selectedNumber.toString(), i, askedPrice);
+                                        } else {
+                                            heatMap = GenerateHeatMap(haggledPrice[i - 1].toString());
+                                            closestNumber = GetClosestNumber(heatMap, haggledPrice[i - 1], i, askedPrice);
+                                        }
+
+                                        haggledPrice += closestNumber;
+                                    }
+                                
+                                    return haggledPrice;
+                                }
+                                
                                 const baseNumpadLayout = [
                                     ['0'],
                                     ['1', '2', '3'],
@@ -326,97 +368,25 @@ function topLevelTurbo() {
                                     ['4', '5', '6'],
                                     ['7', '8', '9']
                                 ];
-                                
-                                setTimeout(PerformHaggling, hagglingTimeout);
 
-                                function PerformHaggling() {
-                                    var shopkeeperDeal = document.getElementById("shopkeeper_makes_deal").textContent,
-                                        match = shopkeeperDeal.match("[0-9|,]+ Neopoints"),
-                                        askingPrice = parseInt(match[0].replace(" Neopoints", "").replace(/,/g, ""));
-                                        thresholdPrice = "" + Math.round(Number(askingPrice) + (Number(askingPrice) * (GetRandomFloat(0.3, 3) * 0.1)));
-                                        console.log(thresholdPrice);
-
-                                        haggleInput.value = "0" + GenerateHagglePrice(thresholdPrice);
-                                }
-                                
-                                function GenerateHagglePrice(askedPrice) {
-                                    let haggledPrice = "";
-                                    let heatMap, closestNumber;
-                                
-                                    for (let i = 0; i < askedPrice.length; i++) {
-                                        const selectedNumber = parseInt(askedPrice[i]);
-                                
-                                        if (i <= 1) {
-                                            heatMap = GenerateHeatMap(selectedNumber.toString());
-                                            closestNumber = GetClosestNumber(heatMap, selectedNumber.toString(), i, askedPrice);
-                                        } else {
-                                            heatMap = GenerateHeatMap(haggledPrice[i - 1].toString());
-                                            closestNumber = GetClosestNumber(heatMap, haggledPrice[i - 1], i, askedPrice);
-                                        }
-
-                                        haggledPrice += closestNumber;
-                                    }
-                                
-                                    // Add the last number directly if the haggled price is empty
-                                    if (haggledPrice.length === 0) {
-                                        haggledPrice += askedPrice[askedPrice.length - 1];
-                                    }
-                                
-                                    return haggledPrice;
-                                }
-                                
-                                function GetClosestNumber(heatMap, selectedNumber, index, askingPrice) {
-                                    if (index <= 1) {
-                                        return selectedNumber.toString(); // Convert to string since numpad numbers are strings
-                                    }
-                                
-                                    let closestNumbers = [];
-                                    let importanceThreshold = Math.ceil(askingPrice.length / 2.5) - 1;
-                                
-                                    for (const number in heatMap) {
-                                        const distance = heatMap[number];
-                                        let minDist = 1; // default min distance for non-important digits
-                                
-                                        if (index <= importanceThreshold) {
-                                            minDist = 1.5; // important digits have a min distance of 1.5
-                                        }
-                                
-                                        if (distance <= minDist && distance >= 0) {
-                                            closestNumbers.push(number);
-                                        }
-                                    }
-                                
-                                    
-                                
-                                    // Remove numbers less than the selectedNumber
-                                    if(closestNumbers.length > 1 && index < importanceThreshold){
-                                        closestNumbers = closestNumbers.filter(number => parseInt(number) > parseInt(selectedNumber));
-                                    }
-
-                                    console.log(selectedNumber, closestNumbers, heatMap, importanceThreshold);
-                                
-                                    // Randomly select one of the closest numbers
-                                    const randomIndex = Math.floor(Math.random() * closestNumbers.length);
-                                    return closestNumbers[randomIndex];
-                                }
-                                
-                                
-                                
-                                
+                                // Generates a heat-map based on the position of the numpad numbers;
                                 function GenerateHeatMap(selectedNumber, weight = false) {
                                     const heatMap = {};
                                     var numpadLayout;
                                 
+                                    // Use a different heat-map for the number 0;
                                     if (selectedNumber == '0') {
                                         numpadLayout = zeroNumpadLayout;
                                     } else {
                                         numpadLayout = baseNumpadLayout;
                                     }
                                 
-                                    // Find the row and column of the selected number
+                                    // Navigate through the numpad array to find the selected number;
                                     let selectedRow, selectedColumn;
                                     for (let row = 0; row < numpadLayout.length; row++) {
                                         for (let col = 0; col < numpadLayout[row].length; col++) {
+
+                                            // Saving the row and column of the selected number for later processing;
                                             if (numpadLayout[row][col] === selectedNumber) {
                                                 selectedRow = row;
                                                 selectedColumn = col;
@@ -425,20 +395,58 @@ function topLevelTurbo() {
                                         }
                                     }
                                 
-                                    // Calculate Manhattan distance for each number in the layout
+                                    // Using the Manhattan Distance formula to create a heat-map for natural-looking haggles;
                                     for (let row = 0; row < numpadLayout.length; row++) {
                                         for (let col = 0; col < numpadLayout[row].length; col++) {
                                             const number = numpadLayout[row][col];
+
+                                            // Numbers from a different row but the same column take more 'effort' to get to;
                                             var weight = 0;
                                 
                                             if (row != selectedRow && col == selectedColumn) weight = 0.5;
                                 
+                                            // Calculate the Manhattan Distance and store the value in the array for later use;
                                             const distance = Math.abs(row - selectedRow) + Math.abs(col - selectedColumn) + weight;
                                             heatMap[number] = distance;
                                         }
                                     }
                                 
                                     return heatMap;
+                                }
+
+                                // Get the closest number to input based on the heat-maps created above;
+                                function GetClosestNumber(heatMap, selectedNumber, index, askingPrice) {
+                                    // Return the first 2 numbers of the haggle; for the haggle to go through;
+                                    if (index <= 1) {
+                                        return selectedNumber.toString();
+                                    }
+                                
+                                    // Map the numbers with an importance value for them to jump to another row if necessary;
+                                    let closestNumbers = [];
+                                    let importanceThreshold = Math.ceil(askingPrice.length / 2.5) - 1;
+                                
+                                    // Check the heat-map and push closer numbers to an array;
+                                    for (const number in heatMap) {
+                                        const distance = heatMap[number];
+                                        let minDist = 1; // For contiguous numbers;
+                                
+                                        if (index <= importanceThreshold) {
+                                            minDist = 1.5; // For numbers outside the current row;
+                                        }
+                                        
+                                        if (distance <= minDist && distance >= 0) {
+                                            closestNumbers.push(number);
+                                        }
+                                    }
+                                
+                                    // Remove unnecessary options to create the haggle;
+                                    if(closestNumbers.length > 1 && index < importanceThreshold){
+                                        closestNumbers = closestNumbers.filter(number => parseInt(number) > parseInt(selectedNumber));
+                                    }
+                                
+                                    // Select one of the numbers for the haggle value;
+                                    const randomIndex = Math.floor(Math.random() * closestNumbers.length);
+                                    return closestNumbers[randomIndex];
                                 }
                             }
 
