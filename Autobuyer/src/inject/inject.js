@@ -312,114 +312,134 @@ function topLevelTurbo() {
                             if(isEnteringOffer){
                                 // Haggling action;
                                 var hagglingTimeout = GetRandomFloat(minHagglingTimeout, maxHagglingTimeout) / 2;
-
-                                setTimeout(PerformHaggling, hagglingTimeout);
-
-                                function PerformHaggling(){
-                                    // The asked price message can change, that's why the complexity of this operation;
-                                    var shopkeeperElement = document.getElementById("shopkeeper_makes_deal"),
-                                    textInsideElement = shopkeeperElement.textContent,
-                                    match = textInsideElement.match("[0-9|,]+ Neopoints"),
-                                    askedPrice = match[0].replace(" Neopoints", "").replaceAll(",", "");
-
-                                    function HumanLikeHaggling(input) {
-                                        const length = input.length;
-                                        const startingNumber = input[0];
-                                        var selectedNumber = GetClosestSecondNumber(input);
-                                        const selectedAlgorithm = GetRandomInt(0, 5);
-
-                                        switch (selectedAlgorithm) {
-                                            // 11111 Pattern; Fastest Approach;
-                                            case 0:
-                                            case 1:
-                                                if(startingNumber > selectedNumber){
-                                                    return "0" + startingNumber.repeat(length);
-                                                } else {
-                                                    return "0" + startingNumber + selectedNumber + startingNumber.repeat(length - 2);
-                                                }
-                                            break;
-
-                                            // 12121 Pattern;
-                                            case 2:
-                                                const numRepetitions = Math.ceil(length / 2);
-                                                return "0" + (startingNumber + selectedNumber).repeat(numRepetitions).slice(0, length);
-                                            break;
-
-                                            // 12222 Pattern;
-                                            case 3:
-                                                return "0" + (startingNumber + (selectedNumber.repeat(length))).slice(0, length);
-                                            break;
-
-                                            // Random patterns based on the first and second value chosen for the price;
-                                            case 4:
-                                                const priceSample = [startingNumber, selectedNumber];
-                                                let variation = startingNumber + selectedNumber;
-
-                                                for (let i = 1; i < length - 1; i++) {
-                                                    const numberChosen = priceSample[GetRandomInt(0, 2)];
-                                                    variation += numberChosen;
-                                                }
-
-                                                return "0" + variation;
-                                            break;
-
-                                            default: return null; break;
-                                        }
-                                    }
-
-                                    // Inputting the haggle offer;
-                                    haggleInput.value = HumanLikeHaggling(askedPrice);
-                                }
-                            }
-
-                            // Gets the closest second number in the numpad for the haggle;
-                            function GetClosestSecondNumber(input){
-                                const numpadLayout = [
+                                
+                                const baseNumpadLayout = [
                                     ['0'],
                                     ['1', '2', '3'],
                                     ['4', '5', '6'],
                                     ['7', '8', '9']
                                 ];
                                 
-                                const firstDigit = input[0];
-                                const secondDigit = input[1];
-                            
-                                if (firstDigit >= secondDigit) return firstDigit;
-                            
-                                // Find the row and column of the firstDigit in the numpadLayout
-                                let row, col;
+                                const zeroNumpadLayout = [
+                                    ['0', '1'],
+                                    ['2', '3'],
+                                    ['4', '5', '6'],
+                                    ['7', '8', '9']
+                                ];
+                                
+                                setTimeout(PerformHaggling, hagglingTimeout);
 
-                                // Getting the row and column position for the numpad key;
-                                for (let i = 0; i < numpadLayout.length; i++) {
-                                    const columnIndex = numpadLayout[i].indexOf(firstDigit);
-                                    if (columnIndex !== -1) {
-                                        row = i;
-                                        col = columnIndex;
-                                        break;
-                                    }
+                                function PerformHaggling() {
+                                    var shopkeeperDeal = document.getElementById("shopkeeper_makes_deal").textContent,
+                                        match = shopkeeperDeal.match("[0-9|,]+ Neopoints"),
+                                        askingPrice = parseInt(match[0].replace(" Neopoints", "").replace(/,/g, ""));
+                                        thresholdPrice = "" + Math.round(Number(askingPrice) + (Number(askingPrice) * (GetRandomFloat(0.3, 3) * 0.1)));
+                                        console.log(thresholdPrice);
+
+                                        haggleInput.value = "0" + GenerateHagglePrice(thresholdPrice);
                                 }
-                            
-                                // Find the closest available digit based on the first digit's position;
-                                let closestDigit = '';
-                                let minDistance = Number.MAX_VALUE;
-                            
-                                for (let i = 0; i < numpadLayout.length; i++) {
-                                    for (let j = 0; j < numpadLayout[i].length; j++) {
-                                        const digit = numpadLayout[i][j];
-                                        // Skipping the first digit, as it was returned before, and checking if it's greater;
-                                        if (digit !== firstDigit && digit >= secondDigit) {
-                                            // Calculating the closest distance to the number we need based on the first number;
-                                            const distance = Math.abs(i - row) + Math.abs(j - col);
+                                
+                                function GenerateHagglePrice(askedPrice) {
+                                    let haggledPrice = "";
+                                    let heatMap, closestNumber;
+                                
+                                    for (let i = 0; i < askedPrice.length; i++) {
+                                        const selectedNumber = parseInt(askedPrice[i]);
+                                
+                                        if (i <= 1) {
+                                            heatMap = GenerateHeatMap(selectedNumber.toString());
+                                            closestNumber = GetClosestNumber(heatMap, selectedNumber.toString(), i, askedPrice);
+                                        } else {
+                                            heatMap = GenerateHeatMap(haggledPrice[i - 1].toString());
+                                            closestNumber = GetClosestNumber(heatMap, haggledPrice[i - 1], i, askedPrice);
+                                        }
 
-                                            if (distance < minDistance) {
-                                                closestDigit = digit;
-                                                minDistance = distance;
+                                        haggledPrice += closestNumber;
+                                    }
+                                
+                                    // Add the last number directly if the haggled price is empty
+                                    if (haggledPrice.length === 0) {
+                                        haggledPrice += askedPrice[askedPrice.length - 1];
+                                    }
+                                
+                                    return haggledPrice;
+                                }
+                                
+                                function GetClosestNumber(heatMap, selectedNumber, index, askingPrice) {
+                                    if (index <= 1) {
+                                        return selectedNumber.toString(); // Convert to string since numpad numbers are strings
+                                    }
+                                
+                                    let closestNumbers = [];
+                                    let importanceThreshold = Math.ceil(askingPrice.length / 2.5) - 1;
+                                
+                                    for (const number in heatMap) {
+                                        const distance = heatMap[number];
+                                        let minDist = 1; // default min distance for non-important digits
+                                
+                                        if (index <= importanceThreshold) {
+                                            minDist = 1.5; // important digits have a min distance of 1.5
+                                        }
+                                
+                                        if (distance <= minDist && distance >= 0) {
+                                            closestNumbers.push(number);
+                                        }
+                                    }
+                                
+                                    
+                                
+                                    // Remove numbers less than the selectedNumber
+                                    if(closestNumbers.length > 1 && index < importanceThreshold){
+                                        closestNumbers = closestNumbers.filter(number => parseInt(number) > parseInt(selectedNumber));
+                                    }
+
+                                    console.log(selectedNumber, closestNumbers, heatMap, importanceThreshold);
+                                
+                                    // Randomly select one of the closest numbers
+                                    const randomIndex = Math.floor(Math.random() * closestNumbers.length);
+                                    return closestNumbers[randomIndex];
+                                }
+                                
+                                
+                                
+                                
+                                function GenerateHeatMap(selectedNumber, weight = false) {
+                                    const heatMap = {};
+                                    var numpadLayout;
+                                
+                                    if (selectedNumber == '0') {
+                                        numpadLayout = zeroNumpadLayout;
+                                    } else {
+                                        numpadLayout = baseNumpadLayout;
+                                    }
+                                
+                                    // Find the row and column of the selected number
+                                    let selectedRow, selectedColumn;
+                                    for (let row = 0; row < numpadLayout.length; row++) {
+                                        for (let col = 0; col < numpadLayout[row].length; col++) {
+                                            if (numpadLayout[row][col] === selectedNumber) {
+                                                selectedRow = row;
+                                                selectedColumn = col;
+                                                break;
                                             }
                                         }
                                     }
+                                
+                                    // Calculate Manhattan distance for each number in the layout
+                                    for (let row = 0; row < numpadLayout.length; row++) {
+                                        for (let col = 0; col < numpadLayout[row].length; col++) {
+                                            const number = numpadLayout[row][col];
+                                            var weight = 0;
+                                
+                                            if (row != selectedRow && col == selectedColumn) weight = 0.5;
+                                
+                                            const distance = Math.abs(row - selectedRow) + Math.abs(col - selectedColumn) + weight;
+                                            heatMap[number] = distance;
+                                        }
+                                    }
+                                
+                                    return heatMap;
                                 }
-                            
-                                return closestDigit;
                             }
 
                             var captchaElement, imageLoadingTime;
