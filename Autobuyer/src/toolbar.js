@@ -117,7 +117,7 @@ function injectToolbar() {
                         </li>
                         <li><a href="${restockListUrl}" class = "toolbar-category dropdown-category">
                             <img  class = "dropdown-icon" src="${restockListIconUrl}"> 
-                            Restock List Gen </a>
+                            Restock List </a>
                         </li>
                         <li><a href="${faqUrl}" class = "toolbar-category dropdown-category"> 
                             <img  class = "dropdown-icon" src="${faqIconUrl}"> 
