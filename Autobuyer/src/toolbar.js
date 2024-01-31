@@ -36,7 +36,7 @@ const autoKQURL = `${srcPath}/options/AutoKQ/autokq.html`;
 const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
-const restockListUrl = `${srcPath}/options/Tools/restockListMaker.html`;
+const restockListUrl = `${srcPath}/options/Tools/restockListGen.html`;
 const faqUrl = `${srcPath}/options/Tools/faq.html`;
 const infoUrl = `${srcPath}/options/Tools/info.html`;
 const mailUrl = `${srcPath}/options/Mail/mail.html`;
@@ -117,7 +117,7 @@ function injectToolbar() {
                         </li>
                         <li><a href="${restockListUrl}" class = "toolbar-category dropdown-category">
                             <img  class = "dropdown-icon" src="${restockListIconUrl}"> 
-                            Restock List Maker </a>
+                            Restock List Gen </a>
                         </li>
                         <li><a href="${faqUrl}" class = "toolbar-category dropdown-category"> 
                             <img  class = "dropdown-icon" src="${faqIconUrl}"> 

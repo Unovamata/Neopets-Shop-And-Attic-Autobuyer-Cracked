@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>NeoBuyer+ Options | Main Shop Buyer Settings</title>
+        <link rel="stylesheet" type="text/css" href="../table.css" />
+        <link rel="stylesheet" type="text/css" href="../options.css" />
+    </head>
+
+    <body>
+        <div class="center">
+            <div class="enter-info">NeoBuyer+ Restock List Generator<sub></sub><sup>beta</sup></div>
+            <div class="category-info">
+                Create your own "Restock Lists" for AutoBuying!
+                <div class="autosaved">
+                    <span class="sub">To view helpful tooltips, simply hover over the options!</span><span id="total-profit"></span><br>
+                </div>
+            </div>
+
+            <div class="category-info">Useful Links</div>
+            <button class="button" id="shopDirectory">Shops Directory</button>
+            <button class="button" id="generator"><sub></sub> List Generator <sup>beta</sup></button>
+            <button class="button" id="tutorial"><sub></sub> Tutorial <sup>beta</sup></button>
+            <br>
+            
+            <center>
+                <div id="restock-list-generator">
+                    <div class="subcategory-info">Restock List Parser & Generator</div>
+
+                    <table class="table">
+                        <tbody class="restock-generator">
+                            <thead>
+                                <th></th><th></th>
+                            </thead>
+                            <tr>
+                                <td>
+                                    <div class="subcategory-info">JellyNeo's Data
+                                        <span class="tooltiptext">
+                                            Paste JellyNeo's database data in this field and then click out of the input field to generate a Restock List automatically.
+                                            
+                                            <br><br><a href="https://www.jellyneo.net/?go=shopsdirectory">JN's Shop Directory</a>
+                                        </span>
+                                    </div>
+                                    <textarea rows="20" cols="30" id="inputList"></textarea>
+                                    <br><br><br>
+                                </td>
+                                <td>
+                                    <div class="subcategory-info">Resulting Restock List</div>
+                                    <textarea rows="20" cols="30" id="outputList"></textarea>
+                                    <br><br><br>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subcategory-info">Store & Inventory Settings</div>
+
+                    <table class="table">
+                        <tbody class="main-shop-settings">
+                            <thead>
+                                <th></th><th></th>
+                            </thead>
+                            <tr>
+                                <td>Restock List:
+                                    <span class="tooltiptext">
+                                        The list must be ordered from most profitable to least profitable. You can group by store.<br><br>
+                                        
+                                        <a href="https://www.jellyneo.net/?go=shopsdirectory">JN's Shop Directory</a>
+                                    </span>
+                                </td>
+                                <td><textarea rows="20" cols="50" id="RESTOCK_LIST"></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="tutorial-display">
+                    <div class="subcategory-info">Restock List Generator Usage Guide</div>
+
+                    <table class="table">
+                        <tbody class="restock-generator">
+                            <thead>
+                                <th></th>
+                            </thead>
+                            <tr>
+                                <td style="text-align: left; padding-left: 100px;">
+                                    <b>1.</b> Click the <b>"Shops Directory"</b> button above, this will open JellyNeo's Shop Directory.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; padding-left: 100px;">
+                                    <b>2.</b> Choose a shop for which you want to create a restock list. Then, find and click the "<img src="db.png">" icon below to the selected shop to browse the possible items to be stocked in said shop.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; padding-left: 100px;">
+                                    <b>3.</b> After the page loads, use the search filters to adjust the parameters based on your needs.<br>
+                                    
+                                    <div class="subcategory-info" style="text-align: center;">Configuration Recommendations</div>
+                                    <div style="text-align: center;">
+                                        <b>
+                                        Rarity: <input value='1' disabled> to <input value="100" disabled><br><br>
+                                        Price Range: <input value='[Minimum NP Profit]' disabled> to <input value="" disabled><br><br>
+                                        Sort By: <input value='Price' disabled> <input value="Descending" disabled><br><br>
+                                        Exclude Neocash items? <input checked="true" type="checkbox"><br><br>
+                                        Results Per Page: <input value='75' disabled><br><br>
+                                        Status: <input value='Active' disabled></b>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; padding-left: 100px;">
+                                    <b>4.</b> Select all the items filtered by the database, including images and prices. Copy all entries found.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; padding-left: 100px;">
+                                    <b>5.</b> Now, simply paste all the entries you have copied into the <b>"JellyNeo's Data"</b> input field, then click anywhere outside that input field. NeoBuyer+ will automatically process the data and display the results in the <b>"Resulting Restock List"</b>.
+                                    <br><br><b>Note: Items with the "Inflation Notice" tag will be given higher priority in the "Resulting Restock List".</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; padding-left: 100px;">
+                                    <b>6.</b> Select all entries <b>(Ctrl + A)</b> and then copy them, to ultimately paste them in the <b>"Restock List"</b> input field. With that, your <b>"Restock List"</b> will automatically sync with what the AutoBuyer and AutoAttic will reference for AutoBuying.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <br><br><br>
+                <button id="reset" class="button reset">Reset All Settings</button>
+                <br><br><br>
+            </center>
+            
+        </div>
+        <script src="../../common/utils.js"></script>
+        <script src="../../../js/jquery.js"></script>
+        <script src="../../../js/moment.js"></script>
+        <script src="../../../js/moment-timezone-with-data.js"></script>
+        <script src="../../toolbar.js"></script>
+        <script src="../../common/default_items.js"></script>
+        <script src="../../../js/ExtPay.js"></script>
+        <script src="../optionsPage.js"></script>
+        <script src="restockListGen.js"></script>
+    </body>
+</html>
