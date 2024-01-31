@@ -16,7 +16,7 @@ inputList.onchange = function (){
             var itemHasPrice = nextItem.includes("NP") || nextItem.includes("Inflation Notice");
 
             if(isRegularItem && !itemHasPrice){
-                console.log(currentItem);
+                unpricedItems.push(currentItem);
             } 
         } catch {}
 
@@ -33,11 +33,11 @@ inputList.onchange = function (){
 
     // Filtering out items that match the pattern
     var filteredItems = inputData
-    .filter(item => !inflatedItems.includes(item))
+    .filter(item => !inflatedItems.includes(item) && !unpricedItems.includes(item))
     .filter(item => !item.includes('Inflation Notice'))
     .filter(item => !/^\d{1,3}(,\d{3})*\sNP$/.test(item));
 
-    filteredItems = [...inflatedItems, ...filteredItems];
+    filteredItems = [...unpricedItems, ...inflatedItems, ...filteredItems];
 
     var resultingList = "";
     
