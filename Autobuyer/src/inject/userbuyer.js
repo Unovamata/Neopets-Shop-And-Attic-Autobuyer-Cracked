@@ -12,7 +12,8 @@ getSTART_AUTOKQ_PROCESS(async function(isActive){
         if(PageIncludes("Item not found!") || 
         PageIncludes("Sorry - The owner of this shop has been frozen!") ||
         PageIncludes("There are no items for sale in this shop!") ||
-        PageIncludes("This transaction has expired!")) {
+        PageIncludes("This transaction has expired!") ||
+        PageIncludes("You do not have enough Neopoints to purchase this item!")) {
             setAUTOKQ_STATUS("Shop Owner Either Frozen or the Item Just Sold Out, Restarting Search...");
 
             // If there are ingredients to search left, then go to the SW after purchase;

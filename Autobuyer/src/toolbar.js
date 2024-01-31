@@ -20,7 +20,8 @@ const checkIconUrl = `${srcPath}/toolbar/check.png`;
 const crossIconUrl = `${srcPath}/toolbar/delete.png`;
 const mailIconUrl = `${srcPath}/toolbar/neomail.svg`;
 const dropdownIconUrl = `${srcPath}/toolbar/dropdown-arrow.png`;
-const faqIconUrl = `${srcPath}/toolbar/community-icon.svg`;
+const faqIconUrl = `${srcPath}/toolbar/communitycentral-icon.png`;
+const restockListIconUrl = `${srcPath}/toolbar/myalbums-icon.svg`;
 
 
 
@@ -35,6 +36,7 @@ const autoKQURL = `${srcPath}/options/AutoKQ/autokq.html`;
 const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
+const restockListUrl = `${srcPath}/options/Tools/restockListMaker.html`;
 const faqUrl = `${srcPath}/options/Tools/faq.html`;
 const infoUrl = `${srcPath}/options/Tools/info.html`;
 const mailUrl = `${srcPath}/options/Mail/mail.html`;
@@ -112,6 +114,10 @@ function injectToolbar() {
                         <li><a href="${databaseUrl}" class = "toolbar-category dropdown-category">
                             <img  class = "dropdown-icon" src="${databaseIconUrl}"> 
                             Database </a>
+                        </li>
+                        <li><a href="${restockListUrl}" class = "toolbar-category dropdown-category">
+                            <img  class = "dropdown-icon" src="${restockListIconUrl}"> 
+                            Restock List Maker </a>
                         </li>
                         <li><a href="${faqUrl}" class = "toolbar-category dropdown-category"> 
                             <img  class = "dropdown-icon" src="${faqIconUrl}"> 
