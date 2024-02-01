@@ -300,10 +300,6 @@ b {
     color: red;
 }
 
-td .danger-tooltip {
-    background-color: red;
-}
-
 input:checked+.slider-danger {
     background-color: red;
 }

@@ -40,7 +40,7 @@
         ],
         "js": [
 			"js/jquery.js",
-            "src/better_quick_stock.user.js"
+            "src/inject/better_quick_stock.user.js"
         ]
     },
     {
@@ -55,7 +55,7 @@
             "src/common/default_items.js",
             "src/common/item_db.js",
             "src/inject/inject.js",
-			"src/neopets-restock-timer.user.js"
+			"src/inject/neopets-restock-timer.user.js"
         ]
     },
     {
@@ -65,7 +65,7 @@
         ],
         "all_frames": true,
         "js": [
-            "src/neon.js",
+            "src/inject/neon.js",
 			"src/common/utils.js",
             "src/inject/autopricer.js"
         ],
@@ -103,7 +103,7 @@
         ],
         "all_frames": true,
         "js": [
-			"src/neopets_auctions_comma_separate.js"
+			"src/inject/neopets_auctions_comma_separate.js"
         ],
         "run_at": "document_end"
     },
