@@ -295,3 +295,19 @@ b {
     font-family: 'Cafeteria', sans-serif;
     font-size: 20px;
 }
+
+.danger {
+    color: red;
+}
+
+td .danger-tooltip {
+    background-color: red;
+}
+
+input:checked+.slider-danger {
+    background-color: red;
+}
+
+input:focus+.slider-danger {
+    box-shadow: 0 0 1px red;
+}

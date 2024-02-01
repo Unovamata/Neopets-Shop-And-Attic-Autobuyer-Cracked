@@ -8,7 +8,7 @@
 
     <body>
         <div class="center">
-            <div class="enter-info">NeoBuyer+ AutoPricer</div>
+            <div class="enter-info">NeoBuyer+ AutoPricer<sup class="danger turbo-tag">Turbo</sup></div>
             <div class="category-info">Shop Auto Pricer Settings
                 <br><span class="sub autosaved">To view helpful tooltips, simply hover over the options!</span><br>
                 <br>
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <button class="button" id="stock"><sub></sub> Shop Stock</button>
+            <button class="button" id="stock">Shop Stock</button>
             <button class="button" id="options">Options</button>
             <br><br>
             <center>
@@ -61,13 +61,27 @@
 
                 <!--Options-->
                 <div id="autopricer-options-container">
-                    <div class="subcategory-info">Pricing Settings</div>
+                    <div class="subcategory-info">AutoPricer Settings</div>
 
                     <table class="table">
                         <tbody class="autopricer-settings">
                             <thead>
                                 <th></th><th></th>
                             </thead>
+                            <tr>
+                                <td>Enable the AutoPricer's <b class="danger">Turbo</b> mode:
+                                    <span class="tooltiptext">
+                                        This feature combines Neopets Shop Wizard's searches onto a single page<br><br>
+                                        <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm">Neon Extension</a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="IS_TURBO" type="checkbox">
+                                        <span class="slider-danger slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>Enable <b>Neon</b> for Shop Wizard:
                                     <span class="tooltiptext">

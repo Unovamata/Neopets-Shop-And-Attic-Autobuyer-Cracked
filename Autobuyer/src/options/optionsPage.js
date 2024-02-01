@@ -145,6 +145,12 @@ function showOrHide() {
     $("#SHOULD_SUBMIT_AUTOMATICALLY").is(":checked") ? $(".submit-automatically").show() : $(".submit-automatically").hide();
     $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
     
+    $("#IS_TURBO").is(":checked") ? (
+        $(".turbo-tag").show()
+    ) : (
+        $(".turbo-tag").hide()
+    );
+
     switch($("#PRICING_TYPE").val()){
         case "Absolute":
             $(".percentage").hide();
@@ -433,6 +439,8 @@ function setSHOULD_CHANGE_DOCUMENT_DATA(value) { chrome.storage.local.set({ SHOU
 
 // AutoPricer Setters;
 
+function setIS_TURBO(value) { chrome.storage.local.set({ IS_TURBO: value }, (function () {})) }
+
 function setSHOULD_USE_NEON(value) { chrome.storage.local.set({ SHOULD_USE_NEON: value }, (function () {})) }
 
 function setPRICING_TYPE(value) { chrome.storage.local.set({ PRICING_TYPE: value }, (function () {})) }
@@ -568,6 +576,18 @@ $("#SHOULD_CHANGE_DOCUMENT_DATA").on("change", function() {
 });
 
 // AutoPricer Data Binding;
+
+$("#IS_TURBO").bind("input propertychange", (function() {
+    const isChecked = $("#IS_TURBO").is(":checked");
+    setIS_TURBO(isChecked);
+    showOrHide();
+}));
+
+$("#SHOULD_USE_NEON").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_USE_NEON").is(":checked");
+    setSHOULD_USE_NEON(isChecked);
+    showOrHide();
+}))
 
 $("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function() {
     setMAX_WAIT_PER_REFRESH($("#MAX_WAIT_PER_REFRESH").val())
@@ -716,12 +736,6 @@ $("#MIN_WAIT_BEFORE_UPDATE").bind("input propertychange", (function() {
 
 $("#MAX_WAIT_BEFORE_UPDATE").bind("input propertychange", (function() {
     setMAX_WAIT_BEFORE_UPDATE($("#MAX_WAIT_BEFORE_UPDATE").val())
-}))
-
-$("#SHOULD_USE_NEON").bind("input propertychange", (function() {
-    const isChecked = $("#SHOULD_USE_NEON").is(":checked");
-    setSHOULD_USE_NEON(isChecked);
-    showOrHide();
 }))
 
 $("#MIN_WAIT_BAN_TIME").bind("input propertychange", (function() {
@@ -925,6 +939,7 @@ resetButton.onclick = function(_) {
     SHOULD_CHANGE_DOCUMENT_DATA: false,
 
     // AutoPricer;
+    IS_TURBO: false,
     SHOULD_USE_NEON: false,
     PRICING_TYPE: "Percentage",
     SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
@@ -1050,6 +1065,7 @@ resetButton.onclick = function(_) {
         $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES),
 
         // AutoPricer;
+        $("#IS_TURBO").prop("checked", _.IS_TURBO),
         $("#SHOULD_USE_NEON").prop("checked", _.SHOULD_USE_NEON),
         $("#PRICING_TYPE").val(_.PRICING_TYPE);
         $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").prop("checked", _.SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING),
