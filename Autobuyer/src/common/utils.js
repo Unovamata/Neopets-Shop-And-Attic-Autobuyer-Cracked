@@ -575,3 +575,11 @@ function ShowOrHideLoading(status){
 function setITEM_HISTORY(itemHistory){
     chrome.storage.local.set({ ITEM_HISTORY: itemHistory }, function () {});
 }
+
+
+//######################################################################################################################################
+
+
+function TestPattern(pattern, element){
+    return pattern.test(element);
+}
