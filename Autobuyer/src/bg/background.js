@@ -45,6 +45,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_CHANGE_DOCUMENT_DATA: false,
 
 			// AutoPricer;
+			IS_TURBO: false,
 			SHOULD_USE_NEON: false,
 			PRICING_TYPE: "Percentage",
 			SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
@@ -58,7 +59,6 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_FIXED_PRICING: 800,
 
 			// AutoKQ;
-
 			START_AUTOKQ_PROCESS: false,
 			AUTOKQ_STATUS: "Inactive",
 			KQ_INVENTORY: [],
@@ -76,6 +76,9 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_WAIT_BAN_TIME: 900000,
 			MIN_WAIT_PER_REFRESH: 10000,
 			MAX_WAIT_PER_REFRESH: 20000,
+			RESUBMIT_TYPE: "Absolute",
+			MIN_RESUBMITS_PER_ITEM: 2,
+			MAX_RESUBMITS_PER_ITEM: 5,
 			RESUBMITS_PER_ITEM: 5,
 			MIN_WAIT_PER_ACTION: 10000,
 			MAX_WAIT_PER_ACTION: 20000,

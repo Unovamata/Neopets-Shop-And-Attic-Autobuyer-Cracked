@@ -146,10 +146,24 @@ function showOrHide() {
     $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
     
     $("#IS_TURBO").is(":checked") ? (
-        $(".turbo-tag").show()
+        $(".turbo-tag").show(),
+        $(".turbo-hide").hide()
     ) : (
-        $(".turbo-tag").hide()
+        $(".turbo-tag").hide(),
+        $(".turbo-hide").show()
     );
+
+    switch($("#RESUBMIT_TYPE").val()){
+        case "Absolute":
+            $(".resubmit-random").hide();
+            $(".resubmit-absolute").show();
+        break;
+
+        case "Random":
+            $(".resubmit-random").show();
+            $(".resubmit-absolute").hide();
+        break;
+    }  
 
     switch($("#PRICING_TYPE").val()){
         case "Absolute":
@@ -467,6 +481,12 @@ function setMIN_WAIT_PER_REFRESH(value) { chrome.storage.local.set({ MIN_WAIT_PE
 
 function setMAX_WAIT_PER_REFRESH(value) { chrome.storage.local.set({ MAX_WAIT_PER_REFRESH: Number(value) }, (function () {})) }
 
+function setRESUBMIT_TYPE(value) { chrome.storage.local.set({ RESUBMIT_TYPE: value }, (function () {})) }
+
+function setMIN_RESUBMITS_PER_ITEM(value) { chrome.storage.local.set({ MIN_RESUBMITS_PER_ITEM: Number(value) }, (function () {})) }
+
+function setMAX_RESUBMITS_PER_ITEM(value) { chrome.storage.local.set({ MAX_RESUBMITS_PER_ITEM: Number(value) }, (function () {})) }
+
 function setRESUBMITS_PER_ITEM(value) { chrome.storage.local.set({ RESUBMITS_PER_ITEM: value }, (function () {})) }
 
 function setMIN_RESUBMIT_WAIT_TIME(value) { chrome.storage.local.set({ MIN_RESUBMIT_WAIT_TIME: Number(value) }, (function () {})) }
@@ -617,6 +637,19 @@ $("#MIN_WAIT_PER_REFRESH").bind("input propertychange", (function() {
 
 $("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function() {
     setMAX_WAIT_PER_REFRESH($("#MAX_WAIT_PER_REFRESH").val())
+}))
+
+$("#RESUBMIT_TYPE").on("change", (function() {
+    setRESUBMIT_TYPE($("#RESUBMIT_TYPE").val())
+    showOrHide();
+}))
+
+$("#MIN_RESUBMITS_PER_ITEM").bind("input propertychange", (function() {
+    setMIN_RESUBMITS_PER_ITEM($("#MIN_RESUBMITS_PER_ITEM").val())
+}))
+
+$("#MAX_RESUBMITS_PER_ITEM").bind("input propertychange", (function() {
+    setMAX_RESUBMITS_PER_ITEM($("#MAX_RESUBMITS_PER_ITEM").val())
 }))
 
 $("#RESUBMITS_PER_ITEM").bind("input propertychange", (function() {
@@ -963,6 +996,9 @@ resetButton.onclick = function(_) {
     MAX_WAIT_BAN_TIME: 900000,
     MIN_WAIT_PER_REFRESH: 10000,
     MAX_WAIT_PER_REFRESH: 20000,
+    RESUBMIT_TYPE: "Absolute",
+    MIN_RESUBMITS_PER_ITEM: 2,
+    MAX_RESUBMITS_PER_ITEM: 5,
     RESUBMITS_PER_ITEM: 5,
     MIN_WAIT_PER_ACTION: 10000,
     MAX_WAIT_PER_ACTION: 20000,
@@ -1083,6 +1119,9 @@ resetButton.onclick = function(_) {
         $("#MAX_WAIT_BAN_TIME").val(_.MAX_WAIT_BAN_TIME),
         $("#MIN_WAIT_PER_REFRESH").val(_.MIN_WAIT_PER_REFRESH),
         $("#MAX_WAIT_PER_REFRESH").val(_.MAX_WAIT_PER_REFRESH),
+        $("#RESUBMIT_TYPE").val(_.RESUBMIT_TYPE),
+        $("#MIN_RESUBMITS_PER_ITEM").val(_.MIN_RESUBMITS_PER_ITEM),
+        $("#MAX_RESUBMITS_PER_ITEM").val(_.MAX_RESUBMITS_PER_ITEM),
         $("#RESUBMITS_PER_ITEM").val(_.RESUBMITS_PER_ITEM),
         $("#MIN_RESUBMIT_WAIT_TIME").val(_.MIN_RESUBMIT_WAIT_TIME),
         $("#MAX_RESUBMIT_WAIT_TIME").val(_.MAX_RESUBMIT_WAIT_TIME),

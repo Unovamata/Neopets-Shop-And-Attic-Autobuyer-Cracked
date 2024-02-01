@@ -5,6 +5,7 @@ async function RunAutoPricer(){
     
     chrome.storage.local.get({
         // AutoPricer;
+        IS_TURBO: false,
         SHOULD_USE_NEON: false,
         PRICING_TYPE: "Percentage",
         SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: false,
@@ -26,6 +27,9 @@ async function RunAutoPricer(){
         MAX_WAIT_BAN_TIME: 900000,
         MIN_WAIT_PER_REFRESH: 10000,
         MAX_WAIT_PER_REFRESH: 20000,
+        RESUBMIT_TYPE: "Absolute",
+        MIN_RESUBMITS_PER_ITEM: 2,
+        MAX_RESUBMITS_PER_ITEM: 5,
         RESUBMITS_PER_ITEM: 5,
         MIN_WAIT_PER_ACTION: 10000,
         MAX_WAIT_PER_ACTION: 20000,
@@ -83,6 +87,9 @@ async function RunAutoPricer(){
             MAX_WAIT_PER_REFRESH: sleepWhileNavigatingToSWMax,
             MIN_WAIT_PER_ACTION: sleepInSWPageMin,
             MAX_WAIT_PER_ACTION: sleepInSWPageMax,
+            RESUBMIT_TYPE: resubmitType,
+			MIN_RESUBMITS_PER_ITEM: minResubmitsPerItem,
+			MAX_RESUBMITS_PER_ITEM: maxResubmitsPerItem,
             RESUBMITS_PER_ITEM: resubmitPresses,
             MIN_RESUBMIT_WAIT_TIME: sleepThroughSearchesMin,
             MAX_RESUBMIT_WAIT_TIME: sleepThroughSearchesMax,
@@ -494,8 +501,16 @@ async function RunAutoPricer(){
 
         // PressResubmit(); Press the "Resubmit" button in the SW page;
         async function PressResubmit(){
+            var resubmits = 0;
+
+            if(resubmitType == "Absolute"){
+                resubmits = resubmitPresses
+            } else {
+                resubmits = GetRandomInt(minResubmitsPerItem, maxResubmitsPerItem);
+            }
+
             // The amount of times the extension should search for lower prices;
-            for(var i = 1; i <= resubmitPresses; i++){
+            for(var i = 1; i <= resubmits; i++){
                 await CheckForBan();
                 
                 FindLowestPricedShop();

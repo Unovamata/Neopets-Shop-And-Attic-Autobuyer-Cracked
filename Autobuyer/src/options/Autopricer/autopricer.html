@@ -268,7 +268,41 @@
                                 <td><input type="number" id="MAX_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td><b>AutoPricer</b> Resubmits per Item:
+                                <td>Resubmits Per Item Approach:
+                                    <span class="tooltiptext">
+                                        Select an algorithm that will handle the amount of resubmits sent to Neopets' servers.
+                                        <br><br>
+                                        Absolute: The AutoPricer will always press the resubmit button (X) times for AutoPricing.
+                                        Random: The AutoPricer will generate a random number between (X) and (Y) to determine the amount of resubmits necessary for an item.
+                                    </span>
+                                </td>
+                                <td>
+                                    <select id="RESUBMIT_TYPE">
+                                        <option value="Absolute">Absolute</option>
+                                        <option value="Random">Random</option>
+                                    </select>                                        
+                                </td>
+                            </tr>
+                            <tr class="resubmit-random">
+                                <td><b>Minimum Random</b> Resubmits per Item:
+                                    <span class="tooltiptext">
+                                        The minimum random percentage range subtracted from the item's lowest price.<br><br>
+                                        Lowest Price = Price - Price Percentage.
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="MIN_RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
+                            </tr>
+                            <tr class="resubmit-random">
+                                <td><b>Maximum Random</b> Resubmits per Item:
+                                    <span class="tooltiptext">
+                                        The minimum random percentage range subtracted from the item's lowest price.<br><br>
+                                        Lowest Price = Price - Price Percentage.
+                                    </span>
+                                </td>
+                                <td><input type="number" min="0" max="100" id="MAX_RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
+                            </tr>
+                            <tr class="resubmit-absolute">
+                                <td><b>Absolute AutoPricer</b> Resubmits per Item:
                                     <span class="tooltiptext">
                                         The amount of times the AutoPricer must press the "Resubmit" button.
                                     </span>
