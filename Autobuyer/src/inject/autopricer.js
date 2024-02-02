@@ -826,10 +826,6 @@ async function RunAutoPricer(){
             return new Promise(resolve => setTimeout(resolve, milliseconds));
         }
 
-        function GetRandomFloat(min, max) { return Math.random() * (max - min) + min; }
-
-        function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min) + min); }
-
         // Limits a value to its minimum or maximum depending on its ceiling or floor;
         function Clamp(value, min, max){ return Math.min(Math.max(value, min), max); }
 

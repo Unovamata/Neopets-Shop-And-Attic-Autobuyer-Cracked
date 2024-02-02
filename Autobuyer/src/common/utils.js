@@ -603,3 +603,7 @@ function setITEM_HISTORY(itemHistory){
 function TestPattern(pattern, element){
     return pattern.test(element);
 }
+
+function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1) + min); }
+
+function GetRandomFloat(min, max) { return Math.random() * (max - min + 1) + min; }
