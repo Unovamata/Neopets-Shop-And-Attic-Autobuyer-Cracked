@@ -323,7 +323,7 @@ function topLevelTurbo() {
                                         askingPrice = parseInt(match[0].replace(" Neopoints", "").replace(/,/g, ""));
                                         thresholdToAdd =  Math.pow(Number(askingPrice), GetRandomFloat(0.75, 0.85));
                                         thresholdPrice = "" + Math.round(Number(askingPrice) + thresholdToAdd);
-                                        console.log(thresholdPrice);
+                                        //console.log(thresholdPrice);
                                         
                                         // Creating the haggle;
                                         haggleInput.value = "0" + GenerateHagglePrice(thresholdPrice);

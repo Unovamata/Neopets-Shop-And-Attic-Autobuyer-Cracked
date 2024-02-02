@@ -795,7 +795,7 @@ async function RunAutoPricer(){
                     var lowestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
 
                     // If the lowest price is greater than the amount the user wants to spend on kitchen quests, search again;
-                    if(lowestPrice => maxSpendablePrice){
+                    if(lowestPrice >= maxSpendablePrice){
                         window.location.reload();
                     }
 
