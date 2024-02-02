@@ -80,6 +80,7 @@ async function RunAutoPricer(){
             // AutoKQ;
             START_AUTOKQ_PROCESS: isKQRunning,
             MAX_INSTA_BUY_PRICE: maxInstaBuyPrice,
+            MAX_SPENDABLE_PRICE: maxSpendablePrice,
 
             // Shop Wizard;
             MIN_WAIT_BAN_TIME: sleepIfBannedMin,
@@ -798,6 +799,12 @@ async function RunAutoPricer(){
                 await WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
                     // Parsing the string to a number;
                     var lowestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
+
+                    // If the lowest price is greater than the amount the user wants to spend on kitchen quests, search again;
+                    if(lowestPrice => maxSpendablePrice){
+                        window.location.reload();
+                    }
+
                     // If the price is lower than the insta buy threshold or ultimately the script has to choose a shop, go to the lowest priced shop;
                     if(lowestPrice <= maxInstaBuyPrice || mustTriggerNavigation){
                         GoToLowestPricedShop();
