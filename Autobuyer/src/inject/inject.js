@@ -1,7 +1,7 @@
 var errorRefreshed = false;
 
-function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min) + min); }
-function GetRandomFloat(min, max) { return Math.random() * (max - min) + min; }
+function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1) + min); }
+function GetRandomFloat(min, max) { return Math.random() * (max - min + 1) + min; }
 
 function topLevelTurbo() {
     // Updates the page's title;
@@ -321,10 +321,16 @@ function topLevelTurbo() {
                                     var shopkeeperDeal = document.getElementById("shopkeeper_makes_deal").textContent,
                                         match = shopkeeperDeal.match("[0-9|,]+ Neopoints"),
                                         askingPrice = parseInt(match[0].replace(" Neopoints", "").replace(/,/g, ""));
-                                        thresholdPrice = "" + Math.round(Number(askingPrice) + (Number(askingPrice) * (GetRandomFloat(0.5, 1.6) * 0.1)));
-
+                                        thresholdToAdd =  Math.pow(Number(askingPrice), GetRandomFloat(0.75, 0.85));
+                                        thresholdPrice = "" + Math.round(Number(askingPrice) + thresholdToAdd);
+                                        console.log(thresholdPrice);
+                                        
                                         // Creating the haggle;
                                         haggleInput.value = "0" + GenerateHagglePrice(thresholdPrice);
+                                }
+
+                                function Clamp(value, min, max) {
+                                    return Math.min(Math.max(value, min), max);
                                 }
                                 
                                 // Generates the haggle amount based on a numpad position heat-map;
