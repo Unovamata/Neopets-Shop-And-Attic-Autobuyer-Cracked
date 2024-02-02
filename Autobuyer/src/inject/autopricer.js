@@ -513,8 +513,6 @@ async function RunAutoPricer(){
                 resubmits = GetRandomInt(minResubmitsPerItem, maxResubmitsPerItem);
             }
 
-            console.log(resubmits);
-
             // The amount of times the extension should search for lower prices;
             for(var i = 1; i <= resubmits; i++){
                 await CheckForBan();
