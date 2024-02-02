@@ -519,7 +519,7 @@ async function RunAutoPricer(){
             for(var i = 1; i <= resubmits; i++){
                 await CheckForBan();
                 
-                FindLowestPricedShop();
+                FindLowestPricedShop(false, false);
 
                 await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
 
@@ -782,10 +782,10 @@ async function RunAutoPricer(){
             // The amount of times the extension should search for lower prices;
             await PressResubmit();
 
-            FindLowestPricedShop(true);
+            FindLowestPricedShop(true, true);
         }
 
-        async function FindLowestPricedShop(mustTriggerNavigation = false){
+        async function FindLowestPricedShop(mustTriggerNavigation = false, isLastSearch = false){
 
             // Automatically buys an item if its below a certain price threshold;
             if(isKQRunning){
@@ -795,7 +795,7 @@ async function RunAutoPricer(){
                     var lowestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
 
                     // If the lowest price is greater than the amount the user wants to spend on kitchen quests, search again;
-                    if(lowestPrice >= maxSpendablePrice){
+                    if(lowestPrice >= maxSpendablePrice && isLastSearch){
                         window.location.reload();
                     }
 
