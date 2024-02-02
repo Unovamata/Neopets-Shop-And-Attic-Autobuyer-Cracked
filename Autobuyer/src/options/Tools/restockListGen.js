@@ -1,10 +1,10 @@
 const inputList = document.getElementById("inputList");
 
-var inflatedItems = [], 
-unpricedItems = [],
-filteredItems = [];
-
 inputList.onchange = function (){
+    var inflatedItems = [], 
+    unpricedItems = [],
+    filteredItems = [];
+
     var inputListString = inputList.value;
 
     // Checking if the data comes from the JN Database page or the Print page;
