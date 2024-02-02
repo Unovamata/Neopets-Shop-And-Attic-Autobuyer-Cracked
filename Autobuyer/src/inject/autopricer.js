@@ -65,6 +65,7 @@ async function RunAutoPricer(){
         // Destructing the variables extracted from the extension;
         const {
             // AutoPricer;
+            IS_TURBO: isTurbo,
 			PRICING_TYPE: pricingType,
 			SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING: isRandomPercentage,
 			PERCENTAGE_PRICING_ALGORITHM_TYPE: percentageAlgorithmType,
@@ -238,7 +239,7 @@ async function RunAutoPricer(){
             if(isInErrorPage) return;
 
             //If the user is in the Shop Wizard page;
-            if(window.location.href != wizardURL){
+            if(!window.location.href.includes(wizardURL)){
                 /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
                 * This function either loads or submits prices depending on the current state of the AutoPricer;
                 */
@@ -258,76 +259,24 @@ async function RunAutoPricer(){
                     autoPricingList = list;
 
                     //If the pricing list has been completed, end the AutoPricing process;
-                    if(autoPricingList.length - 1 < currentPricingIndex){
-                        setCURRENT_PRICING_INDEX(0);
-                        setSTART_AUTOPRICING_PROCESS(false);
-                        setAUTOPRICER_STATUS("AutoPricing Complete!");
-
-                        // Submitting the prices automatically;
-                        getSHOULD_SUBMIT_AUTOMATICALLY(async function (isSubmittingAutomatically){
-                            if(isSubmittingAutomatically){
-                                await Sleep(sleepBeforeNavigatingToNextPageMin, sleepBeforeNavigatingToNextPageMax);
-                                setNEXT_PAGE_INDEX(1);
-                                setSUBMIT_PRICES_PROCESS(true);
-                                setSTART_INVENTORY_PROCESS(false);
-
-                                getSHOP_INVENTORY(function (entireShopStock){
-                                    for(var i = 0; i < entireShopStock.length; i++){
-                                        entireShopStock[i].IsPricing = true;
-                                    }
-    
-                                    setINVENTORY_UPDATED(true);
-                                    setSHOP_INVENTORY(entireShopStock);
-                                    window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
-                                })
-                            } else {
-                                window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
-                            }
-                        });
-
-                        return;
-                    }
+                    AutoSubmitPrices(autoPricingList.length, currentPricingIndex);
 
                     var itemToSearch = autoPricingList[currentPricingIndex];
                     var nameToSearch = itemToSearch.Name;
 
-                    // Checking if an item is inside a blacklist;
-                    if(blacklist.includes(nameToSearch)){
-                        setCURRENT_PRICING_INDEX(++currentPricingIndex);
-
-                        UpdateShopInventoryWithValue(itemToSearch, 0);
-                        setAUTOPRICER_STATUS(`${nameToSearch} is Blacklisted, Skipping...`);
-
-                        // Reloading the page so the script can continue;
-                        await Sleep(sleepBlacklistMin, sleepBlacklistMax);
-                        window.location.reload();
-                        return;
-                    }
+                    if(!isTurbo) await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
                     
-
-                    await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
-
-                    // Searching the searchbox, if the box doesn't exists, the user is in a Faerie quest;
-                    var searchBox = document.getElementById("shopwizard");
-
-                    if(searchBox === null || searchBox === undefined && !isInErrorPage){
-                        window.alert(
-                            "You are currently in a Faerie Quest.\n" +
-                            "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +
-                            "To continue, click 'Start AutoPricing' on the AutoPricer page.\n" +
-                            "The AutoPricer will resume from the last priced item.\n" +
-                            "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
-                            "AutoPricer has been stopped.\n"
-                        );
-                        setAUTOPRICER_STATUS("Faerie Quest Detected, Process Stopped.");
-                        CancelAutoPricer();
-                        return;
-                    }
+                    if(DetectFaerieQuest(isInErrorPage)) return;
 
                     // If the box exists, then introduce the name on it;
                     setAUTOPRICER_STATUS(`Searching ${nameToSearch}...`);
-                    await SimulateKeyEvents(searchBox, nameToSearch);
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+
+                    if(!isTurbo){
+                        await SimulateKeyEvents(searchBox, nameToSearch);
+                        await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+                    }
+
+                    await CheckForBan();
 
                     // Click the button for the search;
                     await PressSearch();
@@ -342,7 +291,7 @@ async function RunAutoPricer(){
                         }
                     });
 
-                    await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+                    if(!isTurbo) await Sleep(sleepInSWPageMin, sleepInSWPageMax);
 
                     // The amount of times the extension should search for lower prices;
                     await PressResubmit();
@@ -482,11 +431,71 @@ async function RunAutoPricer(){
                     await Sleep(sleepNewSearchMin, sleepNewSearchMax);
 
                     //Starting a new search;
-                    WaitForElement(".button-default__2020.button-blue__2020.wizard-button__2020[type='submit'][value='New Search']", 0).then((newSearchButton) => {
-                        newSearchButton.click();
-                    })
+                    if(!isTurbo){
+                        WaitForElement(".button-default__2020.button-blue__2020.wizard-button__2020[type='submit'][value='New Search']", 0).then((newSearchButton) => {
+                            newSearchButton.click();
+                        })
+                    } else {
+                        try{
+                            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${autoPricingList[currentPricingIndex].Name}`;
+                        } catch {
+                            window.location.reload();
+                        }
+                        
+                    }
                 });
             });
+        }
+
+        function AutoSubmitPrices(listLength, currentPricingIndex){
+            if(listLength - 1 < currentPricingIndex){
+                setCURRENT_PRICING_INDEX(0);
+                setSTART_AUTOPRICING_PROCESS(false);
+                setAUTOPRICER_STATUS("AutoPricing Complete!");
+
+                // Submitting the prices automatically;
+                getSHOULD_SUBMIT_AUTOMATICALLY(async function (isSubmittingAutomatically){
+                    if(isSubmittingAutomatically){
+                        await Sleep(sleepBeforeNavigatingToNextPageMin, sleepBeforeNavigatingToNextPageMax);
+                        setNEXT_PAGE_INDEX(1);
+                        setSUBMIT_PRICES_PROCESS(true);
+                        setSTART_INVENTORY_PROCESS(false);
+
+                        getSHOP_INVENTORY(function (entireShopStock){
+                            for(var i = 0; i < entireShopStock.length; i++){
+                                entireShopStock[i].IsPricing = true;
+                            }
+
+                            setINVENTORY_UPDATED(true);
+                            setSHOP_INVENTORY(entireShopStock);
+                            window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
+                        })
+                    } else {
+                        window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
+                    }
+                });
+
+                return;
+            }
+        }
+
+        // DetectFaerieQuest(); If the item search box is missing in thew Shop Missing, the user is in a quest;
+        function DetectFaerieQuest(isInErrorPage){
+            var searchBox = document.getElementById("shopwizard");
+
+            if(searchBox === null || searchBox === undefined && !isInErrorPage){
+                window.alert(
+                    "You are currently in a Faerie Quest.\n" +
+                    "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +
+                    "To continue, click 'Start AutoPricing' on the AutoPricer page.\n" +
+                    "The AutoPricer will resume from the last priced item.\n" +
+                    "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
+                    "AutoPricer has been stopped.\n"
+                );
+                setAUTOPRICER_STATUS("Faerie Quest Detected, Process Stopped.");
+                CancelAutoPricer();
+                return true;
+            }
         }
 
         // PressSearch(); Press the search button in the SW page;
@@ -508,6 +517,8 @@ async function RunAutoPricer(){
             } else {
                 resubmits = GetRandomInt(minResubmitsPerItem, maxResubmitsPerItem);
             }
+
+            console.log(resubmits);
 
             // The amount of times the extension should search for lower prices;
             for(var i = 1; i <= resubmits; i++){
@@ -765,6 +776,8 @@ async function RunAutoPricer(){
 
         // Setting KQ Searches for AutoBuying;
         async function KQSearch(){
+            if(DetectFaerieQuest(isInErrorPage)) return;
+
             await CheckForBan();
             
             await PressSearch();

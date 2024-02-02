@@ -547,13 +547,14 @@ function setMIN_PAGE_LOAD_FAILURES(value) { chrome.storage.local.set({ MIN_PAGE_
 
 // AutoKQ Setters;
 
-function setKQ_RESUBMITS_PER_ITEM(value) { chrome.storage.local.set({ KQ_RESUBMITS_PER_ITEM: value }, (function () {})) }
 
 function setUSE_BLACKLIST_KQ(value) { chrome.storage.local.set({ USE_BLACKLIST_KQ: value }, (function () {})) }
 
 function setBLACKLIST_KQ(value) { chrome.storage.local.set({ BLACKLIST_KQ: value }, (function () {})) }
 
 function setMAX_INSTA_BUY_PRICE(value) { chrome.storage.local.set({ MAX_INSTA_BUY_PRICE: Number(value) }, (function () {})) }
+
+function setMAX_SPENDABLE_PRICE(value) { chrome.storage.local.set({ MAX_SPENDABLE_PRICE: Number(value) }, (function () {})) }
 
 // Miscellaneous Setters;
 
@@ -820,8 +821,8 @@ $("#MAX_INSTA_BUY_PRICE").bind("input propertychange", (function() {
     setMAX_INSTA_BUY_PRICE($("#MAX_INSTA_BUY_PRICE").val())
 }))
 
-$("#KQ_RESUBMITS_PER_ITEM").bind("input propertychange", (function() {
-    setRESUBMITS_PER_ITEM($("#KQ_RESUBMITS_PER_ITEM").val())
+$("#MAX_SPENDABLE_PRICE").bind("input propertychange", (function() {
+    setMAX_SPENDABLE_PRICE($("#MAX_SPENDABLE_PRICE").val())
 }))
 
 $("#USE_BLACKLIST_KQ").bind("input propertychange", (function() {
@@ -987,7 +988,7 @@ resetButton.onclick = function(_) {
 
     // AutoKQ
     MAX_INSTA_BUY_PRICE: 0, 
-    KQ_RESUBMITS_PER_ITEM: 3,
+    MAX_SPENDABLE_PRICE: 60000,
     USE_BLACKLIST_KQ: false,
     BLACKLIST_KQ: ["Yellow Negg", "Purple Negg", "Green Negg", "Partitioned Negg", "Super Icy Negg"],
 
@@ -1134,7 +1135,7 @@ resetButton.onclick = function(_) {
 
         // KQ Settings;
         $("#MAX_INSTA_BUY_PRICE").val(_.MAX_INSTA_BUY_PRICE),
-        $("#KQ_RESUBMITS_PER_ITEM").val(_.KQ_RESUBMITS_PER_ITEM),
+        $("#MAX_SPENDABLE_PRICE").val(_.MAX_SPENDABLE_PRICE),
         $("#USE_BLACKLIST_KQ").prop("checked", _.USE_BLACKLIST_KQ),
         $("#BLACKLIST_KQ").val(_.BLACKLIST_KQ.join("\n")), 
 

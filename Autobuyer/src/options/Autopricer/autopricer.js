@@ -326,35 +326,49 @@ var autoPricingList = [];
 var swTab = null;
 
 function StartAutoPricer(){
-    var selectedRows = document.querySelectorAll(".checked-row");
-    autoPricingList = [];
+    getBLACKLIST_SW(function(blacklist){
+        getIS_TURBO(function(isTurbo){
+            var selectedRows = document.querySelectorAll(".checked-row");
+            autoPricingList = [];
 
-    selectedRows.forEach((row) => {
-        const nameCell = row.cells[1];
-        const priceCell = row.cells[3];
-        const priceInput = priceCell.querySelector('input[type=number]');
-        
-        const name = nameCell.textContent;
-        const price = parseInt(priceInput.value);
-        const index = row.rowIndex;
+            selectedRows.forEach((row) => {
+                const nameCell = row.cells[1];
+                const priceCell = row.cells[3];
+                const priceInput = priceCell.querySelector('input[type=number]');
+                
+                const name = nameCell.textContent;
+                const price = parseInt(priceInput.value);
+                const index = row.rowIndex;
 
+                
+                // Filtering out all the blacklisted items before they are submitted for AutoPricing;
+                var isInBlacklist = blacklist.some(function(blacklistedItem){
+                    return blacklistedItem === name;
+                });
+
+                if(!isInBlacklist){
+                    const item = new Item(name, price, true, index, 0, 1);
+                    autoPricingList.push(item);
+                }
+            });
         
-        //Item(Name, Price, IsPricing, Index, ListIndex, Stock)
-        const item = new Item(name, price, true, index, 0, 1);
-        autoPricingList.push(item);
+            setAUTOPRICER_INVENTORY(autoPricingList);
+            setSTART_AUTOPRICING_PROCESS(true);
+            setCURRENT_PRICING_INDEX(0);
+
+            setSUBMIT_AUTOKQ_PROCESS(false);
+            setSTART_AUTOKQ_PROCESS(false);
+
+            // Function to create a new tab if swTab is null
+            if(isTurbo){
+                chrome.tabs.create({ url: `https://www.neopets.com/shops/wizard.phtml?string=${autoPricingList[0].Name}`, active: true });
+            } else {
+                chrome.tabs.create({ url: 'https://www.neopets.com/shops/wizard.phtml', active: true });
+            }
+
+            setAUTOPRICER_STATUS("AutoPricer Process Running...");
+        });
     });
-
-    setAUTOPRICER_INVENTORY(autoPricingList);
-    setSTART_AUTOPRICING_PROCESS(true);
-    setCURRENT_PRICING_INDEX(0);
-
-    setSUBMIT_AUTOKQ_PROCESS(false);
-    setSTART_AUTOKQ_PROCESS(false);
-
-    // Function to create a new tab if swTab is null
-    chrome.tabs.create({ url: 'https://www.neopets.com/shops/wizard.phtml', active: true });
-
-    setAUTOPRICER_STATUS("AutoPricer Process Running...");
 }
 
 const cancelAutoPricingButton = document.getElementById("cancel");

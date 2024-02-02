@@ -204,6 +204,26 @@ function getSHOULD_SUBMIT_AUTOMATICALLY(callback) {
     });
 }
 
+function getBLACKLIST_SW(callback) {
+    chrome.storage.local.get(['BLACKLIST_SW'], function (result) {
+        const value = result.BLACKLIST_SW;
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function getIS_TURBO(callback) {
+    chrome.storage.local.get(['IS_TURBO'], function (result) {
+        const value = result.IS_TURBO;
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 
 //######################################################################################################################################
 //// AutoKQ Variable Calling
