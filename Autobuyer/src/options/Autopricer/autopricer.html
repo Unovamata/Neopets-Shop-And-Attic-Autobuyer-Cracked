@@ -71,8 +71,9 @@
                             <tr>
                                 <td>Enable <b class="danger">Turbo</b> Mode:
                                     <span class="tooltiptext">
-                                        This feature combines Neopets Shop Wizard's searches onto a single page<br><br>
-                                        <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm">Neon Extension</a>
+                                        Turbo mode enables the AutoPricer to skip multiple wait times that mimick human behavior more closely.
+
+                                        Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
                                     </span>
                                 </td>
                                 <td>
@@ -249,7 +250,7 @@
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_BAN_TIME"></input><span class="notation">ms</span></td>
                             </tr>
-                            <tr>
+                            <tr class="turbo-hide">
                                 <td><b>Minimum</b> Wait Cooldown per Refresh:
                                     <span class="tooltiptext">
                                         Minimum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Shop Wizard page.
@@ -258,7 +259,7 @@
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
                             </tr>
-                            <tr>
+                            <tr class="turbo-hide">
                                 <td><b>Maximum</b> Wait Cooldown per Refresh:
                                     <span class="tooltiptext">
                                         Maximum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Shop Wizard page.
@@ -327,7 +328,7 @@
                                 </td>
                                 <td><input type="number" id="MAX_RESUBMIT_WAIT_TIME"></input><span class="notation">ms</span></td>
                             </tr>
-                            <tr>
+                            <tr class="turbo-hide">
                                 <td><b>Minimum</b> Auto-Click <b>'New Search'</b> Button:
                                     <span class="tooltiptext">
                                         Minimum wait time in milliseconds to start a "New Search" after the pricing actions are complete.
@@ -336,7 +337,7 @@
                                 </td>
                                 <td><input type="number" id="MIN_NEW_SEARCH_WAIT_TIME"></input><span class="notation">ms</span></td>
                             </tr>
-                            <tr>
+                            <tr class="turbo-hide">
                                 <td><b>Maximum</b> Auto-Click <b>'New Search'</b> Button:
                                     <span class="tooltiptext">
                                         Maximum wait time in milliseconds to start a "New Search" after the pricing actions are complete.
@@ -356,24 +357,6 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </td>
-                            </tr>
-                            <tr class="blacklist-sw">
-                                <td><b>Minimum</b> Blacklisted Item Wait:
-                                    <span class="tooltiptext">
-                                        Minimum wait time in milliseconds if the AutoPricer is pricing a blacklisted item.
-                                        <br><br> 1 second = 1000
-                                    </span>
-                                </td>
-                                <td><input type="number" id="MIN_BLACKLIST_ITEM_WAIT"></input><span class="notation">ms</span></td>
-                            </tr>
-                            <tr class="blacklist-sw">
-                                <td><b>Maximum</b> Blacklisted Item Wait:
-                                    <span class="tooltiptext">
-                                        Maximum wait time in milliseconds if the AutoPricer is pricing a blacklisted item.
-                                        <br><br> 1 second = 1000
-                                    </span>
-                                </td>
-                                <td><input type="number" id="MAX_BLACKLIST_ITEM_WAIT"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr class="blacklist-sw">
                                 <td>Blacklist:
@@ -403,7 +386,7 @@
                                     </label>
                                 </td>
                             </tr>
-                            <tr class="submit-automatically">
+                            <tr class="submit-automatically turbo-hide">
                                 <td><b>Minimum</b> Shop Page Navigation Time:
                                     <span class="tooltiptext">
                                         Minimum wait time in milliseconds the AutoPricer navigates to the Player's Shop page for automatic price submission.
@@ -412,7 +395,7 @@
                                 </td>
                                 <td><input type="number" id="MIN_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
                             </tr>
-                            <tr class="submit-automatically">
+                            <tr class="submit-automatically turbo-hide">
                                 <td><b>Maximum</b> Shop Page Navigation Time:
                                     <span class="tooltiptext">
                                         Maximum wait time in milliseconds the AutoPricer navigates to the Player's Shop page for automatic price submission.
@@ -439,7 +422,7 @@
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_AFTER_PRICING_ITEM"></input><span class="notation">ms</span></td>
                             </tr>
-                            <tr>
+                            <tr class="turbo-hide">
                                 <td><b>Minimum</b> Price Input Box Search Time:
                                     <span class="tooltiptext">
                                         Minimum wait time in milliseconds for the AutoPricer to find the price input box in the page.
@@ -448,7 +431,7 @@
                                 </td>
                                 <td><input type="number" id="MIN_SHOP_SEARCH_FOR_INPUT_BOX"></input><span class="notation">ms</span></td>
                             </tr>
-                            <tr>
+                            <tr class="turbo-hide">
                                 <td><b>Maximum</b> Price Input Box Search Time:
                                     <span class="tooltiptext">
                                         Maximum wait time in milliseconds for the AutoPricer to find the price input box per item to price.
@@ -502,7 +485,8 @@
                                 <td><b>Minimum</b> Typing Speed Cooldown
                                     <span class="tooltiptext">
                                         Minimum wait time in milliseconds per character typed.<br>
-                                        This simulates human-like typing.
+                                        This mimicks human-like typing.
+                                        
                                         <br><br> 1 second = 1000
                                     </span>
                                 </td>
@@ -512,7 +496,7 @@
                                 <td><b>Maximum</b> Typing Speed Cooldown
                                     <span class="tooltiptext">
                                         Maximum wait time in milliseconds per character typed.<br>
-                                        This simulates human-like typing.
+                                        This mimicks human-like typing.
                                         <br><br> 1 second = 1000
                                     </span>
                                 </td>
@@ -545,7 +529,7 @@
                             <tr class="enter-pin">
                                 <td><b>Minimum</b> Cooldown After Typing the <b>PIN</b> Before Updating:
                                     <span class="tooltiptext">
-                                        To simulate human-like behaviour.<br><br>
+                                        To mimick human behavior more closely.<br><br>
                                         1 second = 1000
                                     </span>
                                 </td>
@@ -554,7 +538,7 @@
                             <tr class="enter-pin">
                                 <td><b>Maximum</b> Cooldown After Typing the <b>PIN</b> Before Updating:
                                     <span class="tooltiptext">
-                                        To simulate human-like behaviour.<br><br>
+                                        To mimick human behavior more closely.<br><br>
                                         1 second = 1000
                                     </span>
                                 </td>

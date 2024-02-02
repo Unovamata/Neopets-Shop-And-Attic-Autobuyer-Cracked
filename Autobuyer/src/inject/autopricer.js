@@ -37,11 +37,8 @@ async function RunAutoPricer(){
         MAX_RESUBMIT_WAIT_TIME: 40000,
         MIN_NEW_SEARCH_WAIT_TIME: 10000,
         MAX_NEW_SEARCH_WAIT_TIME: 30000,
-        MIN_BLACKLIST_ITEM_WAIT: 10000,
-        MAX_BLACKLIST_ITEM_WAIT: 30000,
         USE_AUTOPRICING_BLACKLIST: false,
         USE_BLACKLIST_SW: false,
-        BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
 
         // Shop Stock Page Settings;
         MIN_WAIT_AFTER_PRICING_ITEM: 10000,
@@ -97,9 +94,6 @@ async function RunAutoPricer(){
             MAX_RESUBMIT_WAIT_TIME: sleepThroughSearchesMax,
             MIN_NEW_SEARCH_WAIT_TIME: sleepNewSearchMin,
             MAX_NEW_SEARCH_WAIT_TIME: sleepNewSearchMax,
-            MIN_BLACKLIST_ITEM_WAIT: sleepBlacklistMin,
-            MAX_BLACKLIST_ITEM_WAIT: sleepBlacklistMax,
-            BLACKLIST_SW: blacklist,
 
             // Shop Stock Page Settings;
             MIN_WAIT_AFTER_PRICING_ITEM: sleepAfterPricingMin,
@@ -457,7 +451,7 @@ async function RunAutoPricer(){
                 // Submitting the prices automatically;
                 getSHOULD_SUBMIT_AUTOMATICALLY(async function (isSubmittingAutomatically){
                     if(isSubmittingAutomatically){
-                        await Sleep(sleepBeforeNavigatingToNextPageMin, sleepBeforeNavigatingToNextPageMax);
+                        if(!isTurbo) await Sleep(sleepBeforeNavigatingToNextPageMin, sleepBeforeNavigatingToNextPageMax);
                         setNEXT_PAGE_INDEX(1);
                         setSUBMIT_PRICES_PROCESS(true);
                         setSTART_INVENTORY_PROCESS(false);
@@ -685,7 +679,7 @@ async function RunAutoPricer(){
 
                             // Get a reference to the input element
                             const inputElement = document.querySelector(`input[name="cost_${rowIndex}"]`);
-                            await Sleep(sleepSearchPriceInputBoxMin, sleepSearchPriceInputBoxMax);
+                            if(!isTurbo) await Sleep(sleepSearchPriceInputBoxMin, sleepSearchPriceInputBoxMax);
 
                             // Clear the current value in the input field
                             inputElement.value = "";

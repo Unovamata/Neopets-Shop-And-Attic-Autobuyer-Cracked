@@ -86,8 +86,6 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_RESUBMIT_WAIT_TIME: 40000,
 			MIN_NEW_SEARCH_WAIT_TIME: 10000,
 			MAX_NEW_SEARCH_WAIT_TIME: 30000,
-			MIN_BLACKLIST_ITEM_WAIT: 10000,
-			MAX_BLACKLIST_ITEM_WAIT: 30000,
 			USE_BLACKLIST_SW: false,
 			BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
 			
@@ -121,7 +119,6 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_SHARE_BLACKLISTS: false,
 			SHOULD_SHARE_PIN: false,
 			SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
-			SHOULD_SHARE_EMAIL: false,
 			SHOULD_SHARE_HISTORY: false,
 			SHOULD_SHARE_NEOBUYER_MAILS: false,
 

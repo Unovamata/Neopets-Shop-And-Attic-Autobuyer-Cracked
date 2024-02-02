@@ -497,10 +497,6 @@ function setMIN_NEW_SEARCH_WAIT_TIME(value) { chrome.storage.local.set({ MIN_NEW
 
 function setMAX_NEW_SEARCH_WAIT_TIME(value) { chrome.storage.local.set({ MAX_NEW_SEARCH_WAIT_TIME: Number(value) }, (function () {})) }
 
-function setMIN_BLACKLIST_ITEM_WAIT(value) { chrome.storage.local.set({ MIN_BLACKLIST_ITEM_WAIT: Number(value) }, (function () {})) }
-
-function setMAX_BLACKLIST_ITEM_WAIT(value) { chrome.storage.local.set({ MAX_BLACKLIST_ITEM_WAIT: Number(value) }, (function () {})) }
-
 function setUSE_BLACKLIST_SW(value) { chrome.storage.local.set({ USE_BLACKLIST_SW: value }, (function () {})) }
 
 function setBLACKLIST_SW(value) { chrome.storage.local.set({ BLACKLIST_SW: value }, (function () {})) }
@@ -569,8 +565,6 @@ function setSHOULD_SHARE_BLACKLISTS(value) { chrome.storage.local.set({ SHOULD_S
 function setSHOULD_SHARE_PIN(value) { chrome.storage.local.set({ SHOULD_SHARE_PIN: value }, (function () {})) }
 
 function setSHOULD_SHARE_ATTIC_LAST_REFRESH(value) { chrome.storage.local.set({ SHOULD_SHARE_ATTIC_LAST_REFRESH: value }, (function () {})) }
-
-function setSHOULD_SHARE_EMAIL(value) { chrome.storage.local.set({ SHOULD_SHARE_EMAIL: value }, (function () {})) }
 
 function setSHOULD_SHARE_HISTORY(value) { chrome.storage.local.set({ SHOULD_SHARE_HISTORY: value }, (function () {})) }
 
@@ -671,14 +665,6 @@ $("#MIN_NEW_SEARCH_WAIT_TIME").bind("input propertychange", (function() {
 
 $("#MAX_NEW_SEARCH_WAIT_TIME").bind("input propertychange", (function() {
     setMAX_NEW_SEARCH_WAIT_TIME($("#MAX_NEW_SEARCH_WAIT_TIME").val())
-}))
-
-$("#MIN_BLACKLIST_ITEM_WAIT").bind("input propertychange", (function() {
-    setMIN_BLACKLIST_ITEM_WAIT($("#MIN_BLACKLIST_ITEM_WAIT").val())
-}))
-
-$("#MAX_BLACKLIST_ITEM_WAIT").bind("input propertychange", (function() {
-    setMAX_BLACKLIST_ITEM_WAIT($("#MAX_BLACKLIST_ITEM_WAIT").val())
 }))
 
 $("#USE_BLACKLIST_SW").bind("input propertychange", (function() {
@@ -876,11 +862,6 @@ $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").bind("input propertychange", (function() {
     setSHOULD_SHARE_ATTIC_LAST_REFRESH(isChecked);
 }))
 
-$("#SHOULD_SHARE_EMAIL").bind("input propertychange", (function() {
-    const isChecked = $("#SHOULD_SHARE_EMAIL").is(":checked");
-    setSHOULD_SHARE_EMAIL(isChecked);
-}))
-
 $("#SHOULD_SHARE_HISTORY").bind("input propertychange", (function() {
     const isChecked = $("#SHOULD_SHARE_HISTORY").is(":checked");
     setSHOULD_SHARE_HISTORY(isChecked);
@@ -1007,8 +988,6 @@ resetButton.onclick = function(_) {
     MAX_RESUBMIT_WAIT_TIME: 40000,
     MIN_NEW_SEARCH_WAIT_TIME: 10000,
     MAX_NEW_SEARCH_WAIT_TIME: 30000,
-    MIN_BLACKLIST_ITEM_WAIT: 10000,
-    MAX_BLACKLIST_ITEM_WAIT: 30000,
     USE_BLACKLIST_SW: false,
     BLACKLIST_SW: ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],
 
@@ -1040,7 +1019,6 @@ resetButton.onclick = function(_) {
     SHOULD_SHARE_BLACKLISTS: false,
     SHOULD_SHARE_PIN: false,
     SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
-    SHOULD_SHARE_EMAIL: false,
     SHOULD_SHARE_HISTORY: false,
     SHOULD_SHARE_NEOBUYER_MAILS: false,
 
@@ -1128,8 +1106,6 @@ resetButton.onclick = function(_) {
         $("#MAX_RESUBMIT_WAIT_TIME").val(_.MAX_RESUBMIT_WAIT_TIME),
         $("#MIN_NEW_SEARCH_WAIT_TIME").val(_.MIN_NEW_SEARCH_WAIT_TIME),
         $("#MAX_NEW_SEARCH_WAIT_TIME").val(_.MAX_NEW_SEARCH_WAIT_TIME),
-        $("#MIN_BLACKLIST_ITEM_WAIT").val(_.MIN_BLACKLIST_ITEM_WAIT),
-        $("#MAX_BLACKLIST_ITEM_WAIT").val(_.MAX_BLACKLIST_ITEM_WAIT),
         $("#USE_BLACKLIST_SW").prop("checked", _.USE_BLACKLIST_SW),
         $("#BLACKLIST_SW").val(_.BLACKLIST_SW.join("\n")), 
 
@@ -1167,7 +1143,6 @@ resetButton.onclick = function(_) {
         $("#SHOULD_SHARE_BLACKLISTS").prop("checked", _.SHOULD_SHARE_BLACKLISTS),
         $("#SHOULD_SHARE_PIN").prop("checked", _.SHOULD_SHARE_PIN),
         $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").prop("checked", _.SHOULD_SHARE_ATTIC_LAST_REFRESH),
-        $("#SHOULD_SHARE_EMAIL").prop("checked", _.SHOULD_SHARE_EMAIL),
         $("#SHOULD_SHARE_HISTORY").prop("checked", _.SHOULD_SHARE_HISTORY),
         $("#SHOULD_SHARE_NEOBUYER_MAILS").prop("checked", _.SHOULD_SHARE_NEOBUYER_MAILS),
 

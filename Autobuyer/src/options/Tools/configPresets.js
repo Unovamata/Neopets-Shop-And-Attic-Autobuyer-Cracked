@@ -57,13 +57,6 @@ chrome.storage.local.get(null, function(items) {
         itemsCopy.ATTIC_PREV_NUM_ITEMS = 0;
 
         // Sharing item history;
-        if(!$("#SHOULD_SHARE_EMAIL").is(":checked")){
-            itemsCopy.EMAIL_TEMPLATE = "";
-            itemsCopy.EMAIL_USER_ID = "";
-            itemsCopy.EMAIL_SERVICE_ID = "";
-        }
-
-        // Sharing item history;
         if(!$("#SHOULD_SHARE_HISTORY").is(":checked")){
             itemsCopy.ITEM_HISTORY = [];
         }
