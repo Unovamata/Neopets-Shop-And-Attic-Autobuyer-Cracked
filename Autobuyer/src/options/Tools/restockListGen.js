@@ -28,12 +28,10 @@ inputList.onchange = function (){
             // If the item is unpriced, add it to the unpriced item list;
             if(!item.includes("NP") && !item.includes("Inflation Notice")){
                 unpricedItems.push(cleanedItem);
-                inputData.splice(index, 1);
             } 
             // If an item has been inflated, add it to the inflated item list;
             else if(item.includes("Inflation Notice")){
                 inflatedItems.push(cleanedItem);
-                inputData.splice(index, 1);
             } 
             // Else, it's a priced item, so add it to the regular item list;
             else {
@@ -88,8 +86,11 @@ inputList.onchange = function (){
         resultingList += item + "\n";
     });
 
+    var outputList = document.getElementById('outputList');
+    outputList.innerHTML = '';
+
     // Display the cleaned dataset
-    document.getElementById('outputList').value = resultingList;
+    outputList.value = resultingList;
 }
 
 
