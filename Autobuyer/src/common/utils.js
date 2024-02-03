@@ -98,6 +98,16 @@ function getSTART_AUTOPRICING_PROCESS(trueCallback, falseCallback) {
     });
 }
 
+function getSTART_AUTOPRICING_PROCESS(callback) {
+    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
+        const value = result.START_AUTOPRICING_PROCESS;
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
 function setAUTOPRICER_INVENTORY(value) {
     return new Promise((resolve) => {
         chrome.storage.local.set({ AUTOPRICER_INVENTORY: value }, function () {
@@ -607,3 +617,7 @@ function TestPattern(pattern, element){
 function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1) + min); }
 
 function GetRandomFloat(min, max) { return Math.random() * (max - min + 1) + min; }
+
+function PageIncludes(input){
+    return document.body.textContent.includes(input);
+}

@@ -50,10 +50,19 @@ function StartAutoKQ(){
     setSTART_INVENTORY_PROCESS(false);
     setSTART_INVENTORY_PROCESS(false);
     setSUBMIT_PRICES_PROCESS(false);
+
+    getSTART_AUTOPRICING_PROCESS(function (isActive) {
+        if(isActive){
+            setAUTOPRICER_STATUS("AutoPricer Process Cancelled by the AutoKQ Process...");
+        }
+    });
+
     setSTART_AUTOPRICING_PROCESS(false);
+
     setSTART_AUTOKQ_PROCESS(true);
     setSUBMIT_AUTOKQ_PROCESS(false);
     setAUTOKQ_STATUS("Navigating to the KQ Page...");
+    
 
     chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: true });
 

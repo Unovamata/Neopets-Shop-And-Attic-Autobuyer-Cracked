@@ -476,9 +476,7 @@ async function RunAutoPricer(){
 
         // DetectFaerieQuest(); If the item search box is missing in thew Shop Missing, the user is in a quest;
         function DetectFaerieQuest(isInErrorPage){
-            var searchBox = document.getElementById("shopwizard");
-
-            if(searchBox === null || searchBox === undefined && !isInErrorPage){
+            if(window.location.href.includes(wizardURL) && PageIncludes("Ancient laws of magic and all that") && !isInErrorPage){
                 window.alert(
                     "You are currently in a Faerie Quest.\n" +
                     "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +

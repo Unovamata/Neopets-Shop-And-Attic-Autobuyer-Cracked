@@ -4,10 +4,6 @@ getSTART_AUTOKQ_PROCESS(async function(isActive){
     
     await getKQ_INVENTORY(async function(ingredients){
 
-        function PageIncludes(input){
-            return document.body.textContent.includes(input);
-        }
-
         // If the item has been sold out or the owner has been frozen, search them again;
         if(PageIncludes("Item not found!") || 
         PageIncludes("Sorry - The owner of this shop has been frozen!") ||

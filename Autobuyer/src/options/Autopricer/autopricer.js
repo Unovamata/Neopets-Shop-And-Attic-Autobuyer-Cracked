@@ -1,16 +1,3 @@
-function getSTART_AUTOPRICING_PROCESS(callback) {
-    chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
-        const value = result.START_AUTOPRICING_PROCESS;
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-//######################################################################################################################################
-
-
 var loadInventoryButton = document.getElementById("load-inventory");
 
 loadInventoryButton.onclick = function(_) {
@@ -357,6 +344,13 @@ function StartAutoPricer(){
             setCURRENT_PRICING_INDEX(0);
 
             setSUBMIT_AUTOKQ_PROCESS(false);
+
+            getSTART_AUTOKQ_PROCESS(function (isActive) {
+                if(isActive){
+                    setAUTOKQ_STATUS("AutoKQ Process Cancelled by the AutoPricer Process...");
+                }
+            });
+
             setSTART_AUTOKQ_PROCESS(false);
 
             // Function to create a new tab if swTab is null
