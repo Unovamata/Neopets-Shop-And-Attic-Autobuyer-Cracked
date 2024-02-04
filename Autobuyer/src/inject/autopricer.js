@@ -21,6 +21,7 @@ async function RunAutoPricer(){
         // AutoKQ;
         START_AUTOKQ_PROCESS: false,
         MAX_INSTA_BUY_PRICE: 0,
+        MAX_SPENDABLE_PRICE: 60000,
 
         // Shop Wizard;
         MIN_WAIT_BAN_TIME: 300000,
@@ -792,6 +793,7 @@ async function RunAutoPricer(){
                     // If the lowest price is greater than the amount the user wants to spend on kitchen quests, search again;
                     if(lowestPrice >= maxSpendablePrice && isLastSearch){
                         window.location.reload();
+                        return;
                     }
 
                     // If the price is lower than the insta buy threshold or ultimately the script has to choose a shop, go to the lowest priced shop;
@@ -812,14 +814,6 @@ async function RunAutoPricer(){
 
 
         //######################################################################################################################################
-
-
-        // Waits 'X' amount of milliseconds. 'await Sleep(min, max)';
-        function Sleep(min, max, showConsoleMessage = true) {
-            const milliseconds = GetRandomFloat(min, max);
-            //if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`, min, max);
-            return new Promise(resolve => setTimeout(resolve, milliseconds));
-        }
 
         // Limits a value to its minimum or maximum depending on its ceiling or floor;
         function Clamp(value, min, max){ return Math.min(Math.max(value, min), max); }

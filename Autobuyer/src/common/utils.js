@@ -609,3 +609,10 @@ function GetRandomFloat(min, max) { return Math.random() * (max - min + 1) + min
 function PageIncludes(input){
     return document.body.textContent.includes(input);
 }
+
+// Waits 'X' amount of milliseconds. 'await Sleep(min, max)';
+function Sleep(min, max, showConsoleMessage = true) {
+    const milliseconds = GetRandomFloat(min, max);
+    //if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`, min, max);
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}

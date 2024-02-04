@@ -160,7 +160,7 @@ async function ReadPrizeElement(){
 
 async function SearchInAllElements(selectorA, selectorB, selectorC, selectorD) {
     return new Promise((resolve) => {
-        const maxRetries = 10; // Maximum number of retries
+        const maxRetries = 20; // Maximum number of retries
         let retries = 0;
 
         const intervalId = setInterval(async () => {
@@ -188,6 +188,7 @@ async function SearchInAllElements(selectorA, selectorB, selectorC, selectorD) {
             }
 
             retries++;
+            await Sleep(500, 1000);
         }, 1000); // Retry every second
     });
 }
