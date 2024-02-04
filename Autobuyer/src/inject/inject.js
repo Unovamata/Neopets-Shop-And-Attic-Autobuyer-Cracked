@@ -1004,10 +1004,6 @@ function topLevelTurbo() {
 
                 ReloadPageBasedOnConditions();
             }
-            
-            function FormatMillisecondsToSeconds(milliseconds) {
-                return (milliseconds / 1e3).toFixed(2) + " secs"
-            }
 
             function ReloadPageBasedOnConditions() {
                 var currentStockedItems;
@@ -1257,6 +1253,10 @@ function topLevelTurbo() {
             function AddCSSStyle(e) {
                 const t = document.createElement("style");
                 t.textContent = e, document.head.append(t)
+            }
+
+            function FormatMillisecondsToSeconds(milliseconds) {
+                return (milliseconds / 1e3).toFixed(2) + " secs"
             }
         }));
     }

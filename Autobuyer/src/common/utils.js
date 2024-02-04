@@ -11,6 +11,184 @@ class Item {
 }
 
 //######################################################################################################################################
+//// AutoBuyer & AutoAttic Variable Calling;
+
+// Updates the page's title;
+function UpdateDocument(title, message, shouldSendMessage) {
+    // Update the document title to uppercase
+    chrome.storage.local.get({
+        SHOULD_CHANGE_DOCUMENT_DATA: false,
+    }, (function(autobuyerVariables) {
+        // Update the document title to uppercase
+        if(autobuyerVariables.SHOULD_CHANGE_DOCUMENT_DATA) document.title = title.toUpperCase();
+
+        if(shouldSendMessage){
+            message = `${message} - ${new Date().toLocaleString()}`;
+    
+            // Send a message to the Chrome runtime
+            chrome.runtime.sendMessage({
+                neobuyer: "NeoBuyer",
+                type: "Notification",
+                notificationObject: {
+                type: "basic",
+                title: title,
+                message: message,
+                iconUrl: "../../icons/icon48.png",
+                },
+            });
+        }
+    }));
+}
+
+function FilterItemsByProfitCriteria(itemNames, itemPrices, itemProfits, minDBProfit, minDBProfitPercent) {
+    var filteredItems = [];
+    
+    for (var i = 0; i < itemProfits.length; i++) {
+        var meetsProfitCriteria = itemProfits[i] > minDBProfit;
+        var meetsPercentCriteria = (itemProfits[i] / itemPrices[i]) > minDBProfitPercent;
+
+        if (meetsProfitCriteria && meetsPercentCriteria) {
+            filteredItems.push(itemNames[i]);
+        }
+    }
+
+    return filteredItems;
+}
+
+function BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuy, minDBProfitPercent) {
+    var bestItemName = null;
+    var maxProfit = -1;
+    var length = itemProfits.length;
+
+    for (var i = 0; i < length; i++) {
+        var profit = itemProfits[i];
+
+        var meetsProfitCriteria = profit >= minDBProfitToBuy;
+        var meetsPercentCriteria = (profit / itemPrices[i]) >= minDBProfitPercent;
+
+        if (meetsProfitCriteria && meetsPercentCriteria && profit > maxProfit) {
+            maxProfit = profit;
+            bestItemName = itemNames[i];
+        }
+    }
+
+    return bestItemName;
+}
+
+function PickSecondBestItem(filteredItems){
+    var selectedName = filteredItems.length > 0 ? filteredItems[0] : null;
+
+    // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
+    if(selectedName && isBuyingSecondMostProfitable){
+        if(filteredItems.length > 1){
+            selectedName = filteredItems[1];
+            //console.log("Going for the second best item");
+        } else if (filteredItems.length == 1){
+            selectedName = filteredItems[0];
+        }
+    }
+
+    return selectedName;
+}
+
+var isBannerDisplaying = false;
+var bannerElementID = "qpkzsoynerzxsqw";
+
+function DisplayAutoBuyerBanner() {
+    chrome.storage.local.get({ SHOULD_SHOW_BANNER: false }, function (result) {
+        var isShowingBanner = result.SHOULD_SHOW_BANNER;
+        
+        if (isShowingBanner && !isBannerDisplaying) {
+            isBannerDisplaying = true;
+
+            // Creating the banner element;
+            const bannerElement = document.createElement("div");
+            bannerElement.innerText = "Autobuyer Running";
+            bannerElement.id = bannerElementID;
+
+            document.body.appendChild(bannerElement);
+            UpdateElementStyle(true);
+        }
+    });
+}
+
+function UpdateElementStyle(isAlmostAbandonedAttic) {
+    const topPosition = isAlmostAbandonedAttic ? "0" : "68px";
+    
+    const style = `
+        color: white;
+        width: 100%;
+        position: fixed;
+        height: 35px;
+        top: ${topPosition};
+        left: 0;
+        z-index: 11;
+        pointer-events: none;
+        text-align: center;
+        line-height: 35px;
+        font-size: 15px;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        background-color: rgba(0, 0, 0, .8);
+        font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    `;
+
+    AddCSSStyle("#" + bannerElementID + " {" + style + "}");
+}
+
+
+function AddCSSStyle(bannerID) {
+    const t = document.createElement("style");
+    t.textContent = bannerID, document.head.append(t)
+}
+
+function UpdateBannerStatus(runningStatus) {
+    const bannerElement = document.getElementById(bannerElementID);
+    
+    if (bannerElement) {
+        // Update the banner text with the running status
+        bannerElement.innerText = "Autobuyer Running: " + runningStatus;
+    }
+}
+
+
+function SaveToPurchaseHistory(itemName, shopName, price, status) {
+    chrome.storage.local.get({ ITEM_HISTORY: [] }, function (result) {
+        var itemHistory = result.ITEM_HISTORY;
+        
+        // Determine the current user's account
+        var accountName = "";
+
+        if(shopName === atticString){
+            accountName = document.querySelector(".user a:nth-of-type(1)").innerText
+        } else {
+            accountName = document.getElementsByClassName("nav-profile-dropdown-text")[0].innerText.split("Welcome, ")[1];
+        }
+
+        var newItem = {
+            "Item Name": itemName,
+            "Shop Name": shopName,
+            "Price": price,
+            "Status": status,
+            "Date & Time": new Date().toLocaleString(),
+            "Account": accountName
+        };
+        
+        //Saving the new history;
+        itemHistory.push(newItem);
+
+        chrome.storage.local.set({ ITEM_HISTORY: itemHistory }, function () {});
+    });
+}
+
+function FormatMillisecondsToSeconds(milliseconds) {
+    return (milliseconds / 1e3).toFixed(2) + " secs"
+}
+
+
+//######################################################################################################################################
 //// Auto Pricer Variable Calling
 
 function setSUBMIT_PRICES_PROCESS(value) {
@@ -329,6 +507,8 @@ function HandleServerErrors() {
         MIN_PAGE_LOAD_FAILURES: 10000,
         MAX_PAGE_LOAD_FAILURES: 20000
     }, (function(autobuyerVariables) {
+        var errorRefreshed = false;
+
         // Destructing the variables extracted from the extension;
         const {
             MIN_PAGE_LOAD_FAILURES: minPageReloadTime,
@@ -349,7 +529,8 @@ function HandleServerErrors() {
 
             // Captcha;
             if (indexOfMessage === 2) {
-                UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.");
+                UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.", true);
+                return;
             } else { // Refresh on page errors;
                 function executeOnceAndPreventReexecution() {
                     if (!errorRefreshed) {
@@ -359,18 +540,16 @@ function HandleServerErrors() {
                     }
                 }
 
-                setTimeout(executeOnceAndPreventReexecution, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+                setTimeout(executeOnceAndPreventReexecution, GetRandomFloat(minPageReloadTime, maxPageReloadTime));
             }
         }
         
         // Browser errors;
         else if(window.location.title == "www.neopets.com"){
-            setTimeout(() => { location.reload(); }, Math.random() * (maxPageReloadTime - minPageReloadTime) + minPageReloadTime);
+            setTimeout(() => { location.reload(); }, GetRandomFloat(minPageReloadTime, maxPageReloadTime));
         }
     }));
 }
-
-HandleServerErrors();
 
 // Waits for an element to appear on the page. Can search JQuery and IDs;
 function WaitForElement(selector, index = 0) {
@@ -605,6 +784,8 @@ function TestPattern(pattern, element){
 function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1) + min); }
 
 function GetRandomFloat(min, max) { return Math.random() * (max - min + 1) + min; }
+
+function GetRandomFloatExclusive(min, max) { return Math.random() * (max - min) + min; }
 
 function PageIncludes(input){
     return document.body.textContent.includes(input);
