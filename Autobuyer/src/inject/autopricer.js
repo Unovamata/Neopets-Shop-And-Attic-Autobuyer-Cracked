@@ -206,14 +206,14 @@ async function RunAutoPricer(){
         // A list separated from the shop list so the system knows what to price;
         var autoPricingList = [];   
 
-        getSTART_AUTOPRICING_PROCESS(
-            function() {
+        getSTART_AUTOPRICING_PROCESS(async function (isActive) {
+            if(isActive){
                 /* If the user is inside the SW and the AutoPricing process is active, the extension will begin
                 * pricing the "AutoPricerInventory" list, saving its values and updating them with the lowest
                 * prices available;
                 */
-                StartSWPricing();      
-            }, async function() {
+                StartSWPricing();
+            } else {
                 /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
                 * This function either loads or submits prices depending on the current state of the AutoPricer;
                 */
@@ -222,9 +222,8 @@ async function RunAutoPricer(){
                 } else {
                     StartInventoryScrapingOrSubmitting();
                 }
-                
             }
-        );
+        });
 
         var wizardURL = "https://www.neopets.com/shops/wizard.phtml";
 
