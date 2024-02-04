@@ -172,19 +172,6 @@ function topLevelTurbo() {
             STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
             RUN_BETWEEN_HOURS: [0, 23],
             RESTOCK_LIST: defaultDesiredItems,
-            ATTIC_ENABLED: !0,
-            ATTIC_HIGHLIGHT: !0,
-            ATTIC_CLICK_ITEM: !0,
-            ATTIC_ITEM_DB_MIN_PROFIT_NPS: 1e4,
-            ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: .5,
-            ATTIC_MIN_BUY_TIME: 500,
-            ATTIC_MAX_BUY_TIME: 750,
-            ATTIC_RUN_BETWEEN_HOURS: [0, 23],
-            ATTIC_MIN_REFRESH: 2500,
-            ATTIC_MAX_REFRESH: 3500,
-            ATTIC_SHOULD_REFRESH: !1,
-            ATTIC_LAST_REFRESH_MS: -1,
-            ATTIC_PREV_NUM_ITEMS: -1,
             SEND_TO_SDB_AFTER_PURCHASE: !1,
             PAUSE_AFTER_BUY_MS: 0,
             MIN_PAGE_LOAD_FAILURES: 10000,
@@ -228,19 +215,6 @@ function topLevelTurbo() {
                 MIN_OCR_PAGE: minOCRDetectionInterval,
                 MAX_OCR_PAGE: maxOCRDetectionInterval,
                 RESTOCK_LIST: restockList,
-                ATTIC_ENABLED: isAtticEnabled,
-                ATTIC_HIGHLIGHT: isHighlightingItemsInAttic,
-                ATTIC_CLICK_ITEM: isClickingItemsInAttic,
-                ATTIC_ITEM_DB_MIN_PROFIT_NPS: minDBProfitToBuyInAttic,
-                ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: minDBProfitPercentToBuyInAttic,
-                ATTIC_MIN_BUY_TIME: minAtticBuyTime,
-                ATTIC_MAX_BUY_TIME: maxAtticBuyTime,
-                ATTIC_RUN_BETWEEN_HOURS: atticRunBetweenHours,
-                ATTIC_MIN_REFRESH: minRefreshIntervalAttic,
-                ATTIC_MAX_REFRESH: maxRefreshIntervalAttic,
-                ATTIC_SHOULD_REFRESH: isAtticAutoRefreshing,
-                ATTIC_LAST_REFRESH_MS: atticLastRefresh,
-                ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems,
             } = autobuyerVariables;
             
             var shopIntervals, 
@@ -327,10 +301,6 @@ function topLevelTurbo() {
                                         
                                         // Creating the haggle;
                                         haggleInput.value = "0" + GenerateHagglePrice(thresholdPrice);
-                                }
-
-                                function Clamp(value, min, max) {
-                                    return Math.min(Math.max(value, min), max);
                                 }
                                 
                                 // Generates the haggle amount based on a numpad position heat-map;
@@ -741,123 +711,6 @@ function topLevelTurbo() {
 
 
                 // Almost Abandoned Attic;
-                } else if(IsInAlmostAbandonedAttic()){
-                    if(!isAtticEnabled) return;
-
-                    DisplayAutoBuyerBanner();
-
-                    function IsItemInInventory() {
-                        const message = "I have placed it in your inventory";
-                        return document.body.innerText.includes(message);
-                    }
-
-                    // Recently bought item;
-                    if (IsItemInInventory()) {
-                        var boughtItemElement = document.getElementsByTagName("strong")[0].innerText;
-                        
-                        UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
-                        SaveToPurchaseHistory(boughtItemElement, atticString, "-", "Bought");
-
-                        setTimeout(function() {
-                            AutoRefreshAttic();
-                        }, 120000);
-
-                        HighlightItemsInAttic();
-                    } 
-                    
-                    // Purchase cooldown;
-                    else if (document.body.innerText.includes("Didn't you just buy something?")) {
-                        UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes");
-                        
-                        setTimeout(function() {
-                            window.location.href = "https://www.neopets.com/halloween/garage.phtml";
-                        }, 120000);
-                    }
-
-                    // Pausing if the user is AAA banned;
-                    else if (document.body.innerText.includes("Sorry, please try again later.")){
-                        UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer in Attic");
-                    } 
-                    
-                    // 5 item limit per day;
-                    else if (document.body.innerText.includes("cannot buy any more items from this shop today")) {
-                        UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer in Attic");
-                    }
-                    
-                    // Buying items from the attick;
-                    else {
-                        AtticRestockUpdateChecker();
-
-                        function AtticRestockUpdateChecker(){
-                            if (atticPreviousNumberOfItems < 0) return;
-                            if (atticLastRefresh < 0) return;
-                            var ItemsStocked = GetStockedItemNumber();
-                            var lastRestock = Date.now();
-                        
-                            if (ItemsStocked > atticPreviousNumberOfItems) {
-                                chrome.storage.local.set({
-                                    ATTIC_PREV_NUM_ITEMS: ItemsStocked,
-                                    ATTIC_LAST_REFRESH_MS: lastRestock
-                                }, function() {
-                                    UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
-                                });
-                            }
-                        }
-                        
-                        // Sold out;
-                        if (document.body.innerText.includes("Sorry, we just sold out of that.")) {
-                            UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
-                        }
-                        
-                        // Selecting the best item to buy;
-                        var bestItemName = HighlightItemsInAttic();
-
-                        if (bestItemName) {
-                            if (isClickingItemsInAttic) {
-                                var randomBuyTime = GetRandomFloat(minAtticBuyTime, maxAtticBuyTime);
-
-                                UpdateBannerAndDocument(
-                                    "Attempting " + bestItemName + " in Attic",
-                                    "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
-                                );
-                                
-                                // Getting item data for submission;
-                                var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
-                                var itemID = selectedLi.getAttribute("oii");
-                                var itemPrice = selectedLi.getAttribute("oprice").replaceAll(",","");
-
-                                SaveToPurchaseHistory(bestItemName, atticString, itemPrice, "Attempted");
-
-                                setTimeout(function() {
-                                    document.getElementById("oii").value = itemID;
-                                    document.getElementById("frm-abandoned-attic").submit();
-                                }, randomBuyTime);
-                            }
-                        }
-                        
-                        // Wait for the scheduled time or run the AutoBuyer
-                        if(isAtticAutoRefreshing){
-                            if(IsTimeToAutoRefreshAttic() && isRunningOnScheduledTime){
-                                UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
-                                isRunningOnScheduledTime = true;
-
-                                RunAutoBuyer();
-                            } else {
-                                AutoRefreshAttic();
-                            }
-                        }
-
-                        // Additional function to check if it's time to auto-refresh the Attic
-                        function IsTimeToAutoRefreshAttic() {
-                            var now = new Date();
-                            var currentHour = now.getHours();
-                            return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
-                        }
-
-                        // Update the stored number of items
-                        var numItems = GetStockedItemNumber();
-                        chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
-                    }
                 }
             }
 
@@ -865,108 +718,11 @@ function topLevelTurbo() {
                 UpdateBannerStatus(title), UpdateDocument(title, message, true);
             }
 
-            function AutoRefreshAttic() {
-                if(!isAtticAutoRefreshing){
-                    UpdateBannerStatus("Attic auto refresh is disabled. Waiting for manual refresh.");
-                    return;
-                }
-
-                // Calculate the time to wait before the next refresh
-                const waitTime = CreateWaitTime();
-
-                function CreateWaitTime() {
-                    if (atticLastRefresh < 0) {
-                        return GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
-                    }
-                
-                    const now = Date.now();
-                    const baseInterval = 7 * 60 * 1000; // 7 minutes in ms;
-                    const minTimeFrame = 10 * 1000; // 10 seconds in ms;
-                    const maxTimeFrame = 30 * 1000; // 30 seconds in ms;
-                
-                    // Calculate the start of the current 7-minute interval;
-                    const intervalStart = Math.floor((now - atticLastRefresh) / baseInterval) * baseInterval + atticLastRefresh;
-                
-                    // Calculate the expected refresh time within the time frame
-                    const expectedRefreshTime = intervalStart + baseInterval + minTimeFrame + Math.random() * (maxTimeFrame - minTimeFrame);
-                
-                    if (now <= expectedRefreshTime) {
-                        return expectedRefreshTime - now;
-                    } else {
-                        // The current interval has passed; schedule the next one
-                        return baseInterval - (now - intervalStart) + expectedRefreshTime - now;
-                    }
-                }
-        
-                // Create a message with the wait time and last restock time
-                let message = "Waiting " + FormatMillisecondsToSeconds(waitTime) + " to reload...";
-        
-                if (atticLastRefresh > 0) {
-                    message += " Last restock: " + moment(atticLastRefresh)
-                        .tz("America/Los_Angeles")
-                        .format("h:mm:ss A") + " NST...";
-                }
-        
-                // Update the banner status and initiate the page reload after the wait time
-                UpdateBannerStatus(message);
-
-                setTimeout(() => {
-                    window.location.href = "https://www.neopets.com/halloween/garage.phtml";
-                }, waitTime);
-            }
-
             function SendBeepMessage() {
                 /*chrome.runtime.sendMessage({
                     neobuyer: "NeoBuyer",
                     type: "Beep"
                 })*/
-            }
-
-            function GetStockedItemNumber() {
-                return Array.from(document.querySelectorAll("#items li"))
-                    .map((e => e.getAttribute("oname")))
-                    .length
-            }
-
-            function HighlightItemsInAttic() {
-                if (isHighlightingItemsInAttic) {
-                    var items = Array.from(document.querySelectorAll("#items li"));
-                    var itemData = items.map((item) => {
-                        var itemName = item.getAttribute("oname");
-                        var itemPrice = item.getAttribute("oprice").replaceAll(",", "");
-                        return {
-                            name: itemName,
-                            price: itemPrice,
-                        };
-                    });
-
-                    var filteredItems = null, selectedName = null;
-
-                    if (buyWithItemDB) {
-                        var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
-                        selectedName = BestItemName(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
-                        filteredItems = FilterItemsByProfitCriteria(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
-
-                        if (selectedName) {
-                            filteredItems.forEach((item) => HighlightItemWithColor(item, "lightgreen"));
-                            HighlightItemWithColor(selectedName, "orangered");
-                        }
-                    } else {
-                        // Filtering the items based on the restocking list;
-                        filteredItems = restockList.filter((itemName) => {
-                            return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName));
-                        });
-
-                        selectedName = PickSecondBestItem(filteredItems);
-
-                        if(selectedName){
-                            filteredItems.forEach((item) => HighlightItemWithColor(item, "lightgreen"));
-                            HighlightItemWithColor(selectedName, "orangered");
-                        }
-                    }
-
-                    return selectedName;
-                }
             }
 
             function PickSecondBestItem(filteredItems){
@@ -985,11 +741,6 @@ function topLevelTurbo() {
                 return selectedName;
             }
 
-            function HighlightItemWithColor(itemName, color) {
-                const itemElement = document.querySelector(`#items li[oname="${itemName}"]`);
-                itemElement.style.backgroundColor = color;
-            }
-
             function ProcessPurchase() {
                 var itemName = document.querySelector("h2").innerText.replaceAll("Haggle for ", "");
 
@@ -1003,6 +754,10 @@ function topLevelTurbo() {
                 SaveToPurchaseHistory(itemName, shopName, purchaseAmount, "Bought");
 
                 ReloadPageBasedOnConditions();
+            }
+            
+            function FormatMillisecondsToSeconds(milliseconds) {
+                return (milliseconds / 1e3).toFixed(2) + " secs"
             }
 
             function ReloadPageBasedOnConditions() {
@@ -1253,10 +1008,6 @@ function topLevelTurbo() {
             function AddCSSStyle(e) {
                 const t = document.createElement("style");
                 t.textContent = e, document.head.append(t)
-            }
-
-            function FormatMillisecondsToSeconds(milliseconds) {
-                return (milliseconds / 1e3).toFixed(2) + " secs"
             }
         }));
     }

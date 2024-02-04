@@ -13,32 +13,6 @@ class Item {
 //######################################################################################################################################
 //// AutoBuyer & AutoAttic Variable Calling;
 
-// Updates the page's title;
-function UpdateDocument(title, message, shouldSendMessage) {
-    // Update the document title to uppercase
-    chrome.storage.local.get({
-        SHOULD_CHANGE_DOCUMENT_DATA: false,
-    }, (function(autobuyerVariables) {
-        // Update the document title to uppercase
-        if(autobuyerVariables.SHOULD_CHANGE_DOCUMENT_DATA) document.title = title.toUpperCase();
-
-        if(shouldSendMessage){
-            message = `${message} - ${new Date().toLocaleString()}`;
-    
-            // Send a message to the Chrome runtime
-            chrome.runtime.sendMessage({
-                neobuyer: "NeoBuyer",
-                type: "Notification",
-                notificationObject: {
-                type: "basic",
-                title: title,
-                message: message,
-                iconUrl: "../../icons/icon48.png",
-                },
-            });
-        }
-    }));
-}
 
 function FilterItemsByProfitCriteria(itemNames, itemPrices, itemProfits, minDBProfit, minDBProfitPercent) {
     var filteredItems = [];
@@ -144,6 +118,11 @@ function AddCSSStyle(bannerID) {
     t.textContent = bannerID, document.head.append(t)
 }
 
+function UpdateBannerAndDocument(title, message) {
+    UpdateBannerStatus(title), UpdateDocument(title, message, true);
+}
+
+
 function UpdateBannerStatus(runningStatus) {
     const bannerElement = document.getElementById(bannerElementID);
     
@@ -151,6 +130,33 @@ function UpdateBannerStatus(runningStatus) {
         // Update the banner text with the running status
         bannerElement.innerText = "Autobuyer Running: " + runningStatus;
     }
+}
+
+// Updates the page's title;
+function UpdateDocument(title, message, shouldSendMessage) {
+    // Update the document title to uppercase
+    chrome.storage.local.get({
+        SHOULD_CHANGE_DOCUMENT_DATA: false,
+    }, (function(autobuyerVariables) {
+        // Update the document title to uppercase
+        if(autobuyerVariables.SHOULD_CHANGE_DOCUMENT_DATA) document.title = title.toUpperCase();
+
+        if(shouldSendMessage){
+            message = `${message} - ${new Date().toLocaleString()}`;
+    
+            // Send a message to the Chrome runtime
+            chrome.runtime.sendMessage({
+                neobuyer: "NeoBuyer",
+                type: "Notification",
+                notificationObject: {
+                type: "basic",
+                title: title,
+                message: message,
+                iconUrl: "../../icons/icon48.png",
+                },
+            });
+        }
+    }));
 }
 
 
