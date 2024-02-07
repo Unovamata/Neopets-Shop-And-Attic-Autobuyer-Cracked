@@ -11,22 +11,49 @@ class Item {
 }
 
 //######################################################################################################################################
-//// AutoBuyer & AutoAttic Variable Calling;
+//// AutoBuyers' Common Functions;
 
+function CalculateItemProfits(itemIDs, itemPrices, buyUnknownItemsIfProfitMargin,  minDBRarityToBuy, isBlacklistActive, blacklistToNeverBuy) {
+    const itemProfits = [];
 
-function FilterItemsByProfitCriteria(itemNames, itemPrices, itemProfits, minDBProfit, minDBProfitPercent) {
-    var filteredItems = [];
-    
-    for (var i = 0; i < itemProfits.length; i++) {
-        var meetsProfitCriteria = itemProfits[i] > minDBProfit;
-        var meetsPercentCriteria = (itemProfits[i] / itemPrices[i]) > minDBProfitPercent;
-
-        if (meetsProfitCriteria && meetsPercentCriteria) {
-            filteredItems.push(itemNames[i]);
+    for (const itemID of itemIDs) {
+        if (!IsItemInRarityThresholdToBuy(itemID) || IsItemInBlacklist(itemID, isBlacklistActive, blacklistToNeverBuy)) {
+            itemProfits.push(-99999999);
+        } else {
+            const itemData = item_db[itemID];
+            
+            try{
+                if (itemData["Rarity"] == undefined || itemData["Price"] == undefined) {
+                    //console.warn("Item not found in the database or price not available.");
+                    itemProfits.push(buyUnknownItemsIfProfitMargin);
+                } else {
+                    const itemPrice = itemData.Price;
+                    const userPrice = parseInt(itemPrices[itemIDs.indexOf(itemID)]);
+                    const profit = itemPrice - userPrice;
+                    itemProfits.push(profit);
+                }
+            } catch {
+                itemProfits.push(buyUnknownItemsIfProfitMargin);
+            }  
         }
     }
 
-    return filteredItems;
+    function IsItemInRarityThresholdToBuy(itemDB) {
+        const item = item_db[itemDB];
+
+        if (!item) {
+            return true;
+        }
+        
+        const itemRarity = parseInt(item.Rarity);
+        return !itemRarity || itemRarity >= minDBRarityToBuy;
+    }
+
+    return itemProfits;
+}
+
+function IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy) {
+    return isBlacklistActive && blacklistToNeverBuy.includes(itemName);
 }
 
 function BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuy, minDBProfitPercent) {
@@ -49,6 +76,23 @@ function BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuy, minD
     return bestItemName;
 }
 
+
+function FilterItemsByProfitCriteria(itemNames, itemPrices, itemProfits, minDBProfit, minDBProfitPercent) {
+    var filteredItems = [];
+    
+    for (var i = 0; i < itemProfits.length; i++) {
+        var meetsProfitCriteria = itemProfits[i] > minDBProfit;
+        var meetsPercentCriteria = (itemProfits[i] / itemPrices[i]) > minDBProfitPercent;
+
+        if (meetsProfitCriteria && meetsPercentCriteria) {
+            filteredItems.push(itemNames[i]);
+        }
+    }
+
+    return filteredItems;
+}
+
+
 function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
     var selectedName = filteredItems.length > 0 ? filteredItems[0] : null;
 
@@ -65,24 +109,25 @@ function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
     return selectedName;
 }
 
-var isBannerDisplaying = false;
+
+//// AutoBuyers' Visual Functions;
+
+
 var bannerElementID = "qpkzsoynerzxsqw";
 
-function DisplayAutoBuyerBanner() {
+function DisplayAutoBuyerBanner(isAlmostAbandonedAttic = false) {
     chrome.storage.local.get({ SHOULD_SHOW_BANNER: false }, function (result) {
-        var isShowingBanner = result.SHOULD_SHOW_BANNER;
+        var isBannerVisible = result.SHOULD_SHOW_BANNER;
         
-        if (isShowingBanner && !isBannerDisplaying) {
-            isBannerDisplaying = true;
+        if(!isBannerVisible) return
 
-            // Creating the banner element;
-            const bannerElement = document.createElement("div");
-            bannerElement.innerText = "Autobuyer Running";
-            bannerElement.id = bannerElementID;
+        // Creating the banner element;
+        const bannerElement = document.createElement("div");
+        bannerElement.innerText = "Autobuyer Running";
+        bannerElement.id = bannerElementID;
 
-            document.body.appendChild(bannerElement);
-            UpdateElementStyle(true);
-        }
+        document.body.appendChild(bannerElement);
+        UpdateElementStyle(isAlmostAbandonedAttic);
     });
 }
 
@@ -127,8 +172,8 @@ function UpdateBannerAndDocument(title, message) {
 }
 
 function UpdateBannerStatus(runningStatus) {
-    const bannerElement = document.getElementById(bannerElementID);
-    
+    var bannerElement = document.getElementById(bannerElementID);
+
     if (bannerElement) {
         // Update the banner text with the running status
         bannerElement.innerText = "Autobuyer Running: " + runningStatus;
@@ -161,6 +206,10 @@ function UpdateDocument(title, message, shouldSendMessage) {
         }
     }));
 }
+
+
+//// AutoBuyers' Data Controlling Functions;
+
 
 
 function SaveToPurchaseHistory(itemName, shopName, price, status) {

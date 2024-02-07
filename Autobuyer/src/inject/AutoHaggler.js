@@ -1,8 +1,8 @@
 HandleServerErrors();
 
-InjectAutoHaggler();
-
 DisplayAutoBuyerBanner();
+
+InjectAutoHaggler();
 
 function InjectAutoHaggler() {
 

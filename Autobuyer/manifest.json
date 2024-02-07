@@ -45,16 +45,13 @@
     },
     {
         "matches": [
-            "*://www.neopets.com/halloween/garage.phtml*",
             "*://www.neopets.com/objects.phtml*"
         ],
         "js": [
-			"js/moment.js",
-			"js/moment-timezone-with-data.js",
             "src/common/default_items.js",
             "src/common/item_db.js",
 			"src/common/utils.js",
-			"src/inject/neopets-restock-timer.user.js"
+			"src/inject/AutoBuyer.js"
         ]
     },
 	{
@@ -63,6 +60,7 @@
         ],
         "js": [
 			"src/common/utils.js",
+			"src/inject/neopets-restock-timer.user.js",
             "src/inject/AutoHaggler.js"
         ]
     },

@@ -230,7 +230,7 @@ function InjectAutoAttic() {
                 var filteredItems = null, selectedName = null;
 
                 if (buyWithItemDB) {
-                    var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price));
+                    var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price), buyUnknownItemsIfProfitMargin, minDBRarityToBuy, isBlacklistActive, blacklistToNeverBuy);
                     selectedName = BestItemName(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
                     filteredItems = FilterItemsByProfitCriteria(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
 
@@ -241,10 +241,8 @@ function InjectAutoAttic() {
                 } else {
                     // Filtering the items based on the restocking list;
                     filteredItems = restockList.filter((itemName) => {
-                        return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName));
+                        return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy));
                     });
-
-                    console.log(filteredItems);
 
                     selectedName = PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable);
 
@@ -256,49 +254,6 @@ function InjectAutoAttic() {
 
                 return selectedName;
             }
-        }
-
-        function CalculateItemProfits(itemIDs, itemPrices) { /// *
-            const itemProfits = [];
-        
-            for (const itemID of itemIDs) {
-                if (!IsItemInRarityThresholdToBuy(itemID) || IsItemInBlacklist(itemID)) {
-                    itemProfits.push(-99999999);
-                } else {
-                    const itemData = item_db[itemID];
-                    
-                    try{
-                        if (itemData["Rarity"] == undefined || itemData["Price"] == undefined) {
-                            //console.warn("Item not found in the database or price not available.");
-                            itemProfits.push(buyUnknownItemsIfProfitMargin);
-                        } else {
-                            const itemPrice = itemData.Price;
-                            const userPrice = parseInt(itemPrices[itemIDs.indexOf(itemID)]);
-                            const profit = itemPrice - userPrice;
-                            itemProfits.push(profit);
-                        }
-                    } catch {
-                        itemProfits.push(buyUnknownItemsIfProfitMargin);
-                    }  
-                }
-            }
-        
-            return itemProfits;
-        }
-
-        function IsItemInBlacklist(itemName) {
-            return isBlacklistActive && blacklistToNeverBuy.includes(itemName);
-        }
-
-        function IsItemInRarityThresholdToBuy(e) {
-            const item = item_db[e];
-
-            if (!item) {
-                return true;
-            }
-            
-            const itemRarity = parseInt(item.Rarity);
-            return !itemRarity || itemRarity >= minDBRarityToBuy;
         }
     }));
 }

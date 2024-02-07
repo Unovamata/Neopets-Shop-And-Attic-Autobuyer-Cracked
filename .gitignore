@@ -4,4 +4,6 @@ AC.js
 //Ignoring benchmarking scripts
 benchmark.js
 
+//Ignoring deprecated scripts
 SDBPricer.js
+inject.js
