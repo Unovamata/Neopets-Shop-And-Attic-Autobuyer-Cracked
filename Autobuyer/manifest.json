@@ -46,8 +46,7 @@
     {
         "matches": [
             "*://www.neopets.com/halloween/garage.phtml*",
-            "*://www.neopets.com/objects.phtml*",
-			"*://www.neopets.com/haggle.phtml*"
+            "*://www.neopets.com/objects.phtml*"
         ],
         "js": [
 			"js/moment.js",
@@ -55,8 +54,16 @@
             "src/common/default_items.js",
             "src/common/item_db.js",
 			"src/common/utils.js",
-            "src/inject/inject.js",
 			"src/inject/neopets-restock-timer.user.js"
+        ]
+    },
+	{
+        "matches": [
+            "*://www.neopets.com/haggle.phtml*"
+        ],
+        "js": [
+			"src/common/utils.js",
+            "src/inject/AutoHaggler.js"
         ]
     },
 	{

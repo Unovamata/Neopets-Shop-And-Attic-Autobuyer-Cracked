@@ -49,7 +49,7 @@ function BestItemName(itemNames, itemPrices, itemProfits, minDBProfitToBuy, minD
     return bestItemName;
 }
 
-function PickSecondBestItem(filteredItems){
+function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
     var selectedName = filteredItems.length > 0 ? filteredItems[0] : null;
 
     // If there's an item to buy and isBuyingSecondMostProfitable is true, check for the second best option
@@ -118,10 +118,13 @@ function AddCSSStyle(bannerID) {
     t.textContent = bannerID, document.head.append(t)
 }
 
+function ClickToRefreshShop() {
+    document.querySelector("div.shop-bg").click()
+}
+
 function UpdateBannerAndDocument(title, message) {
     UpdateBannerStatus(title), UpdateDocument(title, message, true);
 }
-
 
 function UpdateBannerStatus(runningStatus) {
     const bannerElement = document.getElementById(bannerElementID);
@@ -167,7 +170,7 @@ function SaveToPurchaseHistory(itemName, shopName, price, status) {
         // Determine the current user's account
         var accountName = "";
 
-        if(shopName === atticString){
+        if(shopName === "Attic"){
             accountName = document.querySelector(".user a:nth-of-type(1)").innerText
         } else {
             accountName = document.getElementsByClassName("nav-profile-dropdown-text")[0].innerText.split("Welcome, ")[1];
@@ -794,7 +797,7 @@ function GetRandomFloat(min, max) { return Math.random() * (max - min + 1) + min
 function GetRandomFloatExclusive(min, max) { return Math.random() * (max - min) + min; }
 
 function PageIncludes(input){
-    return document.body.textContent.includes(input);
+    return document.body.innerText.includes(input);
 }
 
 // Waits 'X' amount of milliseconds. 'await Sleep(min, max)';

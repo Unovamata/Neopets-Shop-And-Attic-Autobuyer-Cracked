@@ -1,12 +1,13 @@
 HandleServerErrors();
 
-InjectAutoPricer();
+InjectAutoAttic();
 
+DisplayAutoBuyerBanner();
 
 //######################################################################################################################################
 
 
-function InjectAutoPricer() {
+function InjectAutoAttic() {
     chrome.storage.local.get({
         BUY_UNKNOWN_ITEMS_PROFIT: 1e5,
         ITEM_DB_MIN_RARITY: 1,
@@ -15,6 +16,7 @@ function InjectAutoPricer() {
         ENABLED: !0,
         USE_ITEM_DB: !0,
         RESTOCK_LIST: defaultDesiredItems,
+        SHOULD_GO_FOR_SECOND_MOST_VALUABLE: !1,
         ATTIC_ENABLED: !0,
         ATTIC_HIGHLIGHT: !0,
         ATTIC_CLICK_ITEM: !0,
@@ -38,6 +40,7 @@ function InjectAutoPricer() {
             BLACKLIST: blacklistToNeverBuy,
             USE_ITEM_DB: buyWithItemDB,
             RESTOCK_LIST: restockList,
+            SHOULD_GO_FOR_SECOND_MOST_VALUABLE: isBuyingSecondMostProfitable,
             ATTIC_ENABLED: isAtticEnabled,
             ATTIC_HIGHLIGHT: isHighlightingItemsInAttic,
             ATTIC_CLICK_ITEM: isClickingItemsInAttic,
@@ -56,114 +59,110 @@ function InjectAutoPricer() {
         var isRunningOnScheduledTime = false;
 
         // Run the AutoBuyer
-        if(!isAtticEnabled) RunAutoAttic();
+        if(!isAtticEnabled) return;
 
-        function RunAutoAttic() {
-            DisplayAutoBuyerBanner();
+        // Recently bought item;
+        if (PageIncludes("I have placed it in your inventory")) {
+            var boughtItemElement = document.getElementsByTagName("strong")[0].innerText;
+            
+            UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
+            SaveToPurchaseHistory(boughtItemElement, "Attic", "-", "Bought");
 
-            // Recently bought item;
-            if (PageIncludes("I have placed it in your inventory")) {
-                var boughtItemElement = document.getElementsByTagName("strong")[0].innerText;
-                
-                UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
-                SaveToPurchaseHistory(boughtItemElement, "Attic", "-", "Bought");
+            setTimeout(function() {
+                AutoRefreshAttic();
+            }, 120000);
 
-                setTimeout(function() {
+            HighlightItemsInAttic();
+        } 
+        
+        // Purchase cooldown;
+        else if (PageIncludes("Didn't you just buy something?")) {
+            UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes");
+            
+            setTimeout(function() {
+                window.location.href = "https://www.neopets.com/halloween/garage.phtml";
+            }, 120000);
+        }
+
+        // Pausing if the user is AAA banned;
+        else if (PageIncludes("Sorry, please try again later.")){
+            UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer+ in Attic");
+        } 
+        
+        // 5 item limit per day;
+        else if (PageIncludes("cannot buy any more items from this shop today")) {
+            UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer+ in Attic");
+        }
+        
+        // Buying items from the attick;
+        else {
+            if (atticPreviousNumberOfItems < 0) return;
+            if (atticLastRefresh < 0) return;
+            var ItemsStocked = GetAtticStockedItemNumber();
+            var lastRestock = Date.now();
+
+            if (ItemsStocked > atticPreviousNumberOfItems) {
+                chrome.storage.local.set({
+                    ATTIC_PREV_NUM_ITEMS: ItemsStocked,
+                    ATTIC_LAST_REFRESH_MS: lastRestock
+                }, function() {
+                    UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
+                });
+            }
+            
+            // Sold out;
+            if (PageIncludes("Sorry, we just sold out of that.")) {
+                UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
+            }
+            
+            // Selecting the best item to buy;
+            var bestItemName = HighlightItemsInAttic();
+
+            if (bestItemName) {
+                if (isClickingItemsInAttic) {
+                    var randomBuyTime = GetRandomFloat(minAtticBuyTime, maxAtticBuyTime);
+
+                    UpdateBannerAndDocument(
+                        "Attempting " + bestItemName + " in Attic",
+                        "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
+                    );
+                    
+                    // Getting item data for submission;
+                    var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
+                    var itemID = selectedLi.getAttribute("oii");
+                    var itemPrice = selectedLi.getAttribute("oprice").replaceAll(",","");
+
+                    SaveToPurchaseHistory(bestItemName, "Attic", itemPrice, "Attempted");
+
+                    setTimeout(function() {
+                        document.getElementById("oii").value = itemID;
+                        document.getElementById("frm-abandoned-attic").submit();
+                    }, randomBuyTime);
+                }
+            }
+            
+            // Wait for the scheduled time or run the AutoBuyer
+            if(isAtticAutoRefreshing){
+                if(IsTimeToAutoRefreshAttic() && isRunningOnScheduledTime){
+                    UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
+                    isRunningOnScheduledTime = true;
+
+                    RunAutoAttic();
+                } else {
                     AutoRefreshAttic();
-                }, 120000);
-
-                HighlightItemsInAttic();
-            } 
-            
-            // Purchase cooldown;
-            else if (PageIncludes("Didn't you just buy something?")) {
-                UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes");
-                
-                setTimeout(function() {
-                    window.location.href = "https://www.neopets.com/halloween/garage.phtml";
-                }, 120000);
+                }
             }
 
-            // Pausing if the user is AAA banned;
-            else if (PageIncludes("Sorry, please try again later.")){
-                UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer+ in Attic");
-            } 
-            
-            // 5 item limit per day;
-            else if (PageIncludes("cannot buy any more items from this shop today")) {
-                UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer+ in Attic");
+            // Additional function to check if it's time to auto-refresh the Attic
+            function IsTimeToAutoRefreshAttic() {
+                var now = new Date();
+                var currentHour = now.getHours();
+                return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
             }
-            
-            // Buying items from the attick;
-            else {
-                if (atticPreviousNumberOfItems < 0) return;
-                if (atticLastRefresh < 0) return;
-                var ItemsStocked = GetAtticStockedItemNumber();
-                var lastRestock = Date.now();
 
-                if (ItemsStocked > atticPreviousNumberOfItems) {
-                    chrome.storage.local.set({
-                        ATTIC_PREV_NUM_ITEMS: ItemsStocked,
-                        ATTIC_LAST_REFRESH_MS: lastRestock
-                    }, function() {
-                        UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
-                    });
-                }
-                
-                // Sold out;
-                if (PageIncludes("Sorry, we just sold out of that.")) {
-                    UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
-                }
-                
-                // Selecting the best item to buy;
-                var bestItemName = HighlightItemsInAttic();
-
-                if (bestItemName) {
-                    if (isClickingItemsInAttic) {
-                        var randomBuyTime = GetRandomFloat(minAtticBuyTime, maxAtticBuyTime);
-
-                        UpdateBannerAndDocument(
-                            "Attempting " + bestItemName + " in Attic",
-                            "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
-                        );
-                        
-                        // Getting item data for submission;
-                        var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
-                        var itemID = selectedLi.getAttribute("oii");
-                        var itemPrice = selectedLi.getAttribute("oprice").replaceAll(",","");
-
-                        SaveToPurchaseHistory(bestItemName, "Attic", itemPrice, "Attempted");
-
-                        setTimeout(function() {
-                            document.getElementById("oii").value = itemID;
-                            document.getElementById("frm-abandoned-attic").submit();
-                        }, randomBuyTime);
-                    }
-                }
-                
-                // Wait for the scheduled time or run the AutoBuyer
-                if(isAtticAutoRefreshing){
-                    if(IsTimeToAutoRefreshAttic() && isRunningOnScheduledTime){
-                        UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
-                        isRunningOnScheduledTime = true;
-
-                        RunAutoAttic();
-                    } else {
-                        AutoRefreshAttic();
-                    }
-                }
-
-                // Additional function to check if it's time to auto-refresh the Attic
-                function IsTimeToAutoRefreshAttic() {
-                    var now = new Date();
-                    var currentHour = now.getHours();
-                    return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
-                }
-
-                // Update the stored number of items
-                var numItems = GetAtticStockedItemNumber();
-                chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
-            }
+            // Update the stored number of items
+            var numItems = GetAtticStockedItemNumber();
+            chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
         }
 
         function AutoRefreshAttic() {
@@ -245,7 +244,9 @@ function InjectAutoPricer() {
                         return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName));
                     });
 
-                    selectedName = PickSecondBestItem(filteredItems);
+                    console.log(filteredItems);
+
+                    selectedName = PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable);
 
                     if(selectedName){
                         filteredItems.forEach((item) => HighlightAtticItemWithColor(item, "lightgreen"));
