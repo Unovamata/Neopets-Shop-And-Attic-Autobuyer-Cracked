@@ -18,6 +18,7 @@ function InjectAutoPricer() {
         HIGHLIGHT: !0,
         CLICK_ITEM: !0,
         CLICK_CONFIRM: !0,
+        SHOULD_BYPASS_CONFIRM: false,
         SHOULD_GO_FOR_SECOND_MOST_VALUABLE: !1,
         MIN_REFRESH: 3500,
         MAX_REFRESH: 5e3,
@@ -48,6 +49,7 @@ function InjectAutoPricer() {
             HIGHLIGHT: isHighlightingItemsInShops,
             CLICK_ITEM: isClickingItems,
             CLICK_CONFIRM: isClickingConfirm,
+            SHOULD_BYPASS_CONFIRM: isBypassingConfirm,
             SHOULD_GO_FOR_SECOND_MOST_VALUABLE: isBuyingSecondMostProfitable,
             STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: storesToCycle,
             RUN_BETWEEN_HOURS: runBetweenHours,
@@ -70,6 +72,24 @@ function InjectAutoPricer() {
         
         // Check if the user is in a main shop;
         if(!isAutoBuyerEnabled) return;
+
+        // Setting the bypass for shop items;
+        if(isBypassingConfirm){
+            // Loading the shop's stock;
+            let shopStockArr = [...document.getElementsByClassName('shop-item')];
+
+            // Define the confirmPurchase function in the webpage's global context
+            window.confirmPurchase = function(item) {
+                if (item.className == 'shop-item') {
+                    window.location.href = item.firstElementChild.dataset.link; // Redirect to the link specified in the dataset
+                }
+            };
+
+            // Attach event listeners to each 'shop-item' element
+            shopStockArr.forEach(
+                shopItem => shopItem.addEventListener('click', () => confirmPurchase(shopItem))
+            );
+        }
 
         var itemElements = Array.from(document.querySelectorAll(".item-img"));
 
@@ -162,6 +182,8 @@ function InjectAutoPricer() {
             return selectedName
         }();
 
+
+        
         // This code is better to not touch it as it breaks with any change made to it;
         itemToBuyExtracted ? function(e) {
             //Clicking the selected item;
@@ -183,13 +205,15 @@ function InjectAutoPricer() {
         }), 3e4)) : ReloadPageBasedOnConditions(),
         function() {
             if (isClickingConfirm) {
-                var e = !1;
+                
+                var isClicked = !1;
+
                 clearInterval(shopIntervals), shopIntervals = setInterval((function() {
                     var t, n = document.getElementById("confirm-link");
                     ((t = n)
                         .offsetWidth || t.offsetHeight || t.getClientRects()
                         .length) && setTimeout((function() {
-                        e || (n.click(), e = !0)
+                        isClicked || (n.click(), isClicked = !0)
                     }), GetRandomFloat(minClickConfirmInterval, maxClickConfirmInterval));
                 }), confirmWindowInteral)
             }

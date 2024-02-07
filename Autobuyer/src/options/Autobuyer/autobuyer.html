@@ -426,7 +426,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Auto-Click Confirm Modal:
+                            <td>Auto-Click Confirm Window:
                                 <span class="tooltiptext">
                                     Enables NeoBuyer+ to Auto-Click the Confirm Window Buttons.
                                 </span>
@@ -435,6 +435,21 @@
                                 <label class="switch">
                                     <input id="CLICK_CONFIRM" type="checkbox">
                                     <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="confirm-hide">
+                            <td><b>Bypass</b> Confirm Window:
+                                <span class="tooltiptext">
+                                    If active, NeoBuyer+ will only buy items after a shop clear and it will not continuously refresh or navigate to other shops. This is useful if you want to only buy items in shop clears to minimize the possibility of long restock bans.
+                                    <br><br>This feature is also useful if you have multiple shop tabs open and you just want to restock when shops are empty and wait for the next shop clear.
+                                    <br><br>Activate this option while also setting "Store Numbers to Cycle Through When Stocked:" to [].
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_BYPASS_CONFIRM" type="checkbox">
+                                    <span class="slider slider-danger round"></span>
                                 </label>
                             </td>
                         </tr>

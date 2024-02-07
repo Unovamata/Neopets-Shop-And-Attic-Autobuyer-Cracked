@@ -447,6 +447,8 @@ function setMIN_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({ MIN
 
 function setMAX_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({ MAX_FIVE_SECOND_RULE_REFRESH: Number(value) }, (function () {})) }
 
+function setSHOULD_BYPASS_CONFIRM(value) { chrome.storage.local.set({ SHOULD_BYPASS_CONFIRM: value }, (function () {})) }
+
 function setSHOULD_ONLY_REFRESH_ON_CLEAR(value) { chrome.storage.local.set({ SHOULD_ONLY_REFRESH_ON_CLEAR: value }, (function () {})) }
 
 function setSHOULD_CHANGE_DOCUMENT_DATA(value) { chrome.storage.local.set({ SHOULD_CHANGE_DOCUMENT_DATA: value }, (function () {})) }
@@ -579,6 +581,11 @@ $("#MIN_FIVE_SECOND_RULE_REFRESH").bind("input propertychange", (function() {
 $("#MAX_FIVE_SECOND_RULE_REFRESH").bind("input propertychange", (function() {
     setMAX_FIVE_SECOND_RULE_REFRESH($("#MAX_FIVE_SECOND_RULE_REFRESH").val())
 }))
+
+$("#SHOULD_BYPASS_CONFIRM").on("change", function() {
+    const isChecked = $("#SHOULD_BYPASS_CONFIRM").is(":checked");
+    setSHOULD_BYPASS_CONFIRM(isChecked);
+});
 
 $("#SHOULD_ONLY_REFRESH_ON_CLEAR").on("change", function() {
     const isChecked = $("#SHOULD_ONLY_REFRESH_ON_CLEAR").is(":checked");
@@ -950,6 +957,7 @@ resetButton.onclick = function(_) {
     // AutoBuyer;
     MIN_FIVE_SECOND_RULE_REFRESH: 5000,
     MAX_FIVE_SECOND_RULE_REFRESH: 10000,
+    SHOULD_BYPASS_CONFIRM: false,
     SHOULD_ONLY_REFRESH_ON_CLEAR: false,
     SHOULD_CHANGE_DOCUMENT_DATA: false,
 
@@ -1074,6 +1082,7 @@ resetButton.onclick = function(_) {
         //AutoBuyer Settings;
         $("#MIN_FIVE_SECOND_RULE_REFRESH").val(_.MIN_FIVE_SECOND_RULE_REFRESH),
         $("#MAX_FIVE_SECOND_RULE_REFRESH").val(_.MAX_FIVE_SECOND_RULE_REFRESH),
+        $("#SHOULD_BYPASS_CONFIRM").prop("checked", _.SHOULD_BYPASS_CONFIRM),
         $("#SHOULD_ONLY_REFRESH_ON_CLEAR").prop("checked", _.SHOULD_ONLY_REFRESH_ON_CLEAR),
         $("#SHOULD_CHANGE_DOCUMENT_DATA").prop("checked", _.SHOULD_CHANGE_DOCUMENT_DATA),
         $("#MIN_PAGE_LOAD_FAILURES").val(_.MIN_PAGE_LOAD_FAILURES),
