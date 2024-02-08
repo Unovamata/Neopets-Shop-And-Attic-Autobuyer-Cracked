@@ -20,6 +20,7 @@
             <div class="category-info">AutoKQ Controllers</div>
             <button class="button" id="options"><sub></sub> AutoKQ Options <sup>beta</sup></button>
             <button class="button" id="history"><sub></sub> AutoKQ Log <sup>beta</sup></button>
+            <button class="button" id="analytics"><sub></sub> AutoKQ Analytics <sup>beta</sup></button>
             <br>
             <button id="start" class="button">Start AutoKQ</button>
             <button id="cancel" class="button">Cancel AutoKQ</button>
@@ -32,7 +33,15 @@
                     <br>
                     <button id="resetKQ" class="button reset">Clear Kitchen Quest History</button>
                 </div>
-                
+
+                <div id="analytics-container">
+                    <div class="category-info">Stat Obtained Distribution</div>
+                    <div>
+                        <canvas id="chart"></canvas>
+                    </div>
+                    <br>
+                    <button id="resetKQ" class="button reset">Clear Kitchen Quest History</button>
+                </div>
 
                 <!--Options-->
                 <div id="autokq-options-container">
@@ -222,7 +231,8 @@
                 </div>
             </center>
         </div>
-
+        <script src="../../../js/chart.umd.js"></script>
+        <script src="../../../js/chartjs-plugin-datalabels.min.js"></script>
         <script src="../../common/utils.js"></script>
         <script src="../../../js/jquery.js"></script>
         <script src="../../../js/moment.js"></script>

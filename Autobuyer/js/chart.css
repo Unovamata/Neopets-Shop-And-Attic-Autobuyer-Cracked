@@ -1,4 +1,9 @@
-.ct-double-octave:after,
+.analytics{
+    width: 15%;
+    height: 15%;
+}
+
+/*.ct-double-octave:after,
 .ct-major-eleventh:after,
 .ct-major-second:after,
 .ct-major-seventh:after,
@@ -842,4 +847,4 @@
     position: absolute;
     top: 0;
     left: 0
-}
+}*/

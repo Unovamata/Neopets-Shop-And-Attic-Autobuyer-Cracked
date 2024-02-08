@@ -106,24 +106,37 @@ setInterval(HideKQButtons, 100);
 
 const stockContainer = document.getElementById('history-container');
 const optionsContainer = document.getElementById('autokq-options-container');
+const analyticsContainer = document.getElementById('analytics-container');
 
 const optionsButton = document.getElementById("options");
 optionsButton.addEventListener('click', ShowOptions);
 
 function ShowOptions(){
     stockContainer.style.display = 'none';
+    analyticsContainer.style.display = 'none';
     optionsContainer.style.display = 'block';
 }
 
 const stockButton = document.getElementById("history");
-stockButton.addEventListener('click', ShowShopStock);
+stockButton.addEventListener('click', ShowHistory);
 
-function ShowShopStock(){
+function ShowHistory(){
     optionsContainer.style.display = 'none';
+    analyticsContainer.style.display = 'none';
     stockContainer.style.display = 'block';
 }
 
-optionsContainer.style.display = 'none';
+const analyticsButton = document.getElementById("analytics");
+analyticsButton.addEventListener('click', ShowAnalytics);
+
+function ShowAnalytics(){
+    optionsContainer.style.display = 'none';
+    stockContainer.style.display = 'none';
+    analyticsContainer.style.display = 'block';
+}
+
+
+ShowAnalytics();
 
 
 //######################################################################################################################################
@@ -441,3 +454,116 @@ function CheckIsNaNDisplay(input, outputTrue, outputFalse){
 ProcessAutoKQLog(false), setInterval((function() {
     ProcessAutoKQLog(false)
 }), 5e3)
+
+  chrome.storage.local.get({
+    KQ_TRACKER: [],
+}, (function(tracker) {
+    var data = tracker.KQ_TRACKER;
+
+    StatsObtained(data, "chart");
+}))
+
+function StatsObtained(data, id){
+    var stats = data.filter(function(entry){
+        return entry.Type == "Stat";
+    });
+
+    var statsInputData = [0, 0, 0, 0, 0];
+
+    stats.forEach(function(object){
+        switch(object.Prize){
+            case "Level":
+                statsInputData[0] += 1;
+            break;
+
+            case "Hit point":
+                statsInputData[1] += 1;
+            break;
+
+            case "Attack":
+                statsInputData[2] += 1;
+            break;
+
+            case "Defence":
+                statsInputData[3] += 1;
+            break;
+
+            default:
+                statsInputData[4] += 1;
+            break;
+        }
+    })
+    
+    var options = FormatDatalabelsOptions();
+
+    new Chart(document.getElementById(id).getContext("2d"), {
+        type: 'pie',
+        data: {
+            labels: ["Level", "Hit point", "Strength", "Defence", "Agility"],
+            datasets: [
+                {
+                    data: statsInputData,
+                    backgroundColor: GenerateRGBAArray([3, 169, 244], 5),
+                    borderColor: ['rgba(255, 255, 255, 1)'],
+                    borderWidth: 3
+                }
+            ]
+        },
+        options: options,
+        plugins: [ChartDataLabels],
+    });
+
+    ResizeChart(id, "15%");
+}
+
+function FormatDatalabelsOptions(){
+    return options = {
+        tooltips: {
+            enabled: false
+        },
+        plugins: {
+            datalabels: {
+            formatter: (value, ctx) => {
+                const datapoints = ctx.chart.data.datasets[0].data
+                const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
+                const percentage = value / total * 100
+                return percentage.toFixed(2) + "%";
+            },
+            color: '#fff',
+            backgroundColor: 'rgba(3, 169, 244, 0.5)',
+            borderColor: ['rgba(3, 169, 244, 0.6)'],
+            borderRadius: 5,
+            borderWidth: 2,
+            font: {
+                weight: 'bold',
+                family: "Cafeteria",
+                size: 20,
+            },
+            }
+        }
+    };
+}
+
+function GenerateRGBAArray(baseColor, divisions) {
+    var rgbaArray = [];
+
+    for (var i = 0; i < divisions; i++) {
+        var alpha = 0.2 + (i / (divisions - 1)) * 0.8; // Calculate alpha from 0.2 to 1.0
+        var rgbaValue = `rgba(${baseColor.join(', ')}, ${alpha.toFixed(1)})`;
+        rgbaArray.push(rgbaValue);
+    }
+
+    console.log(rgbaArray);
+
+    return rgbaArray;
+}
+
+
+function ResizeChart(id, sizeX, sizeY = ""){
+    // Set fixed width and height for the canvas
+    document.getElementById(id).style.width = sizeX;
+
+    if(sizeY == "") document.getElementById(id).style.height = sizeY;
+    else document.getElementById(id).style.height = sizeX;
+    
+}
