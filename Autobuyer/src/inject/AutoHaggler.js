@@ -391,17 +391,19 @@ function InjectAutoHaggler() {
 
         function ReloadPageBasedOnConditions() {
             if (IsSoldOut()) {
-                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloatExclusive(minSoldOutRefresh, maxSoldOutRefresh)) + " to reload page...");
+                var cooldown = GetRandomFloatExclusive(minSoldOutRefresh, maxSoldOutRefresh);
+                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
                 
                 setTimeout(() => {
                     ClickToRefreshShop();
-                }, t);
+                }, cooldown);
             } else if (IsItemAddedToInventory()) {
-                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloatExclusive(minInventoryRefreshInterval, maxInventoryRefreshInterval) + pauseAfterBuy) + " to reload page...");
+                var cooldown = GetRandomFloatExclusive(minInventoryRefreshInterval, maxInventoryRefreshInterval) + pauseAfterBuy;
+                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
                 
                 setTimeout(() => {
                     ClickToRefreshShop();
-                }, t);
+                }, cooldown); //Wait 5 seconds after purchase;
             }
         }
 
