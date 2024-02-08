@@ -460,8 +460,34 @@ ProcessAutoKQLog(false), setInterval((function() {
 }, (function(tracker) {
     var data = tracker.KQ_TRACKER;
 
-    StatsObtained(data, "chart");
+    PrizesObtained(data, "prizesObtainedChart");
+
+    StatsObtained(data, "statsObtainedChart");
+
+    PetStatsObtained(data, "benefitedPetsChart")
 }))
+
+var chartSize = "400px";
+
+function PrizesObtained(data, id){
+    var prizes = data.filter(function(entry){
+        return entry.Type == "Stat" || "Item" || "Neopoints";
+    });
+
+    var prizesInputData = [0, 0, 0];
+
+    prizes.forEach(function(object){
+        switch(object.Type){
+            case "Stat": prizesInputData[0] += 1; break;
+            case "Item": prizesInputData[1] += 1; break;
+            default: prizesInputData[2] += 1; break;
+        }
+    });
+
+    CreateChartWithLabels(id, "pie", ["Stat", "Item", "Neopoints"], prizesInputData, FormatDatalabelsOptions());
+    
+    ResizeChartInterval(id, chartSize);
+}
 
 function StatsObtained(data, id){
     var stats = data.filter(function(entry){
@@ -472,49 +498,39 @@ function StatsObtained(data, id){
 
     stats.forEach(function(object){
         switch(object.Prize){
-            case "Level":
-                statsInputData[0] += 1;
-            break;
-
-            case "Hit point":
-                statsInputData[1] += 1;
-            break;
-
-            case "Attack":
-                statsInputData[2] += 1;
-            break;
-
-            case "Defence":
-                statsInputData[3] += 1;
-            break;
-
-            default:
-                statsInputData[4] += 1;
-            break;
+            case "Level": statsInputData[0] += 1; break;
+            case "Hit point": statsInputData[1] += 1; break;
+            case "Attack": statsInputData[2] += 1; break;
+            case "Defence": statsInputData[3] += 1; break;
+            default: statsInputData[4] += 1; break;
         }
     })
-    
-    var options = FormatDatalabelsOptions();
 
-    new Chart(document.getElementById(id).getContext("2d"), {
-        type: 'pie',
-        data: {
-            labels: ["Level", "Hit point", "Strength", "Defence", "Agility"],
-            datasets: [
-                {
-                    data: statsInputData,
-                    backgroundColor: GenerateRGBAArray([3, 169, 244], 5),
-                    borderColor: ['rgba(255, 255, 255, 1)'],
-                    borderWidth: 3
-                }
-            ]
-        },
-        options: options,
-        plugins: [ChartDataLabels],
+    CreateChartWithLabels(id, "pie", ["Level", "Hit point", "Strength", "Defence", "Agility"], statsInputData, FormatDatalabelsOptions());
+
+    ResizeChartInterval(id, chartSize);
+}
+
+function PetStatsObtained(data, id){
+    // Count the appearances of each unique Pet Name
+    var filteredPets = data.filter(function(object) {
+        return object['Pet Name'] !== "";
     });
 
-    ResizeChart(id, "15%");
+    var petNameCounts = filteredPets.reduce(function(counts, entry) {
+        var petName = entry['Pet Name'];
+        counts[petName] = (counts[petName] || 0) + 1;
+        
+        return counts;
+    }, {});
+
+    CreateBarChart(id, "bar", Object.keys(petNameCounts), Object.values(petNameCounts), FormatDatalabelsOptions());
+
+    ResizeChartInterval(id, chartSize);
 }
+
+//######################################################################################################################################
+
 
 function FormatDatalabelsOptions(){
     return options = {
@@ -544,20 +560,73 @@ function FormatDatalabelsOptions(){
     };
 }
 
+function CreateChartWithLabels(id, type, labels, data, options){
+    new Chart(document.getElementById(id).getContext("2d"), {
+        type: type,
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    data: data,
+                    backgroundColor: GenerateRGBAArray([3, 169, 244], labels.length),
+                    borderColor: ['rgba(255, 255, 255, 1)'],
+                    borderWidth: 3
+                }
+            ]
+        },
+        options: options,
+        plugins: [ChartDataLabels],
+    });
+}
+
+function CreateBarChart(id, type, labels, data, options) {
+    var datasets = []; // Array to store datasets
+
+    // Iterate over each pet name and create a dataset
+    labels.forEach(function(label, index) {
+        var dataset = {
+            label: label,
+            backgroundColor: CalculateColorInIndex([3, 169, 244], index, labels.length), // You can define a function to get random colors
+            data: [data[index]] // Get the corresponding data point
+        };
+        datasets.push(dataset);
+    });
+
+    new Chart(document.getElementById(id).getContext("2d"), {
+        type: type,
+        data: {
+            labels: ["Data"],
+            datasets: datasets // Use the dynamically created datasets
+        },
+        options: options
+    });
+}
+
 function GenerateRGBAArray(baseColor, divisions) {
     var rgbaArray = [];
 
-    for (var i = 0; i < divisions; i++) {
-        var alpha = 0.2 + (i / (divisions - 1)) * 0.8; // Calculate alpha from 0.2 to 1.0
-        var rgbaValue = `rgba(${baseColor.join(', ')}, ${alpha.toFixed(1)})`;
-        rgbaArray.push(rgbaValue);
-    }
+    if(divisions == 1) return ["rgba(3, 169, 244, 1)"]
 
-    console.log(rgbaArray);
+    for (var i = 0; i < divisions; i++) {
+        rgbaArray.push(CalculateColorInIndex(baseColor, i, divisions));
+    }
 
     return rgbaArray;
 }
 
+function CalculateColorInIndex(baseColor, index, divisions){
+    var alpha = 1 - (index / (divisions - 1)) * 0.8; // Calculate alpha from 0.2 to 1.0
+    return `rgba(${baseColor.join(', ')}, ${alpha.toFixed(1)})`;
+}
+
+
+function ResizeChartInterval(id, sizeX, sizeY = ""){
+    ResizeChart(id, sizeX, sizeY);
+
+    setInterval(function(){
+        ResizeChart(id, sizeX, sizeY);
+    }, 100);
+}
 
 function ResizeChart(id, sizeX, sizeY = ""){
     // Set fixed width and height for the canvas
@@ -565,5 +634,4 @@ function ResizeChart(id, sizeX, sizeY = ""){
 
     if(sizeY == "") document.getElementById(id).style.height = sizeY;
     else document.getElementById(id).style.height = sizeX;
-    
 }
