@@ -465,6 +465,8 @@ ProcessAutoKQLog(false), setInterval((function() {
     StatsObtained(data, "statsObtainedChart");
 
     PetStatsObtained(data, "benefitedPetsChart")
+
+    PrizeTypesPerMonth(data, "prizesPerMonth")
 }))
 
 var chartSize = "400px";
@@ -526,12 +528,99 @@ function PetStatsObtained(data, id){
 
     CreateBarChart(id, "bar", Object.keys(petNameCounts), Object.values(petNameCounts), FormatDatalabelsOptions());
 
-    ResizeChartInterval(id, chartSize);
+    ResizeChartInterval(id, "760px", chartSize);
+}
+
+function PrizeTypesPerMonth(data, id){
+    var separatedDataset = FormatDatasetByMonthAndYear(data);
+    var keys = Object.keys(separatedDataset)
+    var keyDataset = [];
+
+    keys.forEach(function (key, index){
+        keyDataset.push({key: key, value: [{key: "Stat", value: 0}, {key: "Item", value: 0}, {key: "Neopoints", value: 0}]});
+
+        separatedDataset[key].forEach(function(object){
+            switch(object.Type){
+                case "Stat": keyDataset[index].value[0].value += 1; break;
+                case "Item": keyDataset[index].value[1].value += 1; break;
+                default: keyDataset[index].value[2].value += 1; break;
+            }
+        })
+    });
+
+    // Parse the dataset into a format that Chart.js can understand
+    var chartData = { labels: [], datasets: [] };
+
+    // Extract labels and data for each dataset
+    keyDataset.forEach(function(monthData) {
+        chartData.labels.push(monthData.key); // Assuming the key represents the month
+
+        monthData.value.forEach(function(dataType, index) {
+            var existingDataset = chartData.datasets.find(function(dataset) {
+                return dataset.label === dataType.key;
+            });
+            
+            if (existingDataset) {
+                existingDataset.data.push(dataType.value);
+            } else {
+                var colors = CalculateColorInIndex(index, 3);
+
+                chartData.datasets.push({
+                    label: dataType.key,
+                    data: [dataType.value],
+                    borderColor: colors, // Function to generate random colors
+                    backgroundColor:  colors,
+                    borderWidth: 3,
+                    fill: false
+                });
+            }
+        });
+    });
+
+    // Set up Chart.js with a line chart configuration
+    new Chart(document.getElementById('prizesPerMonth').getContext('2d'), {
+        type: 'line',
+        data: chartData,
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Data Occurrences Timeline'
+            },
+        }
+    });
+
+    ResizeChartInterval(id, "760px", "380px")
+}
+
+// Function to separate the dataset by month and year
+function FormatDatasetByMonthAndYear(dataset) {
+    var separatedData = {};
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    // Iterate over each entry in the dataset
+    dataset.forEach(function(entry) {
+        // Splitting the date;
+        var dateParts = entry['Date & Time'].split('/');
+        var year = parseInt(dateParts[2], 10);
+        var month = parseInt(dateParts[0], 10) - 1;
+        var key = months[month] + " " + year;
+
+        // Initialize an array for the key if it doesn't exist
+        if (!separatedData[key]) {
+            separatedData[key] = [];
+        }
+
+        // Push the entry to the corresponding array
+        separatedData[key].push(entry);
+    });
+
+    return separatedData;
 }
 
 //######################################################################################################################################
 
-
+// Format for the percentage datalabels in the charts;
 function FormatDatalabelsOptions(){
     return options = {
         tooltips: {
@@ -560,6 +649,7 @@ function FormatDatalabelsOptions(){
     };
 }
 
+// Create a chart with datalabels;
 function CreateChartWithLabels(id, type, labels, data, options){
     new Chart(document.getElementById(id).getContext("2d"), {
         type: type,
@@ -568,7 +658,7 @@ function CreateChartWithLabels(id, type, labels, data, options){
             datasets: [
                 {
                     data: data,
-                    backgroundColor: GenerateRGBAArray([3, 169, 244], labels.length),
+                    backgroundColor: GenerateRGBAArray(labels.length),
                     borderColor: ['rgba(255, 255, 255, 1)'],
                     borderWidth: 3
                 }
@@ -579,6 +669,7 @@ function CreateChartWithLabels(id, type, labels, data, options){
     });
 }
 
+// Create a Bar chart;
 function CreateBarChart(id, type, labels, data, options) {
     var datasets = []; // Array to store datasets
 
@@ -586,8 +677,8 @@ function CreateBarChart(id, type, labels, data, options) {
     labels.forEach(function(label, index) {
         var dataset = {
             label: label,
-            backgroundColor: CalculateColorInIndex([3, 169, 244], index, labels.length), // You can define a function to get random colors
-            data: [data[index]] // Get the corresponding data point
+            backgroundColor: CalculateColorInIndex(index, labels.length),
+            data: [data[index]]
         };
         datasets.push(dataset);
     });
@@ -602,24 +693,28 @@ function CreateBarChart(id, type, labels, data, options) {
     });
 }
 
-function GenerateRGBAArray(baseColor, divisions) {
+// Generate a RGBA array for charts that require a color array to function;
+function GenerateRGBAArray(divisions) {
     var rgbaArray = [];
 
     if(divisions == 1) return ["rgba(3, 169, 244, 1)"]
 
     for (var i = 0; i < divisions; i++) {
-        rgbaArray.push(CalculateColorInIndex(baseColor, i, divisions));
+        rgbaArray.push(CalculateColorInIndex(i, divisions));
     }
 
     return rgbaArray;
 }
 
-function CalculateColorInIndex(baseColor, index, divisions){
-    var alpha = 1 - (index / (divisions - 1)) * 0.8; // Calculate alpha from 0.2 to 1.0
-    return `rgba(${baseColor.join(', ')}, ${alpha.toFixed(1)})`;
+// Based on an input index, it returns a color based on a base color;
+function CalculateColorInIndex(index, divisions){
+    if(divisions == 1) return ["rgba(3, 169, 244, 1)"]
+
+    var alpha = 1 - (index / (divisions - 1)) * 0.8;
+    return `rgba(${[3, 169, 244].join(', ')}, ${alpha.toFixed(1)})`;
 }
 
-
+// Resize the chart in case of page size changes in an interval;
 function ResizeChartInterval(id, sizeX, sizeY = ""){
     ResizeChart(id, sizeX, sizeY);
 
@@ -632,6 +727,6 @@ function ResizeChart(id, sizeX, sizeY = ""){
     // Set fixed width and height for the canvas
     document.getElementById(id).style.width = sizeX;
 
-    if(sizeY == "") document.getElementById(id).style.height = sizeY;
-    else document.getElementById(id).style.height = sizeX;
+    if(sizeY == "") document.getElementById(id).style.height = sizeX;
+    else document.getElementById(id).style.height = sizeY;
 }
