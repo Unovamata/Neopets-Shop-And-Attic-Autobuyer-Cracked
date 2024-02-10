@@ -56,6 +56,7 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Detect and only restock on "Shop Clears".
 - Auto Kitchen Quest Solver and Tracker.
 - Improved and intelligent haggling system.
+- Bypass "Confirm" pop-up when buying items.
 
 ## Included Features
 
