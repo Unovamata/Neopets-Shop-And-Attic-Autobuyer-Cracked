@@ -43,6 +43,9 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_FIVE_SECOND_RULE_REFRESH: 10000,
 			SHOULD_BYPASS_CONFIRM: false,
 			SHOULD_ONLY_REFRESH_ON_CLEAR: false,
+			SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS: false,
+			MIN_HAGGLE_POWER: 0.75,
+			MAX_HAGGLE_POWER: 0.85,
 			SHOULD_CHANGE_DOCUMENT_DATA: false,
 
 			// AutoPricer;

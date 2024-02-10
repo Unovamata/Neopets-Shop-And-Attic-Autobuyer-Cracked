@@ -372,6 +372,44 @@
                             </td>
                             <td><textarea rows="20" cols="50" id="RESTOCK_LIST"></textarea></td>
                         </tr>
+                        <tr>
+                            <td>Use Custom Multipliers for Haggle Generation: <span class="subdued">(Not Advised to Modify)</span>
+                                <span class="dangertooltip tooltiptext">
+                                    This setting toggles custom haggling multipliers to generate a typeable haggle.<br><br>
+                                    Output Haggle = Rounded(Asking Price + (Asking Price <sup>Z</sup>)). 
+                                    <br>Where Z is equal to a random number between X & Y (Exclusive).<br><br>
+
+                                    This is a very complex system, modifying the default multipliers can generate unexpected haggles, losing out on items. Do not change these values unless you know what you are doing. 
+                                    <br><br>Activate this option at your own risk.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS" type="checkbox">
+                                    <span class="slider slider-danger round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="haggle-hide">
+                            <td>
+                                <b>Minimum</b> Haggle Power:
+                                <span class="tooltiptext">
+                                    The minimum number to power the Asking Price to, in decimals.
+                                    <br><br>Default = 0.75.
+                                </span>
+                            </td>
+                            <td><input type="number" max="100" min="1" id="MIN_HAGGLE_POWER"></input></td>
+                        </tr>
+                        <tr class="haggle-hide">
+                            <td>
+                                <b>Maximum</b> Haggle Power:
+                                <span class="tooltiptext">
+                                    The maximum number to power the Asking Price to, in decimals.
+                                    <br><br>Default = 0.85.
+                                </span>
+                            </td>
+                            <td><input type="number" max="100" min="1" id="MAX_HAGGLE_POWER"></input></td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -440,7 +478,7 @@
                         </tr>
                         <tr class="confirm-hide">
                             <td><b>Bypass</b> Confirm Window:
-                                <span class="tooltiptext">
+                                <span class="dangertooltip tooltiptext">
                                     If active, NeoBuyer+ will bypass the confirm pop-up Neopets generates, redirecting the user straight to the haggling page.
                                     <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
                                 </span>
@@ -534,7 +572,7 @@
                         </tr>
                         <tr>
                             <td>Annotate Captcha with Neopet's Location:
-                                <span class="tooltiptext">
+                                <span class="dangertooltip tooltiptext">
                                     This will add a red dot to where the neopet is in the captcha.<br><br>
 
                                     Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
@@ -575,7 +613,7 @@
                         </thead>
                         <tr>
                             <td>Show Status Banner:
-                                <span class="tooltiptext">
+                                <span class="dangertooltip tooltiptext">
                                     This setting toggles the banner text shown on the shop pages.<br><br>
 
                                     Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
@@ -590,7 +628,7 @@
                         </tr>
                         <tr>
                             <td>Highlight Desired <b>Shop</b> Items:
-                                <span class="tooltiptext">
+                                <span class="dangertooltip tooltiptext">
                                     Neobuyer+ highlights items of interest:<br><br>
 
                                     - The highest valued item in stock is highlighted in orange.<br>
@@ -641,7 +679,7 @@
                         </tr>
                         <tr>
                             <td>Change Page Information:
-                                <span class="tooltiptext">
+                                <span class="dangertooltip tooltiptext">
                                     If enabled, NeoBuyer+ will change the titles on pages to reflect the state of the AutoBuyer at any given point and time.<br><br>
                                     Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
                                 </span>

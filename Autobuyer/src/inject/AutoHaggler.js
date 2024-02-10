@@ -11,6 +11,9 @@ function InjectAutoHaggler() {
     chrome.storage.local.get({
         PAUSE_AFTER_BUY_MS: 0,
         ENABLED: !0,
+        SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS: false,
+        MIN_HAGGLE_POWER: 0.75,
+        MAX_HAGGLE_POWER: 0.85,
         SHOULD_CLICK_NEOPET: !0,
         SHOULD_ANNOTATE_IMAGE: !0,
         SHOULD_ENTER_OFFER: !0,
@@ -24,6 +27,9 @@ function InjectAutoHaggler() {
         const {
             PAUSE_AFTER_BUY_MS: pauseAfterBuy,
             ENABLED: isAutoBuyerEnabled,
+            SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS: isUsingCustomHaggleMultipliers,
+            MIN_HAGGLE_POWER: minHagglePower,
+            MAX_HAGGLE_POWER: maxHagglePower,
             SHOULD_CLICK_NEOPET: isClickingCaptcha,
             SHOULD_ANNOTATE_IMAGE: isAnnotatingImage,
             SHOULD_ENTER_OFFER: isEnteringOffer,
@@ -95,7 +101,15 @@ function InjectAutoHaggler() {
                         var shopkeeperDeal = document.getElementById("shopkeeper_makes_deal").textContent,
                             match = shopkeeperDeal.match("[0-9|,]+ Neopoints"),
                             askingPrice = parseInt(match[0].replace(" Neopoints", "").replace(/,/g, ""));
-                            thresholdToAdd =  Math.pow(Number(askingPrice), GetRandomFloatExclusive(0.75, 0.85));
+
+                            var haggleX = 0.75, haggleY = 0.85;
+
+                            if(isUsingCustomHaggleMultipliers){
+                                haggleX = minHagglePower;
+                                haggleY = maxHagglePower;
+                            }
+
+                            thresholdToAdd =  Math.pow(Number(askingPrice), GetRandomFloatExclusive(haggleX, haggleY));
                             thresholdPrice = "" + Math.round(Number(askingPrice) + thresholdToAdd);
                             
                             

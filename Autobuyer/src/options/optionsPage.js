@@ -144,6 +144,7 @@ function showOrHide() {
     $("#USE_BLACKLIST_KQ").is(":checked") ? $(".blacklist-kq").show() : $(".blacklist-kq").hide();
     $("#SHOULD_SUBMIT_AUTOMATICALLY").is(":checked") ? $(".submit-automatically").show() : $(".submit-automatically").hide();
     $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
+    $("#SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS").is(":checked") ? $(".haggle-hide").show() : $(".haggle-hide").hide();
     
     $("#IS_TURBO").is(":checked") ? (
         $(".turbo-tag").show(),
@@ -451,6 +452,12 @@ function setSHOULD_BYPASS_CONFIRM(value) { chrome.storage.local.set({ SHOULD_BYP
 
 function setSHOULD_ONLY_REFRESH_ON_CLEAR(value) { chrome.storage.local.set({ SHOULD_ONLY_REFRESH_ON_CLEAR: value }, (function () {})) }
 
+function setSHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS(value) { chrome.storage.local.set({ SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS: value }, (function () {})) }
+
+function setMIN_HAGGLE_POWER(value) { chrome.storage.local.set({ MIN_HAGGLE_POWER: value }, (function () {})) }
+
+function setMAX_HAGGLE_POWER(value) { chrome.storage.local.set({ MAX_HAGGLE_POWER: value }, (function () {})) }
+
 function setSHOULD_CHANGE_DOCUMENT_DATA(value) { chrome.storage.local.set({ SHOULD_CHANGE_DOCUMENT_DATA: value }, (function () {})) }
 
 // AutoPricer Setters;
@@ -591,6 +598,20 @@ $("#SHOULD_ONLY_REFRESH_ON_CLEAR").on("change", function() {
     const isChecked = $("#SHOULD_ONLY_REFRESH_ON_CLEAR").is(":checked");
     setSHOULD_ONLY_REFRESH_ON_CLEAR(isChecked);
 });
+
+$("#SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS").on("change", function() {
+    const isChecked = $("#SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS").is(":checked");
+    setSHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS(isChecked);
+    showOrHide();
+});
+
+$("#MIN_HAGGLE_POWER").bind("input propertychange", (function() {
+    setMIN_HAGGLE_POWER($("#MIN_HAGGLE_POWER").val())
+}))
+
+$("#MAX_HAGGLE_POWER").bind("input propertychange", (function() {
+    setMAX_HAGGLE_POWER($("#MAX_HAGGLE_POWER").val())
+}))
 
 $("#SHOULD_CHANGE_DOCUMENT_DATA").on("change", function() {
     const isChecked = $("#SHOULD_CHANGE_DOCUMENT_DATA").is(":checked");
@@ -959,6 +980,9 @@ resetButton.onclick = function(_) {
     MAX_FIVE_SECOND_RULE_REFRESH: 10000,
     SHOULD_BYPASS_CONFIRM: false,
     SHOULD_ONLY_REFRESH_ON_CLEAR: false,
+    SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS: false,
+    MIN_HAGGLE_POWER: 0.75,
+    MAX_HAGGLE_POWER: 0.85,
     SHOULD_CHANGE_DOCUMENT_DATA: false,
 
     // AutoPricer;
@@ -1084,6 +1108,9 @@ resetButton.onclick = function(_) {
         $("#MAX_FIVE_SECOND_RULE_REFRESH").val(_.MAX_FIVE_SECOND_RULE_REFRESH),
         $("#SHOULD_BYPASS_CONFIRM").prop("checked", _.SHOULD_BYPASS_CONFIRM),
         $("#SHOULD_ONLY_REFRESH_ON_CLEAR").prop("checked", _.SHOULD_ONLY_REFRESH_ON_CLEAR),
+        $("#SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS").prop("checked", _.SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS),
+        $("#MIN_HAGGLE_POWER").val(_.MIN_HAGGLE_POWER),
+        $("#MAX_HAGGLE_POWER").val(_.MAX_HAGGLE_POWER),
         $("#SHOULD_CHANGE_DOCUMENT_DATA").prop("checked", _.SHOULD_CHANGE_DOCUMENT_DATA),
         $("#MIN_PAGE_LOAD_FAILURES").val(_.MIN_PAGE_LOAD_FAILURES),
         $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES),

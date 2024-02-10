@@ -240,6 +240,10 @@ td:hover .tooltiptext {
     font-family: 'Cafeteria', sans-serif;
 }
 
+td .dangertooltip {
+    background-color: #f32121;
+}
+
 .toolbar-bottom {
     z-index: 2;
 }
@@ -297,7 +301,7 @@ b {
 }
 
 .danger {
-    color: red;
+    color: #f32121;
 }
 
 input:checked+.slider-danger {
