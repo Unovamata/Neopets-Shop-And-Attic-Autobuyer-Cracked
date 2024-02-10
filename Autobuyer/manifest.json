@@ -2,7 +2,7 @@
 "update_url": "https://clients2.google.com/service/update2/crx",
 
     "name": "NeoBuyer+",
-    "version": "0.7.10.8",
+    "version": "0.7.10.10",
     "manifest_version": 3,
     "description": "NeoBuyer+ Main Shop & Almost Abandoned Attic Autobuyer for Neopets.com",
     "icons":

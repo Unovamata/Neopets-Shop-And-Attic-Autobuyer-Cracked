@@ -9,6 +9,7 @@ function InjectAutoHaggler() {
     var startGlobalTime = performance.now();
     
     chrome.storage.local.get({
+        PAUSE_AFTER_BUY_MS: 0,
         ENABLED: !0,
         SHOULD_CLICK_NEOPET: !0,
         SHOULD_ANNOTATE_IMAGE: !0,
@@ -17,7 +18,7 @@ function InjectAutoHaggler() {
         MAX_FIVE_SECOND_RULE_REFRESH: 10000,
         MIN_OCR_PAGE: 750,
         MAX_OCR_PAGE: 1100,
-    }, (function(autobuyerVariables) {
+    }, (async function(autobuyerVariables) {
         
         // Destructing the variables extracted from the extension;
         const {
@@ -68,9 +69,9 @@ function InjectAutoHaggler() {
                 UpdateBannerAndDocument("Five second rule", "Attempted to purchase an item within 5 seconds of a different purchase");
 
                 // Wait time for five second rules as they are desynced;
-                setTimeout(() => {
-                    window.history.back();
-                }, GetRandomFloatExclusive(minFiveSecondRuleRefresh, maxFiveSecondRuleRefresh));
+                await Sleep(minFiveSecondRuleRefresh, maxFiveSecondRuleRefresh);
+
+                window.history.back();
             }
             
             
@@ -389,21 +390,22 @@ function InjectAutoHaggler() {
             return PageIncludes(" is SOLD OUT!");
         }
 
-        function ReloadPageBasedOnConditions() {
+        async function ReloadPageBasedOnConditions() {
             if (IsSoldOut()) {
                 var cooldown = GetRandomFloatExclusive(minSoldOutRefresh, maxSoldOutRefresh);
                 UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
                 
-                setTimeout(() => {
-                    ClickToRefreshShop();
-                }, cooldown);
+                await Sleep(cooldown);
+
+                ClickToRefreshShop();
             } else if (IsItemAddedToInventory()) {
                 var cooldown = GetRandomFloatExclusive(minInventoryRefreshInterval, maxInventoryRefreshInterval) + pauseAfterBuy;
                 UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
                 
-                setTimeout(() => {
-                    ClickToRefreshShop();
-                }, cooldown); //Wait 5 seconds after purchase;
+                //Wait 5 seconds after purchase;
+                await Sleep(cooldown);
+
+                ClickToRefreshShop();
             }
         }
 

@@ -577,6 +577,7 @@ function HandleServerErrors() {
         "502 Bad Gateway",
         "504 Gateway Time-out",
         "Loading site please wait...",
+        "An error occurred while processing your request.",
         ];
     
         const pageText = document.body.innerText;
@@ -854,4 +855,8 @@ function Sleep(min, max, showConsoleMessage = true) {
     const milliseconds = GetRandomFloat(min, max);
     //if(showConsoleMessage) console.log(`Sleeping for ${milliseconds / 1000} seconds...`, min, max);
     return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+function Sleep(sleepTime) {
+    return new Promise(resolve => setTimeout(resolve, sleepTime));
 }
