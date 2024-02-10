@@ -498,7 +498,7 @@ async function RunAutoPricer(){
                 searchButton.click();
             });
 
-            await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+            if(!isTurbo) await Sleep(sleepInSWPageMin, sleepInSWPageMax);
         }
 
         // PressResubmit(); Press the "Resubmit" button in the SW page;
