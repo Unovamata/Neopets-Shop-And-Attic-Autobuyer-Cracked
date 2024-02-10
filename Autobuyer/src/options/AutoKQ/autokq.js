@@ -218,14 +218,15 @@ var tableRow = document.createElement("tr");
 var tableHead = document.createElement("thead");
 var tableHeader = document.createElement("th");
 var tableDataCell = document.createElement("td");
+var nullDataMessage = "No Kitchen Quests Done Yet.";
 
 // Data Table with purchase history and information;
 function DisplayTableData(dataArray) {
     var tableContainer = document.getElementById("table-container");
 
     if (dataArray.length === 0) {
-        tableContainer.classList.add("rarity-info");
-        tableContainer.textContent = "No Kitchen Quests done yet.";
+        tableContainer.classList.add("subcategory-info");
+        tableContainer.textContent = "No Kitchen Quests Done Yet.";
         clearButton.setAttribute("disabled", true);
         return;
     }
@@ -486,9 +487,9 @@ function PrizesObtained(data, id){
         }
     });
 
-    CreateChartWithLabels(id, "pie", ["Stat", "Item", "Neopoints"], prizesInputData, FormatDatalabelsOptions());
+    var isChartActive = CreateChartWithLabels(id, "pie", ["Stat", "Item", "Neopoints"], prizesInputData, FormatDatalabelsOptions());
     
-    ResizeChartInterval(id, chartSize);
+    if(isChartActive) ResizeChartInterval(id, chartSize);
 }
 
 function StatsObtained(data, id){
@@ -508,9 +509,9 @@ function StatsObtained(data, id){
         }
     })
 
-    CreateChartWithLabels(id, "pie", ["Level", "Hit point", "Strength", "Defence", "Agility"], statsInputData, FormatDatalabelsOptions());
+    var isChartActive = CreateChartWithLabels(id, "pie", ["Level", "Hit point", "Strength", "Defence", "Agility"], statsInputData, FormatDatalabelsOptions());
 
-    ResizeChartInterval(id, chartSize);
+    if(isChartActive) ResizeChartInterval(id, chartSize);
 }
 
 function PetStatsObtained(data, id){
@@ -526,12 +527,17 @@ function PetStatsObtained(data, id){
         return counts;
     }, {});
 
-    CreateBarChart(id, "bar", Object.keys(petNameCounts), Object.values(petNameCounts), FormatDatalabelsOptions());
+    var isChartActive = CreateBarChart(id, "bar", Object.keys(petNameCounts), Object.values(petNameCounts), FormatDatalabelsOptions());
 
-    ResizeChartInterval(id, "760px", chartSize);
+    if(isChartActive) ResizeChartInterval(id, "760px", chartSize);
 }
 
 function PrizeTypesPerMonth(data, id){
+    const canvas = document.getElementById(id),
+    context = canvas.getContext("2d");
+
+    if(!CheckIfEnoughData(canvas, data)) return;
+
     var separatedDataset = FormatDatasetByMonthAndYear(data);
     var keys = Object.keys(separatedDataset)
     var keyDataset = [];
@@ -578,7 +584,7 @@ function PrizeTypesPerMonth(data, id){
     });
 
     // Set up Chart.js with a line chart configuration
-    new Chart(document.getElementById('prizesPerMonth').getContext('2d'), {
+    new Chart(context, {
         type: 'line',
         data: chartData,
         options: {
@@ -649,9 +655,16 @@ function FormatDatalabelsOptions(){
     };
 }
 
+var notEnoughData = "Additional data is necessary for analytics to operate effectively...";
+
 // Create a chart with datalabels;
 function CreateChartWithLabels(id, type, labels, data, options){
-    new Chart(document.getElementById(id).getContext("2d"), {
+    const canvas = document.getElementById(id),
+    context = canvas.getContext("2d");
+
+    if(!CheckIfEnoughData(canvas, data)) return false;
+
+    new Chart(context, {
         type: type,
         data: {
             labels: labels,
@@ -667,10 +680,17 @@ function CreateChartWithLabels(id, type, labels, data, options){
         options: options,
         plugins: [ChartDataLabels],
     });
+
+    return true;
 }
 
 // Create a Bar chart;
 function CreateBarChart(id, type, labels, data, options) {
+    const canvas = document.getElementById(id),
+    context = canvas.getContext("2d");
+
+    if(!CheckIfEnoughData(canvas, data)) return false;
+
     var datasets = []; // Array to store datasets
 
     // Iterate over each pet name and create a dataset
@@ -683,7 +703,7 @@ function CreateBarChart(id, type, labels, data, options) {
         datasets.push(dataset);
     });
 
-    new Chart(document.getElementById(id).getContext("2d"), {
+    new Chart(context, {
         type: type,
         data: {
             labels: ["Data"],
@@ -691,6 +711,8 @@ function CreateBarChart(id, type, labels, data, options) {
         },
         options: options
     });
+
+    return true;
 }
 
 // Generate a RGBA array for charts that require a color array to function;
@@ -729,4 +751,18 @@ function ResizeChart(id, sizeX, sizeY = ""){
 
     if(sizeY == "") document.getElementById(id).style.height = sizeX;
     else document.getElementById(id).style.height = sizeY;
+}
+
+function CheckIfEnoughData(canvas, data){
+    if(AreAllZeroes(data)){
+        canvas.parentElement.textContent = notEnoughData;
+        canvas.remove();
+        return false;
+    }
+
+    return true;
+}
+
+function AreAllZeroes(data){
+    return data.every(datapoint => datapoint === 0)
 }
