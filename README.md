@@ -48,15 +48,16 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - User's shop auto-pricer.
 - Shop restock timer.
 - Daily update checker.
-- Better Quickstock.
+- Better "Quickstock."
 - Save and load configuration presets.
-- Almost Abandoned Attic auto-buyer.
+- "Almost Abandoned Attic" AutoBuyer.
 - NeoBuyer+ Mail updates on development.
 - Wait times to circumvent 5 second rule desyncs.
 - Detect and only restock on "Shop Clears".
-- Auto Kitchen Quest Solver and Tracker.
+- Auto "Kitchen Quest" solver and tracker with analytics.
 - Improved and intelligent haggling system.
-- Bypass "Confirm" pop-up when buying items.
+- "Restock List" generator.
+- Bypass "Confirm" pop-up when buying items from main shops.
 
 ## Included Features
 
