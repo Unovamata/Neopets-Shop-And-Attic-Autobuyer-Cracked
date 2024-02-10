@@ -461,22 +461,37 @@ ProcessAutoKQLog(false), setInterval((function() {
 }, (function(tracker) {
     var data = tracker.KQ_TRACKER;
 
+    // Processing prizes obtained today only;
+    PrizesObtained(FilterDataToday(data), "prizesObtainedTodayChart");
+
+    var stats = data.filter(function (entry){
+        return entry["Type"] == "Stat";
+    });
+
+    // Processing stats obtained today only;
+    StatsObtained(FilterDataToday(stats), "statsObtainedTodayChart");
+
     PrizesObtained(data, "prizesObtainedChart");
 
-    StatsObtained(data, "statsObtainedChart");
+    StatsObtained(stats, "statsObtainedChart");
 
-    PetStatsObtained(data, "benefitedPetsChart")
+    StatsObtainedPerPet(stats, "benefitedPetsChart")
 
     PrizeTypesPerMonth(data, "prizesPerMonth")
 }))
 
 var chartSize = "400px";
 
-function PrizesObtained(data, id){
-    var prizes = data.filter(function(entry){
-        return entry.Type == "Stat" || "Item" || "Neopoints";
-    });
+function FilterDataToday(data){
+    return data.filter(function(entry){
+        var today = new Date();
+        var formattedDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 
+        return entry["Date & Time"].includes(formattedDate);
+    });
+}
+
+function PrizesObtained(prizes, id){
     var prizesInputData = [0, 0, 0];
 
     prizes.forEach(function(object){
@@ -492,11 +507,7 @@ function PrizesObtained(data, id){
     if(isChartActive) ResizeChartInterval(id, chartSize);
 }
 
-function StatsObtained(data, id){
-    var stats = data.filter(function(entry){
-        return entry.Type == "Stat";
-    });
-
+function StatsObtained(stats, id){
     var statsInputData = [0, 0, 0, 0, 0];
 
     stats.forEach(function(object){
@@ -505,7 +516,7 @@ function StatsObtained(data, id){
             case "Hit point": statsInputData[1] += 1; break;
             case "Attack": statsInputData[2] += 1; break;
             case "Defence": statsInputData[3] += 1; break;
-            default: statsInputData[4] += 1; break;
+            case "Agility": statsInputData[4] += 1; break;
         }
     })
 
@@ -514,7 +525,7 @@ function StatsObtained(data, id){
     if(isChartActive) ResizeChartInterval(id, chartSize);
 }
 
-function PetStatsObtained(data, id){
+function StatsObtainedPerPet(data, id){
     // Count the appearances of each unique Pet Name
     var filteredPets = data.filter(function(object) {
         return object['Pet Name'] !== "";
