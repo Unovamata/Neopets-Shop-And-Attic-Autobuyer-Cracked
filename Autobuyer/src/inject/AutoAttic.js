@@ -31,7 +31,7 @@ function InjectAutoAttic() {
         ATTIC_SHOULD_REFRESH: !1,
         ATTIC_LAST_REFRESH_MS: -1,
         ATTIC_PREV_NUM_ITEMS: -1,
-    }, (function(autobuyerVariables) {
+    }, (async function(autobuyerVariables) {
         
         // Destructing the variables extracted from the extension;
         const {
@@ -57,7 +57,8 @@ function InjectAutoAttic() {
             ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems,
         } = autobuyerVariables;
         
-        var isRunningOnScheduledTime = false;
+        var isRunningOnScheduledTime = false,
+        atticWaitTime = 1200000;
 
         // Run the AutoBuyer
         if(!isAtticEnabled) return;
@@ -69,9 +70,9 @@ function InjectAutoAttic() {
             UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
             SaveToPurchaseHistory(boughtItemElement, "Attic", "-", "Bought");
 
-            setTimeout(function() {
-                AutoRefreshAttic();
-            }, 120000);
+            await Sleep(atticWaitTime);
+
+            AutoRefreshAttic();
 
             HighlightItemsInAttic();
         } 
@@ -80,19 +81,21 @@ function InjectAutoAttic() {
         else if (PageIncludes("Didn't you just buy something?")) {
             UpdateBannerAndDocument("Need to wait 20 minutes in Attic", "Pausing NeoBuyer in Attic for 20 minutes");
             
-            setTimeout(function() {
-                window.location.href = "https://www.neopets.com/halloween/garage.phtml";
-            }, 120000);
+            await Sleep(atticWaitTime);
+
+            window.location.href = "https://www.neopets.com/halloween/garage.phtml";
         }
 
         // Pausing if the user is AAA banned;
         else if (PageIncludes("Sorry, please try again later.")){
             UpdateBannerAndDocument("Attic is refresh banned", "Pausing NeoBuyer+ in Attic");
+            return;
         } 
         
         // 5 item limit per day;
         else if (PageIncludes("cannot buy any more items from this shop today")) {
             UpdateBannerAndDocument("Five item limit reached in Attic", "Pausing NeoBuyer+ in Attic");
+            return;
         }
         
         // Buying items from the attick;
@@ -135,10 +138,10 @@ function InjectAutoAttic() {
 
                     SaveToPurchaseHistory(bestItemName, "Attic", itemPrice, "Attempted");
 
-                    setTimeout(function() {
-                        document.getElementById("oii").value = itemID;
-                        document.getElementById("frm-abandoned-attic").submit();
-                    }, randomBuyTime);
+                    await Sleep(randomBuyTime);
+
+                    document.getElementById("oii").value = itemID;
+                    document.getElementById("frm-abandoned-attic").submit();
                 }
             }
             
@@ -166,7 +169,7 @@ function InjectAutoAttic() {
             chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
         }
 
-        function AutoRefreshAttic() {
+        async function AutoRefreshAttic() {
             if(!isAtticAutoRefreshing){
                 UpdateBannerStatus("Attic auto refresh is disabled. Waiting for manual refresh.");
                 return;
@@ -211,9 +214,9 @@ function InjectAutoAttic() {
             // Update the banner status and initiate the page reload after the wait time
             UpdateBannerStatus(message);
 
-            setTimeout(() => {
-                window.location.href = "https://www.neopets.com/halloween/garage.phtml";
-            }, waitTime);
+            await Sleep(waitTime);
+            
+            window.location.href = "https://www.neopets.com/halloween/garage.phtml";
         }
 
         function HighlightItemsInAttic() {

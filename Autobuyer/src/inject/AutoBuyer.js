@@ -185,14 +185,14 @@ function InjectAutoPricer() {
 
         
         // This code is better to not touch it as it breaks with any change made to it;
-        itemToBuyExtracted ? function(e) {
+        itemToBuyExtracted ? async function(e) {
             //Clicking the selected item;
             if (isClickingItems) {
                 var itemToBuyElement = document.querySelector(`.item-img[data-name="${e}"]`);
 
-                setTimeout((function() {
-                    itemToBuyElement.click();
-                }), GetRandomFloat(minClickImageInterval, maxClickImageInterval));
+                await Sleep(minClickImageInterval, maxClickImageInterval);
+
+                itemToBuyElement.click();
             }
         }(itemToBuyExtracted) : ! function() {
             var e = new Date,
@@ -219,7 +219,7 @@ function InjectAutoPricer() {
             }
         }()
 
-        function ReloadPageBasedOnConditions() {
+        async function ReloadPageBasedOnConditions() {
             // Calculate the number of stocked items
             var currentStockedItems = Array.from(document.querySelectorAll(".item-img")).length;
             UpdateDocument(currentStockedItems + " stocked items", "", false);
@@ -233,37 +233,39 @@ function InjectAutoPricer() {
             }
 
             if (currentStockedItems < minItemsToConsiderStocked) {
-                // Handle case when not enough items are stocked
-                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minRefreshIntervalUnstocked, maxRefreshIntervalUnstocked)) + " to reload page...");
-                
-                setTimeout(() => {
-                    location.reload();
-                }, t);
-            } else {
+                var cooldown = GetRandomFloat(minRefreshIntervalUnstocked, maxRefreshIntervalUnstocked);
 
+                // Handle case when not enough items are stocked
+                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
+
+                await Sleep(cooldown);
+
+                location.reload();
+            } else {
+                var cooldown = GetRandomFloat(minRefreshIntervalStocked, maxRefreshIntervalStocked);
                 
                 // Handle case when enough items are stocked
-                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minRefreshIntervalStocked, maxRefreshIntervalStocked)) + " to reload page...");
+                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
                 
-                setTimeout(() => {
-                    // Handle cycling through shops
-                    if (storesToCycle.length === 0) {
-                        location.reload();
-                    } else if (storesToCycle.length === 1) {
-                        window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
-                    } else {
-                        const currentShopId = window.location.toString().match(/obj_type=(\d+)/)[1];
-                        const currentIndex = storesToCycle.findIndex(shopId => shopId == currentShopId);
+                await Sleep(cooldown);
 
-                        if (currentIndex === -1) {
-                            window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${storesToCycle[0]}`;
-                        } else {
-                            const nextIndex = currentIndex === storesToCycle.length - 1 ? 0 : currentIndex + 1;
-                            const nextShopId = storesToCycle[nextIndex];
-                            window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${nextShopId}`;
-                        }
+                // Handle cycling through shops
+                if (storesToCycle.length === 0) {
+                    location.reload();
+                } else if (storesToCycle.length === 1) {
+                    window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
+                } else {
+                    const currentShopId = window.location.toString().match(/obj_type=(\d+)/)[1];
+                    const currentIndex = storesToCycle.findIndex(shopId => shopId == currentShopId);
+
+                    if (currentIndex === -1) {
+                        window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${storesToCycle[0]}`;
+                    } else {
+                        const nextIndex = currentIndex === storesToCycle.length - 1 ? 0 : currentIndex + 1;
+                        const nextShopId = storesToCycle[nextIndex];
+                        window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${nextShopId}`;
                     }
-                }, t);
+                }
             }
         }
     }));
