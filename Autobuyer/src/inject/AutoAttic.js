@@ -1,8 +1,9 @@
 HandleServerErrors();
 
+DisplayAutoBuyerBanner(true);
+
 InjectAutoAttic();
 
-DisplayAutoBuyerBanner();
 
 //######################################################################################################################################
 

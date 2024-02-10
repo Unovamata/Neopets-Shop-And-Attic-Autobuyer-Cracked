@@ -240,6 +240,8 @@ function InjectAutoPricer() {
                     location.reload();
                 }, t);
             } else {
+
+                
                 // Handle case when enough items are stocked
                 UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(t = GetRandomFloat(minRefreshIntervalStocked, maxRefreshIntervalStocked)) + " to reload page...");
                 
