@@ -860,3 +860,197 @@ function Sleep(min, max, showConsoleMessage = true) {
 function Sleep(sleepTime) {
     return new Promise(resolve => setTimeout(resolve, sleepTime));
 }
+
+//######################################################################################################################################
+
+//Charts
+
+// Function to separate the dataset by month and year
+function FormatDatasetByMonthAndYear(dataset) {
+    var separatedData = {};
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    // Iterate over each entry in the dataset
+    dataset.forEach(function(entry) {
+        // Splitting the date;
+        var dateParts = entry['Date & Time'].split('/');
+        var year = parseInt(dateParts[2], 10);
+        var month = parseInt(dateParts[0], 10) - 1;
+        var key = months[month] + " " + year;
+
+        // Initialize an array for the key if it doesn't exist
+        if (!separatedData[key]) {
+            separatedData[key] = [];
+        }
+
+        // Push the entry to the corresponding array
+        separatedData[key].push(entry);
+    });
+
+    return separatedData;
+}
+
+//######################################################################################################################################
+
+// Format for the percentage datalabels in the charts;
+function FormatDatalabelsOptions(){
+    return options = {
+        tooltips: {
+            enabled: false
+        },
+        plugins: {
+            datalabels: {
+            formatter: (value, ctx) => {
+                const datapoints = ctx.chart.data.datasets[0].data
+                const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
+                const percentage = value / total * 100
+                return percentage.toFixed(2) + "%";
+            },
+            color: '#fff',
+            backgroundColor: 'rgba(3, 169, 244, 0.5)',
+            borderColor: ['rgba(3, 169, 244, 0.6)'],
+            borderRadius: 5,
+            borderWidth: 2,
+            font: {
+                weight: 'bold',
+                family: "Cafeteria",
+                size: 20,
+            },
+            }
+        }
+    };
+}
+
+var notEnoughData = "Additional data is necessary for analytics to operate effectively...";
+
+// Create a chart with datalabels;
+function CreateChartWithLabels(id, type, labels, data, options){
+    const canvas = document.getElementById(id),
+    context = canvas.getContext("2d");
+
+    if(!CheckIfEnoughData(canvas, data)) return false;
+
+    new Chart(context, {
+        type: type,
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    data: data,
+                    backgroundColor: GenerateRGBAArray(labels.length),
+                    borderColor: ['rgba(255, 255, 255, 1)'],
+                    borderWidth: 3
+                }
+            ]
+        },
+        options: options,
+        plugins: [ChartDataLabels],
+    });
+
+    return true;
+}
+
+// Create a Bar chart;
+function CreateBarChart(id, type, labels, data, options) {
+    const canvas = document.getElementById(id),
+    context = canvas.getContext("2d");
+
+    if(!CheckIfEnoughData(canvas, data)) return false;
+
+    var datasets = []; // Array to store datasets
+
+    // Iterate over each pet name and create a dataset
+    labels.forEach(function(label, index) {
+        var dataset = {
+            label: label,
+            backgroundColor: CalculateColorInIndex(index, labels.length),
+            data: [data[index]]
+        };
+        datasets.push(dataset);
+    });
+
+    new Chart(context, {
+        type: type,
+        data: {
+            labels: ["Data"],
+            datasets: datasets // Use the dynamically created datasets
+        },
+        options: options
+    });
+
+    return true;
+}
+
+// Generate a RGBA array for charts that require a color array to function;
+function GenerateRGBAArray(divisions) {
+    var rgbaArray = [];
+
+    if(divisions == 1) return ["rgba(3, 169, 244, 1)"]
+
+    for (var i = 0; i < divisions; i++) {
+        rgbaArray.push(CalculateColorInIndex(i, divisions));
+    }
+
+    return rgbaArray;
+}
+
+// Based on an input index, it returns a color based on a base color;
+function CalculateColorInIndex(index, divisions){
+    if(divisions == 1) return ["rgba(3, 169, 244, 1)"]
+
+    var alpha = 1 - (index / (divisions - 1)) * 0.8;
+    return `rgba(${[3, 169, 244].join(', ')}, ${alpha.toFixed(1)})`;
+}
+
+// Resize the chart in case of page size changes in an interval;
+function ResizeChartInterval(id, sizeX, sizeY = ""){
+    ResizeChart(id, sizeX, sizeY);
+
+    setInterval(function(){
+        ResizeChart(id, sizeX, sizeY);
+    }, 100);
+}
+
+function ResizeChart(id, sizeX, sizeY = ""){
+    // Set fixed width and height for the canvas
+    document.getElementById(id).style.width = sizeX;
+
+    if(sizeY == "") document.getElementById(id).style.height = sizeX;
+    else document.getElementById(id).style.height = sizeY;
+}
+
+function CheckIfEnoughData(canvas, data){
+    if(AreAllZeroes(data)){
+        canvas.parentElement.textContent = notEnoughData;
+        canvas.remove();
+        return false;
+    }
+
+    return true;
+}
+
+function AreAllZeroes(data){
+    return data.every(datapoint => datapoint === 0)
+}
+
+function ShowAndHideTabs(tabsToShow, tabsToHide){
+    tabsToHide.forEach(function(id){
+        var hide = document.getElementById(id);
+        hide.style.display = 'none';
+    });
+
+    tabsToShow.forEach(function(id){
+        var show = document.getElementById(id);
+        show.style.display = 'block';
+    });
+}
+
+function ShowAndHideElements(tabsToShow, tabsToHide){
+    tabsToHide.forEach(function(element){
+        element.style.display = 'none';
+    });
+
+    tabsToShow.forEach(function(element){
+        element.style.display = 'block';
+    });
+}

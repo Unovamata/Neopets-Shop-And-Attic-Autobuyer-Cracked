@@ -1,31 +1,101 @@
-// Number formatting
-function FormatNumberWithSymbols(number, decimalPlaces) {
-    // Mapping of value thresholds to symbols
-    const symbolMap = [
-        { value: 1e12, symbol: "t" },
-        { value: 1e9, symbol: "b" },
-        { value: 1e6, symbol: "m" },
-        { value: 1e3, symbol: "k" },
-        { value: 1, symbol: "" }
-    ];
+// GUI Interaction;
 
-    // Reverse the symbol map and find the appropriate symbol
-    const matchedSymbol = symbolMap.find(symbolInfo => {
-        return number >= symbolInfo.value;
-    });
+const tableButton = document.getElementById("table-button");
+const tableContainer = document.getElementById("table-container");
+const analyticsContainer = document.getElementById("analytics-container");
 
-    // Format the number with the matched symbol
-    if (matchedSymbol) {
-        var numberValue = number / matchedSymbol.value;
-        var numberToFixed = numberValue.toFixed(decimalPlaces);
-        var formattedNumber = numberToFixed.replace(/\.0+$|(\.[0-9]*[1-9])0+$/, "$1") + matchedSymbol.symbol;
+tableButton.onclick = function(e) {
+    ShowHistory();
+} 
 
-        return (formattedNumber);
-    } else {
-        return "0";
+function ShowHistory(){
+    ShowAndHideElements([tableContainer], [analyticsContainer]);
+}
+
+const analyticsButton = document.getElementById("analytics-button");
+
+analyticsButton.onclick = function(e) {
+    ShowAndHideElements([analyticsContainer], [tableContainer])
+}
+
+//Toggling the main tab;
+ShowHistory();
+
+var currentPage = 1;
+var totalPages = 1;
+
+// Function to update navigation buttons and page indicator
+function UpdateNavigation() {
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    const pageIndicator = document.getElementById("page-indicator");
+
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages;
+
+    pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+}
+
+// Event listener for previous button
+document.getElementById("prev-button").addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+    }
+
+    LoadCurrentPage();
+});
+
+// Event listener for next button
+document.getElementById("next-button").addEventListener("click", () => {
+    if (currentPage < totalPages) {
+        currentPage++;
+    }
+
+    LoadCurrentPage();
+});
+
+// Event listener for first page button
+document.getElementById("first-button").addEventListener("click", () => {
+    currentPage = 1;
+
+    LoadCurrentPage();
+});
+
+// Event listener for last page button
+document.getElementById("last-button").addEventListener("click", () => {
+    currentPage = totalPages;
+
+    LoadCurrentPage();
+});
+
+// Initial load
+LoadCurrentPage();
+
+// Function to load data for the current page
+function LoadCurrentPage() {
+    ProcessPurchaseHistory(true)
+}
+
+
+//Update the history data every 5 seconds;
+ProcessPurchaseHistory(false), setInterval((function() {
+    ProcessPurchaseHistory(false)
+}), 5e3)
+
+const clearButton = document.getElementById("reset");
+clearButton.addEventListener('click', ClearHistory);
+
+function ClearHistory(){
+    if(confirm("Do you want to delete all entries in your item purchase history?")){
+        if(confirm("Are you sure you want to clear your purchase history? This action cannot be undone unless you have a backup of you configuration presets.")){
+            setITEM_HISTORY([])
+        }
     }
 }
 
+//######################################################################################################################################
+
+// GUI Functions;
 
 // Toggle tab contents
 function ToggleTabs(selectedTabId, contentIdToShow) {
@@ -43,83 +113,135 @@ function ToggleTabs(selectedTabId, contentIdToShow) {
     document.getElementById(contentIdToShow).style.display = "block";
 }
 
-// Adds thousands and commas to separate and format a more readable number;
-function AddThousandSeparators(number) {
-    return number.toLocaleString();
+// Number with formatted with commas and NP at the end;
+function FormatNPNumber(number) {
+    return number.toLocaleString() + " NP"
 }
 
-// Number with NP at the end;
-function FormatNPNumber(input) {
-    return AddThousandSeparators(input) + " NP"
+var currentHistorySize = -1;
+
+function ProcessPurchaseHistory(forceUpdateHistory) {
+    chrome.storage.local.get({
+        ITEM_HISTORY: [],
+    }, (function(t) {
+        // Processing the history data;
+        const history = t.ITEM_HISTORY;
+        const historySize = t.ITEM_HISTORY.length;
+        const processedData = ProcessItemData(history);
+
+        // Force updating if necessary;
+        if (forceUpdateHistory || currentHistorySize != historySize) {
+            currentHistorySize = historySize;
+            DisplayTableData(processedData);
+        }
+
+        // Updating the page data;
+        totalPages = Math.ceil(processedData.length / chunkSize);
+        const pageIndicator = document.getElementById("page-indicator");
+
+        pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+    }))
+}
+
+//--------------------------------
+
+var totalProfit = 0, totalValue = 0;
+
+// Processes and formats the item data in the table;
+function ProcessItemData(itemArray){
+    var proccessedData = [];
+    totalProfit = 0;
+    totalValue = 0;
+
+    itemArray.forEach(function(item, index){
+        const itemInfo = item_db[item["Item Name"]];
+
+        if(itemInfo == undefined){
+            item.Rarity = "?";
+            item["Est. Value"] = "";
+            item["Est. Profit"] = "";
+        } else {
+            // If the item info exists, update price and rarity
+            item.Rarity = itemInfo.Rarity;
+
+            const boughtPrice = parseInt(item.Price);
+            const itemValue = parseInt(itemInfo.Price);
+            
+            // Measuring the value of the purchase
+            var value = itemValue;
+            item["Est. Value"] = CheckIsNaNDisplay(value, "-", FormatNPNumber(value));
+            if(!isNaN(value)) totalValue += value;
+
+            // Measuring the profit from the purchase;
+            var profit = itemValue - boughtPrice;
+            item["Est. Profit"] = CheckIsNaNDisplay(profit, "-", FormatNPNumber(profit));
+
+            if(!isNaN(profit)) totalProfit += profit;
+
+            item["Price"] = CheckIsNaNDisplay(boughtPrice, "-", boughtPrice);
+        }
+
+        proccessedData.push(item);
+    });
+
+    document.getElementById("total-profit").innerText = FormatNPNumber(totalProfit);
+    document.getElementById("total-value").innerText = FormatNPNumber(totalValue);
+    document.getElementById("total-entries").innerText = itemArray.length + " items listed";
+
+    return proccessedData.reverse();
+}
+
+
+//If a value is NaN or not, then it'll display one option or the other;
+function CheckIsNaNDisplay(input, outputTrue, outputFalse){
+    return isNaN(input) ? outputTrue : outputFalse;
 }
 
 
 //######################################################################################################################################
 
 
-
-const clearButton = document.getElementById("reset");
-clearButton.addEventListener('click', ClearHistory);
-
-function ClearHistory(){
-    if(confirm("Do you want to delete all entries in your item purchase history?")){
-        if(confirm("Are you sure you want to clear your purchase history? This action cannot be undone unless you have a backup of you configuration presets.")){
-            setITEM_HISTORY([])
-        }
-    }
-}
-
-
-var newTable = document.createElement("table");
+var table = document.createElement("table");
+table.classList.add("table", "sortable"); // Add classes for styling
 var tableBody = document.createElement("tbody");
 var tableRow = document.createElement("tr");
 var tableHead = document.createElement("thead");
 var tableHeader = document.createElement("th");
 var tableDataCell = document.createElement("td");
+const pageIndicator = document.getElementById("page-indicator");
+const chunkSize = 50;
 
 // Data Table with purchase history and information;
 function DisplayTableData(dataArray) {
-    var tableContainer = document.getElementById("table-container");
+    tableBody.innerHTML = '';
+    table.innerHTML = '';
 
-    if (dataArray.length === 0) {
-        tableContainer.classList.add("rarity-info");
-        tableContainer.textContent = "No items purchased yet.";
-        clearButton.setAttribute("disabled", true);
-        return;
-    }
+    // Creating the row headers;
+    var keys = CreateHeaderRowKeys(dataArray, ["JN"], tableHeader);
 
-    document.getElementById("table-container").innerHTML = "";
+    LoadChunksOfData(dataArray, chunkSize, keys);
     
-    var tableClone = newTable.cloneNode(false);
-    var tableBodyClone = tableBody.cloneNode(false);
-    var tableRowClone = tableRow.cloneNode(false);
+    function LoadChunksOfData(data, chunkSize, headers){
+        const tableSortingScript = document.createElement("script");
+        tableSortingScript.src = "../../../js/sortable.js";
+        document.head.appendChild(tableSortingScript);
+        
+        const startIndex = (currentPage - 1) * chunkSize;
+        const endIndex = startIndex + chunkSize;
+        const dataChunk = data.slice(startIndex, endIndex);
     
-    // Appending data to the table;
-    tableContainer.appendChild(AppendDataToTable(dataArray.reverse()));
-    
-    MakeSortableTable();
-
-
-    // FUNCTION'S FUNCTIONS;
-    // Creating the header rows for information (Account, Date & Time, Item Name, Price...)
-    function AppendDataToTable(dataArray){
-        tableRowClone = CreateHeaderRowKeys(dataArray, tableClone);
-
-        for (a = 0; a < dataArray.length; ++a) {
-            var itemCells = tableRow.cloneNode(false);
-            itemCells.classList.add("item");
+        for (var i = 0; i < chunkSize && dataChunk[i] != null; i++) {
+            const row = dataChunk[i];
+            const rowElement = document.createElement("tr");
+            rowElement.classList.add("item");
             var lastName = "";
 
-            // Navigating through the columns;
-            for (var s = 0; s < tableRowClone.length; ++s) {
-                // Clone a cell node for the current row
-                var cell = tableDataCell.cloneNode(false);
+            for (const header of headers) {
+                const cell = document.createElement("td");
+                cell.classList.add("table-cell"); // Add class for table cells
+                let cellValue = row[header] || "";
                 
-                // Get the value of the current cell or assign an empty string if undefined
-                var cellValue = dataArray[a][tableRowClone[s]] || "";
-                
-                // Setting the information nodes in the table cells;
-                switch(tableRowClone[s]){
+                switch (header) {
                     case "Date & Time":
                         cell.appendChild(document.createTextNode(cellValue));
                         cell.classList.add('class-DateTime');
@@ -165,59 +287,56 @@ function DisplayTableData(dataArray) {
                         cell.appendChild(document.createTextNode(cellValue));
                     break;
                 }
-                
-                // Append the cell to the current row
-                itemCells.appendChild(cell);
+    
+                rowElement.appendChild(cell);
             }
-            
-            tableBodyClone.appendChild(itemCells)
+    
+            tableBody.appendChild(rowElement);
         }
-        return tableClone.appendChild(tableBodyClone), tableClone.classList.add("sortable"), tableClone;
+    
+        table.appendChild(tableBody);
+        table.classList.add("table", "sortable"); // Add classes for styling
+        tableContainer.innerHTML = "";
+        tableContainer.appendChild(table);
     }
-
-    // Creating the header rows for information (Account, Date & Time, Item Name, Price...)
-    function CreateHeaderRowKeys(dataArray, tableClone) {
-        const headerKeys = [];
-
-        for(i = 0; i < dataArray.length; i++){
-            for(key in dataArray[i]){ // Check all the keys in the current data;
-                // Check if the key is unique;
-                if(dataArray[i].hasOwnProperty(key) && headerKeys.indexOf(key) == -1){
-                    headerKeys.push(key); // Adding the key;
-
-                    // Creating the cell and appending it;
-                    const headerCell = tableHeader.cloneNode(false);
-                    headerCell.appendChild(document.createTextNode(key));
-                    tableRowClone.appendChild(headerCell);   
-                } else break;
-            }
-        }
-
-        headerKeys.push("JN");
-        headerCell = tableHeader.cloneNode(false);
-        headerCell.appendChild(document.createTextNode("JN"));
-        tableRowClone.appendChild(headerCell);
-        
-        //Creating the header rows;
-        const headerRow = tableHead.cloneNode(false);
-        headerRow.appendChild(tableRowClone);
-        tableClone.appendChild(headerRow);
-
-        return headerKeys;
-    }  
 }
 
+function CreateHeaderRowKeys(dataArray, keysToPush, tableHeader) {
+    var tableRowClone = tableRow.cloneNode(false);
 
-//--------------------------------
+    const headerKeys = [];
+    const firstItem = dataArray[0];
 
+    for(key in firstItem){ // Check all the keys in the current data;
+        // Check if the key is unique;
+        if(firstItem.hasOwnProperty(key) && headerKeys.indexOf(key) == -1){
+            headerKeys.push(key); // Adding the key;
 
-// Handles the JN link of the item;
-function CreateJellyneoLink(cellValue){
-    var itemLink = document.createElement("a");
-    itemLink.href = "https://items.jellyneo.net/search/?name=" + cellValue + "&name_type=3";
-    itemLink.innerText = cellValue;
-    itemLink.setAttribute("target", "_blank");
-    return itemLink;
+            // Creating the cell and appending it;
+            const headerCell = tableHeader.cloneNode(false);
+            headerCell.appendChild(document.createTextNode(key));
+            tableRowClone.appendChild(headerCell);   
+        } else break;
+    }
+
+    // Pushing extra keys to the DB;
+    keysToPush.forEach(function(key){
+        headerKeys.push(key);
+        headerCell = tableHeader.cloneNode(false);
+        headerCell.appendChild(document.createTextNode(key));
+        tableRowClone.appendChild(headerCell);
+    });
+
+    //Creating the header rows;
+    const headerRow = tableHead.cloneNode(false);
+    headerRow.appendChild(tableRowClone);
+    table.appendChild(headerRow);
+
+    return headerKeys;
+}
+
+function NumberWithCommas(e) {
+    return e.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 // Handles the JN link of the item;
@@ -228,15 +347,11 @@ function CreatePurchaseStatusSpan(cellValue){
     // Coloring the span based on the purchase interaction type;
     switch(cellValue){
         case "Bought":
-            statusSpan.style.color = "green";
-        break;
-
-        case "Attempted":
-            statusSpan.style.color = "grey";
+            statusSpan.style.color = "#2196F3";
         break;
 
         default:
-            statusSpan.style.color = "red";
+            statusSpan.style.color = "grey";
         break;
     }
 
@@ -256,398 +371,181 @@ function MakeSortableTable(){
 
 //######################################################################################################################################
 
-var currentHistorySize = -1;
+/*
+const data = item_db_array;
+const chunkSize = 500;
+var currentPage = 1;
 
-function ProcessPurchaseHistory(forceUpdateHistory) {
-    chrome.storage.local.get({
-        ITEM_HISTORY: [],
-    }, (function(t) {
-        const historySize = t.ITEM_HISTORY.length;
-        var purchaseManager = ManagePurchases(t.ITEM_HISTORY)
-        var itemData = ProcessItemData(purchaseManager);
 
-        if (forceUpdateHistory || currentHistorySize != historySize) {
-            currentHistorySize = historySize;
-            DisplayTableData(purchaseManager);
-            //Analytics(purchaseManager, itemData, totalProfit)
-        }
-    }))
+// Calculate the total number of pages
+const totalPages = Math.ceil(data.length / chunkSize);
+
+// Function to load data for the current page
+function LoadCurrentPage() {
+    LoadTableData(data, chunkSize, currentPage);
+
+    // Update navigation
+    UpdateNavigation();
 }
 
-//--------------------------------
+function LoadTableData(data, chunkSize, currentPage){
+    table.innerHTML = "";
+    thead.innerHTML = "";
+    tbody.innerHTML = "";
+    const headers = [];
 
-function ManagePurchases(purchases){
-    if(purchases.length <= 1) return purchases;
-
-    const optimizedPurchases = [];
-
-    //Optimized purchases;
-    for(var purchase of purchases){
-        optimizedPurchases.push(purchase);
-    }
-
-    return optimizedPurchases;
-}
-
-//--------------------------------
-
-var totalProfit = 0, totalValue = 0;
-
-// Processes and formats the item data in the table;
-function ProcessItemData(itemArray){
-    totalProfit = 0;
-    totalValue = 0;
-
-    for(var item of itemArray){
-        const itemInfo = item_db[item["Item Name"]];
-
-        if(itemInfo == undefined){
-            item.Rarity = "?";
-        } else {
-            // If the item info exists, update price and rarity
-            item.Rarity = itemInfo.Rarity;
-
-            const boughtPrice = parseInt(item.Price);
-            const itemValue = parseInt(itemInfo.Price);
-            
-            // Measuring the value of the purchase
-            var value = itemValue;
-            item["Est. Value"] = CheckIsNaNDisplay(value, "-", FormatNPNumber(value));
-            if(!isNaN(value)) totalValue += value;
-
-            // Measuring the profit from the purchase;
-            var profit = itemValue - boughtPrice;
-            item["Est. Profit"] = CheckIsNaNDisplay(profit, "-", FormatNPNumber(profit));
-            var totalProfitLabel = document.getElementById("total-profit"); 
-            var totalValueLabel = document.getElementById("total-value");
-
-            if(!isNaN(profit)) totalProfit += profit;
-
-            item["Price"] = CheckIsNaNDisplay(boughtPrice, "-", boughtPrice);
-        }
-    }
-
-    document.getElementById("total-profit").innerText = FormatNPNumber(totalProfit);
-    document.getElementById("total-value").innerText = FormatNPNumber(totalValue);
-
-    return totalProfit;
-}
-
-//--------------------------------
-
-//If a value is NaN or not, then it'll display one option or the other;
-function CheckIsNaNDisplay(input, outputTrue, outputFalse){
-    return isNaN(input) ? outputTrue : outputFalse;
-}
-
-
-//######################################################################################################################################
-
-
-var i = 20;
-
-function Analytics(t, r, n) {
-    var a = "No analytics are available yet. Check back after some more successful purchases!";
-    t.length > 10 && r > 5e5 && n > 5e5 && document.getElementById("analytics-container")
-        .innerHTML != a ? (function(t) {
-            var r = function(e) {
-                var t = new Map;
-                for (var r of e) t.set(r["Shop Name"], 0);
-                for (var r of e) t.set(r["Shop Name"], t.get(r["Shop Name"]) + ParseNumericString(r["Est. Profit"]));
-                return t = new Map([...t.entries()].sort(((e, t) => t[1] - e[1]))), t
-            }(t);
-            new Chartist.Bar("#profit-by-store", {
-                labels: Array.from(r.keys()),
-                series: [Array.from(r.values())]
-            }, {
-                low: 0,
-                axisX: {
-                    showGrid: !1,
-                    offset: 75
-                },
-                axisY: {
-                    offset: 100,
-                    labelInterpolationFnc: function(t) {
-                        return FormatNumberWithSymbols(t) + " NP"
-                    }
-                }
-            })
-        }(t), function(t) {
-            var r = function(e) {
-                var t = new Map;
-                for (var r of e) t.set(r["Item Name"], 0);
-                for (var r of e) t.set(r["Item Name"], t.get(r["Item Name"]) + 1);
-                for (var n = new Map, a = 0; a < i; a++) {
-                    var o = [...t.entries()].reduce(((e, t) => t[1] > e[1] ? t : e));
-                    if (o[1] <= 0) break;
-                    n.set(o[0], o[1]), t.set(o[0], -1)
-                }
-                return n = new Map([...n.entries()].sort(((e, t) => t[1] - e[1])))
-            }(t);
-            new Chartist.Bar("#most-common-items", {
-                labels: Array.from(r.keys()),
-                series: [Array.from(r.values())]
-            }, {
-                low: 0,
-                axisX: {
-                    showGrid: !1,
-                    offset: 75
-                },
-                axisY: {
-                    offset: 100,
-                    labelInterpolationFnc: function(t) {
-                        return FormatNumberWithSymbols(t)
-                    }
-                }
-            })
-        }(t), function(t) {
-            var r = function(e) {
-                var t = new Map;
-                for (var r of e) t.set(r["Item Name"], 0);
-                for (var r of e) t.set(r["Item Name"], t.get(r["Item Name"]) + ParseNumericString(r["Est. Profit"]));
-                for (var n = new Map, a = 0; a < i; a++) {
-                    var o = [...t.entries()].reduce(((e, t) => t[1] > e[1] ? t : e));
-                    if (o[1] <= 0) break;
-                    n.set(o[0], o[1]), t.set(o[0], -1)
-                }
-                return n = new Map([...n.entries()].sort(((e, t) => t[1] - e[1])))
-            }(t);
-            new Chartist.Bar("#best-items", {
-                labels: Array.from(r.keys()),
-                series: [Array.from(r.values())]
-            }, {
-                low: 0,
-                axisX: {
-                    showGrid: !1,
-                    offset: 75
-                },
-                axisY: {
-                    offset: 100,
-                    labelInterpolationFnc: function(t) {
-                        return FormatNumberWithSymbols(t)
-                    }
-                }
-            })
-        }(t), function(t) {
-            var r = function(e) {
-                var t = new Map;
-                for (var r of e) t.set(r.Account, 0);
-                for (var r of e) t.set(r.Account, t.get(r.Account) + ParseNumericString(r["Est. Profit"]));
-                return t = new Map([...t.entries()].sort(((e, t) => t[1] - e[1]))), t
-            }(t);
-            new Chartist.Bar("#profit-by-account", {
-                labels: Array.from(r.keys()),
-                series: [Array.from(r.values())]
-            }, {
-                low: 0,
-                axisX: {
-                    showGrid: !1,
-                    offset: 75
-                },
-                axisY: {
-                    offset: 100,
-                    labelInterpolationFnc: function(t) {
-                        return FormatNumberWithSymbols(t) + " NP"
-                    }
-                }
-            })
-        }(t), function(t) {
-            var r = function(e) {
-                var t = new Map;
-                for (var r of e) {
-                    var n = FormatDate(r["Date & Time"]);
-                    t.set(n, 0)
-                }
-                for (var r of e) {
-                    n = FormatDate(r["Date & Time"]);
-                    t.set(n, t.get(n) + ParseNumericString(r["Est. Profit"]))
-                }
-                return t = new Map([...t.entries()].reverse()), t
-            }(t);
-            new Chartist.Line("#timeline", {
-                labels: Array.from(r.keys()),
-                series: [Array.from(r.values())]
-            }, {
-                low: 0,
-                axisX: {
-                    showGrid: !1,
-                    offset: 75
-                },
-                axisY: {
-                    offset: 100,
-                    labelInterpolationFnc: function(t) {
-                        return FormatNumberWithSymbols(t)
-                    }
-                }
-            })
-        }(t), function(e, t) {
-            new Chartist.Pie("#ratio", {
-                series: [e, t]
-            }, {
-                donut: !0,
-                donutWidth: 50,
-                startAngle: 270,
-                total: e + t,
-                labelInterpolationFnc: function(r) {
-                    return (r / (e + t) * 100)
-                        .toFixed(1) + "%"
-                }
-            })
-        }(r, n), function(t) {
-            var r = CalculateProfitsByTime(t, "Est. Profit"),
-                n = CalculateProfitsByTime(t, "Est. Value");
-            new Chartist.Line("#hourly", {
-                labels: Array.from(n.keys()),
-                series: [Array.from(r.values()), Array.from(n.values())]
-            }, {
-                low: 0,
-                axisX: {
-                    showGrid: !1,
-                    offset: 75,
-                    labelInterpolationFnc: function(e) {
-                        return e
-                    }
-                },
-                axisY: {
-                    offset: 100,
-                    labelInterpolationFnc: function(t) {
-                        return FormatNumberWithSymbols(t)
-                    }
-                }
-            })
-        }(t), function(e) {
-            for (var t = CalculateProfitsByTime(e, "Est. Profit"), r = CalculateProfitsByTime(e, "Est. Value"), n = [], a = 0; a < Array.from(t.values())
-                .length; a++) n.push(Number(Array.from(t.values())[a]) / Number(Array.from(r.values())[a]));
-            new Chartist.Line("#hourly-percent", {
-                labels: Array.from(r.keys()),
-                series: [Array.from(n)]
-            }, {
-                low: 0,
-                axisX: {
-                    showGrid: !1,
-                    offset: 75,
-                    labelInterpolationFnc: function(e) {
-                        return e
-                    }
-                },
-                axisY: {
-                    offset: 100,
-                    labelInterpolationFnc: function(e) {
-                        return (100 * e)
-                            .toFixed(0) + "%"
-                    }
-                }
-            })
-        }(t)) : (document.getElementById("analytics-container")
-            .innerHTML = "", $("#analytics-container")
-            .text(a))
-}
-
-//--------------------------------
-
-// Calculates profits by time by sorting them;
-function CalculateProfitsByTime(entries, entryType) {
-    const timeProfitMap = new Map;
-
-    // Add profits by time;
-    for(const entry of entries){
-        const time = GetTimeFromEntry(entry["Date & Time"]);
-        // Set to 0 non existant entries, update profits for a specific timeframe;
-        timeProfitMap.set(time, (timeProfitMap.get(time) || 0) + CalculateEstimatedProfit(entry[entryType]));
-    }
-
-    // Creating the sorted graph;
-    const sortedTimeProfitMap = new Map([...timeProfitMap.entries()].sort((entryA, entryB) => {
-        const timeA = entryA[0];
-        const timeB = entryB[0];
-
-        // Checking profits between AM and PM times;
-        if(timeA.includes("A") && !timeB.includes("A")){
-            return -1;
-        } else if(!timeA.includes("A") && timeB.includes("A")){
-            return 1;
-        } else{
-            //Extracting numeric hours;
-            const regex = /(\d+)/;
-            const numericTimeA = Number(timeA.match(regex)[0]);
-            const numericTimeB = Number(timeB.match(regex)[0]);
-
-            if(numericTimeA === 12){
-                return -1;
-            } else if(numericTimeB === 12){
-                return 1;
-            } else {
-                return numericTimeA - numericTimeB;
+    const headerRow = document.createElement("tr");
+    headerRow.classList.add("header-row"); // Add class for table header row
+    
+    for (const row of data) {
+        for (const key in row) {
+            if (row.hasOwnProperty(key) && headers.indexOf(key) === -1) {
+                headers.push(key);
+                const headerCell = document.createElement("th");
+                headerCell.textContent = key;
+                headerRow.appendChild(headerCell);
+                headerRow.classList.add(`class-${key}`);
             }
         }
-    }));
-
-    return sortedTimeProfitMap;
-}
-
-// Extract the date and time from a string;
-function GetTimeFromEntry(dateTime){
-    return dateTime.split(" ")[1].split(":")[0] + dateTime.split(" ")[2];
-}
-
-// Calculate profit from string;
-function CalculateEstimatedProfit(profit) {
-    // Check if profit is a valid string
-    if (profit === undefined || profit === null) {
-        return 0; // Return a default value or handle the error as needed
     }
 
-    const numericProfit = Number(profit.replaceAll(",", ""));
-    return isNaN(numericProfit) ? 0 : numericProfit;
+    const jnRow = document.createElement("th");
+    jnRow.classList.add("header-row"); // Add class for table header row
+    jnRow.textContent = "JellyNeo";
+    jnRow.classList.add("class-jellyneo");
+    headerRow.appendChild(jnRow);
+    headers.push("JellyNeo");
+    
+
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    table.appendChild(tbody);
+    table.classList.add("table", "sortable"); // Add classes for styling
+    tableContainer.appendChild(table);
+
+    LoadChunksOfData(data, chunkSize, currentPage, headers);
 }
 
-// Parses a date to a specific format;
-function FormatDate(dateString) {
-    const dateComponents = dateString.split("/");
+function LoadChunksOfData(data, chunkSize, currentPage, headers){
+    var e = document.createElement("script");
+    e.setAttribute("src", "../../../js/sortable.js"), document.head.append(e)
+    
+    const startIndex = (currentPage - 1) * chunkSize;
+    const endIndex = startIndex + chunkSize;
+    const dataChunk = data.slice(startIndex, endIndex);
 
-    const month = dateComponents[0];
-    const year = dateComponents[2];
+    for (var i = 0; i < chunkSize && dataChunk[i] != null; i++) {
+        const row = dataChunk[i];
+        const rowElement = document.createElement("tr");
+        rowElement.classList.add("item");
+        var lastName = "";
 
-    // Keeping the last two digits from the year;
-    const formattedYear = year.replace(",", "".substring(2));
+        for (const header of headers) {
+            const cell = document.createElement("td");
+            cell.classList.add("table-cell"); // Add class for table cells
+            let cellValue = row[header] || "";
 
-    return month + "/" + formattedYear;
-}
+            switch (header) {
+                case "Date & Time":
+                    cell.classList.add('class-DateTime');
+                break;
 
-function ParseNumericString(inputString) {
-    // Check if inputString is valid
-    if (inputString === undefined) {
-        return 0; // Return a default value or handle the error as needed
+                case "Name":
+                    const name = document.createElement("div");
+                    name.innerText = cellValue;
+                    cell.appendChild(name);
+                    lastName = cellValue;
+                    cell.classList.add('class-Name');
+                break;
+                
+                case "Rarity":
+                    cell.textContent = NumberWithCommas(cellValue);
+                    cell.classList.add('class-Rarity');
+                break;
+
+                case "Price":
+                    cell.textContent = NumberWithCommas(cellValue);
+                    cell.classList.add('class-Price');
+                break;
+
+                case "JellyNeo":
+                    // Create the <a> element
+                    var linkElement = document.createElement("a");
+                    linkElement.href = `https://items.jellyneo.net/search/?name=${lastName}&name_type=3`;
+
+                    // Create the <img> element
+                    var imgElement = document.createElement("img");
+                    imgElement.src = "../JN.png";
+                    imgElement.alt = "Info Icon";
+
+                    linkElement.appendChild(imgElement);
+
+                    cell.appendChild(linkElement);
+                    cell.classList.add('class-JellyNeo');
+                break;
+                
+                
+            }
+
+            rowElement.appendChild(cell);
+        }
+
+        tbody.appendChild(rowElement);
     }
 
-    const numbersOnly = inputString.replace(",", "");
-    const number = isNaN(Number(numbersOnly)) ? 0 : Number(numbersOnly);
-    return number;
+    table.appendChild(tbody);
+    table.classList.add("table", "sortable"); // Add classes for styling
+    tableContainer.appendChild(table);
 }
 
+// Function to update navigation buttons and page indicator
+function UpdateNavigation() {
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    const pageIndicator = document.getElementById("page-indicator");
+
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages;
+
+    pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+}
+
+// Event listener for previous button
+document.getElementById("prev-button").addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+    }
+
+    LoadCurrentPage();
+});
+
+// Event listener for next button
+document.getElementById("next-button").addEventListener("click", () => {
+    if (currentPage < totalPages) {
+        currentPage++;
+
+    }
+
+    LoadCurrentPage();
+});
+
+// Event listener for next button
+document.getElementById("first-button").addEventListener("click", () => {
+    currentPage = 1;
+
+    LoadCurrentPage();
+});
+
+// Event listener for next button
+document.getElementById("last-button").addEventListener("click", () => {
+    currentPage = totalPages;
+
+    LoadCurrentPage();
+});
+
+// Initial load
+LoadCurrentPage();
+*/
 
 //######################################################################################################################################
-
-
-function wrapper() {
-    //On click, toggle tabs and its containers;
-    document.getElementById("table").onclick = function(e) {
-        ToggleTabs("table", "table-container")
-    } 
-    
-    //On click, toggle analytics and its containers;
-    /*document.getElementById("analytics").onclick = function(e) {
-        window.alert("Feature currently unavailable.\n\nThanks for your patience!");
-        //ToggleTabs("analytics", "analytics-container"), ProcessPurchaseHistory(true)
-    }*/
-    
-    //Toggling the main tab;
-    ToggleTabs("table", "table-container");
-    
-    //Update the history data every 5 seconds;
-    ProcessPurchaseHistory(false), setInterval((function() {
-        ProcessPurchaseHistory(false)
-    }), 5e3)
-}
-
-wrapper();

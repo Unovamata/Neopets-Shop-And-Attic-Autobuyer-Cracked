@@ -37,15 +37,15 @@ function LoadTableData(data, chunkSize, currentPage){
     const headerRow = document.createElement("tr");
     headerRow.classList.add("header-row"); // Add class for table header row
     
-    for (const row of data) {
-        for (const key in row) {
-            if (row.hasOwnProperty(key) && headers.indexOf(key) === -1) {
-                headers.push(key);
-                const headerCell = document.createElement("th");
-                headerCell.textContent = key;
-                headerRow.appendChild(headerCell);
-                headerRow.classList.add(`class-${key}`);
-            }
+    var firstItem = data[0];
+
+    for (const key in firstItem) {
+        if (firstItem.hasOwnProperty(key) && headers.indexOf(key) === -1) {
+            headers.push(key);
+            const headerCell = document.createElement("th");
+            headerCell.textContent = key;
+            headerRow.appendChild(headerCell);
+            headerRow.classList.add(`class-${key}`);
         }
     }
 

@@ -5,7 +5,6 @@
         <link rel="stylesheet" type="text/css" href="../../../js/chart.css" />
         <link rel="stylesheet" type="text/css" href="../options.css" />
         <link rel="stylesheet" type="text/css" href="../table.css">
-        
     </head>
 
     <body>
@@ -13,22 +12,39 @@
             <div class="enter-info">NeoBuyer+ History</div>
             <div class="rarity-info">Previous Purchases History
                 <div class="autosaved">
-                    <span class="sub">Total estimated profit: </span><span id="total-profit"></span><br>
-                    <span class="sub">Total attempted value: </span><span id="total-value"></span>
+                    <span class="sub">Total estimated profit: </span><span id="total-profit">Loading...</span><br>
+                    <span class="sub">Total attempted value: </span><span id="total-value">Loading...</span><br>
+                    <span class="sub">Total history entries: <span id="total-entries">Loading...</span>
                 </div>
             </div>
             
-            <button class="tablinks button" id="table">Table</button>
+            <button class="tablinks button" id="table-button">Table</button>
+            <button class="tablinks button" id="analytics-button"><sub></sub> Analytics <sup>beta</sup></button>
+            <div class="page-navigation">
+                <button id="first-button" class="button">|< First</button>
+                <button id="prev-button" class="button"><< Previous</button>
+                <span id="page-indicator" class="rarity-info"></span>
+                <button id="next-button" class="button">Next >></button>
+                <button id="last-button" class="button">Last >|</button>
+            </div>
             <br><br>
-            <!--<button class="tablinks button" id="analytics"><sub></sub> Analytics <sup>beta</sup></button>-->
 
             <center>
                 <!-- Table -->
-                <div id="table-container" class="tabcontent table"></div>
+                <div id="table-container" class="tabcontent table">
+                    <span class="loading rarity-info">Loading...</span>
+                </div>
                 
                 <!-- Analytics -->
-                <!--<div id="analytics-container" display="none" class="tabcontent table">
-                    <br>
+                <div id="analytics-container" display="none" class="tabcontent table">
+                    <div>
+                        <div class="category-info">Average Purchase Ratio</div>
+                        <div class="subcategory-info">
+                            <canvas id="mainShopRatioChart"></canvas>
+                        </div>
+                    </div><br><br>
+
+                    <!--<br>
                     <div class="chart-label">Profit by store name:</div>
                     <div class="ct-chart ct-golden-section ct-major-twelfth" id="profit-by-store"></div>
                     <div class="chart-label">Profit by account:</div>
@@ -47,9 +63,9 @@
                     <div class="chart-label">Total profit vs attempted value:<br>
                         <span class="sub">(Anything over 8% is considered a great ratio)</span></div>
                     <div class="ct-chart ct-golden-section ct-double-octave" id="ratio"></div>
-                    <br>
+                    <br>-->
                     
-                </div>-->
+                </div>
                 <br>
                 <button id="reset" class="button reset">Clear Purchase History</button>
             </center>
@@ -62,7 +78,7 @@
         <script src="../../toolbar.js"></script>
         <script src="../../../js/jquery.js"></script>
         <script src="../../../js/sortable.js"></script>
-        <script src="../../../js/chart.js"></script>
+        <script src="../../../js/chart.umd.js"></script>
         <script src="../../common/item_db.js"></script>
         <script src="../../../js/ExtPay.js"></script>
         <script src="history.js"></script>
