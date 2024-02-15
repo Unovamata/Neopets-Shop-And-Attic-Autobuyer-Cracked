@@ -242,7 +242,7 @@ ProcessAutoKQLog(false), setInterval((function() {
     ProcessAutoKQLog(false)
 }), 5e3)
 
-  chrome.storage.local.get({
+chrome.storage.local.get({
     KQ_TRACKER: [],
 }, (function(tracker) {
     var data = tracker.KQ_TRACKER;
@@ -265,8 +265,6 @@ ProcessAutoKQLog(false), setInterval((function() {
 
     PrizeTypesPerMonth(data, "prizesPerMonth")
 }))
-
-var chartSize = "400px";
 
 function FilterDataToday(data){
     return data.filter(function(entry){

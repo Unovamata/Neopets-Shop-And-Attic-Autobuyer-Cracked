@@ -38,11 +38,19 @@
                 <!-- Analytics -->
                 <div id="analytics-container" display="none" class="tabcontent table">
                     <div>
-                        <div class="category-info">Average Purchase Ratio</div>
+                        <div class="category-info">Main Shops Average Purchase Ratio</div>
                         <div class="subcategory-info">
                             <canvas id="mainShopRatioChart"></canvas>
                         </div>
                     </div><br><br>
+
+                    <div>
+                        <div class="category-info">Almost Abandoned Attic Average Purchase Ratio</div>
+                        <div class="subcategory-info">
+                            <canvas id="atticRatioChart"></canvas>
+                        </div>
+                    </div><br><br>
+                </div>
 
                     <!--<br>
                     <div class="chart-label">Profit by store name:</div>
@@ -64,8 +72,6 @@
                         <span class="sub">(Anything over 8% is considered a great ratio)</span></div>
                     <div class="ct-chart ct-golden-section ct-double-octave" id="ratio"></div>
                     <br>-->
-                    
-                </div>
                 <br>
                 <button id="reset" class="button reset">Clear Purchase History</button>
             </center>
@@ -73,15 +79,19 @@
             
             <br><br><br>
         </div>
-
+        
+        <script src="../../../js/chart.umd.js"></script>
+        <script src="../../../js/chartjs-plugin-datalabels.min.js"></script>
+        <script src="../../../js/sortable.js"></script>
+        <script src="../DisplayChunkData.js"></script>
         <script src="../../common/utils.js"></script>
         <script src="../../toolbar.js"></script>
         <script src="../../../js/jquery.js"></script>
-        <script src="../../../js/sortable.js"></script>
-        <script src="../../../js/chart.umd.js"></script>
+        <script src="../../../js/moment.js"></script>
+        <script src="../../../js/moment-timezone-with-data.js"></script>
+        <script src="../../common/default_items.js"></script>
+        <script src="../optionsPage.js"></script>
         <script src="../../common/item_db.js"></script>
-        <script src="../../../js/ExtPay.js"></script>
-        <script src="../DisplayChunkData.js"></script>
         <script src="history.js"></script>
     </body>
 </html>

@@ -922,6 +922,7 @@ function FormatDatalabelsOptions(){
 }
 
 var notEnoughData = "Additional data is necessary for analytics to operate effectively...";
+var chartSize = "400px";
 
 // Create a chart with datalabels;
 function CreateChartWithLabels(id, type, labels, data, options){

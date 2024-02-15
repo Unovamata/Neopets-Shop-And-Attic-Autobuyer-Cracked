@@ -68,6 +68,8 @@ function ProcessPurchaseHistory(forceUpdateHistory) {
         if (forceUpdateHistory || currentHistorySize != historySize) {
             currentHistorySize = historySize;
             DisplayTableData(processedData, ["JN"], chunkSize, FilterFunction);
+
+            try { AveragePurchaseRatios(processedData, "mainShopRatioChart", "atticRatioChart"); } catch {}
         }
 
         // Updating the page data;
@@ -75,6 +77,7 @@ function ProcessPurchaseHistory(forceUpdateHistory) {
         UpdateNavigation();
     }))
 }
+
 
 var totalProfit = 0, totalValue = 0;
 
@@ -194,3 +197,49 @@ function CreatePurchaseStatusSpan(cellValue){
 }
 
 //######################################################################################################################################
+
+// Charts
+
+function AveragePurchaseRatios(data, mainShopId, atticId){
+    var mainShopBuyRatio = [0, 0],
+    atticShopBuyRatio = [0, 0];
+
+    data.forEach(function(entry, index){
+        switch(entry["Shop Name"]){
+            case "Attic":
+                try{
+                    var lastEntry = data[index - 1];
+                    
+                    // If the item was bought in the same session;
+                    if(lastEntry.Name == entry.Name && entry.Status == "Bought"){
+                        atticShopBuyRatio[0] += 1; // Add to the purchase positive ratio;
+                    } else { // If not, the item was not bought, add it to the negative ratio;
+                        atticShopBuyRatio[1] += 1;
+                    }
+                } catch {
+                    atticShopBuyRatio[1] += 1;
+                }
+            break;
+
+            default:
+                switch(entry.Status){
+                    case "Bought":
+                        mainShopBuyRatio[0] += 1;
+                    break;
+
+                    default: // Missed items;
+                        mainShopBuyRatio[1] += 1;
+                    break;
+                }
+            break;
+        }
+    });
+    
+    var mainShopRatioChart = CreateChartWithLabels(mainShopId, "pie", ["Bought", "Missed"], mainShopBuyRatio, FormatDatalabelsOptions());
+
+    if(mainShopRatioChart) ResizeChartInterval(mainShopId, chartSize);
+
+    var atticRatioChart = CreateChartWithLabels(atticId, "pie", ["Bought", "Missed"], atticShopBuyRatio, FormatDatalabelsOptions());
+
+    if(atticRatioChart) ResizeChartInterval(atticId, chartSize);
+}
