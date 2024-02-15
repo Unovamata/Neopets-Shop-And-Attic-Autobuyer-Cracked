@@ -95,7 +95,7 @@ function DisplayTableData(data, keysToPush, chunkSize, FilterFunction) {
                 cell.classList.add("table-cell"); // Add class for table cells
                 let cellValue = row[header] || "";
                 
-                cell = FilterFunction(header, cell, [cellValue]);
+                cell = FilterFunction(header, cell, [cellValue, row]);
     
                 rowElement.appendChild(cell);
             }

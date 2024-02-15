@@ -1,16 +1,3 @@
-function getSTART_AUTOKQ_PROCESS(callback) {
-    chrome.storage.local.get(['START_AUTOKQ_PROCESS'], function (result) {
-        const value = result.START_AUTOKQ_PROCESS;
-
-        if (typeof callback === 'function') {
-        callback(value);
-        }
-    });
-}
-
-//######################################################################################################################################
-
-
 const statusTag = document.getElementById("status-tag");
 
 
@@ -34,15 +21,9 @@ setInterval(UpdateGUIData, 500);
 
 //######################################################################################################################################
 
-const KQpageButton = document.getElementById("page");
 
-KQpageButton.addEventListener('click', function() {
-    chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: true });
-});
-
-
-const startAutoPricingButton = document.getElementById("start");
-startAutoPricingButton.addEventListener('click', StartAutoKQ);
+const startAutoKQButton = document.getElementById("start");
+startAutoKQButton.addEventListener('click', StartAutoKQ);
 
 var autoPricingList = [];
 
@@ -69,8 +50,8 @@ function StartAutoKQ(){
     setAUTOKQ_STATUS("AutoKQ Process Running...");
 }
 
-const cancelAutoPricingButton = document.getElementById("cancel");
-cancelAutoPricingButton.addEventListener('click', CancelAutoPricer);
+const cancelAutoKQButton = document.getElementById("cancel");
+cancelAutoKQButton.addEventListener('click', CancelAutoPricer);
 
 function CancelAutoPricer(){
     if(confirm("Do you want to terminate the current AutoPricer process?")){
@@ -89,11 +70,11 @@ function CancelAutoPricer(){
 function HideKQButtons(){
     getSTART_AUTOKQ_PROCESS(function (isActive) {
         if(isActive){
-            startAutoPricingButton.style.display = "none";
-            cancelAutoPricingButton.style.display = "inline";
+            startAutoKQButton.style.display = "none";
+            cancelAutoKQButton.style.display = "inline";
         } else {
-            cancelAutoPricingButton.style.display = "none";
-            startAutoPricingButton.style.display = "inline";
+            cancelAutoKQButton.style.display = "none";
+            startAutoKQButton.style.display = "inline";
         }
     });
 }
@@ -131,69 +112,6 @@ function ShowAnalytics(){
 
 ShowHistory();
 
-
-//######################################################################################################################################
-
-
-// Number formatting
-function FormatNumberWithSymbols(number, decimalPlaces) {
-    // Mapping of value thresholds to symbols
-    const symbolMap = [
-        { value: 1e12, symbol: "t" },
-        { value: 1e9, symbol: "b" },
-        { value: 1e6, symbol: "m" },
-        { value: 1e3, symbol: "k" },
-        { value: 1, symbol: "" }
-    ];
-
-    // Reverse the symbol map and find the appropriate symbol
-    const matchedSymbol = symbolMap.find(symbolInfo => {
-        return number >= symbolInfo.value;
-    });
-
-    // Format the number with the matched symbol
-    if (matchedSymbol) {
-        var numberValue = number / matchedSymbol.value;
-        var numberToFixed = numberValue.toFixed(decimalPlaces);
-        var formattedNumber = numberToFixed.replace(/\.0+$|(\.[0-9]*[1-9])0+$/, "$1") + matchedSymbol.symbol;
-
-        return (formattedNumber);
-    } else {
-        return "0";
-    }
-}
-
-
-// Toggle tab contents
-function ToggleTabs(selectedTabId, contentIdToShow) {
-    // Hide all tab content elements
-    var tabContents = document.querySelectorAll(".tabcontent");
-    var tabLinks = document.querySelectorAll(".tablinks");
-
-    for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].style.display = "none";
-        tabLinks[i].classList.remove("active");
-    }
-
-    // Add "active" class to the selected tab link and display the corresponding content
-    document.getElementById(selectedTabId).classList.add("active");
-    document.getElementById(contentIdToShow).style.display = "block";
-}
-
-// Adds thousands and commas to separate and format a more readable number;
-function AddThousandSeparators(number) {
-    return number.toLocaleString();
-}
-
-// Number with NP at the end;
-function FormatNPNumber(input) {
-    return AddThousandSeparators(input) + " NP"
-}
-
-
-//######################################################################################################################################
-
-
 const clearButton = document.getElementById("resetKQ");
 clearButton.addEventListener('click', ClearKQLog);
 
@@ -205,244 +123,119 @@ function ClearKQLog(){
     }
 }
 
-var newTable = document.createElement("table");
-var tableBody = document.createElement("tbody");
-var tableRow = document.createElement("tr");
-var tableHead = document.createElement("thead");
-var tableHeader = document.createElement("th");
-var tableDataCell = document.createElement("td");
-var nullDataMessage = "No Kitchen Quests Done Yet.";
+const KQpageButton = document.getElementById("page");
 
-// Data Table with purchase history and information;
-function DisplayTableData(dataArray) {
-    var tableContainer = document.getElementById("table-container");
+KQpageButton.addEventListener('click', function() {
+    chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: true });
+});
 
-    if (dataArray.length === 0) {
-        tableContainer.classList.add("subcategory-info");
-        tableContainer.textContent = "No Kitchen Quests Done Yet.";
-        clearButton.setAttribute("disabled", true);
-        return;
-    }
-
-    document.getElementById("table-container").innerHTML = "";
-    
-    var tableClone = newTable.cloneNode(false);
-    var tableBodyClone = tableBody.cloneNode(false);
-    var tableRowClone = tableRow.cloneNode(false);
-    
-    // Appending data to the table;
-    tableContainer.appendChild(AppendDataToTable(dataArray.reverse()));
-    
-    MakeSortableTable();
-
-
-    // FUNCTION'S FUNCTIONS;
-    // Creating the header rows for information (Account, Date & Time, Item Name, Price...)
-    function AppendDataToTable(dataArray){
-        tableRowClone = CreateHeaderRowKeys(dataArray, tableClone);
-
-        for (a = 0; a < dataArray.length; ++a) {
-            var itemCells = tableRow.cloneNode(false);
-            itemCells.classList.add("item");
-            var lastName = "";
-
-            // Navigating through the columns;
-            for (var s = 0; s < tableRowClone.length; ++s) {
-                // Clone a cell node for the current row
-                var cell = tableDataCell.cloneNode(false);
-                
-                // Get the value of the current cell or assign an empty string if undefined
-                var cellValue = dataArray[a][tableRowClone[s]] || "";
-                var prizeType = dataArray[a].Type;
-
-                // Setting the information nodes in the table cells;
-                switch(tableRowClone[s]){
-                    case "Date & Time":
-                        cell.appendChild(document.createTextNode(cellValue));
-                        cell.classList.add('class-DateTime');
-                    break;
-
-                    case "Item Name":
-                        const name = document.createElement("div");
-                        name.innerText = cellValue;
-                        cell.appendChild(name);
-                        lastName = cellValue;
-                        cell.appendChild(name);
-                    break;
-
-                    case "Status":
-                        // Create a colored span element for the "Status" column
-                        var statusSpan = CreatePurchaseStatusSpan(cellValue);
-                        cell.appendChild(statusSpan);
-                    break;
-
-                    case "Prize":
-                        if(prizeType == "Neopoints"){
-                            var priceValue = parseInt(cellValue);
-                            var priceSpan = CheckIsNaNDisplay(priceValue, "-", FormatNPNumber(priceValue));
-                            cell.appendChild(document.createTextNode(priceSpan));
-                        } else {
-                            cell.appendChild(document.createTextNode(cellValue));
-                        }
-                    break;
-
-                    case "JN":
-                        if(prizeType == "Item"){
-                            var itemName = dataArray[a].Prize;
-
-                            // Create the <a> element
-                            var linkElement = document.createElement("a");
-                            linkElement.href = `https://items.jellyneo.net/search/?name=${itemName}&name_type=3`;
-
-                            // Create the <img> element
-                            var imgElement = document.createElement("img");
-                            imgElement.src = "../JN.png";
-                            imgElement.alt = "Info Icon";
-
-                            linkElement.appendChild(imgElement);
-
-                            cell.appendChild(linkElement);
-                            cell.classList.add('class-JellyNeo');
-                        }
-                    break;
-
-                    default:
-                        cell.appendChild(document.createTextNode(cellValue));
-                    break;
-                }
-                
-                // Append the cell to the current row
-                itemCells.appendChild(cell);
-            }
-            
-            tableBodyClone.appendChild(itemCells)
-        }
-        return tableClone.appendChild(tableBodyClone), tableClone.classList.add("sortable"), tableClone;
-    }
-
-    // Creating the header rows for information (Account, Date & Time, Item Name, Price...)
-    function CreateHeaderRowKeys(dataArray, tableClone) {
-        const headerKeys = [];
-
-        for(i = 0; i < dataArray.length; i++){
-            for(key in dataArray[i]){ // Check all the keys in the current data;
-                // Check if the key is unique;
-                if(dataArray[i].hasOwnProperty(key) && headerKeys.indexOf(key) == -1){
-                    headerKeys.push(key); // Adding the key;
-
-                    // Creating the cell and appending it;
-                    const headerCell = tableHeader.cloneNode(false);
-                    headerCell.appendChild(document.createTextNode(key));
-                    tableRowClone.appendChild(headerCell);   
-                } else break;
-            }
-        }
-
-        headerKeys.push("JN");
-        headerCell = tableHeader.cloneNode(false);
-        headerCell.appendChild(document.createTextNode("JN"));
-        tableRowClone.appendChild(headerCell);
-        
-        //Creating the header rows;
-        const headerRow = tableHead.cloneNode(false);
-        headerRow.appendChild(tableRowClone);
-        tableClone.appendChild(headerRow);
-
-        return headerKeys;
-    }  
-}
-
-
-//--------------------------------
-
-
-// Handles the JN link of the item;
-function CreateJellyneoLink(cellValue){
-    var itemLink = document.createElement("a");
-    itemLink.href = "https://items.jellyneo.net/search/?name=" + cellValue + "&name_type=3";
-    itemLink.innerText = cellValue;
-    itemLink.setAttribute("target", "_blank");
-    return itemLink;
-}
-
-// Handles the JN link of the item;
-function CreatePurchaseStatusSpan(cellValue){
-    var statusSpan = document.createElement("a");
-    statusSpan.innerText = cellValue;
-
-    // Coloring the span based on the purchase interaction type;
-    switch(cellValue){
-        case "Bought":
-            statusSpan.style.color = "green";
-        break;
-
-        case "Attempted":
-            statusSpan.style.color = "grey";
-        break;
-
-        default:
-            statusSpan.style.color = "red";
-        break;
-    }
-
-    return statusSpan;
-}
-
-function MakeSortableTable(){
-    // Loop through all the table elements in the document
-    forEach(document.getElementsByTagName("table"), function(tableElement) {
-        // Find sortable elements and make them sortable;
-        if (tableElement.className.search(/\bsortable\b/) !== -1) {
-            sorttable.makeSortable(tableElement);
-            tableElement.classList.add("table");
-        }
-    });
-}
 
 //######################################################################################################################################
 
+
+// DisplayChunkData.js
+const chunkSize = 30;
+
+// Initial load
+LoadCurrentPage();
+
+LoadCurrentPage = function(){
+    ProcessAutoKQLog(true)
+
+    // Update navigation
+    UpdateNavigation();
+}
+
+
 var currentHistorySize = -1;
+const tableContainer = document.getElementById("table-container");
 
 function ProcessAutoKQLog(forceUpdateHistory) {
     chrome.storage.local.get({
         KQ_TRACKER: [],
     }, (function(t) {
-        const historySize = t.KQ_TRACKER.length;
-        var purchaseManager = ManagePurchases(t.KQ_TRACKER)
+        const history = t.KQ_TRACKER;
+        const historySize = history.length;
 
+        // Force updating if necessary;
         if (forceUpdateHistory || currentHistorySize != historySize) {
             currentHistorySize = historySize;
-            DisplayTableData(purchaseManager);
-            //Analytics(purchaseManager, itemData, totalProfit)
+            DisplayTableData(history, ["JN"], chunkSize, FilterFunction);
         }
+
+        // Updating the page data;
+        totalPages = Math.ceil(history.length / chunkSize);
+        UpdateNavigation();
     }))
 }
 
-//--------------------------------
+function FilterFunction(header, cell, data){    
+    // Setting the information nodes in the table cells;
+    switch(header){
+        case "Account":
+            cell.appendChild(document.createTextNode(data[0]));
+            cell.classList.add('class-DateTime');
+        break;
 
-function ManagePurchases(purchases){
-    if(purchases.length <= 1) return purchases;
+        case "Date & Time":
+            cell.appendChild(document.createTextNode(data[0]));
+            cell.classList.add('class-DateTime');
+        break;
 
-    const optimizedPurchases = [];
+        case "Pet Name":
+            cell.appendChild(document.createTextNode(data[0]));
+            cell.classList.add('class-DateTime');
+        break;
 
-    //Optimized purchases;
-    for(var purchase of purchases){
-        optimizedPurchases.push(purchase);
+        case "Prize":
+            if(data[1].Prize == "Neopoints"){
+                var priceValue = parseInt(data[0]);
+                var priceSpan = CheckIsNaNDisplay(priceValue, "-", FormatNPNumber(priceValue));
+                cell.appendChild(document.createTextNode(priceSpan));
+            } else {
+                cell.appendChild(document.createTextNode(data[0]));
+            }
+
+            cell.classList.add('class-Prize');
+        break;
+
+        case "Type":
+            cell.appendChild(document.createTextNode(data[0]));
+            cell.classList.add('class-Type');
+        break;
+
+        case "JN":
+            if(data[1].Type == "Item"){
+                var itemName = data[1].Prize;
+
+                // Create the <a> element
+                var linkElement = document.createElement("a");
+                linkElement.href = `https://items.jellyneo.net/search/?name=${itemName}&name_type=3`;
+
+                // Create the <img> element
+                var imgElement = document.createElement("img");
+                imgElement.src = "../JN.png";
+                imgElement.alt = "Info Icon";
+
+                linkElement.appendChild(imgElement);
+
+                cell.appendChild(linkElement);
+                cell.classList.add('class-JellyNeo');
+            }
+        break;
+
+        default:
+            cell.appendChild(document.createTextNode(data[0]));
+        break;
     }
 
-    return optimizedPurchases;
+    return cell;
 }
-
-//--------------------------------
-
-//If a value is NaN or not, then it'll display one option or the other;
-function CheckIsNaNDisplay(input, outputTrue, outputFalse){
-    return isNaN(input) ? outputTrue : outputFalse;
-}
-
 
 //######################################################################################################################################
 
+
+var nullDataMessage = "No Kitchen Quests Done Yet.";
 
 //Update the history data every 5 seconds;
 ProcessAutoKQLog(false), setInterval((function() {

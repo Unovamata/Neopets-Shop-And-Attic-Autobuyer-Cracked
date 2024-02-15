@@ -156,7 +156,7 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
 }
 
 .class-Name {
-    width: 300px;
+    width: 200px;
 }
 
 .class-Rarity {
@@ -172,6 +172,14 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
 }
 
 .class-DateTime {
+    width: 100px;
+}
+
+.class-Prize{
+    width: 400px;
+}
+
+.class-Type{
     width: 100px;
 }
 

@@ -29,6 +29,14 @@
 
             <center>
                 <div id="history-container">
+                    <div class="page-navigation">
+                        <button id="first-button" class="button">|< First</button>
+                        <button id="prev-button" class="button"><< Previous</button>
+                        <span id="page-indicator" class="rarity-info"></span>
+                        <button id="next-button" class="button">Next >></button>
+                        <button id="last-button" class="button">Last >|</button>
+                    </div>        
+
                     <div id="table-container" class="tabcontent table"></div>
                     <br>
                 </div>
@@ -271,15 +279,14 @@
         <script src="../../../js/chart.umd.js"></script>
         <script src="../../../js/chartjs-plugin-datalabels.min.js"></script>
         <script src="../../common/utils.js"></script>
+        <script src="../../toolbar.js"></script>
+        <script src="../../../js/sortable.js"></script>
+        <script src="../DisplayChunkData.js"></script>
+        <script src="autokq.js"></script>
         <script src="../../../js/jquery.js"></script>
         <script src="../../../js/moment.js"></script>
         <script src="../../../js/moment-timezone-with-data.js"></script>
-        <script src="../../toolbar.js"></script>
         <script src="../../common/default_items.js"></script>
-        <script src="../../../js/ExtPay.js"></script>
-        <script src="../../../js/sortable.js"></script>
-        <script src="../../common/item_db.js"></script>
-        <script src="autokq.js"></script>
         <script src="../optionsPage.js"></script>
     </body>
 </html>

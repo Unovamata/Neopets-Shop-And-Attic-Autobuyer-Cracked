@@ -11,7 +11,7 @@ const chunkSize = 500;
 totalPages = Math.ceil(data.length / chunkSize);
 
 LoadCurrentPage = function(){
-    DisplayTableData(data, ["JellyNeo"], chunkSize, FilterFunction);
+    DisplayTableData(data, ["JN"], chunkSize, FilterFunction);
 
     // Update navigation
     UpdateNavigation();
@@ -37,7 +37,7 @@ function FilterFunction(header, cell, data){
             cell.classList.add('class-Price');
         break;
 
-        case "JellyNeo":
+        case "JN":
             // Create the <a> element
             var linkElement = document.createElement("a");
             linkElement.href = `https://items.jellyneo.net/search/?name=${lastName}&name_type=3`;

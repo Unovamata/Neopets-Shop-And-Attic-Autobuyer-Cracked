@@ -53,27 +53,6 @@ LoadCurrentPage = function(){
 }
 
 // GUI Functions;
-// Toggle tab contents
-function ToggleTabs(selectedTabId, contentIdToShow) {
-    // Hide all tab content elements
-    var tabContents = document.querySelectorAll(".tabcontent");
-    var tabLinks = document.querySelectorAll(".tablinks");
-
-    for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].style.display = "none";
-        tabLinks[i].classList.remove("active");
-    }
-
-    // Add "active" class to the selected tab link and display the corresponding content
-    document.getElementById(selectedTabId).classList.add("active");
-    document.getElementById(contentIdToShow).style.display = "block";
-}
-
-// Number with formatted with commas and NP at the end;
-function FormatNPNumber(number) {
-    return number.toLocaleString() + " NP"
-}
-
 var currentHistorySize = -1;
 
 function ProcessPurchaseHistory(forceUpdateHistory) {

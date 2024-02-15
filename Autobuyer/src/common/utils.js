@@ -1054,3 +1054,8 @@ function ShowAndHideElements(tabsToShow, tabsToHide){
         element.style.display = 'block';
     });
 }
+
+// Number with NP at the end;
+function FormatNPNumber(input) {
+    return input.toLocaleString() + " NP"
+}
