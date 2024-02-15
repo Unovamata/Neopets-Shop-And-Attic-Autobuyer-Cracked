@@ -122,12 +122,6 @@ function ProcessItemData(itemArray){
     return proccessedData.reverse();
 }
 
-
-//If a value is NaN or not, then it'll display one option or the other;
-function CheckIsNaNDisplay(input, outputTrue, outputFalse){
-    return isNaN(input) ? outputTrue : outputFalse;
-}
-
 function FilterFunction(header, cell, data){
     switch (header) {
         case "Date & Time":

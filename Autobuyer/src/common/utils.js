@@ -1059,3 +1059,8 @@ function ShowAndHideElements(tabsToShow, tabsToHide){
 function FormatNPNumber(input) {
     return input.toLocaleString() + " NP"
 }
+
+//If a value is NaN or not, then it'll display one option or the other;
+function CheckIsNaNDisplay(input, outputTrue, outputFalse){
+    return isNaN(input) ? outputTrue : outputFalse;
+}

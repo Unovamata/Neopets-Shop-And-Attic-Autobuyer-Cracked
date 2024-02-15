@@ -188,7 +188,7 @@ function FilterFunction(header, cell, data){
         break;
 
         case "Prize":
-            if(data[1].Prize == "Neopoints"){
+            if(data[1].Type == "Neopoints"){
                 var priceValue = parseInt(data[0]);
                 var priceSpan = CheckIsNaNDisplay(priceValue, "-", FormatNPNumber(priceValue));
                 cell.appendChild(document.createTextNode(priceSpan));
