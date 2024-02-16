@@ -200,7 +200,7 @@ function CreatePurchaseStatusSpan(cellValue){
 
 // Charts
 
-const showEntries = 20;
+const showEntries = 15;
 
 function AveragePurchaseRatios(data, mainShopId, atticId){
     var mainShopBuyRatio = [0, 0],
@@ -221,23 +221,32 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     if(atticRatioChart) ResizeChartInterval(atticId, chartSize);
 
-
-
     // Convert the map to an array of entries and sort it based on occurrence count
-    var mostCommonEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Entries - a[1].Entries),
-    mostCommonKeys = [],
-    mostCommonValues = [],
-    topMostCommonEntries = [...mostCommonEntries].slice(0, showEntries);
-    
+    var mostCommonEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Entries - a[1].Entries).slice(0, showEntries),
+    mostCommonData = [];
+
     // Log the most common entries up to showEntries
-    topMostCommonEntries.forEach(entry => {
-        mostCommonKeys.push(entry[0]);
-        mostCommonValues.push(entry[1].Entries);
+    mostCommonEntries.forEach(entry => {
+        mostCommonData[entry[0]] = entry[1].Entries;
     });
 
-    var isChartActive = CreateBarChart("mostCommonItemsChart", "bar", mostCommonKeys, mostCommonValues, FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
+    var isChartActive = CreateBarChart("mostCommonItemsChart", "bar", Object.keys(mostCommonData), Object.values(mostCommonData), FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
 
     if(isChartActive) ResizeChartInterval("mostCommonItemsChart", "760px", chartSize);
+
+    var mostProfitableEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Value - a[1].Value).slice(0, showEntries),
+    mostProfitableData = [];
+
+    // Log the most common entries up to showEntries
+    mostProfitableEntries.forEach(entry => {
+        mostProfitableData[entry[0]] = entry[1].Value;
+    });
+
+    var isChartActive = CreateBarChart("mostValuableItemsChart", "bar", Object.keys(mostProfitableData), Object.values(mostProfitableData), FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
+
+    if(isChartActive) ResizeChartInterval("mostValuableItemsChart", "760px", chartSize);
+
+    console.log(totalProfit, totalValue);
 }
 
 function AtticAndMainShopRatios(data, index, entry, atticShopBuyRatio, mainShopBuyRatio){
@@ -276,8 +285,9 @@ function MostCommonItems(entry, mostCommonItems){
     var entryMin = {
         Name: entry["Item Name"],
         Status: entry.Status,
-        Value: entry["Est. Value"],
-        Profit: entry["Est. Profit"],
+        Value: Number(entry["Est. Value"].replace(/[^\d.-]/g, '')),
+        Profit: Number(entry["Est. Profit"].replace(/[^\d.-]/g, '')),
+        Shop: entry["Shop Name"],
         Entries: 1,
     }
 
