@@ -200,39 +200,17 @@ function CreatePurchaseStatusSpan(cellValue){
 
 // Charts
 
+const showEntries = 20;
+
 function AveragePurchaseRatios(data, mainShopId, atticId){
     var mainShopBuyRatio = [0, 0],
-    atticShopBuyRatio = [0, 0];
+    atticShopBuyRatio = [0, 0],
+    mostCommonItems = new Map();
 
     data.forEach(function(entry, index){
-        switch(entry["Shop Name"]){
-            case "Attic":
-                try{
-                    var lastEntry = data[index - 1];
-                    
-                    // If the item was bought in the same session;
-                    if(lastEntry.Name == entry.Name && entry.Status == "Bought"){
-                        atticShopBuyRatio[0] += 1; // Add to the purchase positive ratio;
-                    } else { // If not, the item was not bought, add it to the negative ratio;
-                        atticShopBuyRatio[1] += 1;
-                    }
-                } catch {
-                    atticShopBuyRatio[1] += 1;
-                }
-            break;
-
-            default:
-                switch(entry.Status){
-                    case "Bought":
-                        mainShopBuyRatio[0] += 1;
-                    break;
-
-                    default: // Missed items;
-                        mainShopBuyRatio[1] += 1;
-                    break;
-                }
-            break;
-        }
+        AtticAndMainShopRatios(data, index, entry, atticShopBuyRatio, mainShopBuyRatio);
+        
+        MostCommonItems(entry, mostCommonItems);
     });
     
     var mainShopRatioChart = CreateChartWithLabels(mainShopId, "pie", ["Bought", "Missed"], mainShopBuyRatio, FormatDatalabelsOptions());
@@ -242,4 +220,60 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
     var atticRatioChart = CreateChartWithLabels(atticId, "pie", ["Bought", "Missed"], atticShopBuyRatio, FormatDatalabelsOptions());
 
     if(atticRatioChart) ResizeChartInterval(atticId, chartSize);
+
+
+
+    // Convert the map to an array of entries and sort it based on occurrence count
+    let mostCommonEntries = [...mostCommonItems.entries()].sort((a, b) => b[1] - a[1]);
+
+    var mostCommonKeys = [], mostCommonValues = [];
+
+    // Log the most common entries up to showEntries
+    mostCommonEntries.slice(0, showEntries).forEach(entry => {
+        mostCommonKeys.push(entry[0]);
+        mostCommonValues.push(entry[1]);
+    });
+
+    var isChartActive = CreateBarChart("mostCommonItemsChart", "bar", mostCommonKeys, mostCommonValues, FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
+
+    if(isChartActive) ResizeChartInterval("mostCommonItemsChart", "760px", chartSize);
+}
+
+function AtticAndMainShopRatios(data, index, entry, atticShopBuyRatio, mainShopBuyRatio){
+    switch(entry["Shop Name"]){
+        case "Attic":
+            try{
+                var lastEntry = data[index - 1];
+                
+                // If the item was bought in the same session;
+                if(lastEntry.Name == entry.Name && entry.Status == "Bought"){
+                    atticShopBuyRatio[0] += 1; // Add to the purchase positive ratio;
+                } else { // If not, the item was not bought, add it to the negative ratio;
+                    atticShopBuyRatio[1] += 1;
+                }
+            } catch {
+                atticShopBuyRatio[1] += 1;
+            }
+        break;
+
+        default:
+            switch(entry.Status){
+                case "Bought":
+                    mainShopBuyRatio[0] += 1;
+                break;
+
+                default: // Missed items;
+                    mainShopBuyRatio[1] += 1;
+                break;
+            }
+        break;
+    }
+}
+
+
+function MostCommonItems(entry, mostCommonItems){
+    if (entry.Status === "Bought") {
+        let itemName = entry["Item Name"];
+        mostCommonItems.set(itemName, (mostCommonItems.get(itemName) || 0) + 1);
+    }
 }

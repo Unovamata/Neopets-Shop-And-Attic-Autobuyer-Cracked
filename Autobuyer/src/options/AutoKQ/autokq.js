@@ -322,7 +322,7 @@ function StatsObtainedPerPet(data, id){
         return counts;
     }, {});
 
-    var isChartActive = CreateBarChart(id, "bar", Object.keys(petNameCounts), Object.values(petNameCounts), FormatDatalabelsOptions());
+    var isChartActive = CreateBarChart(id, "bar", Object.keys(petNameCounts), Object.values(petNameCounts), FormatDatalabelsOptions(), "Stat Increases per Pet");
 
     if(isChartActive) ResizeChartInterval(id, "760px", chartSize);
 }

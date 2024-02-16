@@ -952,7 +952,7 @@ function CreateChartWithLabels(id, type, labels, data, options){
 }
 
 // Create a Bar chart;
-function CreateBarChart(id, type, labels, data, options) {
+function CreateBarChart(id, type, labels, data, options, datasetName = "Data") {
     const canvas = document.getElementById(id),
     context = canvas.getContext("2d");
 
@@ -973,7 +973,7 @@ function CreateBarChart(id, type, labels, data, options) {
     new Chart(context, {
         type: type,
         data: {
-            labels: ["Data"],
+            labels: [datasetName],
             datasets: datasets // Use the dynamically created datasets
         },
         options: options
