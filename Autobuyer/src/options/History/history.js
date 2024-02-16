@@ -1,6 +1,7 @@
 // GUI Interaction;
 
 const tableButton = document.getElementById("table-button");
+const tableNavigation = document.getElementById("history-navigation");
 const tableContainer = document.getElementById("table-container");
 const analyticsContainer = document.getElementById("analytics-container");
 
@@ -9,13 +10,13 @@ tableButton.onclick = function(e) {
 } 
 
 function ShowHistory(){
-    ShowAndHideElements([tableContainer], [analyticsContainer]);
+    ShowAndHideElements([tableContainer, tableNavigation], [analyticsContainer]);
 }
 
 const analyticsButton = document.getElementById("analytics-button");
 
 analyticsButton.onclick = function(e) {
-    ShowAndHideElements([analyticsContainer], [tableContainer])
+    ShowAndHideElements([analyticsContainer], [tableContainer, tableNavigation])
 }
 
 //Toggling the main tab;
@@ -203,6 +204,10 @@ function CreatePurchaseStatusSpan(cellValue){
 const showEntries = 15;
 
 function AveragePurchaseRatios(data, mainShopId, atticId){
+    var totalProfitVsAttempted = CreateChartWithLabels("totalProfitVsAttempted", "pie", ["Total Attempted Value", "Total Estimated Profit"], [totalValue, totalProfit], FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
+
+    if(totalProfitVsAttempted) ResizeChartInterval("totalProfitVsAttempted", chartSize);
+
     var mainShopBuyRatio = [0, 0],
     atticShopBuyRatio = [0, 0],
     mostCommonItems = new Map();
@@ -230,9 +235,9 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
         mostCommonData[entry[0]] = entry[1].Entries;
     });
 
-    var isChartActive = CreateBarChart("mostCommonItemsChart", "bar", Object.keys(mostCommonData), Object.values(mostCommonData), FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
+    var mostCommonItemsChart = CreateBarChart("mostCommonItemsChart", "bar", Object.keys(mostCommonData), Object.values(mostCommonData), FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
 
-    if(isChartActive) ResizeChartInterval("mostCommonItemsChart", "760px", chartSize);
+    if(mostCommonItemsChart) ResizeChartInterval("mostCommonItemsChart", "760px", chartSize);
 
     var mostProfitableEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Value - a[1].Value).slice(0, showEntries),
     mostProfitableData = [];
@@ -242,11 +247,9 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
         mostProfitableData[entry[0]] = entry[1].Value;
     });
 
-    var isChartActive = CreateBarChart("mostValuableItemsChart", "bar", Object.keys(mostProfitableData), Object.values(mostProfitableData), FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
+    var mostValuableItemsChart = CreateBarChart("mostValuableItemsChart", "bar", Object.keys(mostProfitableData), Object.values(mostProfitableData), FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
 
-    if(isChartActive) ResizeChartInterval("mostValuableItemsChart", "760px", chartSize);
-
-    console.log(totalProfit, totalValue);
+    if(mostValuableItemsChart) ResizeChartInterval("mostValuableItemsChart", "760px", chartSize);
 }
 
 function AtticAndMainShopRatios(data, index, entry, atticShopBuyRatio, mainShopBuyRatio){

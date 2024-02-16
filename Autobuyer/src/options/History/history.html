@@ -18,25 +18,42 @@
                 </div>
             </div>
             
-            <button class="tablinks button" id="table-button">Table</button>
-            <button class="tablinks button" id="analytics-button"><sub></sub> Analytics <sup>beta</sup></button>
-            <div class="page-navigation">
-                <button id="first-button" class="button">|< First</button>
-                <button id="prev-button" class="button"><< Previous</button>
-                <span id="page-indicator" class="rarity-info"></span>
-                <button id="next-button" class="button">Next >></button>
-                <button id="last-button" class="button">Last >|</button>
-            </div>
-            <br><br>
+            
 
             <center>
+                <button class="tablinks button" id="table-button">Table</button>
+                <button class="tablinks button" id="analytics-button"><sub></sub> Analytics <sup>beta</sup></button>
+
                 <!-- Table -->
-                <div id="table-container" class="tabcontent table">
-                    <span class="loading rarity-info">Loading...</span>
+                <div>
+                    <div class="page-navigation" id="history-navigation">
+                        <button id="first-button" class="button">|< First</button>
+                        <button id="prev-button" class="button"><< Previous</button>
+                        <span id="page-indicator" class="rarity-info"></span>
+                        <button id="next-button" class="button">Next >></button>
+                        <button id="last-button" class="button">Last >|</button>
+                    </div>
+                    <br><br>
+
+                    <div id="table-container" class="tabcontent table">
+                        <span class="loading rarity-info">Loading...</span>
+                    </div>
                 </div>
+                
                 
                 <!-- Analytics -->
                 <div id="analytics-container" display="none" class="tabcontent table">
+                    <div>
+                        <div class="category-info">General Total Profit vs Total Attempted Value (*)</div>
+                        
+                        <div class="subcategory-info">
+                            <canvas id="totalProfitVsAttempted"></canvas>
+                        </div>
+                        <span class="autosaved rarity-info sub">(*) A success ratio close to 8% is deemed excellent for NeoBuyer+.</span>
+                        <span class="autosaved rarity-info sub">(*) A ratio below 8% suggests a need to reduce your AutoBuying times.</span>
+                        <span class="autosaved rarity-info sub">(*) When adjusting your AutoBuyer times, clearing your purchase History ensures consistent analytics.</span>
+                    </div><br><br>
+
                     <div>
                         <div class="category-info">Main Shops Average Purchase Ratio</div>
                         <div class="subcategory-info">
@@ -82,9 +99,6 @@
                     <div class="chart-label">Profit/attempted value ratio by hour of the day:<br>
                         <span class="sub">(Consider restocking in your most profitable hours)</span></div>
                     <div class="ct-chart ct-golden-section ct-major-twelfth" id="hourly-percent"></div>
-                    <div class="chart-label">Total profit vs attempted value:<br>
-                        <span class="sub">(Anything over 8% is considered a great ratio)</span></div>
-                    <div class="ct-chart ct-golden-section ct-double-octave" id="ratio"></div>
                     <br>-->
                 <br>
                 <button id="reset" class="button reset">Clear Purchase History</button>
