@@ -224,14 +224,15 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
 
     // Convert the map to an array of entries and sort it based on occurrence count
-    let mostCommonEntries = [...mostCommonItems.entries()].sort((a, b) => b[1] - a[1]);
-
-    var mostCommonKeys = [], mostCommonValues = [];
-
+    var mostCommonEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Entries - a[1].Entries),
+    mostCommonKeys = [],
+    mostCommonValues = [],
+    topMostCommonEntries = [...mostCommonEntries].slice(0, showEntries);
+    
     // Log the most common entries up to showEntries
-    mostCommonEntries.slice(0, showEntries).forEach(entry => {
+    topMostCommonEntries.forEach(entry => {
         mostCommonKeys.push(entry[0]);
-        mostCommonValues.push(entry[1]);
+        mostCommonValues.push(entry[1].Entries);
     });
 
     var isChartActive = CreateBarChart("mostCommonItemsChart", "bar", mostCommonKeys, mostCommonValues, FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
@@ -272,8 +273,25 @@ function AtticAndMainShopRatios(data, index, entry, atticShopBuyRatio, mainShopB
 
 
 function MostCommonItems(entry, mostCommonItems){
+    var entryMin = {
+        Name: entry["Item Name"],
+        Status: entry.Status,
+        Value: entry["Est. Value"],
+        Profit: entry["Est. Profit"],
+        Entries: 1,
+    }
+
+    var entryName = entryMin.Name;
+
     if (entry.Status === "Bought") {
-        let itemName = entry["Item Name"];
-        mostCommonItems.set(itemName, (mostCommonItems.get(itemName) || 0) + 1);
+        if(mostCommonItems.has(entryName)){
+            var entryCall = mostCommonItems.get(entryName);
+            entryCall.Entries += 1;
+            
+            mostCommonItems.set(entryCall.Name, entryCall);
+            
+        } else {
+            mostCommonItems.set(entryName, entryMin);
+        }
     }
 }
