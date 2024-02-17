@@ -535,9 +535,9 @@ async function RunAutoPricer(){
             
                     if (contents.includes('I am too busy right now, please come back in about ')) {
                         var bannedMinutes = contents.replace("I am too busy right now, please come back in about ", "");
-                        bannedMinutes = Number(bannedMinutes.replace(" minutes and I can help you out.", "")) * 6000;
+                        bannedMinutes = Number(bannedMinutes.replace(" minutes and I can help you out.", ""));
                         setAUTOPRICER_STATUS(`Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
-                        setAUTOKQ_STATUS("Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...");
+                        setAUTOKQ_STATUS(`Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
 
                         window.alert(
                             "You are currently Shop Wizard Banned.\n\n" +
@@ -546,6 +546,8 @@ async function RunAutoPricer(){
                             "You can either close this tab or leave it open after confirming this alert, it is up to you.\n\n" +
                             "The AutoPricer has paused.\n"
                         );
+
+                        bannedMinutes *= 60000;
 
                         // Sleep for the SW banned minutes and refresh the window;
                         await Sleep(bannedMinutes + Number(sleepIfBannedMin), bannedMinutes + Number(sleepIfBannedMax))

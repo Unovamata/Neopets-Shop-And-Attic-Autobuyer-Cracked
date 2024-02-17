@@ -244,7 +244,7 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     // Log the most common entries up to showEntries
     mostProfitableEntries.forEach(entry => {
-        mostProfitableData[entry[0]] = entry[1].Value;
+        mostProfitableData[entry[0]] = entry[1].Profit;
     });
 
     var mostValuableItemsChart = CreateBarChart("mostValuableItemsChart", "bar", Object.keys(mostProfitableData), Object.values(mostProfitableData), FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
