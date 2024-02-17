@@ -62,6 +62,8 @@ function setSTORES_TO_CYCLE_THROUGH_WHEN_STOCKED(_) { chrome.storage.local.set({
 
 function setRUN_BETWEEN_HOURS(_) { chrome.storage.local.set({ RUN_BETWEEN_HOURS: _ }, (function () {})) }
 
+function setPAUSE_BETWEEN_MINUTES(_) { console.log(_); chrome.storage.local.set({ PAUSE_BETWEEN_MINUTES: _ }, (function () {})) }
+
 function setITEMS_TO_CONSIDER_STOCKED(_) { chrome.storage.local.set({ ITEMS_TO_CONSIDER_STOCKED: Number(_) }, (function () {})) }
 
 function setMIN_CLICK_ITEM_IMAGE(_) { chrome.storage.local.set({ MIN_CLICK_ITEM_IMAGE: Number(_) }, (function () {})) }
@@ -378,6 +380,13 @@ $("#USE_BLACKLIST")
             var _ = JSON.parse($("#RUN_BETWEEN_HOURS")
                 .val());
             (!Array.isArray(_) || _.length < 2 || _.length > 2) && (_ = [0, 23]), _[0] < 0 && (_[0] = 0), _[1] > 23 && (_[1] = 23), _[1] < 0 && (_[1] = 0), _[0] > 23 && (_[0] = 23), _[0] > _[1] && (_ = [0, 23]), setRUN_BETWEEN_HOURS(_)
+        } catch (_) {}
+    })), $("#PAUSE_BETWEEN_MINUTES")
+    .bind("input propertychange", (function() {
+        try {
+            var _ = JSON.parse($("#PAUSE_BETWEEN_MINUTES")
+                .val());
+            (!Array.isArray(_) || _.length < 2 || _.length % 2 !== 0) && (_ = []), _[0] < 0 && (_[0] = 0), _[1] > 59 && (_[1] = 59), _[1] < 0 && (_[1] = 0), _[0] > 59 && (_[0] = 59), _[0] > _[1] && (_ = []), setPAUSE_BETWEEN_MINUTES(_)
         } catch (_) {}
     })), $("#STORES_TO_CYCLE_THROUGH_WHEN_STOCKED")
     .bind("input propertychange", (function() {
@@ -958,6 +967,7 @@ resetButton.onclick = function(_) {
     SHOULD_GO_FOR_SECOND_MOST_VALUABLE: !1,
     STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
     RUN_BETWEEN_HOURS: [0, 23],
+    PAUSE_BETWEEN_MINUTES: [],
     RESTOCK_LIST: defaultDesiredItems,
     ATTIC_ENABLED: !0,
     ATTIC_HIGHLIGHT: !0,
@@ -1083,7 +1093,8 @@ resetButton.onclick = function(_) {
         .val(_.MIN_REFRESH_STOCKED), $("#MAX_REFRESH_STOCKED")
         .val(_.MAX_REFRESH_STOCKED), $("#STORES_TO_CYCLE_THROUGH_WHEN_STOCKED")
         .val("[" + _.STORES_TO_CYCLE_THROUGH_WHEN_STOCKED + "]"), $("#RUN_BETWEEN_HOURS")
-        .val("[" + _.RUN_BETWEEN_HOURS + "]"), $("#ITEMS_TO_CONSIDER_STOCKED")
+        .val("[" + _.RUN_BETWEEN_HOURS + "]"), $("#PAUSE_BETWEEN_MINUTES")
+        .val("[" + _.PAUSE_BETWEEN_MINUTES + "]"), $("#ITEMS_TO_CONSIDER_STOCKED")
         .val(_.ITEMS_TO_CONSIDER_STOCKED), $("#MIN_CLICK_ITEM_IMAGE")
         .val(_.MIN_CLICK_ITEM_IMAGE), $("#MAX_CLICK_ITEM_IMAGE")
         .val(_.MAX_CLICK_ITEM_IMAGE), $("#MIN_CLICK_CONFIRM")

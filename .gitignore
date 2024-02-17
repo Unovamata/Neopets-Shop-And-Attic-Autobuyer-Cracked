@@ -7,3 +7,4 @@ benchmark.js
 //Ignoring deprecated scripts
 SDBPricer.js
 inject.js
+.idea
