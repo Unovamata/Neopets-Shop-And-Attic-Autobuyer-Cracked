@@ -124,6 +124,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_SHARE_PIN: false,
 			SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
 			SHOULD_SHARE_HISTORY: false,
+			SHOULD_SHARE_AUTOKQ_LOG: false,
 			SHOULD_SHARE_NEOBUYER_MAILS: false,
 
 			// NeoBuyer+ Mail;

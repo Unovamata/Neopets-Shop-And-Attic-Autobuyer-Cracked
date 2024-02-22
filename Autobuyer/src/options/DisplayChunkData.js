@@ -82,7 +82,8 @@ function CallSortingScript(){
 function DisplayTableData(data, keysToPush, chunkSize, FilterFunction) {
     if(data.length == 0){
         HideNavigationButtons();
-        tableContainer.innerHTML = "";
+        tableContainer.classList.add("loading", "rarity-info");
+        tableContainer.innerHTML = "No data found... Please collect more data with NeoBuyer+.";
         tableContainer.appendChild(table);
         return;
     } else {
