@@ -154,7 +154,7 @@ function ProcessAutoKQLog(forceUpdateHistory) {
     chrome.storage.local.get({
         KQ_TRACKER: [],
     }, (function(t) {
-        const history = t.KQ_TRACKER;
+        const history = t.KQ_TRACKER.reverse();
         const historySize = history.length;
 
         // Force updating if necessary;
