@@ -1042,7 +1042,7 @@ function ShowAndHideTabs(tabsToShow, tabsToHide){
 
     tabsToShow.forEach(function(id){
         var show = document.getElementById(id);
-        show.style.display = 'block';
+        show.style.display = 'initial';
     });
 }
 
@@ -1052,7 +1052,7 @@ function ShowAndHideElements(tabsToShow, tabsToHide){
     });
 
     tabsToShow.forEach(function(element){
-        element.style.display = 'block';
+        element.style.display = 'initial';
     });
 }
 

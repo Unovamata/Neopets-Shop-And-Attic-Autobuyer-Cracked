@@ -420,8 +420,8 @@ function setSHOULD_SHARE_BLACKLISTS(value) { chrome.storage.local.set({SHOULD_SH
 function setSHOULD_SHARE_PIN(value) { chrome.storage.local.set({SHOULD_SHARE_PIN: value}, (function() {})) }
 function setSHOULD_SHARE_ATTIC_LAST_REFRESH(value) { chrome.storage.local.set({SHOULD_SHARE_ATTIC_LAST_REFRESH: value}, (function() {})) }
 function setSHOULD_SHARE_HISTORY(value) { chrome.storage.local.set({SHOULD_SHARE_HISTORY: value}, (function() {})) }
+function setSHOULD_SHARE_AUTOKQ_LOG(value) { chrome.storage.local.set({ SHOULD_SHARE_AUTOKQ_LOG: value }, (function () {})) }
 function setSHOULD_SHARE_NEOBUYER_MAILS(value) { chrome.storage.local.set({SHOULD_SHARE_NEOBUYER_MAILS: value}, (function() {})) }
-
 
 // AutoBuyer Setters;
 
@@ -739,9 +739,14 @@ $("#SHOULD_SHARE_HISTORY").bind("input propertychange", (function () {
   setSHOULD_SHARE_HISTORY(isChecked);
 }))
 
-$("#SHOULD_SHARE_NEOBUYER_MAILS").bind("input propertychange", (function () {
-  const isChecked = $("#SHOULD_SHARE_NEOBUYER_MAILS").is(":checked");
-  setSHOULD_SHARE_NEOBUYER_MAILS(isChecked);
+$("#SHOULD_SHARE_AUTOKQ_LOG").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_AUTOKQ_LOG").is(":checked");
+    setSHOULD_SHARE_AUTOKQ_LOG(isChecked);
+}))
+
+$("#SHOULD_SHARE_NEOBUYER_MAILS").bind("input propertychange", (function() {
+    const isChecked = $("#SHOULD_SHARE_NEOBUYER_MAILS").is(":checked");
+    setSHOULD_SHARE_NEOBUYER_MAILS(isChecked);
 }))
 
 
@@ -897,6 +902,7 @@ resetButton.onclick = function (_) {
   SHOULD_SHARE_PIN: false,
   SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
   SHOULD_SHARE_HISTORY: false,
+  SHOULD_SHARE_AUTOKQ_LOG: false,
   SHOULD_SHARE_NEOBUYER_MAILS: false,
 
 }, (function (_) {
@@ -1025,6 +1031,7 @@ resetButton.onclick = function (_) {
   $("#SHOULD_SHARE_PIN").prop("checked", _.SHOULD_SHARE_PIN);
   $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").prop("checked", _.SHOULD_SHARE_ATTIC_LAST_REFRESH);
   $("#SHOULD_SHARE_HISTORY").prop("checked", _.SHOULD_SHARE_HISTORY);
+  $("#SHOULD_SHARE_AUTOKQ_LOG").prop("checked", _.SHOULD_SHARE_AUTOKQ_LOG),
   $("#SHOULD_SHARE_NEOBUYER_MAILS").prop("checked", _.SHOULD_SHARE_NEOBUYER_MAILS);
 
   showOrHide();

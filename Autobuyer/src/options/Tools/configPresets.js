@@ -61,6 +61,10 @@ chrome.storage.local.get(null, function(items) {
             itemsCopy.ITEM_HISTORY = [];
         }
 
+        if(!$("#SHOULD_SHARE_AUTOKQ_LOG").is(":checked")){
+            itemsCopy.KQ_TRACKER = [];
+        }
+
         // Sharing NeoBuyer+ emails;
         if(!$("#SHOULD_SHARE_NEOBUYER_MAILS").is(":checked")){
             itemsCopy.SKIP_CURRENT_MAIL = false;

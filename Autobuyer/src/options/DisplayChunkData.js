@@ -1,12 +1,22 @@
 var currentPage = 1;
 var totalPages = 1;
 
+const firstButton = document.getElementById("first-button");
+const prevButton = document.getElementById("prev-button");
+const nextButton = document.getElementById("next-button");
+const lastButton = document.getElementById("last-button");
+const pageIndicator = document.getElementById("page-indicator");
+
+function HideNavigationButtons(){
+    ShowAndHideElements([], [firstButton, prevButton, nextButton, lastButton, pageIndicator]);
+}
+
+function ShowNavigationButtons(){
+    ShowAndHideElements([firstButton, prevButton, nextButton, lastButton, pageIndicator], []);
+}
+
 // Function to update navigation buttons and page indicator
 function UpdateNavigation() {
-    const prevButton = document.getElementById("prev-button");
-    const nextButton = document.getElementById("next-button");
-    const pageIndicator = document.getElementById("page-indicator");
-
     prevButton.disabled = currentPage === 1;
     nextButton.disabled = currentPage === totalPages;
 
@@ -14,7 +24,7 @@ function UpdateNavigation() {
 }
 
 // Event listener for previous button
-document.getElementById("prev-button").addEventListener("click", () => {
+prevButton.addEventListener("click", () => {
     if (currentPage > 1) {
         currentPage--;
     }
@@ -23,7 +33,7 @@ document.getElementById("prev-button").addEventListener("click", () => {
 });
 
 // Event listener for next button
-document.getElementById("next-button").addEventListener("click", () => {
+nextButton.addEventListener("click", () => {
     if (currentPage < totalPages) {
         currentPage++;
     }
@@ -32,14 +42,14 @@ document.getElementById("next-button").addEventListener("click", () => {
 });
 
 // Event listener for first page button
-document.getElementById("first-button").addEventListener("click", () => {
+firstButton.addEventListener("click", () => {
     currentPage = 1;
 
     LoadCurrentPage();
 });
 
 // Event listener for last page button
-document.getElementById("last-button").addEventListener("click", () => {
+lastButton.addEventListener("click", () => {
     currentPage = totalPages;
 
     LoadCurrentPage();
@@ -59,7 +69,6 @@ var tableRow = document.createElement("tr");
 var tableHead = document.createElement("thead");
 var tableHeader = document.createElement("th");
 var tableDataCell = document.createElement("td");
-const pageIndicator = document.getElementById("page-indicator");
 
 CallSortingScript();
 
@@ -71,6 +80,16 @@ function CallSortingScript(){
 
 // Data Table with purchase history and information;
 function DisplayTableData(data, keysToPush, chunkSize, FilterFunction) {
+    if(data.length == 0){
+        HideNavigationButtons();
+        tableContainer.classList.add("loading", "rarity-info");
+        tableContainer.innerHTML = "No data found... Please collect more data with NeoBuyer+.";
+        tableContainer.appendChild(table);
+        return;
+    } else {
+        ShowNavigationButtons();
+    }
+
     // Resetting table data;
     tableBody.innerHTML = '';
     table.innerHTML = '';
