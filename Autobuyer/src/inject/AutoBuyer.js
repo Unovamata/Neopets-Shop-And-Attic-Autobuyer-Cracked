@@ -32,6 +32,7 @@ function InjectAutoPricer() {
         MAX_CLICK_CONFIRM: 200,
         STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
         RUN_BETWEEN_HOURS: [0, 23],
+        PAUSE_BETWEEN_MINUTES: [],
         RESTOCK_LIST: defaultDesiredItems,
     }, (function(autobuyerVariables) {
         
@@ -53,6 +54,7 @@ function InjectAutoPricer() {
             SHOULD_GO_FOR_SECOND_MOST_VALUABLE: isBuyingSecondMostProfitable,
             STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: storesToCycle,
             RUN_BETWEEN_HOURS: runBetweenHours,
+            PAUSE_BETWEEN_MINUTES: pauseBetweenMinutes,
             MIN_REFRESH: minRefreshIntervalUnstocked,
             MAX_REFRESH: maxRefreshIntervalUnstocked,
             ITEMS_TO_CONSIDER_STOCKED: minItemsToConsiderStocked,
@@ -195,14 +197,31 @@ function InjectAutoPricer() {
                 itemToBuyElement.click();
             }
         }(itemToBuyExtracted) : ! function() {
-            var e = new Date,
+            const e = new Date,
                 t = e.getHours(),
                 n = e.getMinutes();
             e.getDay();
-            return t >= runBetweenHours[0] && t <= runBetweenHours[1] && n >= 0 && n <= 60
-        }() ? (isRunningOnScheduledTime || (UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop"), isRunningOnScheduledTime = !0), setTimeout((function() {
-            RunAutoBuyer()
-        }), 3e4)) : ReloadPageBasedOnConditions(),
+            let notPaused = t >= runBetweenHours[0] && t <= runBetweenHours[1];
+            if (pauseBetweenMinutes.length > 0) {
+                for (let i = 0; i < pauseBetweenMinutes.length; i += 2) {
+                    if (n >= pauseBetweenMinutes[i] && n <= pauseBetweenMinutes[i + 1]) {
+                        setTimeout(() => {
+                            location.reload();
+                        }, (pauseBetweenMinutes[i + 1] - n + 1) * 60000);
+                        UpdateBannerAndDocument(`Paused until ${t}:${(pauseBetweenMinutes[i + 1] < 10 ? '0' : '') + pauseBetweenMinutes[i + 1]}`, "Waiting for scheduled time in main shop");
+                        return false;
+                    }
+                }
+            } else {
+                notPaused = notPaused && n >= 0 && n <= 60;
+            }
+            if (!notPaused) {
+                UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop");
+            }
+            return notPaused;
+        }() ? (isRunningOnScheduledTime || (isRunningOnScheduledTime = !0), setTimeout((function() {
+            // RunAutoBuyer()
+        }), 60000)) : ReloadPageBasedOnConditions(),
         function() {
             if (isClickingConfirm) {
                 
