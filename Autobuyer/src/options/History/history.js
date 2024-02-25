@@ -239,8 +239,9 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     if(mostCommonItemsChart) ResizeChartInterval("mostCommonItemsChart", "760px", chartSize);
 
-    var mostProfitableEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Value - a[1].Value).slice(0, showEntries),
+    var mostProfitableEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Profit - a[1].Profit).slice(0, showEntries),
     mostProfitableData = [];
+    
 
     // Log the most common entries up to showEntries
     mostProfitableEntries.forEach(entry => {
