@@ -197,31 +197,46 @@ function InjectAutoPricer() {
                 itemToBuyElement.click();
             }
         }(itemToBuyExtracted) : ! function() {
-            const e = new Date,
-                t = e.getHours(),
-                n = e.getMinutes();
-            e.getDay();
-            let notPaused = t >= runBetweenHours[0] && t <= runBetweenHours[1];
-            if (pauseBetweenMinutes.length > 0) {
-                for (let i = 0; i < pauseBetweenMinutes.length; i += 2) {
-                    if (n >= pauseBetweenMinutes[i] && n <= pauseBetweenMinutes[i + 1]) {
-                        setTimeout(() => {
-                            location.reload();
-                        }, (pauseBetweenMinutes[i + 1] - n + 1) * 60000);
-                        UpdateBannerAndDocument(`Paused until ${t}:${(pauseBetweenMinutes[i + 1] < 10 ? '0' : '') + pauseBetweenMinutes[i + 1]}`, "Waiting for scheduled time in main shop");
-                        return false;
-                    }
+            const date = new Date(),
+            hours = date.getHours(),
+            minutes = date.getMinutes();
+
+            // Check if the AutoBuyer has not been paused;
+            let notPaused = hours >= runBetweenHours[0] && hours <= runBetweenHours[1];
+
+            // If it is, return immediately;
+            if (pauseBetweenMinutes.length <= 0 || (notPaused && minutes >= 0 && minutes <= 60)) {
+                return notPaused;
+            }
+
+            // If it's not, check if it's the current minute pause;
+            for (let i = 0; i < pauseBetweenMinutes.length; i += 2) {
+                const startMinute = pauseBetweenMinutes[i];
+                const endMinute = pauseBetweenMinutes[i + 1];
+
+                // If it's time to pause, add a pause based on the leftover minutes between the end and current time;
+                if (minutes >= startMinute && minutes <= endMinute) {
+                    const delayMinutes = endMinute - minutes + 1;
+                    
+                    setTimeout(() => {
+                        location.reload();
+                    }, delayMinutes * 60000);
+
+                    UpdateBannerAndDocument(`Paused until ${hours}:${(endMinute < 10 ? '0' : '') + endMinute}`, "Waiting for scheduled time in main shop");
+                    return false;
                 }
-            } else {
-                notPaused = notPaused && n >= 0 && n <= 60;
             }
+            
             if (!notPaused) {
-                UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in main shop");
+                UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in the main shop");
             }
+
             return notPaused;
+
+
         }() ? (isRunningOnScheduledTime || (isRunningOnScheduledTime = !0), setTimeout((function() {
             // RunAutoBuyer()
-        }), 60000)) : ReloadPageBasedOnConditions(),
+        }), 3e4)) : ReloadPageBasedOnConditions(),
         function() {
             if (isClickingConfirm) {
                 
