@@ -453,20 +453,53 @@ chrome.storage.local.get({
 
     var mostProfitableNames = [], mostProfitablePrices = [];
 
-    var mostProfitableSold = allItemsSold.slice(0, showEntries)
+    allItemsSold.slice(0, showEntries)
         .map(item => [item[1].Item, item[1].Price])
         .forEach(function(entry){
             mostProfitableNames.push(entry[0]);
             mostProfitablePrices.push(entry[1]);
     });
 
-    console.log(mostProfitableNames, mostProfitablePrices)
-
-    var mostProfitableItemsSold = CreateBarChart("mostProfitableItemsSold", "bar", mostProfitableNames, mostProfitablePrices, FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
+    var mostProfitableItemsSold = CreateBarChart("mostProfitableItemsSold", "bar", mostProfitableNames, mostProfitablePrices, FormatDatalabelsOptions(), `Top ${showEntries} Most Profitable Items Sold`);
 
     if(mostProfitableItemsSold) ResizeChartInterval("mostProfitableItemsSold", "760px", "380px");
 
-    var mostCommonItemsSold = CreateBarChart("mostCommonItemsSold", "bar", mostProfitableNames, mostProfitablePrices, FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
+    var commonnessData = CountDatasetEntries(data, "Item");
+
+    var mostCommonItemsSold = CreateBarChart("mostCommonItemsSold", "bar", Object.keys(commonnessData), Object.values(commonnessData), FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Sold Items`);
 
     if(mostCommonItemsSold) ResizeChartInterval("mostCommonItemsSold", "760px", "380px");
+
+    var recurringBuyers = CountDatasetEntries(data, "Buyer");
+
+    var topRecurringBuyers = CreateBarChart("topRecurringBuyers", "bar", Object.keys(recurringBuyers), Object.values(recurringBuyers), FormatDatalabelsOptions(), `Top ${showEntries} Most Recurring Users`);
+
+    if(topRecurringBuyers) ResizeChartInterval("topRecurringBuyers", "760px", "380px");
+
 }));
+
+function CountDatasetEntries(data, lookupValue){
+    var commonnessData = {};
+
+    // Reading the amount of appeareances of a specific item;
+    data.forEach(function(entry){
+        var itemName = entry[lookupValue];
+
+        if(commonnessData[itemName]){
+            commonnessData[itemName] += 1;
+        } else {
+            commonnessData[itemName] = 1;
+        }
+    });
+
+    // Sorting the entries to most common to least common and only showing the first 15 entries;
+    commonnessData = Object.entries(commonnessData).sort((a, b) => b[1] - a[1]).slice(0, showEntries);
+
+    // Returning the list to a key-value pair for chart processing;
+    commonnessData = commonnessData.reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+    }, {});
+
+    return commonnessData;
+}
