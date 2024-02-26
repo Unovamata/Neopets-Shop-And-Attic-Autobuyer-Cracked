@@ -444,10 +444,29 @@ chrome.storage.local.get({
         profitsPerMonth.push(sumOfProfits);
     });
 
-    console.log(profitsPerMonth, formattedData)
-
     // Set up Chart.js with a line chart configuration
     var monthlyProfits = CreateTimelineChart("monthlyProfits", Object.keys(formattedData), profitsPerMonth, "Monthly Profits");
 
     if(monthlyProfits) ResizeChartInterval("monthlyProfits", "760px", "380px");
+
+    var allItemsSold = [...data.entries()].sort((a, b) => b[1].Price - a[1].Price);
+
+    var mostProfitableNames = [], mostProfitablePrices = [];
+
+    var mostProfitableSold = allItemsSold.slice(0, showEntries)
+        .map(item => [item[1].Item, item[1].Price])
+        .forEach(function(entry){
+            mostProfitableNames.push(entry[0]);
+            mostProfitablePrices.push(entry[1]);
+    });
+
+    console.log(mostProfitableNames, mostProfitablePrices)
+
+    var mostProfitableItemsSold = CreateBarChart("mostProfitableItemsSold", "bar", mostProfitableNames, mostProfitablePrices, FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
+
+    if(mostProfitableItemsSold) ResizeChartInterval("mostProfitableItemsSold", "760px", "380px");
+
+    var mostCommonItemsSold = CreateBarChart("mostCommonItemsSold", "bar", mostProfitableNames, mostProfitablePrices, FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
+
+    if(mostCommonItemsSold) ResizeChartInterval("mostCommonItemsSold", "760px", "380px");
 }));

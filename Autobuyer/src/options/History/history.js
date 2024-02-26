@@ -201,8 +201,6 @@ function CreatePurchaseStatusSpan(cellValue){
 
 // Charts
 
-const showEntries = 15;
-
 function AveragePurchaseRatios(data, mainShopId, atticId){
     var totalProfitVsAttempted = CreateChartWithLabels("totalProfitVsAttempted", "pie", ["Total Attempted Value", "Total Estimated Profit"], [totalValue, totalProfit], FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
 

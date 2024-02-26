@@ -913,6 +913,8 @@ function FormatDatasetByMonthAndYear(dataset, monthIndex) {
 
 //######################################################################################################################################
 
+const showEntries = 15;
+
 // Format for the percentage datalabels in the charts;
 function FormatDatalabelsOptions(){
     return options = {
