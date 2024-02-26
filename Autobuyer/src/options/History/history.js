@@ -237,7 +237,7 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     var mostCommonItemsChart = CreateBarChart("mostCommonItemsChart", "bar", Object.keys(mostCommonData), Object.values(mostCommonData), FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Bought Items`);
 
-    if(mostCommonItemsChart) ResizeChartInterval("mostCommonItemsChart", "760px", chartSize);
+    if(mostCommonItemsChart) ResizeChartInterval("mostCommonItemsChart", "760px", "380px");
 
     var mostProfitableEntries = [...groupedItems.entries()].sort((a, b) => b[1].Profit - a[1].Profit).slice(0, showEntries),
     mostProfitableData = [];
@@ -249,7 +249,7 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     var mostValuableItemsChart = CreateBarChart("mostValuableItemsChart", "bar", Object.keys(mostProfitableData), Object.values(mostProfitableData), FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
 
-    if(mostValuableItemsChart) ResizeChartInterval("mostValuableItemsChart", "760px", chartSize);
+    if(mostValuableItemsChart) ResizeChartInterval("mostValuableItemsChart", "760px", "380px");
     
     // Profit Per Store Name
     var shopNames = {};
@@ -299,7 +299,7 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     var mostProfitableShops = CreateBarChart("mostProfitableShops", "bar", Object.keys(shopNames), Object.values(shopNames), FormatDatalabelsOptions(), `Most Profitable Shops for NeoBuyer+`);
 
-    if(mostProfitableShops) ResizeChartInterval("mostProfitableShops", "760px", chartSize);
+    if(mostProfitableShops) ResizeChartInterval("mostProfitableShops", "760px", "380px");
 
     // Profit pet hour;
 
@@ -322,11 +322,11 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     var profitPerHour = CreateBarChart("profitPerHour", "bar", Object.keys(hourRatios), hourProfit, FormatDatalabelsOptions(), `Profitability Per Hour of the Day`);
 
-    if(profitPerHour) ResizeChartInterval("profitPerHour", "760px", chartSize);
+    if(profitPerHour) ResizeChartInterval("profitPerHour", "760px", "380px");
 
     var ratioPerHour = CreateBarChart("ratioPerHour", "bar", Object.keys(hourRatios), hourRatio, FormatDatalabelsOptions(), `Probability of Buying an Item in a set Hour`);
 
-    if(ratioPerHour) ResizeChartInterval("ratioPerHour", "760px", chartSize);
+    if(ratioPerHour) ResizeChartInterval("ratioPerHour", "760px", "380px");
 
     
     var datesDataset = FormatDatasetByMonthAndYear(Object.values(data));

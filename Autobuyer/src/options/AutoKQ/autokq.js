@@ -324,7 +324,7 @@ function StatsObtainedPerPet(data, id){
 
     var isChartActive = CreateBarChart(id, "bar", Object.keys(petNameCounts), Object.values(petNameCounts), FormatDatalabelsOptions(), "Stat Increases per Pet");
 
-    if(isChartActive) ResizeChartInterval(id, "760px", chartSize);
+    if(isChartActive) ResizeChartInterval(id, "760px", "380px");
 }
 
 function PrizeTypesPerMonth(data, id){
