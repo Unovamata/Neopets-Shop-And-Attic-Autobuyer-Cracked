@@ -327,13 +327,31 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
     var ratioPerHour = CreateBarChart("ratioPerHour", "bar", Object.keys(hourRatios), hourRatio, FormatDatalabelsOptions(), `Probability of Buying an Item in a set Hour`);
 
     if(ratioPerHour) ResizeChartInterval("ratioPerHour", "760px", chartSize);
+
+    
+    var datesDataset = FormatDatasetByMonthAndYear(Object.values(data));
+    var datesProfits = [];
+
+    Object.keys(datesDataset).forEach(function(entry){
+        var items = datesDataset[entry];
+
+        var profits = items
+            .filter(item => item.Status === "Bought")
+            .map(item => Number(item["Est. Value"].replace(/[^\d.-]/g, '')));
+        var sumOfProfits = profits.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        
+        datesProfits.push(sumOfProfits);
+    });
+
+    // Set up Chart.js with a line chart configuration
+    var profitsOverTime = CreateTimelineChart("profitsOverTime", Object.keys(datesDataset), datesProfits, FormatDatalabelsOptions(), "");
+
+    if(profitsOverTime) ResizeChartInterval("profitsOverTime", "760px", chartSize);
 }
 
 function AtticAndMainShopRatios(entry, atticShopBuyRatio, mainShopBuyRatio){
     switch(entry["Shop Name"]){
         case "Attic":
-            console.log(entry.Status);
-
             try{
                 // If the item was bought in the same session;
                 if(entry.Status == "Bought"){

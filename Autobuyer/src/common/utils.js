@@ -969,7 +969,7 @@ function CreateBarChart(id, type, labels, data, options, datasetName = "Data") {
         };
         datasets.push(dataset);
     });
-
+    
     new Chart(context, {
         type: type,
         data: {
@@ -977,6 +977,47 @@ function CreateBarChart(id, type, labels, data, options, datasetName = "Data") {
             datasets: datasets // Use the dynamically created datasets
         },
         options: options
+    });
+
+    return true;
+}
+
+// Create a Bar chart;
+function CreateTimelineChart(id, labels, data, datasetName = "Data") {
+    const canvas = document.getElementById(id),
+    context = canvas.getContext("2d");
+
+    if(!CheckIfEnoughData(canvas, data)) return false;
+
+    var chartData = { labels: [], datasets: [] };
+
+    // Iterate over each pet name and create a dataset
+    labels.forEach(function(label, index) {
+        chartData.labels.push(label); // Assuming the key represents the month
+
+        var colors = CalculateColorInIndex(index, labels.length);
+
+        chartData.datasets.push({
+            label: label,
+            data: [data[index]],
+            borderColor: colors, // Function to generate random colors
+            backgroundColor:  colors,
+            borderWidth: 3,
+            fill: false
+        });
+    });
+
+    // Set up Chart.js with a line chart configuration
+    new Chart(context, {
+        type: 'line',
+        data: chartData,
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Data Occurrences Timeline'
+            },
+        }
     });
 
     return true;
