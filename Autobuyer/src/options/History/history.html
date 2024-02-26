@@ -51,13 +51,43 @@
                         </div>
                         <span class="autosaved rarity-info sub">(*) A success ratio close to 8% is deemed excellent for NeoBuyer+.</span>
                         <span class="autosaved rarity-info sub">(*) A ratio below 8% suggests a need to reduce your AutoBuying times.</span>
-                        <span class="autosaved rarity-info sub">(*) When adjusting your AutoBuyer times, clearing your purchase History ensures consistent ratios.</span>
+                        <br><span class="autosaved rarity-info sub">(*) When adjusting your AutoBuyer times, clearing your purchase History ensures consistent ratios.</span>
+                        <span class="autosaved rarity-info sub">(*) If you only go for the most profitable items, your ratio may be heavily skewed.</span>
                     </div><br><br>
 
                     <div>
                         <div class="category-info">Main Shops Average Purchase Ratio</div>
                         <div class="subcategory-info">
                             <canvas id="mainShopRatioChart"></canvas>
+                        </div>
+                    </div><br><br>
+
+                    <div>
+                        <div class="category-info">Almost Abandoned Attic Average Purchase Ratio</div>
+                        <div class="subcategory-info">
+                            <canvas id="atticRatioChart"></canvas>
+                        </div>
+                    </div><br><br>
+
+                    <div>
+                        <div class="category-info">Profit Per Hour of the Day (*)</div>
+                        <div class="subcategory-info">
+                            <canvas id="profitPerHour"></canvas>
+                        </div>
+                    </div><br><br>
+
+                    <div>
+                        <div class="category-info">Ratio Per Hour of the Day (*)</div>
+                        <div class="subcategory-info">
+                            <canvas id="ratioPerHour"></canvas>
+                        </div>
+                        <span class="autosaved rarity-info sub">(*) The likelihood of NeoBuyer+ successfully purchasing an item at a specific time increases with higher ratios.</span>
+                    </div><br><br>
+
+                    <div>
+                        <div class="category-info">Most Profitable Shops</div>
+                        <div class="subcategory-info">
+                            <canvas id="mostProfitableShops"></canvas>
                         </div>
                     </div><br><br>
 
@@ -74,30 +104,11 @@
                             <canvas id="mostValuableItemsChart"></canvas>
                         </div>
                     </div><br><br>
-
-                    <div>
-                        <div class="category-info">Almost Abandoned Attic Average Purchase Ratio</div>
-                        <div class="subcategory-info">
-                            <canvas id="atticRatioChart"></canvas>
-                        </div>
-                    </div><br><br>
                 </div>
 
                     <!--<br>
-                    <div class="chart-label">Profit by store name:</div>
-                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="profit-by-store"></div>
-                    <div class="chart-label">Profit by account:</div>
-                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="profit-by-account"></div>
-                    <div class="chart-label">Most commonly attempted items:</div>
-                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="most-common-items"></div>
                     <div class="chart-label">Monthly profit timeline:</div>
-                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="timeline"></div>
-                    <div class="chart-label">Profit & attempted value by hour of the day:</div>
-                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="hourly"></div>
-                    <div class="chart-label">Profit/attempted value ratio by hour of the day:<br>
-                        <span class="sub">(Consider restocking in your most profitable hours)</span></div>
-                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="hourly-percent"></div>
-                    <br>-->
+                    <div class="ct-chart ct-golden-section ct-major-twelfth" id="timeline"></div>-->
                 <br>
                 <button id="reset" class="button reset">Clear Purchase History</button>
             </center>

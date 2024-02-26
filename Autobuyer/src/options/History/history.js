@@ -210,12 +210,12 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     var mainShopBuyRatio = [0, 0],
     atticShopBuyRatio = [0, 0],
-    mostCommonItems = new Map();
+    groupedItems = new Map();
 
-    data.forEach(function(entry, index){
-        AtticAndMainShopRatios(data, index, entry, atticShopBuyRatio, mainShopBuyRatio);
+    data.forEach(function(entry){
+        AtticAndMainShopRatios(entry, atticShopBuyRatio, mainShopBuyRatio);
         
-        MostCommonItems(entry, mostCommonItems);
+        MostCommonItems(entry, groupedItems);
     });
     
     var mainShopRatioChart = CreateChartWithLabels(mainShopId, "pie", ["Bought", "Missed"], mainShopBuyRatio, FormatDatalabelsOptions());
@@ -227,7 +227,7 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
     if(atticRatioChart) ResizeChartInterval(atticId, chartSize);
 
     // Convert the map to an array of entries and sort it based on occurrence count
-    var mostCommonEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Entries - a[1].Entries).slice(0, showEntries),
+    var mostCommonEntries = [...groupedItems.entries()].sort((a, b) => b[1].Entries - a[1].Entries).slice(0, showEntries),
     mostCommonData = [];
 
     // Log the most common entries up to showEntries
@@ -239,9 +239,8 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     if(mostCommonItemsChart) ResizeChartInterval("mostCommonItemsChart", "760px", chartSize);
 
-    var mostProfitableEntries = [...mostCommonItems.entries()].sort((a, b) => b[1].Profit - a[1].Profit).slice(0, showEntries),
+    var mostProfitableEntries = [...groupedItems.entries()].sort((a, b) => b[1].Profit - a[1].Profit).slice(0, showEntries),
     mostProfitableData = [];
-    
 
     // Log the most common entries up to showEntries
     mostProfitableEntries.forEach(entry => {
@@ -251,16 +250,93 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
     var mostValuableItemsChart = CreateBarChart("mostValuableItemsChart", "bar", Object.keys(mostProfitableData), Object.values(mostProfitableData), FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
 
     if(mostValuableItemsChart) ResizeChartInterval("mostValuableItemsChart", "760px", chartSize);
+    
+    // Profit Per Store Name
+    var shopNames = {};
+    var hourRatios = {};
+
+    for(var i = 0; i <= 23; i++){
+        hourRatios[i] = {Ratio: 0, Profit: 0, Attempted: 0};
+    }
+
+    data.forEach(function(entry){
+        var value = Number(entry["Est. Value"].replace(/[^\d.-]/g, ''));
+
+        if(entry.Status == "Bought"){
+            if(!shopNames.hasOwnProperty(entry["Shop Name"])){
+                shopNames[entry["Shop Name"]] = value;
+            } else {
+                shopNames[entry["Shop Name"]] += value;
+            }
+        }
+
+        var entryHour = new Date(entry["Date & Time"]).getHours();
+        var hourObject = hourRatios[entryHour];
+
+        switch(entry.Shop){
+            case "Attic":
+                    // If the item was bought in the same session;
+                    if(entry.Status == "Bought"){
+                        hourObject.Profit += value;
+                    } else { // If not, the item was not bought, add it to the negative ratio;
+                        hourObject.Attempted += value;
+                    }
+            break;
+    
+            default:
+                switch(entry.Status){
+                    case "Bought":
+                        hourObject.Profit += value;
+                    break;
+    
+                    default: // Missed items;
+                        hourObject.Attempted += value;
+                    break;
+                }
+            break;
+        }        
+    });
+
+    var mostProfitableShops = CreateBarChart("mostProfitableShops", "bar", Object.keys(shopNames), Object.values(shopNames), FormatDatalabelsOptions(), `Most Profitable Shops for NeoBuyer+`);
+
+    if(mostProfitableShops) ResizeChartInterval("mostProfitableShops", "760px", chartSize);
+
+    // Profit pet hour;
+
+    var hourProfit = [], hourAttempted = [], hourRatio = [];
+
+    for(var i = 0; i <= 23; i++){
+        var entry = hourRatios[i];
+        var profitPerHour = entry.Profit;
+        var attemptedPerHour = entry.Attempted;
+        var ratio = (profitPerHour /  attemptedPerHour * 100).toFixed(2);
+
+        if(attemptedPerHour == 0) ratio = 0;
+
+        entry.Ratio = Number(ratio);
+
+        hourProfit.push(profitPerHour);
+        hourAttempted.push(attemptedPerHour);
+        hourRatio.push(ratio);
+    };
+
+    var profitPerHour = CreateBarChart("profitPerHour", "bar", Object.keys(hourRatios), hourProfit, FormatDatalabelsOptions(), `Profitability Per Hour of the Day`);
+
+    if(profitPerHour) ResizeChartInterval("profitPerHour", "760px", chartSize);
+
+    var ratioPerHour = CreateBarChart("ratioPerHour", "bar", Object.keys(hourRatios), hourRatio, FormatDatalabelsOptions(), `Probability of Buying an Item in a set Hour`);
+
+    if(ratioPerHour) ResizeChartInterval("ratioPerHour", "760px", chartSize);
 }
 
-function AtticAndMainShopRatios(data, index, entry, atticShopBuyRatio, mainShopBuyRatio){
+function AtticAndMainShopRatios(entry, atticShopBuyRatio, mainShopBuyRatio){
     switch(entry["Shop Name"]){
         case "Attic":
+            console.log(entry.Status);
+
             try{
-                var lastEntry = data[index - 1];
-                
                 // If the item was bought in the same session;
-                if(lastEntry.Name == entry.Name && entry.Status == "Bought"){
+                if(entry.Status == "Bought"){
                     atticShopBuyRatio[0] += 1; // Add to the purchase positive ratio;
                 } else { // If not, the item was not bought, add it to the negative ratio;
                     atticShopBuyRatio[1] += 1;
@@ -287,6 +363,7 @@ function AtticAndMainShopRatios(data, index, entry, atticShopBuyRatio, mainShopB
 
 function MostCommonItems(entry, mostCommonItems){
     var entryMin = {
+        Date: entry["Date & Time"],
         Name: entry["Item Name"],
         Status: entry.Status,
         Value: Number(entry["Est. Value"].replace(/[^\d.-]/g, '')),
