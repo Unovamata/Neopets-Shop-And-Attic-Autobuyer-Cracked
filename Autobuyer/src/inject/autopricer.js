@@ -17,6 +17,7 @@ async function RunAutoPricer(){
         FIXED_PRICING_VALUE: 1000,
         MIN_FIXED_PRICING: 200,
         MAX_FIXED_PRICING: 800,
+        SHOP_HISTORY: [],
 
         // AutoKQ;
         START_AUTOKQ_PROCESS: false,
@@ -74,6 +75,7 @@ async function RunAutoPricer(){
 			FIXED_PRICING_VALUE: fixedPricingDeduction,
 			MIN_FIXED_PRICING: minFixedPricingDeduction,
 			MAX_FIXED_PRICING: maxFixedPricingDeduction,
+            SHOP_HISTORY: shopHistory,
 
             // AutoKQ;
             START_AUTOKQ_PROCESS: isKQRunning,
@@ -198,8 +200,12 @@ async function RunAutoPricer(){
             
             const trElements = tableElement.querySelectorAll("tr");
             var historyItems = [];
+            var today = new Date();
+            var day = today.getDay();
+            var month = today.getMonth();
+            var year = today.getFullYear();
 
-            trElements.forEach(function(tr){
+            trElements.forEach(function(tr, index){
                 const tdElements = tr.querySelectorAll("td");
                 
                 // Extracting the data;
@@ -209,18 +215,36 @@ async function RunAutoPricer(){
                         Item: '',
                         Buyer: '',
                         Price: '',
+                        Hash: '',
                     }
 
                     for(var i = 0; i < 4; i++){
                         var text = tdElements[i].textContent;
+                        var dateParts = '';
+
+                        if(i == 0){
+                            dateParts = text.split("/");
+                        }
 
                         switch(i){
-                            case 0: entry.Date = text; break;
+                            case 0: entry.Date = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); break;
                             case 1: entry.Item = text; break;
                             case 2: entry.Buyer = text; break;
                             default: entry.Price = text; break;
                         }
                     }
+
+                    var entryDate = entry.Date;
+                    var entryDay = entryDate.getDay();
+                    var entryMonth = entryDate.getMonth();
+                    var entryYear = entryDate.getFullYear();
+
+                    if(day == entryDay && month == entryMonth && year == entryYear){
+                        return;
+                    }
+
+                    var entryString = entryDate + entry.Item + entry.Buyer + entry.Price + index;
+                    entry.Hash = entryString.hashCode();
 
                     historyItems.push(entry);
                 } catch {}
@@ -228,8 +252,15 @@ async function RunAutoPricer(){
 
             historyItems.shift();
 
+            var differenceArray = historyItems.filter(entry => {
+                return !shopHistory.some(existingEntry => existingEntry.Hash == entry.Hash);
+            });
 
-            console.log(historyItems);
+            var resultArray = shopHistory.concat(differenceArray);
+
+            await setSHOP_HISTORY(resultArray);
+
+            console.log(resultArray, differenceArray);
         }
 
         LoadPageLinks();

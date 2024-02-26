@@ -356,7 +356,6 @@ function setNAVIGATE_TO_NEXT_PAGE(value) {
             resolve();
         });
     });
-    
 }
 
 function getNAVIGATE_TO_NEXT_PAGE(callback) {
@@ -456,6 +455,28 @@ function getIS_TURBO(callback) {
             callback(value);
         }
     });
+}
+
+function setSHOP_HISTORY(value) {
+    return new Promise((resolve) => {
+        chrome.storage.local.set({ SHOP_HISTORY: value }, function () {
+            resolve();
+        });
+    });
+}
+
+String.prototype.hashCode = function() {
+    var hash = 0,i, chr;
+
+    if (this.length === 0) return hash;
+
+    for (i = 0; i < this.length; i++) {
+        chr = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    
+    return hash;
 }
 
 
