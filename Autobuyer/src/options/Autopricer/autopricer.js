@@ -419,3 +419,12 @@ ShowShopStock();
 
 
 // Analytics
+const deleteSalesHistoryButton = document.getElementById("deleteHistory");
+deleteSalesHistoryButton.addEventListener('click', DeleteSalesHistory);
+
+async function DeleteSalesHistory(){
+    if(confirm("Do you want to remove your sales history data from NeoBuyer+?\n\nThis will inutilize the AutoPricer's Analytics until you import your data again.")){
+        await setSHOP_HISTORY([]);
+        location.reload();
+    }
+}

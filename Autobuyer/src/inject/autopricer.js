@@ -259,8 +259,6 @@ async function RunAutoPricer(){
             var resultArray = shopHistory.concat(differenceArray);
 
             await setSHOP_HISTORY(resultArray);
-
-            console.log(resultArray, differenceArray);
         }
 
         LoadPageLinks();
