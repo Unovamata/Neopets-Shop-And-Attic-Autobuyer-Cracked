@@ -18,6 +18,7 @@ async function RunAutoPricer(){
         MIN_FIXED_PRICING: 200,
         MAX_FIXED_PRICING: 800,
         SHOP_HISTORY: [],
+        SHOULD_IMPORT_SALES: false,
 
         // AutoKQ;
         START_AUTOKQ_PROCESS: false,
@@ -76,6 +77,7 @@ async function RunAutoPricer(){
 			MIN_FIXED_PRICING: minFixedPricingDeduction,
 			MAX_FIXED_PRICING: maxFixedPricingDeduction,
             SHOP_HISTORY: shopHistory,
+            SHOULD_IMPORT_SALES: shouldImportSales,
 
             // AutoKQ;
             START_AUTOKQ_PROCESS: isKQRunning,
@@ -189,6 +191,8 @@ async function RunAutoPricer(){
                 }
             });
 
+            if(!shouldImportSales) return;
+
             // Fetching history data;
             const salesResponse = await fetch("https://www.neopets.com/market.phtml?type=sales");
             const salesContent = await salesResponse.text();
@@ -200,10 +204,6 @@ async function RunAutoPricer(){
             
             const trElements = tableElement.querySelectorAll("tr");
             var historyItems = [];
-            var today = new Date();
-            var day = today.getDate();
-            var month = today.getMonth() + 1;
-            var year = today.getFullYear();
 
             trElements.forEach(function(tr, index){
                 const tdElements = tr.querySelectorAll("td");

@@ -386,6 +386,7 @@ function setMAX_NEW_SEARCH_WAIT_TIME(value) { chrome.storage.local.set({MAX_NEW_
 function setUSE_BLACKLIST_SW(value) { chrome.storage.local.set({USE_BLACKLIST_SW: value}, (function() {})) }
 function setBLACKLIST_SW(value) { chrome.storage.local.set({BLACKLIST_SW: value}, (function() {})) }
 function setSHOULD_SUBMIT_AUTOMATICALLY(value) { chrome.storage.local.set({SHOULD_SUBMIT_AUTOMATICALLY: value}, (function() {})) }
+function setSHOULD_IMPORT_SALES(value) { chrome.storage.local.set({SHOULD_IMPORT_SALES: value}, (function() {})) }
 function setMIN_WAIT_PER_ACTION(value) { chrome.storage.local.set({MIN_WAIT_PER_ACTION: Number(value)}, (function() {})) }
 function setMAX_WAIT_PER_ACTION(value) { chrome.storage.local.set({MAX_WAIT_PER_ACTION: Number(value)}, (function() {})) }
 function setMIN_WAIT_AFTER_PRICING_ITEM(value) { chrome.storage.local.set({MIN_WAIT_AFTER_PRICING_ITEM: Number(value)}, (function() {})) }
@@ -405,6 +406,7 @@ function setMAX_WAIT_BEFORE_UPDATE(value) { chrome.storage.local.set({MAX_WAIT_B
 function setMIN_WAIT_BAN_TIME(value) { chrome.storage.local.set({MIN_WAIT_BAN_TIME: value}, (function() {})) }
 function setMAX_WAIT_BAN_TIME(value) { chrome.storage.local.set({MAX_WAIT_BAN_TIME: value}, (function() {})) }
 function setMIN_PAGE_LOAD_FAILURES(value) { chrome.storage.local.set({MIN_PAGE_LOAD_FAILURES: value}, (function() {})) }
+
 
 // AutoKQ Setters;
 function setUSE_BLACKLIST_KQ(value) { chrome.storage.local.set({USE_BLACKLIST_KQ: value}, (function() {})) }
@@ -560,9 +562,12 @@ $("#BLACKLIST_SW").bind("input propertychange", (function () {
 $("#SHOULD_SUBMIT_AUTOMATICALLY").bind("input propertychange", (function () {
   const isChecked = $("#SHOULD_SUBMIT_AUTOMATICALLY").is(":checked");
   setSHOULD_SUBMIT_AUTOMATICALLY(isChecked);
-  showOrHide();
 }))
 
+$("#SHOULD_IMPORT_SALES").bind("input propertychange", (function () {
+  const isChecked = $("#SHOULD_IMPORT_SALES").is(":checked");
+  setSHOULD_IMPORT_SALES(isChecked);
+}))
 
 $("#MIN_WAIT_PER_ACTION").bind("input propertychange", (function () {
   setMIN_WAIT_PER_ACTION($("#MIN_WAIT_PER_ACTION").val())
@@ -875,6 +880,7 @@ resetButton.onclick = function (_) {
 
   // Shop Stock Page Settings;
   SHOULD_SUBMIT_AUTOMATICALLY: false,
+  SHOULD_IMPORT_SALES: false,
   MIN_SHOP_NAVIGATION_COOLDOWN: 20000,
   MAX_SHOP_NAVIGATION_COOLDOWN: 40000,
   MIN_WAIT_AFTER_PRICING_ITEM: 10000,
@@ -1004,6 +1010,7 @@ resetButton.onclick = function (_) {
 
   // Shop Stock Page Settings;
   $("#SHOULD_SUBMIT_AUTOMATICALLY").prop("checked", _.SHOULD_SUBMIT_AUTOMATICALLY);
+  $("#SHOULD_IMPORT_SALES").prop("checked", _.SHOULD_IMPORT_SALES);
   $("#MIN_SHOP_NAVIGATION_COOLDOWN").val(_.MIN_SHOP_NAVIGATION_COOLDOWN);
   $("#MAX_SHOP_NAVIGATION_COOLDOWN").val(_.MAX_SHOP_NAVIGATION_COOLDOWN);
   $("#MIN_WAIT_PER_ACTION").val(_.MIN_WAIT_PER_ACTION);

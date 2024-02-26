@@ -62,6 +62,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MIN_FIXED_PRICING: 200,
 			MAX_FIXED_PRICING: 800,
 			SALES_HISTORY: [],
+			SHOULD_IMPORT_SALES: false,
 
 			// AutoKQ;
 			START_AUTOKQ_PROCESS: false,
