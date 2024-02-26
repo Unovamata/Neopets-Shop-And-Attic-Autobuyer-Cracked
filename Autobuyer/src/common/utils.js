@@ -887,7 +887,7 @@ function Sleep(sleepTime) {
 //Charts
 
 // Function to separate the dataset by month and year
-function FormatDatasetByMonthAndYear(dataset) {
+function FormatDatasetByMonthAndYear(dataset, monthIndex) {
     var separatedData = {};
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -1010,23 +1010,19 @@ function CreateTimelineChart(id, labels, data, datasetName = "Data") {
 
     if(!CheckIfEnoughData(canvas, data)) return false;
 
-    var chartData = { labels: [], datasets: [] };
+    var chartData = { labels: labels, datasets: [] };
 
-    // Iterate over each pet name and create a dataset
-    labels.forEach(function(label, index) {
-        chartData.labels.push(label); // Assuming the key represents the month
+    // Create a single dataset containing all the data points
+    var dataset = {
+        label: datasetName,
+        data: data,
+        borderColor: CalculateColorInIndex(0, 1), // Assuming you want a single color for all data points
+        backgroundColor:  CalculateColorInIndex(0, 1),
+        borderWidth: 3,
+        fill: false
+    };
 
-        var colors = CalculateColorInIndex(index, labels.length);
-
-        chartData.datasets.push({
-            label: label,
-            data: [data[index]],
-            borderColor: colors, // Function to generate random colors
-            backgroundColor:  colors,
-            borderWidth: 3,
-            fill: false
-        });
-    });
+    chartData.datasets.push(dataset);
 
     // Set up Chart.js with a line chart configuration
     new Chart(context, {
@@ -1069,17 +1065,36 @@ function CalculateColorInIndex(index, divisions){
 function ResizeChartInterval(id, sizeX, sizeY = ""){
     ResizeChart(id, sizeX, sizeY);
 
+    var hasUpdated = false;
+
     setInterval(function(){
-        ResizeChart(id, sizeX, sizeY);
+        hasUpdated = ResizeChart(id, sizeX, sizeY, hasUpdated);
     }, 100);
 }
 
-function ResizeChart(id, sizeX, sizeY = ""){
-    // Set fixed width and height for the canvas
-    document.getElementById(id).style.width = sizeX;
+function ResizeChart(id, sizeX, sizeY = "", hasUpdated) {
+    var canvas = document.getElementById(id);
+    canvas.style.width = sizeX;
 
-    if(sizeY == "") document.getElementById(id).style.height = sizeX;
-    else document.getElementById(id).style.height = sizeY;
+    if (sizeY == "") {
+        canvas.style.height = sizeX;
+    } else {
+        canvas.style.height = sizeY;
+    }
+
+    // Get the Chart.js instance associated with the canvas
+    if(!hasUpdated){
+        var chartInstance = Chart.getChart(id);
+
+        if (chartInstance) {
+            chartInstance.resize();
+            chartInstance.update();
+        }
+
+        return true;
+    }
+
+    return true;
 }
 
 function CheckIfEnoughData(canvas, data){

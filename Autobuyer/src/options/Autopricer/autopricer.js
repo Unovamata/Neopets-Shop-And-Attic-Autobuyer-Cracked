@@ -428,3 +428,26 @@ async function DeleteSalesHistory(){
         location.reload();
     }
 }
+
+chrome.storage.local.get({
+    SHOP_HISTORY: []
+}, (function(context) {
+    var data = context.SHOP_HISTORY;
+
+    var formattedData = FormatDatasetByMonthAndYear(data);
+    var profitsPerMonth = [];
+
+    Object.values(formattedData).forEach(function(entry, index){
+        var profits = entry.map(item => item.Price);
+        var sumOfProfits = profits.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+        profitsPerMonth.push(sumOfProfits);
+    });
+
+    console.log(profitsPerMonth, formattedData)
+
+    // Set up Chart.js with a line chart configuration
+    var monthlyProfits = CreateTimelineChart("monthlyProfits", Object.keys(formattedData), profitsPerMonth, "Monthly Profits");
+
+    if(monthlyProfits) ResizeChartInterval("monthlyProfits", "760px", "380px");
+}));

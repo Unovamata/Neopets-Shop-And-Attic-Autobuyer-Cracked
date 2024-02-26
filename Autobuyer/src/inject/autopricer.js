@@ -201,8 +201,8 @@ async function RunAutoPricer(){
             const trElements = tableElement.querySelectorAll("tr");
             var historyItems = [];
             var today = new Date();
-            var day = today.getDay();
-            var month = today.getMonth();
+            var day = today.getDate();
+            var month = today.getMonth() + 1;
             var year = today.getFullYear();
 
             trElements.forEach(function(tr, index){
@@ -211,7 +211,6 @@ async function RunAutoPricer(){
                 // Extracting the data;
                 try{
                     var entry = {
-                        Date: '',
                         Item: '',
                         Buyer: '',
                         Price: '',
@@ -227,24 +226,23 @@ async function RunAutoPricer(){
                         }
 
                         switch(i){
-                            case 0: entry.Date = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); break;
+                            case 0: entry["Date & Time"] = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); break;
                             case 1: entry.Item = text; break;
                             case 2: entry.Buyer = text; break;
-                            default: entry.Price = text; break;
+                            default: entry.Price = Number(text.replace(/[^\d.-]/g, '')); break;
                         }
                     }
 
-                    var entryDate = entry.Date;
-                    var entryDay = entryDate.getDay();
-                    var entryMonth = entryDate.getMonth();
-                    var entryYear = entryDate.getFullYear();
-
-                    if(day == entryDay && month == entryMonth && year == entryYear){
-                        return;
-                    }
+                    var entryDate = entry["Date & Time"];
 
                     var entryString = entryDate + entry.Item + entry.Buyer + entry.Price + index;
                     entry.Hash = entryString.hashCode();
+
+                    var entryDay = entryDate.getDate();
+                    var entryMonth = entryDate.getMonth() + 1;
+                    var entryYear = entryDate.getFullYear();
+
+                    entry["Date & Time"] = entryMonth + "/" + entryDay + "/" + entryYear;
 
                     historyItems.push(entry);
                 } catch {}

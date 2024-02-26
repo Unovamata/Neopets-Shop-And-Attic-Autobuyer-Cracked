@@ -344,9 +344,9 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
     });
 
     // Set up Chart.js with a line chart configuration
-    var profitsOverTime = CreateTimelineChart("profitsOverTime", Object.keys(datesDataset), datesProfits, FormatDatalabelsOptions(), "");
-
-    if(profitsOverTime) ResizeChartInterval("profitsOverTime", "760px", chartSize);
+    var profitsOverTime = CreateTimelineChart("profitsOverTime", Object.keys(datesDataset), datesProfits, "Profits");
+    
+    if(profitsOverTime) ResizeChartInterval("profitsOverTime", "760px", "380px");
 }
 
 function AtticAndMainShopRatios(entry, atticShopBuyRatio, mainShopBuyRatio){
