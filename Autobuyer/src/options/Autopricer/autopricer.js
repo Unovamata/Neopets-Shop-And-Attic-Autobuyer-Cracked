@@ -389,24 +389,30 @@ function CancelAutoPricer(){
 
 const stockContainer = document.getElementById('shop-stock-container');
 const optionsContainer = document.getElementById('autopricer-options-container');
+const analyiticsContainer = document.getElementById('analytics-container');
 
 const optionsButton = document.getElementById("options");
 optionsButton.addEventListener('click', ShowOptions);
 
 function ShowOptions(){
-    stockContainer.style.display = 'none';
-    optionsContainer.style.display = 'block';
+    ShowAndHideElements([optionsContainer], [stockContainer, analyiticsContainer]);
 }
 
 const stockButton = document.getElementById("stock");
 stockButton.addEventListener('click', ShowShopStock);
 
 function ShowShopStock(){
-    optionsContainer.style.display = 'none';
-    stockContainer.style.display = 'block';
+    ShowAndHideElements([stockContainer], [optionsContainer, analyiticsContainer]);
 }
 
-optionsContainer.style.display = 'none';
+const analyticsButton = document.getElementById("analytics");
+analyticsButton.addEventListener('click', ShowAnalytics);
+
+function ShowAnalytics(){
+    ShowAndHideElements([analyiticsContainer], [optionsContainer, stockContainer]);
+}
+
+ShowShopStock();
 
 
 //######################################################################################################################################

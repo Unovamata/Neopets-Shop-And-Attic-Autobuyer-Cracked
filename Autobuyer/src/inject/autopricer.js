@@ -186,6 +186,50 @@ async function RunAutoPricer(){
                     rowsItems.push(item);
                 }
             });
+
+            // Fetching history data;
+            const salesResponse = await fetch("https://www.neopets.com/market.phtml?type=sales");
+            const salesContent = await salesResponse.text();
+
+            // Parsing the history's contents;
+            const historyParser = new DOMParser();
+            const historyDocument = historyParser.parseFromString(salesContent, 'text/html');
+            const tableElement = historyDocument.querySelector('form[action="market.phtml"]').parentElement.parentElement.parentElement;
+            
+            const trElements = tableElement.querySelectorAll("tr");
+            var historyItems = [];
+
+            trElements.forEach(function(tr){
+                const tdElements = tr.querySelectorAll("td");
+                
+                // Extracting the data;
+                try{
+                    var entry = {
+                        Date: '',
+                        Item: '',
+                        Buyer: '',
+                        Price: '',
+                    }
+
+                    for(var i = 0; i < 4; i++){
+                        var text = tdElements[i].textContent;
+
+                        switch(i){
+                            case 0: entry.Date = text; break;
+                            case 1: entry.Item = text; break;
+                            case 2: entry.Buyer = text; break;
+                            default: entry.Price = text; break;
+                        }
+                    }
+
+                    historyItems.push(entry);
+                } catch {}
+            });
+
+            historyItems.shift();
+
+
+            console.log(historyItems);
         }
 
         LoadPageLinks();
