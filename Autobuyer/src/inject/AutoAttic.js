@@ -198,8 +198,6 @@ function InjectAutoAttic() {
                         "Attempting " + bestItemName + " in Attic",
                         "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
                     );
-
-                    
                     
                     // Getting item data for submission;
                     var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
