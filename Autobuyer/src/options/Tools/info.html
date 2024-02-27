@@ -12,7 +12,10 @@
             <br><br>
 
             <center>
-                <div class="category-info">Export & Load Settings</div>
+                <div class="category-info">Export & Load Settings
+                    <br><span class="sub autosaved">Always verify and test if your presets have been exported as expected!</span><br>
+                </div>
+                
 
                 <button class="autobuyerButton" id="save">Export Settings Preset</button> 
 
@@ -70,7 +73,24 @@
                             <td>
                                 <label class="switch">
                                     <input id="SHOULD_SHARE_SHOP_STOCK" type="checkbox">
-                                    <span class="slider round"></span>
+                                    <span class="slider-danger slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Export Shop Sales History:
+                                <span class="tooltiptext">
+                                    If you enable this option, the configuration exporter will include your entire 'Shop Sales History' data.
+                                    <br><br>
+                                    <a>This is HIGHLY identifiable information.</a><br><br>
+                                    <a>You could potentially get frozen if you share this!</a><br><br>
+                                    <a>Please proceed with caution.</a>
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_SHARE_SALES_HISTORY" type="checkbox">
+                                    <span class="slider-danger slider round"></span>
                                 </label>
                             </td>
                         </tr>
@@ -104,7 +124,7 @@
                             <td>
                                 <label class="switch">
                                     <input id="SHOULD_SHARE_PIN" type="checkbox">
-                                    <span class="slider round"></span>
+                                    <span class="slider-danger slider round"></span>
                                 </label>
                             </td>
                         </tr>
@@ -138,7 +158,7 @@
                             <td>
                                 <label class="switch">
                                     <input id="SHOULD_SHARE_HISTORY" type="checkbox">
-                                    <span class="slider round"></span>
+                                    <span class="slider-danger slider round"></span>
                                 </label>
                             </td>
                         </tr>      
@@ -155,7 +175,7 @@
                             <td>
                                 <label class="switch">
                                     <input id="SHOULD_SHARE_AUTOKQ_LOG" type="checkbox">
-                                    <span class="slider round"></span>
+                                    <span class="slider-danger slider round"></span>
                                 </label>
                             </td>
                         </tr>   
@@ -204,13 +224,17 @@
                 <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm" target="_blank">
                     <button class="autobuyerButton">Neon Chrome Extension</button>
                 </a>
-                <div class="category-info">Credits<br><br>
-                    Original NeoBuyer Chrome Extension - NeoBuyer.<br>
-                    Neon Chrome Extension - MintFarm.<br>
-                    Neopets Restock Timer - jackmb, dgoldman.<br>
-                    Better Quick Stock - brunodemarchi. Adapted by Unovamata.<br>
-                    Neopets Auctions Comma Separate - <a href = "https://greasyfork.org/en/users/1199864-zara-kayn">Zara Kayn</a><br>
-                    <br><br>
+
+                <div class="category-info">Feature Credits<br><br>
+                    <b>Pause</b> NeoBuyer+ in Specific Minute Intervals - <a href="https://github.com/chrisli-03" target="_blank">chrisli-03</a><br>
+                </div>
+
+                <div class="category-info">General Credits<br><br>
+                    Original NeoBuyer Chrome Extension - NeoBuyer<br>
+                    Neon Chrome Extension - MintFarm<br>
+                    Neopets Restock Timer - jackmb, dgoldman<br>
+                    Better Quick Stock - brunodemarchi. Adapted by Unovamata<br>
+                    Neopets Auctions Comma Separate - <a href = "https://greasyfork.org/en/users/1199864-zara-kayn" target="_blank">Zara Kayn</a><br>
                 </div>
             </center>
         </div>

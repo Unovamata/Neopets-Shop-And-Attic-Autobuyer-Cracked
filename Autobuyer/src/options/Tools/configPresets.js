@@ -25,13 +25,18 @@ chrome.storage.local.get(null, function(items) {
         if(!$("#SHOULD_SHARE_STORES_TO_VISIT").is(":checked")){
             itemsCopy.STORES_TO_CYCLE_THROUGH_WHEN_STOCKED = [];
         }
-
+        
         // Resetting the Auto Pricer and data sharing;
         if(!$("#SHOULD_SHARE_SHOP_STOCK").is(":checked")){
             itemsCopy.SHOP_INVENTORY = [];
             itemsCopy.AUTOPRICER_INVENTORY = [];
         }
         
+        // Resetting the Auto Pricer and data sharing;
+        if(!$("#SHOULD_SHARE_SALES_HISTORY").is(":checked")){
+            itemsCopy.SHOP_HISTORY = [];
+        }
+
         if(!$("#SHOULD_SHARE_BLACKLISTS").is(":checked")){
             // Resetting blacklists to their default value;
             itemsCopy.BLACKLIST = ['Forgotten Shore Map Piece', 'Petpet Laboratory Map', 'Piece of a treasure map', 'Piece of a treasure map', 'Secret Laboratory Map', 'Space Map', 'Spooky Treasure Map', 'Underwater Map Piece'],

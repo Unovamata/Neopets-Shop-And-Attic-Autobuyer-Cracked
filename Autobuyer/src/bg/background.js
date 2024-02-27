@@ -61,7 +61,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			FIXED_PRICING_VALUE: 1000,
 			MIN_FIXED_PRICING: 200,
 			MAX_FIXED_PRICING: 800,
-			SALES_HISTORY: [],
+			SHOP_HISTORY: [],
 			SHOULD_IMPORT_SALES: false,
 
 			// AutoKQ;
@@ -122,6 +122,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_SHARE_STORES_TO_VISIT: false,
 			SHOULD_SHARE_RESTOCK_LIST: false,
 			SHOULD_SHARE_SHOP_STOCK: false,
+			SHOULD_SHARE_SALES_HISTORY: false,
 			SHOULD_SHARE_BLACKLISTS: false,
 			SHOULD_SHARE_PIN: false,
 			SHOULD_SHARE_ATTIC_LAST_REFRESH: false,

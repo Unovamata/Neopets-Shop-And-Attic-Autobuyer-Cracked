@@ -418,6 +418,7 @@ function setMAX_SPENDABLE_PRICE(value) { chrome.storage.local.set({MAX_SPENDABLE
 function setSHOULD_SHARE_STORES_TO_VISIT(value) { chrome.storage.local.set({SHOULD_SHARE_STORES_TO_VISIT: value}, (function() {})) }
 function setSHOULD_SHARE_RESTOCK_LIST(value) { chrome.storage.local.set({SHOULD_SHARE_RESTOCK_LIST: value}, (function() {})) }
 function setSHOULD_SHARE_SHOP_STOCK(value) { chrome.storage.local.set({SHOULD_SHARE_SHOP_STOCK: value}, (function() {})) }
+function setSHOULD_SHARE_SALES_HISTORY(value) { chrome.storage.local.set({SHOULD_SHARE_SALES_HISTORY: value}, (function() {})) }
 function setSHOULD_SHARE_BLACKLISTS(value) { chrome.storage.local.set({SHOULD_SHARE_BLACKLISTS: value}, (function() {})) }
 function setSHOULD_SHARE_PIN(value) { chrome.storage.local.set({SHOULD_SHARE_PIN: value}, (function() {})) }
 function setSHOULD_SHARE_ATTIC_LAST_REFRESH(value) { chrome.storage.local.set({SHOULD_SHARE_ATTIC_LAST_REFRESH: value}, (function() {})) }
@@ -724,6 +725,11 @@ $("#SHOULD_SHARE_SHOP_STOCK").bind("input propertychange", (function () {
   setSHOULD_SHARE_SHOP_STOCK(isChecked);
 }))
 
+$("#SHOULD_SHARE_SALES_HISTORY").bind("input propertychange", (function () {
+  const isChecked = $("#SHOULD_SHARE_SALES_HISTORY").is(":checked");
+  setSHOULD_SHARE_SALES_HISTORY(isChecked);
+}))
+
 $("#SHOULD_SHARE_BLACKLISTS").bind("input propertychange", (function () {
   const isChecked = $("#SHOULD_SHARE_BLACKLISTS").is(":checked");
   setSHOULD_SHARE_BLACKLISTS(isChecked);
@@ -904,6 +910,7 @@ resetButton.onclick = function (_) {
   SHOULD_SHARE_STORES_TO_VISIT: false,
   SHOULD_SHARE_RESTOCK_LIST: false,
   SHOULD_SHARE_SHOP_STOCK: false,
+  SHOULD_SHARE_SALES_HISTORY: false,
   SHOULD_SHARE_BLACKLISTS: false,
   SHOULD_SHARE_PIN: false,
   SHOULD_SHARE_ATTIC_LAST_REFRESH: false,
@@ -1034,6 +1041,7 @@ resetButton.onclick = function (_) {
   $("#SHOULD_SHARE_STORES_TO_VISIT").prop("checked", _.SHOULD_SHARE_STORES_TO_VISIT);
   $("#SHOULD_SHARE_RESTOCK_LIST").prop("checked", _.SHOULD_SHARE_RESTOCK_LIST);
   $("#SHOULD_SHARE_SHOP_STOCK").prop("checked", _.SHOULD_SHARE_SHOP_STOCK);
+  $("#SHOULD_SHARE_SALES_HISTORY").prop("checked", _.SHOULD_SHARE_SALES_HISTORY);
   $("#SHOULD_SHARE_BLACKLISTS").prop("checked", _.SHOULD_SHARE_BLACKLISTS);
   $("#SHOULD_SHARE_PIN").prop("checked", _.SHOULD_SHARE_PIN);
   $("#SHOULD_SHARE_ATTIC_LAST_REFRESH").prop("checked", _.SHOULD_SHARE_ATTIC_LAST_REFRESH);
