@@ -63,6 +63,8 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_FIXED_PRICING: 800,
 			SHOP_HISTORY: [],
 			SHOULD_IMPORT_SALES: false,
+			ATTIC_NEXT_START_WINDOW: 0,
+        	ATTIC_NEXT_END_WINDOW: 0,
 
 			// AutoKQ;
 			START_AUTOKQ_PROCESS: false,

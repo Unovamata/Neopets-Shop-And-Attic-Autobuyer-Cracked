@@ -245,6 +245,13 @@ function FormatMillisecondsToSeconds(milliseconds) {
     return (milliseconds / 1e3).toFixed(2) + " secs"
 }
 
+function setATTIC_NEXT_START_WINDOW(value) {
+    chrome.storage.local.set({ ATTIC_NEXT_START_WINDOW: value }, function () {});
+}
+
+function setATTIC_NEXT_END_WINDOW(value) {
+    chrome.storage.local.set({ ATTIC_NEXT_END_WINDOW: value }, function () {});
+}
 
 //######################################################################################################################################
 //// Auto Pricer Variable Calling

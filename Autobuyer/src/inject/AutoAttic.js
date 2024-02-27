@@ -31,6 +31,8 @@ function InjectAutoAttic() {
         ATTIC_SHOULD_REFRESH: !1,
         ATTIC_LAST_REFRESH_MS: -1,
         ATTIC_PREV_NUM_ITEMS: -1,
+        ATTIC_NEXT_START_WINDOW: 0,
+        ATTIC_NEXT_END_WINDOW: 0,
     }, (async function(autobuyerVariables) {
         
         // Destructing the variables extracted from the extension;
@@ -55,10 +57,78 @@ function InjectAutoAttic() {
             ATTIC_SHOULD_REFRESH: isAtticAutoRefreshing,
             ATTIC_LAST_REFRESH_MS: atticLastRefresh,
             ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems,
+            ATTIC_NEXT_START_WINDOW: atticStartWindow,
+            ATTIC_NEXT_END_WINDOW: atticEndWindow,
         } = autobuyerVariables;
         
         var isRunningOnScheduledTime = false,
         atticWaitTime = 1200000;
+
+        // Calculate the time to wait before the next refresh
+        var waitTime = CreateWaitTime(atticLastRefresh);
+
+        function CreateWaitTime(atticLastRefresh) {
+            const now = new Date();
+            const lastRestockTime = new Date(atticLastRefresh);
+        
+            const lastRestockMinute = lastRestockTime.getMinutes();
+        
+            const timeDifference = now - lastRestockTime;
+
+            var extraMinutes = 0, extraSeconds = 0, minutesInterval;
+
+            if(timeDifference < 14 * 60 * 1000){
+                minutesInterval = 14;
+                extraMinutes = 0;
+                extraSeconds = 0;
+            } else {
+                minutesInterval = 7;
+                extraMinutes = 7;
+                extraSeconds = 6;
+            }
+
+            const windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000)) + 1;
+
+            const windowStartTime = new Date(lastRestockTime);
+            const windowEndTime = new Date(lastRestockTime);
+    
+            const secondsToAdd = minutesInterval === 14 ? 10 : 4;
+    
+            windowStartTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
+            windowStartTime.setSeconds(lastRestockTime.getSeconds() + 1 * windowsPassed);
+    
+            windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
+            windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * windowsPassed + extraSeconds);
+    
+            lastStartWindow = windowStartTime;
+            lastEndWindow = windowEndTime;
+    
+            console.log(windowStartTime.getHours() + ":" + windowStartTime.getMinutes() + ":" + windowStartTime.getSeconds() + " | " +
+            windowEndTime.getHours() + ":" + windowEndTime.getMinutes() + ":" + windowEndTime.getSeconds());
+
+            console.log(now)
+            console.log(new Date(atticStartWindow))
+            console.log(new Date(atticEndWindow))
+
+            var wait = 0;
+
+            if(now >= new Date(atticStartWindow) && now <= new Date(atticEndWindow)){
+                wait = 1000;
+
+                RefreshBanner(wait);
+
+                return 1000;
+            } else {
+                setATTIC_NEXT_START_WINDOW(windowStartTime.getTime());
+                setATTIC_NEXT_END_WINDOW(windowEndTime.getTime());
+
+                wait = windowStartTime - now;
+
+                RefreshBanner(wait);
+
+                return wait;
+            }
+        }
 
         // Run the AutoBuyer
         if(!isAtticEnabled) return;
@@ -110,6 +180,7 @@ function InjectAutoAttic() {
                     ATTIC_PREV_NUM_ITEMS: ItemsStocked,
                     ATTIC_LAST_REFRESH_MS: lastRestock
                 }, function() {
+                    waitTime = CreateWaitTime(atticLastRefresh);
                     UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
                 });
             }
@@ -175,56 +246,12 @@ function InjectAutoAttic() {
                 return;
             }
 
-            // Calculate the time to wait before the next refresh
-            const waitTime = CreateWaitTime(atticLastRefresh);
+            await Sleep(waitTime);
 
-            function CreateWaitTime(atticLastRefresh) {
-                const now = new Date();
-                const lastRestockTime = new Date(atticLastRefresh);
-            
-                const lastRestockMinute = lastRestockTime.getMinutes();
-            
-                const timeDifference = now - lastRestockTime;
+            window.location.href = "https://www.neopets.com/halloween/garage.phtml";
+        }
 
-                var extraMinutes = 0, extraSeconds = 0, minutesInterval;
-
-                if(timeDifference < 14 * 60 * 1000){
-                    minutesInterval = 14;
-                    extraMinutes = 0;
-                    extraSeconds = 0;
-                } else {
-                    minutesInterval = 7;
-                    extraMinutes = 7;
-                    extraSeconds = 6;
-                }
-
-                const windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000)) + 1;
-
-                const windowStartTime = new Date(lastRestockTime);
-                const windowEndTime = new Date(lastRestockTime);
-        
-                const secondsToAdd = minutesInterval === 14 ? 10 : 4;
-        
-                windowStartTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
-                windowStartTime.setSeconds(lastRestockTime.getSeconds() + 1 * windowsPassed);
-        
-                windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
-                windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * windowsPassed + extraSeconds);
-        
-                lastStartWindow = windowStartTime;
-                lastEndWindow = windowEndTime;
-        
-                console.log(windowStartTime.getHours() + ":" + windowStartTime.getMinutes() + ":" + windowStartTime.getSeconds() + " | " +
-                windowEndTime.getHours() + ":" + windowEndTime.getMinutes() + ":" + windowEndTime.getSeconds());
-
-                if(now >= windowStartTime && now <= windowEndTime){
-                    console.log("Refreshing for stock...")
-                    return 1000;
-                } else {
-                    return windowStartTime - now;
-                }
-            }
-    
+        function RefreshBanner(waitTime){
             // Create a message with the wait time and last restock time
             let message = "Waiting " + FormatMillisecondsToSeconds(waitTime) + " to reload...";
     
@@ -236,10 +263,6 @@ function InjectAutoAttic() {
     
             // Update the banner status and initiate the page reload after the wait time
             UpdateBannerStatus(message);
-
-            await Sleep(waitTime);
-
-            window.location.href = "https://www.neopets.com/halloween/garage.phtml";
         }
 
         function HighlightItemsInAttic() {
