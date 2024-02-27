@@ -66,19 +66,18 @@ function InjectAutoAttic() {
         updateTimes = false;
 
         // Calculate the time to wait before the next refresh
+        
         var waitTime = CreateWaitTime(atticLastRefresh);
 
-        function CreateWaitTime(atticLastRefresh) {
+        function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
             const now = new Date();
             const lastRestockTime = new Date(atticLastRefresh);
-
-            if(atticStartWindow < now && atticEndWindow < now) location.reload();
         
             const lastRestockMinute = lastRestockTime.getMinutes();
         
             const timeDifference = now - lastRestockTime;
 
-            var extraMinutes = 0, extraSeconds = 0, minutesInterval;
+            var extraMinutes = 0, extraSeconds = 0, minutesInterval, extraWindow = 0;
 
             if(timeDifference < 14 * 60 * 1000){
                 minutesInterval = 14;
@@ -88,9 +87,12 @@ function InjectAutoAttic() {
                 minutesInterval = 7;
                 extraMinutes = 7;
                 extraSeconds = 6;
+                extraWindow = -1;
             }
 
-            const windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000));
+            if(isNextWindow) extraWindow = 1;
+
+            const windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000)) + 1 + extraWindow;
 
             const windowStartTime = new Date(lastRestockTime);
             const windowEndTime = new Date(lastRestockTime);
@@ -102,9 +104,6 @@ function InjectAutoAttic() {
     
             windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
             windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * windowsPassed + extraSeconds);
-
-            // Sometimes, desyncs happen whenever the last restock time changes;
-            if(windowStartTime > windowEndTime) location.reload();
 
             var wait = 0;
             
@@ -176,7 +175,8 @@ function InjectAutoAttic() {
                     ATTIC_PREV_NUM_ITEMS: ItemsStocked,
                     ATTIC_LAST_REFRESH_MS: lastRestock
                 }, function() {
-                    waitTime = CreateWaitTime(atticLastRefresh);
+                    // Since the attic restocked, get the next window if nothing good was found;
+                    waitTime = CreateWaitTime(atticLastRefresh, true);
                     UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
                     updateTimes = true;
                 });
@@ -198,6 +198,8 @@ function InjectAutoAttic() {
                         "Attempting " + bestItemName + " in Attic",
                         "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
                     );
+
+                    
                     
                     // Getting item data for submission;
                     var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
@@ -268,44 +270,42 @@ function InjectAutoAttic() {
         }
 
         function HighlightItemsInAttic() {
-            if (isHighlightingItemsInAttic) {
-                var items = Array.from(document.querySelectorAll("#items li"));
-                var itemData = items.map((item) => {
-                    var itemName = item.getAttribute("oname");
-                    var itemPrice = item.getAttribute("oprice").replaceAll(",", "");
-                    return {
-                        name: itemName,
-                        price: itemPrice,
-                    };
+            var items = Array.from(document.querySelectorAll("#items li"));
+            var itemData = items.map((item) => {
+                var itemName = item.getAttribute("oname");
+                var itemPrice = item.getAttribute("oprice").replaceAll(",", "");
+                return {
+                    name: itemName,
+                    price: itemPrice,
+                };
+            });
+
+            var filteredItems = null, selectedName = null;
+
+            if (buyWithItemDB) {
+                var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price), buyUnknownItemsIfProfitMargin, minDBRarityToBuy, isBlacklistActive, blacklistToNeverBuy);
+                selectedName = BestItemName(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
+                filteredItems = FilterItemsByProfitCriteria(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
+
+                if (selectedName && isHighlightingItemsInAttic) {
+                    filteredItems.forEach((item) => HighlightAtticItemWithColor(item, "lightgreen"));
+                    HighlightAtticItemWithColor(selectedName, "orangered");
+                }
+            } else {
+                // Filtering the items based on the restocking list;
+                filteredItems = restockList.filter((itemName) => {
+                    return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy));
                 });
 
-                var filteredItems = null, selectedName = null;
+                selectedName = PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable);
 
-                if (buyWithItemDB) {
-                    var itemProfits = CalculateItemProfits(itemData.map(item => item.name), itemData.map(item => item.price), buyUnknownItemsIfProfitMargin, minDBRarityToBuy, isBlacklistActive, blacklistToNeverBuy);
-                    selectedName = BestItemName(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
-                    filteredItems = FilterItemsByProfitCriteria(itemData.map(item => item.name), itemData.map(item => item.price), itemProfits, minDBProfitToBuyInAttic, minDBProfitPercentToBuyInAttic);
-
-                    if (selectedName) {
-                        filteredItems.forEach((item) => HighlightAtticItemWithColor(item, "lightgreen"));
-                        HighlightAtticItemWithColor(selectedName, "orangered");
-                    }
-                } else {
-                    // Filtering the items based on the restocking list;
-                    filteredItems = restockList.filter((itemName) => {
-                        return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy));
-                    });
-
-                    selectedName = PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable);
-
-                    if(selectedName){
-                        filteredItems.forEach((item) => HighlightAtticItemWithColor(item, "lightgreen"));
-                        HighlightAtticItemWithColor(selectedName, "orangered");
-                    }
+                if(selectedName && isHighlightingItemsInAttic){
+                    filteredItems.forEach((item) => HighlightAtticItemWithColor(item, "lightgreen"));
+                    HighlightAtticItemWithColor(selectedName, "orangered");
                 }
-
-                return selectedName;
             }
+
+            return selectedName;
         }
     }));
 }
