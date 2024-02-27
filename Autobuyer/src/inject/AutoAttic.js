@@ -176,29 +176,52 @@ function InjectAutoAttic() {
             }
 
             // Calculate the time to wait before the next refresh
-            const waitTime = CreateWaitTime();
+            const waitTime = CreateWaitTime(atticLastRefresh);
 
-            function CreateWaitTime() {
-                if (atticLastRefresh < 0) {
-                    return GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
-                }
+            function CreateWaitTime(atticLastRefresh) {
+                const now = new Date();
+                const lastRestockTime = new Date(atticLastRefresh);
             
-                const now = Date.now();
-                const baseInterval = 7 * 60 * 1000; // 7 minutes in ms;
-                const minTimeFrame = 10 * 1000; // 10 seconds in ms;
-                const maxTimeFrame = 30 * 1000; // 30 seconds in ms;
+                const lastRestockMinute = lastRestockTime.getMinutes();
             
-                // Calculate the start of the current 7-minute interval;
-                const intervalStart = Math.floor((now - atticLastRefresh) / baseInterval) * baseInterval + atticLastRefresh;
-            
-                // Calculate the expected refresh time within the time frame
-                const expectedRefreshTime = intervalStart + baseInterval + minTimeFrame + Math.random() * (maxTimeFrame - minTimeFrame);
-            
-                if (now <= expectedRefreshTime) {
-                    return expectedRefreshTime - now;
+                const timeDifference = now - lastRestockTime;
+
+                var extraMinutes = 0, extraSeconds = 0, minutesInterval;
+
+                if(timeDifference < 14 * 60 * 1000){
+                    minutesInterval = 14;
+                    extraMinutes = 0;
+                    extraSeconds = 0;
                 } else {
-                    // The current interval has passed; schedule the next one
-                    return baseInterval - (now - intervalStart) + expectedRefreshTime - now;
+                    minutesInterval = 7;
+                    extraMinutes = 7;
+                    extraSeconds = 6;
+                }
+
+                const windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000)) + 1;
+
+                const windowStartTime = new Date(lastRestockTime);
+                const windowEndTime = new Date(lastRestockTime);
+        
+                const secondsToAdd = minutesInterval === 14 ? 10 : 4;
+        
+                windowStartTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
+                windowStartTime.setSeconds(lastRestockTime.getSeconds() + 1 * windowsPassed);
+        
+                windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
+                windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * windowsPassed + extraSeconds);
+        
+                lastStartWindow = windowStartTime;
+                lastEndWindow = windowEndTime;
+        
+                console.log(windowStartTime.getHours() + ":" + windowStartTime.getMinutes() + ":" + windowStartTime.getSeconds() + " | " +
+                windowEndTime.getHours() + ":" + windowEndTime.getMinutes() + ":" + windowEndTime.getSeconds());
+
+                if(now >= windowStartTime && now <= windowEndTime){
+                    console.log("Refreshing for stock...")
+                    return 1000;
+                } else {
+                    return windowStartTime - now;
                 }
             }
     
@@ -215,7 +238,7 @@ function InjectAutoAttic() {
             UpdateBannerStatus(message);
 
             await Sleep(waitTime);
-            
+
             window.location.href = "https://www.neopets.com/halloween/garage.phtml";
         }
 
