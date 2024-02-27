@@ -360,6 +360,10 @@ function setMIN_HAGGLE_POWER(value) { chrome.storage.local.set({MIN_HAGGLE_POWER
 function setMAX_HAGGLE_POWER(value) { chrome.storage.local.set({MAX_HAGGLE_POWER: value}, (function () {})) }
 function setSHOULD_CHANGE_DOCUMENT_DATA(value) { chrome.storage.local.set({SHOULD_CHANGE_DOCUMENT_DATA: value}, (function () {})) }
 
+//AutoAttic Setters;
+function setATTIC_NEXT_START_WINDOW(value) { chrome.storage.local.set({ATTIC_NEXT_START_WINDOW: value}, (function () {})) }
+function setATTIC_NEXT_END_WINDOW(value) { chrome.storage.local.set({ATTIC_NEXT_END_WINDOW: value}, (function () {})) }
+
 // AutoPricer Setters;
 function setIS_TURBO(value) { chrome.storage.local.set({IS_TURBO: value}, (function () {})) }
 function setSHOULD_USE_NEON(value) { chrome.storage.local.set({SHOULD_USE_NEON: value}, (function () {})) }
@@ -464,6 +468,16 @@ $("#SHOULD_CHANGE_DOCUMENT_DATA").on("change", function () {
   const isChecked = $("#SHOULD_CHANGE_DOCUMENT_DATA").is(":checked");
   setSHOULD_CHANGE_DOCUMENT_DATA(isChecked);
 });
+
+// AutoAttic Data Binding;
+
+$("#ATTIC_NEXT_START_WINDOW").bind("input propertychange", (function () {
+  setATTIC_NEXT_START_WINDOW($("#ATTIC_NEXT_START_WINDOW").val())
+}))
+
+$("#ATTIC_NEXT_END_WINDOW").bind("input propertychange", (function () {
+  setATTIC_NEXT_END_WINDOW($("#ATTIC_NEXT_END_WINDOW").val())
+}))
 
 // AutoPricer Data Binding;
 
@@ -846,6 +860,10 @@ resetButton.onclick = function (_) {
   MAX_HAGGLE_POWER: 0.85,
   SHOULD_CHANGE_DOCUMENT_DATA: false,
 
+  // AutoAttic;
+  ATTIC_NEXT_START_WINDOW: -1,
+  ATTIC_NEXT_END_WINDOW: -1,
+
   // AutoPricer;
   IS_TURBO: false,
   SHOULD_USE_NEON: false,
@@ -919,6 +937,7 @@ resetButton.onclick = function (_) {
   SHOULD_SHARE_NEOBUYER_MAILS: false,
 
 }, (function (_) {
+
   $("#PAUSE_AFTER_BUY_MS").val(_.PAUSE_AFTER_BUY_MS);
   $("#SEND_TO_SDB_AFTER_PURCHASE").prop("checked", _.SEND_TO_SDB_AFTER_PURCHASE);
   $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").prop("checked", _.SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES);
@@ -978,6 +997,21 @@ resetButton.onclick = function (_) {
   $("#SHOULD_CHANGE_DOCUMENT_DATA").prop("checked", _.SHOULD_CHANGE_DOCUMENT_DATA);
   $("#MIN_PAGE_LOAD_FAILURES").val(_.MIN_PAGE_LOAD_FAILURES);
   $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES);
+
+  // AutoAttic Settings;
+  DisplayAtticTimes();
+  
+  // Updates the next possible windows in the GUI every 10 seconds;
+  function DisplayAtticTimes(){
+    var atticStartWindow = moment(_.ATTIC_NEXT_START_WINDOW).tz("America/Los_Angeles").format("HH:mm:ss"),
+    atticEndWindow = moment(_.ATTIC_NEXT_END_WINDOW).tz("America/Los_Angeles").format("HH:mm:ss");
+
+    $("#ATTIC_NEXT_START_WINDOW").val(atticStartWindow);
+    $("#ATTIC_NEXT_END_WINDOW").val(atticEndWindow);
+  }
+
+  setInterval(DisplayAtticTimes, 10000);
+  
 
   // AutoPricer;
   $("#IS_TURBO").prop("checked", _.IS_TURBO);

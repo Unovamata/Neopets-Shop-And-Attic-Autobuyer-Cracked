@@ -75,6 +75,38 @@
                             <input id="ATTIC_LAST_REFRESH_TIME" type="time" step="1" /> <span class="notation">NST</span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Next Refresh <b>Start</b> Time Window <b>in Local Time:</b>
+                            <span class="tooltiptext">
+                                This is the next speculated start window for the Almost Abandoned Attic to restock.
+
+                                <br><br>This value is read-only and is based on your Last Restock Time for the AutoAttic process to know when to refresh.
+                                <br><br>These times may desync if 1 of 3 scenarios occur:
+                                <br>- You have not restocked in the Almost Abandoned Attic recently. 
+                                <br>- Your Last Restock Time is incorrect.
+                                <br>- The times have to sync properly after changing the Last Restock Time.
+                            </span>
+                        </td>
+                        <td>
+                            <input id="ATTIC_NEXT_START_WINDOW" type="time" step="1" disabled /> <span class="notation">NST</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Next Refresh <b>End</b> Time Window <b>in Local Time:</b>
+                            <span class="tooltiptext">
+                                This is the next speculated end window for the Almost Abandoned Attic to restock.
+
+                                <br><br>This value is read-only and is based on your Last Restock Time for the AutoAttic process to know when to refresh.
+                                <br><br>These times may desync if 1 of 3 scenarios occur:
+                                <br>- You have not restocked in the Almost Abandoned Attic recently. 
+                                <br>- Your Last Restock Time is incorrect.
+                                <br>- The times have to sync properly after changing the Last Restock Time.
+                            </span>
+                        </td>
+                        <td>
+                            <input id="ATTIC_NEXT_END_WINDOW" type="time" step="1" disabled/> <span class="notation">NST</span>
+                        </td>
+                    </tr>
                     <tr class="attic-refresh-hide">
                         <td>Refresh Time Window:
                             <span class="tooltiptext">
