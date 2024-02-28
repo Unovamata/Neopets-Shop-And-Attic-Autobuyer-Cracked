@@ -15,6 +15,7 @@ async function RunAutoPricer(){
         MAX_PRICING_PERCENTAGE: 20,
         FIXED_PRICING_ALGORITHM_TYPE: "True Absolute",
         FIXED_PRICING_VALUE: 1000,
+        SHOULD_CHECK_IF_FROZEN_SHOP: false,
         MIN_FIXED_PRICING: 200,
         MAX_FIXED_PRICING: 800,
         SHOP_HISTORY: [],
@@ -85,6 +86,7 @@ async function RunAutoPricer(){
             MAX_SPENDABLE_PRICE: maxSpendablePrice,
 
             // Shop Wizard;
+            SHOULD_CHECK_IF_FROZEN_SHOP: shouldCheckIfFrozenShop,
             MIN_WAIT_BAN_TIME: sleepIfBannedMin,
             MAX_WAIT_BAN_TIME: sleepIfBannedMax,
             MIN_WAIT_PER_REFRESH: sleepWhileNavigatingToSWMin,
@@ -222,7 +224,7 @@ async function RunAutoPricer(){
                         "Date & Time": dateParts[1] + "/" + dateParts[0] + "/" + dateParts[2],
                         Item: tdElements[1].textContent,
                         Buyer: tdElements[2].textContent,
-                        Price: Number(tdElements[3].textContent.replace(/[^\d.-]/g, '')),
+                        Price: ParseNPNumber(tdElements[3].textContent),
                         Entries: 1,
                         Profit: 0,
                     }
@@ -264,7 +266,7 @@ async function RunAutoPricer(){
                 return !matchingObject;
             // Filtering invalid items;
             }).filter(item => item["Date & Time"] != "undefined/Date/undefined");
-            
+
             await setSHOP_HISTORY([...shopHistory, ...filteredHistoryItems]);
         }
 
@@ -372,8 +374,64 @@ async function RunAutoPricer(){
                     await PressResubmit();
 
                     // Getting the lowest price;
-                    WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
-                        var ownerName = searchResults.parentNode.firstElementChild.textContent;
+                    WaitForElement(".wizard-results-grid-header", 0).then(async (searchResults) => {
+                        var ownerElements = searchResults.parentNode.querySelectorAll("li");
+                        
+                        var ownerName = '', bestPrice = 0;
+
+                        // Checking if an owner is frozen;
+                        for(var i = 1; i < ownerElements.length; i++){
+                            // Extracting all the table data;
+                            var entry = ownerElements[i];
+                            var ownerElement = entry.querySelector("a");
+                            var ownerLink = ownerElement.getAttribute("href");
+                            var currentOwnerPrice = ParseNPNumber(entry.querySelector("div").textContent);
+                            var percentageDifference = 0;
+
+                            /* Measuring the price difference to see if the user has an abnormally low 
+                             * price, maybe meaning it was frozen. This saves in requests and processing 
+                             * time for AutoPricing */
+                            try {
+                                var nextOwnerPrice = ParseNPNumber(ownerElements[i + 1].querySelector("div").textContent);
+
+                                percentageDifference = CalculatePercentageDifference(currentOwnerPrice, nextOwnerPrice);
+                            } catch { }
+
+                            // Sending and reading a request to know if the shop user is frozen;
+                            if(shouldCheckIfFrozenShop && percentageDifference > 20){
+                                var isFrozen = await CheckShopFrozenStatus(ownerLink);
+
+                                if(!isFrozen){
+                                    ownerName = ownerElement.textContent;
+                                    bestPrice = currentOwnerPrice;
+                                    return;
+                                }
+                            // If the user decided to not check if the user's shop is frozen, then return the first value;
+                            } else {
+                                ownerName = ownerElement.textContent;
+                                bestPrice = ParseNPNumber(currentOwnerPrice);
+                                return;
+                            }
+                        }
+
+                        // Calculates the percentage difference between 2 numbers to know if a user has been frozen or not;
+                        function CalculatePercentageDifference(oldValue, newValue) {
+                            return Math.abs((newValue - oldValue) / oldValue) * 100;
+                        }
+
+                        async function CheckShopFrozenStatus(ownerLink){
+                            // Getting the shop request;
+                            const shopResponse = await fetch(ownerLink);
+                            const shopContent = await shopResponse.text();
+
+                            // Parsing the history's contents;
+                            const shopParser = new DOMParser();
+                            const shopDocument = shopParser.parseFromString(shopContent, 'text/html');
+                            const isOwnerFrozen = shopDocument.body.textContent.includes("Sorry - The owner of this shop has been frozen!");
+
+                            return isOwnerFrozen;
+                        }
+
 
                         //Don't change the price if it's already the cheapest item in the list;
                         if(username == ownerName){
@@ -382,8 +440,6 @@ async function RunAutoPricer(){
                             return;
                         }
 
-                        // Parsing the string to a number;
-                        var bestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
                         var deductedPrice = 0;
 
                         switch(pricingType){
@@ -512,9 +568,9 @@ async function RunAutoPricer(){
                         })
                     } else {
                         try{
-                            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${autoPricingList[currentPricingIndex].Name}`;
+                            //window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${autoPricingList[currentPricingIndex].Name}`;
                         } catch {
-                            window.location.reload();
+                            //window.location.reload();
                         }
                         
                     }
@@ -870,7 +926,7 @@ async function RunAutoPricer(){
                 // Getting the lowest price;
                 await WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
                     // Parsing the string to a number;
-                    var lowestPrice = Number.parseInt(searchResults.textContent.replace(' NP', '').replace(',', ''));
+                    var lowestPrice = ParseNPNumber(searchResults.textContent);
 
                     // If the lowest price is greater than the amount the user wants to spend on kitchen quests, search again;
                     if(lowestPrice >= maxSpendablePrice && isLastSearch){

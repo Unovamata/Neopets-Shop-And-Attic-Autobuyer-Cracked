@@ -61,6 +61,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			FIXED_PRICING_VALUE: 1000,
 			MIN_FIXED_PRICING: 200,
 			MAX_FIXED_PRICING: 800,
+			SHOULD_CHECK_IF_FROZEN_SHOP: false,
 			SHOP_HISTORY: [],
 			SHOULD_IMPORT_SALES: false,
 			ATTIC_NEXT_START_WINDOW: 0,

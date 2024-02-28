@@ -377,6 +377,7 @@ function setFIXED_PRICING_ALGORITHM_TYPE(value) { chrome.storage.local.set({FIXE
 function setFIXED_PRICING_VALUE(value) { chrome.storage.local.set({FIXED_PRICING_VALUE: Number(value)}, (function () {})) }
 function setMIN_FIXED_PRICING(value) { chrome.storage.local.set({MIN_FIXED_PRICING: Number(value)}, (function () {})) }
 function setMAX_FIXED_PRICING(value) { chrome.storage.local.set({MAX_FIXED_PRICING: Number(value)}, (function () {})) }
+function setSHOULD_CHECK_IF_FROZEN_SHOP(value) { chrome.storage.local.set({SHOULD_CHECK_IF_FROZEN_SHOP: value}, (function () {})) }
 function setMIN_WAIT_PER_REFRESH(value) { chrome.storage.local.set({MIN_WAIT_PER_REFRESH: Number(value)}, (function () {})) }
 function setMAX_WAIT_PER_REFRESH(value) { chrome.storage.local.set({MAX_WAIT_PER_REFRESH: Number(value)}, (function () {})) }
 function setRESUBMIT_TYPE(value) { chrome.storage.local.set({RESUBMIT_TYPE: value}, (function () {})) }
@@ -693,6 +694,11 @@ $("#MAX_FIXED_PRICING").bind("input propertychange", (function () {
   setMAX_FIXED_PRICING($("#MAX_FIXED_PRICING").val())
 }))
 
+$("#SHOULD_CHECK_IF_FROZEN_SHOP").bind("input propertychange", (function () {
+  const isChecked = $("#SHOULD_CHECK_IF_FROZEN_SHOP").is(":checked");
+  setSHOULD_CHECK_IF_FROZEN_SHOP(isChecked);
+}))
+
 // AutoKQ Data Binding;
 
 $("#MAX_INSTA_BUY_PRICE").bind("input propertychange", (function () {
@@ -877,6 +883,7 @@ resetButton.onclick = function (_) {
   FIXED_PRICING_VALUE: 1000,
   MIN_FIXED_PRICING: 200,
   MAX_FIXED_PRICING: 800,
+  SHOULD_CHECK_IF_FROZEN_SHOP: false,
 
   // AutoKQ
   MAX_INSTA_BUY_PRICE: 0,
@@ -1024,6 +1031,7 @@ resetButton.onclick = function (_) {
   $("#MAX_PRICING_PERCENTAGE").val(_.MAX_PRICING_PERCENTAGE);
   $("#FIXED_PRICING_ALGORITHM_TYPE").val(_.FIXED_PRICING_ALGORITHM_TYPE);
   $("#FIXED_PRICING_VALUE").val(_.FIXED_PRICING_VALUE);
+  $("#SHOULD_CHECK_IF_FROZEN_SHOP").prop("checked", _.SHOULD_CHECK_IF_FROZEN_SHOP);
   $("#MIN_FIXED_PRICING").val(_.MIN_FIXED_PRICING);
   $("#MAX_FIXED_PRICING").val(_.MAX_FIXED_PRICING);
 

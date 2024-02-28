@@ -1147,6 +1147,10 @@ function FormatNPNumber(input) {
     return input.toLocaleString() + " NP"
 }
 
+function ParseNPNumber(input){
+    return Number(input.replace(/[^\d.-]/g, ''));
+}
+
 //If a value is NaN or not, then it'll display one option or the other;
 function CheckIsNaNDisplay(input, outputTrue, outputFalse){
     return isNaN(input) ? outputTrue : outputFalse;
