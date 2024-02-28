@@ -429,26 +429,28 @@ async function DeleteSalesHistory(){
     }
 }
 
+// Processing the shop sales history;
 chrome.storage.local.get({
     SHOP_HISTORY: []
 }, (function(context) {
     var data = context.SHOP_HISTORY;
-
     var formattedData = FormatDatasetByMonthAndYear(data);
     var profitsPerMonth = [];
 
+    // Process the data for the profit per month graph;
     Object.values(formattedData).forEach(function(entry, index){
-        var profits = entry.map(item => item.Price);
+        var profits = entry.map(item => item.Price * item.Entries);
         var sumOfProfits = profits.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
+        
         profitsPerMonth.push(sumOfProfits);
     });
 
-    // Set up Chart.js with a line chart configuration
+    // Monthly Profits timeline chart;
     var monthlyProfits = CreateTimelineChart("monthlyProfits", Object.keys(formattedData), profitsPerMonth, "Monthly Profits");
 
     if(monthlyProfits) ResizeChartInterval("monthlyProfits", "760px", "380px");
 
+    // Create charts for the most profitable items sold and most commonly items sold;
     var allItemsSold = [...data.entries()].sort((a, b) => b[1].Price - a[1].Price);
 
     var mostProfitableNames = [], mostProfitablePrices = [];
@@ -469,6 +471,8 @@ chrome.storage.local.get({
     var mostCommonItemsSold = CreateBarChart("mostCommonItemsSold", "bar", Object.keys(commonnessData), Object.values(commonnessData), FormatDatalabelsOptions(), `Top ${showEntries} Most Commonly Sold Items`);
 
     if(mostCommonItemsSold) ResizeChartInterval("mostCommonItemsSold", "760px", "380px");
+
+    // Recurring buyers chart;
 
     var recurringBuyers = CountDatasetEntries(data, "Buyer");
 

@@ -201,62 +201,71 @@ async function RunAutoPricer(){
             const historyParser = new DOMParser();
             const historyDocument = historyParser.parseFromString(salesContent, 'text/html');
             const tableElement = historyDocument.querySelector('form[action="market.phtml"]').parentElement.parentElement.parentElement;
-            
             const trElements = tableElement.querySelectorAll("tr");
+
             var historyItems = [];
 
+            var now = new Date(),
+            todayDate = now.getDate(),
+            todayMonth = now.getMonth() + 1,
+            todayYear = now.getFullYear();
+
+            // Processing all the history data into an array;
             trElements.forEach(function(tr, index){
                 const tdElements = tr.querySelectorAll("td");
                 
-                // Extracting the data;
+                // Parsing the data;
                 try{
+                    var dateParts = tdElements[0].textContent.split("/");
+
                     var entry = {
-                        Item: '',
-                        Buyer: '',
-                        Price: '',
-                        Hash: '',
+                        "Date & Time": dateParts[1] + "/" + dateParts[0] + "/" + dateParts[2],
+                        Item: tdElements[1].textContent,
+                        Buyer: tdElements[2].textContent,
+                        Price: Number(tdElements[3].textContent.replace(/[^\d.-]/g, '')),
+                        Entries: 1,
+                        Profit: 0,
                     }
+                    
+                    var isASaleFromToday = todayYear == Number(dateParts[2]) && todayMonth == Number(dateParts[1]) && Number(todayDate == dateParts[0]);
 
-                    for(var i = 0; i < 4; i++){
-                        var text = tdElements[i].textContent;
-                        var dateParts = '';
+                    // Do not include today's sales;
+                    if(!isASaleFromToday){
+                        // Find the entry to edit its data later;
+                        var foundEntry = historyItems.find(item =>
+                            item["Date & Time"] === entry["Date & Time"] &&
+                            item.Item === entry.Item &&
+                            item.Buyer === entry.Buyer &&
+                            item.Price === entry.Price
+                        );
 
-                        if(i == 0){
-                            dateParts = text.split("/");
-                        }
-
-                        switch(i){
-                            case 0: entry["Date & Time"] = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); break;
-                            case 1: entry.Item = text; break;
-                            case 2: entry.Buyer = text; break;
-                            default: entry.Price = Number(text.replace(/[^\d.-]/g, '')); break;
+                        if(foundEntry == undefined){
+                            historyItems.push(entry);
+                        } 
+                        // Increase the number of times this item has appeared in the shop sales history and increment the profit;
+                        else { 
+                            foundEntry.Entries += 1;
+                            foundEntry.Profit = foundEntry.Price * foundEntry.Entries;
                         }
                     }
-
-                    var entryDate = entry["Date & Time"];
-
-                    var entryString = entryDate + entry.Item + entry.Buyer + entry.Price + index;
-                    entry.Hash = entryString.hashCode();
-
-                    var entryDay = entryDate.getDate();
-                    var entryMonth = entryDate.getMonth() + 1;
-                    var entryYear = entryDate.getFullYear();
-
-                    entry["Date & Time"] = entryMonth + "/" + entryDay + "/" + entryYear;
-
-                    historyItems.push(entry);
                 } catch {}
             });
 
-            historyItems.shift();
-
-            var differenceArray = historyItems.filter(entry => {
-                return !shopHistory.some(existingEntry => existingEntry.Hash == entry.Hash);
-            });
-
-            var resultArray = shopHistory.concat(differenceArray);
-
-            await setSHOP_HISTORY(resultArray);
+            // Filter objects out of the historyItems that are in the extension's local shopHistory;
+            var filteredHistoryItems = historyItems.filter(shopItem => {
+                // If the information matches, then the item is already listed, returning true;
+                var matchingObject = shopHistory.find(historyItem =>
+                    historyItem["Date & Time"] === shopItem["Date & Time"] &&
+                    historyItem.Item === shopItem.Item &&
+                    historyItem.Buyer === shopItem.Buyer &&
+                    historyItem.Price === shopItem.Price
+                );
+                
+                return !matchingObject;
+            // Filtering invalid items;
+            }).filter(item => item["Date & Time"] != "undefined/Date/undefined");
+            
+            await setSHOP_HISTORY([...shopHistory, ...filteredHistoryItems]);
         }
 
         LoadPageLinks();

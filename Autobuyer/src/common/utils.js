@@ -905,7 +905,7 @@ function FormatDatasetByMonthAndYear(dataset, monthIndex) {
         var year = parseInt(dateParts[2], 10);
         var month = parseInt(dateParts[0], 10) - 1;
         var key = months[month] + " " + year;
-
+        
         // Initialize an array for the key if it doesn't exist
         if (!separatedData[key]) {
             separatedData[key] = [];
@@ -1020,7 +1020,7 @@ function CreateTimelineChart(id, labels, data, datasetName = "Data") {
     if(!CheckIfEnoughData(canvas, data)) return false;
 
     var chartData = { labels: labels, datasets: [] };
-
+    
     // Create a single dataset containing all the data points
     var dataset = {
         label: datasetName,
