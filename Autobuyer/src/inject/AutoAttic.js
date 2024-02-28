@@ -135,8 +135,6 @@ function InjectAutoAttic() {
             UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
             SaveToPurchaseHistory(boughtItemElement, "Attic", "-", "Bought");
 
-            await Sleep(atticWaitTime);
-
             AutoRefreshAttic();
 
             HighlightItemsInAttic();
