@@ -404,13 +404,13 @@ async function RunAutoPricer(){
                                 if(!isFrozen){
                                     ownerName = ownerElement.textContent;
                                     bestPrice = currentOwnerPrice;
-                                    return;
+                                    break;
                                 }
                             // If the user decided to not check if the user's shop is frozen, then return the first value;
                             } else {
                                 ownerName = ownerElement.textContent;
-                                bestPrice = ParseNPNumber(currentOwnerPrice);
-                                return;
+                                bestPrice = currentOwnerPrice;
+                                break;
                             }
                         }
 
@@ -419,19 +419,31 @@ async function RunAutoPricer(){
                             return Math.abs((newValue - oldValue) / oldValue) * 100;
                         }
 
-                        async function CheckShopFrozenStatus(ownerLink){
-                            // Getting the shop request;
-                            const shopResponse = await fetch(ownerLink);
-                            const shopContent = await shopResponse.text();
-
-                            // Parsing the history's contents;
-                            const shopParser = new DOMParser();
-                            const shopDocument = shopParser.parseFromString(shopContent, 'text/html');
-                            const isOwnerFrozen = shopDocument.body.textContent.includes("Sorry - The owner of this shop has been frozen!");
-
-                            return isOwnerFrozen;
+                        async function CheckShopFrozenStatus(ownerLink, maxRetries = 3, retryDelay = 2000) {
+                            let retries = 0;
+                        
+                            while (retries < maxRetries) {
+                                try {
+                                    const shopResponse = await fetch(ownerLink);
+                                    
+                                    if (shopResponse.ok) {
+                                        const shopContent = await shopResponse.text();
+                                        const shopDocument = new DOMParser().parseFromString(shopContent, 'text/html');
+                                        const isOwnerFrozen = shopDocument.body.textContent.includes("Sorry - The owner of this shop has been frozen!");
+                                        return isOwnerFrozen;
+                                    }
+                                } catch (error) {
+                                    console.error('Error fetching data:', error);
+                                }
+                        
+                                // If the request fails, wait for a while before retrying
+                                await new Promise(resolve => setTimeout(resolve, retryDelay));
+                                retries++;
+                            }
+                        
+                            throw new Error(`Failed to fetch data from ${ownerLink} after ${maxRetries} retries.`);
                         }
-
+                                                
 
                         //Don't change the price if it's already the cheapest item in the list;
                         if(username == ownerName){
@@ -488,8 +500,6 @@ async function RunAutoPricer(){
                                         case "Nines": deductedPrice = RoundToNearestUnit(percentageBestPrice, true); break;
                                         case "Unchanged": deductedPrice = percentageBestPrice; break;
                                     }
-
-                                    console.log(percentagePricingOptions[randomIndex]);
                                 break;
 
                                 case "Unchanged":
@@ -568,9 +578,9 @@ async function RunAutoPricer(){
                         })
                     } else {
                         try{
-                            //window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${autoPricingList[currentPricingIndex].Name}`;
+                            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${autoPricingList[currentPricingIndex].Name}`;
                         } catch {
-                            //window.location.reload();
+                            window.location.reload();
                         }
                         
                     }

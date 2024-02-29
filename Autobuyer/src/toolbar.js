@@ -16,11 +16,12 @@ const historyIconUrl = `${srcPath}/toolbar/transferlog-icon.svg`;
 const toolsIconUrl = `${srcPath}/toolbar/settings-icon.svg`;
 const databaseIconUrl = `${srcPath}/toolbar/database-icon.svg`;
 const infoIconUrl = `${srcPath}/toolbar/search-icon.svg`;
+const creditsIconUrl = `${srcPath}/toolbar/gallery-icon.svg`;
 const checkIconUrl = `${srcPath}/toolbar/check.png`;
 const crossIconUrl = `${srcPath}/toolbar/delete.png`;
 const mailIconUrl = `${srcPath}/toolbar/neomail.svg`;
 const dropdownIconUrl = `${srcPath}/toolbar/dropdown-arrow.png`;
-const faqIconUrl = `${srcPath}/toolbar/communitycentral-icon.png`;
+const communityIconUrl = `${srcPath}/toolbar/communitycentral-icon.png`;
 const restockListIconUrl = `${srcPath}/toolbar/myalbums-icon.svg`;
 
 
@@ -37,7 +38,7 @@ const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
 const restockListUrl = `${srcPath}/options/Tools/restockListGen.html`;
-const faqUrl = `${srcPath}/options/Tools/faq.html`;
+const communityUrl = `${srcPath}/options/Tools/faq.html`;
 const infoUrl = `${srcPath}/options/Tools/info.html`;
 const mailUrl = `${srcPath}/options/Mail/mail.html`;
 
@@ -107,25 +108,41 @@ function injectToolbar() {
                 </a>
                 <div class="hover-menu">
                     <ul>
-                        <li><a href="${historyUrl}" class = "toolbar-category dropdown-category"> 
-                            <img  class = "dropdown-icon" src="${historyIconUrl}"> 
-                            History </a>
+                        <li>
+                            <a href="${historyUrl}" class = "toolbar-category dropdown-category"> 
+                                <img  class = "dropdown-icon" src="${historyIconUrl}"> 
+                                History 
+                            </a>
                         </li>
                         <li><a href="${databaseUrl}" class = "toolbar-category dropdown-category">
                             <img  class = "dropdown-icon" src="${databaseIconUrl}"> 
                             Database </a>
                         </li>
-                        <li><a href="${restockListUrl}" class = "toolbar-category dropdown-category">
-                            <img  class = "dropdown-icon" src="${restockListIconUrl}"> 
-                            Restock List </a>
+                        <li>
+                            <a href="${restockListUrl}" class = "toolbar-category dropdown-category">
+                                <img  class = "dropdown-icon" src="${restockListIconUrl}"> 
+                                Restock List
+                            </a>
                         </li>
-                        <li><a href="${faqUrl}" class = "toolbar-category dropdown-category"> 
-                            <img  class = "dropdown-icon" src="${faqIconUrl}"> 
-                            FAQs </a>
-                        </li>
-                        <li><a href="${infoUrl}" class = "toolbar-category dropdown-category">
-                            <img  class = "dropdown-icon" src="${infoIconUrl}"> 
-                            Miscellaneous </a>
+                        <li>
+                            <div class="hover-submenu">
+                                <ul>
+                                    <a href="${communityUrl}" class = "toolbar-category dropdown-category"> 
+                                        <img  class = "dropdown-icon" src="${infoIconUrl}"> 
+                                        FAQs 
+                                    </a>
+                                    <a href="${infoUrl}" class = "toolbar-category dropdown-category">
+                                        <img  class = "dropdown-icon" src="${creditsIconUrl}"> 
+                                        Credits & Presets 
+                                    </a>
+                                </ul>
+                            </div>
+
+                            <a class = "toolbar-category dropdown-category"> 
+                                <img  class = "dropdown-icon" src="${communityIconUrl}"> 
+                                Community 
+                                <img  class = "dropleft-arrow" src="${dropdownIconUrl}">
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -161,6 +178,26 @@ function injectToolbar() {
     cssLink.type = 'text/css';
     cssLink.href = toolbarCSS;
     document.head.appendChild(cssLink);
+
+    //HoverSubmenu(".hover-menu", ".submenu", "hover-submenu");
+
+    
+
+    /*function HoverSubmenu(menuSelector, subMenuSelector, classInjection){
+        var menu = document.querySelector(menuSelector);
+
+        console.log(menu);
+        var subMenu = document.querySelector(subMenuSelector);
+
+        menu.addEventListener('mouseenter', function() {
+            subMenu.classList.add(classInjection);
+        });
+    
+        menu.addEventListener('mouseleave', function() {
+            subMenu.classList.remove(classInjection);
+        });
+    }*/
+
 }
 
 // Wait for the entire page, including CSS, to be fully loaded

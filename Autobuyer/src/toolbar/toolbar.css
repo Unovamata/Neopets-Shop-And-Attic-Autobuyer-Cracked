@@ -146,11 +146,11 @@
     display: inline-block;
 }
 
-.hover-menu {
+.hover-menu, .hover-submenu {
     display: none;
     position: absolute;
-    background-color: #03a9f4; /* Background color for the menu */
-    box-shadow: 0 4px 6px #03a8f435; /* Box shadow for the menu */
+    background-color: #03a9f4;
+    box-shadow: 0 4px 6px #03a8f435;
     width: 150px;
     border-radius: 10%;
 }
@@ -159,29 +159,70 @@
     display: block;
 }
 
-/* Style the list items to remove default list styling */
+.hover-menu .toolbar-category {
+    margin: 1px 1px 10px;
+}
+
 .hover-menu ul {
     list-style-type: none;
     padding: 0;
 }
 
 
-/* Style the links within list items */
-.hover-menu ul li a {
+.hover-menu a {
     text-decoration: none;
-    color: #000000; /* Adjust the color as needed */
+    color: #000000;
     display: block;
 }
 
+.hover-menu a:hover {
+    background-color: #24bdf8;
+}
+
+/* Submenus*/
+.hover-submenu {
+    transform: translateX(150px) translateY(-10px);
+}
+
 .hover-menu .toolbar-category {
-    margin: 0 0px 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* Display the submenu when hovering over the parent li */
+.hover-menu li:hover .hover-submenu {
+    display: block;
+}
+
+/* Style the list items and links */
+.hover-submenu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.hover-submenu a {
+    text-decoration: none;
+    color: #000000;
+    display: block;
 }
 
 /* Change link color on hover */
-.hover-menu ul li a:hover {
-    background-color: #24bdf8; /* Adjust the color as needed */
+.hover-submenu a:hover {
+    background-color: #24bdf8;
 }
 
+.dropleft-arrow {
+    transition: transform 0.3s ease-in-out;
+    width: 10px;
+    position: relative;
+    left: 10px;
+    transform: rotate(270deg);
+}
+
+.hover-menu li:hover .dropleft-arrow {
+    animation: flipOnSelection 0.1s ease-in-out;
+    transform: rotate(90deg);
+}
 
 .dropdown-arrow {
     transition: transform 0.3s ease-in-out;
