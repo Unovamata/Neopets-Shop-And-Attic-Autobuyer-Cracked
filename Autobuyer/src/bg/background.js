@@ -48,6 +48,10 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_HAGGLE_POWER: 0.85,
 			SHOULD_CHANGE_DOCUMENT_DATA: false,
 
+			//AutoAttic;
+			ATTIC_NEXT_START_WINDOW: 0,
+        	ATTIC_NEXT_END_WINDOW: 0,
+
 			// AutoPricer;
 			IS_TURBO: false,
 			SHOULD_USE_NEON: false,
@@ -64,8 +68,6 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_CHECK_IF_FROZEN_SHOP: false,
 			SHOP_HISTORY: [],
 			SHOULD_IMPORT_SALES: false,
-			ATTIC_NEXT_START_WINDOW: 0,
-        	ATTIC_NEXT_END_WINDOW: 0,
 
 			// AutoKQ;
 			START_AUTOKQ_PROCESS: false,

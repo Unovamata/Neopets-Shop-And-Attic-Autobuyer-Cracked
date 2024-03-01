@@ -108,11 +108,11 @@ function InjectAutoAttic() {
             var wait = 0;
             
             if(now >= new Date(atticStartWindow) && now <= new Date(atticEndWindow)){
-                wait = 1000;
+                wait = GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
 
                 RefreshBanner(wait);
 
-                return 1000;
+                return wait;
             } else {
                 setATTIC_NEXT_START_WINDOW(windowStartTime.getTime());
                 setATTIC_NEXT_END_WINDOW(windowEndTime.getTime());
