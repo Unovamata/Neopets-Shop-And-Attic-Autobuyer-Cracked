@@ -262,7 +262,7 @@ function setSUBMIT_PRICES_PROCESS(value) {
 
 function getSUBMIT_PRICES_PROCESS(callback) {
     chrome.storage.local.get(['SUBMIT_PRICES_PROCESS'], function (result) {
-        const value = result.SUBMIT_PRICES_PROCESS;
+        var value = result.SUBMIT_PRICES_PROCESS;
 
         // Check if value is undefined or null, and set it to false
         if (value === undefined || value === null) {
@@ -285,7 +285,7 @@ function setSHOP_INVENTORY(value) {
 
 function getSHOP_INVENTORY(callback) {
     chrome.storage.local.get(['SHOP_INVENTORY'], async function (result) {
-        const value = result.SHOP_INVENTORY;
+        var value = result.SHOP_INVENTORY;
 
         if(value == undefined || value == null){
             await setSHOP_INVENTORY([]);
@@ -303,7 +303,7 @@ function setINVENTORY_UPDATED(value) {
 
 function getINVENTORY_UPDATED(callback) {
     chrome.storage.local.get(['INVENTORY_UPDATED'], function (result) {
-        const value = result.INVENTORY_UPDATED;
+        var value = result.INVENTORY_UPDATED;
 
         if (typeof callback === 'function') {
             callback(value);
@@ -317,7 +317,7 @@ function setSTART_INVENTORY_PROCESS(value) {
 
 function getSTART_INVENTORY_PROCESS(callback) {
     chrome.storage.local.get(['START_INVENTORY_PROCESS'], function (result) {
-        const value = result.START_INVENTORY_PROCESS;
+        var value = result.START_INVENTORY_PROCESS;
 
         if (typeof callback === 'function') {
             callback(value);
@@ -331,7 +331,7 @@ function setSTART_AUTOPRICING_PROCESS(value) {
 
 function getSTART_AUTOPRICING_PROCESS(callback) {
     chrome.storage.local.get(['START_AUTOPRICING_PROCESS'], function (result) {
-        const value = result.START_AUTOPRICING_PROCESS;
+        var value = result.START_AUTOPRICING_PROCESS;
 
         if (typeof callback === 'function') {
             callback(value);
@@ -349,7 +349,7 @@ function setAUTOPRICER_INVENTORY(value) {
 
 function getAUTOPRICER_INVENTORY(callback) {
     chrome.storage.local.get(['AUTOPRICER_INVENTORY'], function (result) {
-        const value = result.AUTOPRICER_INVENTORY;
+        var value = result.AUTOPRICER_INVENTORY;
 
         if (typeof callback === 'function') {
             callback(value);
@@ -367,7 +367,7 @@ function setNAVIGATE_TO_NEXT_PAGE(value) {
 
 function getNAVIGATE_TO_NEXT_PAGE(callback) {
     chrome.storage.local.get(['NAVIGATE_TO_NEXT_PAGE'], function (result) {
-        const value = result.NAVIGATE_TO_NEXT_PAGE;
+        var value = result.NAVIGATE_TO_NEXT_PAGE;
 
         if (value === undefined || value === null) {
             setNAVIGATE_TO_NEXT_PAGE(true);
@@ -385,7 +385,7 @@ function setNEXT_PAGE_INDEX(value) {
 
 function getNEXT_PAGE_INDEX(callback) {
     chrome.storage.local.get(['NEXT_PAGE_INDEX'], function (result) {
-        const value = result.NEXT_PAGE_INDEX;
+        var value = result.NEXT_PAGE_INDEX;
 
         if (value === undefined || value === null) {
             setNEXT_PAGE_INDEX(1);
@@ -403,7 +403,7 @@ function setCURRENT_PRICING_INDEX(value) {
 
 function getCURRENT_PRICING_INDEX(callback) {
     chrome.storage.local.get(['CURRENT_PRICING_INDEX'], function (result) {
-        const value = result.CURRENT_PRICING_INDEX;
+        var value = result.CURRENT_PRICING_INDEX;
 
         if(value === undefined || value === null) value = 0;
 
@@ -419,7 +419,7 @@ function setAUTOPRICER_STATUS(value) {
 
 function getAUTOPRICER_STATUS(callback) {
     chrome.storage.local.get(['AUTOPRICER_STATUS'], function (result) {
-        const value = result.AUTOPRICER_STATUS;
+        var value = result.AUTOPRICER_STATUS;
 
         // Check if value is undefined or null, and set it to false
         if (value === undefined || value === null) {
@@ -434,7 +434,7 @@ function getAUTOPRICER_STATUS(callback) {
 
 function getSHOULD_SUBMIT_AUTOMATICALLY(callback) { 
     chrome.storage.local.get(['SHOULD_SUBMIT_AUTOMATICALLY'], function (result) {
-        const value = result.SHOULD_SUBMIT_AUTOMATICALLY;
+        var value = result.SHOULD_SUBMIT_AUTOMATICALLY;
 
         if(value === undefined || value === null) value = 0;
 
@@ -446,7 +446,7 @@ function getSHOULD_SUBMIT_AUTOMATICALLY(callback) {
 
 function getBLACKLIST_SW(callback) {
     chrome.storage.local.get(['BLACKLIST_SW'], function (result) {
-        const value = result.BLACKLIST_SW;
+        var value = result.BLACKLIST_SW;
 
         if (typeof callback === 'function') {
             callback(value);
@@ -456,7 +456,7 @@ function getBLACKLIST_SW(callback) {
 
 function getIS_TURBO(callback) {
     chrome.storage.local.get(['IS_TURBO'], function (result) {
-        const value = result.IS_TURBO;
+        var value = result.IS_TURBO;
 
         if (typeof callback === 'function') {
             callback(value);
@@ -496,7 +496,7 @@ function setAUTOKQ_STATUS(value) {
 
 function getAUTOKQ_STATUS(callback) {
     chrome.storage.local.get(['AUTOKQ_STATUS'], function (result) {
-        const value = result.AUTOKQ_STATUS;
+        var value = result.AUTOKQ_STATUS;
 
         // Check if value is undefined or null, and set it to false
         if (value === undefined || value === null) {
@@ -515,7 +515,7 @@ function setSTART_AUTOKQ_PROCESS(value) {
 
 function getSTART_AUTOKQ_PROCESS(callback) {
     chrome.storage.local.get(['START_AUTOKQ_PROCESS'], function (result) {
-        const value = result.START_AUTOKQ_PROCESS;
+        var value = result.START_AUTOKQ_PROCESS;
 
         if(value == undefined || value == null){
             setSTART_AUTOKQ_PROCESS(false);
@@ -533,7 +533,7 @@ function setSUBMIT_AUTOKQ_PROCESS(value) {
 
 function getSUBMIT_AUTOKQ_PROCESS(callback) {
     chrome.storage.local.get(['SUBMIT_AUTOKQ_PROCESS'], function (result) {
-        const value = result.SUBMIT_AUTOKQ_PROCESS;
+        var value = result.SUBMIT_AUTOKQ_PROCESS;
 
         if(value == undefined || value == null){
             setSUBMIT_AUTOKQ_PROCESS(false);
@@ -555,7 +555,7 @@ function setKQ_INVENTORY(value) {
 
 function getKQ_INVENTORY(callback) {
     chrome.storage.local.get(['KQ_INVENTORY'], async function (result) {
-        const value = result.KQ_INVENTORY;
+        var value = result.KQ_INVENTORY;
 
         if(value == undefined || value == null){
             await setKQ_INVENTORY([]);
@@ -569,7 +569,7 @@ function getKQ_INVENTORY(callback) {
 
 function getBLACKLIST_KQ(callback) {
     chrome.storage.local.get(['BLACKLIST_KQ'], async function (result) {
-        const value = result.BLACKLIST_KQ;
+        var value = result.BLACKLIST_KQ;
 
         if(value == undefined || value == null){
             value = [];
@@ -805,7 +805,7 @@ function setUPDATE_DATE(value) {
 
 function getUPDATE_DATE(callback) {
     chrome.storage.local.get(['UPDATE_DATE'], function (result) {
-        const value = result.UPDATE_DATE;
+        var value = result.UPDATE_DATE;
 
         if(value === undefined || value === null){
             setUPDATE_DATE("");
@@ -823,7 +823,7 @@ function setIS_NEW_MAIL_INBOX(value) {
 
 function getIS_NEW_MAIL_INBOX(callback) {
     chrome.storage.local.get(['IS_NEW_MAIL_INBOX'], function (result) {
-        const value = result.IS_NEW_MAIL_INBOX;
+        var value = result.IS_NEW_MAIL_INBOX;
 
         if(value === undefined || value === null){
             setIS_NEW_MAIL_INBOX("");
