@@ -85,10 +85,6 @@ function InjectAutoAttic() {
                 minutesInterval = 14;
                 extraMinutes = 0;
                 extraSeconds = 0;
-
-                minutesInterval = 2;
-                extraMinutes = 0;
-                extraSeconds = 0;
             } else {
                 minutesInterval = 7;
                 extraMinutes = 7;
