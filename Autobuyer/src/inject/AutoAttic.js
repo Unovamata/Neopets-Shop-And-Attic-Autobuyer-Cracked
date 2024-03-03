@@ -70,6 +70,7 @@ function InjectAutoAttic() {
         var waitTime = CreateWaitTime(atticLastRefresh);
 
         function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
+            var forceUpdate = false;
             const now = new Date();
             const lastRestockTime = new Date(atticLastRefresh);
         
@@ -78,9 +79,14 @@ function InjectAutoAttic() {
             const timeDifference = now - lastRestockTime;
 
             var extraMinutes = 0, extraSeconds = 0, minutesInterval, extraWindow = 0;
+            const fourteenMinutes = 14 * 60 * 1000;
 
-            if(timeDifference < 14 * 60 * 1000){
+            if(timeDifference < fourteenMinutes){
                 minutesInterval = 14;
+                extraMinutes = 0;
+                extraSeconds = 0;
+
+                minutesInterval = 2;
                 extraMinutes = 0;
                 extraSeconds = 0;
             } else {
@@ -114,10 +120,15 @@ function InjectAutoAttic() {
 
                 return wait;
             } else {
-                setATTIC_NEXT_START_WINDOW(windowStartTime.getTime());
-                setATTIC_NEXT_END_WINDOW(windowEndTime.getTime());
+                // Broken times;
+                if(wait > fourteenMinutes){
+                    location.reload();
+                } else {
+                    setATTIC_NEXT_START_WINDOW(windowStartTime.getTime());
+                    setATTIC_NEXT_END_WINDOW(windowEndTime.getTime());
 
-                wait = windowStartTime - now;
+                    wait = windowStartTime - now;
+                }
 
                 RefreshBanner(wait);
 
@@ -248,7 +259,7 @@ function InjectAutoAttic() {
             window.location.href = "https://www.neopets.com/halloween/garage.phtml";
         }
 
-        function RefreshBanner(waitTime){            
+        function RefreshBanner(waitTime, addNextWindows = true){            
             var startTime = moment(atticStartWindow).tz("America/Los_Angeles").format("h:mm:ss A")
             endTime = moment(atticEndWindow).tz("America/Los_Angeles").format("h:mm:ss A")
 
