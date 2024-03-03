@@ -63,14 +63,13 @@ function InjectAutoAttic() {
         
         var isRunningOnScheduledTime = false,
         atticWaitTime = 1200000,
-        updateTimes = false;
+        atticRestocked  = false;
 
         // Calculate the time to wait before the next refresh
         
         var waitTime = CreateWaitTime(atticLastRefresh);
 
         function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
-            var forceUpdate = false;
             const now = new Date();
             const lastRestockTime = new Date(atticLastRefresh);
         
@@ -124,9 +123,9 @@ function InjectAutoAttic() {
                     setATTIC_NEXT_END_WINDOW(windowEndTime.getTime());
 
                     wait = windowStartTime - now;
-                }
 
-                RefreshBanner(wait);
+                    RefreshBanner(wait);
+                }
 
                 return wait;
             }
@@ -175,17 +174,7 @@ function InjectAutoAttic() {
             var ItemsStocked = GetAtticStockedItemNumber();
             var lastRestock = Date.now();
 
-            if (ItemsStocked > atticPreviousNumberOfItems) {
-                chrome.storage.local.set({
-                    ATTIC_PREV_NUM_ITEMS: ItemsStocked,
-                    ATTIC_LAST_REFRESH_MS: lastRestock
-                }, function() {
-                    // Since the attic restocked, get the next window if nothing good was found;
-                    waitTime = CreateWaitTime(atticLastRefresh, true);
-                    UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
-                    updateTimes = true;
-                });
-            }
+            if (ItemsStocked > atticPreviousNumberOfItems) atticRestocked = true;
             
             // Sold out;
             if (PageIncludes("Sorry, we just sold out of that.")) {
@@ -226,6 +215,16 @@ function InjectAutoAttic() {
 
                     RunAutoAttic();
                 } else {
+                    // Waiting a minute before updating after a restock happened;
+                    if(atticRestocked){
+                        setATTIC_PREV_NUM_ITEMS(ItemsStocked);
+                        setATTIC_LAST_REFRESH_MS(lastRestock);
+
+                        UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
+
+                        await Sleep(30000);
+                    }
+
                     AutoRefreshAttic();
                 }
             }
@@ -240,8 +239,6 @@ function InjectAutoAttic() {
             // Update the stored number of items
             var numItems = GetAtticStockedItemNumber();
             chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
-
-            if(updateTimes) location.reload();
         }
 
         async function AutoRefreshAttic() {
@@ -264,8 +261,6 @@ function InjectAutoAttic() {
             var areWindowsUndefined = startTime == endTime;
 
             if(!areWindowsUndefined) message += `Next Windows ${startTime} : ${endTime}`;
-
-            console.log(startTime == endTime);
     
             if (atticLastRefresh > 0) {
                 message += " Last restock: " + moment(atticLastRefresh)

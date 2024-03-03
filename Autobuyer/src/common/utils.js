@@ -472,18 +472,16 @@ function setSHOP_HISTORY(value) {
     });
 }
 
-String.prototype.hashCode = function() {
-    var hash = 0,i, chr;
 
-    if (this.length === 0) return hash;
+//######################################################################################################################################
+/// AutoAttic Variable Calling;
 
-    for (i = 0; i < this.length; i++) {
-        chr = this.charCodeAt(i);
-        hash = ((hash << 5) - hash) + chr;
-        hash |= 0; // Convert to 32bit integer
-    }
-    
-    return hash;
+function setATTIC_PREV_NUM_ITEMS(value) {
+    chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: Number(value) }, function () {});
+}
+
+function setATTIC_LAST_REFRESH_MS(value) {
+    chrome.storage.local.set({ ATTIC_LAST_REFRESH_MS: value }, function () {});
 }
 
 
