@@ -255,12 +255,17 @@ function InjectAutoAttic() {
             window.location.href = "https://www.neopets.com/halloween/garage.phtml";
         }
 
-        function RefreshBanner(waitTime, addNextWindows = true){            
+        function RefreshBanner(waitTime){            
             var startTime = moment(atticStartWindow).tz("America/Los_Angeles").format("h:mm:ss A")
             endTime = moment(atticEndWindow).tz("America/Los_Angeles").format("h:mm:ss A")
 
             // Create a message with the wait time and last restock time
-            let message = `Waiting ${FormatMillisecondsToSeconds(waitTime)}... Next Windows ${startTime} : ${endTime}`;
+            let message = `Waiting ${FormatMillisecondsToSeconds(waitTime)}...`;
+            var areWindowsUndefined = startTime == endTime;
+
+            if(!areWindowsUndefined) message += `Next Windows ${startTime} : ${endTime}`;
+
+            console.log(startTime == endTime);
     
             if (atticLastRefresh > 0) {
                 message += " Last restock: " + moment(atticLastRefresh)
