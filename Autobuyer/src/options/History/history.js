@@ -27,7 +27,7 @@ ProcessPurchaseHistory(false), setInterval((function() {
     ProcessPurchaseHistory(false)
 }), 5e3)
 
-const clearButton = document.getElementById("reset");
+const clearButton = document.getElementById("reset-history");
 clearButton.addEventListener('click', ClearHistory);
 
 function ClearHistory(){
