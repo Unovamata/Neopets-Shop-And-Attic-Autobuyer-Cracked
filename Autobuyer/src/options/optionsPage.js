@@ -361,6 +361,7 @@ function setMAX_HAGGLE_POWER(value) { chrome.storage.local.set({MAX_HAGGLE_POWER
 function setSHOULD_CHANGE_DOCUMENT_DATA(value) { chrome.storage.local.set({SHOULD_CHANGE_DOCUMENT_DATA: value}, (function () {})) }
 
 //AutoAttic Setters;
+function setATTIC_RESTOCK_LIST(value) { chrome.storage.local.set({ATTIC_RESTOCK_LIST: value}, (function () {})) }
 function setATTIC_NEXT_START_WINDOW(value) { chrome.storage.local.set({ATTIC_NEXT_START_WINDOW: value}, (function () {})) }
 function setATTIC_NEXT_END_WINDOW(value) { chrome.storage.local.set({ATTIC_NEXT_END_WINDOW: value}, (function () {})) }
 
@@ -471,6 +472,18 @@ $("#SHOULD_CHANGE_DOCUMENT_DATA").on("change", function () {
 });
 
 // AutoAttic Data Binding;
+
+$("#ATTIC_RESTOCK_LIST").bind("input propertychange", (function () {
+  try {
+    setATTIC_RESTOCK_LIST($("#ATTIC_RESTOCK_LIST")
+      .val()
+      .split("\n")
+      .map((_ => _.trim()))
+      .filter((_ => "" != _)))
+  } catch (_) {
+    window.alert("Error in parsing your restock list: " + _)
+  }
+}));
 
 $("#ATTIC_NEXT_START_WINDOW").bind("input propertychange", (function () {
   setATTIC_NEXT_START_WINDOW($("#ATTIC_NEXT_START_WINDOW").val())
@@ -867,6 +880,7 @@ resetButton.onclick = function (_) {
   SHOULD_CHANGE_DOCUMENT_DATA: false,
 
   // AutoAttic;
+  ATTIC_RESTOCK_LIST: defaultDesiredItems,
   ATTIC_NEXT_START_WINDOW: -1,
   ATTIC_NEXT_END_WINDOW: -1,
 
@@ -1006,6 +1020,9 @@ resetButton.onclick = function (_) {
   $("#MAX_PAGE_LOAD_FAILURES").val(_.MAX_PAGE_LOAD_FAILURES);
 
   // AutoAttic Settings;
+  $("#ATTIC_RESTOCK_LIST").val(_.ATTIC_RESTOCK_LIST.join("\n"));
+
+
   DisplayAtticTimes();
   
   // Updates the next possible windows in the GUI every 10 seconds;

@@ -49,6 +49,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_CHANGE_DOCUMENT_DATA: false,
 
 			//AutoAttic;
+			ATTIC_RESTOCK_LIST: [],
 			ATTIC_NEXT_START_WINDOW: 0,
         	ATTIC_NEXT_END_WINDOW: 0,
 

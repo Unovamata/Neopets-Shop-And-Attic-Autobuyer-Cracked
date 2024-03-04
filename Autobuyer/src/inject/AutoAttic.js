@@ -16,7 +16,7 @@ function InjectAutoAttic() {
         BLACKLIST: [],
         ENABLED: !0,
         USE_ITEM_DB: !0,
-        RESTOCK_LIST: defaultDesiredItems,
+        ATTIC_RESTOCK_LIST: defaultDesiredItems,
         SHOULD_GO_FOR_SECOND_MOST_VALUABLE: !1,
         ATTIC_ENABLED: !0,
         ATTIC_HIGHLIGHT: !0,
@@ -42,7 +42,7 @@ function InjectAutoAttic() {
             USE_BLACKLIST: isBlacklistActive,
             BLACKLIST: blacklistToNeverBuy,
             USE_ITEM_DB: buyWithItemDB,
-            RESTOCK_LIST: restockList,
+            ATTIC_RESTOCK_LIST: atticRestockList,
             SHOULD_GO_FOR_SECOND_MOST_VALUABLE: isBuyingSecondMostProfitable,
             ATTIC_ENABLED: isAtticEnabled,
             ATTIC_HIGHLIGHT: isHighlightingItemsInAttic,
@@ -296,7 +296,7 @@ function InjectAutoAttic() {
                 }
             } else {
                 // Filtering the items based on the restocking list;
-                filteredItems = restockList.filter((itemName) => {
+                filteredItems = atticRestockList.filter((itemName) => {
                     return itemData.some((item) => item.name === itemName && !IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy));
                 });
 
