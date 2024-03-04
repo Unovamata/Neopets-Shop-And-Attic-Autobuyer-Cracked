@@ -202,7 +202,10 @@ async function RunAutoPricer(){
             // Parsing the history's contents;
             const historyParser = new DOMParser();
             const historyDocument = historyParser.parseFromString(salesContent, 'text/html');
-            const tableElement = historyDocument.querySelector('form[action="market.phtml"]').parentElement.parentElement.parentElement;
+            const tableElement = historyDocument.querySelector('form[action="market.phtml"]')?.parentElement.parentElement.parentElement;
+            if (!tableElement) {
+                return;
+            }
             const trElements = tableElement.querySelectorAll("tr");
 
             var historyItems = [];
