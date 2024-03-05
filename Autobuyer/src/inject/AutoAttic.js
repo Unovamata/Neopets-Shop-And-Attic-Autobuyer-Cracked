@@ -69,6 +69,11 @@ function InjectAutoAttic() {
         
         var waitTime = CreateWaitTime(atticLastRefresh);
 
+        /* For every action taken that involves ABying, 
+         * the attic will wait X amount of milliseconds
+         * to optimize refreshes; */
+        var atticWaitAfterAction = 30000;
+        
         function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
             const now = new Date();
             const lastRestockTime = new Date(atticLastRefresh);
@@ -141,6 +146,8 @@ function InjectAutoAttic() {
             UpdateBannerAndDocument(boughtItemElement + " bought", boughtItemElement + " bought from Attic");
             SaveToPurchaseHistory(boughtItemElement, "Attic", "-", "Bought");
 
+            await Sleep(atticWaitAfterAction);
+
             AutoRefreshAttic();
 
             HighlightItemsInAttic();
@@ -179,6 +186,7 @@ function InjectAutoAttic() {
             // Sold out;
             if (PageIncludes("Sorry, we just sold out of that.")) {
                 UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
+                await Sleep(atticWaitAfterAction);
             }
             
             // Selecting the best item to buy;
@@ -222,7 +230,7 @@ function InjectAutoAttic() {
 
                         UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
 
-                        await Sleep(30000);
+                        await Sleep(atticWaitAfterAction);
                     }
 
                     AutoRefreshAttic();
