@@ -58,6 +58,8 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Improved and intelligent haggling system.
 - "Restock List" generator.
 - Bypass "Confirm" pop-up when buying items from main shops.
+- Informative analytics about your AutoBuying and selling activities.
+- Human-like AutoAttic refresher.
 
 ## Included Features
 
