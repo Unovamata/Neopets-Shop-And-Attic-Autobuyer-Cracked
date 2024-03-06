@@ -351,6 +351,8 @@ async function RunAutoPricer(){
                     // If the box exists, then introduce the name on it;
                     setAUTOPRICER_STATUS(`Searching ${nameToSearch}...`);
 
+                    const searchBox = document.getElementById("shopwizard");
+
                     if(!isTurbo){
                         await SimulateKeyEvents(searchBox, nameToSearch);
                         await Sleep(sleepInSWPageMin, sleepInSWPageMax);
