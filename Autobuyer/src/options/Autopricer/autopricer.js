@@ -355,7 +355,7 @@ function StartAutoPricer(){
 
             // Function to create a new tab if swTab is null
             if(isTurbo){
-                chrome.tabs.create({ url: `https://www.neopets.com/shops/wizard.phtml?string=${autoPricingList[0].Name}`, active: true });
+                chrome.tabs.create({ url: `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(autoPricingList[0].Name)}`, active: true });
             } else {
                 chrome.tabs.create({ url: 'https://www.neopets.com/shops/wizard.phtml', active: true });
             }

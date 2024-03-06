@@ -581,7 +581,7 @@ async function RunAutoPricer(){
                         })
                     } else {
                         try{
-                            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${autoPricingList[currentPricingIndex].Name}`;
+                            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(autoPricingList[currentPricingIndex].Name)}`;
                         } catch {
                             window.location.reload();
                         }
