@@ -341,8 +341,10 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
         datesProfits.push(sumOfProfits);
     });
 
+    const datesReversedKeys = Object.keys(datesDataset).reverse();
+
     // Set up Chart.js with a line chart configuration
-    var profitsOverTime = CreateTimelineChart("profitsOverTime", Object.keys(datesDataset), datesProfits, "Profits");
+    var profitsOverTime = CreateTimelineChart("profitsOverTime", datesReversedKeys, datesProfits.reverse(), "Profits");
     
     if(profitsOverTime) ResizeChartInterval("profitsOverTime", "760px", "380px");
 }
