@@ -14,7 +14,7 @@ getSTART_AUTOKQ_PROCESS(async function(isActive){
 
             // If there are ingredients to search left, then go to the SW after purchase;
             if(ingredients.length > 0){
-                window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${ingredients[0]}`;
+                window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(ingredients[0])}`;
             } else { // If not, it means the quest can be completed;
                 setSUBMIT_AUTOKQ_PROCESS(true);
                 setAUTOKQ_STATUS("Ingredients Bought! Preparing for Quest Completion...");
@@ -28,7 +28,7 @@ getSTART_AUTOKQ_PROCESS(async function(isActive){
 
         // If the ingredient has been taken off the purchase list, then proceed;
         if(!ingredients.includes(itemName)){
-            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${ingredients[0]}`;
+            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(ingredients[0])}`;
         }
 
         if (buyLink) {

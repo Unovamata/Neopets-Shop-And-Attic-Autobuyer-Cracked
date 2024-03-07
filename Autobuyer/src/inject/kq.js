@@ -69,7 +69,7 @@ getSTART_AUTOKQ_PROCESS(function(isActive){
                 
 
                 // Launching the SW;
-                window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${itemArray[0]}`;
+                window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(itemArray[0])}`;
                 setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
             });
         });
