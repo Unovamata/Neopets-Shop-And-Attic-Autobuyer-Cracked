@@ -1,3 +1,15 @@
+body:not(.toolbar){
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out; /* Set the transition property */
+    animation: fadeIn 0.5s ease-in-out 0.5s forwards; /* Start the fadeIn animation after a delay */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1; /* At the end of the animation, set opacity to 1 */
+    }
+}
+
 /* Apply style to the entire table */
 table {
     border-collapse: collapse;

@@ -178,26 +178,6 @@ function injectToolbar() {
     cssLink.type = 'text/css';
     cssLink.href = toolbarCSS;
     document.head.appendChild(cssLink);
-
-    //HoverSubmenu(".hover-menu", ".submenu", "hover-submenu");
-
-    
-
-    /*function HoverSubmenu(menuSelector, subMenuSelector, classInjection){
-        var menu = document.querySelector(menuSelector);
-
-        console.log(menu);
-        var subMenu = document.querySelector(subMenuSelector);
-
-        menu.addEventListener('mouseenter', function() {
-            subMenu.classList.add(classInjection);
-        });
-    
-        menu.addEventListener('mouseleave', function() {
-            subMenu.classList.remove(classInjection);
-        });
-    }*/
-
 }
 
 // Wait for the entire page, including CSS, to be fully loaded
