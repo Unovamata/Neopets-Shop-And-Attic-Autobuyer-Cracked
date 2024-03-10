@@ -1,9 +1,11 @@
+var pageContents = document.getElementsByClassName('content')[0];
+pageContents.innerHTML = pageContents.innerHTML.replace(/<!-- desc start -->[\s\S]*<!-- desc end -->/ig, "");
+
 // Allows the user to buy from another user's shops;
 getSTART_AUTOKQ_PROCESS(async function(isActive){
     if(!isActive) return;
     
     await getKQ_INVENTORY(async function(ingredients){
-
         // If the item has been sold out or the owner has been frozen, search them again;
         if(PageIncludes("Item not found!") || 
         PageIncludes("Sorry - The owner of this shop has been frozen!") ||
