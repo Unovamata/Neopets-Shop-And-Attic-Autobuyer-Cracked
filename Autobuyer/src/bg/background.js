@@ -47,6 +47,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MIN_HAGGLE_POWER: 0.75,
 			MAX_HAGGLE_POWER: 0.85,
 			SHOULD_CHANGE_DOCUMENT_DATA: false,
+			PAUSE_AFTER_BUY_MS: 18000,
 
 			//AutoAttic;
 			ATTIC_RESTOCK_LIST: [],

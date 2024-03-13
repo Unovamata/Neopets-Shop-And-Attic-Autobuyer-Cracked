@@ -400,4 +400,35 @@ setInterval(ActivateNewMailNotification, 500);
 // Load the notifications as soon as the page has finished loading;
 document.addEventListener("DOMContentLoaded", function () {
     UpdateNotification();
+
+    FormatDangerTooltips();
 });
+
+
+function FormatDangerTooltips(){
+    if(location.href.includes("info.html")) return;
+
+    var dangerElements = document.getElementsByClassName("dangertooltip");
+
+    Array.from(dangerElements).forEach(function(element){
+        const span = document.createElement("span");
+
+        // Create the text node for the span
+        const textNode = document.createTextNode("Although inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature.");
+
+        // Create the <a> element
+        const anchor = document.createElement("a");
+        anchor.textContent = "Activate this option at your own risk.";
+
+        // Append the text node to the span
+        span.appendChild(textNode);
+
+        // Append the <br>, span, and <a> elements to another element with id "container"
+        element.appendChild(document.createElement("br"));
+        element.appendChild(document.createElement("br"));
+        element.appendChild(span);
+        element.appendChild(document.createElement("br"));
+        element.appendChild(document.createElement("br"));
+        element.appendChild(anchor);
+    });
+}

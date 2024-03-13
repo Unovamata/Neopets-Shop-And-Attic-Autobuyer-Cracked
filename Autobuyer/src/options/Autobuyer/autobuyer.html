@@ -36,7 +36,7 @@
                     </tbody>
                 </table>
                 
-                <div class="subcategory-info">Refresh Settings</div>
+                <div class="subcategory-info">Main Shop Refresh Settings</div>
 
                 <table class="table">
                     <tbody class="main-shop-settings">
@@ -44,24 +44,29 @@
                             <th></th><th></th>
                         </thead>
                             <tr>
-                                <td>Refresh Time Window:
+                                <td><b>AutoBuyer</b> Refresh Time Window:
                                     <span class="tooltiptext">
-                                        Set the time range for refreshing. <br><br>
-                                        For example: <br> 11am to 4pm = [11, 16] or All times [0,23]
+                                        Specifies the time range to run the AutoBuyer process.
+
+                                        <br><br>For example: <br>[11, 16] or [0,23]
+
+                                        <br><br>If NeoBuyer+ runs unattended for 24 hours, it will only restock at these specific timeframes.
+
+                                        <br><br>Default: [0,23]
                                     </span>
                                 </td>
                                 <td><input type="text" id="RUN_BETWEEN_HOURS"></input><span class="notation">from, to</span></td>
                             </tr>
                             <tr>
-                                <td><b>Pause</b> NeoBuyer+ in Specific Minute Intervals:
+                                <td><b>Pause the AutoBuyer</b> in Specific Minute Intervals:
                                     <span class="tooltiptext">
-                                            Set the time range for pausing while AutoBuying. 
+                                            Specifies the time range for pausing the AutoBuyer process. 
+
                                             <br><br>For example:
 
-                                            <br>If you would like to pause from 05:10 to 05:20 = [10, 20]
+                                            <br>Pausing the AutoBuyer process from 05:10 to 05:20: <br>[10, 20]
 
-                                            <br><br>You can even add multiple intervals if needed:
-                                            <br>For example: [10, 20, 45, 50]
+                                            <br><br>You can add multiple intervals if needed: <br>[10, 20, 45, 50]
 
                                             <br><br>Credits to <a href="https://github.com/chrisli-03" target="_blank">chrisli-03</a>.
                                     </span>
@@ -71,8 +76,8 @@
                             <tr>
                                 <td><b>Minimum Unstocked</b> Refresh:
                                     <span class="tooltiptext">
-                                        Minimum time in milliseconds between refreshes when the shop is empty. 
-                                        <br><br> 1 second = 1000
+                                        Specifies the minimum time <u>in milliseconds</u> between refreshes when a main shop is <u>empty</u>; NeoBuyer+ is waiting for stock.
+                                        <br><br>Refresh Time = Random(Max Time - Min Time)
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_REFRESH"></input><span class="notation">ms</span></td>
@@ -80,8 +85,8 @@
                             <tr>
                                 <td><b>Maximum Unstocked</b> Refresh:
                                     <span class="tooltiptext">
-                                        Maximum time in milliseconds between refreshes when the shop is empty.
-                                        <br><br> 1 second = 1000
+                                        Specifies the maximum time <u>in milliseconds</u> between refreshes when a main shop is <u>empty</u>; NeoBuyer+ is waiting for stock.
+                                        <br><br>Refresh Time = Random(Max Time - Min Time)
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_REFRESH"></input><span class="notation">ms</span></td>
@@ -89,34 +94,37 @@
                             <tr>
                                 <td><b>Minimum Stocked</b> Refresh:
                                     <span class="tooltiptext">
-                                        Minimum time in milliseconds between refreshes when the shop is stocked.
-                                        <br><br> 1 second = 1000
+                                        Minimum time <u>in milliseconds</u> between refreshes when a main shop is <u>stocked</u>; NeoBuyer+ is AutoBuying.
+                                        <br><br>Refresh Time = Random(Max Time - Min Time)
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_REFRESH_STOCKED"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
                                 <td><b>Maximum Stocked</b> Refresh:
-                                    <span class="tooltiptext">Maximum time in milliseconds between refreshes when the shop is stocked.
-                                        <br><br> 1 second = 1000
+                                    <span class="tooltiptext">
+                                        Maximum time <u>in milliseconds</u> between refreshes when a main shop is <u>stocked</u>; NeoBuyer+ is AutoBuying.
+                                        <br><br>Refresh Time = Random(Max Time - Min Time)
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_REFRESH_STOCKED"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td><b>Minimum</b> Five Second Rule Refresh:
-                                    <span class="tooltiptext">Minimum time in milliseconds between refreshes when a five-second rule is detected.
-                                        <br><br> Occasionally, the Neopian Standard Time desyncs, prolonging five-second rules. You may lose out on some items in the more competitive shops <a>if you buy anything</a>, but you will get restock banned less often with this setting on.
-                                        <br><br> 1 second = 1000
+                                <td><b>Minimum</b> Five-Second Rule Refresh:
+                                    <span class="tooltiptext">
+                                        Minimum time <u>in milliseconds</u> between refreshes when a <u>five-second rule prompt</u> triggers.
+                                        <br><br> Occasionally, the Neopian Standard Time desyncs, prolonging five-second rules. You may lose out on some items in the more competitive shops, but you will get restock banned less often with this setting activated.
+                                        <br><br>Refresh Time = Wait Time to Return to the Main Shop + Random(Max Time - Min Time)
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_FIVE_SECOND_RULE_REFRESH"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td><b>Maximum</b> Five Second Rule Refresh:
-                                    <span class="tooltiptext">Minimum time in milliseconds between refreshes when a five-second rule is detected.
-                                        <br><br> Occasionally, the Neopian Standard Time desyncs, prolonging five-second rules. You may lose out on some items in the more competitive shops <a>if you buy anything</a>, but you will get restock banned less often with this setting on.
-                                        <br><br> 1 second = 1000
+                                <td><b>Maximum</b> Five-Second Rule Refresh:
+                                    <span class="tooltiptext">
+                                        Maximum time <u>in milliseconds</u> between refreshes when a <u>five-second rule prompt</u> triggers.
+                                        <br><br> Occasionally, the Neopian Standard Time desyncs, prolonging five-second rules. You may lose out on some items in the more competitive shops, but you will get restock banned less often with this setting activated.
+                                        <br><br>Refresh Time = Wait Time to Return to the Main Shop + Random(Max Time - Min Time)
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_FIVE_SECOND_RULE_REFRESH"></input><span class="notation">ms</span></td>
@@ -268,11 +276,13 @@
                             <th></th><th></th>
                         </thead>
                         <tr>
-                            <td>Refresh Shop <b>Only</b> When Cleared:
+                            <td>Refresh Shops <b>Only When Unstocked</b>:
                                 <span class="tooltiptext">
-                                    If active, NeoBuyer+ will only buy items after a shop clear and it will not continuously refresh or navigate to other shops. This is useful if you want to only buy items in shop clears to minimize the possibility of long restock bans.
-                                    <br><br>This feature is also useful if you have multiple shop tabs open and you just want to restock when shops are empty and wait for the next shop clear.
-                                    <br><br>Activate this option while also setting "Store Numbers to Cycle Through When Stocked:" to [].
+                                    If enabled, NeoBuyer+ will only buy items after Shop Clears. The AutoBuyer process will not continuously refresh or navigate to other shops; the process will halt. <u>To clarify, this setting will not detect Shop Clears</u>.
+
+                                    <br><br>If active, set "Store Numbers to Cycle Through When Stocked" to [].
+
+                                    <br><br>This feature can help while restocking with multiple tabs open, minimizing Restock Bans.
                                 </span>
                             </td>
                             <td>
@@ -286,9 +296,8 @@
                             <td>
                                 Store Numbers to Cycle Through When Stocked:
                                 <span class="tooltiptext">
-                                    If a store in the list is stocked, NeoBuyer+ will wait the specified number of seconds before moving to the next shop.<br><br>
-                                    It cycles through multiple shops until finding one that's not stocked. <br><br>
-                                    <a href="https://thedailyneopets.com/articles/list-neopian-shops-of-neopia">Neopian Shops IDs</a>
+                                    If a store in this list has stock, NeoBuyer+ will wait the set seconds before navigating to the next shop. Otherwise, it will refresh until the shop stocks.
+                                    <br><br><a href="https://thedailyneopets.com/articles/list-neopian-shops-of-neopia">Neopian Shops IDs</a>
                                 </span>
                             </td>
                             <td><input type="text" id="STORES_TO_CYCLE_THROUGH_WHEN_STOCKED"></input><span class="notation">store IDs</span></td>
@@ -296,7 +305,7 @@
                         <tr>
                             <td><b>Minimum</b> Items for Store to be Considered Stocked:
                                 <span class="tooltiptext">
-                                    If you input 5 and a store has 5 items, then it's 'stocked'.
+                                    If you input 'X' in this field and a store has 'X' items in stock, then the AutoBuyer process will consider it stocked and wait a few seconds before navigating to the next shop. Otherwise, it will navigate to the next shop immediately.
                                 </span>
                             </td>
                             <td><input type="number" id="ITEMS_TO_CONSIDER_STOCKED"></input><span class="notation">items = stocked shop</span></td>
@@ -304,7 +313,15 @@
                         <tr>
                             <td>Use Item Database Value Estimates:
                                 <span class="tooltiptext">
-                                    If active, NeoBuyer+ will target profitable items exclusively based on its custom item database.
+                                    NeoBuyer+ keeps track of 3 constants: <u>Price, Value, and Profit</u>.
+
+                                    <ul>
+                                        <li>Price is the item's stocking price, what you pay to buy the item.</li>
+                                        <li>Value is the item's market value without the stocking Price subtraction.</li>
+                                        <li>Profit is the result of the Value minus the stocking Price.</li>
+                                    </ul>
+
+                                    If enabled, the AutoBuyer process will target items exclusively based on its item database and its preset settings.
                                 </span>
                             </td>
                             <td>
@@ -318,9 +335,7 @@
                             <td>
                                 <b>Minimum</b> Profit to Click Item:
                                 <span class="tooltiptext">
-                                    Neobuyer+ will buy an item only if its profitability margin is greater than the amount provided.<br><br>
-
-                                    - This only applies while using the item database.
+                                    The AutoBuyer process will only buy an item if its <u>Profit Margin surpasses</u> the amount inputted in this field. This setting only applies while using the item database.
                                 </span>
                             </td>
                             <td><input type="number" id="ITEM_DB_MIN_PROFIT_NPS"></input><span class="notation">NPS</span></td>
@@ -328,21 +343,16 @@
                         <tr class="db-hide">
                             <td><b>Minimum</b> Profit Percentage to Click Item:
                                 <span class="tooltiptext">
-                                    Neobuyer+ will buy an item only if its profitability percentage is greater than the amount provided.<br><br>
-
-                                    - This only applies while using the item database.<br>
-                                    - Decimals only (0.5).<br>
+                                    The AutoBuyer process will only buy an item if its <u>Profit Margin Percentage surpasses</u> the amount inputted in this field, <u> in decimals</u>. This setting only applies while using the item database.
                                 </span>
                             </td>
                             <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input><span class="notation">%</span></td>
                         </tr>
                         <tr class="db-hide">
                             <td>
-                                Estimated Profit of Items Not in Item DB:
+                                Estimated Profit of Items <b>not</b> in Item DB:
                                 <span class="tooltiptext">
-                                    For items not in the database, NeoBuyer+ assumes a default profit amount. <br><br>
-                                    
-                                    This is handy for new, unlisted items.
+                                    The AutoBuyer process will assume the default profit amount inputted in this field for items not found in the database. This feature can come in handy for new, unlisted items.
                                 </span>
                             </td>
                             <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input><span class="notation">NPS</span></td>
@@ -351,19 +361,23 @@
                             <td>
                                 <b>Minimum</b> Rarity to Click Profitable Items: <span class="subdued">(Not Advised to Modify)</span>:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ will only acquire items over that rarity threshold.<br><br>
+                                    NeoBuyer+ will only acquire items over the rarity threshold inputted in this field.
 
-                                    - Minimum rarity: 1. <br>
-                                    - Maximum rarity: 100.
+                                    <br><br>Minimum rarity: 1
+                                    <br>Maximum rarity: 100
                                 </span>
                             </td>
-                            <td><span class="notation">Rarity</span><input type="number" max="100" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
+                            <td><span class="notation">Rarity</span><input type="number" max="101" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
                         </tr>
                         <tr class="db-hide">
                             <td>Use a Blacklist of Items to not Purchase:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ will be prevented from clicking on specific items inside the blacklist, even if they meet the profit criteria.<br><br>
-                                    This is useful when the item database has inaccurate or outdated price estimates.</span>
+                                    The AutoBuyer process will prevent clicking on Blacklisted items, irrespective of whether those items meet the profit criteria. 
+                                    
+                                    <br><br>Blacklists override other settings, ensuring the AutoBuyer process does not click any Blacklisted items. This feature is useful for countering inaccurate or outdated price estimates in the item database. 
+                                    
+                                    <br><br><u>Enter one item per line.</u>
+                                </span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -374,57 +388,18 @@
                         </tr>
                         <tr class="blacklist-hide">
                             <td class="db-hide">Blacklist:
-                                <span class="tooltiptext">This list will supercede all other settings. If an item is in this list, it will never be clicked on by the Autobuyer. This is useful if you find that the item DB has an incorrect or out of date price estimate. Enter one item per line only.</span>
                             </td>
                             <td class="db-hide"><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
                         </tr>
                         <tr class="restock-hide">
                             <td>Restock List:
                                 <span class="tooltiptext">
-                                    The list must be ordered from most profitable to least profitable. You can group by store.<br><br>
+                                    The Restocking list must be ordered from most profitable to least profitable. You can group by store.
                                     
-                                    <a href="https://www.jellyneo.net/?go=shopsdirectory">JN's Shop Directory</a>
+                                    <br><br><a href="https://www.jellyneo.net/?go=shopsdirectory">JellyNeo's Shop Directory</a>
                                 </span>
                             </td>
                             <td><textarea rows="20" cols="50" id="RESTOCK_LIST"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>Use Custom Multipliers for Haggle Generation: <span class="subdued">(Not Advised to Modify)</span>
-                                <span class="dangertooltip tooltiptext">
-                                    This setting toggles custom haggling multipliers to generate a typeable haggle.<br><br>
-                                    Output Haggle = Rounded(Asking Price + (Asking Price <sup>Z</sup>)). 
-                                    <br>Where Z is equal to a random number between X & Y (Exclusive).<br><br>
-
-                                    This is a very complex system, modifying the default multipliers can generate unexpected haggles, losing out on items. Do not change these values unless you know what you are doing. 
-                                    <br><br>Activate this option at your own risk.
-                                </span>
-                            </td>
-                            <td>
-                                <label class="switch">
-                                    <input id="SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS" type="checkbox">
-                                    <span class="slider slider-danger round"></span>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="haggle-hide">
-                            <td>
-                                <b>Minimum</b> Haggle Power:
-                                <span class="tooltiptext">
-                                    The minimum number to power the Asking Price to, in decimals.
-                                    <br><br>Default = 0.75.
-                                </span>
-                            </td>
-                            <td><input type="number" max="100" min="1" id="MIN_HAGGLE_POWER"></input></td>
-                        </tr>
-                        <tr class="haggle-hide">
-                            <td>
-                                <b>Maximum</b> Haggle Power:
-                                <span class="tooltiptext">
-                                    The maximum number to power the Asking Price to, in decimals.
-                                    <br><br>Default = 0.85.
-                                </span>
-                            </td>
-                            <td><input type="number" max="100" min="1" id="MAX_HAGGLE_POWER"></input></td>
                         </tr>
                     </tbody>
                 </table>
@@ -437,7 +412,7 @@
                             <th></th><th></th>
                         </thead>
                         <tr>
-                            <td>Auto-Click Item to Buy:</td>
+                            <td><b>Auto-Click Items</b> in Main Shops:</td>
                             <td>
                                 <label class="switch">
                                     <input id="CLICK_ITEM" type="checkbox">
@@ -448,8 +423,8 @@
                         <tr class="click-hide">
                             <td><b>Minimum Click</b> Item Image:
                                 <span class="tooltiptext">
-                                    Minimum click speed in milliseconds for the NeoBuyer+ to click in a desired item after the page loads.
-                                    <br><br> 1 second = 1000
+                                    Specifies the minimum clicking speed <u>in milliseconds</u> for the AutoBuyer process to click on a desired item in the Main Shop's stock after the page loads.
+                                    <br><br> Item Image Clicking Time = Random(Max Time - Min Time)
                                 </span>
                             </td>
                             <td><input type="number" id="MIN_CLICK_ITEM_IMAGE"><span class="notation">ms</span></input></td>
@@ -457,19 +432,20 @@
                         <tr class="click-hide">
                             <td><b>Maximum Click</b> Item Image:
                                 <span class="tooltiptext">
-                                    Minimum click speed in milliseconds for the NeoBuyer+ to click in a desired item after the page loads.
-                                    <br><br> 1 second = 1000
+                                    Specifies the maximum clicking speed <u>in milliseconds</u> for the AutoBuyer process to click on a desired item in the Main Shop's stock after the page loads.
+                                    <br><br> Item Image Clicking Time = Random(Max Time - Min Time)
                                 </span>
                             </td>
                             <td><input type="number" id="MAX_CLICK_ITEM_IMAGE"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr class="click-hide">
-                            <td>Go for 2nd Best Item:
+                            <td>Go for <b>2nd Best Item<b>:
                                 <span class="tooltiptext">
-                                    Better for slower internet connections. <br><br>
-                                    Instead of aiming for the best item in stock, NeoBuyer+ prioritizes the second-best item for a better chance of success. <br><br>
+                                    This setting is better suited for slower internet connections.
 
-                                    It will still buy the sole worthwhile item if only one is available.
+                                    <br><br>Instead of aiming for the best item in stock, NeoBuyer+ prioritizes the second-best item for a better chance of success.
+
+                                    <br><br>It will still buy the sole worthwhile item if only one is available.
                                 </span>
                             </td>
                             <td>
@@ -480,9 +456,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Auto-Click Confirm Window:
+                            <td><b>Auto-Click Confirm</b> Window:
                                 <span class="tooltiptext">
-                                    Enables NeoBuyer+ to Auto-Click the Confirm Window Buttons.
+                                    Enables the AutoBuyer process to Auto-Click the confirm window buttons.
                                 </span>
                             </td>
                             <td>
@@ -496,7 +472,7 @@
                             <td><b>Bypass</b> Confirm Window:
                                 <span class="dangertooltip tooltiptext">
                                     If active, NeoBuyer+ will bypass the confirm pop-up Neopets generates, redirecting the user straight to the haggling page.
-                                    <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    <br><br> This option disables Click Confirm Times.
                                 </span>
                             </td>
                             <td>
@@ -506,26 +482,26 @@
                                 </label>
                             </td>
                         </tr>
-                        <tr class="confirm-hide">
+                        <tr class="confirm-hide bypass-hide">
                             <td><b>Minimum Click</b> Confirm Purchase:
                                 <span class="tooltiptext">
-                                    Minimum click speed in milliseconds for the NeoBuyer+ to click 'Confirm' after clicking a desired item to purchase if enabled.
-                                    <br><br> 1 second = 1000
+                                    Specifies the minimum clicking speed <u>in milliseconds</u> for the AutoBuyer process to click the 'Yes' button in the 'Are you sure' purchase confirm window after clicking a desired item to purchase.
+                                    <br><br> 'Yes' Clicking Speed = Random(Max Time - Min Time)
                                 </span>
                             </td>
                             <td><input type="number" id="MIN_CLICK_CONFIRM"></input><span class="notation">ms</span></td>
                         </tr>
-                        <tr class="confirm-hide">
+                        <tr class="confirm-hide bypass-hide">
                             <td><b>Maximum Click</b> Confirm Purchase:
                                 <span class="tooltiptext">
-                                    Maximum click speed in milliseconds for the NeoBuyer+ to click 'Confirm' after clicking a desired item to purchase if enabled.
-                                    <br><br> 1 second = 1000
+                                    Specifies the maximum clicking speed <u>in milliseconds</u> for the AutoBuyer process to click the 'Yes' button in the 'Are you sure' purchase confirm window after clicking a desired item to purchase.
+                                    'Yes' Clicking Speed = Random(Max Time - Min Time)
                                 </span>
                             </td>
                             <td><input type="number" id="MAX_CLICK_CONFIRM"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr>
-                            <td>Auto-Enter Offer:
+                            <td><b>Auto-Enter Offer:</b>
                                 <span class="tooltiptext">
                                     Makes NeoBuyer+ enter offers with slight price variations using a random function, typing in a human-like manner.
                                 </span>
@@ -536,6 +512,43 @@
                                     <span class="slider round"></span>
                                 </label>
                             </td>
+                        </tr>
+                        <tr class="offer-hide">
+                            <td>Use Custom Multipliers for Haggle Generation: <span class="subdued">(Not Advised to Modify)</span>
+                                <span class="dangertooltip tooltiptext">
+                                    This setting toggles custom haggling multipliers to generate a typeable haggle.
+                                    <br><br>Output Haggle = Rounded(Asking Price + (Asking Price <sup>Z</sup>)). 
+                                    <br>Where Z is equal to a random number between X & Y (Exclusive).
+
+                                    <br><br>This is a very complex system, modifying the default multipliers can generate unexpected haggles, losing out on items. Do not change these values unless you know what you are doing. 
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS" type="checkbox">
+                                    <span class="slider slider-danger round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="offer-hide haggle-hide">
+                            <td>
+                                <b>Minimum</b> Haggle Power:
+                                <span class="tooltiptext">
+                                    The minimum number to power the Asking Price to, in decimals.
+                                    <br><br>Default: 0.75
+                                </span>
+                            </td>
+                            <td><input type="number" max="5" min="0" id="MIN_HAGGLE_POWER"></input></td>
+                        </tr>
+                        <tr class="offer-hide haggle-hide">
+                            <td>
+                                <b>Maximum</b> Haggle Power:
+                                <span class="tooltiptext">
+                                    The maximum number to power the Asking Price to, in decimals.
+                                    <br><br>Default: 0.85
+                                </span>
+                            </td>
+                            <td><input type="number" max="5" min="0" id="MAX_HAGGLE_POWER"></input></td>
                         </tr>
                     </tbody>
                 </table>
@@ -549,9 +562,9 @@
                             <th></th><th></th>
                         </thead>
                         <tr>
-                            <td>Attempt to Refresh Through Page Load Failures:
+                            <td><b>Refresh</b> Through Page Load Failures:
                                 <span class="tooltiptext">
-                                    If Neopet's server rejects the request and the page fails to load, this setting will automatically refresh the page.
+                                    If Neopets' servers reject a request and the page fails to load, this feature will automatically refresh the page after a few seconds.
                                 </span>
                             </td>
                             <td>
@@ -564,7 +577,8 @@
                         <tr class="refresh-hide">
                             <td><b>Minimum</b> Refresh Time Per Page Error:
                                 <span class="tooltiptext">
-                                    If Neopet's server rejects the request and the page fails to load, this setting will automatically refresh the page.
+                                    Specifies the minimum time <u>in milliseconds</u> between refreshes when an <u>error</u> appears on a page.
+                                    <br><br> Error Refresh Time = Random(Max Time - Min Time)
                                 </span>
                             </td>
                             <td><input type="number" id="MIN_PAGE_LOAD_FAILURES"></input><span class="notation">ms</span></td>
@@ -572,13 +586,18 @@
                         <tr class="refresh-hide">
                             <td><b>Maximum</b> Refresh Time Per Page Error:
                                 <span class="tooltiptext">
-                                    If Neopet's server rejects the request and the page fails to load, this setting will automatically refresh the page.
+                                    Specifies the maximum time <u>in milliseconds</u> between refreshes when an <u>error</u> appears on a page.
+                                    <br><br> Error Refresh Time = Random(Max Time - Min Time)
                                 </span>
                             </td>
                             <td><input type="number" id="MAX_PAGE_LOAD_FAILURES"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr>
-                            <td>Auto-Click Captcha:</td>
+                            <td><b>Auto-Click Captcha:</b>
+                                <span class="tooltiptext">
+                                    This system waits for the set milliseconds before inputting the offer and solving the captcha to mimic human behavior. The AutoBuyer process can solve these queries immediately, but that can lead to account freezes.
+                                </span>
+                            </td>
                             <td>
                                 <label class="switch">
                                     <input id="SHOULD_CLICK_NEOPET" type="checkbox">
@@ -586,12 +605,32 @@
                                 </label>
                             </td>
                         </tr>
+                        <tr class="captcha-hide">
+                            <td><b>Minimum</b> Total Time on Haggling Page:
+                                <span class="tooltiptext">
+                                    This setting specifies the minimum time <u>in milliseconds</u> spent on the haggling page, including offer inputting and captcha detection and clicking. Lower times signify lower haggling times.
+
+                                    <br><br>Total Haggling Time = Max Time - Min Time
+                                    <br>Time to Input Offer & Clicking Captcha = Total Haggling Time / 2
+                                </span>
+                            </td>
+                            <td><input type="number" id="MIN_OCR_PAGE"></input><span class="notation">ms</span></td>
+                        </tr>
+                        <tr class="captcha-hide">
+                            <td><b>Maximum</b> Total Time on Haggling Page:
+                                <span class="tooltiptext">
+                                    This setting specifies the maximum time <u>in milliseconds</u> spent on the haggling page, including offer inputting and captcha detection and clicking. Lower times signify lower haggling times.
+
+                                    <br><br>Total Haggling Time = Max Time - Min Time
+                                    <br>Time to Input Offer & Clicking Captcha = Total Haggling Time / 2
+                                </span>
+                            </td>
+                            <td><input type="number" id="MAX_OCR_PAGE"></input><span class="notation">ms</span></td>
+                        </tr>
                         <tr>
                             <td>Annotate Captcha with Neopet's Location:
                                 <span class="dangertooltip tooltiptext">
-                                    This will add a red dot to where the neopet is in the captcha.<br><br>
-
-                                    Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    If enabled, this feature will mark the pet's position within the captcha image with a red dot.
                                 </span>
                             </td>
                             <td>
@@ -600,22 +639,6 @@
                                     <span class="slider slider-danger round"></span>
                                 </label>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><b>Minimum</b> Total Time on Captcha Page:
-                                <span class="tooltiptext">
-                                    In milliseconds. <br><br> For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MIN_OCR_PAGE"></input><span class="notation">ms</span></td>
-                        </tr>
-                        <tr>
-                            <td><b>Maximum</b> Total Time on Captcha Page:
-                                <span class="tooltiptext">
-                                    In milliseconds. <br><br> For example, 1 second = 1000.
-                                </span>
-                            </td>
-                            <td><input type="number" id="MAX_OCR_PAGE"></input><span class="notation">ms</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -628,11 +651,9 @@
                             <th></th><th></th>
                         </thead>
                         <tr>
-                            <td>Show Status Banner:
+                            <td><b>Show Status Banner</b>:
                                 <span class="dangertooltip tooltiptext">
-                                    This setting toggles the banner text shown on the shop pages.<br><br>
-
-                                    Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    This setting toggles the banner text shown on the shop pages.
                                 </span>
                             </td>
                             <td>
@@ -643,14 +664,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Highlight Desired <b>Shop</b> Items:
+                            <td><b>Highlight</b> Desired Shop Items:
                                 <span class="dangertooltip tooltiptext">
-                                    Neobuyer+ highlights items of interest:<br><br>
-
-                                    - The highest valued item in stock is highlighted in orange.<br>
-                                    - Other items of interest will be highlighted in green.<br><br>
-
-                                    Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    The AutoBuyer process will highlight profitable items with color coding:
+                                    
+                                    <br><br>Orange: Most profitable stocked item.
+                                    <br>Green: Decently profitable or second most profitable stocked item.
                                 </span>
                             </td>
                             <td>
@@ -663,8 +682,8 @@
                         <tr>
                             <td>Pause Extra Time After Successful Purchase:
                                 <span class="tooltiptext">
-                                    Determines the pause duration in milliseconds after a successful main shop purchase.<br><br>
-                                    30 minutes = 1800000 milliseconds.
+                                    If enabled, this setting determines the pause duration <u>in milliseconds</u> after a successful Main Shop purchase.
+                                    <br><br>Default: 1800000 milliseconds (30 minutes)
                                 </span>
                             </td>
                             <td><input type="number" id="PAUSE_AFTER_BUY_MS"></input><span class="notation">ms</span></td>
@@ -683,7 +702,7 @@
                         <tr>
                             <td>Show Chrome Notifications:
                                 <span class="tooltiptext">
-                                    Chrome notifications will appear when important events occur.
+                                    NeoBuyer+ will send notifications when important events occur. For example, item purchases, shop clears, and other actions the extension may take.
                                 </span>
                             </td>
                             <td>
@@ -696,8 +715,7 @@
                         <tr>
                             <td>Change Page Information:
                                 <span class="dangertooltip tooltiptext">
-                                    If enabled, NeoBuyer+ will change the titles on pages to reflect the state of the AutoBuyer at any given point and time.<br><br>
-                                    Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    If enabled, NeoBuyer+ will change the titles on tabs to reflect the status of the AutoBuyer process.
                                 </span>
                             </td>
                             <td>
@@ -710,7 +728,7 @@
                         <tr>
                             <td>Sound Alerts:
                                 <span class="tooltiptext">
-                                    The AutoBuyer provides audible notifications during page actions.
+                                    If enabled, the AutoBuyer process will provide audible notifications during page actions.
                                 </span>
                             </td>
                             <td>

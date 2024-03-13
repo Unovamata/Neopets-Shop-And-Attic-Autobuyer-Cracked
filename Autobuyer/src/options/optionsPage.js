@@ -74,7 +74,7 @@ function getPacificTimeDateObjFromInputs() {
     .toDate()
 }
 
-function showOrHide() {
+function ShowOrHide() {
   $("#USE_ITEM_DB").is(":checked") ? (
     $(".db-hide").show(), $(".restock-hide").hide()
   ) : (
@@ -86,6 +86,9 @@ function showOrHide() {
   $("#ATTIC_CLICK_ITEM").is(":checked") ? $(".attic-click-hide").show() : $(".attic-click-hide").hide();
   $("#ATTIC_SHOULD_REFRESH").is(":checked") ? $(".attic-refresh-hide").show() : $(".attic-refresh-hide").hide();
   $("#CLICK_CONFIRM").is(":checked") ? $(".confirm-hide").show() : $(".confirm-hide").hide();
+  $("#SHOULD_BYPASS_CONFIRM").is(":checked") ? $(".bypass-hide").hide() : $(".bypass-hide").show();
+  $("#SHOULD_ENTER_OFFER").is(":checked") ? $(".offer-hide").show() : $(".offer-hide").hide();
+  $("#SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS").is(":checked") && $("#SHOULD_ENTER_OFFER").is(":checked")? $(".haggle-hide").show() : $(".haggle-hide").hide();
   $("#ATTIC_ENABLED").is(":checked") ? $(".attic-settings").show() : $(".attic-settings").hide();
   $("#ENABLED").is(":checked") ? $(".main-shop-settings").show() : $(".main-shop-settings").hide();
   $("#SHOULD_ENTER_PIN").is(":checked") ? $(".enter-pin").show() : $(".enter-pin").hide();
@@ -93,7 +96,8 @@ function showOrHide() {
   $("#USE_BLACKLIST_KQ").is(":checked") ? $(".blacklist-kq").show() : $(".blacklist-kq").hide();
   $("#SHOULD_SUBMIT_AUTOMATICALLY").is(":checked") ? $(".submit-automatically").show() : $(".submit-automatically").hide();
   $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked") ? $(".refresh-hide").show() : $(".refresh-hide").hide();
-  $("#SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS").is(":checked") ? $(".haggle-hide").show() : $(".haggle-hide").hide();
+  $("#SHOULD_CLICK_NEOPET").is(":checked") ? $(".captcha-hide").show() : $(".captcha-hide").hide();
+  
 
   $("#IS_TURBO").is(":checked") ? (
     $(".turbo-tag").show(), $(".turbo-hide").hide()
@@ -168,7 +172,7 @@ function HideFixedPricingSections() {
 }
 
 $("#USE_BLACKLIST").on("change", (function () {
-  setUSE_BLACKLIST($("#USE_BLACKLIST").is(":checked")), showOrHide()
+  setUSE_BLACKLIST($("#USE_BLACKLIST").is(":checked")), ShowOrHide()
 }));
 $("#SHOULD_SHOW_CHROME_NOTIFICATIONS").on("change", (function () {
     setSHOULD_SHOW_CHROME_NOTIFICATIONS($("#SHOULD_SHOW_CHROME_NOTIFICATIONS").is(":checked"))
@@ -177,11 +181,11 @@ $("#SEND_TO_SDB_AFTER_PURCHASE").on("change", (function () {
     setSEND_TO_SDB_AFTER_PURCHASE($("#SEND_TO_SDB_AFTER_PURCHASE").is(":checked"))
   }));
 $("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").on("change", (function () {
-    setSHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES($("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked")), showOrHide()
+    setSHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES($("#SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES").is(":checked")), ShowOrHide()
   }));
 $("#ITEM_DB_MIN_RARITY").bind("input propertychange", (function () {
     var _ = $("#ITEM_DB_MIN_RARITY").val();
-    _ < 1 && (_ = 1), _ > 99 && (_ = 99), setITEM_DB_MIN_RARITY(Math.trunc(_))}));
+    _ < 1 && (_ = 1), _ > 100 && (_ = 100), setITEM_DB_MIN_RARITY(Math.trunc(_))}));
 $("#BUY_UNKNOWN_ITEMS_PROFIT").bind("input propertychange", (function () {
   setBUY_UNKNOWN_ITEMS_PROFIT(Math.trunc($("#BUY_UNKNOWN_ITEMS_PROFIT").val()))
 }));
@@ -197,16 +201,16 @@ $("#BLACKLIST").bind("input propertychange", (function () {
   }
 }));
 $("#ATTIC_CLICK_ITEM").on("change", (function () {
-  setATTIC_CLICK_ITEM($("#ATTIC_CLICK_ITEM").is(":checked")), showOrHide()
+  setATTIC_CLICK_ITEM($("#ATTIC_CLICK_ITEM").is(":checked")), ShowOrHide()
 }));
 $("#ATTIC_HIGHLIGHT").on("change", (function () {
   setATTIC_HIGHLIGHT($("#ATTIC_HIGHLIGHT").is(":checked"))
 }));
 $("#ATTIC_SHOULD_REFRESH").on("change", (function () {
-  setATTIC_SHOULD_REFRESH($("#ATTIC_SHOULD_REFRESH").is(":checked")), showOrHide()
+  setATTIC_SHOULD_REFRESH($("#ATTIC_SHOULD_REFRESH").is(":checked")), ShowOrHide()
 }));
 $("#ATTIC_ENABLED").on("change", (function () {
-  setATTIC_ENABLED($("#ATTIC_ENABLED").is(":checked")), showOrHide()
+  setATTIC_ENABLED($("#ATTIC_ENABLED").is(":checked")), ShowOrHide()
 }));
 $("#ATTIC_MIN_REFRESH").bind("input propertychange", (function () {
   setATTIC_MIN_REFRESH($("#ATTIC_MIN_REFRESH").val())
@@ -307,7 +311,7 @@ $("#STORES_TO_CYCLE_THROUGH_WHEN_STOCKED").bind("input propertychange", (functio
 }));
 $("#ENABLED").on("change", (function () {
   setENABLED($("#ENABLED").is(":checked"));
-  showOrHide();
+  ShowOrHide();
 }));
 $("#HIGHLIGHT").on("change", (function () {
   setHIGHLIGHT($("#HIGHLIGHT").is(":checked"));
@@ -315,25 +319,32 @@ $("#HIGHLIGHT").on("change", (function () {
 $("#CLICK_ITEM").on("change", (function () {
   setCLICK_ITEM($("#CLICK_ITEM").is(":checked"));
   $("#CLICK_ITEM").is(":checked") || ($("#SHOULD_GO_FOR_SECOND_MOST_VALUABLE").prop("checked", !1), setSHOULD_GO_FOR_SECOND_MOST_VALUABLE(!1));
-  showOrHide();
+  ShowOrHide();
 }));
 $("#SHOULD_GO_FOR_SECOND_MOST_VALUABLE").on("change", (function () {
   setSHOULD_GO_FOR_SECOND_MOST_VALUABLE($("#SHOULD_GO_FOR_SECOND_MOST_VALUABLE").is(":checked"));
   $("#SHOULD_GO_FOR_SECOND_MOST_VALUABLE").is(":checked") && ($("#CLICK_ITEM").prop("checked", !0), setCLICK_ITEM(!0));
 }));
 $("#CLICK_CONFIRM").on("change", (function () {
-  setCLICK_CONFIRM($("#CLICK_CONFIRM").is(":checked"));
-  showOrHide();
+  const isChecked = $("#CLICK_CONFIRM").is(":checked");
+
+  if(!isChecked){
+    setSHOULD_BYPASS_CONFIRM(false);
+  }
+
+  setCLICK_CONFIRM(isChecked);
+  ShowOrHide();
 }));
 $("#SHOULD_SHOW_BANNER").on("change", (function () {
   setSHOULD_SHOW_BANNER($("#SHOULD_SHOW_BANNER").is(":checked"));
 }));
 $("#USE_ITEM_DB").on("change", (function () {
   setUSE_ITEM_DB($("#USE_ITEM_DB").is(":checked"));
-  showOrHide();
+  ShowOrHide();
 }));
 $("#SHOULD_CLICK_NEOPET").on("change", (function () {
   setSHOULD_CLICK_NEOPET($("#SHOULD_CLICK_NEOPET").is(":checked"));
+  ShowOrHide();
 }));
 $("#SHOULD_ANNOTATE_IMAGE").on("change", (function () {
   setSHOULD_ANNOTATE_IMAGE($("#SHOULD_ANNOTATE_IMAGE").is(":checked"));
@@ -343,6 +354,7 @@ $("#SHOULD_SOUND_ALERTS").on("change", (function () {
 }));
 $("#SHOULD_ENTER_OFFER").on("change", (function () {
   setSHOULD_ENTER_OFFER($("#SHOULD_ENTER_OFFER").is(":checked"));
+  ShowOrHide();
 }));
 $("#PAUSE_AFTER_BUY_MS").bind("input propertychange", (function () {
   setPAUSE_AFTER_BUY_MS($("#PAUSE_AFTER_BUY_MS").val());
@@ -447,6 +459,14 @@ $("#MAX_FIVE_SECOND_RULE_REFRESH").bind("input propertychange", (function () {
 $("#SHOULD_BYPASS_CONFIRM").on("change", function () {
   const isChecked = $("#SHOULD_BYPASS_CONFIRM").is(":checked");
   setSHOULD_BYPASS_CONFIRM(isChecked);
+
+  // Setting the min and max click confirms to not override the bypass clicks;
+  if(isChecked){
+    setMIN_CLICK_CONFIRM(10000);
+    setMAX_CLICK_CONFIRM(10000);
+  }
+
+  ShowOrHide();
 });
 
 $("#SHOULD_ONLY_REFRESH_ON_CLEAR").on("change", function () {
@@ -457,7 +477,7 @@ $("#SHOULD_ONLY_REFRESH_ON_CLEAR").on("change", function () {
 $("#SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS").on("change", function () {
   const isChecked = $("#SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS").is(":checked");
   setSHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS(isChecked);
-  showOrHide();
+  ShowOrHide();
 });
 
 $("#MIN_HAGGLE_POWER").bind("input propertychange", (function () {
@@ -500,13 +520,13 @@ $("#ATTIC_NEXT_END_WINDOW").bind("input propertychange", (function () {
 $("#IS_TURBO").bind("input propertychange", (function () {
   const isChecked = $("#IS_TURBO").is(":checked");
   setIS_TURBO(isChecked);
-  showOrHide();
+  ShowOrHide();
 }));
 
 $("#SHOULD_USE_NEON").bind("input propertychange", (function () {
   const isChecked = $("#SHOULD_USE_NEON").is(":checked");
   setSHOULD_USE_NEON(isChecked);
-  showOrHide();
+  ShowOrHide();
 }))
 
 $("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function () {
@@ -516,7 +536,7 @@ $("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function () {
 $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").on("change", function () {
   const isChecked = $("#SHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING").is(":checked");
   setSHOULD_USE_RANDOM_PERCENTAGES_FOR_PRICING(isChecked);
-  showOrHide();
+  ShowOrHide();
 });
 
 $("#FIXED_PRICING_PERCENTAGE").bind("input propertychange", (function () {
@@ -541,7 +561,7 @@ $("#MAX_WAIT_PER_REFRESH").bind("input propertychange", (function () {
 
 $("#RESUBMIT_TYPE").on("change", (function () {
   setRESUBMIT_TYPE($("#RESUBMIT_TYPE").val())
-  showOrHide();
+  ShowOrHide();
 }))
 
 $("#MIN_RESUBMITS_PER_ITEM").bind("input propertychange", (function () {
@@ -575,7 +595,7 @@ $("#MAX_NEW_SEARCH_WAIT_TIME").bind("input propertychange", (function () {
 $("#USE_BLACKLIST_SW").bind("input propertychange", (function () {
   const isChecked = $("#USE_BLACKLIST_SW").is(":checked");
   setUSE_BLACKLIST_SW(isChecked);
-  showOrHide();
+  ShowOrHide();
 }))
 
 $("#BLACKLIST_SW").bind("input propertychange", (function () {
@@ -651,7 +671,7 @@ $("#MAX_TYPING_SPEED").bind("input propertychange", (function () {
 $("#SHOULD_ENTER_PIN").bind("input propertychange", (function () {
   const isChecked = $("#SHOULD_ENTER_PIN").is(":checked");
   setSHOULD_ENTER_PIN(isChecked);
-  showOrHide();
+  ShowOrHide();
 }))
 
 $("#NEOPETS_SECURITY_PIN").bind("input propertychange", (function () {
@@ -684,17 +704,17 @@ $("#MAX_PAGE_LOAD_FAILURES").bind("input propertychange", (function () {
 
 $("#PRICING_TYPE").on("change", (function () {
   setPRICING_TYPE($("#PRICING_TYPE").val())
-  showOrHide();
+  ShowOrHide();
 }))
 
 $("#PERCENTAGE_PRICING_ALGORITHM_TYPE").on("change", (function () {
   setPERCENTAGE_PRICING_ALGORITHM_TYPE($("#PERCENTAGE_PRICING_ALGORITHM_TYPE").val())
-  showOrHide();
+  ShowOrHide();
 }))
 
 $("#FIXED_PRICING_ALGORITHM_TYPE").on("change", (function () {
   setFIXED_PRICING_ALGORITHM_TYPE($("#FIXED_PRICING_ALGORITHM_TYPE").val())
-  showOrHide();
+  ShowOrHide();
 }))
 
 $("#FIXED_PRICING_VALUE").bind("input propertychange", (function () {
@@ -728,7 +748,7 @@ $("#MAX_SPENDABLE_PRICE").bind("input propertychange", (function () {
 $("#USE_BLACKLIST_KQ").bind("input propertychange", (function () {
   const isChecked = $("#USE_BLACKLIST_KQ").is(":checked");
   setUSE_BLACKLIST_KQ(isChecked);
-  showOrHide();
+  ShowOrHide();
 }))
 
 
@@ -876,7 +896,7 @@ resetButton.onclick = function (_) {
   ATTIC_LAST_REFRESH_MS: -1,
   SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES: !0,
   SHOULD_SHOW_CHROME_NOTIFICATIONS: !0,
-  PAUSE_AFTER_BUY_MS: 0,
+  PAUSE_AFTER_BUY_MS: 18000,
 
   // AutoBuyer;
   MIN_FIVE_SECOND_RULE_REFRESH: 5000,
@@ -1119,5 +1139,5 @@ resetButton.onclick = function (_) {
   $("#SHOULD_SHARE_AUTOKQ_LOG").prop("checked", _.SHOULD_SHARE_AUTOKQ_LOG),
   $("#SHOULD_SHARE_NEOBUYER_MAILS").prop("checked", _.SHOULD_SHARE_NEOBUYER_MAILS);
 
-  showOrHide();
+  ShowOrHide();
 }));

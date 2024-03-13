@@ -9,7 +9,7 @@ function InjectAutoHaggler() {
     var startGlobalTime = performance.now();
     
     chrome.storage.local.get({
-        PAUSE_AFTER_BUY_MS: 0,
+        PAUSE_AFTER_BUY_MS: 18000,
         ENABLED: !0,
         SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS: false,
         MIN_HAGGLE_POWER: 0.75,
