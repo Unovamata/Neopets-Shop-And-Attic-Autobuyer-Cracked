@@ -241,13 +241,15 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
 
     if(mostCommonItemsChart) ResizeChartInterval("mostCommonItemsChart", "760px", "380px");
 
-    var mostProfitableEntries = [...groupedItems.entries()].sort((a, b) => b[1].Profit - a[1].Profit).slice(0, showEntries),
+    var mostProfitableEntries = [...groupedItems.entries()].sort((a, b) => b[1].Value - a[1].Value).slice(0, showEntries),
     mostProfitableData = [];
 
     // Log the most common entries up to showEntries
     mostProfitableEntries.forEach(entry => {
-        mostProfitableData[entry[0]] = entry[1].Profit;
+        mostProfitableData[entry[0]] = entry[1].Value;
     });
+
+    //console.log(mostProfitableData);
 
     var mostValuableItemsChart = CreateBarChart("mostValuableItemsChart", "bar", Object.keys(mostProfitableData), Object.values(mostProfitableData), FormatDatalabelsOptions(), `Top ${showEntries} Most Valuable Bought Items`);
 

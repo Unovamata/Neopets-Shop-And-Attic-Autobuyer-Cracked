@@ -862,7 +862,10 @@ function ShowOrHideLoading(status){
     loadingIcon.style.width = '1.6%';
     loadingIcon.style.height = '1.6%';
 
-    if(status.includes("Complete") || status.includes("Inactive") || status.includes("Updated!") || status.includes("Sleep") || status.includes("Stopped") || status.includes("Cancelled")){
+    if(status.includes("Complete") || status.includes("Inactive") || 
+       status.includes("Updated!") || status.includes("Sleep") || 
+       status.includes("Stopped") || status.includes("Cancelled") ||
+       status.includes("Usable")){
         loadingIcon.style.visibility = 'hidden';
     } else {
         loadingIcon.style.visibility = 'visible';
