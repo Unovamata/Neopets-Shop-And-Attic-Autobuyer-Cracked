@@ -49,7 +49,7 @@
     border-radius: 10px;
     border: 1px solid white;
     opacity: 0;
-    animation: fadeIn 0.4s ease-out 0.4s forwards;
+    animation: fadeIn 0.4s ease-out 1.5s forwards;
 }
 
 @keyframes fadeIn {
