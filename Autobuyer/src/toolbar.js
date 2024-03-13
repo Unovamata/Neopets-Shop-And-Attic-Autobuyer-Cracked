@@ -25,13 +25,12 @@ const communityIconUrl = `${srcPath}/toolbar/communitycentral-icon.png`;
 const restockListIconUrl = `${srcPath}/toolbar/myalbums-icon.svg`;
 
 
-
 // Styles
 const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
 
 // Links
 const autobuyerUrl = `${srcPath}/options/Autobuyer/autobuyer.html`;
-const atticUrl = `${srcPath}/options/attic.html`;
+const atticUrl = `${srcPath}/options/AutoAttic/attic.html`;
 const autopricerUrl = `${srcPath}/options/Autopricer/autopricer.html`;
 const autoKQURL = `${srcPath}/options/AutoKQ/autokq.html`;
 const autosdbUrl = `${srcPath}/options/autosdb.html`;
@@ -47,7 +46,7 @@ const utilsScriptUrl = `${srcPath}/common/utils.js`
 
 
 // content.js
-function injectToolbar() {
+function InjectToolbar() {
     const toolbarHTML = `
     <div class="toolbar">
         <div class = "toolbar-pattern"></div>
@@ -182,7 +181,18 @@ function injectToolbar() {
 
 // Wait for the entire page, including CSS, to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    injectToolbar();
+    InjectToolbar();
+
+    chrome.storage.local.get({ WARNING_ACK: false }, function (result) {
+        if(!result.WARNING_ACK){
+            var toolbarElements = document.getElementsByClassName("toolbar-category");
+
+            // Convert the collection to an array and then iterate over it
+            Array.from(toolbarElements).forEach(function(menu){
+                menu.style.display = "none";
+            });
+        }
+    });
 });
 
 
@@ -200,48 +210,50 @@ function UpdateNotification(){
     const parsedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDay()}, ${currentDate.getFullYear()}`;
     //setUPDATE_DATE(""); //DEBUG!!!!
 
-    getUPDATE_DATE(async function (date){
-        // Checking the latest version of the extension daily;
-        var hasDoneDailyVersionCheck = date === parsedDate;
+    try{
+        getUPDATE_DATE(async function (date){
+            // Checking the latest version of the extension daily;
+            var hasDoneDailyVersionCheck = date === parsedDate;
 
-        if(hasDoneDailyVersionCheck){
-            return;
-        }
+            if(hasDoneDailyVersionCheck){
+                return;
+            }
 
-        // If the version checker has not been run, check the latest version of the extension;
-        var currentVersion = chrome.runtime.getManifest().version;
-        var apiUrl = "https://api.github.com/repos/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
-        var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
-        var parsedVersion = githubLatestVersion.replace("v", "");
-        var isLatestVersion = parsedVersion == currentVersion;
+            // If the version checker has not been run, check the latest version of the extension;
+            var currentVersion = chrome.runtime.getManifest().version;
+            var apiUrl = "https://api.github.com/repos/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
+            var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
+            var parsedVersion = githubLatestVersion.replace("v", "");
+            var isLatestVersion = parsedVersion == currentVersion;
 
-        switch(parsedVersion){
-            // Github's API can't be reached;
-            case 'a':
-                CreateNotificationElement(isLatestVersion, warningColor, "Unable to Check for Updates...", "../../../icons/delete.png");
-                isLatestVersion = true; // It can be the latest version for all we know;
-            break;
+            switch(parsedVersion){
+                // Github's API can't be reached;
+                case 'a':
+                    CreateNotificationElement(isLatestVersion, warningColor, "Unable to Check for Updates...", "../../../icons/delete.png");
+                    isLatestVersion = true; // It can be the latest version for all we know;
+                break;
 
-            // Unknown error;
-            case 'b':
-                CreateNotificationElement(isLatestVersion, errorColor, "Update Checker Failed...", "../../../icons/delete.png");
-                isLatestVersion = true; // It can be the latest version for all we know;
-            break;
+                // Unknown error;
+                case 'b':
+                    CreateNotificationElement(isLatestVersion, errorColor, "Update Checker Failed...", "../../../icons/delete.png");
+                    isLatestVersion = true; // It can be the latest version for all we know;
+                break;
 
-            // Normal version checking;
-            default:
-                if(isLatestVersion){
-                    CreateNotificationElement(isLatestVersion, successColor);
-                    setUPDATE_DATE(parsedDate);
-                } else {
-                    CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ is Outdated!", "../../../icons/delete.png", true);
-                }
-            break;
-        }
+                // Normal version checking;
+                default:
+                    if(isLatestVersion){
+                        CreateNotificationElement(isLatestVersion, successColor);
+                        setUPDATE_DATE(parsedDate);
+                    } else {
+                        CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ is Outdated!", "../../../icons/delete.png", true);
+                    }
+                break;
+            }
 
-        // Check for new NeoBuyer+ mail updates;
-        CheckNewMail();
-    });
+            // Check for new NeoBuyer+ mail updates;
+            CheckNewMail();
+        });
+    } catch {}
 }
 
 async function FetchLatestGitHubVersion(apiUrl) {
@@ -320,7 +332,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
 }
 
 const emailCheckURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
-var mailSuccessColor = "#2de52d";
+var mailSuccessColor = "#1889e0";
 
 // Checks for new NeoBuyer+ mails daily;
 function CheckNewMail(){
@@ -372,13 +384,15 @@ function CheckNewMail(){
 
 // Activates the red dot notification whenever a new mail arrives;
 function ActivateNewMailNotification(){
-    getEMAIL_LIST(function (emailList){
-        const isUnread = emailList.some(email => email.Read === false);
-        var notification = document.getElementsByClassName("notification-dot")[0];
-
-        if(isUnread) notification.style.visibility = "visible";
-        else notification.style.visibility = "hidden";
-    });
+    try{
+        getEMAIL_LIST(function (emailList){
+            const isUnread = emailList.some(email => email.Read === false);
+            var notification = document.getElementsByClassName("notification-dot")[0];
+    
+            if(isUnread) notification.style.visibility = "visible";
+            else notification.style.visibility = "hidden";
+        });
+    } catch {}
 }
 
 setInterval(ActivateNewMailNotification, 500);

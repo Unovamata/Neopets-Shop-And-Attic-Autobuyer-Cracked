@@ -23,7 +23,7 @@ setTimeout(() => {
 	chrome.storage.local.get({WARNING_ACK: false, EXT_P_S: true}, data => {
 		if(!data.WARNING_ACK && data.EXT_P_S){
 			setATTIC_SHOULD_REFRESH(false);
-			chrome.tabs.create({ url: "../../src/notes/warning.html" });
+			chrome.tabs.create({ url: "../../src/options/Warning/warning.html" });
 		}
 	});
 }, 3000)

@@ -13,10 +13,14 @@ function ShowHistory(){
     ShowAndHideElements([tableContainer, tableNavigation], [analyticsContainer]);
 }
 
+function ShowAnalytics(){
+    ShowAndHideElements([analyticsContainer], [tableContainer, tableNavigation]);
+}
+
 const analyticsButton = document.getElementById("analytics-button");
 
 analyticsButton.onclick = function(e) {
-    ShowAndHideElements([analyticsContainer], [tableContainer, tableNavigation])
+    ShowAnalytics();
 }
 
 //Toggling the main tab;
