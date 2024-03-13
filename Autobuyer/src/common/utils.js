@@ -551,6 +551,24 @@ function setKQ_INVENTORY(value) {
     });
 }
 
+function getSHOULD_DELETE_SHOP_LAYOUTS(callback) {
+    chrome.storage.local.get(['SHOULD_DELETE_SHOP_LAYOUTS'], async function (result) {
+        var value = result.SHOULD_DELETE_SHOP_LAYOUTS;
+
+        if(value == undefined || value == null){
+            await setSHOULD_DELETE_SHOP_LAYOUTS([]);
+        }
+
+        if (typeof callback === 'function') {
+            callback(value);
+        }
+    });
+}
+
+function setSHOULD_DELETE_SHOP_LAYOUTS(value) {
+    chrome.storage.local.set({SHOULD_DELETE_SHOP_LAYOUTS: value}, (function () {}));
+}
+
 function getKQ_INVENTORY(callback) {
     chrome.storage.local.get(['KQ_INVENTORY'], async function (result) {
         var value = result.KQ_INVENTORY;

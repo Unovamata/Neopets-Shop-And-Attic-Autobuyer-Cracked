@@ -79,6 +79,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			MAX_SPENDABLE_PRICE: 60000,
     		USE_BLACKLIST_KQ: false,
     		BLACKLIST_KQ: ["Yellow Negg", "Purple Negg", "Green Negg", "Partitioned Negg", "Super Icy Negg"],
+			SHOULD_DELETE_SHOP_LAYOUTS: false,
 
 			// [Level, Hit Points, Strength, Defence, Agility, Items, Neopoints];
 			KQ_TRACKER: [],

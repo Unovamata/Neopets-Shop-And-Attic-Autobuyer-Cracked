@@ -97,15 +97,18 @@
                             </thead>
                             <tr>
                                 <td>Enable <b>Neon</b> for Shop Wizard:
-                                    <span class="tooltiptext">
-                                        This feature combines Neopets Shop Wizard's searches onto a single page<br><br>
+                                    <span class="dangertooltip tooltiptext">
+                                        This feature combines Neopets Shop Wizard's searches into a single page.<br><br>
+                                        
                                         <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm">Neon Extension</a>
+                                        
+                                        <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
                                     </span>
                                 </td>
                                 <td>
                                     <label class="switch">
                                         <input id="SHOULD_USE_NEON" type="checkbox">
-                                        <span class="slider round"></span>
+                                        <span class="slider-danger slider round"></span>
                                     </label>
                                 </td>
                             </tr>
@@ -152,8 +155,8 @@
                                     <span class="tooltiptext">
                                         Select an algorithm that will handle the amount of resubmits sent to Neopets' servers.
                                         <br><br>
-                                        Absolute: The AutoPricer will always press the resubmit button (X) times for AutoPricing.
-                                        Random: The AutoPricer will generate a random number between (X) and (Y) to determine the amount of resubmits necessary for an item.
+                                        Absolute: The AutoKQ process will always press the resubmit button (X) times for AutoPricing.
+                                        <br>Random: The AutoKQ process will generate a random number between (X) and (Y) to determine the amount of resubmits necessary for an item.
                                     </span>
                                 </td>
                                 <td>
@@ -182,9 +185,9 @@
                                 <td><input type="number" min="0" max="100" id="MAX_RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
                             </tr>
                             <tr class="resubmit-absolute">
-                                <td><b>Absolute AutoPricer</b> Resubmits per Item:
+                                <td><b>Absolute</b> Resubmits per Item:
                                     <span class="tooltiptext">
-                                        The amount of times the AutoPricer must press the "Resubmit" button.
+                                        The amount of times the AutoKQ process must press the "Resubmit" button.
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" id="RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
@@ -226,10 +229,7 @@
                                 <td><input type="number" id="MAX_RESUBMIT_WAIT_TIME"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td>Use a Blacklist of Items to not Buy:
-                                    <span class="tooltiptext">This blacklist skips items with names that match the entries in the list.<br><br>
-                                        This is helpful for avoiding incorrect pricing of items with similar names to others</span>
-                                </td>
+                                <td>Use a Blacklist of Items to not Buy:</td>
                                 <td>
                                     <label class="switch">
                                         <input id="USE_BLACKLIST_KQ" type="checkbox">
@@ -241,6 +241,32 @@
                                 <td>Blacklist:
                                 </td>
                                 <td><textarea rows="10" cols="40" id="BLACKLIST_KQ"></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subcategory-info">Users Shops Settings</div>
+
+                    <table class="table">
+                        <tbody class="autopricer-settings">
+                            <thead>
+                                <th></th><th></th>
+                            </thead>
+                            <tr>
+                                <td><b>Remove</b> Shop Layouts:
+                                    <span class="dangertooltip tooltiptext">
+                                        If enabled, NeoBuyer+ will remove <a>ANY</a> HTML or CSS layout changes on shop pages. This helps the AutoKQ process' consistency.
+                                        <br>This feature affects all users' shops regardless of whether the AutoKQ process is running or not.
+
+                                        <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    </span>
+                                </td>
+                                <td>
+                                    <label class="switch">
+                                        <input id="SHOULD_DELETE_SHOP_LAYOUTS" type="checkbox">
+                                        <span class="slider-danger slider round"></span>
+                                    </label>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

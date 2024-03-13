@@ -1,5 +1,10 @@
-var pageContents = document.getElementsByClassName('content')[0];
-pageContents.innerHTML = pageContents.innerHTML.replace(/<!-- desc start -->[\s\S]*<!-- desc end -->/ig, "");
+getSHOULD_DELETE_SHOP_LAYOUTS(function(isDeletingLayouts){
+    if(!isDeletingLayouts) return;
+    
+    var pageContents = document.getElementsByClassName('content')[0];
+    pageContents.innerHTML = pageContents.innerHTML.replace(/<!-- desc start -->[\s\S]*<!-- desc end -->/ig, "");
+})
+
 
 // Allows the user to buy from another user's shops;
 getSTART_AUTOKQ_PROCESS(async function(isActive){

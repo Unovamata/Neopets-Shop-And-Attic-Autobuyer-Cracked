@@ -420,6 +420,7 @@ function setUSE_BLACKLIST_KQ(value) { chrome.storage.local.set({USE_BLACKLIST_KQ
 function setBLACKLIST_KQ(value) { chrome.storage.local.set({BLACKLIST_KQ: value}, (function() {})) }
 function setMAX_INSTA_BUY_PRICE(value) { chrome.storage.local.set({MAX_INSTA_BUY_PRICE: Number(value)}, (function() {})) }
 function setMAX_SPENDABLE_PRICE(value) { chrome.storage.local.set({MAX_SPENDABLE_PRICE: Number(value)}, (function() {})) }
+function setSHOULD_DELETE_SHOP_LAYOUTS(value) { chrome.storage.local.set({SHOULD_DELETE_SHOP_LAYOUTS: value}, (function () {})); }
 
 // Miscellaneous Setters;
 function setSHOULD_SHARE_STORES_TO_VISIT(value) { chrome.storage.local.set({SHOULD_SHARE_STORES_TO_VISIT: value}, (function() {})) }
@@ -723,10 +724,17 @@ $("#MAX_SPENDABLE_PRICE").bind("input propertychange", (function () {
   setMAX_SPENDABLE_PRICE($("#MAX_SPENDABLE_PRICE").val())
 }))
 
+
 $("#USE_BLACKLIST_KQ").bind("input propertychange", (function () {
   const isChecked = $("#USE_BLACKLIST_KQ").is(":checked");
   setUSE_BLACKLIST_KQ(isChecked);
   showOrHide();
+}))
+
+
+$("#SHOULD_DELETE_SHOP_LAYOUTS").bind("input propertychange", (function () {
+  const isChecked = $("#SHOULD_DELETE_SHOP_LAYOUTS").is(":checked");
+  setSHOULD_DELETE_SHOP_LAYOUTS(isChecked);
 }))
 
 $("#BLACKLIST_KQ").bind("input propertychange", (function () {
@@ -905,6 +913,7 @@ resetButton.onclick = function (_) {
   MAX_SPENDABLE_PRICE: 60000,
   USE_BLACKLIST_KQ: false,
   BLACKLIST_KQ: ["Yellow Negg", "Purple Negg", "Green Negg", "Partitioned Negg", "Super Icy Negg"],
+  SHOULD_DELETE_SHOP_LAYOUTS: false,
 
   // Shop Wizard;
   MIN_WAIT_BAN_TIME: 300000,
@@ -1074,6 +1083,7 @@ resetButton.onclick = function (_) {
   $("#MAX_SPENDABLE_PRICE").val(_.MAX_SPENDABLE_PRICE);
   $("#USE_BLACKLIST_KQ").prop("checked", _.USE_BLACKLIST_KQ);
   $("#BLACKLIST_KQ").val(_.BLACKLIST_KQ.join("\n"));
+  $("#SHOULD_DELETE_SHOP_LAYOUTS").prop("checked", _.SHOULD_DELETE_SHOP_LAYOUTS);
 
   // Shop Stock Page Settings;
   $("#SHOULD_SUBMIT_AUTOMATICALLY").prop("checked", _.SHOULD_SUBMIT_AUTOMATICALLY);
