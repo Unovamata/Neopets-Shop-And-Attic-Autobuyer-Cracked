@@ -352,6 +352,7 @@ $("#PAUSE_AFTER_BUY_MS").bind("input propertychange", (function () {
 //######################################################################################################################################
 
 // AutoBuyer Setters;
+function setMIN_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({MIN_FIVE_SECOND_RULE_REFRESH: Number(value)}, (function () {})) }
 function setMAX_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({MAX_FIVE_SECOND_RULE_REFRESH: Number(value)}, (function () {})) }
 function setSHOULD_BYPASS_CONFIRM(value) { chrome.storage.local.set({SHOULD_BYPASS_CONFIRM: value}, (function () {})) }
 function setSHOULD_ONLY_REFRESH_ON_CLEAR(value) { chrome.storage.local.set({SHOULD_ONLY_REFRESH_ON_CLEAR: value}, (function () {})) }
