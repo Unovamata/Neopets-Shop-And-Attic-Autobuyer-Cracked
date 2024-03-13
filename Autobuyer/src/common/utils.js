@@ -604,6 +604,7 @@ function HandleServerErrors() {
         "504 Gateway Time-out",
         "Loading site please wait...",
         "An error occurred while processing your request.",
+        "Internal Server Error"
         ];
     
         const pageText = document.body.innerText;
@@ -617,7 +618,7 @@ function HandleServerErrors() {
                 UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.", true);
                 return;
             } else { // Refresh on page errors;
-                function executeOnceAndPreventReexecution() {
+                function RefreshWindow() {
                     if (!errorRefreshed) {
                         errorRefreshed = true;
                         
@@ -625,7 +626,7 @@ function HandleServerErrors() {
                     }
                 }
 
-                setTimeout(executeOnceAndPreventReexecution, GetRandomFloat(minPageReloadTime, maxPageReloadTime));
+                setTimeout(RefreshWindow, GetRandomFloat(minPageReloadTime, maxPageReloadTime));
             }
         }
         
