@@ -92,7 +92,7 @@ function InjectAutoAttic() {
             } else {
                 minutesInterval = 7;
                 extraMinutes = 7;
-                extraSeconds = 6;
+                extraSeconds = 5;
                 extraWindow = -1;
             }
 
