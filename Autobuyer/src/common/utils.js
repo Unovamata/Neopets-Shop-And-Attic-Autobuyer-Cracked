@@ -1175,3 +1175,52 @@ function ParseNPNumber(input){
 function CheckIsNaNDisplay(input, outputTrue, outputFalse){
     return isNaN(input) ? outputTrue : outputFalse;
 }
+
+
+//######################################################################################################################################
+
+
+function EncryptData(input, key, counter = 5){
+    var keyArray = StringToArray32(key);
+    var textBytes = aesjs.utils.utf8.toBytes(input);
+    
+    // Encrypting the data;
+    var aesCtr = new aesjs.ModeOfOperation.ctr(keyArray, new aesjs.Counter(counter));
+    var encryptedBytes = aesCtr.encrypt(textBytes);
+    var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+
+    return encryptedHex;
+}
+
+function DecryptData(encryptedMessage, key, counter = 5){
+    var keyArray = StringToArray32(key);
+
+    // Converting the data to bytes for decrypting;
+    var encryptedBytes = aesjs.utils.hex.toBytes(encryptedMessage);
+    
+    // Decrypting instance;
+    var aesCtr = new aesjs.ModeOfOperation.ctr(keyArray, new aesjs.Counter(counter));
+    var decryptedBytes = aesCtr.decrypt(encryptedBytes);
+    
+    // Convert our bytes back into text;
+    var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+
+    return decryptedText;
+}
+
+function StringToArray32(inputString) {
+    // Ensure input string is at least 32 characters long
+    while (inputString.length < 32) {
+        inputString += inputString; // Pad with itself if shorter
+    }
+    // Truncate to 32 characters if longer
+    inputString = inputString.substring(0, 32);
+
+    // Convert each character to ASCII and store in the array
+    const array32 = [];
+    for (let i = 0; i < inputString.length; i++) {
+        array32.push(inputString.charCodeAt(i));
+    }
+    
+    return array32;
+}
