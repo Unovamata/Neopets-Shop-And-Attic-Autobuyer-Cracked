@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
 function LoadingScreen(){
     const loadingBar = document.getElementById("loading-bar");
     const loadingScreen = document.getElementById("loading-screen");
-    const totalResources = countResources(); // Function to count total resources
+    const totalResources = CountResources(); // Function to count total resources
 
-    function countResources() {
+    function CountResources() {
         const totalLinks = document.querySelectorAll("link").length;
         const totalScripts = document.querySelectorAll("script").length;
         const totalImages = document.querySelectorAll("img").length;
@@ -59,7 +59,7 @@ function LoadingScreen(){
 
     var loadedResources = 0;
 
-    function updateLoadingProgress() {
+    function UpdateLoadingProgress() {
         loadedResources++;
         pageProgress = (loadedResources / totalResources) * 100;
 
@@ -75,7 +75,7 @@ function LoadingScreen(){
         }
     }
 
-    intervalID = setInterval(updateLoadingProgress, 2);
+    intervalID = setInterval(UpdateLoadingProgress, 2);
 }
 
 function Clamp(value, min, max) {

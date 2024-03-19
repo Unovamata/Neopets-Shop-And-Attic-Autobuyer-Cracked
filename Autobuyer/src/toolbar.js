@@ -193,6 +193,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+    UpdateNotification();
+
+    FormatDangerTooltips();
 });
 
 
@@ -229,13 +233,13 @@ function UpdateNotification(){
             switch(parsedVersion){
                 // Github's API can't be reached;
                 case 'a':
-                    CreateNotificationElement(isLatestVersion, warningColor, "Unable to Check for Updates...", "../../../icons/delete.png");
+                    CreateNotificationElement(isLatestVersion, warningColor, "Unable to Check for Updates...", "../../../icons/delete.svg");
                     isLatestVersion = true; // It can be the latest version for all we know;
                 break;
 
                 // Unknown error;
                 case 'b':
-                    CreateNotificationElement(isLatestVersion, errorColor, "Update Checker Failed...", "../../../icons/delete.png");
+                    CreateNotificationElement(isLatestVersion, errorColor, "Update Checker Failed...", "../../../icons/delete.svg");
                     isLatestVersion = true; // It can be the latest version for all we know;
                 break;
 
@@ -245,7 +249,7 @@ function UpdateNotification(){
                         CreateNotificationElement(isLatestVersion, successColor);
                         setUPDATE_DATE(parsedDate);
                     } else {
-                        CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ is Outdated!", "../../../icons/delete.png", true);
+                        CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Required", "../../../icons/delete.svg", true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
                     }
                 break;
             }
@@ -278,38 +282,53 @@ async function FetchLatestGitHubVersion(apiUrl) {
 
 var notifications = 0;
 
-function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is up to Date!", imageSrc = "../../../icons/check.png", isOutdated = false){
+function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is up to Date!", imageSrc = "../../../icons/check.png", isOutdated = false, classToolbar = "update-notification", versions = []){
     setTimeout(() => {
         const updateNotification = document.createElement("span");
-        updateNotification.className = "update-notification";
+        updateNotification.className = classToolbar;
         notifications += 1.5; // For time delays per notifications;
 
         // Creating the image component;
         const updateImage = document.createElement("img");
         updateImage.className = "update-image";
-        updateImage.src = imageSrc; //"../../../icons/check.png"; // Replace with your image URL
+        updateImage.src = imageSrc;
 
         // Setting the update status;
         const updateStatus = document.createElement("a");
         updateStatus.className = "update-status";
-        updateStatus.textContent = text;
+
+        const updateTitle = document.createElement("a");
+        updateTitle.className = "update-title";
+        updateTitle.textContent = text;
+        updateStatus.appendChild(updateTitle);
 
         updateNotification.style.backgroundColor = color;
 
         // For outdated versions of the extension;
         if(isOutdated){
             updateStatus.appendChild(document.createElement("br"));
+            CreateMessage(`You are currently using an older version of NeoBuyer+. The latest version available is ${versions[0]}, whereas you are currently using version ${versions[0]}.`);
+            CreateMessage(`We advise you to update to the latest version as soon as possible. These updates contain critical fixes or optimizations that allow NeoBuyer+ to become undetectable to TNT. `);
+            CreateMessage(`Please take the necessary steps to update NeoBuyer+ to the latest version to continue enjoying its features seamlessly and securely. NeoBuyer+'s usage has been locked until said update occurs.`);
+            CreateMessage(`Thank you for your attention to this matter.`);
+            updateStatus.appendChild(document.createElement("br"));
+
+            updateStatus.appendChild(document.createElement("br"));
             const updateLink = document.createElement("a");
             updateLink.href = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
-            updateLink.textContent = "Update NeoBuyer";
+            updateLink.textContent = "Click Here to Update NeoBuyer+";
             updateLink.style.fontSize = "26.5px";
             updateStatus.appendChild(updateLink);
-            
+
+            document.querySelector('.center').remove();
+            document.querySelector('.toolbar').remove();
+            document.querySelector('.toolbar-bottom').remove();          
         }
 
         updateNotification.appendChild(updateStatus);
         updateNotification.appendChild(updateImage);
         document.body.appendChild(updateNotification);
+        
 
         // If it's the latest version, then animate the popup;
         if(isLatestVersion){
@@ -327,6 +346,15 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
                     }, 1500);
                 }
             });
+        }
+
+        function CreateMessage(message){
+            updateStatus.appendChild(document.createElement("br"));
+            const messageElement = document.createElement("a");
+            messageElement.className = "update-message";
+            messageElement.textContent = message;
+            updateStatus.appendChild(messageElement);
+            updateStatus.appendChild(document.createElement("br"));
         }
     }, 1500 * notifications);
 }
@@ -396,14 +424,6 @@ function ActivateNewMailNotification(){
 }
 
 setInterval(ActivateNewMailNotification, 500);
-
-// Load the notifications as soon as the page has finished loading;
-document.addEventListener("DOMContentLoaded", function () {
-    UpdateNotification();
-
-    FormatDangerTooltips();
-});
-
 
 function FormatDangerTooltips(){
     if(location.href.includes("info.html")) return;
