@@ -23,6 +23,7 @@ const mailIconUrl = `${srcPath}/toolbar/neomail.svg`;
 const dropdownIconUrl = `${srcPath}/toolbar/dropdown-arrow.png`;
 const communityIconUrl = `${srcPath}/toolbar/communitycentral-icon.png`;
 const restockListIconUrl = `${srcPath}/toolbar/myalbums-icon.svg`;
+const buyersIconUrl = `${srcPath}/toolbar/myshop-icon.png`;
 
 
 // Styles
@@ -66,13 +67,26 @@ function InjectToolbar() {
         <img class="logo" src="${logoUrl}"></img>
 
         <div class = "toolbar-text">
-            <a href="${autobuyerUrl}" class = "toolbar-category">
-                <img  class = "toolbar-icon" src="${shopIconUrl}"> 
-            AutoBuyer </a>
-
-            <a href="${atticUrl}" class = "toolbar-category">
-                <img  class = "toolbar-icon" src="${atticIconUrl}"> 
-            AutoAttic </a>
+            <div class="toolbar-category">
+                <a>
+                    <img class="toolbar-icon" src="${shopIconUrl}">
+                    AutoBuyers
+                    <img  class = "dropdown-arrow" src="${dropdownIconUrl}">
+                </a>
+                <div class="hover-menu">
+                    <ul>
+                        <li>
+                            <a href="${autobuyerUrl}" class = "toolbar-category dropdown-category">
+                                <img  class = "dropdown-icon" src="${buyersIconUrl}"> 
+                            AutoBuyer </a>
+                        </li>
+                        <li><a href="${atticUrl}" class = "toolbar-category dropdown-category">
+                            <img  class = "dropdown-icon" src="${atticIconUrl}"> 
+                            AutoAttic </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             
             <div class="toolbar-category">
                 <a>
