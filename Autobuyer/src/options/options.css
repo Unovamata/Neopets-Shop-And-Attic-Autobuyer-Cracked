@@ -26,6 +26,8 @@
 .loading-logo{
     position: relative;
     animation: pulseEffect 4s ease-in-out infinite;
+    max-width: 25vw;
+    max-height: 25vh;
 }
 
 @keyframes pulseEffect {

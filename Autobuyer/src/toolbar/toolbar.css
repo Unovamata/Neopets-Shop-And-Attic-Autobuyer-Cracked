@@ -311,14 +311,14 @@
 }
 
 .update-notification-full .update-title {
-    font-size: 5.7vw; /* Change to em for better scalability */
+    font-size: 5.7vw;
     text-align: center;
     width: 70%;
 }
 
 .update-notification-full .update-message {
-    font-size: 18px; /* Change to em for better scalability */
-    text-align: left; /* Align text to the left */
+    font-size: 1.2vw;
+    text-align: left;
 }
 
 .update-notification-full img {
@@ -354,8 +354,8 @@
 
 .update-image {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 15px;
+    top: 50vh;
+    transform: translateY(-10vh);
+    left: 4vh;
     width: 20px;
 }

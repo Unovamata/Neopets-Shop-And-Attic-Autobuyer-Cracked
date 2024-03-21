@@ -331,7 +331,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
             const updateLink = document.createElement("a");
             updateLink.href = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
             updateLink.textContent = "Click Here to Update NeoBuyer+";
-            updateLink.style.fontSize = "26.5px";
+            updateLink.style.fontSize = "2.5vw";
             updateStatus.appendChild(updateLink);
 
             document.querySelector('.center').remove();
