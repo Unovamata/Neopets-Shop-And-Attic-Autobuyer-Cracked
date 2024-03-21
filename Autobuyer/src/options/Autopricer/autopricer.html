@@ -73,8 +73,6 @@
                                 <td>Enable <b class="danger">Turbo</b> Mode:
                                     <span class="dangertooltip tooltiptext">
                                         Turbo mode enables the AutoPricer to skip multiple wait times that mimick human behavior more closely.
-
-                                        <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
                                     </span>
                                 </td>
                                 <td>
@@ -90,8 +88,6 @@
                                         This feature combines Neopets Shop Wizard's searches into a single page.<br><br>
                                         
                                         <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm">Neon Extension</a>
-                                        
-                                        <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
                                     </span>
                                 </td>
                                 <td>
@@ -105,10 +101,12 @@
                                 <td>Pricing Type:
                                     <span class="tooltiptext">
                                         Select an algorithm that matches the pricing style you want for your shop. This is designed to mimic human pricing in the player's shop.
-                                        <br><br>
-                                        Percentage: The AutoPricer will subtract the price by a certain percentage (X%) from the lowest price found in the Shop Wizard.<br>
-                                        Absolute: The AutoPricer will subtract a specific amount (X) from the lowest price found in the Shop Wizard.<br>
-                                        Random: The AutoPricer will randomly choose to subtract either a percentage (X%) or a specific amount (X) from the lowest price found in the Shop Wizard.
+                                        
+                                        <ul>
+                                            <li>Percentage: The AutoPricer will subtract the price by a certain percentage (X%) from the lowest price found in the Shop Wizard.</li><br>
+                                            <li>Absolute: The AutoPricer will subtract a specific amount (X) from the lowest price found in the Shop Wizard.</li><br>
+                                            <li>Random: The AutoPricer will randomly choose to subtract either a percentage (X%) or a specific amount (X) from the lowest price found in the Shop Wizard.</li>
+                                        </ul>
                                     </span>
                                 </td>
                                 <td>
@@ -136,11 +134,13 @@
                                 <td><b>Percentage</b> Pricing Algorithm Type:
                                     <span class="tooltiptext">
                                         Choose how you want to format your shop's prices:
-                                        <br><br>
-                                        Zeroes: Prices end with zeroes. Example: Lowest price XX,290 becomes XX,000.<br>
-                                        Nines: Prices end with nines. Example: Lowest price XX,290 becomes XX,999.<br>
-                                        Unchanged: Prices stay the same, minus X%. Lowest Price = Price - Price Percentage.<br>
-                                        Random: Prices formatted randomly using the above methods.
+                                        
+                                        <ul>
+                                            <li>Zeroes: Prices end with zeroes; Lowest price XX,290 becomes XX,000.</li><br>
+                                            <li>Nines: Prices end with nines; Lowest price XX,290 becomes XX,999.</li><br>
+                                            <li>Unchanged: Prices stay the same, minus X%; Lowest Price = Price - Price Percentage.</li><br>
+                                            <li>Random: Prices formatted randomly using the above methods.
+                                        </ul>
                                     </span>
                                 </td>
                                 <td>
@@ -183,10 +183,12 @@
                                 <td><b>Absolute</b> Pricing Algorithm Type:
                                     <span class="tooltiptext">
                                         Choose how you want to format your shop's prices:
-                                        <br><br>
-                                        True Absolute: Subtract a fixed amount from the lowest Shop Wizard price. Example: Lowest Price = Price - X.<br>
-                                        Random Absolute: Subtract a randomly chosen amount from a range of numbers from the lowest Shop Wizard price. Example: Lowest Price = Price - (Random X).<br>
-                                        Random: Prices formatted randomly using the above methods.
+                                        
+                                        <ul>
+                                            <li>True Absolute: Subtract a fixed amount from the lowest Shop Wizard price; Lowest Price = Price - X.</li><br>
+                                            <li>Random Absolute: Subtract a randomly chosen amount from a range of numbers from the lowest Shop Wizard price; Lowest Price = Price - (Random X).</li><br>
+                                            <li>Random: Prices formatted randomly using the above methods.</li>
+                                        </ul>
                                     </span>
                                 </td>
                                 <td>
@@ -201,7 +203,7 @@
                                 <td><b>Fixed</b> Neopoint Pricing Subtraction:
                                     <span class="tooltiptext">
                                         The fixed amount subtracted from the item's lowest price.<br><br>
-                                        Lowest Price = Price - X.
+                                        Lowest Price = Price - X
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="999999" id="FIXED_PRICING_VALUE"></input><span class="notation">NPs</span></td>
@@ -210,7 +212,7 @@
                                 <td><b>Minimum</b> Neopoint Pricing Subtraction: 
                                     <span class="tooltiptext">
                                         The minimum fixed random amount range subtracted from the item's lowest price.<br><br>
-                                        Lowest Price = Price - (Random X).
+                                        Lowest Price = Price - (Random X)
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="999999" id="MIN_FIXED_PRICING"></input><span class="notation">NPs</span></td>
@@ -239,8 +241,6 @@
                                     <span class="dangertooltip tooltiptext">
                                         If enabled, this feature ensures that when AutoPricing, the AutoPricer will select a user actively playing the game, resulting in more competitive pricing.
                                         <br><br>This is particularly beneficial because frozen shops often contain stock with outdated prices, leading to potential profit loss.
-
-                                        <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
                                     </span>
                                 </td>
                                 <td>
@@ -253,9 +253,8 @@
                             <tr>
                                 <td><b>Minimum</b> Wait Time if Shop Wizard Banned:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds added to the Shop Wizard Ban time.<br>
-                                        If you were banned for 30 minutes, this time will be added to the AutoPricer's wait duration before it resumes auto-pricing.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> added to the Shop Wizard Ban time.<br>
+                                        If you were banned for 30 minutes, this time will be added to the AutoPricer's wait duration before it resumes AutoPricing.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_BAN_TIME"></input><span class="notation">ms</span></td>
@@ -263,9 +262,8 @@
                             <tr>
                                 <td><b>Maximum</b> Wait Time if Shop Wizard Banned:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds added to the Shop Wizard Ban time.<br>
-                                        If you were banned for 30 minutes, this time will be added to the AutoPricer's wait duration before it resumes auto-pricing.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> added to the Shop Wizard Ban time.<br>
+                                        If you were banned for 30 minutes, <a>this time will be added to the AutoPricer's wait duration before it resumes AutoPricing</a>.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_BAN_TIME"></input><span class="notation">ms</span></td>
@@ -289,12 +287,14 @@
                                 <td><input type="number" id="MAX_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td>Resubmits Per Item Approach:
+                                <td><b>Resubmits Per Item</b> Approach:
                                     <span class="tooltiptext">
                                         Select an algorithm that will handle the amount of resubmits sent to Neopets' servers.
-                                        <br><br>
-                                        Absolute: The AutoPricer will always press the resubmit button (X) times for AutoPricing.
-                                        Random: The AutoPricer will generate a random number between (X) and (Y) to determine the amount of resubmits necessary for an item.
+                                        
+                                        <ul>
+                                            <li>Absolute: The AutoPricer will always press the resubmit button (X) times for AutoPricing.</li><br>
+                                            <li>Random: The AutoPricer will generate a random number between (X) and (Y) to determine the amount of resubmits necessary for an item.</li>
+                                        </ul>
                                     </span>
                                 </td>
                                 <td>
@@ -307,8 +307,8 @@
                             <tr class="resubmit-random">
                                 <td><b>Minimum Random</b> Resubmits per Item:
                                     <span class="tooltiptext">
-                                        The minimum random percentage range subtracted from the item's lowest price.<br><br>
-                                        Lowest Price = Price - Price Percentage.
+                                        The minimum amount of resubmits an item will be put through in the Shop Wizard while AutoPricing.
+                                        <br><br>Resubmits = Random(Maximum Random Resubmits - Minimum Random Resubmits)
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="100" id="MIN_RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
@@ -316,8 +316,8 @@
                             <tr class="resubmit-random">
                                 <td><b>Maximum Random</b> Resubmits per Item:
                                     <span class="tooltiptext">
-                                        The minimum random percentage range subtracted from the item's lowest price.<br><br>
-                                        Lowest Price = Price - Price Percentage.
+                                        The minimum amount of resubmits an item will be put through in the Shop Wizard while AutoPricing.
+                                        <br><br>Resubmits = Random(Maximum Random Resubmits - Minimum Random Resubmits)
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="100" id="MAX_RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
@@ -333,8 +333,7 @@
                             <tr>
                                 <td><b>Minimum</b> Auto-Click <b>'Resubmit'</b> Button:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds between "Resubmit" button clicks.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> between "Resubmit" button clicks.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_RESUBMIT_WAIT_TIME"></input><span class="notation">ms</span></td>
@@ -342,8 +341,7 @@
                             <tr>
                                 <td><b>Maximum</b> Auto-Click <b>'Resubmit'</b> Button:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds between "Resubmit" button clicks.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> between "Resubmit" button clicks.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_RESUBMIT_WAIT_TIME"></input><span class="notation">ms</span></td>
@@ -396,7 +394,7 @@
                             <tr>
                                 <td>Submit Prices <b>Automatically</b> After Auto-Pricing Stock:
                                     <span class="tooltiptext">
-                                        If you enable this option, the Auto-Pricer process will submit automatically all the stock prices to the player's shop after a certain cooldown.
+                                        If you enable this option, the AutoPricing process will submit automatically all the stock prices to the player's shop after a certain cooldown.
                                     </span>
                                 </td>
                                 <td>
@@ -409,12 +407,15 @@
                             <tr>
                                 <td>Import <b>Shop Sales History</b> for Analyitics Processing:
                                     <span class="tooltiptext">
-                                        If you enable this option, the Auto-Pricer process will extract automatically all your Sales History data.
-                                        <br>This is useful to visually quantify the performance of the AutoBuyer throughout time.
-                                        <br><br>- This process runs every time you load your shop inventory if activated.
-                                        <br>- If you AutoBuy across multiple accounts, the analytics results will merge.
-                                        <br>- Your sales history remains stored in NeoBuyer+ even if you delete it from Neopets.
-                                        <br>- You can delete your NeoBuyer+ sales history in the Analytics tab by selecting "Delete Shop History Data".
+                                        If you enable this option, the AutoPricing process will extract automatically all your Sales History data. This is useful to visually quantify the performance of the AutoBuyer throughout time.
+
+                                        <ul>
+                                            <li>This process runs every time you load your shop inventory if activated.</li><br>
+                                            <li>If you utilize the AutoBuyer process across multiple accounts, the analytics results will merge if you use this specific instance of the extension.</li><br>
+                                            <li>Your sales history remains stored in the extension even if you delete it from Neopets' servers.</li><br>
+                                            <li>You can delete your sales history in the Analytics tab by selecting "Delete Shop History Data."</li><br>
+                                            <li>Your sales history will not be exported to your configuration preset if you do not want to. This can be configured in the "Export Configuration Presets" menu.</li>
+                                        </ul>
                                     </span>
                                 </td>
                                 <td>
@@ -427,8 +428,7 @@
                             <tr class="submit-automatically turbo-hide">
                                 <td><b>Minimum</b> Shop Page Navigation Time:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds the AutoPricer navigates to the Player's Shop page for automatic price submission.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> the AutoPricer navigates to the Player's Shop page for automatic price submission.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
@@ -436,8 +436,7 @@
                             <tr class="submit-automatically turbo-hide">
                                 <td><b>Maximum</b> Shop Page Navigation Time:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds the AutoPricer navigates to the Player's Shop page for automatic price submission.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> the AutoPricer navigates to the Player's Shop page for automatic price submission.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_SHOP_NAVIGATION_COOLDOWN"></input><span class="notation">ms</span></td>
@@ -445,8 +444,7 @@
                             <tr>
                                 <td><b>Minimum</b> Cooldown After Pricing Item:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds after pricing an item in the Shop.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> after pricing an item in the Shop.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_AFTER_PRICING_ITEM"></input><span class="notation">ms</span></td>
@@ -454,8 +452,7 @@
                             <tr>
                                 <td><b>Maximum</b> Cooldown After Pricing Item:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds after pricing an item in the Shop.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> after pricing an item in the Shop.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_AFTER_PRICING_ITEM"></input><span class="notation">ms</span></td>
@@ -463,8 +460,7 @@
                             <tr class="turbo-hide">
                                 <td><b>Minimum</b> Price Input Box Search Time:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds for the AutoPricer to find the price input box in the page.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> for the AutoPricer to find the price input box in the page.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_SHOP_SEARCH_FOR_INPUT_BOX"></input><span class="notation">ms</span></td>
@@ -472,8 +468,7 @@
                             <tr class="turbo-hide">
                                 <td><b>Maximum</b> Price Input Box Search Time:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds for the AutoPricer to find the price input box per item to price.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> for the AutoPricer to find the price input box per item to price.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_SHOP_SEARCH_FOR_INPUT_BOX"></input><span class="notation">ms</span></td>
@@ -481,8 +476,7 @@
                             <tr>
                                 <td><b>Minimum</b> Auto-Click Update Button Cooldown:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds after pricing all the items and then clicking the "Update" button.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> after pricing all the items and then clicking the "Update" button.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_SHOP_CLICK_UPDATE"></input><span class="notation">ms</span></td>
@@ -490,8 +484,7 @@
                             <tr>
                                 <td><b>Maximum</b> Auto-Click Update Button Cooldown:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds after pricing all the items and then clicking the "Update" button.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> after pricing all the items and then clicking the "Update" button.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_SHOP_CLICK_UPDATE"></input><span class="notation">ms</span></td>
@@ -509,7 +502,7 @@
                             <tr>
                                 <td>Attempt to Refresh Through Page Load Failures:
                                     <span class="tooltiptext">
-                                        If Neopet's server rejects the request and the page fails to load, this setting will automatically refresh the page.
+                                        If Neopets' servers reject a request and the page fails to load, this feature will automatically refresh the page after a few seconds.
                                     </span>
                                 </td>
                                 <td>
@@ -522,10 +515,7 @@
                             <tr>
                                 <td><b>Minimum</b> Typing Speed Cooldown
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds per character typed.<br>
-                                        This mimicks human-like typing.
-                                        
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> per character typed. This setting mimicks human-like typing.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_TYPING_SPEED"></input><span class="notation">ms</span></td>
@@ -533,9 +523,7 @@
                             <tr>
                                 <td><b>Maximum</b> Typing Speed Cooldown
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds per character typed.<br>
-                                        This mimicks human-like typing.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> per character typed.<br> This setting mimicks human-like typing.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_TYPING_SPEED"></input><span class="notation">ms</span></td>
@@ -543,10 +531,13 @@
                             <tr>
                                 <td>Auto-Enter Neopets <b>PIN</b>:
                                     <span class="tooltiptext">
-                                        If enabled, the bot will automatically enter your PIN when updating prices in all the pages of your shop.<br><br>
+                                        If enabled, the bot will automatically enter your PIN when updating prices in all the pages of your shop.
 
-                                        <a>The entered information will never be stored elsewhere.<br> 
-                                        NeoBuyer+ will never steal your credentials, check the source code.</a>
+                                        <ul>
+                                            <li>The entered information will never be stored elsewhere.</li>
+                                            <li>The extension will never steal your credentials, you can be assured of that.</li>
+                                        </ul>
+                                        
                                     </span>
                                 </td>
                                 <td>
@@ -565,20 +556,11 @@
                                 <td><input type="text" min="0000" max="9999" id="NEOPETS_SECURITY_PIN"></input><span class="notation">PIN</span></td>
                             </tr>
                             <tr class="enter-pin">
-                                <td><b>Minimum</b> Cooldown After Typing the <b>PIN</b> Before Updating:
-                                    <span class="tooltiptext">
-                                        To mimick human behavior more closely.<br><br>
-                                        1 second = 1000
-                                    </span>
-                                </td>
+                                <td><b>Minimum</b> Cooldown After Typing the <b>PIN</b> Before Clicking the "Update" button:</td>
                                 <td><input type="number" id="MIN_WAIT_BEFORE_UPDATE"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr class="enter-pin">
-                                <td><b>Maximum</b> Cooldown After Typing the <b>PIN</b> Before Updating:
-                                    <span class="tooltiptext">
-                                        To mimick human behavior more closely.<br><br>
-                                        1 second = 1000
-                                    </span>
+                                <td><b>Maximum</b> Cooldown After Typing the <b>PIN</b> Before Clicking the "Update" button:
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_BEFORE_UPDATE"></input><span class="notation">ms</span></td>
                             </tr>

@@ -24,7 +24,7 @@
                         </thead>
                         <tr>
                             <td>Main Shop Autobuyer Enabled:
-                                <span class="tooltiptext">Enables NeoBuyer+.</span>
+                                <span class="tooltiptext">Enables the AutoBuyer process.</span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -50,7 +50,7 @@
 
                                         <br><br>For example: <br>[11, 16] or [0,23]
 
-                                        <br><br>If NeoBuyer+ runs unattended for 24 hours, it will only restock at these specific timeframes.
+                                        <br><br>If the AutoBuyer process runs unattended for 24 hours, it will only restock at these specific timeframes.
 
                                         <br><br>Default: [0,23]
                                     </span>
@@ -76,7 +76,7 @@
                             <tr>
                                 <td><b>Minimum Unstocked</b> Refresh:
                                     <span class="tooltiptext">
-                                        Specifies the minimum time <u>in milliseconds</u> between refreshes when a main shop is <u>empty</u>; NeoBuyer+ is waiting for stock.
+                                        Specifies the minimum time <u>in milliseconds</u> between refreshes when a main shop is <u>empty</u>; the AutoBuyer process is waiting for stock.
                                         <br><br>Refresh Time = Random(Max Time - Min Time)
                                     </span>
                                 </td>
@@ -85,7 +85,7 @@
                             <tr>
                                 <td><b>Maximum Unstocked</b> Refresh:
                                     <span class="tooltiptext">
-                                        Specifies the maximum time <u>in milliseconds</u> between refreshes when a main shop is <u>empty</u>; NeoBuyer+ is waiting for stock.
+                                        Specifies the maximum time <u>in milliseconds</u> between refreshes when a main shop is <u>empty</u>; the AutoBuyer process is waiting for stock.
                                         <br><br>Refresh Time = Random(Max Time - Min Time)
                                     </span>
                                 </td>
@@ -94,7 +94,7 @@
                             <tr>
                                 <td><b>Minimum Stocked</b> Refresh:
                                     <span class="tooltiptext">
-                                        Minimum time <u>in milliseconds</u> between refreshes when a main shop is <u>stocked</u>; NeoBuyer+ is AutoBuying.
+                                        Minimum time <u>in milliseconds</u> between refreshes when a main shop is <u>stocked</u>; the AutoBuyer process is AutoBuying.
                                         <br><br>Refresh Time = Random(Max Time - Min Time)
                                     </span>
                                 </td>
@@ -103,7 +103,7 @@
                             <tr>
                                 <td><b>Maximum Stocked</b> Refresh:
                                     <span class="tooltiptext">
-                                        Maximum time <u>in milliseconds</u> between refreshes when a main shop is <u>stocked</u>; NeoBuyer+ is AutoBuying.
+                                        Maximum time <u>in milliseconds</u> between refreshes when a main shop is <u>stocked</u>; the AutoBuyer process is AutoBuying.
                                         <br><br>Refresh Time = Random(Max Time - Min Time)
                                     </span>
                                 </td>
@@ -143,7 +143,7 @@
                             <td>
                                 Select a Shop to Stock:
                                 <span class="tooltiptext">
-                                    If a store in the list is stocked, NeoBuyer+ will wait the specified number of seconds before moving to the next shop.<br><br>
+                                    If a store in the list is stocked, the AutoBuyer process will wait the specified number of seconds before moving to the next shop.<br><br>
                                     It cycles through multiple shops until finding one that's not stocked. <br><br>
                                     <a href="https://thedailyneopets.com/articles/list-neopian-shops-of-neopia">Neopian Shops IDs</a>
                                 </span>
@@ -278,7 +278,7 @@
                         <tr>
                             <td>Refresh Shops <b>Only When Unstocked</b>:
                                 <span class="tooltiptext">
-                                    If enabled, NeoBuyer+ will only buy items after Shop Clears. The AutoBuyer process will not continuously refresh or navigate to other shops; the process will halt. <u>To clarify, this setting will not detect Shop Clears</u>.
+                                    If enabled, the AutoBuyer process will only buy items after Shop Clears. The AutoBuyer process will not continuously refresh or navigate to other shops; the process will halt. <u>To clarify, this setting will not detect Shop Clears</u>.
 
                                     <br><br>If active, set "Store Numbers to Cycle Through When Stocked" to [].
 
@@ -296,7 +296,7 @@
                             <td>
                                 Store Numbers to Cycle Through When Stocked:
                                 <span class="tooltiptext">
-                                    If a store in this list has stock, NeoBuyer+ will wait the set seconds before navigating to the next shop. Otherwise, it will refresh until the shop stocks.
+                                    If a store in this list has stock, the AutoBuyer process will wait the set seconds before navigating to the next shop. Otherwise, it will refresh until the shop stocks.
                                     <br><br><a href="https://thedailyneopets.com/articles/list-neopian-shops-of-neopia">Neopian Shops IDs</a>
                                 </span>
                             </td>
@@ -313,7 +313,7 @@
                         <tr>
                             <td>Use Item Database Value Estimates:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ keeps track of 3 constants: <u>Price, Value, and Profit</u>.
+                                    The AutoBuyer process keeps track of 3 constants: <u>Price, Value, and Profit</u>.
 
                                     <ul>
                                         <li>Price is the item's stocking price, what you pay to buy the item.</li>
@@ -343,7 +343,7 @@
                         <tr class="db-hide">
                             <td><b>Minimum</b> Profit Percentage to Click Item:
                                 <span class="tooltiptext">
-                                    Neobuyer+ will buy an item only if its profitability percentage is greater than the amount provided. This only applies while using the item database. Use decimal numbers only.
+                                    The AutoBuyer process will buy an item only if its profitability percentage is greater than the amount provided. This only applies while using the item database. Use decimal numbers only.
 
                                     <br><br>For Example:
                                     <br>0.5 (50% profitability margin)
@@ -364,7 +364,7 @@
                             <td>
                                 <b>Minimum</b> Rarity to Click Profitable Items: <span class="subdued">(Not Advised to Modify)</span>:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ will only acquire items over that rarity threshold.<br>
+                                    The AutoBuyer process will only acquire items over that rarity threshold.<br>
     
                                     <ul>
                                         <li> Minimum rarity: 1
@@ -448,7 +448,7 @@
                                 <span class="tooltiptext">
                                     This setting is better suited for slower internet connections.
 
-                                    <br><br>Instead of aiming for the best item in stock, NeoBuyer+ prioritizes the second-best item for a better chance of success.
+                                    <br><br>Instead of aiming for the best item in stock, the AutoBuyer process prioritizes the second-best item for a better chance of success.
 
                                     <br><br>It will still buy the sole worthwhile item if only one is available.
                                 </span>
@@ -476,7 +476,7 @@
                         <tr class="confirm-hide">
                             <td><b>Bypass</b> Confirm Window:
                                 <span class="dangertooltip tooltiptext">
-                                    If active, NeoBuyer+ will bypass the confirm pop-up Neopets generates, redirecting the user straight to the haggling page.
+                                    If active, the AutoBuyer process will bypass the confirm pop-up Neopets generates, redirecting the user straight to the haggling page.
                                     <br><br> This option disables Click Confirm Times.
                                 </span>
                             </td>
@@ -508,7 +508,7 @@
                         <tr>
                             <td><b>Auto-Enter Offer:</b>
                                 <span class="tooltiptext">
-                                    Makes NeoBuyer+ enter offers with slight price variations using a random function, typing in a human-like manner.
+                                    Makes the AutoBuyer process enter offers with slight price variations using a random function, typing in a human-like manner.
                                 </span>
                             </td>
                             <td>
@@ -671,7 +671,7 @@
                         <tr>
                             <td><b>Highlight</b> Desired Shop Items:
                                 <span class="dangertooltip tooltiptext">
-                                    Neobuyer+ will highlight items of interest based on your configuration presets.
+                                    The AutoBuyer process will highlight items of interest based on your configuration presets.
                                     
                                     <br><br>The highest valued item in stock is highlighted in orange, while other items of interest will be highlighted in green.
                                 </span>
@@ -706,7 +706,7 @@
                         <tr>
                             <td>Show Chrome Notifications:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ will send notifications when important events occur. 
+                                    The AutoBuyer process will send notifications when important events occur. 
                                     
                                     <br><br>For example: 
                                     <br>Purchases, Shop Clears, and More
@@ -722,7 +722,7 @@
                         <tr>
                             <td>Change Page Information:
                                 <span class="dangertooltip tooltiptext">
-                                    If enabled, NeoBuyer+ will change the titles on tabs to reflect the status of the AutoBuyer process.
+                                    If enabled, the AutoBuyer process will change the titles on tabs to reflect the status of the AutoBuyer process.
                                 </span>
                             </td>
                             <td>
