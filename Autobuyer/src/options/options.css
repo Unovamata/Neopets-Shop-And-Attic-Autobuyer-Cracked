@@ -314,6 +314,11 @@ td:hover .tooltiptext {
     font-family: 'Cafeteria', sans-serif;
 }
 
+.tooltiptext ul li{
+    text-align: justify;
+}
+
+
 td .dangertooltip {
     background-color: #f32121;
 }

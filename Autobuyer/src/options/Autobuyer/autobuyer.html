@@ -113,7 +113,7 @@
                                 <td><b>Minimum</b> Five-Second Rule Refresh:
                                     <span class="tooltiptext">
                                         Minimum time <u>in milliseconds</u> between refreshes when a <u>five-second rule prompt</u> triggers.
-                                        <br><br> Occasionally, the Neopian Standard Time desyncs, prolonging five-second rules. You may lose out on some items in the more competitive shops, but you will get restock banned less often with this setting activated.
+                                        <br><br> Occasionally, the Neopian Standard Time goes out of sync, prolonging five-second rules. You may lose out on some items in the more competitive shops, but you will get restock banned less often with this setting activated.
                                         <br><br>Refresh Time = Wait Time to Return to the Main Shop + Random(Max Time - Min Time)
                                     </span>
                                 </td>
@@ -123,7 +123,7 @@
                                 <td><b>Maximum</b> Five-Second Rule Refresh:
                                     <span class="tooltiptext">
                                         Maximum time <u>in milliseconds</u> between refreshes when a <u>five-second rule prompt</u> triggers.
-                                        <br><br> Occasionally, the Neopian Standard Time desyncs, prolonging five-second rules. You may lose out on some items in the more competitive shops, but you will get restock banned less often with this setting activated.
+                                        <br><br> Occasionally, the Neopian Standard Time goes out of sync, prolonging five-second rules. You may lose out on some items in the more competitive shops, but you will get restock banned less often with this setting activated.
                                         <br><br>Refresh Time = Wait Time to Return to the Main Shop + Random(Max Time - Min Time)
                                     </span>
                                 </td>
@@ -335,7 +335,7 @@
                             <td>
                                 <b>Minimum</b> Profit to Click Item:
                                 <span class="tooltiptext">
-                                    The AutoBuyer process will only buy an item if its <u>Profit Margin surpasses</u> the amount inputted in this field. This setting only applies while using the item database.
+                                    The AutoAttic process will only buy an item if its <u>Profit Margin surpasses</u> the amount inputted in this field. This setting only applies while using the item database.
                                 </span>
                             </td>
                             <td><input type="number" id="ITEM_DB_MIN_PROFIT_NPS"></input><span class="notation">NPS</span></td>
@@ -343,7 +343,10 @@
                         <tr class="db-hide">
                             <td><b>Minimum</b> Profit Percentage to Click Item:
                                 <span class="tooltiptext">
-                                    The AutoBuyer process will only buy an item if its <u>Profit Margin Percentage surpasses</u> the amount inputted in this field, <u> in decimals</u>. This setting only applies while using the item database.
+                                    Neobuyer+ will buy an item only if its profitability percentage is greater than the amount provided. This only applies while using the item database. Use decimal numbers only.
+
+                                    <br><br>For Example:
+                                    <br>0.5 (50% profitability margin)
                                 </span>
                             </td>
                             <td><input type="number" id="ITEM_DB_MIN_PROFIT_PERCENT"></input><span class="notation">%</span></td>
@@ -361,10 +364,12 @@
                             <td>
                                 <b>Minimum</b> Rarity to Click Profitable Items: <span class="subdued">(Not Advised to Modify)</span>:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ will only acquire items over the rarity threshold inputted in this field.
-
-                                    <br><br>Minimum rarity: 1
-                                    <br>Maximum rarity: 100
+                                    NeoBuyer+ will only acquire items over that rarity threshold.<br>
+    
+                                    <ul>
+                                        <li> Minimum rarity: 1
+                                        <li> Maximum rarity: 100
+                                    </ul>
                                 </span>
                             </td>
                             <td><span class="notation">Rarity</span><input type="number" max="101" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
@@ -628,7 +633,7 @@
                             <td><input type="number" id="MAX_OCR_PAGE"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr>
-                            <td>Annotate Captcha with Neopet's Location:
+                            <td>Annotate Captcha with Pet's Location:
                                 <span class="dangertooltip tooltiptext">
                                     If enabled, this feature will mark the pet's position within the captcha image with a red dot.
                                 </span>
@@ -666,10 +671,9 @@
                         <tr>
                             <td><b>Highlight</b> Desired Shop Items:
                                 <span class="dangertooltip tooltiptext">
-                                    The AutoBuyer process will highlight profitable items with color coding:
+                                    Neobuyer+ will highlight items of interest based on your configuration presets.
                                     
-                                    <br><br>Orange: Most profitable stocked item.
-                                    <br>Green: Decently profitable or second most profitable stocked item.
+                                    <br><br>The highest valued item in stock is highlighted in orange, while other items of interest will be highlighted in green.
                                 </span>
                             </td>
                             <td>
@@ -683,7 +687,7 @@
                             <td>Pause Extra Time After Successful Purchase:
                                 <span class="tooltiptext">
                                     If enabled, this setting determines the pause duration <u>in milliseconds</u> after a successful Main Shop purchase.
-                                    <br><br>Default: 1800000 milliseconds (30 minutes)
+                                    <br><br>Default: 0 milliseconds
                                 </span>
                             </td>
                             <td><input type="number" id="PAUSE_AFTER_BUY_MS"></input><span class="notation">ms</span></td>
@@ -702,7 +706,10 @@
                         <tr>
                             <td>Show Chrome Notifications:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ will send notifications when important events occur. For example, item purchases, shop clears, and other actions the extension may take.
+                                    NeoBuyer+ will send notifications when important events occur. 
+                                    
+                                    <br><br>For example: 
+                                    <br>Purchases, Shop Clears, and More
                                 </span>
                             </td>
                             <td>

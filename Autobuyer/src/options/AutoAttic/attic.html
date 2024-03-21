@@ -29,8 +29,8 @@
                             <th></th><th></th>
                         </thead>
                         <tr>
-                            <td>Almost Abandoned Attic Autobuyer Enabled:
-                                <span class="tooltiptext">Enables Almost Abandoned Attic Auto-Buyer.</span>
+                            <td>Almost Abandoned Attic AutoBuyer Enabled:
+                                <span class="tooltiptext">Enables Almost Abandoned Attic AutoBuyer.</span>
                             </td>
                             <td>
                                 <label class="switch">
@@ -49,10 +49,16 @@
                         <th></th><th></th>
                     </thead>
                     <tr>
-                        <td>Should Refresh Automatically:
+                        <td><b>Automatic Intelligent Refreshing</b> Enabled:
                             <span class="tooltiptext">
-                                This enables automatic refreshing for the attic buyer.<br><br>
-                                You can disable it to manually refresh the page.
+                                If enabled, this feature activates automatic intelligent refreshing for the attic AutoBuyer process.
+
+                                <br><br>The AutoAttic process calculates all possible windows by the "Last Restock Time."
+
+                                <br><br>The first window comprises +14 minutes and +10 seconds from the last restock time.
+                                <br>All subsequent windows comprise +7 minutes +6 seconds from the last restock time.
+
+                                <br><br>Disable this option to manually refresh the Attic page.
                             </span>
                         </td>
                         <td>
@@ -63,7 +69,7 @@
                         </td>
                     </tr>
                     <tr class="attic-refresh-hide">
-                        <td>Last Restock Time <b>in NST:</b>
+                        <td><b>Last Restock Time</b> <span class="subdued">(in NST)</span>:
                             <span class="tooltiptext">
                                 This is the last known restock time for the attic in Neopian Standard Time (NST).<br> 
                                 Visit the Attic Antics Neoboard to find this timestamp.<br><br>
@@ -79,32 +85,39 @@
                             <input id="ATTIC_LAST_REFRESH_TIME" type="time" step="1" /> <span class="notation">NST</span>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Next Refresh <b>Start</b> Time Window <b>in NST:</b>
+                    <tr class="attic-refresh-hide">
+                        <td>Next Refresh <b>Start</b> Time Window <span class="subdued">(in NST)</span>:
                             <span class="tooltiptext">
-                                This is the next speculated start window for the Almost Abandoned Attic to restock.
+                                This option displays the next speculated <u>start window</u> for the Almost Abandoned Attic to stock. This value is <u>read-only</u> and is related to your "Last Restock Time."
 
-                                <br><br>This value is read-only and is based on your Last Restock Time for the AutoAttic process to know when to refresh.
-                                <br><br>These times may desync if 1 of 3 scenarios occur:
-                                <br>- You have not restocked in the Almost Abandoned Attic recently. 
-                                <br>- Your Last Restock Time is incorrect.
-                                <br>- The times have to sync properly after changing the Last Restock Time.
+                                <br><br>These times may go out of sync if 1 of 3 scenarios occur:
+
+                                <ul>
+                                    <li>You have not restocked in the Almost Abandoned Attic recently.</li>
+                                    <li>Your Last Restock Time is incorrect.</li>
+                                    <li>The times will sync after changing the Last Restock Time after refreshing the page.</li>
+                                </ul>
+                                
+                                These windows will always correct themselves after an attic restock. Be sure to update the "Last Restock Time" often for better accuracy.
                             </span>
                         </td>
                         <td>
                             <input id="ATTIC_NEXT_START_WINDOW" type="time" step="1" disabled /> <span class="notation">NST</span>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Next Refresh <b>End</b> Time Window <b>in NST:</b>
+                    <tr class="attic-refresh-hide">
+                        <td>Next Refresh <b>End</b> Time Window <span class="subdued">(in NST)</span>:
                             <span class="tooltiptext">
-                                This is the next speculated end window for the Almost Abandoned Attic to restock.
+                                This option displays the next speculated <u>end window</u> for the Almost Abandoned Attic to stock. This value is <u>read-only</u> and is related to your "Last Restock Time."
 
-                                <br><br>This value is read-only and is based on your Last Restock Time for the AutoAttic process to know when to refresh.
-                                <br><br>These times may desync if 1 of 3 scenarios occur:
-                                <br>- You have not restocked in the Almost Abandoned Attic recently. 
-                                <br>- Your Last Restock Time is incorrect.
-                                <br>- The times have to sync properly after changing the Last Restock Time.
+                                <br><br>These times may go out of sync if 1 of 3 scenarios occur:
+                                <ul>
+                                    <li>You have not restocked in the Almost Abandoned Attic recently.</li>
+                                    <li>Your Last Restock Time is incorrect.</li>
+                                    <li>The times will sync after changing the Last Restock Time after refreshing the page.</li>
+                                </ul>
+
+                                These windows will always correct themselves after an attic restock. Be sure to update the "Last Restock Time" often for better accuracy.
                             </span>
                         </td>
                         <td>
@@ -112,10 +125,15 @@
                         </td>
                     </tr>
                     <tr class="attic-refresh-hide">
-                        <td>Refresh Time Window:
+                        <td><b>AutoAttic</b> Refresh Time Window:
                             <span class="tooltiptext">
-                                Set the time range for refreshing. <br><br>
-                                For example: <br> 11am to 4pm = [11, 16] or All times [0,23]
+                                Specifies the time range to run the AutoAttic process.
+
+                                <br><br>For example: <br>[11, 16] or [0,23]
+
+                                <br><br>If NeoBuyer+ runs unattended for 24 hours, it will only restock at these specific timeframes.
+
+                                <br><br>Default: [0,23]
                             </span>
                         </td>
                         <td><input type="text" id="ATTIC_RUN_BETWEEN_HOURS"></input><span class="notation">from, to</span></td> 
@@ -123,7 +141,7 @@
                     <tr class=" attic-refresh-hide">
                         <td><b>Minimum Refresh</b> Interval:
                             <span class="tooltiptext">
-                                Minimum time in milliseconds between refreshes if time is within the Attic possible restock window. <br><br> 1 second = 1000
+                                Minimum time <u>in milliseconds</u> between refreshes if time is within the Attic possible restock window.
                             </span>
                         </td>
                         <td><input type="number" id="ATTIC_MIN_REFRESH"></input><span class="notation">ms</span></td>
@@ -131,7 +149,7 @@
                     <tr class=" attic-refresh-hide">
                         <td><b>Maximum Refresh</b> Interval:
                             <span class="tooltiptext">
-                                Minimum time in milliseconds between refreshes if time is within the Attic possible restock window. <br><br> 1 second = 1000
+                                Minimum time <u>in milliseconds</u> between refreshes if time is within the Attic possible restock window.
                             </span>
                         </td>
                         <td><input type="number" id="ATTIC_MAX_REFRESH"></input><span class="notation">ms</span></td>
@@ -157,8 +175,7 @@
                         <tr class=" attic-click-hide">
                             <td><b>Minimum Item Buy</b> Time:
                                 <span class="tooltiptext">
-                                    Minimum buy speed in milliseconds to acquire an item.
-                                    <br><br> 1 second = 1000
+                                    Minimum buy speed <u>in milliseconds</u> to acquire an item.
                                 </span>
                             </td>
                             <td><input type="number" id="ATTIC_MIN_BUY_TIME"></input><span class="notation">ms</span></td>
@@ -166,8 +183,7 @@
                         <tr class=" attic-click-hide">
                             <td><b>Maximum Item Buy</b> Time:
                                 <span class="tooltiptext">
-                                    Maximum buy speed in milliseconds to acquire an item.
-                                    <br><br> 1 second = 1000
+                                    Maximum buy speed <u>in milliseconds</u> to acquire an item.
                                 </span>
                             </td>
                             <td><input type="number" id="ATTIC_MAX_BUY_TIME"></input><span class="notation">ms</span></td>
@@ -186,9 +202,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Attempt to Refresh Through Page Load Failures:
+                            <td><b>Refresh</b> Through Page Load Failures:
                                 <span class="tooltiptext">
-                                    When the page fails to load because Neopet's server rejected the request, which happens sometimes, this setting will refresh the page anyways instead of stopping on the failed page.
+                                    If Neopets' servers reject a request and the page fails to load, this feature will automatically refresh the page after a few seconds.
                                 </span>
                             </td>
                             <td>
@@ -224,7 +240,15 @@
                         <tr>
                             <td>Use Item Database Value Estimates:
                                 <span class="tooltiptext">
-                                    If active, NeoBuyer+ will target profitable items exclusively based on its custom item database.
+                                    NeoBuyer+ keeps track of 3 constants: <u>Price, Value, and Profit</u>.
+
+                                    <ul>
+                                        <li>Price is the item's stocking price, what you pay to buy the item.</li>
+                                        <li>Value is the item's market value without the stocking Price subtraction.</li>
+                                        <li>Profit is the result of the Value minus the stocking Price.</li>
+                                    </ul>
+
+                                    If enabled, the AutoAttic process will target items exclusively based on its item database and its preset settings.
                                 </span>
                             </td>
                             <td>
@@ -236,33 +260,43 @@
                         </tr>
                         <tr class="db-hide">
                             <td>
-                                Minimum Profit to Click Item:
+                                <b>Minimum</b> Profit to Click Item:
                                 <span class="tooltiptext">
-                                    Neobuyer+ will buy an item only if its profitability margin is greater than the amount provided.<br><br>
-                                    - This only applies while using the item database.
+                                    The AutoBuyer process will only buy an item if its <u>Profit Margin surpasses</u> the amount inputted in this field. This setting only applies while using the item database.
                                 </span>
                             </td>
                             <td><input type="number" id="ATTIC_ITEM_DB_MIN_PROFIT_NPS"></input><span class="notation">NPs</span></td>
                         </tr>
                         <tr class="db-hide">
-                            <td>Minimum Profit Percentage to Click Item:
+                            <td><b>Minimum</b> Profit Percentage to Click Item:
                                 <span class="tooltiptext">
-                                    Neobuyer+ will buy an item only if its profitability percentage is greater than the amount provided.<br><br>
+                                    Neobuyer+ will buy an item only if its profitability percentage is greater than the amount provided. This only applies while using the item database. Use decimal numbers only.
 
-                                    - This only applies while using the item database.<br>
-                                    - Decimals only (0.5).<br>
+                                    <br><br>For Example:
+                                    <br>0.5 (50% profitability margin)
                                 </span>
                             </td>
                             <td><input type="number" id="ATTIC_ITEM_DB_MIN_PROFIT_PERCENT"></input><span class="notation">%</span></td>
                         </tr>
                         <tr class="db-hide">
                             <td>
-                                Minimum Rarity to Click Profitable Items: <span class="subdued">(Not Advised to Modify)</span>:
+                                Estimated Profit of Items <b>not</b> in Item DB:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ will only acquire items over that rarity threshold.<br><br>
+                                    The AutoBuyer process will assume the default profit amount inputted in this field for items not found in the database. This feature can come in handy for new, unlisted items.
+                                </span>
+                            </td>
+                            <td><input type="number" id="BUY_UNKNOWN_ITEMS_PROFIT"></input><span class="notation">NPS</span></td>
+                        </tr>
+                        <tr class="db-hide">
+                            <td>
+                                <b>Minimum</b> Rarity to Click Profitable Items: <span class="subdued">(Not Advised to Modify)</span>:
+                                <span class="tooltiptext">
+                                    NeoBuyer+ will only acquire items over that rarity threshold.<br>
     
-                                    - Minimum rarity: 1. <br>
-                                    - Maximum rarity: 100.
+                                    <ul>
+                                        <li> Minimum rarity: 1
+                                        <li> Maximum rarity: 100
+                                    </ul>
                                 </span>
                             </td>
                             <td><span class="notation">Rarity</span><input type="number" max="99" min="1" id="ITEM_DB_MIN_RARITY"></input></td>
@@ -270,8 +304,11 @@
                         <tr class="db-hide">
                             <td>Use a Blacklist of Items to not Purchase:
                                 <span class="tooltiptext">
-                                    NeoBuyer+ will be prevented from clicking on specific items inside the blacklist, even if they meet the profit criteria.<br><br>
-                                    This is useful when the item database has inaccurate or outdated price estimates.
+                                    The AutoBuyer process will prevent clicking on Blacklisted items, irrespective of whether those items meet the profit criteria. 
+                                    
+                                    <br><br>Blacklists override other settings, ensuring the AutoBuyer process does not click any Blacklisted items. This feature is useful for countering inaccurate or outdated price estimates in the item database. 
+                                    
+                                    <br><br><u>Enter one item per line.</u>
                                 </span>
                             </td>
                             <td>
@@ -282,12 +319,7 @@
                             </td>
                         </tr>
                         <tr class="blacklist-hide">
-                            <td class="db-hide">Blacklist:
-                                <span class="tooltiptext"> 
-                                    If an item is on this list, NeoBuyer+ will never click on it.<br><br>
-                                    - Enter one item per line.
-                                </span>
-                            </td>
+                            <td class="db-hide">Blacklist:</td>
                             <td class="db-hide"><textarea rows="10" cols="40" id="BLACKLIST"></textarea></td>
                         </tr>
                         <tr class="restock-hide">
@@ -313,9 +345,7 @@
                         <tr>
                             <td>Show Status Banner:
                                 <span class="dangertooltip tooltiptext">
-                                    This setting toggles the banner text shown on the shop pages.<br><br>
-
-                                    Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    This setting toggles the banner text shown on the shop pages.
                                 </span>
                             </td>
                             <td>
@@ -328,12 +358,9 @@
                         <tr>
                             <td>Highlight Desired <b>Attic</b> Items:
                                 <span class="dangertooltip tooltiptext">
-                                    Neobuyer+ highlights items of interest:<br><br>
-
-                                    - The highest valued item in stock is highlighted in orange.<br>
-                                    - Other items of interest will be highlighted in green.<br><br>
-
-                                    Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    Neobuyer+ will highlight items of interest based on your configuration presets.
+                                    
+                                    <br><br>The highest valued item in stock is highlighted in orange, while other items of interest will be highlighted in green.
                                 </span>
                             </td>
                             <td>
@@ -357,7 +384,10 @@
                         <tr>
                             <td>Show Chrome Notifications:
                                 <span class="tooltiptext">
-                                    Chrome notifications will appear when important events occur.
+                                    NeoBuyer+ will send notifications when important events occur. 
+                                    
+                                    <br><br>For example: 
+                                    <br>Purchases, Shop Clears, and More
                                 </span>
                             </td>
                             <td>
@@ -370,8 +400,7 @@
                         <tr>
                             <td>Change Page Information:
                                 <span class="dangertooltip tooltiptext">
-                                    If enabled, NeoBuyer+ will change the titles on pages to reflect the state of the AutoBuyer at any given point and time.<br><br>
-                                    Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                    If enabled, NeoBuyer+ will change the titles on tabs to reflect the status of the AutoBuyer process.
                                 </span>
                             </td>
                             <td>
@@ -384,7 +413,7 @@
                         <tr>
                             <td>Sound Alerts:
                                 <span class="tooltiptext">
-                                    The AutoBuyer provides audible notifications during page actions.
+                                    If enabled, the AutoBuyer process will provide audible notifications during page actions.
                                 </span>
                             </td>
                             <td>

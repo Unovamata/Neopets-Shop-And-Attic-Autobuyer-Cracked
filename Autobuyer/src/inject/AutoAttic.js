@@ -92,7 +92,7 @@ function InjectAutoAttic() {
             } else {
                 minutesInterval = 7;
                 extraMinutes = 7;
-                extraSeconds = 5;
+                extraSeconds = 6;
                 extraWindow = -1;
             }
 
@@ -106,7 +106,7 @@ function InjectAutoAttic() {
             const secondsToAdd = minutesInterval === 14 ? 10 : 4;
     
             windowStartTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
-            windowStartTime.setSeconds(lastRestockTime.getSeconds() + 1 * windowsPassed);
+            windowStartTime.setSeconds(lastRestockTime.getSeconds() + (1 * windowsPassed) - 1);
     
             windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
             windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * windowsPassed + extraSeconds);
