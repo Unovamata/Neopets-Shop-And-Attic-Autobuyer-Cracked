@@ -101,8 +101,6 @@
                                         This feature combines Neopets Shop Wizard's searches into a single page.<br><br>
                                         
                                         <a href="https://chrome.google.com/webstore/detail/neon/hpbfhmapaaocfnpmbikclmeokcgpljnm">Neon Extension</a>
-                                        
-                                        <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
                                     </span>
                                 </td>
                                 <td>
@@ -115,27 +113,22 @@
                             <tr>
                                 <td><b>Maximum</b> Price to <b>Insta-Buy</b> an Item:
                                     <span class="tooltiptext">
-                                        When the price of an item falls below this specified amount in a user's shop, the AutoKQ system will purchase that item without any further searches, minimizing the risk of Shop Wizard bans.
-                                        <br><br>If the AutoKQ cannot find a price below this threshold, it will continue searching until an item's price is below this threshold or the amount of resubmits per item has been reached. The SW AutoBuyer will always buy the cheapest item out of all searches done.
-                                        <br><br>If you want to disable this option, set this value to 0.
+                                        When the price of an item falls below this specified amount in a user's shop, the AutoKQ process will purchase that item without any further searches, minimizing the risk of Shop Wizard bans.
+                                        <br><br>If the AutoKQ process cannot find a price below this threshold, it will continue searching until an item's price is less than the specified amount or the number of resubmits per item has been reached. The SW AutoBuyer will always buy the cheapest item out of all searches.
+                                        <br><br>If you want to disable this feature, set this value to 0.
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" id="MAX_INSTA_BUY_PRICE"></input><span class="notation">NPs</span></td>
                             </tr>
                             <tr>
-                                <td><b>Maximum</b> amount of NeoPoints to Spend on a Single Item:
-                                    <span class="tooltiptext">
-                                        The amount of times the AutoKQ must press the "Resubmit" button.
-                                    </span>
-                                </td>
+                                <td><b>Maximum</b> amount of NeoPoints to Spend on a Single Item:</td>
                                 <td><input type="number" min="0" id="MAX_SPENDABLE_PRICE"></input><span class="notation">NPs</span></td>
                             </tr>
                             <tr>
                                 <td><b>Minimum</b> Wait Time if Shop Wizard Banned:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds added to the Shop Wizard Ban time.<br>
-                                        If you were banned for 30 minutes, this time will be added to the AutoKQ's wait duration before it resumes auto-pricing.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> added to the Shop Wizard Ban time.<br>
+                                        If you were banned for 30 minutes, this time will be added to the AutoKQ's process wait duration before it resumes auto-pricing.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_BAN_TIME"></input><span class="notation">ms</span></td>
@@ -143,20 +136,21 @@
                             <tr>
                                 <td><b>Maximum</b> Wait Time if Shop Wizard Banned:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds added to the Shop Wizard Ban time.<br>
-                                        If you were banned for 30 minutes, this time will be added to the AutoKQ's wait duration before it resumes auto-pricing.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> added to the Shop Wizard Ban time.<br>
+                                        If you were banned for 30 minutes, this time will be added to the AutoKQ's process wait duration before it resumes auto-pricing.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_BAN_TIME"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td>Resubmits Per Item Approach:
+                                <td><b>Resubmits Per Item</b> Approach:
                                     <span class="tooltiptext">
                                         Select an algorithm that will handle the amount of resubmits sent to Neopets' servers.
-                                        <br><br>
-                                        Absolute: The AutoKQ process will always press the resubmit button (X) times for AutoPricing.
-                                        <br>Random: The AutoKQ process will generate a random number between (X) and (Y) to determine the amount of resubmits necessary for an item.
+                                        
+                                        <ul>
+                                            <li>Absolute: The AutoPricer will always press the resubmit button (X) times for AutoPricing.</li><br>
+                                            <li>Random: The AutoPricer will generate a random number between (X) and (Y) to determine the amount of resubmits necessary for an item.</li>
+                                        </ul>
                                     </span>
                                 </td>
                                 <td>
@@ -169,8 +163,8 @@
                             <tr class="resubmit-random">
                                 <td><b>Minimum Random</b> Resubmits per Item:
                                     <span class="tooltiptext">
-                                        The minimum random percentage range subtracted from the item's lowest price.<br><br>
-                                        Lowest Price = Price - Price Percentage.
+                                        The minimum amount of resubmits an item will be put through in the Shop Wizard while the AutoKQ process is active.
+                                        <br><br>Resubmits = Random(Maximum Random Resubmits - Minimum Random Resubmits)
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="100" id="MIN_RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
@@ -178,8 +172,8 @@
                             <tr class="resubmit-random">
                                 <td><b>Maximum Random</b> Resubmits per Item:
                                     <span class="tooltiptext">
-                                        The minimum random percentage range subtracted from the item's lowest price.<br><br>
-                                        Lowest Price = Price - Price Percentage.
+                                        The maximum amount of resubmits an item will be put through in the Shop Wizard while the AutoKQ process is active.
+                                        <br><br>Resubmits = Random(Maximum Random Resubmits - Minimum Random Resubmits)
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" max="100" id="MAX_RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
@@ -195,8 +189,7 @@
                             <tr>
                                 <td><b>Minimum</b> Cooldown per Action:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds between actions in the Shop Wizard page.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> between actions in the Shop Wizard page.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_PER_ACTION"></input><span class="notation">ms</span></td>
@@ -204,8 +197,7 @@
                             <tr>
                                 <td><b>Maximum</b> Cooldown per Action:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds between actions in the Shop Wizard page.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> between actions in the Shop Wizard page.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_PER_ACTION"></input><span class="notation">ms</span></td>
@@ -213,8 +205,7 @@
                             <tr>
                                 <td><b>Minimum</b> Auto-Click <b>'Resubmit'</b> Button:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds between "Resubmit" button clicks.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> between "Resubmit" button clicks.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_RESUBMIT_WAIT_TIME"></input><span class="notation">ms</span></td>
@@ -222,14 +213,18 @@
                             <tr>
                                 <td><b>Maximum</b> Auto-Click <b>'Resubmit'</b> Button:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds between "Resubmit" button clicks.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> between "Resubmit" button clicks.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_RESUBMIT_WAIT_TIME"></input><span class="notation">ms</span></td>
                             </tr>
                             <tr>
-                                <td>Use a Blacklist of Items to not Buy:</td>
+                                <td>Use a Blacklist of Items to not Buy:
+                                    <span class="tooltiptext">
+                                        Sometimes, Kitchen Quests will ask for absurdly expensive items. This setting allows you to skip quests automatically. However, you must wait until the current quest expires to start the next one.
+                                    </span>
+                                </td>
+                                
                                 <td>
                                     <label class="switch">
                                         <input id="USE_BLACKLIST_KQ" type="checkbox">
@@ -255,10 +250,8 @@
                             <tr>
                                 <td><b>Remove</b> Shop Layouts:
                                     <span class="dangertooltip tooltiptext">
-                                        If enabled, NeoBuyer+ will remove <a>ANY</a> HTML or CSS layout changes on shop pages. This helps the AutoKQ process' consistency.
-                                        <br>This feature affects all users' shops regardless of whether the AutoKQ process is running or not.
-
-                                        <br><br>Although, inoffensive, Neopets can possibly detect the use of NeoBuyer+ through this feature. Activate this option at your own risk.
+                                        If enabled, the extension will remove ANY HTML or CSS layout changes on shop pages. This feature helps the AutoKQ process consistency. However, this will affect all users' shops, including yours, regardless of whether the AutoKQ process is active.
+                                        <br><br>This change is only visual, as it changes the structure of shop pages.
                                     </span>
                                 </td>
                                 <td>
@@ -281,7 +274,7 @@
                             <tr>
                                 <td>Attempt to Refresh Through Page Load Failures:
                                     <span class="tooltiptext">
-                                        If Neopet's server rejects the request and the page fails to load, this setting will automatically refresh the page.
+                                        If Neopets' servers reject a request and the page fails to load, this feature will automatically refresh the page after a few seconds.
                                     </span>
                                 </td>
                                 <td>

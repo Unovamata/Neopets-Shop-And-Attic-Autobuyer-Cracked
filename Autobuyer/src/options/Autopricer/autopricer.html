@@ -271,8 +271,7 @@
                             <tr class="turbo-hide">
                                 <td><b>Minimum</b> Wait Cooldown per Refresh:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Shop Wizard page.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> between refreshes every time the AutoPricer navigates to the Shop Wizard page.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
@@ -280,8 +279,7 @@
                             <tr class="turbo-hide">
                                 <td><b>Maximum</b> Wait Cooldown per Refresh:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds between refreshes every time the AutoPricer navigates to the Shop Wizard page.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> between refreshes every time the AutoPricer navigates to the Shop Wizard page.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_WAIT_PER_REFRESH"></input><span class="notation">ms</span></td>
@@ -325,7 +323,7 @@
                             <tr class="resubmit-absolute">
                                 <td><b>Absolute AutoPricer</b> Resubmits per Item:
                                     <span class="tooltiptext">
-                                        The amount of times the AutoPricer must press the "Resubmit" button.
+                                        The amount of times the AutoPricer process must press the "Resubmit" button.
                                     </span>
                                 </td>
                                 <td><input type="number" min="0" id="RESUBMITS_PER_ITEM"></input><span class="notation">Resubmit\s</span></td>
@@ -349,8 +347,7 @@
                             <tr class="turbo-hide">
                                 <td><b>Minimum</b> Auto-Click <b>'New Search'</b> Button:
                                     <span class="tooltiptext">
-                                        Minimum wait time in milliseconds to start a "New Search" after the pricing actions are complete.
-                                        <br><br> 1 second = 1000
+                                        Minimum wait time <u>in milliseconds</u> to start a "New Search" after the pricing actions are complete.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_NEW_SEARCH_WAIT_TIME"></input><span class="notation">ms</span></td>
@@ -358,8 +355,7 @@
                             <tr class="turbo-hide">
                                 <td><b>Maximum</b> Auto-Click <b>'New Search'</b> Button:
                                     <span class="tooltiptext">
-                                        Maximum wait time in milliseconds to start a "New Search" after the pricing actions are complete.
-                                        <br><br> 1 second = 1000
+                                        Maximum wait time <u>in milliseconds</u> to start a "New Search" after the pricing actions are complete.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_NEW_SEARCH_WAIT_TIME"></input><span class="notation">ms</span></td>
@@ -367,7 +363,8 @@
                             <tr>
                                 <td>Use a Blacklist of Items to not Auto Price:
                                     <span class="tooltiptext">This blacklist skips items with names that match the entries in the list.<br><br>
-                                        This is helpful for avoiding incorrect pricing of items with similar names to others</span>
+                                        This is helpful for avoiding incorrect pricing of items with similar names to others.
+                                    </span>
                                 </td>
                                 <td>
                                     <label class="switch">
@@ -515,7 +512,8 @@
                             <tr>
                                 <td><b>Minimum</b> Typing Speed Cooldown
                                     <span class="tooltiptext">
-                                        Minimum wait time <u>in milliseconds</u> per character typed. This setting mimicks human-like typing.
+                                        Minimum wait time <u>in milliseconds</u> per character typed.
+                                        <br>This setting mimicks human-like typing.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MIN_TYPING_SPEED"></input><span class="notation">ms</span></td>
@@ -523,7 +521,8 @@
                             <tr>
                                 <td><b>Maximum</b> Typing Speed Cooldown
                                     <span class="tooltiptext">
-                                        Maximum wait time <u>in milliseconds</u> per character typed.<br> This setting mimicks human-like typing.
+                                        Maximum wait time <u>in milliseconds</u> per character typed.
+                                        <br>This setting mimicks human-like typing.
                                     </span>
                                 </td>
                                 <td><input type="number" id="MAX_TYPING_SPEED"></input><span class="notation">ms</span></td>
@@ -534,7 +533,7 @@
                                         If enabled, the bot will automatically enter your PIN when updating prices in all the pages of your shop.
 
                                         <ul>
-                                            <li>The entered information will never be stored elsewhere.</li>
+                                            <li>The entered information will never be stored elsewhere.</li><br>
                                             <li>The extension will never steal your credentials, you can be assured of that.</li>
                                         </ul>
                                         
