@@ -26,8 +26,8 @@
 .loading-logo{
     position: relative;
     animation: pulseEffect 4s ease-in-out infinite;
-    max-width: 25vw;
-    max-height: 25vh;
+    max-width: 60vw;
+    max-height: 60vh;
 }
 
 @keyframes pulseEffect {
@@ -45,7 +45,7 @@
 .loading-bar-container {
     position: relative;
     width: 370px;
-    transform: translate(-200px, -75px);
+    transform: translate(-200px, -10vh);
     height: 10px;
     background-color: #2196F3;
     border-radius: 10px;

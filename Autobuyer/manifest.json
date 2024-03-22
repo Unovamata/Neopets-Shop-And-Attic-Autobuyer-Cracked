@@ -39,8 +39,7 @@
             "*://www.neopets.com/quickstock.phtml*"
         ],
         "js": [
-			"js/jquery.js",
-            "src/inject/better_quick_stock.user.js"
+			"js/jquery.js"
         ]
     },
     {
@@ -65,6 +64,22 @@
             "src/inject/AutoHaggler.js"
         ]
     },
+	//{
+        //"matches": [
+        //    "*://www.neopets.com/safetydeposit*"
+        //],
+        //"js": [
+		//	"sdbduper.js"
+        //]
+    //},
+	//{
+        //"matches": [
+        //    "https://items.jellyneo.net/tools/sdb-price-checker/"
+        //],
+        //"js": [
+		//	"sdbpricer.js"
+        //]
+    //},
 	{
         "matches": [
             "*://www.neopets.com/halloween/garage.phtml*"
