@@ -28,6 +28,24 @@ getSHOULD_USE_NEON(function (isNeonAvailable){
     const noResults = 'I did not find anything.  :(  Please try again and I will search elsewhere!';
     const shopBan = 'I am too busy right now,';
 
+    var progressStatus = document.createElement("div");
+    progressStatus.style.width = "100%"
+    progressStatus.style.height = "24px";
+    progressStatus.style.background = "#DDD";
+    progressStatus.style.borderRadius = "12px";
+    progressStatus.style.gridColumn = "span 2";
+    progressStatus.style.textAlign = "center";
+    progressStatus.style.borderStyle = "solid";
+    progressStatus.style.borderWidth = "thin";
+
+    var progressBar = document.createElement("div");
+    progressBar.style.height = "24px";
+    progressBar.style.lineHeight = "24px";
+    progressBar.style.background = "#39FF14";
+    progressBar.style.borderRadius = "12px";
+    progressBar.style.fontFamily = "MuseoSansRounded700";
+    progressBar.style.fontSize = "10pt";
+
     // SHOP SECTIONS
     // 0an = 0
     // 1bo = 1
@@ -164,6 +182,15 @@ getSHOULD_USE_NEON(function (isNeonAvailable){
                 addNewShops(results, subShopIndex);
                 populate();
 
+                // update the progress bar
+                progressBar.style.width = ((100 / 13.0) * sectionsSearched)
+                    .toString() + "%";
+                progressBar.innerHTML = sectionsSearched.toString() + "/13";
+                progressStatus.appendChild(progressBar);
+
+                document.querySelector('.wizard-results-header')
+                    .appendChild(progressStatus);
+
                 // console.log("Sending to database");
                 // chrome.runtime.sendMessage({command: "post", data: "999"}, (response) => {success();});
                 // console.log("SENT");
@@ -172,6 +199,8 @@ getSHOULD_USE_NEON(function (isNeonAvailable){
             // Seen this subShop section before
             else if (!updated) {
                 populate();
+                document.querySelector('.wizard-results-header')
+                    .appendChild(progressStatus);
                 updated = true;
             }
 
@@ -198,7 +227,14 @@ getSHOULD_USE_NEON(function (isNeonAvailable){
             //Case 2: shop wizard ban
             else if (text.includes(shopBan)) {
                 //console.log("Shop Wizard Ban");
-                document.querySelector('.wizard-results__2020').appendChild(lastResultsGrid);
+                document.querySelector('.wizard-results__2020')
+                    .appendChild(lastResultsGrid);
+            }
+
+            //Case 3: Item doesn't exist
+            else {
+                //console.log(text);
+                //Do nothing probably
             }
         }
     };
