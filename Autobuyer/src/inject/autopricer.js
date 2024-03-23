@@ -497,9 +497,9 @@ async function RunAutoPricer(){
                                 break;
 
                                 case "Random":
-                                    var percentagePricingOptions = ["Zeroes", "Nines", "Unchanged"];
-                                    var randomIndex = GetRandomInt(0, percentagePricingOptions.length);
-                                    
+                                    const percentagePricingOptions = ["Zeroes", "Nines", "Unchanged"];
+                                    var randomIndex = GetRandomIntExclusive(0, percentagePricingOptions.length);
+
                                     switch(percentagePricingOptions[randomIndex]){
                                         case "Zeroes": deductedPrice = RoundToNearestUnit(percentageBestPrice); break;
                                         case "Nines": deductedPrice = RoundToNearestUnit(percentageBestPrice, true); break;
