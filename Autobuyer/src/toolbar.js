@@ -69,7 +69,7 @@ function InjectToolbar() {
         <div class = "toolbar-text">
             <div class="toolbar-category">
                 <a>
-                    <img class="toolbar-icon" src="${shopIconUrl}">
+                    <img class="toolbar-icon" src="${buyersIconUrl}">
                     AutoBuyers
                     <img  class = "dropdown-arrow" src="${dropdownIconUrl}">
                 </a>
@@ -77,7 +77,7 @@ function InjectToolbar() {
                     <ul>
                         <li>
                             <a href="${autobuyerUrl}" class = "toolbar-category dropdown-category">
-                                <img  class = "dropdown-icon" src="${buyersIconUrl}"> 
+                                <img  class = "dropdown-icon" src="${shopIconUrl}"> 
                             AutoBuyer </a>
                         </li>
                         <li><a href="${atticUrl}" class = "toolbar-category dropdown-category">
