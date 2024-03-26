@@ -82,3 +82,4 @@ Based on the original developer:
 ## End Notes
 
 As always thanks to the [original developer.](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "original developer.") that allowed NeoBuyer to work as a foundation for this project.
+
