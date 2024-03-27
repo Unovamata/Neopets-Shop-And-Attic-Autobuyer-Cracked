@@ -424,9 +424,8 @@ function InjectAutoHaggler() {
         }
 
         function ProcessSoldOutItem() {
-            var e = document.querySelector("h2")
-                .innerText.replaceAll("Haggle for ", "");
-            
+            var e = Array.from(document.querySelectorAll("h2")).find((el) => el.innerText.includes('Haggle for')).innerText.replaceAll("Haggle for ", "");
+
             UpdateBannerAndDocument("Sold out", "Sold out of " + e);
             
             SaveToPurchaseHistory(e, document.getElementsByTagName("h1")[0].textContent, "-", "Sold out");
