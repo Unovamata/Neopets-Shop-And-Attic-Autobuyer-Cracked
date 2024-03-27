@@ -131,19 +131,6 @@
     },
 	{
         "matches": [
-            "*://www.neopets.com/genie.phtml*",
-			"*://www.neopets.com/auctions.phtml?show=*",
-			"*://www.neopets.com/auctions.phtml",
-			"*://www.neopets.com/auctions.phtml?auction_counter=*"
-        ],
-        "all_frames": true,
-        "js": [
-			"src/inject/neopets_auctions_comma_separate.js"
-        ],
-        "run_at": "document_end"
-    },
-	{
-        "matches": [
             "*://www.neopets.com/browseshop.phtml?owner=*",
 			"*://www.neopets.com/buy_item.phtml*"
         ],
