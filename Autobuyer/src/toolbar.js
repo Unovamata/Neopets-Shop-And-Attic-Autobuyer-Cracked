@@ -39,7 +39,6 @@ const autosdbUrl = `${srcPath}/options/autosdb.html`;
 const historyUrl = `${srcPath}/options/history/history.html`;
 const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
 const restockListUrl = `${srcPath}/options/Tools/restockListGen.html`;
-const communityUrl = `${srcPath}/options/Tools/faq.html`;
 const infoUrl = `${srcPath}/options/Tools/info.html`;
 const mailUrl = `${srcPath}/options/Mail/mail.html`;
 
