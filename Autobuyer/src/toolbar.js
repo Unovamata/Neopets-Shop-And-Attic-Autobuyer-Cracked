@@ -23,6 +23,7 @@ const mailIconUrl = `${srcPath}/toolbar/neomail.svg`;
 const dropdownIconUrl = `${srcPath}/toolbar/dropdown-arrow.png`;
 const communityIconUrl = `${srcPath}/toolbar/communitycentral-icon.png`;
 const restockListIconUrl = `${srcPath}/toolbar/myalbums-icon.svg`;
+const manualIconUrl = `${srcPath}/toolbar/mymanual-icon.svg`;
 const buyersIconUrl = `${srcPath}/toolbar/myshop-icon.png`;
 
 
@@ -122,6 +123,12 @@ function InjectToolbar() {
                 <div class="hover-menu">
                     <ul>
                         <li>
+                            <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
+                                <img  class = "dropdown-icon" src="${manualIconUrl}"> 
+                                Manual 
+                            </a>
+                        </li>
+                        <li>
                             <a href="${historyUrl}" class = "toolbar-category dropdown-category"> 
                                 <img  class = "dropdown-icon" src="${historyIconUrl}"> 
                                 History 
@@ -140,13 +147,17 @@ function InjectToolbar() {
                         <li>
                             <div class="hover-submenu">
                                 <ul>
-                                    <a href="${communityUrl}" class = "toolbar-category dropdown-category"> 
+                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki/FAQs" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
                                         <img  class = "dropdown-icon" src="${infoIconUrl}"> 
                                         FAQs 
                                     </a>
-                                    <a href="${infoUrl}" class = "toolbar-category dropdown-category">
+                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki/Credits" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category">
                                         <img  class = "dropdown-icon" src="${creditsIconUrl}"> 
-                                        Credits & Presets 
+                                        Credits
+                                    </a>
+                                    <a href="${infoUrl}" class = "toolbar-category dropdown-category">
+                                        <img  class = "dropdown-icon" src="${toolsIconUrl}"> 
+                                        Config Presets
                                     </a>
                                 </ul>
                             </div>
