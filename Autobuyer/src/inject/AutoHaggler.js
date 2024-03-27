@@ -382,7 +382,7 @@ function InjectAutoHaggler() {
         }
 
         function ProcessPurchase() {
-            var itemName = document.querySelector("h2").innerText.replaceAll("Haggle for ", "");
+            var itemName = Array.from(document.querySelectorAll("h2")).find((el) => !el.innerText.includes('Haggle for')).innerText.replaceAll("Haggle for ", "");
 
             // Extract shop name
             var shopName = document.getElementsByTagName("h1")[0].textContent;
