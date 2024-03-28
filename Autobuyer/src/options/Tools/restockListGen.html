@@ -20,7 +20,6 @@
             <a href="https://www.jellyneo.net/?go=shopsdirectory" target="_blank">
                 <button class="autobuyerButton">Shops Directory</button>
             </a>
-            <button class="button" id="generator">List Generator</button>
             <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki/Restock-List-Generator" target="_blank">
                 <button class="autobuyerButton">Tutorial</button>
             </a>
@@ -43,7 +42,7 @@
                                 </td>
                                 <td>
                                     <div class="subcategory-info">Resulting Restock List</div>
-                                    <textarea rows="20" cols="30" id="outputList"></textarea>
+                                    <textarea rows="20" cols="30" id="outputList" readonly></textarea>
                                     <br><br><br>
                                 </td>
                             </tr>
@@ -76,70 +75,6 @@
                                     </span>
                                 </td>
                                 <td><textarea rows="20" cols="50" id="ATTIC_RESTOCK_LIST"></textarea></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div id="tutorial-display">
-                    <div class="subcategory-info">Restock List Generator Usage Guide</div>
-
-                    <table class="table">
-                        <tbody class="restock-generator">
-                            <thead>
-                                <th></th>
-                            </thead>
-                            <tr>
-                                <td style="text-align: left; padding-left: 100px;">
-                                    <b>1.</b> Click the <b>"Shops Directory"</b> button above, this will open JellyNeo's Shop Directory.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left; padding-left: 100px;">
-                                    <b>2.</b> Choose a shop for which you want to create a restock list. Then, find and click the "<img src="db.png">" icon below to the selected shop to browse the possible items to be stocked in said shop.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left; padding-left: 100px;">
-                                    <b>3.</b> After the page loads, use the search filters to adjust the parameters based on your needs.<br>
-                                    
-                                    <div class="subcategory-info" style="text-align: center;">Database Page Configuration Recommendations</div>
-                                    <div style="text-align: center;">
-                                        <b>
-                                        Rarity: <input value='1' disabled> to <input value="100" disabled><br><br>
-                                        Price Range: <input value='[Minimum NP Profit]' disabled> to <input value="" disabled><br><br>
-                                        Sort By: <input value='Price' disabled> <input value="Descending" disabled><br><br>
-                                        Exclude Neocash items? <input checked="true" type="checkbox"><br><br>
-                                        Results Per Page: <input value='75' disabled><br><br>
-                                        Status: <input value='Active' disabled></b>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left; padding-left: 100px;">
-                                    <b>4.</b> Select all the items filtered by the database, including images and prices <b>OR</b> click the <button class="button autobuyerButton" style="margin-bottom: 0px;">Print</button> button at the top-right section of the database page. Copy all entries found.<br><br><br>
-
-                                    <b>4.1.</b> If you decide to utilize the Print page approach, set the following options as follows:
-
-                                    <div class="subcategory-info" style="text-align: center;">Print Page Configuration Recommendations</div>
-                                    <div style="text-align: center;">
-                                        <b>
-                                        Number of Columns: <input value='1' disabled> <br><br>
-                                        Show item prices? <input checked="true" type="checkbox"><br><br>
-                                    </div>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left; padding-left: 100px;">
-                                    <b>5.</b> Now, simply paste all the entries you have copied into the <b>"JellyNeo's Data"</b> input field, then click anywhere outside that input field. NeoBuyer+ will automatically process the data and display the results in the <b>"Resulting Restock List"</b>.
-                                    <br><br><b>Note: Items with the "Inflation Notice" tag or unpriced items will be given higher priority in the "Resulting Restock List".</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left; padding-left: 100px;">
-                                    <b>6.</b> Select all entries <b>(Ctrl + A)</b> and then copy them, to ultimately paste them in the <b>"Restock List"</b> input field. With that, your <b>"Restock List"</b> will automatically sync with what the AutoBuyer and AutoAttic will reference for AutoBuying.
-                                </td>
                             </tr>
                         </tbody>
                     </table>
