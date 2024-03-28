@@ -4,7 +4,6 @@
     src: local('Cafeteria'), url('../fonts/Cafeteria Bold.otf') format('truetype');
 }
 
-
 .logo {
     position: absolute;
     vertical-align: middle;
@@ -62,19 +61,20 @@
 .toolbar-bottom {
     background-color: #03a9f4;
     background-image: url(pattern-basic.svg);
-    text-align: center;
+    text-align: left;
     font-weight: bold;
-    padding: 15px 0;
+    padding: 3.5vh 0;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     align-items: center;
-    justify-content: space-between;
 }
 
 .notice-text {
-    font-size: 10px;
+    position: absolute; /* Use fixed positioning */
+    transform: translate(50%, -50%); /* Use transform to center the element */
+    font-size: 0.7vw;
     color: white;
     font-family: "MuseoSansRounded700", 'Arial Bold', sans-serif;
 }
@@ -83,9 +83,49 @@
     position: absolute;
     right: 0.5%;
     bottom: 5%;
-    font-size: 15px;
+    font-size: 2.5vh;
     color: white;
     font-family: "Cafeteria", 'Arial Bold', sans-serif;
+}
+
+.manual-container-bottom {
+    padding: 3.5vh 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.manual-button {
+    position: sticky;
+    background-color: #03a9f4;
+    border-radius: 20%;
+    border-width: 0px;
+    bottom: 2vh;
+    height: auto;
+    width: 6vw;
+    z-index: 1;
+    font-size: 1.3vw;
+    text-decoration: none;
+    color: white !important;
+    font-family: 'Cafeteria', sans-serif;
+}
+
+
+.manual-button:hover .manual-img {
+    transform: rotate(-20deg);
+    transition: transform 0.2s ease-in-out infinite;
+}
+
+.manual-img{
+    width: 3.5vw;
+    height: auto;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+.manual-button a {
+    padding-bottom: 3vh;
 }
 
 .gh-btn{
@@ -359,3 +399,4 @@
     left: 4vh;
     width: 20px;
 }
+

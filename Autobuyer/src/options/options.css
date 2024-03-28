@@ -101,7 +101,7 @@ a:visited {
 
 .center {
     width: 100%;
-    height: calc(100vh - 90px);
+    height: calc(102vh - 14vh);
     position: absolute;
     left: 0;
     right: 0;
