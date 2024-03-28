@@ -1226,3 +1226,10 @@ function StringToArray32(inputString) {
     
     return array32;
 }
+
+function InjectExternalScript(url) {
+    var script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+    document.body.appendChild(script);
+}

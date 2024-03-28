@@ -105,10 +105,6 @@
     height: auto;
     width: 6vw;
     z-index: 1;
-    font-size: 1.3vw;
-    text-decoration: none;
-    color: white !important;
-    font-family: 'Cafeteria', sans-serif;
 }
 
 
@@ -126,6 +122,13 @@
 
 .manual-button a {
     padding-bottom: 3vh;
+}
+
+.button-description-manual {
+    text-decoration: none;
+    color: white !important;
+    font-size: 1.3vw;
+    font-family: 'Cafeteria', sans-serif;
 }
 
 .gh-btn{

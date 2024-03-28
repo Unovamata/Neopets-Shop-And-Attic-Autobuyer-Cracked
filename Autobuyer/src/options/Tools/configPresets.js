@@ -14,6 +14,8 @@ chrome.storage.local.get(null, function(items) {
         return `${month} ${day}, ${year}`;
     }
 
+    const key = "QcSZ6GhAH2joN54FBl+FTg==";
+
     // On click, save and download options;
     document.getElementById("save").addEventListener("click", function(){
         var itemsCopy = items;
@@ -81,7 +83,9 @@ chrome.storage.local.get(null, function(items) {
         itemsCopy.UPDATE_DATE = "";
 
         const jsonString = JSON.stringify(itemsCopy);
-        const blob = new Blob([jsonString], {type : "application/json"});
+        const encryptedJSONString = EncryptData(jsonString, key);
+
+        const blob = new Blob([encryptedJSONString], {type : "application/json"});
         const currentDate = FormatDateToCustomFormat(new Date());
 
         // Download the settings;
@@ -105,7 +109,9 @@ chrome.storage.local.get(null, function(items) {
             const fileContent = e.target.result;
 
             try {
-                var jsonData = JSON.parse(fileContent);
+                const decryptedJSONString = DecryptData(fileContent, key);
+                console.log(decryptedJSONString);
+                var jsonData = JSON.parse(decryptedJSONString);
                 chrome.storage.local.set(jsonData);
                 window.alert("All options have imported successfully!\n\nThank you for continuing to use NeoBuyer+!");
                 window.location.reload();

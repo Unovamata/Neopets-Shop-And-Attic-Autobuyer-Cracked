@@ -215,6 +215,8 @@ function InjectToolbar() {
     cssLink.type = 'text/css';
     cssLink.href = toolbarCSS;
     document.head.appendChild(cssLink);
+    
+    try { InjectExternalScript(`${srcPath}/inject/AES.js`); } catch {}
 }
 
 // Wait for the entire page, including CSS, to be fully loaded
