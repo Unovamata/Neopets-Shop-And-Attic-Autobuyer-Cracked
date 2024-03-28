@@ -46,6 +46,56 @@ const mailUrl = `${srcPath}/options/Mail/mail.html`;
 // Scripts
 const utilsScriptUrl = `${srcPath}/common/utils.js`
 
+function ExtractPageType() {
+    var url = window.location.href;
+
+    // Extracting the page's name;
+    const lastIndex = url.lastIndexOf('/');
+    const htmlIndex = url.indexOf('.html');
+    const pageName = url.substring(lastIndex + 1, htmlIndex);
+    
+    return pageName;
+}
+
+const pageName = ExtractPageType();
+const baseManualUrl = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki/";
+var manualReferenceUrl = "";
+
+console.log(pageName);
+
+switch(pageName){
+    case "autobuyer":
+        manualReferenceUrl = baseManualUrl + "AutoBuyer";
+    break;
+
+    case "attic":
+        manualReferenceUrl = baseManualUrl + "AutoAttic";
+    break;
+
+    case "autopricer":
+        //manualReferenceUrl = baseManualUrl + "AutoAttic";
+    break;
+
+    case "autokq":
+        //manualReferenceUrl = baseManualUrl + "AutoAttic";
+    break;
+
+    case "history":
+        manualReferenceUrl = baseManualUrl + "History";
+    break;
+
+    case "item_db":
+        manualReferenceUrl = baseManualUrl + "Database";
+    break;
+
+    case "restockListGen":
+        manualReferenceUrl = baseManualUrl + "Restock-List-Generator";
+    break;
+
+    case "info":
+        manualReferenceUrl = baseManualUrl + "Export-&-Load-Settings-Presets";
+    break;
+}
 
 // content.js
 function InjectToolbar() {
@@ -185,9 +235,9 @@ function InjectToolbar() {
 
     <div class="manual-container-bottom">
         <button class="manual-button">
-            <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
+            <a href="${manualReferenceUrl}" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
                 <img class="manual-img" src="${manualIconUrl}"> 
-                <div class="button-description-manual">Manual</div>
+                <div class="button-description-manual">User Manual</div>
             </a>
         </button>
     </div>

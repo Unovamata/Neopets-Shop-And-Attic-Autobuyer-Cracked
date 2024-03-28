@@ -73,7 +73,7 @@
 
 .notice-text {
     position: absolute; /* Use fixed positioning */
-    transform: translate(50%, -50%); /* Use transform to center the element */
+    transform: translate(45%, -50%); /* Use transform to center the element */
     font-size: 0.7vw;
     color: white;
     font-family: "MuseoSansRounded700", 'Arial Bold', sans-serif;
