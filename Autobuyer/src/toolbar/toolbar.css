@@ -319,7 +319,7 @@
     position: fixed;
     z-index: 1;
     right: 10px;
-    bottom: 55px;
+    bottom: 8vh;
     opacity: 1;
     animation-delay: 0ms;
     animation: slideRight 0.2s ease-out;
@@ -329,7 +329,7 @@
     color: white !important;
 }
 
-.update-notification a {
+.update-notification a, .update-status a {
     text-decoration: none;
     color: white !important;
     font-family: 'Cafeteria', sans-serif;
@@ -403,3 +403,9 @@
     width: 20px;
 }
 
+.valid-version-image {
+    position: absolute;
+    width: 20px;
+    height: auto;
+    transform: translate(-290px);
+}

@@ -18,7 +18,7 @@ const databaseIconUrl = `${srcPath}/toolbar/database-icon.svg`;
 const infoIconUrl = `${srcPath}/toolbar/search-icon.svg`;
 const creditsIconUrl = `${srcPath}/toolbar/gallery-icon.svg`;
 const checkIconUrl = `${srcPath}/toolbar/check.png`;
-const crossIconUrl = `${srcPath}/toolbar/delete.png`;
+const crossIconUrl = `${srcPath}/toolbar/delete.svg`;
 const mailIconUrl = `${srcPath}/toolbar/neomail.svg`;
 const dropdownIconUrl = `${srcPath}/toolbar/dropdown-arrow.png`;
 const communityIconUrl = `${srcPath}/toolbar/communitycentral-icon.png`;
@@ -61,8 +61,6 @@ const pageName = ExtractPageType();
 const baseManualUrl = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki/";
 var manualReferenceUrl = "";
 
-console.log(pageName);
-
 switch(pageName){
     case "autobuyer":
         manualReferenceUrl = baseManualUrl + "AutoBuyer";
@@ -94,6 +92,10 @@ switch(pageName){
 
     case "info":
         manualReferenceUrl = baseManualUrl + "Export-&-Load-Settings-Presets";
+    break;
+
+    case "mail":
+        //manualReferenceUrl = baseManualUrl + "Export-&-Load-Settings-Presets";
     break;
 }
 
@@ -323,14 +325,14 @@ function UpdateNotification(){
             switch(parsedVersion){
                 // Github's API can't be reached;
                 case 'a':
-                    CreateNotificationElement(isLatestVersion, warningColor, "Unable to Check for Updates...", "../../../icons/delete.svg");
-                    isLatestVersion = true; // It can be the latest version for all we know;
+                    CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ API Can't Be Reached...", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
+                    isLatestVersion = false; // It can be the latest version for all we know;
                 break;
 
                 // Unknown error;
                 case 'b':
-                    CreateNotificationElement(isLatestVersion, errorColor, "Update Checker Failed...", "../../../icons/delete.svg");
-                    isLatestVersion = true; // It can be the latest version for all we know;
+                    CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Checker Failed...", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
+                    isLatestVersion = false; // It can be the latest version for all we know;
                 break;
 
                 // Normal version checking;
@@ -339,7 +341,7 @@ function UpdateNotification(){
                         CreateNotificationElement(isLatestVersion, successColor);
                         setUPDATE_DATE(parsedDate);
                     } else {
-                        CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Required", "../../../icons/delete.svg", true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
+                        CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Required", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
                     }
                 break;
             }
@@ -372,7 +374,7 @@ async function FetchLatestGitHubVersion(apiUrl) {
 
 var notifications = 0;
 
-function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is up to Date!", imageSrc = "../../../icons/check.png", isOutdated = false, classToolbar = "update-notification", versions = []){
+function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is up to Date!", imageSrc = checkIconUrl, isOutdated = false, classToolbar = "update-notification", versions = []){
     setTimeout(() => {
         const updateNotification = document.createElement("span");
         updateNotification.className = classToolbar;
@@ -380,7 +382,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
 
         // Creating the image component;
         const updateImage = document.createElement("img");
-        updateImage.className = "update-image";
+        updateImage.className = "valid-version-image";
         updateImage.src = imageSrc;
 
         // Setting the update status;
@@ -396,6 +398,8 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
 
         // For outdated versions of the extension;
         if(isOutdated){
+            updateImage.className = "update-image";
+
             updateStatus.appendChild(document.createElement("br"));
             CreateMessage(`You are currently using an older version of NeoBuyer+. The latest version available is ${versions[0]}, whereas you are currently using version ${versions[0]}.`);
             CreateMessage(`We advise you to update to the latest version as soon as possible. These updates contain critical fixes or optimizations that allow NeoBuyer+ to become undetectable to TNT. `);

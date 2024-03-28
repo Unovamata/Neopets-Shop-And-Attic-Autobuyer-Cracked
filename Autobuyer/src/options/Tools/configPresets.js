@@ -91,7 +91,7 @@ chrome.storage.local.get(null, function(items) {
         // Download the settings;
         chrome.downloads.download({
             url: URL.createObjectURL(blob),
-            filename: "NeoBuyer+ Config " + currentDate + ".json",
+            filename: "NeoBuyer+ Config " + currentDate,
             conflictAction: "overwrite", // Overwrite the file if it already exists;
         });
     });
