@@ -94,41 +94,4 @@ inputList.onchange = function (){
 }
 
 
-
-
-//######################################################################################################################################
-
-
-const shopsDirectoryButton = document.getElementById("shopDirectory");
-
-shopsDirectoryButton.addEventListener('click', function() {
-    chrome.tabs.create({ url: 'https://www.jellyneo.net/?go=shopsdirectory', active: true });
-});
-
-
-//######################################################################################################################################
-
-
-const generatorContainer = document.getElementById('restock-list-generator');
-const tutorialContainer = document.getElementById('tutorial-display');
-
-const generatorButton = document.getElementById("generator");
-generatorButton.addEventListener('click', ShowListGenerator);
-
-function ShowListGenerator(){
-    generatorContainer.style.display = 'block';
-    tutorialContainer.style.display = 'none';
-}
-
-const tutorialButton = document.getElementById("tutorial");
-tutorialButton.addEventListener('click', ShowTutorialStock);
-
-function ShowTutorialStock(){
-    tutorialContainer.style.display = 'block';
-    generatorContainer.style.display = 'none';
-}
-
-tutorialContainer.style.display = 'none';
-
-
 //######################################################################################################################################
