@@ -71,7 +71,7 @@ switch(pageName){
     break;
 
     case "autopricer":
-        //manualReferenceUrl = baseManualUrl + "AutoAttic";
+        manualReferenceUrl = baseManualUrl + "AutoPricer";
     break;
 
     case "autokq":
