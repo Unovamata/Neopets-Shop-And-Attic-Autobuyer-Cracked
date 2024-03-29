@@ -366,8 +366,8 @@
 
 .update-notification-full img {
     width: 10%;
-    padding-left: 5vw; /* Add padding */
-    height: auto; /* Allow aspect ratio to be maintained */
+    padding-left: 5vw;
+    height: auto;
 }
 
 
@@ -404,8 +404,8 @@
 }
 
 .valid-version-image {
-    position: absolute;
+    position: fixed;
     width: 20px;
     height: auto;
-    transform: translate(-290px);
+    right: 33%;
 }

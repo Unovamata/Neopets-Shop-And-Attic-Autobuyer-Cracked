@@ -450,11 +450,11 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
             updateStatus.appendChild(messageElement);
             updateStatus.appendChild(document.createElement("br"));
         }
-    }, 1500 * notifications);
+    }, 3000 * notifications);
 }
 
 const emailCheckURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
-var mailSuccessColor = "#1889e0";
+var mailSuccessColor = "#20f36a";
 
 // Checks for new NeoBuyer+ mails daily;
 function CheckNewMail(){
