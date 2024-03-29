@@ -75,7 +75,7 @@ switch(pageName){
     break;
 
     case "autokq":
-        //manualReferenceUrl = baseManualUrl + "AutoAttic";
+        manualReferenceUrl = baseManualUrl + "AutoKQ";
     break;
 
     case "history":
@@ -95,7 +95,7 @@ switch(pageName){
     break;
 
     case "mail":
-        //manualReferenceUrl = baseManualUrl + "Export-&-Load-Settings-Presets";
+        manualReferenceUrl = baseManualUrl + "Mail";
     break;
 }
 
