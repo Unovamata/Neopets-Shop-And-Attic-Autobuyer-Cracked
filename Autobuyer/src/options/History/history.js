@@ -65,14 +65,25 @@ function ProcessPurchaseHistory(forceUpdateHistory) {
         ITEM_HISTORY: [],
     }, (function(t) {
         // Processing the history data;
-        const history = t.ITEM_HISTORY;
-        const historySize = t.ITEM_HISTORY.length;
+        var history = t.ITEM_HISTORY;
+        var historySize = t.ITEM_HISTORY.length;
+
         const processedData = ProcessItemData(history);
 
         // Force updating if necessary;
         if (forceUpdateHistory || currentHistorySize != historySize) {
+            // Removing the NeoPass message;
+            const filteredList = history.filter(entry => !entry["Item Name"].includes("We are excited to announce that we have upgraded our system to"));
+
+            history = filteredList;
+            historySize = history.length;
+
+            const processedData = ProcessItemData(history);
+
+            if(currentHistorySize != historySize) setITEM_HISTORY(processedData);
+
             currentHistorySize = historySize;
-            DisplayTableData(processedData, ["JN"], chunkSize, FilterFunction);
+            DisplayTableData(processedData, ["JN"], chunkSize, FilterFunction);            
 
             try { AveragePurchaseRatios(processedData, "mainShopRatioChart", "atticRatioChart"); } catch {}
         }
@@ -95,6 +106,8 @@ function ProcessItemData(itemArray){
     itemArray.forEach(function(item, index){
         const itemInfo = item_db[item["Item Name"]];
 
+
+        
         if(itemInfo == undefined){
             item.Rarity = "?";
             item["Est. Value"] = "";
