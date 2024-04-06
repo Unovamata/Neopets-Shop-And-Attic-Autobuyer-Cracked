@@ -492,21 +492,6 @@ function setAUTOKQ_STATUS(value) {
     chrome.storage.local.set({ AUTOKQ_STATUS: value }, function () {});
 }
 
-function getAUTOKQ_STATUS(callback) {
-    chrome.storage.local.get(['AUTOKQ_STATUS'], function (result) {
-        var value = result.AUTOKQ_STATUS;
-
-        // Check if value is undefined or null, and set it to false
-        if (value === undefined || value === null) {
-            setAUTOKQ_STATUS("Inactive");
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
 function setSTART_AUTOKQ_PROCESS(value) {
     chrome.storage.local.set({ START_AUTOKQ_PROCESS: value }, function () {});
 }
@@ -527,20 +512,6 @@ function getSTART_AUTOKQ_PROCESS(callback) {
 
 function setSUBMIT_AUTOKQ_PROCESS(value) {
     chrome.storage.local.set({ SUBMIT_AUTOKQ_PROCESS: value }, function () {});
-}
-
-function getSUBMIT_AUTOKQ_PROCESS(callback) {
-    chrome.storage.local.get(['SUBMIT_AUTOKQ_PROCESS'], function (result) {
-        var value = result.SUBMIT_AUTOKQ_PROCESS;
-
-        if(value == undefined || value == null){
-            setSUBMIT_AUTOKQ_PROCESS(false);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
 }
 
 function setKQ_INVENTORY(value) {

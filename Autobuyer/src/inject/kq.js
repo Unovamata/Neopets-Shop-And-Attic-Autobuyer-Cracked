@@ -87,7 +87,14 @@ chrome.storage.local.get({
         return new Promise(async (resolve) => {
             var levelOrHitPointText = " has gained a ", statText = " has become better at ", itemText = "You get a ", neopointsText = "You have been given ";
             var prizeElement = await SearchInAllElements(levelOrHitPointText, statText, itemText, neopointsText);
-            var prizeText = prizeElement.textContent;
+            var prizeText;
+
+            try {
+                prizeText = prizeElement.textContent
+            } catch { 
+                window.location.reload();
+            }
+
             var petName = document.querySelectorAll('.profile-dropdown-link')[0].textContent;
     
             
