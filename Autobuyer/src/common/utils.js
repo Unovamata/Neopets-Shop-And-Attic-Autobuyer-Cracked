@@ -110,22 +110,13 @@ function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
 }
 
 function CheckIfWithinTimeframe(time, timeFrom, timeTo){
-    const hours = time.getHours(),
-    minutes = time.getMinutes(),
-    seconds = time.getSeconds(),
-    fromHours = timeFrom.getHours(),
-    fromMinutes = timeFrom.getMinutes(),
-    fromSeconds = timeFrom.getSeconds(),
-    toHours = timeTo.getHours(),
-    toMinutes = timeTo.getMinutes(),
-    toSeconds = timeTo.getSeconds();
+    const currentTimeMs = time.getTime(),
+          timeFromMs = timeFrom.getTime(),
+          timeToMs = timeTo.getTime();
 
-    var isWithinHours = !(hours >= fromHours || hours <= toHours),
-        isWithinMinutes = isWithinHours && (minutes >= fromMinutes || minutes <= toMinutes),
-        isWithinSeconds = isWithinMinutes && (seconds >= fromSeconds || seconds <= toSeconds),
-        isPaused = isWithinSeconds;
-
-    return isPaused;
+    var isWithinRange = currentTimeMs >= timeFromMs && currentTimeMs <= timeToMs;
+    
+    return !isWithinRange; // Return true if the time is NOT within the range
 }
 
 

@@ -202,8 +202,10 @@ function InjectAutoPricer() {
             const timeFrom = new Date(runAutobuyerFrom);
             const timeTo = new Date(runAutobuyerTo);
             const date = new Date();
+
+            console.log(date, timeFrom);
         
-            const timeDifference = Math.abs(timeFrom.getTime() - date.getTime());
+            const timeDifference = timeFrom.getTime() - date.getTime();
 
             // Check if the AutoBuyer has not been paused;
             var isPaused = CheckIfWithinTimeframe(date, timeFrom, timeTo);
