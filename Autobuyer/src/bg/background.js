@@ -39,6 +39,8 @@ chrome.runtime.onInstalled.addListener(function(e) {
 	if(e.reason == "install") {
 		const autoPricerDefaultSettings = {
 			// AutoBuyer;
+			RUN_AUTOBUYER_FROM_MS: 1712386800000,
+			RUN_AUTOBUYER_TO_MS: 1712473199000,
 			MIN_FIVE_SECOND_RULE_REFRESH: 5000,
 			MAX_FIVE_SECOND_RULE_REFRESH: 10000,
 			SHOULD_BYPASS_CONFIRM: false,

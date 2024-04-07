@@ -1,4 +1,3 @@
-
 chrome.storage.local.get({
     START_AUTOKQ_PROCESS: false,
     SUBMIT_AUTOKQ_PROCESS: false,

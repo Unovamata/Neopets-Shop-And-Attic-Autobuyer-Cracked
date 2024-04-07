@@ -1,4 +1,4 @@
-const tableContainer = document.getElementById("table-container");
+var tableContainer;
 
 chrome.storage.local.get({
     AUTOKQ_STATUS: "Inactive",
@@ -150,8 +150,10 @@ chrome.storage.local.get({
         UpdateNavigation();
     }
 
-    var currentHistorySize = -1;
 
+    var currentHistorySize = -1;
+    tableContainer = document.getElementById("table-container");
+    
     function ProcessAutoKQLog(forceUpdateHistory) {
         const history = kqTracker.reverse();
         const historySize = history.length;

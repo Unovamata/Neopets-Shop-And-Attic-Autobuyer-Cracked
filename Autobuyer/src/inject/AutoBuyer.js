@@ -31,10 +31,12 @@ function InjectAutoPricer() {
         MIN_CLICK_CONFIRM: 100,
         MAX_CLICK_CONFIRM: 200,
         STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
+        RUN_AUTOBUYER_FROM_MS: 1712386800000,
+	    RUN_AUTOBUYER_TO_MS: 1712473199000,
         RUN_BETWEEN_HOURS: [0, 23],
         PAUSE_BETWEEN_MINUTES: [],
         RESTOCK_LIST: defaultDesiredItems,
-    }, (function(autobuyerVariables) {
+    }, (async function(autobuyerVariables) {
         
         // Destructing the variables extracted from the extension;
         const {
@@ -53,6 +55,8 @@ function InjectAutoPricer() {
             SHOULD_BYPASS_CONFIRM: isBypassingConfirm,
             SHOULD_GO_FOR_SECOND_MOST_VALUABLE: isBuyingSecondMostProfitable,
             STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: storesToCycle,
+            RUN_AUTOBUYER_FROM_MS: runAutobuyerFrom,
+	        RUN_AUTOBUYER_TO_MS: runAutobuyerTo,
             RUN_BETWEEN_HOURS: runBetweenHours,
             PAUSE_BETWEEN_MINUTES: pauseBetweenMinutes,
             MIN_REFRESH: minRefreshIntervalUnstocked,
@@ -187,118 +191,108 @@ function InjectAutoPricer() {
 
         
         // This code is better to not touch it as it breaks with any change made to it;
-        itemToBuyExtracted ? async function(e) {
-            //Clicking the selected item;
+        if (itemToBuyExtracted) {
+            // Clicking the selected item;
             if (isClickingItems) {
-                var itemToBuyElement = document.querySelector(`.item-img[data-name="${e}"]`);
-
+                var itemToBuyElement = document.querySelector(`.item-img[data-name="${itemToBuyExtracted}"]`);
                 await Sleep(minClickImageInterval, maxClickImageInterval);
-
                 itemToBuyElement.click();
             }
-        }(itemToBuyExtracted) : ! function() {
-            const date = new Date(),
-            hours = date.getHours(),
-            minutes = date.getMinutes();
+        } else {
+            const timeFrom = new Date(runAutobuyerFrom);
+            const timeTo = new Date(runAutobuyerTo);
+            const date = new Date();
+        
+            const timeDifference = Math.abs(timeFrom.getTime() - date.getTime());
 
             // Check if the AutoBuyer has not been paused;
-            let notPaused = hours >= runBetweenHours[0] && hours <= runBetweenHours[1];
+            var isPaused = CheckIfWithinTimeframe(date, timeFrom, timeTo);
 
-            // If it is, return immediately;
-            if (pauseBetweenMinutes.length <= 0 || (notPaused && minutes >= 0 && minutes <= 60)) {
-                return notPaused;
+            if (isPaused) {
+                UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
+                await Sleep(timeDifference);
             }
-
+        
             // If it's not, check if it's the current minute pause;
             for (let i = 0; i < pauseBetweenMinutes.length; i += 2) {
                 const startMinute = pauseBetweenMinutes[i];
                 const endMinute = pauseBetweenMinutes[i + 1];
-
+        
                 // If it's time to pause, add a pause based on the leftover minutes between the end and current time;
                 if (minutes >= startMinute && minutes <= endMinute) {
-                    const delayMinutes = endMinute - minutes + 1;
-                    
-                    setTimeout(() => {
-                        location.reload();
-                    }, delayMinutes * 60000);
-
                     UpdateBannerAndDocument(`Paused until ${hours}:${(endMinute < 10 ? '0' : '') + endMinute}`, "Waiting for scheduled time in main shop");
-                    return false;
+
+                    const delayMinutes = (endMinute - minutes + 1) * 60000;
+                    
+                    await Sleep(delayMinutes);
                 }
             }
-            
-            if (!notPaused) {
-                UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in the main shop");
-            }
-
-            return notPaused;
-
-
-        }() ? (isRunningOnScheduledTime || (isRunningOnScheduledTime = !0), setTimeout((function() {
-            // RunAutoBuyer()
-        }), 3e4)) : ReloadPageBasedOnConditions(),
-        function() {
-            if (isClickingConfirm) {
-                
-                var isClicked = !1;
-
-                clearInterval(shopIntervals), shopIntervals = setInterval((function() {
-                    var t, n = document.getElementById("confirm-link");
-                    ((t = n)
-                        .offsetWidth || t.offsetHeight || t.getClientRects()
-                        .length) && setTimeout((function() {
-                        isClicked || (n.click(), isClicked = !0)
-                    }), GetRandomFloat(minClickConfirmInterval, maxClickConfirmInterval));
-                }), confirmWindowInteral)
-            }
-        }()
-
+        }
+        
+        ReloadPageBasedOnConditions();
+        
+        
+        if (isClickingConfirm) {
+            var isClicked = false;
+            clearInterval(shopIntervals);
+            shopIntervals = setInterval(() => {
+                var n = document.getElementById("confirm-link");
+                if (n.offsetWidth || n.offsetHeight || n.getClientRects().length) {
+                    setTimeout(() => {
+                        if (!isClicked) {
+                            n.click();
+                            isClicked = true;
+                        }
+                    }, GetRandomFloat(minClickConfirmInterval, maxClickConfirmInterval));
+                }
+            }, confirmWindowInteral);
+        }
+        
         async function ReloadPageBasedOnConditions() {
             // Calculate the number of stocked items
             var currentStockedItems = Array.from(document.querySelectorAll(".item-img")).length;
             UpdateDocument(currentStockedItems + " stocked items", "", false);
-
+        
             // If the bot should only refresh if the shop is cleared and the shop is not cleared, then stop refreshing;
-            if(shouldOnlyRefreshOnClear){
-                if(currentStockedItems > 0){
-                    UpdateBannerStatus("Shop Stocked, Stopping. Refreshing Only on Clears.");
-                    return;
-                }
+            if (shouldOnlyRefreshOnClear && currentStockedItems > 0) {
+                UpdateBannerStatus("Shop Stocked, Stopping. Refreshing Only on Clears.");
+                return;
+            }
+        
+            var cooldown;
+            
+            if (currentStockedItems < minItemsToConsiderStocked) {
+                cooldown = GetRandomFloat(minRefreshIntervalUnstocked, maxRefreshIntervalUnstocked);
+                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
+            } else {
+                cooldown = GetRandomFloat(minRefreshIntervalStocked, maxRefreshIntervalStocked);
+                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
             }
 
+            await Sleep(cooldown);
+        
             if (currentStockedItems < minItemsToConsiderStocked) {
-                var cooldown = GetRandomFloat(minRefreshIntervalUnstocked, maxRefreshIntervalUnstocked);
-
-                // Handle case when not enough items are stocked
-                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
-
-                await Sleep(cooldown);
-
                 location.reload();
             } else {
-                var cooldown = GetRandomFloat(minRefreshIntervalStocked, maxRefreshIntervalStocked);
-                
-                // Handle case when enough items are stocked
-                UpdateBannerStatus("Waiting " + FormatMillisecondsToSeconds(cooldown) + " to reload page...");
-                
-                await Sleep(cooldown);
-
-                // Handle cycling through shops
-                if (storesToCycle.length === 0) {
-                    location.reload();
-                } else if (storesToCycle.length === 1) {
-                    window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
+                HandleCyclingThroughShops();
+            }
+        }
+        
+        function HandleCyclingThroughShops() {
+            if (storesToCycle.length === 0) {
+                location.reload();
+            } else if (storesToCycle.length === 1) {
+                window.location.href = "http://www.neopets.com/objects.phtml?type=shop&obj_type=" + storesToCycle[0];
+            } else {
+                const currentShopId = window.location.toString().match(/obj_type=(\d+)/)[1];
+                const currentIndex = storesToCycle.findIndex(shopId => shopId == currentShopId);
+        
+                if (currentIndex === -1) {
+                    window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${storesToCycle[0]}`;
                 } else {
-                    const currentShopId = window.location.toString().match(/obj_type=(\d+)/)[1];
-                    const currentIndex = storesToCycle.findIndex(shopId => shopId == currentShopId);
-
-                    if (currentIndex === -1) {
-                        window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${storesToCycle[0]}`;
-                    } else {
-                        const nextIndex = currentIndex === storesToCycle.length - 1 ? 0 : currentIndex + 1;
-                        const nextShopId = storesToCycle[nextIndex];
-                        window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${nextShopId}`;
-                    }
+                    const nextIndex = currentIndex === storesToCycle.length - 1 ? 0 : currentIndex + 1;
+                    const nextShopId = storesToCycle[nextIndex];
+                    window.location.href = `http://www.neopets.com/objects.phtml?type=shop&obj_type=${nextShopId}`;
                 }
             }
         }

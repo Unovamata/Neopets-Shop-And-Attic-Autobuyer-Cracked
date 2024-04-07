@@ -109,6 +109,25 @@ function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
     return selectedName;
 }
 
+function CheckIfWithinTimeframe(time, timeFrom, timeTo){
+    const hours = time.getHours(),
+    minutes = time.getMinutes(),
+    seconds = time.getSeconds(),
+    fromHours = timeFrom.getHours(),
+    fromMinutes = timeFrom.getMinutes(),
+    fromSeconds = timeFrom.getSeconds(),
+    toHours = timeTo.getHours(),
+    toMinutes = timeTo.getMinutes(),
+    toSeconds = timeTo.getSeconds();
+
+    var isWithinHours = !(hours >= fromHours || hours <= toHours),
+        isWithinMinutes = isWithinHours && (minutes >= fromMinutes || minutes <= toMinutes),
+        isWithinSeconds = isWithinMinutes && (seconds >= fromSeconds || seconds <= toSeconds),
+        isPaused = isWithinSeconds;
+
+    return isPaused;
+}
+
 
 //// AutoBuyers' Visual Functions;
 
