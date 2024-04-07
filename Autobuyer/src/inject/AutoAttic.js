@@ -25,6 +25,8 @@ function InjectAutoAttic() {
         ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: .5,
         ATTIC_MIN_BUY_TIME: 500,
         ATTIC_MAX_BUY_TIME: 750,
+        RUN_AUTOATTIC_FROM_MS: 1712386800000,
+		RUN_AUTOATTIC_TO_MS: 1712473199000,
         ATTIC_RUN_BETWEEN_HOURS: [0, 23],
         ATTIC_MIN_REFRESH: 2500,
         ATTIC_MAX_REFRESH: 3500,
@@ -51,7 +53,8 @@ function InjectAutoAttic() {
             ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: minDBProfitPercentToBuyInAttic,
             ATTIC_MIN_BUY_TIME: minAtticBuyTime,
             ATTIC_MAX_BUY_TIME: maxAtticBuyTime,
-            ATTIC_RUN_BETWEEN_HOURS: atticRunBetweenHours,
+            RUN_AUTOATTIC_FROM_MS: runAutoAtticFrom,
+		    RUN_AUTOATTIC_TO_MS: runAutoAtticTo,
             ATTIC_MIN_REFRESH: minRefreshIntervalAttic,
             ATTIC_MAX_REFRESH: maxRefreshIntervalAttic,
             ATTIC_SHOULD_REFRESH: isAtticAutoRefreshing,
@@ -61,8 +64,7 @@ function InjectAutoAttic() {
             ATTIC_NEXT_END_WINDOW: atticEndWindow,
         } = autobuyerVariables;
         
-        var isRunningOnScheduledTime = false,
-        atticWaitTime = 1200000,
+        var atticWaitTime = 1200000,
         atticRestocked  = false;
 
         // Calculate the time to wait before the next refresh
@@ -217,31 +219,38 @@ function InjectAutoAttic() {
             
             // Wait for the scheduled time or run the AutoBuyer
             if(isAtticAutoRefreshing){
-                if(IsTimeToAutoRefreshAttic() && isRunningOnScheduledTime){
-                    UpdateBannerAndDocument("Waiting", "Waiting for scheduled time in Attic");
-                    isRunningOnScheduledTime = true;
+                IsTimeToAutoRefreshAttic()
 
-                    RunAutoAttic();
-                } else {
-                    // Waiting a minute before updating after a restock happened;
-                    if(atticRestocked){
-                        setATTIC_PREV_NUM_ITEMS(ItemsStocked);
-                        setATTIC_LAST_REFRESH_MS(lastRestock);
+                // Waiting a minute before updating after a restock happened;
+                if(atticRestocked){
+                    setATTIC_PREV_NUM_ITEMS(ItemsStocked);
+                    setATTIC_LAST_REFRESH_MS(lastRestock);
 
-                        UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
+                    UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
 
-                        await Sleep(atticWaitAfterAction);
-                    }
-
-                    AutoRefreshAttic();
+                    await Sleep(atticWaitAfterAction);
                 }
+
+                AutoRefreshAttic();
             }
 
             // Additional function to check if it's time to auto-refresh the Attic
-            function IsTimeToAutoRefreshAttic() {
-                var now = new Date();
-                var currentHour = now.getHours();
-                return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
+            async function IsTimeToAutoRefreshAttic() {
+                const timeFrom = new Date(runAutoAtticFrom);
+                const timeTo = new Date(runAutoAtticTo);
+                const date = new Date();
+
+                console.log(date, timeFrom);
+            
+                const timeDifference = timeFrom.getTime() - date.getTime();
+
+                // Check if the AutoBuyer has not been paused;
+                var isPaused = CheckIfWithinTimeframe(date, timeFrom, timeTo);
+
+                if (isPaused) {
+                    UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
+                    await Sleep(timeDifference);
+                }
             }
 
             // Update the stored number of items

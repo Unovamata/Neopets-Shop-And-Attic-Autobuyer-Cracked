@@ -8,7 +8,6 @@ function setATTIC_MAX_REFRESH(_) { chrome.storage.local.set({ATTIC_MAX_REFRESH: 
 function setATTIC_ITEM_DB_MIN_PROFIT_NPS(_) { chrome.storage.local.set({ATTIC_ITEM_DB_MIN_PROFIT_NPS: _}, (function () {})) }
 function setATTIC_ITEM_DB_MIN_PROFIT_PERCENT(_) { chrome.storage.local.set({ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: _}, (function () {})) }
 function setATTIC_HIGHLIGHT(_) { chrome.storage.local.set({ATTIC_HIGHLIGHT: _}, (function () {})) }
-function setATTIC_RUN_BETWEEN_HOURS(_) { chrome.storage.local.set({ATTIC_RUN_BETWEEN_HOURS: _}, (function () {})) }
 function setPAUSE_AFTER_BUY_MS(_) { chrome.storage.local.set({PAUSE_AFTER_BUY_MS: Number(_)}, (function () {})) }
 function setSEND_TO_SDB_AFTER_PURCHASE(_) { chrome.storage.local.set({SEND_TO_SDB_AFTER_PURCHASE: Number(_)}, (function () {})) }
 function setMIN_REFRESH(_) { chrome.storage.local.set({MIN_REFRESH: Number(_)}, (function () {})) }
@@ -29,7 +28,6 @@ function setSHOULD_SOUND_ALERTS(_) { chrome.storage.local.set({SHOULD_SOUND_ALER
 function setSHOULD_ENTER_OFFER(_) { chrome.storage.local.set({SHOULD_ENTER_OFFER: _}, (function () {})) }
 function setSHOULD_GO_FOR_SECOND_MOST_VALUABLE(_) { chrome.storage.local.set({SHOULD_GO_FOR_SECOND_MOST_VALUABLE: _}, (function () {})) }
 function setSTORES_TO_CYCLE_THROUGH_WHEN_STOCKED(_) { chrome.storage.local.set({STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: _}, (function () {})) }
-function setRUN_BETWEEN_HOURS(_) { chrome.storage.local.set({RUN_BETWEEN_HOURS: _}, (function () {})) }
 function setPAUSE_BETWEEN_MINUTES(_) { chrome.storage.local.set({PAUSE_BETWEEN_MINUTES: _}, (function () {})) }
 function setITEMS_TO_CONSIDER_STOCKED(_) { chrome.storage.local.set({ITEMS_TO_CONSIDER_STOCKED: Number(_)}, (function () {})) }
 function setMIN_CLICK_ITEM_IMAGE(_) { chrome.storage.local.set({MIN_CLICK_ITEM_IMAGE: Number(_)}, (function () {})) }
@@ -290,12 +288,6 @@ $("#ATTIC_MIN_BUY_TIME").bind("input propertychange", (function () {
 $("#ATTIC_MAX_BUY_TIME").bind("input propertychange", (function () {
   setATTIC_MAX_BUY_TIME($("#ATTIC_MAX_BUY_TIME").val())
 }));
-$("#ATTIC_RUN_BETWEEN_HOURS").bind("input propertychange", (function () {
-  try {
-    var _ = JSON.parse($("#ATTIC_RUN_BETWEEN_HOURS").val());
-    (!Array.isArray(_) || _.length < 2 || _.length > 2) && (_ = [0, 23]), _[0] < 0 && (_[0] = 0), _[1] > 23 && (_[1] = 23), _[1] < 0 && (_[1] = 0), _[0] > 23 && (_[0] = 23), _[0] > _[1] && (_ = [0, 23]), setATTIC_RUN_BETWEEN_HOURS(_)
-  } catch (_) {}
-}));
 
 $("#RESTOCK_LIST").bind("input propertychange", (function () {
   try {
@@ -347,12 +339,7 @@ $("#MIN_OCR_PAGE").bind("input propertychange", (function () {
 $("#MAX_OCR_PAGE").bind("input propertychange", (function () {
   setMAX_OCR_PAGE($("#MAX_OCR_PAGE").val())
 }));
-$("#RUN_BETWEEN_HOURS").bind("input propertychange", (function () {
-  try {
-    var _ = JSON.parse($("#RUN_BETWEEN_HOURS").val());
-    (!Array.isArray(_) || _.length < 2 || _.length > 2) && (_ = [0, 23]), _[0] < 0 && (_[0] = 0), _[1] > 23 && (_[1] = 23), _[1] < 0 && (_[1] = 0), _[0] > 23 && (_[0] = 23), _[0] > _[1] && (_ = [0, 23]), setRUN_BETWEEN_HOURS(_)
-  } catch (_) {}
-}));
+
 $("#PAUSE_BETWEEN_MINUTES").bind("input propertychange", (function () {
   try {
     var _ = JSON.parse($("#PAUSE_BETWEEN_MINUTES").val());
@@ -951,7 +938,6 @@ resetButton.onclick = function (_) {
   SHOULD_ENTER_OFFER: !0,
   SHOULD_GO_FOR_SECOND_MOST_VALUABLE: !1,
   STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
-  RUN_BETWEEN_HOURS: [0, 23],
   PAUSE_BETWEEN_MINUTES: [],
   RESTOCK_LIST: defaultDesiredItems,
   ATTIC_ENABLED: !0,
@@ -961,7 +947,6 @@ resetButton.onclick = function (_) {
   ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: .5,
   ATTIC_MIN_BUY_TIME: 500,
   ATTIC_MAX_BUY_TIME: 1e3,
-  ATTIC_RUN_BETWEEN_HOURS: [0, 23],
   ATTIC_MIN_REFRESH: 2500,
   ATTIC_MAX_REFRESH: 3500,
   ATTIC_SHOULD_REFRESH: !1,
@@ -1088,7 +1073,6 @@ resetButton.onclick = function (_) {
     UpdateDateTimeInputs(_.ATTIC_LAST_REFRESH_MS, true, _.RUN_AUTOATTIC_FROM_MS, _.RUN_AUTOATTIC_TO_MS);
   }
   
-  $("#ATTIC_RUN_BETWEEN_HOURS").val("[" + _.ATTIC_RUN_BETWEEN_HOURS + "]");
   $("#ITEM_DB_MIN_PROFIT_NPS").val(_.ITEM_DB_MIN_PROFIT_NPS);
   $("#ITEM_DB_MIN_PROFIT_PERCENT").val(_.ITEM_DB_MIN_PROFIT_PERCENT);
   $("#USE_ITEM_DB").prop("checked", _.USE_ITEM_DB);
@@ -1097,7 +1081,6 @@ resetButton.onclick = function (_) {
   $("#MIN_REFRESH_STOCKED").val(_.MIN_REFRESH_STOCKED);
   $("#MAX_REFRESH_STOCKED").val(_.MAX_REFRESH_STOCKED);
   $("#STORES_TO_CYCLE_THROUGH_WHEN_STOCKED").val("[" + _.STORES_TO_CYCLE_THROUGH_WHEN_STOCKED + "]");
-  $("#RUN_BETWEEN_HOURS").val("[" + _.RUN_BETWEEN_HOURS + "]");
   $("#PAUSE_BETWEEN_MINUTES").val("[" + _.PAUSE_BETWEEN_MINUTES + "]");
   $("#ITEMS_TO_CONSIDER_STOCKED").val(_.ITEMS_TO_CONSIDER_STOCKED);
   $("#MIN_CLICK_ITEM_IMAGE").val(_.MIN_CLICK_ITEM_IMAGE);

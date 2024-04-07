@@ -33,7 +33,6 @@ function InjectAutoPricer() {
         STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
         RUN_AUTOBUYER_FROM_MS: 1712386800000,
 	    RUN_AUTOBUYER_TO_MS: 1712473199000,
-        RUN_BETWEEN_HOURS: [0, 23],
         PAUSE_BETWEEN_MINUTES: [],
         RESTOCK_LIST: defaultDesiredItems,
     }, (async function(autobuyerVariables) {
