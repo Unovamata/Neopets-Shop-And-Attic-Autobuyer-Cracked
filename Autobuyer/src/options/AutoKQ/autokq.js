@@ -1,17 +1,7 @@
-var tableContainer;
+AutoKitchenQuest();
 
-chrome.storage.local.get({
-    AUTOKQ_STATUS: "Inactive",
-    START_AUTOPRICING_PROCESS: false,
-    START_AUTOKQ_PROCESS: false,
-    KQ_TRACKER: [],
-}, (function(autoKQVariables) {
-    const { 
-        AUTOKQ_STATUS: autoKQStatus,
-        START_AUTOPRICING_PROCESS: isAutoPricerActive,
-        START_AUTOKQ_PROCESS: isAutoKQActive,
-        KQ_TRACKER: kqTracker,
-    } = autoKQVariables;
+async function AutoKitchenQuest(){
+    var autoKQStatus = await getVARIABLE("AUTOKQ_STATUS");
 
     const statusTag = document.getElementById("status-tag");
 
@@ -19,13 +9,14 @@ chrome.storage.local.get({
     statusTag.textContent = autoKQStatus;
 
     // Checks constantly if the inventory page needs to update;
-    function UpdateGUIData() {
+    async function UpdateGUIData() {
         ShowOrHideLoading(autoKQStatus);
         statusTag.textContent = autoKQStatus;
+        autoKQStatus = await getVARIABLE("AUTOKQ_STATUS");
     }
 
     // Updates the page's data every half a second when opened and needed;
-    setInterval(UpdateGUIData, 500);
+    setInterval(UpdateGUIData, 100);
 
     //######################################################################################################################################
 
@@ -35,25 +26,27 @@ chrome.storage.local.get({
 
     var autoPricingList = [];
 
-    function StartAutoKQ(){
-        setSTART_INVENTORY_PROCESS(false);
-        setSTART_INVENTORY_PROCESS(false);
-        setSUBMIT_PRICES_PROCESS(false);
+    async function StartAutoKQ(){
+        setVARIABLE("START_INVENTORY_PROCESS", false);
+        setVARIABLE("START_INVENTORY_PROCESS", false);
+        setVARIABLE("SUBMIT_PRICES_PROCESS", false);
+
+        var isAutoPricerActive = await getVARIABLE("START_AUTOPRICING_PROCESS");
 
         if(isAutoPricerActive){
-            setAUTOPRICER_STATUS("AutoPricer Process Cancelled by the AutoKQ Process...");
+            setVARIABLE("AUTOPRICER_STATUS", "AutoPricer Process Cancelled by the AutoKQ Process...");
         }
 
-        setSTART_AUTOPRICING_PROCESS(false);
+        setVARIABLE("START_AUTOPRICING_PROCESS", false);
 
-        setSTART_AUTOKQ_PROCESS(true);
-        setSUBMIT_AUTOKQ_PROCESS(false);
-        setAUTOKQ_STATUS("Navigating to the KQ Page...");
+        setVARIABLE("START_AUTOKQ_PROCESS", true);
+        setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+        setVARIABLE("AUTOKQ_STATUS", "Navigating to the KQ Page...");
         
 
         chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: true });
 
-        setAUTOKQ_STATUS("AutoKQ Process Running...");
+        setVARIABLE("AUTOKQ_STATUS", "AutoKQ Process Running...");
     }
 
     const cancelAutoKQButton = document.getElementById("cancel");
@@ -61,19 +54,20 @@ chrome.storage.local.get({
 
     function CancelAutoPricer(){
         if(confirm("Do you want to terminate the current AutoPricer process?")){
-            setSTART_AUTOPRICING_PROCESS(false);
-            setAUTOPRICER_INVENTORY([]);
-            setCURRENT_PRICING_INDEX(0);
-            setSUBMIT_PRICES_PROCESS(false);
-            setNEXT_PAGE_INDEX(0);
-
-            setSUBMIT_AUTOKQ_PROCESS(false);
-            setSTART_AUTOKQ_PROCESS(false);
-            setAUTOKQ_STATUS("Inactive");
+            setVARIABLE("START_AUTOPRICING_PROCESS", false);
+            setVARIABLE("AUTOPRICER_INVENTORY", []);
+            setVARIABLE("CURRENT_PRICING_INDEX", 0);
+            setVARIABLE("SUBMIT_PRICES_PROCESS", false);
+            setVARIABLE("NEXT_PAGE_INDEX", 0);
+            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+            setVARIABLE("START_AUTOKQ_PROCESS", false);
+            setVARIABLE("AUTOKQ_STATUS", "Inactive");
         }
     }
 
-    function HideKQButtons(){
+    async function HideKQButtons(){
+        var isAutoKQActive = await getVARIABLE("START_AUTOKQ_PROCESS");
+
         if(isAutoKQActive){
             startAutoKQButton.style.display = "none";
             cancelAutoKQButton.style.display = "inline";
@@ -122,7 +116,7 @@ chrome.storage.local.get({
     function ClearKQLog(){
         if(confirm("Do you want to delete all entries in your Kitchen Quest Log?")){
             if(confirm("Are you sure you want to clear your Kitchen Quest Log? This action cannot be undone unless you have a backup of you configuration presets.")){
-                setKQ_TRACKER([])
+                setVARIABLE("KQ_TRACKER", []);
             }
         }
     }
@@ -152,9 +146,10 @@ chrome.storage.local.get({
 
 
     var currentHistorySize = -1;
-    tableContainer = document.getElementById("table-container");
+    tableContainer = document.getElementById("table-container"),
+    kqTracker = await getVARIABLE("KQ_TRACKER");
     
-    function ProcessAutoKQLog(forceUpdateHistory) {
+    async function ProcessAutoKQLog(forceUpdateHistory) {
         const history = kqTracker.reverse();
         const historySize = history.length;
 
@@ -389,4 +384,4 @@ chrome.storage.local.get({
 
         ResizeChartInterval(id, "760px", "380px")
     }
-}));
+}

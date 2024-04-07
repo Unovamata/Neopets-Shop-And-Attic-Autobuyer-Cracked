@@ -10,6 +10,23 @@ class Item {
     }
 }
 
+function getVARIABLE(variable) {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get([variable], function (result) {
+            var value = result[variable];
+
+            resolve(value);
+        });
+    });
+}
+
+function setVARIABLE(propertyName, value) {
+    const storageObject = {};
+    storageObject[propertyName] = value;
+    chrome.storage.local.set(storageObject, function () {});
+}
+
+
 //######################################################################################################################################
 //// AutoBuyers' Common Functions;
 
