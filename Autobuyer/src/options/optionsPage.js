@@ -53,56 +53,77 @@ function updateLastRefreshMs() {
   const atticTimeValue = $("#ATTIC_LAST_REFRESH_TIME").val();
   const isInAutoBuyerPage = atticDateValue === undefined || atticTimeValue === undefined;
 
-  if (!isInAutoBuyerPage && (atticDateValue !== "" && atticTimeValue !== "")) {
-    const timestamp = moment.tz(atticDateValue + " " + atticTimeValue, "America/Los_Angeles").toDate().valueOf();
+  const today = new Date(),
+  year = today.getFullYear(),
+  month = String(today.getMonth() + 1).padStart(2, '0'), // Months are 0-indexed, so we add 1
+  day = String(today.getDate()).padStart(2, '0'),
+  formattedDate = `${year}-${month}-${day}`;
 
-    setATTIC_LAST_REFRESH_MS(timestamp);
-    setATTIC_PREV_NUM_ITEMS(24);
+  if(!isInAutoBuyerPage){
+    if (atticDateValue !== "" && atticTimeValue !== "") {
+      const timestamp = moment.tz(atticDateValue + " " + atticTimeValue, "America/Los_Angeles").toDate().valueOf();
+  
+      setATTIC_LAST_REFRESH_MS(timestamp);
+      setATTIC_PREV_NUM_ITEMS(24);
+    }
+
+    const autoAtticFromValue = $("#RUN_AUTOATTIC_FROM").val();
+    const autoAtticToValue = $("#RUN_AUTOATTIC_TO").val();
+
+    if (autoAtticFromValue !== "" && autoAtticToValue !== "") {
+      const fromTimestamp = moment.tz(formattedDate + " " + autoAtticFromValue, "America/Los_Angeles").toDate().valueOf();
+      const toTimestamp = moment.tz(formattedDate + " " + autoAtticToValue, "America/Los_Angeles").toDate().valueOf();
+
+      setVARIABLE("RUN_AUTOATTIC_FROM_MS", fromTimestamp);
+      setVARIABLE("RUN_AUTOATTIC_TO_MS", toTimestamp);
+    }
   }
+  
+
+  
 
   const autoBuyerFromValue = $("#RUN_AUTOBUYER_FROM").val();
   const autoBuyerToValue = $("#RUN_AUTOBUYER_TO").val();
   const isInAtticPage = autoBuyerFromValue === undefined || autoBuyerToValue === undefined;
 
   if (!isInAtticPage && (autoBuyerFromValue !== "" && autoBuyerToValue !== "")) {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed, so we add 1
-    const day = String(today.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
-
     const fromTimestamp = moment.tz(formattedDate + " " + autoBuyerFromValue, "America/Los_Angeles").toDate().valueOf();
     const toTimestamp = moment.tz(formattedDate + " " + autoBuyerToValue, "America/Los_Angeles").toDate().valueOf();
 
-    setRUN_AUTOBUYER_FROM_MS(fromTimestamp);
-    setRUN_AUTOBUYER_TO_MS(toTimestamp);
+    setVARIABLE("RUN_AUTOBUYER_FROM_MS", fromTimestamp);
+    setVARIABLE("RUN_AUTOBUYER_TO_MS", toTimestamp);
   }
 }
 
-function UpdateDateTimeInputs(firstInputTime, isAttic = true, secondInputTime = "") {
+function UpdateDateTimeInputs(firstInputTime, isAttic = true, secondInputTime = "", thirdInputTime = "") {
   var firstDate = moment(firstInputTime)
       .tz("America/Los_Angeles")
       .format("YYYY-MM-DD"),
 
-    firstTime = moment(firstInputTime)
-      .tz("America/Los_Angeles")
-      .format("YYYY-MM-DD HH:mm:ss")
-      .split(" ")[1];
+    firstTime = ProcessTimezone(firstInputTime);
 
   if(isAttic){
     $("#ATTIC_LAST_REFRESH_DATE").val(firstDate);
     $("#ATTIC_LAST_REFRESH_TIME").val(firstTime);
+
+    var secondTime = ProcessTimezone(secondInputTime);
+    var thirdTime = ProcessTimezone(thirdInputTime);
+
+    $("#RUN_AUTOATTIC_FROM").val(secondTime);
+    $("#RUN_AUTOATTIC_TO").val(thirdTime);
   } else {
-    var secondTime = moment(secondInputTime)
-      .tz("America/Los_Angeles")
-      .format("YYYY-MM-DD HH:mm:ss")
-      .split(" ")[1];
+    var secondTime = ProcessTimezone(secondInputTime);
 
       $("#RUN_AUTOBUYER_FROM").val(firstTime);
       $("#RUN_AUTOBUYER_TO").val(secondTime);
   }
 
-  
+  function ProcessTimezone(time){
+    return moment(time)
+    .tz("America/Los_Angeles")
+    .format("YYYY-MM-DD HH:mm:ss")
+    .split(" ")[1];
+  }
 }
 
 function ShowOrHide() {
@@ -398,9 +419,6 @@ $("#PAUSE_AFTER_BUY_MS").bind("input propertychange", (function () {
 //######################################################################################################################################
 
 // AutoBuyer Setters;
-function setRUN_AUTOBUYER_FROM_MS(value) { chrome.storage.local.set({RUN_AUTOBUYER_FROM_MS: value}, (function () {})) }
-function setRUN_AUTOBUYER_TO_MS(value) { chrome.storage.local.set({RUN_AUTOBUYER_TO_MS: value}, (function () {})) }
-
 function setMIN_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({MIN_FIVE_SECOND_RULE_REFRESH: Number(value)}, (function () {})) }
 function setMAX_FIVE_SECOND_RULE_REFRESH(value) { chrome.storage.local.set({MAX_FIVE_SECOND_RULE_REFRESH: Number(value)}, (function () {})) }
 function setSHOULD_BYPASS_CONFIRM(value) { chrome.storage.local.set({SHOULD_BYPASS_CONFIRM: value}, (function () {})) }
@@ -539,6 +557,15 @@ $("#SHOULD_CHANGE_DOCUMENT_DATA").on("change", function () {
 });
 
 // AutoAttic Data Binding;
+
+
+$("#RUN_AUTOATTIC_FROM").on("change", (function () {
+  updateLastRefreshMs()
+}));
+
+$("#RUN_AUTOATTIC_TO").on("change", (function () {
+  updateLastRefreshMs()
+}));
 
 $("#ATTIC_RESTOCK_LIST").bind("input propertychange", (function () {
   try {
@@ -956,6 +983,8 @@ resetButton.onclick = function (_) {
   SHOULD_CHANGE_DOCUMENT_DATA: false,
 
   // AutoAttic;
+  RUN_AUTOATTIC_FROM_MS: 1712386800000,
+  RUN_AUTOATTIC_TO_MS: 1712473199000,
   ATTIC_RESTOCK_LIST: defaultDesiredItems,
   ATTIC_NEXT_START_WINDOW: -1,
   ATTIC_NEXT_END_WINDOW: -1,
@@ -1056,7 +1085,7 @@ resetButton.onclick = function (_) {
   $("#ATTIC_MAX_REFRESH").val(_.ATTIC_MAX_REFRESH)
   
   if (_.ATTIC_LAST_REFRESH_MS > 0) {
-    UpdateDateTimeInputs(_.ATTIC_LAST_REFRESH_MS);
+    UpdateDateTimeInputs(_.ATTIC_LAST_REFRESH_MS, true, _.RUN_AUTOATTIC_FROM_MS, _.RUN_AUTOATTIC_TO_MS);
   }
   
   $("#ATTIC_RUN_BETWEEN_HOURS").val("[" + _.ATTIC_RUN_BETWEEN_HOURS + "]");

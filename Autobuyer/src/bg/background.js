@@ -52,6 +52,8 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			PAUSE_AFTER_BUY_MS: 18000,
 
 			//AutoAttic;
+			RUN_AUTOATTIC_FROM_MS: 1712386800000,
+			RUN_AUTOATTIC_TO_MS: 1712473199000,
 			ATTIC_RESTOCK_LIST: [],
 			ATTIC_NEXT_START_WINDOW: 0,
         	ATTIC_NEXT_END_WINDOW: 0,
