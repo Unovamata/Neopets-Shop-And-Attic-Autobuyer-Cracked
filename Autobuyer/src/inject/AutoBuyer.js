@@ -31,8 +31,8 @@ function InjectAutoPricer() {
         MIN_CLICK_CONFIRM: 100,
         MAX_CLICK_CONFIRM: 200,
         STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
-        RUN_AUTOBUYER_FROM_MS: 1712386800000,
-	    RUN_AUTOBUYER_TO_MS: 1712473199000,
+        RUN_AUTOBUYER_FROM_MS: 1712473200000,
+		RUN_AUTOBUYER_TO_MS: 1712559599000,
         PAUSE_BETWEEN_MINUTES: [],
         RESTOCK_LIST: defaultDesiredItems,
     }, (async function(autobuyerVariables) {
@@ -197,25 +197,23 @@ function InjectAutoPricer() {
                 itemToBuyElement.click();
             }
         } else {
-            const timeFrom = new Date(runAutobuyerFrom);
-            const timeTo = new Date(runAutobuyerTo);
-            const date = new Date();
-        
+            const timeFrom = TimezoneDate(new Date(runAutobuyerFrom));
+            const timeTo = TimezoneDate(new Date(runAutobuyerTo));
+            const date = TimezoneDate(new Date());
+
             const timeDifferenceFrom = CalculateMillisecondDifference(timeFrom, date);
             const timeDifferenceTo = CalculateMillisecondDifference(timeTo, date);
-            
-            console.log(timeDifferenceFrom, timeDifferenceTo);
 
             // If restocking window hasn't arrived;
             if(timeDifferenceFrom == 0 && timeDifferenceTo == 0){
+                UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
                 await Sleep(CalculateNextWindowReach(timeFrom, date));
             }
 
             // If restocking window has already passed;
             else if(timeDifferenceFrom > 0 && timeDifferenceTo > 0){
                 UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
-                console.log("Sleeping");
-                await Sleep(timeFrom);
+                await Sleep(timeDifferenceFrom);
             }
         
             // If it's not, check if it's the current minute pause;

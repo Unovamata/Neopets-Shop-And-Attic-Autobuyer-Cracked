@@ -47,6 +47,8 @@
             "*://www.neopets.com/objects.phtml*"
         ],
         "js": [
+			"js/moment.js",
+			"js/moment-timezone-with-data.js",
             "src/common/default_items.js",
             "src/common/item_db.js",
 			"src/common/utils.js",

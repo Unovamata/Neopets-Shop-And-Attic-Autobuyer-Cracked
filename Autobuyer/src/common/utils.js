@@ -126,6 +126,10 @@ function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
     return selectedName;
 }
 
+function TimezoneDate(time){
+    return new Date(moment(time).tz("America/Los_Angeles").format("YYYY-MM-DD HH:mm:ss"));
+}
+
 function CalculateNextWindowReach(timeA, timeB){
     const timeAMilliseconds = (timeA.getHours() * 3600 + timeA.getMinutes() * 60 + timeA.getSeconds()) * 1000;
     const timeBMilliseconds = (timeB.getHours() * 3600 + timeB.getMinutes() * 60 + timeB.getSeconds()) * 1000;
@@ -142,7 +146,7 @@ function CalculateMillisecondDifference(timeA, timeB) {
     const shorterTime = (timeDifferenceInSeconds > 0) ? timeB : timeA;
 
     // Convert times to seconds
-    const date = new Date();
+    const date = TimezoneDate(new Date());
     const currentTimeInSeconds = (date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds());
 
     // Calculate time difference in seconds between current time and the shorter time
