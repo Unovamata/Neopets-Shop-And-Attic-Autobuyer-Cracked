@@ -56,7 +56,6 @@ function InjectAutoPricer() {
             STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: storesToCycle,
             RUN_AUTOBUYER_FROM_MS: runAutobuyerFrom,
 	        RUN_AUTOBUYER_TO_MS: runAutobuyerTo,
-            RUN_BETWEEN_HOURS: runBetweenHours,
             PAUSE_BETWEEN_MINUTES: pauseBetweenMinutes,
             MIN_REFRESH: minRefreshIntervalUnstocked,
             MAX_REFRESH: maxRefreshIntervalUnstocked,
@@ -201,17 +200,22 @@ function InjectAutoPricer() {
             const timeFrom = new Date(runAutobuyerFrom);
             const timeTo = new Date(runAutobuyerTo);
             const date = new Date();
-
-            console.log(date, timeFrom);
         
-            const timeDifference = timeFrom.getTime() - date.getTime();
+            const timeDifferenceFrom = CalculateMillisecondDifference(timeFrom, date);
+            const timeDifferenceTo = CalculateMillisecondDifference(timeTo, date);
+            
+            console.log(timeDifferenceFrom, timeDifferenceTo);
 
-            // Check if the AutoBuyer has not been paused;
-            var isPaused = CheckIfWithinTimeframe(date, timeFrom, timeTo);
+            // If restocking window hasn't arrived;
+            if(timeDifferenceFrom == 0 && timeDifferenceTo == 0){
+                await Sleep(CalculateNextWindowReach(timeFrom, date));
+            }
 
-            if (isPaused) {
+            // If restocking window has already passed;
+            else if(timeDifferenceFrom > 0 && timeDifferenceTo > 0){
                 UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
-                await Sleep(timeDifference);
+                console.log("Sleeping");
+                await Sleep(timeFrom);
             }
         
             // If it's not, check if it's the current minute pause;

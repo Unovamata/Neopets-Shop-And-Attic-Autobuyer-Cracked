@@ -126,14 +126,38 @@ function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
     return selectedName;
 }
 
-function CheckIfWithinTimeframe(time, timeFrom, timeTo){
-    const currentTimeMs = time.getTime(),
-          timeFromMs = timeFrom.getTime(),
-          timeToMs = timeTo.getTime();
-
-    var isWithinRange = currentTimeMs >= timeFromMs && currentTimeMs <= timeToMs;
+function CalculateNextWindowReach(timeA, timeB){
+    const timeAMilliseconds = (timeA.getHours() * 3600 + timeA.getMinutes() * 60 + timeA.getSeconds()) * 1000;
+    const timeBMilliseconds = (timeB.getHours() * 3600 + timeB.getMinutes() * 60 + timeB.getSeconds()) * 1000;
     
-    return !isWithinRange; // Return true if the time is NOT within the range
+    return timeAMilliseconds - timeBMilliseconds;
+}
+
+function CalculateMillisecondDifference(timeA, timeB) {
+    // Calculate time differences in seconds
+    const timeDifferenceInSeconds = (timeA.getHours() * 3600 + timeA.getMinutes() * 60 + timeA.getSeconds()) -
+                                    (timeB.getHours() * 3600 + timeB.getMinutes() * 60 + timeB.getSeconds());
+
+    // Find the shorter time
+    const shorterTime = (timeDifferenceInSeconds > 0) ? timeB : timeA;
+
+    // Convert times to seconds
+    const date = new Date();
+    const currentTimeInSeconds = (date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds());
+
+    // Calculate time difference in seconds between current time and the shorter time
+    let timeDifferenceToShorterTime = shorterTime.getHours() * 3600 + shorterTime.getMinutes() * 60 + shorterTime.getSeconds() - currentTimeInSeconds;
+
+    // If the difference is negative, the shorter time has already passed today
+    if (timeDifferenceToShorterTime < 0) {
+        // Calculate time left until the shorter time of the next day
+        timeDifferenceToShorterTime = 24 * 3600 - Math.abs(timeDifferenceToShorterTime);
+    }
+
+    // Convert time difference to milliseconds
+    const timeToNextOccurrence = timeDifferenceToShorterTime * 1000;
+
+    return timeToNextOccurrence;
 }
 
 

@@ -27,7 +27,6 @@ function InjectAutoAttic() {
         ATTIC_MAX_BUY_TIME: 750,
         RUN_AUTOATTIC_FROM_MS: 1712386800000,
 		RUN_AUTOATTIC_TO_MS: 1712473199000,
-        ATTIC_RUN_BETWEEN_HOURS: [0, 23],
         ATTIC_MIN_REFRESH: 2500,
         ATTIC_MAX_REFRESH: 3500,
         ATTIC_SHOULD_REFRESH: !1,
@@ -236,20 +235,25 @@ function InjectAutoAttic() {
 
             // Additional function to check if it's time to auto-refresh the Attic
             async function IsTimeToAutoRefreshAttic() {
-                const timeFrom = new Date(runAutoAtticFrom);
-                const timeTo = new Date(runAutoAtticTo);
+                const timeFrom = new Date(runAutobuyerFrom);
+                const timeTo = new Date(runAutobuyerTo);
                 const date = new Date();
-
-                console.log(date, timeFrom);
             
-                const timeDifference = timeFrom.getTime() - date.getTime();
+                const timeDifferenceFrom = CalculateMillisecondDifference(timeFrom, date);
+                const timeDifferenceTo = CalculateMillisecondDifference(timeTo, date);
+                
+                console.log(timeDifferenceFrom, timeDifferenceTo);
 
-                // Check if the AutoBuyer has not been paused;
-                var isPaused = CheckIfWithinTimeframe(date, timeFrom, timeTo);
+                // If restocking window hasn't arrived;
+                if(timeDifferenceFrom == 0 && timeDifferenceTo == 0){
+                    await Sleep(CalculateNextWindowReach(timeFrom, date));
+                }
 
-                if (isPaused) {
+                // If restocking window has already passed;
+                else if(timeDifferenceFrom > 0 && timeDifferenceTo > 0){
                     UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
-                    await Sleep(timeDifference);
+                    console.log("Sleeping");
+                    await Sleep(timeFrom);
                 }
             }
 
