@@ -121,7 +121,6 @@ async function RunAutoPricer(){
             MAX_WAIT_BEFORE_UPDATE: sleepAfterPinMax,
         } = autobuyerVariables;
 
-
         //######################################################################################################################################
 
 
@@ -142,10 +141,10 @@ async function RunAutoPricer(){
 
                 // If it's the last page, let the user know the process is complete;
                 if(pageIndex == hrefLinks.length - 1){
-                    setSHOP_INVENTORY(rowsItems);
-                    setAUTOPRICER_STATUS("Inactive");
-                    window.alert("The shop inventory has been successfully saved!\nYou can close this window now.\n\nPlease return to NeoBuyer's AutoPricer page to continue.");
-                    setINVENTORY_UPDATED(true);
+                    setVARIABLE("SHOP_INVENTORY", rowsItems);
+                    setVARIABLE("AUTOPRICER_STATUS", "Inactive");
+                    UpdateBannerAndDocument("The shop inventory has been successfully saved! Return to NeoBuyer+ and close this window.");
+                    setVARIABLE("INVENTORY_UPDATED", true);
                 }
             }
         }
@@ -270,7 +269,7 @@ async function RunAutoPricer(){
             // Filtering invalid items;
             }).filter(item => item["Date & Time"] != "undefined/Date/undefined");
 
-            await setSHOP_HISTORY([...shopHistory, ...filteredHistoryItems]);
+            setVARIABLE("SHOP_HISTORY", [...shopHistory, ...filteredHistoryItems]);
         }
 
         LoadPageLinks();
@@ -292,174 +291,188 @@ async function RunAutoPricer(){
         // A list separated from the shop list so the system knows what to price;
         var autoPricingList = [];   
 
-        getSTART_AUTOPRICING_PROCESS(async function (isActive) {
-            if(isActive){
-                /* If the user is inside the SW and the AutoPricing process is active, the extension will begin
-                * pricing the "AutoPricerInventory" list, saving its values and updating them with the lowest
-                * prices available;
-                */
-                StartSWPricing();
-            } else {
-                /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
-                * This function either loads or submits prices depending on the current state of the AutoPricer;
-                */
-                if(isKQRunning){
-                    await KQSearch();
-                } else {
-                    StartInventoryScrapingOrSubmitting();
-                }
-            }
-        });
+        var isActive = await getVARIABLE("START_AUTOPRICING_PROCESS");
 
-        var wizardURL = "https://www.neopets.com/shops/wizard.phtml";
+        if(isActive){
+            /* If the user is inside the SW and the AutoPricing process is active, the extension will begin
+            * pricing the "AutoPricerInventory" list, saving its values and updating them with the lowest
+            * prices available;
+            */
+            StartSWPricing();
+        } else {
+            /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
+            * This function either loads or submits prices depending on the current state of the AutoPricer;
+            */
+
+            if(isKQRunning){
+                await KQSearch();
+            } else {
+                StartInventoryScrapingOrSubmitting();
+            }
+        }
 
         // Selects lowest prices to price the currently stocked items in the shop;
-        function StartSWPricing(){
+        async function StartSWPricing(){
             // Detect page errors;
             if(isInErrorPage) return;
+
+            var wizardURL = "https://www.neopets.com/shops/wizard.phtml";
 
             //If the user is in the Shop Wizard page;
             if(!window.location.href.includes(wizardURL)){
                 /* A user can be inside the SW while also AutoPricing, this circumvents that issue;
                 * This function either loads or submits prices depending on the current state of the AutoPricer;
                 */
-                window.alert("The AutoPricer is running, the Neobuyer's+ shop inventory will not be updated.\n\nWait for the AutoPricer to finish or cancel the process.");
+                UpdateBannerAndDocument("The AutoPricer is running, the Neobuyer's+ shop inventory will not be updated. Cancel the process if necessary...");
 
                 return;
             }
 
-            setAUTOPRICER_STATUS("Navigating to SW...");
+            setVARIABLE("AUTOPRICER_STATUS", "Navigating to SW...");
 
             const usernameElement = document.querySelector('a.text-muted');
             const username = usernameElement.textContent;
+            var list = await getVARIABLE("AUTOPRICER_INVENTORY");
+            var currentPricingIndex = await getVARIABLE("CURRENT_PRICING_INDEX");
 
-            getAUTOPRICER_INVENTORY(function (list) {
-                // Check the currently priced item;
-                getCURRENT_PRICING_INDEX(async function (currentPricingIndex) {
-                    autoPricingList = list;
+            // Check the currently priced item;
+            autoPricingList = list;
 
-                    //If the pricing list has been completed, end the AutoPricing process;
-                    AutoSubmitPrices(autoPricingList.length, currentPricingIndex);
+            //If the pricing list has been completed, end the AutoPricing process;
+            AutoSubmitPrices(autoPricingList.length, currentPricingIndex);
 
-                    var itemToSearch = autoPricingList[currentPricingIndex];
-                    var nameToSearch = itemToSearch.Name;
+            var itemToSearch = autoPricingList[currentPricingIndex];
+            var nameToSearch = itemToSearch.Name;
 
-                    if(!isTurbo) await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
-                    
-                    if(DetectFaerieQuest(isInErrorPage)) return;
+            if(!isTurbo) await Sleep(sleepWhileNavigatingToSWMin, sleepWhileNavigatingToSWMax);
+            
+            if(DetectFaerieQuest(isInErrorPage)) return;
 
-                    // If the box exists, then introduce the name on it;
-                    setAUTOPRICER_STATUS(`Searching ${nameToSearch}...`);
+            // If the box exists, then introduce the name on it;
+            setVARIABLE("AUTOPRICER_STATUS", `Searching ${nameToSearch}...`);
 
-                    const searchBox = document.getElementById("shopwizard");
+            const searchBox = document.getElementById("shopwizard");
 
-                    if(!isTurbo){
-                        await SimulateKeyEvents(searchBox, nameToSearch);
-                        await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+            if(!isTurbo){
+                await SimulateKeyEvents(searchBox, nameToSearch);
+                await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+            }
+
+            await CheckForBan();
+
+            // Click the button for the search;
+            await PressSearch();
+            
+            // Checking if the search was made correctly;
+            WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
+                var h3Element = resultsTextDiv.querySelector('h3');
+
+                // If the name introduced was not valid, then refresh;
+                if(h3Element.textContent === '...'){
+                    window.location.reload();
+                }
+            });
+
+            if(!isTurbo) await Sleep(sleepInSWPageMin, sleepInSWPageMax);
+
+            // The amount of times the extension should search for lower prices;
+            await PressResubmit();
+
+            // Getting the lowest price;
+            WaitForElement(".wizard-results-grid-header", 0).then(async (searchResults) => {
+                var ownerElements = searchResults.parentNode.querySelectorAll("li");
+                
+                var ownerName = '', bestPrice = 0;
+
+                // Checking if an owner is frozen;
+                for(var i = 1; i < ownerElements.length; i++){
+                    // Extracting all the table data;
+                    var entry = ownerElements[i];
+                    var ownerElement = entry.querySelector("a");
+                    var ownerLink = ownerElement.getAttribute("href");
+                    var currentOwnerPrice = ParseNPNumber(entry.querySelector("div").textContent);
+                    var percentageDifference = 0;
+
+                    /* Measuring the price difference to see if the user has an abnormally low 
+                        * price, maybe meaning it was frozen. This saves in requests and processing 
+                        * time for AutoPricing */
+                    try {
+                        var nextOwnerPrice = ParseNPNumber(ownerElements[i + 1].querySelector("div").textContent);
+
+                        percentageDifference = CalculatePercentageDifference(currentOwnerPrice, nextOwnerPrice);
+                    } catch { }
+
+                    // Sending and reading a request to know if the shop user is frozen;
+                    if(shouldCheckIfFrozenShop && percentageDifference > 20){
+                        var isFrozen = await CheckShopFrozenStatus(ownerLink);
+
+                        if(!isFrozen){
+                            ownerName = ownerElement.textContent;
+                            bestPrice = currentOwnerPrice;
+                            break;
+                        }
+                    // If the user decided to not check if the user's shop is frozen, then return the first value;
+                    } else {
+                        ownerName = ownerElement.textContent;
+                        bestPrice = currentOwnerPrice;
+                        break;
                     }
+                }
 
-                    await CheckForBan();
+                // Calculates the percentage difference between 2 numbers to know if a user has been frozen or not;
+                function CalculatePercentageDifference(oldValue, newValue) {
+                    return Math.abs((newValue - oldValue) / oldValue) * 100;
+                }
 
-                    // Click the button for the search;
-                    await PressSearch();
-                    
-                    // Checking if the search was made correctly;
-                    WaitForElement(".wizard-results-text", 0).then((resultsTextDiv) => {
-                        var h3Element = resultsTextDiv.querySelector('h3');
-
-                        // If the name introduced was not valid, then refresh;
-                        if(h3Element.textContent === '...'){
-                            window.location.reload();
-                        }
-                    });
-
-                    if(!isTurbo) await Sleep(sleepInSWPageMin, sleepInSWPageMax);
-
-                    // The amount of times the extension should search for lower prices;
-                    await PressResubmit();
-
-                    // Getting the lowest price;
-                    WaitForElement(".wizard-results-grid-header", 0).then(async (searchResults) => {
-                        var ownerElements = searchResults.parentNode.querySelectorAll("li");
-                        
-                        var ownerName = '', bestPrice = 0;
-
-                        // Checking if an owner is frozen;
-                        for(var i = 1; i < ownerElements.length; i++){
-                            // Extracting all the table data;
-                            var entry = ownerElements[i];
-                            var ownerElement = entry.querySelector("a");
-                            var ownerLink = ownerElement.getAttribute("href");
-                            var currentOwnerPrice = ParseNPNumber(entry.querySelector("div").textContent);
-                            var percentageDifference = 0;
-
-                            /* Measuring the price difference to see if the user has an abnormally low 
-                             * price, maybe meaning it was frozen. This saves in requests and processing 
-                             * time for AutoPricing */
-                            try {
-                                var nextOwnerPrice = ParseNPNumber(ownerElements[i + 1].querySelector("div").textContent);
-
-                                percentageDifference = CalculatePercentageDifference(currentOwnerPrice, nextOwnerPrice);
-                            } catch { }
-
-                            // Sending and reading a request to know if the shop user is frozen;
-                            if(shouldCheckIfFrozenShop && percentageDifference > 20){
-                                var isFrozen = await CheckShopFrozenStatus(ownerLink);
-
-                                if(!isFrozen){
-                                    ownerName = ownerElement.textContent;
-                                    bestPrice = currentOwnerPrice;
-                                    break;
-                                }
-                            // If the user decided to not check if the user's shop is frozen, then return the first value;
-                            } else {
-                                ownerName = ownerElement.textContent;
-                                bestPrice = currentOwnerPrice;
-                                break;
+                async function CheckShopFrozenStatus(ownerLink, maxRetries = 3, retryDelay = 2000) {
+                    let retries = 0;
+                
+                    while (retries < maxRetries) {
+                        try {
+                            const shopResponse = await fetch(ownerLink);
+                            
+                            if (shopResponse.ok) {
+                                const shopContent = await shopResponse.text();
+                                const shopDocument = new DOMParser().parseFromString(shopContent, 'text/html');
+                                const isOwnerFrozen = shopDocument.body.textContent.includes("Sorry - The owner of this shop has been frozen!");
+                                return isOwnerFrozen;
                             }
+                        } catch (error) {
+                            console.error('Error fetching data:', error);
                         }
+                
+                        // If the request fails, wait for a while before retrying
+                        await new Promise(resolve => setTimeout(resolve, retryDelay));
+                        retries++;
+                    }
+                
+                    throw new Error(`Failed to fetch data from ${ownerLink} after ${maxRetries} retries.`);
+                }
+                                        
 
-                        // Calculates the percentage difference between 2 numbers to know if a user has been frozen or not;
-                        function CalculatePercentageDifference(oldValue, newValue) {
-                            return Math.abs((newValue - oldValue) / oldValue) * 100;
-                        }
+                //Don't change the price if it's already the cheapest item in the list;
+                if(username == ownerName){
+                    setVARIABLE("AUTOPRICER_STATUS", `${username} Already has the Lowest Price Available! Skipping...`);
+                    UpdateShopInventoryWithValue(itemToSearch, itemToSearch.Price);
+                    return;
+                }
 
-                        async function CheckShopFrozenStatus(ownerLink, maxRetries = 3, retryDelay = 2000) {
-                            let retries = 0;
-                        
-                            while (retries < maxRetries) {
-                                try {
-                                    const shopResponse = await fetch(ownerLink);
-                                    
-                                    if (shopResponse.ok) {
-                                        const shopContent = await shopResponse.text();
-                                        const shopDocument = new DOMParser().parseFromString(shopContent, 'text/html');
-                                        const isOwnerFrozen = shopDocument.body.textContent.includes("Sorry - The owner of this shop has been frozen!");
-                                        return isOwnerFrozen;
-                                    }
-                                } catch (error) {
-                                    console.error('Error fetching data:', error);
-                                }
-                        
-                                // If the request fails, wait for a while before retrying
-                                await new Promise(resolve => setTimeout(resolve, retryDelay));
-                                retries++;
-                            }
-                        
-                            throw new Error(`Failed to fetch data from ${ownerLink} after ${maxRetries} retries.`);
-                        }
-                                                
+                var deductedPrice = 0;
 
-                        //Don't change the price if it's already the cheapest item in the list;
-                        if(username == ownerName){
-                            setAUTOPRICER_STATUS(`${username} Already has the Lowest Price Available! Skipping...`);
-                            UpdateShopInventoryWithValue(itemToSearch, itemToSearch.Price);
-                            return;
-                        }
+                switch(pricingType){
+                    case "Percentage":
+                        PercentagePricingCalculation();
+                    break;
 
-                        var deductedPrice = 0;
+                    case "Absolute":
+                        AbsolutePricingCalculation();
+                    break;
 
-                        switch(pricingType){
+                    case "Random":
+                        var pricingAlgorithmOptions = ["Percentage", "Absolute"];
+                        var randomIndex = GetRandomInt(0, pricingAlgorithmOptions.length);
+
+                        switch(pricingAlgorithmOptions[randomIndex]){
                             case "Percentage":
                                 PercentagePricingCalculation();
                             break;
@@ -467,54 +480,54 @@ async function RunAutoPricer(){
                             case "Absolute":
                                 AbsolutePricingCalculation();
                             break;
-
-                            case "Random":
-                                var pricingAlgorithmOptions = ["Percentage", "Absolute"];
-                                var randomIndex = GetRandomInt(0, pricingAlgorithmOptions.length);
-
-                                switch(pricingAlgorithmOptions[randomIndex]){
-                                    case "Percentage":
-                                        PercentagePricingCalculation();
-                                    break;
-
-                                    case "Absolute":
-                                        AbsolutePricingCalculation();
-                                    break;
-                                }
-                            break;
                         }
-                        
-                        function PercentagePricingCalculation(){
-                            var percentageBestPrice = Math.floor(CalculatePercentagePrices(bestPrice, true));
+                    break;
+                }
+                
+                function PercentagePricingCalculation(){
+                    var percentageBestPrice = Math.floor(CalculatePercentagePrices(bestPrice, true));
 
-                            switch(percentageAlgorithmType){
-                                case "Zeroes":
-                                    deductedPrice = RoundToNearestUnit(percentageBestPrice);
-                                break;
+                    switch(percentageAlgorithmType){
+                        case "Zeroes":
+                            deductedPrice = RoundToNearestUnit(percentageBestPrice);
+                        break;
 
-                                case "Nines":
-                                    deductedPrice = RoundToNearestUnit(percentageBestPrice, true);
-                                break;
+                        case "Nines":
+                            deductedPrice = RoundToNearestUnit(percentageBestPrice, true);
+                        break;
 
-                                case "Random":
-                                    const percentagePricingOptions = ["Zeroes", "Nines", "Unchanged"];
-                                    var randomIndex = GetRandomIntExclusive(0, percentagePricingOptions.length);
+                        case "Random":
+                            const percentagePricingOptions = ["Zeroes", "Nines", "Unchanged"];
+                            var randomIndex = GetRandomIntExclusive(0, percentagePricingOptions.length);
 
-                                    switch(percentagePricingOptions[randomIndex]){
-                                        case "Zeroes": deductedPrice = RoundToNearestUnit(percentageBestPrice); break;
-                                        case "Nines": deductedPrice = RoundToNearestUnit(percentageBestPrice, true); break;
-                                        case "Unchanged": deductedPrice = percentageBestPrice; break;
-                                    }
-                                break;
-
-                                case "Unchanged":
-                                    deductedPrice = percentageBestPrice;
-                                break;
+                            switch(percentagePricingOptions[randomIndex]){
+                                case "Zeroes": deductedPrice = RoundToNearestUnit(percentageBestPrice); break;
+                                case "Nines": deductedPrice = RoundToNearestUnit(percentageBestPrice, true); break;
+                                case "Unchanged": deductedPrice = percentageBestPrice; break;
                             }
-                        }
+                        break;
 
-                        function AbsolutePricingCalculation(){
-                            switch(fixedAlgorithmType){
+                        case "Unchanged":
+                            deductedPrice = percentageBestPrice;
+                        break;
+                    }
+                }
+
+                function AbsolutePricingCalculation(){
+                    switch(fixedAlgorithmType){
+                        case "True Absolute":
+                            deductedPrice = Clamp(bestPrice - fixedPricingDeduction, 0, 999999);
+                        break;
+
+                        case "Random Absolute":
+                            deductedPrice = Clamp(bestPrice - GetRandomInt(minFixedPricingDeduction, maxFixedPricingDeduction), 0, 999999);
+                        break;
+
+                        case "Both":
+                            var absolutePricingOptions = ["True Absolute", "Random Absolute"];
+                            var randomIndex = GetRandomInt(0, absolutePricingOptions.length);
+
+                            switch(absolutePricingOptions[randomIndex]){
                                 case "True Absolute":
                                     deductedPrice = Clamp(bestPrice - fixedPricingDeduction, 0, 999999);
                                 break;
@@ -522,121 +535,98 @@ async function RunAutoPricer(){
                                 case "Random Absolute":
                                     deductedPrice = Clamp(bestPrice - GetRandomInt(minFixedPricingDeduction, maxFixedPricingDeduction), 0, 999999);
                                 break;
-
-                                case "Both":
-                                    var absolutePricingOptions = ["True Absolute", "Random Absolute"];
-                                    var randomIndex = GetRandomInt(0, absolutePricingOptions.length);
-
-                                    switch(absolutePricingOptions[randomIndex]){
-                                        case "True Absolute":
-                                            deductedPrice = Clamp(bestPrice - fixedPricingDeduction, 0, 999999);
-                                        break;
-
-                                        case "Random Absolute":
-                                            deductedPrice = Clamp(bestPrice - GetRandomInt(minFixedPricingDeduction, maxFixedPricingDeduction), 0, 999999);
-                                        break;
-                                    }
-                                break;
                             }
-                        }
-
-                        function RoundToNearestUnit(number, hasNines = false){
-                            var zeroesToAdd = number.toString().length - 2;
-                            var unitString = "1" + "0".repeat(zeroesToAdd);
-                            var unit = Number(unitString);
-
-                            if(hasNines) return CalculateThousand(number, unit, 1);
-                            return CalculateThousand(number, unit);
-                        }
-
-                        function CalculateThousand(number, unit, subtraction = 0){
-                            return Math.round(number / unit) * unit - subtraction;
-                        }
-
-                        function CalculatePercentagePrices(number, isSubtractingPercentage = false){
-                            if(isRandomPercentage || isSubtractingPercentage) {
-                                return number * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
-                            } else { // If the subtracted percentage is fixed;
-                                return number * (1 - (fixedPercentageDeduction * 0.01));
-                            }
-                        }
-
-                        deductedPrice = Math.floor(deductedPrice);
-                        autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
-
-                        await setAUTOPRICER_INVENTORY(autoPricingList);
-
-                        UpdateShopInventoryWithValue(itemToSearch, deductedPrice);
-
-                        setAUTOPRICER_STATUS(`${nameToSearch} Best Price Found! Priced at ${bestPrice}...`);
-                        
-                    });
-
-                    // Increment currentIndex
-                    setCURRENT_PRICING_INDEX(++currentPricingIndex);
-                    await Sleep(sleepNewSearchMin, sleepNewSearchMax);
-
-                    //Starting a new search;
-                    if(!isTurbo){
-                        WaitForElement(".button-default__2020.button-blue__2020.wizard-button__2020[type='submit'][value='New Search']", 0).then((newSearchButton) => {
-                            newSearchButton.click();
-                        })
-                    } else {
-                        try{
-                            window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(autoPricingList[currentPricingIndex].Name)}`;
-                        } catch {
-                            window.location.reload();
-                        }
-                        
+                        break;
                     }
-                });
+                }
+
+                function RoundToNearestUnit(number, hasNines = false){
+                    var zeroesToAdd = number.toString().length - 2;
+                    var unitString = "1" + "0".repeat(zeroesToAdd);
+                    var unit = Number(unitString);
+
+                    if(hasNines) return CalculateThousand(number, unit, 1);
+                    return CalculateThousand(number, unit);
+                }
+
+                function CalculateThousand(number, unit, subtraction = 0){
+                    return Math.round(number / unit) * unit - subtraction;
+                }
+
+                function CalculatePercentagePrices(number, isSubtractingPercentage = false){
+                    if(isRandomPercentage || isSubtractingPercentage) {
+                        return number * (1 - parseFloat((GetRandomFloat(percentageDeductionMin, percentageDeductionMax) * 0.01).toFixed(3)));
+                    } else { // If the subtracted percentage is fixed;
+                        return number * (1 - (fixedPercentageDeduction * 0.01));
+                    }
+                }
+
+                deductedPrice = Math.floor(deductedPrice);
+                autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
+
+                setVARIABLE("AUTOPRICER_INVENTORY", autoPricingList);
+
+                UpdateShopInventoryWithValue(itemToSearch, deductedPrice);
+
+                setVARIABLE("AUTOPRICER_STATUS", `${nameToSearch} Best Price Found! Priced at ${bestPrice}...`);
             });
+
+            // Increment currentIndex
+            setVARIABLE("CURRENT_PRICING_INDEX", ++currentPricingIndex);
+            await Sleep(sleepNewSearchMin, sleepNewSearchMax);
+
+            //Starting a new search;
+            if(!isTurbo){
+                WaitForElement(".button-default__2020.button-blue__2020.wizard-button__2020[type='submit'][value='New Search']", 0).then((newSearchButton) => {
+                    newSearchButton.click();
+                })
+            } else {
+                try{
+                    window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(autoPricingList[currentPricingIndex].Name)}`;
+                } catch {
+                    window.location.reload();
+                }
+                
+            }
         }
 
-        function AutoSubmitPrices(listLength, currentPricingIndex){
+        async function AutoSubmitPrices(listLength, currentPricingIndex){
             if(listLength - 1 < currentPricingIndex){
-                setCURRENT_PRICING_INDEX(0);
-                setSTART_AUTOPRICING_PROCESS(false);
-                setAUTOPRICER_STATUS("AutoPricing Complete!");
+                setVARIABLE("CURRENT_PRICING_INDEX", 0);
+                setVARIABLE("START_AUTOPRICING_PROCESS", false);
+                setVARIABLE("AUTOPRICER_STATUS", "AutoPricing Complete!");
 
                 // Submitting the prices automatically;
-                getSHOULD_SUBMIT_AUTOMATICALLY(async function (isSubmittingAutomatically){
-                    if(isSubmittingAutomatically){
-                        if(!isTurbo) await Sleep(sleepBeforeNavigatingToNextPageMin, sleepBeforeNavigatingToNextPageMax);
-                        setNEXT_PAGE_INDEX(1);
-                        setSUBMIT_PRICES_PROCESS(true);
-                        setSTART_INVENTORY_PROCESS(false);
+                var isSubmittingAutomatically = await getVARIABLE("SHOULD_SUBMIT_AUTOMATICALLY");
 
-                        getSHOP_INVENTORY(function (entireShopStock){
-                            for(var i = 0; i < entireShopStock.length; i++){
-                                entireShopStock[i].IsPricing = true;
-                            }
+                if(isSubmittingAutomatically){
+                    if(!isTurbo) await Sleep(sleepBeforeNavigatingToNextPageMin, sleepBeforeNavigatingToNextPageMax);
+                    setVARIABLE("NEXT_PAGE_INDEX", 1);
+                    setVARIABLE("SUBMIT_PRICES_PROCESS", true);
+                    setVARIABLE("START_INVENTORY_PROCESS", false);
 
-                            setINVENTORY_UPDATED(true);
-                            setSHOP_INVENTORY(entireShopStock);
-                            window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
-                        })
-                    } else {
-                        window.alert("AutoPricing done!\n\nReturn to NeoBuyer+ and press the 'Submit Prices' to save the new stock prices.");
+                    var entireShopStock = await getVARIABLE("SHOP_INVENTORY");
+
+                    for(var i = 0; i < entireShopStock.length; i++){
+                        entireShopStock[i].IsPricing = true;
                     }
-                });
 
-                return;
+                    setVARIABLE("INVENTORY_UPDATED", true);
+                    setVARIABLE("SHOP_INVENTORY", entireShopStock);
+                    window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
+                } else {
+                    UpdateBannerAndDocument("AutoPricing done! Return to NeoBuyer+ and press the 'Submit Prices' button.");
+                }
             }
         }
 
         // DetectFaerieQuest(); If the item search box is missing in thew Shop Missing, the user is in a quest;
         function DetectFaerieQuest(isInErrorPage){
+            var wizardURL = "https://www.neopets.com/shops/wizard.phtml";
+
             if(window.location.href.includes(wizardURL) && PageIncludes("Ancient laws of magic and all that") && !isInErrorPage){
-                window.alert(
-                    "You are currently in a Faerie Quest.\n" +
-                    "Please complete or cancel the quest to use NeoBuyer's+ AutoPricer.\n\n" +
-                    "To continue, click 'Start AutoPricing' on the AutoPricer page.\n" +
-                    "The AutoPricer will resume from the last priced item.\n" +
-                    "Please avoid modifying your Shop Inventory List in the meantime.\n\n" +
-                    "AutoPricer has been stopped.\n"
-                );
-                setAUTOPRICER_STATUS("Faerie Quest Detected, Process Stopped.");
+                UpdateBannerAndDocument("You are currently in a Faerie Quest.");
+                setVARIABLE("AUTOPRICER_STATUS", "Faerie Quest Detected, Process Stopped.");
                 CancelAutoPricer();
                 return true;
             }
@@ -687,23 +677,17 @@ async function RunAutoPricer(){
                     if (contents.includes('I am too busy right now, please come back in about ')) {
                         var bannedMinutes = contents.replace("I am too busy right now, please come back in about ", "");
                         bannedMinutes = Number(bannedMinutes.replace(" minutes and I can help you out.", ""));
-                        setAUTOPRICER_STATUS(`Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
+                        setVARIABLE("AUTOPRICER_STATUS", `Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
                         setVARIABLE("AUTOKQ_STATUS", `Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
 
-                        window.alert(
-                            "You are currently Shop Wizard Banned.\n\n" +
-                            "You will need to wait a certain period of time before the autopricer can continue.\n" +
-                            "The AutoPricer will resume from the last priced item automatically.\n" +
-                            "You can either close this tab or leave it open after confirming this alert, it is up to you.\n\n" +
-                            "The AutoPricer has paused.\n"
-                        );
+                        UpdateBannerAndDocument("You are currently Shop Wizard Banned.");
 
                         bannedMinutes *= 60000;
 
                         // Sleep for the SW banned minutes and refresh the window;
                         await Sleep(bannedMinutes + Number(sleepIfBannedMin), bannedMinutes + Number(sleepIfBannedMax))
                         resolve();
-                        setAUTOPRICER_STATUS(`Shop Wizard is Usable Again!`);
+                        setVARIABLE("AUTOPRICER_STATUS", `Shop Wizard is Usable Again!`);
                         setVARIABLE("AUTOKQ_STATUS", "Shop Wizard is Usable Again!");
                         window.location.reload();
                     }
@@ -714,49 +698,49 @@ async function RunAutoPricer(){
         }
 
         // Loads and edits the stored shop inventory and sets a price to items;
-        function UpdateShopInventoryWithValue(itemToSearch, price){
-            getSHOP_INVENTORY(function(shopList){
-                var updatedShopList = shopList;
+        async function UpdateShopInventoryWithValue(itemToSearch, price){
+            var shopList = await getVARIABLE("SHOP_INVENTORY");
 
-                updatedShopList[itemToSearch.Index - 1].Price = price;
-                updatedShopList[itemToSearch.Index - 1].IsPricing = false;
-                setSHOP_INVENTORY(updatedShopList);
-                setINVENTORY_UPDATED(true);
-            });
+            var updatedShopList = shopList;
+
+            updatedShopList[itemToSearch.Index - 1].Price = price;
+            updatedShopList[itemToSearch.Index - 1].IsPricing = false;
+            setVARIABLE("SHOP_INVENTORY", updatedShopList);
+            setVARIABLE("INVENTORY_UPDATED", true);
         }
 
-        var marketURL = "https://www.neopets.com/market.phtml?";
-
         // Loading or submitting of prices;
-        function StartInventoryScrapingOrSubmitting(){
+        async function StartInventoryScrapingOrSubmitting(){
+            var marketURL = "https://www.neopets.com/market.phtml?";
+
             //If the player is in the market;
             if(window.location.href.includes(marketURL)){
                 // Check if the system can submit prices;
-                getSUBMIT_PRICES_PROCESS(function (canSubmit){
-                    if(!canSubmit){
-                        //If it can't, then it will be loading the stock into the extension;
-                        getSTART_INVENTORY_PROCESS(function (canScrapeInventory) {
-                            if(canScrapeInventory){
-                                ProcessAllPages();
-                                setSTART_INVENTORY_PROCESS(false);
-                            } 
-                        });
-                        return;
-                    } else {
-                        StartPriceSubmitting();
+                var canSubmit = await getVARIABLE("SUBMIT_PRICES_PROCESS");
+
+                if(!canSubmit){
+                    var canScrapeInventory = await getVARIABLE("START_INVENTORY_PROCESS");
+
+                    //If it can't, then it will be loading the stock into the extension;
+                    if(canScrapeInventory){
+                        ProcessAllPages();
+                        setVARIABLE("START_INVENTORY_PROCESS", false);
                     }
-                });
+                    
+                    return;
+                } else {
+                    StartPriceSubmitting();
+                }
             }
         }
 
         // Resets the AutoPricer to its initial state;
         function CancelAutoPricer(){
-            getSTART_INVENTORY_PROCESS(false);
-            setSTART_AUTOPRICING_PROCESS(false);
-            setAUTOPRICER_INVENTORY([]);
-            setINVENTORY_UPDATED(true);
-            setCURRENT_PRICING_INDEX(0);
-            setSUBMIT_PRICES_PROCESS(false);
+            setVARIABLE("START_AUTOPRICING_PROCESS", false);
+            setVARIABLE("AUTOPRICER_INVENTORY", []);
+            setVARIABLE("INVENTORY_UPDATED", true);
+            setVARIABLE("CURRENT_PRICING_INDEX", 0);
+            setVARIABLE("SUBMIT_PRICES_PROCESS", false);
         }
 
         async function StartPriceSubmitting(){
@@ -767,7 +751,7 @@ async function RunAutoPricer(){
         // Loads elements from the shop page to inject the calculated prices;
         async function PriceItemsInPage() {
             return new Promise(async (resolve) => {
-                setAUTOPRICER_STATUS("Navigating to Shop's Stock...");
+                setVARIABLE("AUTOPRICER_STATUS", "Navigating to Shop's Stock...");
 
                 var form = null;
                 form = await WaitForElement('form[action="process_market.phtml"][method="post"]', 0);
@@ -804,68 +788,67 @@ async function RunAutoPricer(){
 
                 if(!isVetoWord){
                     await new Promise(async (resolve) => {
-                        getSHOP_INVENTORY(async function (list){
-                            // Extracting the items from the list;
-                            
-                            const item = list.find(item => item.Name === itemName); // Finding the Item object based on its name in the table;
+                        var list = await getVARIABLE("SHOP_INVENTORY");
 
-                            var itemPrice;
+                        // Extracting the items from the list;
+                        const item = list.find(item => item.Name === itemName); // Finding the Item object based on its name in the table;
 
-                            try {
-                                itemPrice = parseInt(item.Price);
-                            } catch {
-                                resolve();
-                                return;
-                            }
-                            
-                            // If the price is NOT worth changing;
-                            if (itemPrice == parseInt(inputElements.value) || !item.IsPricing) {
-                                resolve(); // Skip the current item and move to the next
-                                return;
-                            }
+                        var itemPrice;
 
-                            setAUTOPRICER_STATUS(`Pricing ${itemName} at ${itemPrice} NPs...`);
+                        try {
+                            itemPrice = parseInt(item.Price);
+                        } catch {
+                            resolve();
+                            return;
+                        }
+                        
+                        // If the price is NOT worth changing;
+                        if (itemPrice == parseInt(inputElements.value) || !item.IsPricing) {
+                            resolve(); // Skip the current item and move to the next
+                            return;
+                        }
 
-                            // Get a reference to the input element
-                            const inputElement = document.querySelector(`input[name="cost_${rowIndex}"]`);
-                            if(!isTurbo) await Sleep(sleepSearchPriceInputBoxMin, sleepSearchPriceInputBoxMax);
+                        setVARIABLE("AUTOPRICER_STATUS", `Pricing ${itemName} at ${itemPrice} NPs...`);
 
-                            // Clear the current value in the input field
-                            inputElement.value = "";
+                        // Get a reference to the input element
+                        const inputElement = document.querySelector(`input[name="cost_${rowIndex}"]`);
+                        if(!isTurbo) await Sleep(sleepSearchPriceInputBoxMin, sleepSearchPriceInputBoxMax);
 
-                            // The value you want to input
-                            const desiredValue = itemPrice.toString();
-                            await SimulateKeyEvents(inputElement, desiredValue);
+                        // Clear the current value in the input field
+                        inputElement.value = "";
 
-                            updatedPrices = true;
-                            resolve(); // Continue to the next item
-                        });
+                        // The value you want to input
+                        const desiredValue = itemPrice.toString();
+                        await SimulateKeyEvents(inputElement, desiredValue);
+
+                        updatedPrices = true;
+                        resolve(); // Continue to the next item
                     });
                 }
             }
         }
 
         // Go to the next page in the page for pricing;
-        function GetNextPage(){
-            getNEXT_PAGE_INDEX(function (index){
-                if(index < hrefLinks.length){
-                    setNAVIGATE_TO_NEXT_PAGE(true);
-                } else {
-                    getSUBMIT_PRICES_PROCESS(function (isActive){
-                        if(isActive){
-                            setSUBMIT_PRICES_PROCESS(false);
-                            setAUTOPRICER_STATUS("AutoPricing Complete!");
-                            window.alert("The AutoPricing process has completed successfully!");
-                        }
-                    });
+        async function GetNextPage(){
+            var index = await getVARIABLE("NEXT_PAGE_INDEX");
+
+            if(index < hrefLinks.length){
+                setVARIABLE("NAVIGATE_TO_NEXT_PAGE", true);
+            } else {
+                var canSubmit = await getVARIABLE("SUBMIT_PRICES_PROCESS");
+                
+                if(canSubmit){
+                    setVARIABLE("SUBMIT_PRICES_PROCESS", false);
+                    setVARIABLE("AUTOPRICER_STATUS", `Pricing ${itemName} at ${itemPrice} NPs...`);
+                    UpdateBannerAndDocument("The AutoPricing process has completed successfully!");
                 }
-            });
+            }
         }
 
         // Press the 'Update' button in the shop to update its prices;
         async function PressUpdateButton(pinInput, updateButton){
             if(!isEnteringPINAutomatically){
-                window.alert("Since you deactivated the Auto-Enter PIN option, please Enter your PIN manually.\n\nThe AutoPricing process has finished for this page, fill the PIN input box with your PIN and the system will continue to the next page automatically.");
+                UpdateBannerAndDocument("Please Enter your PIN manually. The AutoPricing process has priced page, to continue fill the PIN input box.");
                 
                 async function WaitForPIN(pinInput){
                     return new Promise(async (resolve) => {
@@ -894,7 +877,7 @@ async function RunAutoPricer(){
 
             if(pinInput.value != "") updateButton.click();
             GetNextPage();
-            setAUTOPRICER_STATUS(`Prices Updated!`);
+            setVARIABLE("AUTOPRICER_STATUS", `Prices Updated!`);
         }
 
         var currentPageLink = null;
@@ -902,17 +885,15 @@ async function RunAutoPricer(){
         async function NavigateToNextPage(){
             return new Promise(async (resolve) => {
                 await Sleep(sleepWaitForUpdateMin, sleepWaitForUpdateMax);
+                var canNavigate = await getVARIABLE("NAVIGATE_TO_NEXT_PAGE");
+                var index = await getVARIABLE("NEXT_PAGE_INDEX");
 
-                getNAVIGATE_TO_NEXT_PAGE(function (canNavigate){
-                    getNEXT_PAGE_INDEX(function (index){
-                        currentPageLink = hrefLinks[index];
-                        if(currentPageLink === undefined || currentPageLink === null) return;
-                        window.location.href = currentPageLink;
-                        setNAVIGATE_TO_NEXT_PAGE(false);
-                        setNEXT_PAGE_INDEX(++index);
-                        if(canNavigate) setAUTOPRICER_STATUS(`Navigating to the Shop's Next Page...`);
-                    });
-                });
+                currentPageLink = hrefLinks[index];
+                if(currentPageLink === undefined || currentPageLink === null) return;
+                window.location.href = currentPageLink;
+                setVARIABLE("NAVIGATE_TO_NEXT_PAGE", false);
+                setVARIABLE("NEXT_PAGE_INDEX", ++index);
+                if(canNavigate) setVARIABLE("AUTOPRICER_STATUS", `Navigating to the Shop's Next Page...`);
 
                 resolve();
             });

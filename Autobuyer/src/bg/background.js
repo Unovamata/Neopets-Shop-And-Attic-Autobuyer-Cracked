@@ -1,11 +1,5 @@
 importScripts("../../js/ExtPay.js");
 
-function setATTIC_SHOULD_REFRESH(e) {
-    chrome.storage.local.set({
-        ATTIC_SHOULD_REFRESH: e
-    }, function() {})
-}
-
 function getRandomToken() {
     var e = new Uint8Array(32);
     crypto.getRandomValues(e);

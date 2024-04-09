@@ -111,8 +111,6 @@ function InjectAutoHaggler() {
 
                             thresholdToAdd =  Math.pow(Number(askingPrice), GetRandomFloatExclusive(haggleX, haggleY));
                             thresholdPrice = "" + Math.round(Number(askingPrice) + thresholdToAdd);
-                            
-                            
 
                             // Creating the haggle;
                             haggleInput.value = "0" + GenerateHagglePrice(thresholdPrice);
