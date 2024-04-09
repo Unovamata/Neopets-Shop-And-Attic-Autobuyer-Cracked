@@ -70,12 +70,14 @@ function InjectAutoAttic() {
         
         var waitTime = CreateWaitTime(atticLastRefresh);
 
+        console.log(waitTime);
+
         /* For every action taken that involves ABying, 
          * the attic will wait X amount of milliseconds
          * to optimize refreshes; */
         var atticWaitAfterAction = 30000;
         
-        async function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
+        function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
             const now = new Date();
             const lastRestockTime = new Date(atticLastRefresh);
         
@@ -113,7 +115,7 @@ function InjectAutoAttic() {
             windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * windowsPassed + extraSeconds);
 
             var wait = 0;
-            
+
             if(now >= new Date(atticStartWindow) && now <= new Date(atticEndWindow)){
                 wait = GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
 
@@ -218,7 +220,7 @@ function InjectAutoAttic() {
             
             // Wait for the scheduled time or run the AutoBuyer
             if(isAtticAutoRefreshing){
-                IsTimeToAutoRefreshAttic()
+                IsTimeToAutoRefreshAttic();
 
                 // Waiting a minute before updating after a restock happened;
                 if(atticRestocked){
@@ -235,8 +237,8 @@ function InjectAutoAttic() {
 
             // Additional function to check if it's time to auto-refresh the Attic
             async function IsTimeToAutoRefreshAttic() {
-                const timeFrom = TimezoneDate(new Date(runAutobuyerFrom));
-                const timeTo = TimezoneDate(new Date(runAutobuyerTo));
+                const timeFrom = TimezoneDate(new Date(runAutoAtticFrom));
+                const timeTo = TimezoneDate(new Date(runAutoAtticTo));
                 const date = TimezoneDate(new Date());
 
                 const timeDifferenceFrom = CalculateMillisecondDifference(timeFrom, date);

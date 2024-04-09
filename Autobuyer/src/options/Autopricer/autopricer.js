@@ -172,7 +172,7 @@ async function ReadInventoryData(){
 
 
 ReadInventoryData();
-setInterval(ReadInventoryData, 2000);
+setInterval(ReadInventoryData, 5000);
 
 //######################################################################################################################################
 
