@@ -70,8 +70,6 @@ function InjectAutoAttic() {
         
         var waitTime = CreateWaitTime(atticLastRefresh);
 
-        console.log(waitTime);
-
         /* For every action taken that involves ABying, 
          * the attic will wait X amount of milliseconds
          * to optimize refreshes; */
