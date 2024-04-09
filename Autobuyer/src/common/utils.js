@@ -665,18 +665,6 @@ function ShowOrHideLoading(status){
 //######################################################################################################################################
 
 
-function setITEM_HISTORY(itemHistory){
-    chrome.storage.local.set({ ITEM_HISTORY: itemHistory }, function () {});
-}
-
-
-//######################################################################################################################################
-
-
-function TestPattern(pattern, element){
-    return pattern.test(element);
-}
-
 function GetRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1) + min); }
 
 function GetRandomIntExclusive(min, max) { return Math.floor(Math.random() * (max - min) + min); }

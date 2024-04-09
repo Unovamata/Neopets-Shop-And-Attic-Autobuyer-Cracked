@@ -93,5 +93,8 @@ inputList.onchange = function (){
     outputList.value = resultingList;
 }
 
+function TestPattern(pattern, element){
+    return pattern.test(element);
+}
 
 //######################################################################################################################################

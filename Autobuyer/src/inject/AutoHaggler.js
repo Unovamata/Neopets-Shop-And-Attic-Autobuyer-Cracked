@@ -105,14 +105,15 @@ function InjectAutoHaggler() {
                             var haggleX = 0.75, haggleY = 0.85;
 
                             if(isUsingCustomHaggleMultipliers){
-                                haggleX = minHagglePower;
-                                haggleY = maxHagglePower;
+                                haggleX = Number(minHagglePower);
+                                haggleY = Number(maxHagglePower);
                             }
 
                             thresholdToAdd =  Math.pow(Number(askingPrice), GetRandomFloatExclusive(haggleX, haggleY));
                             thresholdPrice = "" + Math.round(Number(askingPrice) + thresholdToAdd);
                             
                             
+
                             // Creating the haggle;
                             haggleInput.value = "0" + GenerateHagglePrice(thresholdPrice);
                     }
