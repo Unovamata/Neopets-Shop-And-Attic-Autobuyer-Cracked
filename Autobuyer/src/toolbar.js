@@ -301,54 +301,54 @@ var successColor = "#2196F3";
 var errorColor = "#f22046";
 var warningColor = "#ff8214";
 
-function UpdateNotification(){
+async function UpdateNotification(){
     const currentDate = new Date();
     const parsedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDay()}, ${currentDate.getFullYear()}`;
-    //setUPDATE_DATE(""); //DEBUG!!!!
+    //setVARIABLE("UPDATE_DATE", ""); //DEBUG!!!!
 
     try{
-        getUPDATE_DATE(async function (date){
-            // Checking the latest version of the extension daily;
-            var hasDoneDailyVersionCheck = date === parsedDate;
+        var date = await getVARIABLE("UPDATE_DATE");
 
-            if(hasDoneDailyVersionCheck){
-                return;
-            }
+        // Checking the latest version of the extension daily;
+        var hasDoneDailyVersionCheck = date === parsedDate;
 
-            // If the version checker has not been run, check the latest version of the extension;
-            var currentVersion = chrome.runtime.getManifest().version;
-            var apiUrl = "https://api.github.com/repos/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
-            var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
-            var parsedVersion = githubLatestVersion.replace("v", "");
-            var isLatestVersion = parsedVersion == currentVersion;
+        if(hasDoneDailyVersionCheck){
+            return;
+        }
 
-            switch(parsedVersion){
-                // Github's API can't be reached;
-                case 'a':
-                    CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ API Can't Be Reached...", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
-                    isLatestVersion = false; // It can be the latest version for all we know;
-                break;
+        // If the version checker has not been run, check the latest version of the extension;
+        var currentVersion = chrome.runtime.getManifest().version;
+        var apiUrl = "https://api.github.com/repos/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
+        var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
+        var parsedVersion = githubLatestVersion.replace("v", "");
+        var isLatestVersion = parsedVersion == currentVersion;
 
-                // Unknown error;
-                case 'b':
-                    CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Checker Failed...", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
-                    isLatestVersion = false; // It can be the latest version for all we know;
-                break;
+        switch(parsedVersion){
+            // Github's API can't be reached;
+            case 'a':
+                CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ API Can't Be Reached...", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
+                isLatestVersion = false; // It can be the latest version for all we know;
+            break;
 
-                // Normal version checking;
-                default:
-                    if(isLatestVersion){
-                        CreateNotificationElement(isLatestVersion, successColor);
-                        setUPDATE_DATE(parsedDate);
-                    } else {
-                        CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Required", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
-                    }
-                break;
-            }
+            // Unknown error;
+            case 'b':
+                CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Checker Failed...", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
+                isLatestVersion = false; // It can be the latest version for all we know;
+            break;
 
-            // Check for new NeoBuyer+ mail updates;
-            CheckNewMail();
-        });
+            // Normal version checking;
+            default:
+                if(isLatestVersion){
+                    CreateNotificationElement(isLatestVersion, successColor);
+                    setVARIABLE("UPDATE_DATE", parsedDate);
+                } else {
+                    CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Required", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
+                }
+            break;
+        }
+
+        // Check for new NeoBuyer+ mail updates;
+        CheckNewMail();
     } catch {}
 }
 
@@ -461,7 +461,7 @@ function CheckNewMail(){
     // Fetching the data from the URL to check for new mails;
     fetch(emailCheckURL)
     .then(response => response.text())
-    .then(htmlContent => {
+    .then(async htmlContent => {
         const parser = new DOMParser();
         const githubDocument = parser.parseFromString(htmlContent, 'text/html');
 
@@ -476,44 +476,43 @@ function CheckNewMail(){
         
         var extractedEmail = new Email(0, ID, author, date, subject, title, contents, read);
 
-        getEMAIL_LIST(function (emailList){
-            const hasEmail = emailList.some(email => email.ID === ID);
+        var emailList = await getVARIABLE("EMAIL_LIST");
 
-            if (!hasEmail) {
-                getSKIP_CURRENT_MAIL(function(skipCurrentEmail){
-                    getCURRENT_MAIL_INDEX(function (currentIndex){
-                        // If the user opted-out from receiving the current message active;
-                        if(ID != currentIndex){
-                            setSKIP_CURRENT_MAIL(false);
-                            setCURRENT_MAIL_INDEX(currentIndex);
-                        } else {
-                            if(skipCurrentEmail) return;
-                        }
+        const hasEmail = emailList.some(email => email.ID === ID);
 
-                        // Notificate the user for new mails while also updating the mail list;
-                        CreateNotificationElement(true, mailSuccessColor, "You've Got Mail!");
-                        extractedEmail.Entry = emailList.length + 1;
-                        emailList.unshift(extractedEmail);
-                        setEMAIL_LIST(emailList);
-                    });
-                })
+        if (!hasEmail) {
+            var skipCurrentEmail = await getVARIABLE("SKIP_CURRENT_MAIL");
+            var currentIndex = await getVARIABLE("CURRENT_MAIL_INDEX");
+            
+            // If the user opted-out from receiving the current message active;
+            if(ID != currentIndex){
+                setVARIABLE("SKIP_CURRENT_MAIL", false);
+                setVARIABLE("CURRENT_MAIL_INDEX", currentIndex);
+            } else {
+                if(skipCurrentEmail) return;
             }
-        });
+
+            // Notificate the user for new mails while also updating the mail list;
+            CreateNotificationElement(true, mailSuccessColor, "You've Got Mail!");
+            extractedEmail.Entry = emailList.length + 1;
+            emailList.unshift(extractedEmail);
+            setVARIABLE("emailList", emailList);
+        }
     }).catch(error => {
         console.error("An error ocurred during the execution... Try again later...", error);
     });
 }
 
 // Activates the red dot notification whenever a new mail arrives;
-function ActivateNewMailNotification(){
+async function ActivateNewMailNotification(){
     try{
-        getEMAIL_LIST(function (emailList){
-            const isUnread = emailList.some(email => email.Read === false);
-            var notification = document.getElementsByClassName("notification-dot")[0];
-    
-            if(isUnread) notification.style.visibility = "visible";
-            else notification.style.visibility = "hidden";
-        });
+        var emailList = await getVARIABLE("EMAIL_LIST");
+
+        const isUnread = emailList.some(email => email.Read === false);
+        var notification = document.getElementsByClassName("notification-dot")[0];
+
+        if(isUnread) notification.style.visibility = "visible";
+        else notification.style.visibility = "hidden";
     } catch {}
 }
 

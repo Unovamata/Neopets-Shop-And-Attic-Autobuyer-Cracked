@@ -1,20 +1,24 @@
 // URL to fetch emails;
 const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
 
+SkipCurrentEmail();
+
 // Loading the email list if not skipping the current most recent email;
-getSKIP_CURRENT_MAIL(function (isSkippingCurrentMail){
+async function SkipCurrentEmail(){
+    var isSkippingCurrentMail = await getVARIABLE("SKIP_CURRENT_MAIL");
+
     var loading = document.getElementById("loading-messages");
     loading.style.visibility = "hidden";
     
     if(isSkippingCurrentMail) return;
 
-    getEMAIL_LIST(function (emailList){
-        for(var i = 0; i < emailList.length; i++) {
-            var email = emailList[i];
-            InsertNewEmailRow(email);
-        }
-    });
-});
+    var emailList = await getVARIABLE("EMAIL_LIST");
+
+    for(var i = 0; i < emailList.length; i++) {
+        var email = emailList[i];
+        InsertNewEmailRow(email);
+    }
+}
 
 var inbox = document.getElementById("inbox");
 var activeEmail = null;
@@ -48,28 +52,28 @@ function InsertNewEmailRow(email){
     emailReadCell.style.cursor = "pointer";
 
     // If the envelope is clicked, it will load the information from the email;
-    emailReadCell.addEventListener("click", function(event){
-        getEMAIL_LIST(function (emailList){
-            // Formatting the email to load as they are organized on more recent first;
-            var cellIndex = Number(newEmailRow.querySelector("td:first-child").textContent) - 1;
-            var emailIndex = (emailList.length - 1) - cellIndex;
+    emailReadCell.addEventListener("click", async function(event){
+        var emailList = await getVARIABLE("EMAIL_LIST");
+        
+        // Formatting the email to load as they are organized on more recent first;
+        var cellIndex = Number(newEmailRow.querySelector("td:first-child").textContent) - 1;
+        var emailIndex = (emailList.length - 1) - cellIndex;
 
-            activeEmail = emailList[emailIndex];
-            activeEmail.Read = true;
-            setEMAIL_LIST(emailList);
-            
-            // Hiding elements and filling other fields;
-            inbox.style.display = "none";
-            messageContainer.style.display = "block";
-            returnToInboxButton.style.display = "block";
-            
-            authorBox.innerHTML = activeEmail.Author;
-            idBox.textContent = activeEmail.ID;
-            sentDateBox.innerHTML = activeEmail.Date;
-            subjectBox.innerHTML = activeEmail.Subject;
-            titleBox.innerHTML = activeEmail.Title;
-            messageBox.innerHTML = activeEmail.Contents;
-        });
+        activeEmail = emailList[emailIndex];
+        activeEmail.Read = true;
+        setVARIABLE("EMAIL_LIST", emailList);
+        
+        // Hiding elements and filling other fields;
+        inbox.style.display = "none";
+        messageContainer.style.display = "block";
+        returnToInboxButton.style.display = "block";
+        
+        authorBox.innerHTML = activeEmail.Author;
+        idBox.textContent = activeEmail.ID;
+        sentDateBox.innerHTML = activeEmail.Date;
+        subjectBox.innerHTML = activeEmail.Subject;
+        titleBox.innerHTML = activeEmail.Title;
+        messageBox.innerHTML = activeEmail.Contents;
     });
 
     inbox.appendChild(newEmailRow);
@@ -91,7 +95,7 @@ returnToInboxButton.addEventListener("click", ShowInbox);
 ShowInbox();
 
 // Hides the message box and displays the inbox;
-function ShowInbox(){
+async function ShowInbox(){
     inbox.style.removeProperty("display");
     messageContainer.style.display = "none";
     returnToInboxButton.style.display = "none";
@@ -101,47 +105,52 @@ function ShowInbox(){
 var deleteEmailsButton = document.getElementById("reset");
 deleteEmailsButton.addEventListener("click", DeleteMails);
 
-function DeleteMails(){
+async function DeleteMails(){
     // Getting the email list for deletion and telling the system to not receive the newest email if its ID is equal to 'X';
-    getEMAIL_LIST(function (mails){
-        try {
-            setCURRENT_MAIL_INDEX(mails[0].ID);
-        } catch {
-            setCURRENT_MAIL_INDEX(-1);
-        }
-    });
+    var emailList = await getVARIABLE("EMAIL_LIST");
+
+    try {
+        setVARIABLE("CURRENT_MAIL_INDEX", emailList[0].ID);
+    } catch {
+        setVARIABLE("CURRENT_MAIL_INDEX", -1);
+    }
 
     // Resetting the data;
-    setEMAIL_LIST([]);
-    setSKIP_CURRENT_MAIL(true);
+    setVARIABLE("EMAIL_LIST", []);
+    setVARIABLE("SKIP_CURRENT_MAIL", true);
 
     // And alerting the user;
-    getCURRENT_MAIL_INDEX(function (currentIndex){
-        if(currentIndex == -1){
-            window.alert("All NeoBuyer+ mails have been successfully deleted!");
-        } else {
-            CheckNewMail();
-            setRETRIEVED_NEWEST_EMAIL(true);
-        }
-    });
+    var currentIndex = await getVARIABLE("CURRENT_MAIL_INDEX");
+
+    if(currentIndex == -1){
+        window.alert("All NeoBuyer+ mails have been successfully deleted!");
+    } else {
+        CheckNewMail();
+        setVARIABLE("RETRIEVED_NEWEST_EMAIL", true);
+    }
 
     window.location.reload();
 }
 
-getCURRENT_MAIL_INDEX(function (currentIndex){
+async function UpdateDeleteButton(){
+    var currentIndex = await getVARIABLE("CURRENT_MAIL_INDEX");
+
     if(currentIndex != -1){
         deleteEmailsButton.textContent = "Get the Latest Email for Next Update Check";
     }
-});
+}
+
+UpdateDeleteButton();
+
 
 // Checks constantly if the inventory page needs to update;
-function UpdateGUIData() {
-    getRETRIEVED_NEWEST_EMAIL(function (newestRetrieved) {
-        if (newestRetrieved) {
-            location.reload();
-            setRETRIEVED_NEWEST_EMAIL(false);
-        }
-    });
+async function UpdateGUIData() {
+    var newestRetrieved = await getVARIABLE("RETRIEVED_NEWEST_EMAIL");
+
+    if (newestRetrieved) {
+        location.reload();
+        setVARIABLE("RETRIEVED_NEWEST_EMAIL", false);
+    }
 }
 
 setInterval(UpdateGUIData, 1000);

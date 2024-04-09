@@ -37,7 +37,7 @@ clearButton.addEventListener('click', ClearHistory);
 function ClearHistory(){
     if(confirm("Do you want to delete all entries in your item purchase history?")){
         if(confirm("Are you sure you want to clear your purchase history? This action cannot be undone unless you have a backup of you configuration presets.")){
-            setITEM_HISTORY([])
+            setVARIABLE("ITEM_HISTORY", []);
         }
     }
 }
@@ -80,7 +80,7 @@ function ProcessPurchaseHistory(forceUpdateHistory) {
 
             const processedData = ProcessItemData(history);
 
-            if(currentHistorySize != historySize) setITEM_HISTORY(processedData);
+            if(currentHistorySize != historySize) setVARIABLE("ITEM_HISTORY", processedData);
 
             currentHistorySize = historySize;
             DisplayTableData(processedData, ["JN"], chunkSize, FilterFunction);            
