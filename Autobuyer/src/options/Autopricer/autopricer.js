@@ -314,7 +314,7 @@ var swTab = null;
 
 function StartAutoPricer(){
     getBLACKLIST_SW(function(blacklist){
-        getIS_TURBO(function(isTurbo){
+        getIS_TURBO(async function(isTurbo){
             var selectedRows = document.querySelectorAll(".checked-row");
             autoPricingList = [];
 
@@ -343,15 +343,15 @@ function StartAutoPricer(){
             setSTART_AUTOPRICING_PROCESS(true);
             setCURRENT_PRICING_INDEX(0);
 
-            setSUBMIT_AUTOKQ_PROCESS(false);
+            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
 
-            getSTART_AUTOKQ_PROCESS(function (isActive) {
-                if(isActive){
-                    setAUTOKQ_STATUS("AutoKQ Process Cancelled by the AutoPricer Process...");
-                }
-            });
+            var isActive = await getVARIABLE("START_AUTOKQ_PROCESS");
 
-            setSTART_AUTOKQ_PROCESS(false);
+            if(isActive){
+                setVARIABLE("AutoKQ Process Cancelled by the AutoPricer Process...");
+            }
+
+            setVARIABLE("START_AUTOKQ_PROCESS", false);
 
             // Function to create a new tab if swTab is null
             if(isTurbo){
@@ -377,8 +377,8 @@ function CancelAutoPricer(){
         setCURRENT_PRICING_INDEX(0);
         setSUBMIT_PRICES_PROCESS(false);
         setNEXT_PAGE_INDEX(0);
-        setSUBMIT_AUTOKQ_PROCESS(false);
-        setSTART_AUTOKQ_PROCESS(false);
+        setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+        setVARIABLE("START_AUTOKQ_PROCESS", false);
         setAUTOPRICER_STATUS("Inactive");
     }
 }

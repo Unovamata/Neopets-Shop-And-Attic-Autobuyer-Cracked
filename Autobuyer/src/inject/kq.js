@@ -14,8 +14,8 @@ chrome.storage.local.get({
     // Checking if the AutoKQs can be done;
     if(!isStartingAutoKQProcess) return;
     if(document.body.textContent.includes("Sorry, there is a limit of 10 quests per day.")){
-        setAUTOKQ_STATUS("AutoKQ's Tasks have been Completed!");
-        setSTART_AUTOKQ_PROCESS(false);
+        setVARIABLE("AUTOKQ_STATUS", "AutoKQ's Tasks have been Completed!");
+        setVARIABLE("START_AUTOKQ_PROCESS", false);
         return;
     }
 
@@ -24,12 +24,12 @@ chrome.storage.local.get({
 
     if(startButton){
         // The items have just become available to see;
-        setAUTOKQ_STATUS("Starting Kitchen Quest...");
+        setVARIABLE("AUTOKQ_STATUS", "Starting Kitchen Quest...");
         startButton.click();
         ExtractItemsFromKQ();
     } else {
         // The KQ was already initialized before;
-        setAUTOKQ_STATUS("Kitchen Quest Already Started, Searching Items...");
+        setVARIABLE("AUTOKQ_STATUS", "Kitchen Quest Already Started, Searching Items...");
         ExtractItemsFromKQ();
     }
 
@@ -43,8 +43,8 @@ chrome.storage.local.get({
         // Submitting the ingredients if the user already has them;
         if(isKQProcessDone){
             submitIngredients.click();
-            setSUBMIT_AUTOKQ_PROCESS(false);
-            setAUTOKQ_STATUS("Quest Completed!");
+            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+            setVARIABLE("AUTOKQ_STATUS", "Quest Completed!");
             await ReadPrizeElement();
             window.location.reload();
             return;
@@ -54,7 +54,7 @@ chrome.storage.local.get({
         var ingredients = await WaitForElement('.ingredient-grid', 0);
         var items = ingredients.querySelectorAll("b");
         var itemArray = [];
-        setAUTOKQ_STATUS("Waiting for Ingredients...");
+        setVARIABLE("AUTOKQ_STATUS", "Waiting for Ingredients...");
 
         // Adding the ingredients to a search list;
         items.forEach(function(element) {
@@ -67,19 +67,19 @@ chrome.storage.local.get({
 
         // If the quest asks for blacklisted items, halt the process;
         if(questContainsBlacklistedItem){
-            setAUTOKQ_STATUS("Blacklisted Item Detected... Quest Cancelled!");
-            setSUBMIT_AUTOKQ_PROCESS(false);
-            setKQ_INVENTORY([]);
+            setVARIABLE("AUTOKQ_STATUS", "Blacklisted Item Detected... Quest Cancelled!");
+            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+            setVARIABLE("KQ_INVENTORY", []);
             window.alert("Blacklisted Item Detected in Quest!\n\nThis quest involves a blacklisted item and as a result, the AutoKQ process will be halted. You may consider reactivating AutoKQ once the quest expires or, alternatively, removing the blacklisted item to proceed with this specific quest.")
             return;
         }
 
-        await setKQ_INVENTORY(itemArray);
+        await setVARIABLE("KQ_INVENTORY", itemArray);
         
 
         // Launching the SW;
         window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(itemArray[0])}`;
-        setAUTOKQ_STATUS(`Ingredients Read! Initializing SW for ${itemArray.length} items...`);
+        setVARIABLE("AUTOKQ_STATUS", `Ingredients Read! Initializing SW for ${itemArray.length} items...`);
     }
     
     async function ReadPrizeElement(){

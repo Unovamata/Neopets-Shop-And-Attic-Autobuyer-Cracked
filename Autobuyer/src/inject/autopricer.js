@@ -688,7 +688,7 @@ async function RunAutoPricer(){
                         var bannedMinutes = contents.replace("I am too busy right now, please come back in about ", "");
                         bannedMinutes = Number(bannedMinutes.replace(" minutes and I can help you out.", ""));
                         setAUTOPRICER_STATUS(`Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
-                        setAUTOKQ_STATUS(`Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
+                        setVARIABLE("AUTOKQ_STATUS", `Shop Wizard Ban Detected! Sleeping for ${bannedMinutes} Minutes or so...`);
 
                         window.alert(
                             "You are currently Shop Wizard Banned.\n\n" +
@@ -704,7 +704,7 @@ async function RunAutoPricer(){
                         await Sleep(bannedMinutes + Number(sleepIfBannedMin), bannedMinutes + Number(sleepIfBannedMax))
                         resolve();
                         setAUTOPRICER_STATUS(`Shop Wizard is Usable Again!`);
-                        setAUTOKQ_STATUS("Shop Wizard is Usable Again!");
+                        setVARIABLE("AUTOKQ_STATUS", "Shop Wizard is Usable Again!");
                         window.location.reload();
                     }
                 }
@@ -956,7 +956,7 @@ async function RunAutoPricer(){
 
                     // Choose the 'a' tag to navigate to the shop;
                     function GoToLowestPricedShop(){
-                        setAUTOKQ_STATUS("Search Successful! Choosing Lowest Price...");
+                        setVARIABLE("AUTOKQ_STATUS", "Search Successful! Choosing Lowest Price...");
                         var aElement = searchResults.parentElement.querySelector('a');
 
                         aElement.click();

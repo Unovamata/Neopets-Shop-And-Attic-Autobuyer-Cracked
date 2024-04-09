@@ -5,7 +5,7 @@ AC.js
 benchmark.js
 
 //Ignoring deprecated scripts
-SDBPricer.js
+SDBPricerFeature.js
 inject.js
 .idea
 sdbpricer.js

@@ -21,9 +21,12 @@ function getVARIABLE(variable) {
 }
 
 function setVARIABLE(propertyName, value) {
-    const storageObject = {};
-    storageObject[propertyName] = value;
-    chrome.storage.local.set(storageObject, function () {});
+    return new Promise((resolve, reject) => {
+        const storageObject = {};
+        storageObject[propertyName] = value;
+        chrome.storage.local.set(storageObject, function () {});
+        resolve(value);
+    });
 }
 
 
@@ -538,91 +541,6 @@ function setATTIC_PREV_NUM_ITEMS(value) {
 function setATTIC_LAST_REFRESH_MS(value) {
     chrome.storage.local.set({ ATTIC_LAST_REFRESH_MS: value }, function () {});
 }
-
-
-//######################################################################################################################################
-//// AutoKQ Variable Calling
-
-function setAUTOKQ_STATUS(value) {
-    chrome.storage.local.set({ AUTOKQ_STATUS: value }, function () {});
-}
-
-function setSTART_AUTOKQ_PROCESS(value) {
-    chrome.storage.local.set({ START_AUTOKQ_PROCESS: value }, function () {});
-}
-
-function getSTART_AUTOKQ_PROCESS(callback) {
-    chrome.storage.local.get(['START_AUTOKQ_PROCESS'], function (result) {
-        var value = result.START_AUTOKQ_PROCESS;
-
-        if(value == undefined || value == null){
-            setSTART_AUTOKQ_PROCESS(false);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setSUBMIT_AUTOKQ_PROCESS(value) {
-    chrome.storage.local.set({ SUBMIT_AUTOKQ_PROCESS: value }, function () {});
-}
-
-function setKQ_INVENTORY(value) {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({ KQ_INVENTORY: value }, function () {
-            resolve();
-        });
-    });
-}
-
-function getSHOULD_DELETE_SHOP_LAYOUTS(callback) {
-    chrome.storage.local.get(['SHOULD_DELETE_SHOP_LAYOUTS'], async function (result) {
-        var value = result.SHOULD_DELETE_SHOP_LAYOUTS;
-
-        if(value == undefined || value == null){
-            await setSHOULD_DELETE_SHOP_LAYOUTS([]);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function setSHOULD_DELETE_SHOP_LAYOUTS(value) {
-    chrome.storage.local.set({SHOULD_DELETE_SHOP_LAYOUTS: value}, (function () {}));
-}
-
-function getKQ_INVENTORY(callback) {
-    chrome.storage.local.get(['KQ_INVENTORY'], async function (result) {
-        var value = result.KQ_INVENTORY;
-
-        if(value == undefined || value == null){
-            await setKQ_INVENTORY([]);
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
-function getBLACKLIST_KQ(callback) {
-    chrome.storage.local.get(['BLACKLIST_KQ'], async function (result) {
-        var value = result.BLACKLIST_KQ;
-
-        if(value == undefined || value == null){
-            value = [];
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
-    });
-}
-
 
 //######################################################################################################################################
 // Page Error Handling;
