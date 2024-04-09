@@ -26,6 +26,8 @@ async function AutoKitchenQuest(){
 
     var autoPricingList = [];
 
+    setVARIABLE("START_AUTOKQ_PROCESS", true);
+
     async function StartAutoKQ(){
         setVARIABLE("START_INVENTORY_PROCESS", false);
         setVARIABLE("START_INVENTORY_PROCESS", false);
