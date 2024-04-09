@@ -75,7 +75,7 @@ function InjectAutoAttic() {
          * to optimize refreshes; */
         var atticWaitAfterAction = 30000;
         
-        function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
+        async function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
             const now = new Date();
             const lastRestockTime = new Date(atticLastRefresh);
         
@@ -125,8 +125,8 @@ function InjectAutoAttic() {
                 if(wait > fourteenMinutes){
                     location.reload();
                 } else {
-                    setATTIC_NEXT_START_WINDOW(windowStartTime.getTime());
-                    setATTIC_NEXT_END_WINDOW(windowEndTime.getTime());
+                    await setVARIABLE("ATTIC_NEXT_START_WINDOW", windowStartTime.getTime());
+                    await setVARIABLE("ATTIC_NEXT_END_WINDOW", windowEndTime.getTime());
 
                     wait = windowStartTime - now;
 
@@ -222,8 +222,8 @@ function InjectAutoAttic() {
 
                 // Waiting a minute before updating after a restock happened;
                 if(atticRestocked){
-                    setATTIC_PREV_NUM_ITEMS(ItemsStocked);
-                    setATTIC_LAST_REFRESH_MS(lastRestock);
+                    await setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
+                    await setVARIABLE("ATTIC_LAST_REFRESH_MS", lastRestock);
 
                     UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
 

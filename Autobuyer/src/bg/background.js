@@ -87,7 +87,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_DELETE_SHOP_LAYOUTS: false,
 
 			// [Level, Hit Points, Strength, Defence, Agility, Items, Neopoints];
-			KQ_TRACKER: [],
+			KQ_TRACKER: [0, 0, 0, 0, 0, 0, 0],
 		
 			// Shop Wizard;
 			MIN_WAIT_BAN_TIME: 300000,

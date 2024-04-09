@@ -27,41 +27,41 @@ async function AutoKitchenQuest(){
     var autoPricingList = [];
 
     async function StartAutoKQ(){
-        setVARIABLE("START_INVENTORY_PROCESS", false);
-        setVARIABLE("START_INVENTORY_PROCESS", false);
-        setVARIABLE("SUBMIT_PRICES_PROCESS", false);
+        await setVARIABLE("START_INVENTORY_PROCESS", false);
+        await setVARIABLE("START_INVENTORY_PROCESS", false);
+        await setVARIABLE("SUBMIT_PRICES_PROCESS", false);
 
         var isAutoPricerActive = await getVARIABLE("START_AUTOPRICING_PROCESS");
 
         if(isAutoPricerActive){
-            setVARIABLE("AUTOPRICER_STATUS", "AutoPricer Process Cancelled by the AutoKQ Process...");
+            await setVARIABLE("AUTOPRICER_STATUS", "AutoPricer Process Cancelled by the AutoKQ Process...");
         }
 
-        setVARIABLE("START_AUTOPRICING_PROCESS", false);
+        await setVARIABLE("START_AUTOPRICING_PROCESS", false);
 
-        setVARIABLE("START_AUTOKQ_PROCESS", true);
-        setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
-        setVARIABLE("AUTOKQ_STATUS", "Navigating to the KQ Page...");
+        await setVARIABLE("START_AUTOKQ_PROCESS", true);
+        await setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+        await setVARIABLE("AUTOKQ_STATUS", "Navigating to the KQ Page...");
         
 
         chrome.tabs.create({ url: 'https://www.neopets.com/island/kitchen.phtml', active: true });
 
-        setVARIABLE("AUTOKQ_STATUS", "AutoKQ Process Running...");
+        await setVARIABLE("AUTOKQ_STATUS", "AutoKQ Process Running...");
     }
 
     const cancelAutoKQButton = document.getElementById("cancel");
     cancelAutoKQButton.addEventListener('click', CancelAutoPricer);
 
-    function CancelAutoPricer(){
+    async function CancelAutoPricer(){
         if(confirm("Do you want to terminate the current AutoPricer process?")){
-            setVARIABLE("START_AUTOPRICING_PROCESS", false);
-            setVARIABLE("AUTOPRICER_INVENTORY", []);
-            setVARIABLE("CURRENT_PRICING_INDEX", 0);
-            setVARIABLE("SUBMIT_PRICES_PROCESS", false);
-            setVARIABLE("NEXT_PAGE_INDEX", 0);
-            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
-            setVARIABLE("START_AUTOKQ_PROCESS", false);
-            setVARIABLE("AUTOKQ_STATUS", "Inactive");
+            await setVARIABLE("START_AUTOPRICING_PROCESS", false);
+            await setVARIABLE("AUTOPRICER_INVENTORY", []);
+            await setVARIABLE("CURRENT_PRICING_INDEX", 0);
+            await setVARIABLE("SUBMIT_PRICES_PROCESS", false);
+            await setVARIABLE("NEXT_PAGE_INDEX", 0);
+            await setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+            await setVARIABLE("START_AUTOKQ_PROCESS", false);
+            await setVARIABLE("AUTOKQ_STATUS", "Inactive");
         }
     }
 
@@ -113,10 +113,10 @@ async function AutoKitchenQuest(){
     const clearButton = document.getElementById("resetKQ");
     clearButton.addEventListener('click', ClearKQLog);
 
-    function ClearKQLog(){
+    async function ClearKQLog(){
         if(confirm("Do you want to delete all entries in your Kitchen Quest Log?")){
             if(confirm("Are you sure you want to clear your Kitchen Quest Log? This action cannot be undone unless you have a backup of you configuration presets.")){
-                setVARIABLE("KQ_TRACKER", []);
+                await setVARIABLE("KQ_TRACKER", [0, 0, 0, 0, 0, 0, 0]);
             }
         }
     }

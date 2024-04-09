@@ -37,16 +37,14 @@ function setMAX_CLICK_CONFIRM(_) { chrome.storage.local.set({MAX_CLICK_CONFIRM: 
 function setMIN_OCR_PAGE(_) { chrome.storage.local.set({MIN_OCR_PAGE: Number(_)}, (function () {})) }
 function setMAX_OCR_PAGE(_) { chrome.storage.local.set({MAX_OCR_PAGE: Number(_)}, (function () {})) }
 function setRESTOCK_LIST(_) { chrome.storage.local.set({RESTOCK_LIST: _}, (function () {})) }
-function setATTIC_LAST_REFRESH_MS(_) { chrome.storage.local.set({ATTIC_LAST_REFRESH_MS: _}, (function () {})) }
 function setUSE_BLACKLIST(_) { chrome.storage.local.set({USE_BLACKLIST: _}, (function () {})) }
 function setBLACKLIST(_) { chrome.storage.local.set({BLACKLIST: _}, (function () {})) }
 function setITEM_DB_MIN_RARITY(_) { chrome.storage.local.set({ITEM_DB_MIN_RARITY: _}, (function () {})) }
 function setBUY_UNKNOWN_ITEMS_PROFIT(_) { chrome.storage.local.set({BUY_UNKNOWN_ITEMS_PROFIT: _}, (function () {})) }
 function setSHOULD_SHOW_CHROME_NOTIFICATIONS(_) { chrome.storage.local.set({SHOULD_SHOW_CHROME_NOTIFICATIONS: _}, (function () {})) }
 function setSHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES(_) { chrome.storage.local.set({SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES: _}, (function () {})) }
-function setATTIC_PREV_NUM_ITEMS(_) { chrome.storage.local.set({ATTIC_PREV_NUM_ITEMS: _}, (function () {})) }
 
-function updateLastRefreshMs() {
+async function updateLastRefreshMs() {
   const atticDateValue = $("#ATTIC_LAST_REFRESH_DATE").val();
   const atticTimeValue = $("#ATTIC_LAST_REFRESH_TIME").val();
   const isInAutoBuyerPage = atticDateValue === undefined || atticTimeValue === undefined;
@@ -60,9 +58,9 @@ function updateLastRefreshMs() {
   if(!isInAutoBuyerPage){
     if (atticDateValue !== "" && atticTimeValue !== "") {
       const timestamp = moment.tz(atticDateValue + " " + atticTimeValue, "America/Los_Angeles").toDate().valueOf();
-  
-      setATTIC_LAST_REFRESH_MS(timestamp);
-      setATTIC_PREV_NUM_ITEMS(24);
+      
+      await setVARIABLE("ATTIC_LAST_REFRESH_MS", timestamp);
+      await setVARIABLE("ATTIC_PREV_NUM_ITEMS", 24);
     }
 
     const autoAtticFromValue = $("#RUN_AUTOATTIC_FROM").val();
@@ -72,8 +70,8 @@ function updateLastRefreshMs() {
       const fromTimestamp = moment.tz(formattedDate + " " + autoAtticFromValue, "America/Los_Angeles").toDate().valueOf();
       const toTimestamp = moment.tz(formattedDate + " " + autoAtticToValue, "America/Los_Angeles").toDate().valueOf();
 
-      setVARIABLE("RUN_AUTOATTIC_FROM_MS", fromTimestamp);
-      setVARIABLE("RUN_AUTOATTIC_TO_MS", toTimestamp);
+      await setVARIABLE("RUN_AUTOATTIC_FROM_MS", fromTimestamp);
+      await setVARIABLE("RUN_AUTOATTIC_TO_MS", toTimestamp);
     }
   }
   
@@ -88,8 +86,8 @@ function updateLastRefreshMs() {
     const fromTimestamp = moment.tz(formattedDate + " " + autoBuyerFromValue, "America/Los_Angeles").toDate().valueOf();
     const toTimestamp = moment.tz(formattedDate + " " + autoBuyerToValue, "America/Los_Angeles").toDate().valueOf();
 
-    setVARIABLE("RUN_AUTOBUYER_FROM_MS", fromTimestamp);
-    setVARIABLE("RUN_AUTOBUYER_TO_MS", toTimestamp);
+    await setVARIABLE("RUN_AUTOBUYER_FROM_MS", fromTimestamp);
+    await setVARIABLE("RUN_AUTOBUYER_TO_MS", toTimestamp);
   }
 }
 
@@ -417,8 +415,6 @@ function setSHOULD_CHANGE_DOCUMENT_DATA(value) { chrome.storage.local.set({SHOUL
 
 //AutoAttic Setters;
 function setATTIC_RESTOCK_LIST(value) { chrome.storage.local.set({ATTIC_RESTOCK_LIST: value}, (function () {})) }
-function setATTIC_NEXT_START_WINDOW(value) { chrome.storage.local.set({ATTIC_NEXT_START_WINDOW: value}, (function () {})) }
-function setATTIC_NEXT_END_WINDOW(value) { chrome.storage.local.set({ATTIC_NEXT_END_WINDOW: value}, (function () {})) }
 
 // AutoPricer Setters;
 function setIS_TURBO(value) { chrome.storage.local.set({IS_TURBO: value}, (function () {})) }
@@ -566,12 +562,12 @@ $("#ATTIC_RESTOCK_LIST").bind("input propertychange", (function () {
   }
 }));
 
-$("#ATTIC_NEXT_START_WINDOW").bind("input propertychange", (function () {
-  setATTIC_NEXT_START_WINDOW($("#ATTIC_NEXT_START_WINDOW").val())
+$("#ATTIC_NEXT_START_WINDOW").bind("input propertychange", (async function () {
+  await setVARIABLE("ATTIC_NEXT_START_WINDOW", $("#ATTIC_NEXT_START_WINDOW").val());
 }))
 
-$("#ATTIC_NEXT_END_WINDOW").bind("input propertychange", (function () {
-  setATTIC_NEXT_END_WINDOW($("#ATTIC_NEXT_END_WINDOW").val())
+$("#ATTIC_NEXT_END_WINDOW").bind("input propertychange", (async function () {
+  await setVARIABLE("ATTIC_NEXT_END_WINDOW", $("#ATTIC_NEXT_END_WINDOW").val());
 }))
 
 // AutoPricer Data Binding;

@@ -3,7 +3,7 @@ chrome.storage.local.get({
     SUBMIT_AUTOKQ_PROCESS: false,
     BLACKLIST_KQ: [],
     KQ_TRACKER: [0, 0, 0, 0, 0, 0, 0],
-}, (function(autoKQVariables) {
+}, (async function(autoKQVariables) {
     const { 
         START_AUTOKQ_PROCESS: isStartingAutoKQProcess,
         SUBMIT_AUTOKQ_PROCESS: isKQProcessDone,
@@ -14,8 +14,8 @@ chrome.storage.local.get({
     // Checking if the AutoKQs can be done;
     if(!isStartingAutoKQProcess) return;
     if(document.body.textContent.includes("Sorry, there is a limit of 10 quests per day.")){
-        setVARIABLE("AUTOKQ_STATUS", "AutoKQ's Tasks have been Completed!");
-        setVARIABLE("START_AUTOKQ_PROCESS", false);
+        await setVARIABLE("AUTOKQ_STATUS", "AutoKQ's Tasks have been Completed!");
+        await setVARIABLE("START_AUTOKQ_PROCESS", false);
         return;
     }
 
@@ -24,12 +24,12 @@ chrome.storage.local.get({
 
     if(startButton){
         // The items have just become available to see;
-        setVARIABLE("AUTOKQ_STATUS", "Starting Kitchen Quest...");
+        await setVARIABLE("AUTOKQ_STATUS", "Starting Kitchen Quest...");
         startButton.click();
         ExtractItemsFromKQ();
     } else {
         // The KQ was already initialized before;
-        setVARIABLE("AUTOKQ_STATUS", "Kitchen Quest Already Started, Searching Items...");
+        await setVARIABLE("AUTOKQ_STATUS", "Kitchen Quest Already Started, Searching Items...");
         ExtractItemsFromKQ();
     }
 
@@ -43,8 +43,8 @@ chrome.storage.local.get({
         // Submitting the ingredients if the user already has them;
         if(isKQProcessDone){
             submitIngredients.click();
-            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
-            setVARIABLE("AUTOKQ_STATUS", "Quest Completed!");
+            await setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+            await setVARIABLE("AUTOKQ_STATUS", "Quest Completed!");
             await ReadPrizeElement();
             window.location.reload();
             return;
@@ -54,7 +54,7 @@ chrome.storage.local.get({
         var ingredients = await WaitForElement('.ingredient-grid', 0);
         var items = ingredients.querySelectorAll("b");
         var itemArray = [];
-        setVARIABLE("AUTOKQ_STATUS", "Waiting for Ingredients...");
+        await setVARIABLE("AUTOKQ_STATUS", "Waiting for Ingredients...");
 
         // Adding the ingredients to a search list;
         items.forEach(function(element) {
@@ -67,9 +67,9 @@ chrome.storage.local.get({
 
         // If the quest asks for blacklisted items, halt the process;
         if(questContainsBlacklistedItem){
-            setVARIABLE("AUTOKQ_STATUS", "Blacklisted Item Detected... Quest Cancelled!");
-            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
-            setVARIABLE("KQ_INVENTORY", []);
+            await setVARIABLE("AUTOKQ_STATUS", "Blacklisted Item Detected... Quest Cancelled!");
+            await setVARIABLE("SUBMIT_AUTOKQ_PROCESS", false);
+            await setVARIABLE("KQ_INVENTORY", []);
             window.alert("Blacklisted Item Detected in Quest!\n\nThis quest involves a blacklisted item and as a result, the AutoKQ process will be halted. You may consider reactivating AutoKQ once the quest expires or, alternatively, removing the blacklisted item to proceed with this specific quest.")
             return;
         }
@@ -79,7 +79,7 @@ chrome.storage.local.get({
 
         // Launching the SW;
         window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(itemArray[0])}`;
-        setVARIABLE("AUTOKQ_STATUS", `Ingredients Read! Initializing SW for ${itemArray.length} items...`);
+        await setVARIABLE("AUTOKQ_STATUS", `Ingredients Read! Initializing SW for ${itemArray.length} items...`);
     }
     
     async function ReadPrizeElement(){
@@ -139,7 +139,7 @@ chrome.storage.local.get({
                 //Saving the new history;
                 kqTracker.push(newEntry);
 
-                await setKQ_TRACKER(kqTracker);
+                await setVARIABLE("KQ_TRACKER", kqTracker);
             }
     
             function ExtractPrizeData(text, keyword) {
@@ -202,3 +202,7 @@ chrome.storage.local.get({
         });
     }
 }));
+
+function ArrayHasCommonElement(arrayA, arrayB) {
+    return arrayA.some(element => arrayB.includes(element));
+}

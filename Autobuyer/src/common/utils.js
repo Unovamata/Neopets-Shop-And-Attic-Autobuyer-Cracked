@@ -303,14 +303,6 @@ function FormatMillisecondsToSeconds(milliseconds) {
     return (milliseconds / 1e3).toFixed(2) + " secs"
 }
 
-function setATTIC_NEXT_START_WINDOW(value) {
-    chrome.storage.local.set({ ATTIC_NEXT_START_WINDOW: value }, function () {});
-}
-
-function setATTIC_NEXT_END_WINDOW(value) {
-    chrome.storage.local.set({ ATTIC_NEXT_END_WINDOW: value }, function () {});
-}
-
 //######################################################################################################################################
 //// Auto Pricer Variable Calling
 
@@ -530,18 +522,6 @@ function setSHOP_HISTORY(value) {
     });
 }
 
-
-//######################################################################################################################################
-/// AutoAttic Variable Calling;
-
-function setATTIC_PREV_NUM_ITEMS(value) {
-    chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: Number(value) }, function () {});
-}
-
-function setATTIC_LAST_REFRESH_MS(value) {
-    chrome.storage.local.set({ ATTIC_LAST_REFRESH_MS: value }, function () {});
-}
-
 //######################################################################################################################################
 // Page Error Handling;
 
@@ -645,24 +625,6 @@ function WaitForElement(selector, index = 0) {
                 resolve(element); // Resolve with the found element
             }
         }, 1000);
-    });
-}
-
-function ArrayHasCommonElement(arrayA, arrayB) {
-    return arrayA.some(element => arrayB.includes(element));
-}
-
-function getKQ_TRACKER(callback){
-    chrome.storage.local.get(['KQ_TRACKER'], function (result) {
-        var value = result.KQ_TRACKER;
-
-        if(value == undefined || value == null){
-            value = [0, 0, 0, 0, 0, 0, 0];
-        }
-
-        if (typeof callback === 'function') {
-            callback(value);
-        }
     });
 }
 
