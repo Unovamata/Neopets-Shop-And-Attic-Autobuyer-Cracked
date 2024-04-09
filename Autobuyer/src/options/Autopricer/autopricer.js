@@ -62,6 +62,13 @@ var stockCounter = 0;
 var inventoryData = [];
 
 async function ReadInventoryData(){
+    const activeElement = document.activeElement;
+    const tagName = activeElement.tagName;
+    const inputType = activeElement.getAttribute('type');
+    const isSelectingInputBox = tagName === 'INPUT' && inputType !== 'checkbox';
+    
+    if(isSelectingInputBox) return;
+
     shopValue = 0;
     stockCounter = 0;
 
@@ -85,26 +92,10 @@ async function ReadInventoryData(){
         var cellPrice = row.insertCell(3);
         var priceInput = document.createElement("input");
         priceInput.value = Item.Price;
+        shopValue += Number(Item.Price);
         priceInput.type = "number";
         priceInput.max = 999999;
         priceInput.min = 0;
-        
-        priceInput.addEventListener('change', function () {
-            Item.Price = parseInt(priceInput.value);
-
-            if(Item.Price < 0 || priceInput.value == ""){
-                Item.Price = 0;
-                priceInput.value = 0;
-            } else if(Item.Price > 999999){
-                Item.Price = 999999;
-                priceInput.value = 999999;
-            }
-
-            setVARIABLE("SHOP_INVENTORY", inventoryData);
-        });
-        
-        shopValue += parseInt(Item.Price * Item.Stock);
-        shopValueElement.innerHTML = `${shopValue} NP`;
 
         cellPrice.appendChild(priceInput);
 
@@ -112,23 +103,14 @@ async function ReadInventoryData(){
         var shouldPriceInput = document.createElement("input");
         shouldPriceInput.type = "checkbox";
         shouldPriceInput.checked = Item.IsPricing;
-        
-        shouldPriceInput.addEventListener("change", function () {
-            if (shouldPriceInput.checked) {
-                row.classList.add("checked-row");
-            } else {
-                row.classList.remove("checked-row");
-            }
-
-            Item.IsPricing = shouldPriceInput.checked;
-            setVARIABLE("SHOP_INVENTORY", inventoryData);
-        });
-
-        cellShouldPrice.appendChild(shouldPriceInput);
 
         if (Item.IsPricing) {
-            row.classList.add("checked-row");
+            cellShouldPrice.closest('tr').classList.add("checked-row");
+        } else {
+            cellShouldPrice.closest('tr').classList.remove("checked-row");
         }
+        
+        cellShouldPrice.appendChild(shouldPriceInput);
 
         var cellJN = row.insertCell(5);
 
@@ -145,6 +127,7 @@ async function ReadInventoryData(){
     });
 
     shopItemsElement.innerHTML = stockCounter;
+    shopValueElement.innerHTML = shopValue + " NP";
 
     // Clear the table's current content
     table.innerHTML = "";
@@ -154,12 +137,42 @@ async function ReadInventoryData(){
         table.appendChild(row.cloneNode(true));
     });
 
+    // Attach event listeners to priceInput and shouldPriceInput after cloning
+    table.querySelectorAll('input[type="number"]').forEach((input, index) => {
+        input.addEventListener('change', function () {
+            inventoryData[index].Price = parseInt(input.value);
+
+            if(inventoryData[index].Price < 0 || input.value == ""){
+                inventoryData[index].Price = 0;
+                input.value = 0;
+            } else if(inventoryData[index].Price > 999999){
+                inventoryData[index].Price = 999999;
+                input.value = 999999;
+            }
+
+            setVARIABLE("SHOP_INVENTORY", inventoryData);
+        });
+    });
+
+    table.querySelectorAll('input[type="checkbox"]').forEach((checkbox, index) => {
+        checkbox.addEventListener("change", function () {
+            if (checkbox.checked) {
+                checkbox.closest('tr').classList.add("checked-row");
+            } else {
+                checkbox.closest('tr').classList.remove("checked-row");
+            }
+    
+            inventoryData[index].IsPricing = checkbox.checked;
+            setVARIABLE("SHOP_INVENTORY", inventoryData);
+        });
+    });
+
     table.insertAdjacentHTML('afterbegin', baseTableHTML);
 }
 
+
 ReadInventoryData();
 setInterval(ReadInventoryData, 2000);
-
 
 //######################################################################################################################################
 
