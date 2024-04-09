@@ -25,14 +25,14 @@ async function StartUserBuyer(){
     PageIncludes("There are no items for sale in this shop!") ||
     PageIncludes("This transaction has expired!") ||
     PageIncludes("You do not have enough Neopoints to purchase this item!")) {
-        await setVARIABLE("AUTOKQ_STATUS", "Shop Owner Either Frozen or the Item Just Sold Out, Restarting Search...");
+        setVARIABLE("AUTOKQ_STATUS", "Shop Owner Either Frozen or the Item Just Sold Out, Restarting Search...");
 
         // If there are ingredients to search left, then go to the SW after purchase;
         if(ingredients.length > 0){
             window.location.href = `https://www.neopets.com/shops/wizard.phtml?string=${encodeURIComponent(ingredients[0])}`;
         } else { // If not, it means the quest can be completed;
-            await setVARIABLE("SUBMIT_AUTOKQ_PROCESS", true);
-            await setVARIABLE("AUTOKQ_STATUS", "Ingredients Bought! Preparing for Quest Completion...");
+            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", true);
+            setVARIABLE("AUTOKQ_STATUS", "Ingredients Bought! Preparing for Quest Completion...");
             window.location.href = 'https://www.neopets.com/island/kitchen.phtml';
         }
     }
@@ -56,24 +56,24 @@ async function StartUserBuyer(){
             var removedIngredient = newIngredientsList.shift();
 
             if(removedIngredient == itemName){
-                await setVARIABLE("AUTOKQ_STATUS", `Buying ${removedIngredient}...`);
-                await setVARIABLE("KQ_INVENTORY", newIngredientsList);
+                setVARIABLE("AUTOKQ_STATUS", `Buying ${removedIngredient}...`);
+                setVARIABLE("KQ_INVENTORY", newIngredientsList);
                 window.location.href = buyIngredientURL;
             } else { 
                 // If there's a different item at the top of the page, most likely the user is buying something for themselves;
                 return;
             }
         } else {
-            await setVARIABLE("SUBMIT_AUTOKQ_PROCESS", true);
-            await setVARIABLE("AUTOKQ_STATUS", "Ingredients Bought! Preparing for Quest Completion...");
+            setVARIABLE("SUBMIT_AUTOKQ_PROCESS", true);
+            setVARIABLE("AUTOKQ_STATUS", "Ingredients Bought! Preparing for Quest Completion...");
             window.location.href = 'https://www.neopets.com/island/kitchen.phtml';
         }
     }
 };
 
 // DecodeLink(); Decodes a link in a format that Neopets can understand;
-async function DecodeLink(inputLink) {
-    await setVARIABLE("AUTOKQ_STATUS", "Decoding Purchase Link...");
+function DecodeLink(inputLink) {
+    setVARIABLE("AUTOKQ_STATUS", "Decoding Purchase Link...");
 
     let decodedLink = decodeURIComponent(inputLink);
     decodedLink = decodedLink.replace(/&amp;/g, '&');

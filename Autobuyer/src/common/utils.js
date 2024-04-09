@@ -21,12 +21,9 @@ function getVARIABLE(variable) {
 }
 
 function setVARIABLE(propertyName, value) {
-    return new Promise((resolve, reject) => {
-        const storageObject = {};
-        storageObject[propertyName] = value;
-        chrome.storage.local.set(storageObject, function () {});
-        resolve(value);
-    });
+    const storageObject = {};
+    storageObject[propertyName] = value;
+    chrome.storage.local.set(storageObject, function () {});
 }
 
 
@@ -177,7 +174,7 @@ function DisplayAutoBuyerBanner(isAlmostAbandonedAttic = false) {
     chrome.storage.local.get({ SHOULD_SHOW_BANNER: false }, function (result) {
         var isBannerVisible = result.SHOULD_SHOW_BANNER;
         
-        if(!isBannerVisible) return
+        if(!isBannerVisible) return;
 
         // Creating the banner element;
         const bannerElement = document.createElement("div");
@@ -625,14 +622,6 @@ function WaitForElement(selector, index = 0) {
                 resolve(element); // Resolve with the found element
             }
         }, 1000);
-    });
-}
-
-function setKQ_TRACKER(value) {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({ KQ_TRACKER: value }, function () {
-            resolve();
-        });
     });
 }
 
