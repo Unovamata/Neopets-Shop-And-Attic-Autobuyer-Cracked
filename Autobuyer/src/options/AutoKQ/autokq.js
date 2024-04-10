@@ -24,10 +24,6 @@ async function AutoKitchenQuest(){
     const startAutoKQButton = document.getElementById("start");
     startAutoKQButton.addEventListener('click', StartAutoKQ);
 
-    var autoPricingList = [];
-
-    setVARIABLE("START_AUTOKQ_PROCESS", true);
-
     async function StartAutoKQ(){
         setVARIABLE("START_INVENTORY_PROCESS", false);
         setVARIABLE("START_INVENTORY_PROCESS", false);
