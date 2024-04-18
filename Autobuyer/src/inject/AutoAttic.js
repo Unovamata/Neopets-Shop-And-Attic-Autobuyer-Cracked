@@ -180,6 +180,7 @@ function InjectAutoAttic() {
                     document.getElementById("oii").value = itemID;
                     document.getElementById("frm-abandoned-attic").submit();
                     attemptedItem = true;
+                    console.log("Clicking!");
                 }
             }
 
@@ -192,14 +193,17 @@ function InjectAutoAttic() {
 
                 var currentTime = TimezoneDate(new Date(currentTime)),
                 lastRestockTime = new Date(atticLastRefresh);
-                lastRestockTime.setMinutes(lastRestockTime.getMinutes() + 10);
 
-                var hasRestockedRecently = currentTime < lastRestockTime;
+                const tenMinutes = 10 * 60 * 1000;
+                const timeDifference = Math.abs(currentTime.getTime() - lastRestockTime.getTime());
+
+                const hasRestockedRecently = timeDifference < tenMinutes;
+                console.log(hasRestockedRecently);
 
                 // Waiting a minute before updating after a restock happened;
                 if(atticRestocked && !hasRestockedRecently){
                     setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
-                    setVARIABLE("ATTIC_LAST_REFRESH_MS", lastRestock);
+                    setVARIABLE("ATTIC_LAST_REFRESH_MS", lastRestock.getTime());
 
                     UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
 
