@@ -70,71 +70,40 @@ function InjectAutoAttic() {
 
         // Calculate the time to wait before the next refresh
         
-        var waitTime = CreateWaitTime(atticLastRefresh);
+        var waitTime = GenerateWaitTime(atticLastRefresh);
 
         /* For every action taken that involves ABying, 
          * the attic will wait X amount of milliseconds
          * to optimize refreshes; */
         var atticWaitAfterAction = 30000;
         
-        function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
-            const now = new Date();
-            const lastRestockTime = new Date(atticLastRefresh);
-        
-            const lastRestockMinute = lastRestockTime.getMinutes();
-        
-            const timeDifference = now - lastRestockTime;
-
-            var extraMinutes = 0, extraSeconds = 0, minutesInterval, extraWindow = 0;
-            const fourteenMinutes = 14 * 60 * 1000;
-
-            if(timeDifference < fourteenMinutes){
-                minutesInterval = 14;
-                extraMinutes = 0;
-                extraSeconds = 0;
-            } else {
-                minutesInterval = 7;
-                extraMinutes = 7;
-                extraSeconds = 6;
-                extraWindow = -0.5;
-            }
-
-            if(isNextWindow) extraWindow = 1;
-
-            const windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000)) + 1 + extraWindow;
-
-            const windowStartTime = new Date(lastRestockTime);
-            const windowEndTime = new Date(lastRestockTime);
-    
-            const secondsToAdd = minutesInterval === 14 ? 10 : 4;
-    
-            windowStartTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
-            windowStartTime.setSeconds(lastRestockTime.getSeconds() + (1 * windowsPassed) - 1);
-    
-            windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
-            windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * windowsPassed + extraSeconds);
-
+        function GenerateWaitTime(atticLastRefresh, isNextWindow = false) {   
+            const now = TimezoneDate(new Date());
+            
+            const windowTimes = CreateWaitTime(new Date(), atticLastRefresh);
             var wait = 0;
 
-            if(now >= new Date(atticStartWindow) && now <= new Date(atticEndWindow)){
+            if(now >= windowTimes[0] && now <= windowTimes[1]){
                 wait = GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
-
+          
                 RefreshBanner(wait);
-
+          
                 return wait;
             } else {
+                const fourteenMinutes = 14 * 60 * 1000;
+
                 // Broken times;
                 if(wait > fourteenMinutes){
                     location.reload();
                 } else {
-                    setVARIABLE("ATTIC_NEXT_START_WINDOW", windowStartTime.getTime());
-                    setVARIABLE("ATTIC_NEXT_END_WINDOW", windowEndTime.getTime());
-
-                    wait = windowStartTime - now;
-
+                    setVARIABLE("ATTIC_NEXT_START_WINDOW", windowTimes[0].getTime());
+                    setVARIABLE("ATTIC_NEXT_END_WINDOW", windowTimes[1].getTime());
+          
+                    wait = windowTimes[0] - now;
+          
                     RefreshBanner(wait);
                 }
-
+          
                 return wait;
             }
         }

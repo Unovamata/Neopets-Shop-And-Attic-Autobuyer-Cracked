@@ -126,6 +126,59 @@ function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
     return selectedName;
 }
 
+function CreateWaitTime(inputDate, atticLastRefresh, ) {
+    const now = TimezoneDate(inputDate);
+    const lastRestockTime = TimezoneDate(new Date(atticLastRefresh));
+    lastRestockTime.setFullYear(now.getFullYear());
+    lastRestockTime.setMonth(now.getMonth());
+    lastRestockTime.setDate(now.getDate());
+    
+    const timeDifference = now - lastRestockTime;
+  
+    var extraMinutes = 0, extraSeconds = 0, minutesInterval, extraWindow = 0;
+    const fourteenMinutes = 14 * 60 * 1000;
+  
+    if(timeDifference < fourteenMinutes){
+        minutesInterval = 14;
+        extraMinutes = 0;
+        extraSeconds = 0;
+        extraWindow = 1;
+    } else {
+        minutesInterval = 7;
+        extraMinutes = 7;
+        extraSeconds = 6;
+        extraWindow = -1;
+    }
+  
+    var windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000)) + extraWindow;
+
+    const windowStartTime = new Date(lastRestockTime);
+    const windowEndTime = new Date(lastRestockTime);
+  
+    const secondsToAdd = minutesInterval === 14 ? 10 : 4;
+    const lastRestockMinute = lastRestockTime.getMinutes();
+
+    windowStartTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
+    windowStartTime.setSeconds(lastRestockTime.getSeconds() + (1 * windowsPassed) - 0.5);
+  
+    windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
+    windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * (windowsPassed + 1) + extraSeconds);
+
+    // Check if the current time is after the end of the current window
+    if(now.getTime() >= windowEndTime.getTime()){
+        // Move to the next window
+        windowsPassed++;
+        windowStartTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
+        windowStartTime.setSeconds(lastRestockTime.getSeconds() + (1 * windowsPassed) - 0.5);
+        
+        windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
+        windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * (windowsPassed + 1) + extraSeconds);
+    }
+    
+    return [windowStartTime, windowEndTime];
+}
+
+
 function TimezoneDate(time){
     return new Date(moment(time).tz("America/Los_Angeles").format("YYYY-MM-DD HH:mm:ss"));
 }

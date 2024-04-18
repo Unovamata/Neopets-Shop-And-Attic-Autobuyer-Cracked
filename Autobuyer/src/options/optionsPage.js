@@ -44,6 +44,30 @@ function setBUY_UNKNOWN_ITEMS_PROFIT(_) { chrome.storage.local.set({BUY_UNKNOWN_
 function setSHOULD_SHOW_CHROME_NOTIFICATIONS(_) { chrome.storage.local.set({SHOULD_SHOW_CHROME_NOTIFICATIONS: _}, (function () {})) }
 function setSHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES(_) { chrome.storage.local.set({SHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES: _}, (function () {})) }
 
+// Updates the next possible windows in the GUI every 10 seconds;
+async function DisplayAtticTimes(){    
+  var now = new Date();
+  var lastRestockingTime = new Date(await getVARIABLE("ATTIC_LAST_REFRESH_MS"));
+
+  const windowTimes = CreateWaitTime(now, lastRestockingTime);
+  const startTime = ParseStringTime(windowTimes[0]);
+  const endTime = ParseStringTime(windowTimes[1]);
+
+  $("#ATTIC_NEXT_START_WINDOW").val(`${startTime[0]}:${startTime[1]}:${startTime[2]}`);
+  $("#ATTIC_NEXT_END_WINDOW").val(`${endTime[0]}:${endTime[1]}:${endTime[2]}`);
+
+  setVARIABLE("ATTIC_NEXT_START_WINDOW", windowTimes[0].getTime());
+  setVARIABLE("ATTIC_NEXT_END_WINDOW", windowTimes[1].getTime());
+}
+
+function ParseStringTime(time){
+  const startHours = String(time.getHours()).padStart(2, '0');
+  const startMinutes = String(time.getMinutes()).padStart(2, '0');
+  const startSeconds = String(time.getSeconds()).padStart(2, '0');
+
+  return [startHours, startMinutes, startSeconds];
+}
+
 async function updateLastRefreshMs() {
   const atticDateValue = $("#ATTIC_LAST_REFRESH_DATE").val();
   const atticTimeValue = $("#ATTIC_LAST_REFRESH_TIME").val();
@@ -61,6 +85,7 @@ async function updateLastRefreshMs() {
       
       await setVARIABLE("ATTIC_LAST_REFRESH_MS", timestamp);
       await setVARIABLE("ATTIC_PREV_NUM_ITEMS", 24);
+      DisplayAtticTimes();
     }
 
     const autoAtticFromValue = $("#RUN_AUTOATTIC_FROM").val();
@@ -277,7 +302,7 @@ $("#ATTIC_MAX_REFRESH").bind("input propertychange", (function () {
   setATTIC_MAX_REFRESH($("#ATTIC_MAX_REFRESH").val())
 }));
 $("#ATTIC_LAST_REFRESH_DATE").on("change", (function () {
-  updateLastRefreshMs()
+  updateLastRefreshMs();
 }));
 
 $("#ATTIC_LAST_REFRESH_TIME").on("change", (function () {
@@ -974,6 +999,7 @@ resetButton.onclick = function (_) {
   SHOULD_CHANGE_DOCUMENT_DATA: false,
 
   // AutoAttic;
+  ATTIC_LAST_REFRESH_MS: 0,
   RUN_AUTOATTIC_FROM_MS: 1712473200000,
 	RUN_AUTOATTIC_TO_MS: 1712559599000,
   ATTIC_RESTOCK_LIST: defaultDesiredItems,
@@ -1123,18 +1149,7 @@ resetButton.onclick = function (_) {
   // AutoAttic Settings;
   $("#ATTIC_RESTOCK_LIST").val(_.ATTIC_RESTOCK_LIST.join("\n"));
 
-
   DisplayAtticTimes();
-  
-  // Updates the next possible windows in the GUI every 10 seconds;
-  function DisplayAtticTimes(){
-    var atticStartWindow = moment(_.ATTIC_NEXT_START_WINDOW).tz("America/Los_Angeles").format("HH:mm:ss"),
-    atticEndWindow = moment(_.ATTIC_NEXT_END_WINDOW).tz("America/Los_Angeles").format("HH:mm:ss");
-
-    $("#ATTIC_NEXT_START_WINDOW").val(atticStartWindow);
-    $("#ATTIC_NEXT_END_WINDOW").val(atticEndWindow);
-  }
-
   setInterval(DisplayAtticTimes, 10000);
   
 
