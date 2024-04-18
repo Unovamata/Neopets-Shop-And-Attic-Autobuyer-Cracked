@@ -198,7 +198,6 @@ function InjectAutoAttic() {
                 const timeDifference = Math.abs(currentTime.getTime() - lastRestockTime.getTime());
 
                 const hasRestockedRecently = timeDifference < tenMinutes;
-                console.log(hasRestockedRecently);
 
                 // Waiting a minute before updating after a restock happened;
                 if(atticRestocked && !hasRestockedRecently){
