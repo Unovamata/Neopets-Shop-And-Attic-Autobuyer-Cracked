@@ -839,7 +839,7 @@ async function RunAutoPricer(){
                 
                 if(canSubmit){
                     setVARIABLE("SUBMIT_PRICES_PROCESS", false);
-                    setVARIABLE("AUTOPRICER_STATUS", `Pricing ${itemName} at ${itemPrice} NPs...`);
+                    setVARIABLE("AUTOPRICER_STATUS", `The AutoPricing Process has Completed Successfully!`);
                     UpdateBannerAndDocument("The AutoPricing process has completed successfully!");
                 }
             }
