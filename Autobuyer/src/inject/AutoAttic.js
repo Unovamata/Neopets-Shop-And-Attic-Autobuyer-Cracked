@@ -66,7 +66,8 @@ function InjectAutoAttic() {
         } = autobuyerVariables;
         
         var atticWaitTime = 1200000,
-        atticRestocked  = false;
+        atticRestocked  = false,
+        currentTime = new Date();
 
         // Calculate the time to wait before the next refresh
         
@@ -78,9 +79,9 @@ function InjectAutoAttic() {
         var atticWaitAfterAction = 30000;
         
         function GenerateWaitTime(atticLastRefresh, isNextWindow = false) {   
-            const now = TimezoneDate(new Date());
+            const now = TimezoneDate(currentTime);
             
-            const windowTimes = CreateWaitTime(new Date(), atticLastRefresh);
+            const windowTimes = CreateWaitTime(currentTime, atticLastRefresh);
             var wait = 0;
 
             if(now >= windowTimes[0] && now <= windowTimes[1]){
@@ -90,19 +91,12 @@ function InjectAutoAttic() {
           
                 return wait;
             } else {
-                const fourteenMinutes = 14 * 60 * 1000;
-
-                // Broken times;
-                if(wait > fourteenMinutes){
-                    location.reload();
-                } else {
-                    setVARIABLE("ATTIC_NEXT_START_WINDOW", windowTimes[0].getTime());
-                    setVARIABLE("ATTIC_NEXT_END_WINDOW", windowTimes[1].getTime());
-          
-                    wait = windowTimes[0] - now;
-          
-                    RefreshBanner(wait);
-                }
+                setVARIABLE("ATTIC_NEXT_START_WINDOW", windowTimes[0].getTime());
+                setVARIABLE("ATTIC_NEXT_END_WINDOW", windowTimes[1].getTime());
+        
+                wait = windowTimes[0] - now;
+        
+                RefreshBanner(wait);
           
                 return wait;
             }
@@ -146,12 +140,12 @@ function InjectAutoAttic() {
             return;
         }
         
-        // Buying items from the attick;
+        // Buying items from the attic;
         else {
             if (atticPreviousNumberOfItems < 0) return;
             if (atticLastRefresh < 0) return;
             var ItemsStocked = GetAtticStockedItemNumber();
-            var lastRestock = Date.now();
+            var lastRestock = TimezoneDate(Date.now());
 
             if (ItemsStocked > atticPreviousNumberOfItems) atticRestocked = true;
             
@@ -191,8 +185,14 @@ function InjectAutoAttic() {
             if(isAtticAutoRefreshing){
                 IsTimeToAutoRefreshAttic();
 
+                var currentTime = TimezoneDate(new Date(currentTime)),
+                lastRestockTime = new Date(atticLastRefresh);
+                lastRestockTime.setMinutes(lastRestockTime.getMinutes() + 14);
+
+                var hasRestockedRecently = currentTime < lastRestockTime;
+
                 // Waiting a minute before updating after a restock happened;
-                if(atticRestocked){
+                if(atticRestocked && !hasRestockedRecently){
                     setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
                     setVARIABLE("ATTIC_LAST_REFRESH_MS", lastRestock);
 
@@ -208,7 +208,7 @@ function InjectAutoAttic() {
             async function IsTimeToAutoRefreshAttic() {
                 const timeFrom = TimezoneDate(new Date(runAutoAtticFrom));
                 const timeTo = TimezoneDate(new Date(runAutoAtticTo));
-                const date = TimezoneDate(new Date());
+                const date = TimezoneDate(currentTime);
 
                 const timeDifferenceFrom = CalculateMillisecondDifference(timeFrom, date);
                 const timeDifferenceTo = CalculateMillisecondDifference(timeTo, date);
