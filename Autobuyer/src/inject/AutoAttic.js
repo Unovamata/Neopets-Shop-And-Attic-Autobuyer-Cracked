@@ -192,7 +192,7 @@ function InjectAutoAttic() {
 
                 var currentTime = TimezoneDate(new Date(currentTime)),
                 lastRestockTime = new Date(atticLastRefresh);
-                lastRestockTime.setMinutes(lastRestockTime.getMinutes() + 14);
+                lastRestockTime.setMinutes(lastRestockTime.getMinutes() + 10);
 
                 var hasRestockedRecently = currentTime < lastRestockTime;
 
