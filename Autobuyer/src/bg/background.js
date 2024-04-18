@@ -38,6 +38,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			// AutoBuyer;
 			RUN_AUTOBUYER_FROM_MS: 1712473200000,
 			RUN_AUTOBUYER_TO_MS: 1712559599000,
+			IS_DEFAULT_SHOP_TIME: true,
 			MIN_FIVE_SECOND_RULE_REFRESH: 5000,
 			MAX_FIVE_SECOND_RULE_REFRESH: 10000,
 			SHOULD_BYPASS_CONFIRM: false,
@@ -51,6 +52,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			//AutoAttic;
 			RUN_AUTOATTIC_FROM_MS: 1712473200000,
 			RUN_AUTOATTIC_TO_MS: 1712559599000,
+			IS_DEFAULT_ATTIC_TIME: true,
 			ATTIC_RESTOCK_LIST: [],
 			ATTIC_NEXT_START_WINDOW: 0,
         	ATTIC_NEXT_END_WINDOW: 0,

@@ -27,6 +27,7 @@ function InjectAutoAttic() {
         ATTIC_MAX_BUY_TIME: 750,
         RUN_AUTOATTIC_FROM_MS: 1712473200000,
 		RUN_AUTOATTIC_TO_MS: 1712559599000,
+        IS_DEFAULT_ATTIC_TIME: true,
         ATTIC_MIN_REFRESH: 2500,
         ATTIC_MAX_REFRESH: 3500,
         ATTIC_SHOULD_REFRESH: !1,
@@ -54,6 +55,7 @@ function InjectAutoAttic() {
             ATTIC_MAX_BUY_TIME: maxAtticBuyTime,
             RUN_AUTOATTIC_FROM_MS: runAutoAtticFrom,
 		    RUN_AUTOATTIC_TO_MS: runAutoAtticTo,
+            IS_DEFAULT_ATTIC_TIME: isDefaultAtticTime,
             ATTIC_MIN_REFRESH: minRefreshIntervalAttic,
             ATTIC_MAX_REFRESH: maxRefreshIntervalAttic,
             ATTIC_SHOULD_REFRESH: isAtticAutoRefreshing,
@@ -243,13 +245,13 @@ function InjectAutoAttic() {
                 const timeDifferenceTo = CalculateMillisecondDifference(timeTo, date);
 
                 // If restocking window hasn't arrived;
-                if(timeDifferenceFrom == 0 && timeDifferenceTo == 0){
+                if(timeDifferenceFrom == 0 && timeDifferenceTo == 0 && !isDefaultAtticTime){
                     UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
                     await Sleep(CalculateNextWindowReach(timeFrom, date));
                 }
 
                 // If restocking window has already passed;
-                else if(timeDifferenceFrom > 0 && timeDifferenceTo > 0){
+                else if(timeDifferenceFrom > 0 && timeDifferenceTo > 0 && !isDefaultAtticTime){
                     UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
                     await Sleep(timeDifferenceFrom);
                 }

@@ -33,6 +33,7 @@ function InjectAutoPricer() {
         STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: [2, 58],
         RUN_AUTOBUYER_FROM_MS: 1712473200000,
 		RUN_AUTOBUYER_TO_MS: 1712559599000,
+        IS_DEFAULT_SHOP_TIME: true,
         PAUSE_BETWEEN_MINUTES: [],
         RESTOCK_LIST: defaultDesiredItems,
     }, (async function(autobuyerVariables) {
@@ -56,6 +57,7 @@ function InjectAutoPricer() {
             STORES_TO_CYCLE_THROUGH_WHEN_STOCKED: storesToCycle,
             RUN_AUTOBUYER_FROM_MS: runAutobuyerFrom,
 	        RUN_AUTOBUYER_TO_MS: runAutobuyerTo,
+            IS_DEFAULT_SHOP_TIME: isDefaultShopTime,
             PAUSE_BETWEEN_MINUTES: pauseBetweenMinutes,
             MIN_REFRESH: minRefreshIntervalUnstocked,
             MAX_REFRESH: maxRefreshIntervalUnstocked,
@@ -203,15 +205,15 @@ function InjectAutoPricer() {
 
             const timeDifferenceFrom = CalculateMillisecondDifference(timeFrom, date);
             const timeDifferenceTo = CalculateMillisecondDifference(timeTo, date);
-
+            
             // If restocking window hasn't arrived;
-            if(timeDifferenceFrom == 0 && timeDifferenceTo == 0){
+            if(timeDifferenceFrom == 0 && timeDifferenceTo == 0 && !isDefaultShopTime){
                 UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
                 await Sleep(CalculateNextWindowReach(timeFrom, date));
             }
 
             // If restocking window has already passed;
-            else if(timeDifferenceFrom > 0 && timeDifferenceTo > 0){
+            else if(timeDifferenceFrom > 0 && timeDifferenceTo > 0 && !isDefaultShopTime){
                 UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
                 await Sleep(timeDifferenceFrom);
             }

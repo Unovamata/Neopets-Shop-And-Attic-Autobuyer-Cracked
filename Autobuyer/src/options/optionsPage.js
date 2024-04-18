@@ -67,11 +67,13 @@ async function updateLastRefreshMs() {
     const autoAtticToValue = $("#RUN_AUTOATTIC_TO").val();
 
     if (autoAtticFromValue !== "" && autoAtticToValue !== "") {
+
       const fromTimestamp = moment.tz(formattedDate + " " + autoAtticFromValue, "America/Los_Angeles").toDate().valueOf();
       const toTimestamp = moment.tz(formattedDate + " " + autoAtticToValue, "America/Los_Angeles").toDate().valueOf();
-
+      
       await setVARIABLE("RUN_AUTOATTIC_FROM_MS", fromTimestamp);
       await setVARIABLE("RUN_AUTOATTIC_TO_MS", toTimestamp);
+      CheckIfDefaultTime(autoAtticFromValue, autoAtticToValue, "IS_DEFAULT_ATTIC_TIME");
     }
   }
   
@@ -88,7 +90,15 @@ async function updateLastRefreshMs() {
 
     await setVARIABLE("RUN_AUTOBUYER_FROM_MS", fromTimestamp);
     await setVARIABLE("RUN_AUTOBUYER_TO_MS", toTimestamp);
+    CheckIfDefaultTime(autoBuyerFromValue, autoBuyerToValue, "IS_DEFAULT_SHOP_TIME");
   }
+}
+
+async function CheckIfDefaultTime(fromValue, toValue, variableName){
+  const splitFromHour = fromValue.split(":")[0];
+  const splitToHour = toValue.split(":")[0];
+  const isCloseToDefaultTime = splitFromHour == "00" && splitToHour == "23";
+  await setVARIABLE(variableName, isCloseToDefaultTime);
 }
 
 function UpdateDateTimeInputs(firstInputTime, isAttic = true, secondInputTime = "", thirdInputTime = "") {
