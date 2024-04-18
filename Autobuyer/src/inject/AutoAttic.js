@@ -156,7 +156,8 @@ function InjectAutoAttic() {
             }
             
             // Selecting the best item to buy;
-            var bestItemName = HighlightItemsInAttic();
+            var bestItemName = HighlightItemsInAttic(),
+            attemptedItem = false;
 
             if (bestItemName) {
                 if (isClickingItemsInAttic) {
@@ -178,8 +179,12 @@ function InjectAutoAttic() {
 
                     document.getElementById("oii").value = itemID;
                     document.getElementById("frm-abandoned-attic").submit();
+                    attemptedItem = true;
                 }
             }
+
+            // If the user is attempting an item, return early to purchase it;
+            if(attemptedItem) return;
             
             // Wait for the scheduled time or run the AutoBuyer
             if(isAtticAutoRefreshing){
