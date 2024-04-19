@@ -165,10 +165,11 @@ function InjectAutoAttic() {
                     var itemID = selectedLi.getAttribute("oii");
                     var itemPrice = selectedLi.getAttribute("oprice").replaceAll(",","");
 
+                    var randomBuyTime = GetRandomFloat(minAtticBuyTime, maxAtticBuyTime);
+                    await Sleep(randomBuyTime);
+
                     document.getElementById("oii").value = itemID;
                     document.getElementById("frm-abandoned-attic").submit();
-                    
-                    var randomBuyTime = GetRandomFloat(minAtticBuyTime, maxAtticBuyTime);
 
                     UpdateBannerAndDocument(
                         "Attempting " + bestItemName + " in Attic",
@@ -176,8 +177,6 @@ function InjectAutoAttic() {
                     );
 
                     SaveToPurchaseHistory(bestItemName, "Attic", itemPrice, "Attempted");
-
-                    await Sleep(randomBuyTime);
                     
                     return;
                 }
