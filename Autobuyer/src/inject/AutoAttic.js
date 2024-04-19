@@ -157,35 +157,31 @@ function InjectAutoAttic() {
             
             // Selecting the best item to buy;
             var bestItemName = HighlightItemsInAttic(),
-            attemptedItem = false;
 
             if (bestItemName) {
                 if (isClickingItemsInAttic) {
+                    // Getting item data for submission;
+                    var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
+                    var itemID = selectedLi.getAttribute("oii");
+                    var itemPrice = selectedLi.getAttribute("oprice").replaceAll(",","");
+
+                    document.getElementById("oii").value = itemID;
+                    document.getElementById("frm-abandoned-attic").submit();
+                    
                     var randomBuyTime = GetRandomFloat(minAtticBuyTime, maxAtticBuyTime);
 
                     UpdateBannerAndDocument(
                         "Attempting " + bestItemName + " in Attic",
                         "Attempting to buy " + bestItemName + " in Attic in " + FormatMillisecondsToSeconds(randomBuyTime)
                     );
-                    
-                    // Getting item data for submission;
-                    var selectedLi = document.querySelector(`#items li[oname="${bestItemName}"]`);
-                    var itemID = selectedLi.getAttribute("oii");
-                    var itemPrice = selectedLi.getAttribute("oprice").replaceAll(",","");
 
                     SaveToPurchaseHistory(bestItemName, "Attic", itemPrice, "Attempted");
 
                     await Sleep(randomBuyTime);
-
-                    document.getElementById("oii").value = itemID;
-                    document.getElementById("frm-abandoned-attic").submit();
-                    attemptedItem = true;
-                    console.log("Clicking!");
+                    
+                    return;
                 }
             }
-
-            // If the user is attempting an item, return early to purchase it;
-            if(attemptedItem) return;
             
             // Wait for the scheduled time or run the AutoBuyer
             if(isAtticAutoRefreshing){
