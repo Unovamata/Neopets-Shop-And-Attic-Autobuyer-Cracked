@@ -35,6 +35,7 @@ function InjectAutoAttic() {
         ATTIC_PREV_NUM_ITEMS: -1,
         ATTIC_NEXT_START_WINDOW: 0,
         ATTIC_NEXT_END_WINDOW: 0,
+        SHOULD_SHOW_BANNER: false
     }, (async function(autobuyerVariables) {
         
         // Destructing the variables extracted from the extension;
@@ -63,23 +64,25 @@ function InjectAutoAttic() {
             ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems,
             ATTIC_NEXT_START_WINDOW: atticStartWindow,
             ATTIC_NEXT_END_WINDOW: atticEndWindow,
+            SHOULD_SHOW_BANNER: shouldShowBanner,
         } = autobuyerVariables;
         
         var atticWaitTime = 1200000,
         atticRestocked  = false,
-        currentTime = new Date();
+        currentTime = new Date(),
+        timeZoneCurrentTime = TimezoneDate(new Date(currentTime)),
+        lastRestockTime = TimezoneDate(new Date(atticLastRefresh));
 
         // Calculate the time to wait before the next refresh
-        
-        var waitTime = GenerateWaitTime(atticLastRefresh);
+        var waitTime = GenerateWaitTime();
 
         /* For every action taken that involves ABying, 
          * the attic will wait X amount of milliseconds
          * to optimize refreshes; */
         var atticWaitAfterAction = 30000;
         
-        function GenerateWaitTime(atticLastRefresh, isNextWindow = false) {   
-            const now = TimezoneDate(currentTime);
+        function GenerateWaitTime() {   
+            const now = timeZoneCurrentTime;
             
             const windowTimes = CreateWaitTime(currentTime, atticLastRefresh);
             var wait = 0;
@@ -145,7 +148,6 @@ function InjectAutoAttic() {
             if (atticPreviousNumberOfItems < 0) return;
             if (atticLastRefresh < 0) return;
             var ItemsStocked = GetAtticStockedItemNumber();
-            var lastRestock = TimezoneDate(Date.now());
 
             if (ItemsStocked > atticPreviousNumberOfItems) atticRestocked = true;
             
@@ -154,7 +156,7 @@ function InjectAutoAttic() {
                 UpdateBannerAndDocument("Sold out", "Item was sold out at the Attic");
                 await Sleep(atticWaitAfterAction);
             }
-            
+
             // Selecting the best item to buy;
             var bestItemName = HighlightItemsInAttic();
 
@@ -177,27 +179,24 @@ function InjectAutoAttic() {
                     );
 
                     SaveToPurchaseHistory(bestItemName, "Attic", itemPrice, "Attempted");
-                    
-                    return;
                 }
             }
-            
+
             // Wait for the scheduled time or run the AutoBuyer
             if(isAtticAutoRefreshing){
                 IsTimeToAutoRefreshAttic();
 
-                var currentTime = TimezoneDate(new Date(currentTime)),
-                lastRestockTime = new Date(atticLastRefresh);
+                var currentTime = TimezoneDate(new Date(currentTime));
 
-                const tenMinutes = 10 * 60 * 1000;
-                const timeDifference = Math.abs(currentTime.getTime() - lastRestockTime.getTime());
+                const tenMinutes = 10 * 60 * 1000,
+                timeDifference = Math.abs(currentTime.getTime() - lastRestockTime.getTime());
 
                 const hasRestockedRecently = timeDifference < tenMinutes;
 
                 // Waiting a minute before updating after a restock happened;
                 if(atticRestocked && !hasRestockedRecently){
                     setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
-                    setVARIABLE("ATTIC_LAST_REFRESH_MS", lastRestock.getTime());
+                    setVARIABLE("ATTIC_LAST_REFRESH_MS", timeZoneCurrentTime.getTime());
 
                     UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
 
@@ -211,7 +210,7 @@ function InjectAutoAttic() {
             async function IsTimeToAutoRefreshAttic() {
                 const timeFrom = TimezoneDate(new Date(runAutoAtticFrom));
                 const timeTo = TimezoneDate(new Date(runAutoAtticTo));
-                const date = TimezoneDate(currentTime);
+                const date = timeZoneCurrentTime;
 
                 const timeDifferenceFrom = CalculateMillisecondDifference(timeFrom, date);
                 const timeDifferenceTo = CalculateMillisecondDifference(timeTo, date);
@@ -230,8 +229,7 @@ function InjectAutoAttic() {
             }
 
             // Update the stored number of items
-            var numItems = GetAtticStockedItemNumber();
-            chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
+            //setVARIABLE("ATTIC_PREV_NUM_ITEMS", GetAtticStockedItemNumber());
         }
 
         async function AutoRefreshAttic() {
@@ -245,20 +243,24 @@ function InjectAutoAttic() {
             window.location.href = "https://www.neopets.com/halloween/garage.phtml";
         }
 
-        function RefreshBanner(waitTime){            
-            var startTime = moment(atticStartWindow).tz("America/Los_Angeles").format("h:mm:ss A")
-            endTime = moment(atticEndWindow).tz("America/Los_Angeles").format("h:mm:ss A")
-
+        async function RefreshBanner(waitTime){    
+            if(!shouldShowBanner) return;
+            
             // Create a message with the wait time and last restock time
-            let message = `Waiting ${FormatMillisecondsToSeconds(waitTime)}...`;
-            var areWindowsUndefined = startTime == endTime;
+            let message = `Waiting ${FormatMillisecondsToSeconds(waitTime)}... `;
+            var areWindowsUndefined = atticStartWindow == atticEndWindow;
+            
+            var startWindowTime = new Date(await getVARIABLE("ATTIC_NEXT_START_WINDOW")), 
+            endWindowTime = new Date(await getVARIABLE("ATTIC_NEXT_END_WINDOW"));
 
-            if(!areWindowsUndefined) message += `Next Windows ${startTime} : ${endTime}`;
+            var startWindowString = `${startWindowTime.getHours()}:${startWindowTime.getMinutes()}:${startWindowTime.getSeconds()}`,
+            endWindowString = `${endWindowTime.getHours()}:${endWindowTime.getMinutes()}:${endWindowTime.getSeconds()}`;
+            lastRestockString = `${lastRestockTime.getHours()}:${lastRestockTime.getMinutes()}:${lastRestockTime.getSeconds()}`;
+
+            if(!areWindowsUndefined) message += `Next Windows ${startWindowString} : ${endWindowString}`;
     
             if (atticLastRefresh > 0) {
-                message += " Last restock: " + moment(atticLastRefresh)
-                    .tz("America/Los_Angeles")
-                    .format("h:mm:ss A") + " NST...";
+                message += " Last restock: " + lastRestockString + " NST...";
             }
     
             // Update the banner status and initiate the page reload after the wait time
