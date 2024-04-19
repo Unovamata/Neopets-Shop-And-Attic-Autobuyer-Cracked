@@ -156,7 +156,7 @@ function InjectAutoAttic() {
             }
             
             // Selecting the best item to buy;
-            var bestItemName = HighlightItemsInAttic(),
+            var bestItemName = HighlightItemsInAttic();
 
             if (bestItemName) {
                 if (isClickingItemsInAttic) {
