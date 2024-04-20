@@ -126,9 +126,9 @@ function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
     return selectedName;
 }
 
-function CreateWaitTime(inputDate, atticLastRefresh, ) {
+function CreateWaitTime(inputDate, atticLastRefresh) {
     const now = TimezoneDate(inputDate);
-    const lastRestockTime = TimezoneDate(new Date(atticLastRefresh));
+    const lastRestockTime = new Date(atticLastRefresh);
     lastRestockTime.setFullYear(now.getFullYear());
     lastRestockTime.setMonth(now.getMonth());
     lastRestockTime.setDate(now.getDate());
@@ -182,6 +182,14 @@ function CreateWaitTime(inputDate, atticLastRefresh, ) {
 function TimezoneDate(time){
     return new Date(moment(time).tz("America/Los_Angeles").format("YYYY-MM-DD HH:mm:ss"));
 }
+
+function ParseStringTime(time){
+    const startHours = String(time.getHours()).padStart(2, '0');
+    const startMinutes = String(time.getMinutes()).padStart(2, '0');
+    const startSeconds = String(time.getSeconds()).padStart(2, '0');
+  
+    return [startHours, startMinutes, startSeconds];
+  }
 
 function CalculateNextWindowReach(timeA, timeB){
     const timeAMilliseconds = (timeA.getHours() * 3600 + timeA.getMinutes() * 60 + timeA.getSeconds()) * 1000;
@@ -350,7 +358,7 @@ function SaveToPurchaseHistory(itemName, shopName, price, status) {
 }
 
 function FormatMillisecondsToSeconds(milliseconds) {
-    return (milliseconds / 1e3).toFixed(2) + " secs"
+    return (milliseconds / 1e3).toFixed(2) + " seconds"
 }
 
 //######################################################################################################################################

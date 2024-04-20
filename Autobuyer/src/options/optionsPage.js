@@ -47,25 +47,19 @@ function setSHOULD_REFRESH_THROUGH_PAGE_LOAD_FAILURES(_) { chrome.storage.local.
 // Updates the next possible windows in the GUI every 10 seconds;
 async function DisplayAtticTimes(){    
   var now = new Date();
-  var lastRestockingTime = new Date(await getVARIABLE("ATTIC_LAST_REFRESH_MS"));
+  var lastRestockingTime = TimezoneDate(new Date(await getVARIABLE("ATTIC_LAST_REFRESH_MS")));
 
   const windowTimes = CreateWaitTime(now, lastRestockingTime);
+  const lastRestockTime = ParseStringTime(lastRestockingTime);
   const startTime = ParseStringTime(windowTimes[0]);
   const endTime = ParseStringTime(windowTimes[1]);
 
+  $("#ATTIC_LAST_REFRESH_TIME").val(`${lastRestockTime[0]}:${lastRestockTime[1]}:${lastRestockTime[2]}`);
   $("#ATTIC_NEXT_START_WINDOW").val(`${startTime[0]}:${startTime[1]}:${startTime[2]}`);
   $("#ATTIC_NEXT_END_WINDOW").val(`${endTime[0]}:${endTime[1]}:${endTime[2]}`);
 
   setVARIABLE("ATTIC_NEXT_START_WINDOW", windowTimes[0].getTime());
   setVARIABLE("ATTIC_NEXT_END_WINDOW", windowTimes[1].getTime());
-}
-
-function ParseStringTime(time){
-  const startHours = String(time.getHours()).padStart(2, '0');
-  const startMinutes = String(time.getMinutes()).padStart(2, '0');
-  const startSeconds = String(time.getSeconds()).padStart(2, '0');
-
-  return [startHours, startMinutes, startSeconds];
 }
 
 async function updateLastRefreshMs() {

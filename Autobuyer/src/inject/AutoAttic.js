@@ -84,7 +84,8 @@ function InjectAutoAttic() {
         function GenerateWaitTime() {   
             const now = timeZoneCurrentTime;
             
-            const windowTimes = CreateWaitTime(currentTime, atticLastRefresh);
+            const windowTimes = CreateWaitTime(currentTime, lastRestockTime);
+
             var wait = 0;
 
             if(now >= windowTimes[0] && now <= windowTimes[1]){
@@ -186,17 +187,17 @@ function InjectAutoAttic() {
             if(isAtticAutoRefreshing){
                 IsTimeToAutoRefreshAttic();
 
-                var currentTime = TimezoneDate(new Date(currentTime));
+                var timeZoneCurrentTimeMS = timeZoneCurrentTime.getTime();
 
                 const tenMinutes = 10 * 60 * 1000,
-                timeDifference = Math.abs(currentTime.getTime() - lastRestockTime.getTime());
+                timeDifference = Math.abs(timeZoneCurrentTimeMS - lastRestockTime.getTime());
 
                 const hasRestockedRecently = timeDifference < tenMinutes;
 
                 // Waiting a minute before updating after a restock happened;
-                if(atticRestocked && !hasRestockedRecently){
-                    setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
-                    setVARIABLE("ATTIC_LAST_REFRESH_MS", timeZoneCurrentTime.getTime());
+                if(atticRestocked){
+                    await setVARIABLE("ATTIC_LAST_REFRESH_MS", currentTime.getTime());
+                    await setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
 
                     UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
 
@@ -210,6 +211,7 @@ function InjectAutoAttic() {
             async function IsTimeToAutoRefreshAttic() {
                 const timeFrom = TimezoneDate(new Date(runAutoAtticFrom));
                 const timeTo = TimezoneDate(new Date(runAutoAtticTo));
+
                 const date = timeZoneCurrentTime;
 
                 const timeDifferenceFrom = CalculateMillisecondDifference(timeFrom, date);
@@ -228,8 +230,7 @@ function InjectAutoAttic() {
                 }
             }
 
-            // Update the stored number of items
-            //setVARIABLE("ATTIC_PREV_NUM_ITEMS", GetAtticStockedItemNumber());
+            await setVARIABLE("ATTIC_PREV_NUM_ITEMS", GetAtticStockedItemNumber());
         }
 
         async function AutoRefreshAttic() {
@@ -253,9 +254,13 @@ function InjectAutoAttic() {
             var startWindowTime = new Date(await getVARIABLE("ATTIC_NEXT_START_WINDOW")), 
             endWindowTime = new Date(await getVARIABLE("ATTIC_NEXT_END_WINDOW"));
 
-            var startWindowString = `${startWindowTime.getHours()}:${startWindowTime.getMinutes()}:${startWindowTime.getSeconds()}`,
-            endWindowString = `${endWindowTime.getHours()}:${endWindowTime.getMinutes()}:${endWindowTime.getSeconds()}`;
-            lastRestockString = `${lastRestockTime.getHours()}:${lastRestockTime.getMinutes()}:${lastRestockTime.getSeconds()}`;
+            var startWindowArray = ParseStringTime(startWindowTime),
+            endWindowArray = ParseStringTime(endWindowTime),
+            lastRestockArray = ParseStringTime(lastRestockTime);
+
+            var startWindowString = `${startWindowArray[0]}:${startWindowArray[1]}:${startWindowArray[2]}`,
+            endWindowString = `${endWindowArray[0]}:${endWindowArray[1]}:${endWindowArray[2]}`,
+            lastRestockString = `${lastRestockArray[0]}:${lastRestockArray[1]}:${lastRestockArray[2]}`;
 
             if(!areWindowsUndefined) message += `Next Windows ${startWindowString} : ${endWindowString}`;
     
