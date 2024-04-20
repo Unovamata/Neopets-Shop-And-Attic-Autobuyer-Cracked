@@ -127,7 +127,7 @@ function PickSecondBestItem(filteredItems, isBuyingSecondMostProfitable){
 }
 
 function CreateWaitTime(inputDate, atticLastRefresh) {
-    const now = TimezoneDate(inputDate);
+    const now = inputDate;
     const lastRestockTime = new Date(atticLastRefresh);
     lastRestockTime.setFullYear(now.getFullYear());
     lastRestockTime.setMonth(now.getMonth());
@@ -174,7 +174,7 @@ function CreateWaitTime(inputDate, atticLastRefresh) {
         windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
         windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * (windowsPassed + 1) + extraSeconds);
     }
-    
+
     return [windowStartTime, windowEndTime];
 }
 
