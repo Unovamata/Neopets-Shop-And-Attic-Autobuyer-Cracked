@@ -198,6 +198,8 @@ function InjectAutoAttic() {
                         await setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
 
                         UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
+
+                        await Sleep(atticWaitAfterAction);
                     }
                     
                     AutoRefreshAttic();
@@ -285,6 +287,10 @@ function HighlightAtticItemWithColor(itemName, color) {
 }
 
 async function RefreshBanner(waitTime = -1) {
+    var isBannerVisible = await getVARIABLE("SHOULD_SHOW_BANNER");
+
+    if(!isBannerVisible) return;
+
     const startTimeWindow = await getVARIABLE("ATTIC_NEXT_START_WINDOW");
     const endTimeWindow = await getVARIABLE("ATTIC_NEXT_END_WINDOW");
     const atticLastRefresh = await getVARIABLE("ATTIC_LAST_REFRESH_MS");

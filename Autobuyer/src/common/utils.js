@@ -231,20 +231,18 @@ function CalculateMillisecondDifference(timeA, timeB) {
 
 var bannerElementID = "qpkzsoynerzxsqw";
 
-function DisplayAutoBuyerBanner(isAlmostAbandonedAttic = false) {
-    chrome.storage.local.get({ SHOULD_SHOW_BANNER: false }, function (result) {
-        var isBannerVisible = result.SHOULD_SHOW_BANNER;
-        
-        if(!isBannerVisible) return;
+async function DisplayAutoBuyerBanner(isAlmostAbandonedAttic = false) {
+    var isBannerVisible = await getVARIABLE("SHOULD_SHOW_BANNER");
+    
+    if(!isBannerVisible) return;
 
-        // Creating the banner element;
-        const bannerElement = document.createElement("div");
-        bannerElement.innerText = "Autobuyer Running";
-        bannerElement.id = bannerElementID;
+    // Creating the banner element;
+    const bannerElement = document.createElement("div");
+    bannerElement.innerText = "Autobuyer Running";
+    bannerElement.id = bannerElementID;
 
-        document.body.appendChild(bannerElement);
-        UpdateElementStyle(isAlmostAbandonedAttic);
-    });
+    document.body.appendChild(bannerElement);
+    UpdateElementStyle(isAlmostAbandonedAttic);
 }
 
 function UpdateElementStyle(isAlmostAbandonedAttic) {
