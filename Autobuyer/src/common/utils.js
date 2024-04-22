@@ -133,7 +133,7 @@ function CreateWaitTime(inputDate, atticLastRefresh) {
     lastRestockTime.setMonth(now.getMonth());
     lastRestockTime.setDate(now.getDate());
     
-    const timeDifference = now - lastRestockTime;
+    const timeDifference = Math.abs(now.getTime() - lastRestockTime.getTime());
   
     var extraMinutes = 0, extraSeconds = 0, minutesInterval, extraWindow = 0;
     const fourteenMinutes = 14 * 60 * 1000;
@@ -151,7 +151,7 @@ function CreateWaitTime(inputDate, atticLastRefresh) {
     }
   
     var windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000)) + extraWindow;
-
+    
     const windowStartTime = new Date(lastRestockTime);
     const windowEndTime = new Date(lastRestockTime);
   

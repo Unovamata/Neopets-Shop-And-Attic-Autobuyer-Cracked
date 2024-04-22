@@ -56,8 +56,6 @@ async function DisplayAtticTimes(){
   startTimeArray = ParseStringTime(TimezoneDate(windowTimes[0])),
   endTimeArray = ParseStringTime(TimezoneDate(windowTimes[1]));
 
-  console.log(startTimeArray, endTimeArray);
-
   $("#ATTIC_LAST_REFRESH_TIME").val(`${lastRestockTime[0]}:${lastRestockTime[1]}:${lastRestockTime[2]}`);
   $("#ATTIC_NEXT_START_WINDOW").val(`${startTimeArray[0]}:${startTimeArray[1]}:${startTimeArray[2]}`);
   $("#ATTIC_NEXT_END_WINDOW").val(`${endTimeArray[0]}:${endTimeArray[1]}:${endTimeArray[2]}`);
