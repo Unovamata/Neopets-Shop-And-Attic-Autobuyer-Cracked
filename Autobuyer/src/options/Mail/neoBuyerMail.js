@@ -1,5 +1,5 @@
 // URL to fetch emails;
-const emailURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
+const emailURL = "https://raw.githubusercontent.com/Unovamata/AutoBuyerPlus/main/Autobuyer/Mail/MailDocument.html";
 
 SkipCurrentEmail();
 

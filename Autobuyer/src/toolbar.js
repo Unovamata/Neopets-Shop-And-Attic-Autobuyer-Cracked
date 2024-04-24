@@ -58,7 +58,7 @@ function ExtractPageType() {
 }
 
 const pageName = ExtractPageType();
-const baseManualUrl = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki/";
+const baseManualUrl = "https://github.com/Unovamata/AutoBuyerPlus/wiki/";
 var manualReferenceUrl = "";
 
 switch(pageName){
@@ -105,7 +105,7 @@ function InjectToolbar() {
     <div class="toolbar">
         <div class = "toolbar-pattern"></div>
         <span class="github-btn">
-            <a class="gh-btn" href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked" rel="noopener noreferrer" target="_blank" aria-label="Star Unovamata/https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked On Github">
+            <a class="gh-btn" href="https://github.com/Unovamata/AutoBuyerPlus" rel="noopener noreferrer" target="_blank" aria-label="Star Unovamata/https://github.com/Unovamata/AutoBuyerPlus On Github">
                 <span class="gh-ico" aria-hidden="true"></span>
                 <span class="gh-text">Star</span>
             </a>
@@ -199,19 +199,19 @@ function InjectToolbar() {
                         <li>
                             <div class="hover-submenu">
                                 <ul>
-                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki/FAQs" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
+                                    <a href="https://github.com/Unovamata/AutoBuyerPlus/wiki/FAQs" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
                                         <img  class = "dropdown-icon" src="${infoIconUrl}"> 
                                         FAQs 
                                     </a>
-                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/issues" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
+                                    <a href="https://github.com/Unovamata/AutoBuyerPlus/issues" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
                                         <img  class = "dropdown-icon" src="${bugUrl}"> 
                                         Bug Report 
                                     </a>
-                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/issues/10" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
+                                    <a href="https://github.com/Unovamata/AutoBuyerPlus/issues/1" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
                                         <img  class = "dropdown-icon" src="${suggestionsUrl}"> 
                                         Suggestions
                                     </a>
-                                    <a href="https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/wiki/Credits" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category">
+                                    <a href="https://github.com/Unovamata/AutoBuyerPlus/wiki/Credits" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category">
                                         <img  class = "dropdown-icon" src="${creditsIconUrl}"> 
                                         Credits
                                     </a>
@@ -318,7 +318,7 @@ async function UpdateNotification(){
 
         // If the version checker has not been run, check the latest version of the extension;
         var currentVersion = chrome.runtime.getManifest().version;
-        var apiUrl = "https://api.github.com/repos/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
+        var apiUrl = "https://api.github.com/repos/Unovamata/AutoBuyerPlus/releases/latest";
         var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
         var parsedVersion = githubLatestVersion.replace("v", "");
         var isLatestVersion = parsedVersion == currentVersion;
@@ -409,7 +409,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
 
             updateStatus.appendChild(document.createElement("br"));
             const updateLink = document.createElement("a");
-            updateLink.href = "https://github.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/releases/latest";
+            updateLink.href = "https://github.com/Unovamata/AutoBuyerPlus/releases/tag/0.7.20.27v";
             updateLink.textContent = "Click Here to Update NeoBuyer+";
             updateLink.style.fontSize = "2.5vw";
             updateStatus.appendChild(updateLink);
@@ -453,7 +453,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
     }, 1500 * notifications);
 }
 
-const emailCheckURL = "https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/src/options/Mail/MailDocument.html";
+const emailCheckURL = "https://raw.githubusercontent.com/Unovamata/AutoBuyerPlus/main/Autobuyer/Mail/MailDocument.html";
 var mailSuccessColor = "#20f36a";
 
 // Checks for new NeoBuyer+ mails daily;
