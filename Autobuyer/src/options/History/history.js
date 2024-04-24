@@ -270,10 +270,11 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
     
     // Profit Per Store Name
     var shopNames = {};
-    var hourRatios = {};
+    var hourMainShopRatios = {}, hourAtticRatios = {};
 
     for(var i = 0; i <= 23; i++){
-        hourRatios[i] = {Ratio: 0, Profit: 0, Attempted: 0};
+        hourMainShopRatios[i] = {Ratio: 0, Profit: 0, Attempted: 0};
+        hourAtticRatios[i] = {Ratio: 0, Profit: 0, Attempted: 0};
     }
 
     data.forEach(function(entry){
@@ -288,26 +289,27 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
         }
 
         var entryHour = new Date(entry["Date & Time"]).getHours();
-        var hourObject = hourRatios[entryHour];
+        var hourMainShopObject = hourMainShopRatios[entryHour];
+        var hourAtticObject = hourAtticRatios[entryHour];
 
-        switch(entry.Shop){
+        switch(entry["Shop Name"]){
             case "Attic":
-                    // If the item was bought in the same session;
-                    if(entry.Status == "Bought"){
-                        hourObject.Profit += value;
-                    } else { // If not, the item was not bought, add it to the negative ratio;
-                        hourObject.Attempted += value;
-                    }
+                // If the item was bought in the same session;
+                if(entry.Status == "Bought"){
+                    hourAtticObject.Profit += value;
+                } else { // If not, the item was not bought, add it to the negative ratio;
+                    hourAtticObject.Attempted += value;
+                }
             break;
     
             default:
                 switch(entry.Status){
                     case "Bought":
-                        hourObject.Profit += value;
+                        hourMainShopObject.Profit += value;
                     break;
     
                     default: // Missed items;
-                        hourObject.Attempted += value;
+                        hourMainShopObject.Attempted += value;
                     break;
                 }
             break;
@@ -319,11 +321,11 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
     if(mostProfitableShops) ResizeChartInterval("mostProfitableShops", "760px", "380px");
 
     // Profit pet hour;
-
-    var hourProfit = [], hourAttempted = [], hourRatio = [];
+    var hourProfit = [], atticHourProfit = [], hourAttempted = [], atticHourAttempted = [], hourRatio = [], atticHourRatio = [];
 
     for(var i = 0; i <= 23; i++){
-        var entry = hourRatios[i];
+        // Main Shops;
+        var entry = hourMainShopRatios[i];
         var profitPerHour = entry.Profit;
         var attemptedPerHour = entry.Attempted;
         var ratio = (profitPerHour /  attemptedPerHour * 100).toFixed(2);
@@ -335,15 +337,37 @@ function AveragePurchaseRatios(data, mainShopId, atticId){
         hourProfit.push(profitPerHour);
         hourAttempted.push(attemptedPerHour);
         hourRatio.push(ratio);
+
+        //Attic;
+        entry = hourAtticRatios[i];
+        profitPerHour = entry.Profit;
+        attemptedPerHour = entry.Attempted;
+        ratio = (profitPerHour /  attemptedPerHour * 100).toFixed(2);
+
+        if(attemptedPerHour == 0) ratio = 0;
+
+        entry.Ratio = Number(ratio);
+
+        atticHourProfit.push(profitPerHour);
+        atticHourAttempted.push(attemptedPerHour);
+        atticHourRatio.push(ratio);
     };
 
-    var profitPerHour = CreateBarChart("profitPerHour", "bar", Object.keys(hourRatios), hourProfit, FormatDatalabelsOptions(), `Profitability Per Hour of the Day`);
+    var profitPerHour = CreateBarChart("profitPerHour", "bar", Object.keys(hourMainShopRatios), hourProfit, FormatDatalabelsOptions(), `Profitability Per Hour of the Day`);
 
     if(profitPerHour) ResizeChartInterval("profitPerHour", "760px", "380px");
 
-    var ratioPerHour = CreateBarChart("ratioPerHour", "bar", Object.keys(hourRatios), hourRatio, FormatDatalabelsOptions(), `Probability of Buying an Item in a set Hour`);
+    var atticProfitPerHour = CreateBarChart("atticProfitPerHour", "bar", Object.keys(hourAtticRatios), atticHourProfit, FormatDatalabelsOptions(), `Profitability Per Hour of the Day`);
+
+    if(atticProfitPerHour) ResizeChartInterval("atticProfitPerHour", "760px", "380px");
+
+    var ratioPerHour = CreateBarChart("ratioPerHour", "bar", Object.keys(hourMainShopRatios), hourRatio, FormatDatalabelsOptions(), `Probability of Buying an Item in a set Hour`);
 
     if(ratioPerHour) ResizeChartInterval("ratioPerHour", "760px", "380px");
+
+    var atticRatioPerHour = CreateBarChart("atticRatioPerHour", "bar", Object.keys(hourAtticRatios), atticHourRatio, FormatDatalabelsOptions(), `Probability of Buying an Item in a set Hour`);
+
+    if(atticRatioPerHour) ResizeChartInterval("atticRatioPerHour", "760px", "380px");
 
     
     var datesDataset = FormatDatasetByMonthAndYear(Object.values(data));

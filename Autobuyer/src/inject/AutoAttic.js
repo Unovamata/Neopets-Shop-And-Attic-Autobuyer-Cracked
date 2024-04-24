@@ -351,6 +351,8 @@ function FormatTime(date) {
     return `${hours}:${minutes}:${seconds}`;
 }
 
-setTimeout(function(){
-    setInterval(RefreshBanner, 100);
-}, 1000);
+try{
+    setTimeout(function(){
+        setInterval(RefreshBanner, 100);
+    }, 1000);
+} catch {}
