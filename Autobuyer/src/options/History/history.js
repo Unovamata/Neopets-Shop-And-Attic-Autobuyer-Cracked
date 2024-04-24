@@ -60,38 +60,34 @@ LoadCurrentPage = function(){
 // GUI Functions;
 var currentHistorySize = -1;
 
-function ProcessPurchaseHistory(forceUpdateHistory) {
-    chrome.storage.local.get({
-        ITEM_HISTORY: [],
-    }, (function(t) {
-        // Processing the history data;
-        var history = t.ITEM_HISTORY;
-        var historySize = t.ITEM_HISTORY.length;
+async function ProcessPurchaseHistory(forceUpdateHistory) {
+    // Processing the history data;
+    var history = await getVARIABLE("ITEM_HISTORY");
+    var historySize = history.length;
+    
+    var processedData = ProcessItemData(history);
 
-        const processedData = ProcessItemData(history);
+    // Force updating if necessary;
+    if (forceUpdateHistory || currentHistorySize != historySize) {
+        // Removing the NeoPass message;
+        const filteredList = history.filter(entry => !entry["Item Name"].includes("We are excited to announce that we have upgraded our system to"));
 
-        // Force updating if necessary;
-        if (forceUpdateHistory || currentHistorySize != historySize) {
-            // Removing the NeoPass message;
-            const filteredList = history.filter(entry => !entry["Item Name"].includes("We are excited to announce that we have upgraded our system to"));
+        history = filteredList;
+        historySize = history.length;
 
-            history = filteredList;
-            historySize = history.length;
+        processedData = ProcessItemData(filteredList);
 
-            const processedData = ProcessItemData(history);
+        //if(currentHistorySize != historySize) setVARIABLE("ITEM_HISTORY", processedData);
 
-            if(currentHistorySize != historySize) setVARIABLE("ITEM_HISTORY", processedData);
+        currentHistorySize = historySize;
+        DisplayTableData(processedData, ["JN"], chunkSize, FilterFunction);            
 
-            currentHistorySize = historySize;
-            DisplayTableData(processedData, ["JN"], chunkSize, FilterFunction);            
+        try { AveragePurchaseRatios(processedData, "mainShopRatioChart", "atticRatioChart"); } catch {}
+    }
 
-            try { AveragePurchaseRatios(processedData, "mainShopRatioChart", "atticRatioChart"); } catch {}
-        }
-
-        // Updating the page data;
-        totalPages = Math.ceil(processedData.length / chunkSize);
-        UpdateNavigation();
-    }))
+    // Updating the page data;
+    totalPages = Math.ceil(processedData.length / chunkSize);
+    UpdateNavigation();
 }
 
 
@@ -105,8 +101,6 @@ function ProcessItemData(itemArray){
 
     itemArray.forEach(function(item, index){
         const itemInfo = item_db[item["Item Name"]];
-
-
         
         if(itemInfo == undefined){
             item.Rarity = "?";
