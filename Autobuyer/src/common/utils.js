@@ -21,7 +21,7 @@ function getVARIABLE(variable) {
 }
 
 function setVARIABLE(propertyName, value) {
-    const storageObject = {};
+    var storageObject = {};
     storageObject[propertyName] = value;
     chrome.storage.local.set(storageObject, function () {});
 }

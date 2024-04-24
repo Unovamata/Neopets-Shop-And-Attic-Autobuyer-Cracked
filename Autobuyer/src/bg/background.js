@@ -16,7 +16,10 @@ extpay.startBackground();
 setTimeout(() => {
 	chrome.storage.local.get({WARNING_ACK: false, EXT_P_S: true}, data => {
 		if(!data.WARNING_ACK && data.EXT_P_S){
-			setATTIC_SHOULD_REFRESH(false);
+			var storageObject = {};
+			storageObject["ATTIC_SHOULD_REFRESH"] = false;
+			chrome.storage.local.set(storageObject, function () {});
+
 			chrome.tabs.create({ url: "../../src/options/Warning/warning.html" });
 		}
 	});
