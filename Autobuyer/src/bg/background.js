@@ -37,6 +37,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 		const autoPricerDefaultSettings = {
 			// Toolbar;
 			UPDATE_DATE: "",
+			IS_UP_TO_DATE: false,
 
 			// AutoBuyer;
 			RUN_AUTOBUYER_FROM_MS: 1712473200000,
