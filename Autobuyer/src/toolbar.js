@@ -27,6 +27,7 @@ const manualIconUrl = `${srcPath}/toolbar/mymanual-icon.svg`;
 const buyersIconUrl = `${srcPath}/toolbar/myshop-icon.png`;
 const bugUrl = `${srcPath}/toolbar/wonderclaw-icon.png`;
 const suggestionsUrl = `${srcPath}/toolbar/quests-icon.svg`;
+const discordUrl = `${srcPath}/toolbar/discord-border.svg`;
 
 // Styles
 const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
@@ -105,16 +106,22 @@ function InjectToolbar() {
     <div class="toolbar">
         <div class = "toolbar-pattern"></div>
         <span class="github-btn">
-            <a class="gh-btn" href="https://github.com/Unovamata/AutoBuyerPlus" rel="noopener noreferrer" target="_blank" aria-label="Star Unovamata/https://github.com/Unovamata/AutoBuyerPlus On Github">
+            <button class="gh-btn" data-href="https://github.com/Unovamata/AutoBuyerPlus" aria-label="Star Unovamata/https://github.com/Unovamata/AutoBuyerPlus On Github">
                 <span class="gh-ico" aria-hidden="true"></span>
-                <span class="gh-text">Star</span>
-            </a>
+                <!--<span class="gh-text">Star</span>-->
+            </button>
         </span>
         <span class="github-btn">
-            <a class="gh-btn" href="https://www.buymeacoffee.com/unovamata" rel="noopener noreferrer" target="_blank" aria-label="Buy Me A Coffee">
-                <span class="coffee-ico" aria-hidden="true"></span>
-                <span class="gh-text">Donate</span>
-            </a>
+            <button class="gh-btn" data-href="https://www.buymeacoffee.com/unovamata" aria-label="Buy Me A Coffee">
+                <span class="gh-ico coffee-ico" aria-hidden="true"></span>
+                <!--<span class="gh-text">Donate</span>-->
+            </button>
+        </span>
+        <span class="github-btn">
+            <button class="gh-btn" data-href="https://discord.gg/USnT8ayRE6" aria-label="Star Unovamata/https://github.com/Unovamata/AutoBuyerPlus On Github">
+                <span class="gh-ico discord-ico" aria-hidden="true"></span>
+                <!--<span class="gh-text">Star</span>-->
+            </button>
         </span>
 
         <img class="logo" src="${logoUrl}"></img>
@@ -269,6 +276,15 @@ function InjectToolbar() {
     document.head.appendChild(cssLink);
     
     try { InjectExternalScript(`${srcPath}/inject/AES.js`); } catch {}
+
+    document.querySelectorAll('.github-btn button').forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.getAttribute('data-href');
+            if (url) {
+                window.open(url, '_blank');
+            }
+        });
+    });
 }
 
 // Wait for the entire page, including CSS, to be fully loaded
