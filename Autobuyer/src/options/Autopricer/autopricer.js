@@ -348,9 +348,14 @@ async function StartAutoPricer(){
 
         
         // Filtering out all the blacklisted items before they are submitted for AutoPricing;
-        var isInBlacklist = blacklist.some(function(blacklistedItem){
-            return blacklistedItem === name;
-        });
+        var isInBlacklist = false;
+
+        try{    
+            isInBlacklist = blacklist.some(function(blacklistedItem){
+                return blacklistedItem === name;
+            });
+        } catch {}
+        
 
         if(!isInBlacklist){
             const item = new Item(name, price, true, index, 0, 1);
