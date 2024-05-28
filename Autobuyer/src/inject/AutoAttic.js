@@ -33,9 +33,6 @@ function InjectAutoAttic() {
         ATTIC_PREV_NUM_ITEMS: -1,
         ATTIC_NEXT_START_WINDOW: 0,
         ATTIC_NEXT_END_WINDOW: 0,
-        RUN_AUTOATTIC_FROM_MS: 1712473200000,
-        RUN_AUTOATTIC_TO_MS: 1712559599000,
-        IS_DEFAULT_ATTIC_TIME: false,
     }, (async function(autobuyerVariables) {
         
         // Destructing the variables extracted from the extension;
@@ -54,6 +51,7 @@ function InjectAutoAttic() {
             ATTIC_ITEM_DB_MIN_PROFIT_PERCENT: minDBProfitPercentToBuyInAttic,
             ATTIC_MIN_BUY_TIME: minAtticBuyTime,
             ATTIC_MAX_BUY_TIME: maxAtticBuyTime,
+            ATTIC_RUN_BETWEEN_HOURS: atticRunBetweenHours,
             ATTIC_MIN_REFRESH: minRefreshIntervalAttic,
             ATTIC_MAX_REFRESH: maxRefreshIntervalAttic,
             ATTIC_SHOULD_REFRESH: isAtticAutoRefreshing,
@@ -61,17 +59,11 @@ function InjectAutoAttic() {
             ATTIC_PREV_NUM_ITEMS: atticPreviousNumberOfItems,
             ATTIC_NEXT_START_WINDOW: atticStartWindow,
             ATTIC_NEXT_END_WINDOW: atticEndWindow,
-            RUN_AUTOATTIC_FROM_MS: runAutoAtticFrom,
-            RUN_AUTOATTIC_TO_MS: runAutoAtticTo,
-            IS_DEFAULT_ATTIC_TIME: isDefaultAtticTime,
         } = autobuyerVariables;
         
         var isRunningOnScheduledTime = false,
         atticWaitTime = 1200000,
-        atticRestocked  = false,
-        fourteenMinutes = 14 * 60 * 1000,
-        now = new Date(),
-        lastRestockTime = new Date(atticLastRefresh);
+        atticRestocked  = false;
 
         // Calculate the time to wait before the next refresh
         
@@ -82,12 +74,16 @@ function InjectAutoAttic() {
          * to optimize refreshes; */
         var atticWaitAfterAction = 30000;
         
-        function CreateWaitTime() {        
+        function CreateWaitTime(atticLastRefresh, isNextWindow = false) {
+            const now = new Date();
+            const lastRestockTime = new Date(atticLastRefresh);
+        
             const lastRestockMinute = lastRestockTime.getMinutes();
         
             const timeDifference = now - lastRestockTime;
 
             var extraMinutes = 0, extraSeconds = 0, minutesInterval, extraWindow = 0;
+            const fourteenMinutes = 14 * 60 * 1000;
 
             if(timeDifference < fourteenMinutes){
                 minutesInterval = 14;
@@ -99,6 +95,8 @@ function InjectAutoAttic() {
                 extraSeconds = 6;
                 extraWindow = -1;
             }
+
+            if(isNextWindow) extraWindow = 1;
 
             const windowsPassed = Math.floor(timeDifference / (minutesInterval * 60 * 1000)) + 1 + extraWindow;
 
@@ -118,12 +116,21 @@ function InjectAutoAttic() {
             if(now >= new Date(atticStartWindow) && now <= new Date(atticEndWindow)){
                 wait = GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
 
+                RefreshBanner(wait);
+
                 return wait;
             } else {
-                setVARIABLE("ATTIC_NEXT_START_WINDOW", windowStartTime.getTime());
-                setVARIABLE("ATTIC_NEXT_END_WINDOW", windowEndTime.getTime());
+                // Broken times;
+                if(wait > fourteenMinutes){
+                    location.reload();
+                } else {
+                    setVARIABLE("ATTIC_NEXT_START_WINDOW", windowStartTime.getTime());
+                    setVARIABLE("ATTIC_NEXT_END_WINDOW", windowEndTime.getTime());
 
-                wait = windowStartTime - now;
+                    wait = windowStartTime - now;
+
+                    RefreshBanner(wait);
+                }
 
                 return wait;
             }
@@ -216,12 +223,10 @@ function InjectAutoAttic() {
 
                     RunAutoAttic();
                 } else {
-                    const timeDifference = Math.abs(now - lastRestockTime);
-
                     // Waiting a minute before updating after a restock happened;
-                    if(atticRestocked && timeDifference >= fourteenMinutes){
-                        setVARIABLE("ATTIC_PREV_NUM_ITEMS", ItemsStocked);
-                        setVARIABLE("ATTIC_LAST_REFRESH_MS", lastRestock);
+                    if(atticRestocked){
+                        await setVARIABLE("ATTIC_LAST_REFRESH_MS", lastRestock);
+                        await setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
 
                         UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
 
@@ -234,15 +239,13 @@ function InjectAutoAttic() {
 
             // Additional function to check if it's time to auto-refresh the Attic
             function IsTimeToAutoRefreshAttic() {
-                var refreshHours = [new Date(runAutoAtticFrom).getHours(), new Date(runAutoAtticTo).getHours()];
+                var now = new Date();
                 var currentHour = now.getHours();
-
-                return currentHour >= refreshHours[0] && currentHour <= refreshHours[1] || isDefaultAtticTime;
+                return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
             }
 
             // Update the stored number of items
-            var numItems = GetAtticStockedItemNumber();
-            setVARIABLE("ATTIC_PREV_NUM_ITEMS", numItems);
+            await setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
         }
 
         async function AutoRefreshAttic() {
@@ -313,9 +316,7 @@ function HighlightAtticItemWithColor(itemName, color) {
     itemElement.style.backgroundColor = color;
 }
 
-//######################################################################################################################################
-
-async function RefreshBanner(waitTime = -1) {
+async function RefreshBanner(waitTime = -1, refreshed = false) {
     var isBannerVisible = await getVARIABLE("SHOULD_SHOW_BANNER");
 
     if(!isBannerVisible) return;
@@ -341,6 +342,10 @@ async function RefreshBanner(waitTime = -1) {
         message += ` Last restock: ${lastRestockTime}...`;
     }
 
+    if(now >= startTime && now <= endTime){
+        location.reload();
+    }
+
     UpdateBannerStatus(message);
 }
 
@@ -351,8 +356,9 @@ function FormatTime(date) {
     return `${hours}:${minutes}:${seconds}`;
 }
 
-try{
-    setTimeout(function(){
-        setInterval(RefreshBanner, 100);
-    }, 1000);
-} catch {}
+setTimeout(async function(){
+    setInterval(RefreshBanner);
+}, 1000);
+
+
+//######################################################################################################################################
