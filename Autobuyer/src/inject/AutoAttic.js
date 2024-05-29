@@ -1,9 +1,20 @@
-HandleServerErrors();
+RunAutoAtticProcess();
 
-DisplayAutoBuyerBanner(true);
+async function RunAutoAtticProcess(){
+    var status = await getVARIABLE("UPDATE_STATUS_A");
 
-InjectAutoAttic();
+    if(!status){
+        UpdateBannerAndDocument(updateAlert, updateBanner);
+        chrome.runtime.sendMessage({ action: "outdatedVersion" });
+        return;
+    } 
 
+    HandleServerErrors();
+
+    DisplayAutoBuyerBanner(true);
+
+    InjectAutoAttic();
+}
 
 //######################################################################################################################################
 
@@ -316,6 +327,8 @@ function HighlightAtticItemWithColor(itemName, color) {
     itemElement.style.backgroundColor = color;
 }
 
+var hasRefreshed = false;
+
 async function RefreshBanner(waitTime = -1, refreshed = false) {
     var isBannerVisible = await getVARIABLE("SHOULD_SHOW_BANNER");
 
@@ -342,8 +355,10 @@ async function RefreshBanner(waitTime = -1, refreshed = false) {
         message += ` Last restock: ${lastRestockTime}...`;
     }
 
-    if(now >= startTime && now <= endTime){
+    if(!hasRefreshed && (now >= startTime && now <= endTime)){
         location.reload();
+        hasRefreshed = true;
+        console.log((now >= startTime && now <= endTime));   
     }
 
     UpdateBannerStatus(message);

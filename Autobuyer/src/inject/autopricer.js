@@ -293,6 +293,18 @@ async function RunAutoPricer(){
 
         var isActive = await getVARIABLE("START_AUTOPRICING_PROCESS");
 
+        if(isActive || isKQRunning){
+            var status = await getVARIABLE("UPDATE_STATUS_A");
+
+            if(!status){
+                UpdateBannerAndDocument(updateAlert, updateBanner);
+                chrome.runtime.sendMessage({ action: "outdatedVersion" });
+                return;
+            } 
+        }
+
+        
+
         if(isActive){
             /* If the user is inside the SW and the AutoPricing process is active, the extension will begin
             * pricing the "AutoPricerInventory" list, saving its values and updating them with the lowest

@@ -850,3 +850,20 @@ function InjectExternalScript(url) {
     script.async = true;
     document.body.appendChild(script);
 }
+
+const updateAlert = "NeoBuyer+ Update Required. Navigate to the NeoBuyer+ Github page and update the extension. All processes will stop until you download the latest version of NeoBuyer+...";
+const updateBanner = "NeoBuyer+ Update Required";
+
+/*
+function ExtensionDeactivate(){
+	var extensionId = chrome.runtime.id;
+
+	chrome.management.setEnabled(extensionId, false, () => {
+		if (chrome.runtime.lastError) {
+			console.error(chrome.runtime.lastError);
+		} else {
+			console.log("Extension disabled");
+		}
+	});
+}
+*/

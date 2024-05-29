@@ -1,8 +1,25 @@
-HandleServerErrors();
+RunAutoBuyerProcess();
 
-DisplayAutoBuyerBanner();
+async function RunAutoBuyerProcess(){
+    var status = await getVARIABLE("UPDATE_STATUS_A");
 
-InjectAutoPricer();
+    if(!status){
+        UpdateBannerAndDocument(updateAlert, updateBanner);
+        chrome.runtime.sendMessage({ action: "outdatedVersion" });
+        return;
+    } 
+
+    HandleServerErrors();
+
+    DisplayAutoBuyerBanner();
+
+    InjectAutoPricer();
+
+}
+
+
+//######################################################################################################################################
+
 
 function InjectAutoPricer() {
     chrome.storage.local.get({

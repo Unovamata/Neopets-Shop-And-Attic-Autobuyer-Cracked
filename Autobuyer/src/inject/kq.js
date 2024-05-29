@@ -3,6 +3,15 @@ async function RunAutoKQ(){
     var isStartingAutoKQProcess = await getVARIABLE("START_AUTOKQ_PROCESS");
 
     if(!isStartingAutoKQProcess) return;
+    else {
+        var status = await getVARIABLE("UPDATE_STATUS_A");
+
+        if(!status){
+            UpdateBannerAndDocument(updateAlert, updateBanner);
+            chrome.runtime.sendMessage({ action: "outdatedVersion" });
+            return;
+        } 
+    }
 
     if(document.body.textContent.includes("Sorry, there is a limit of 10 quests per day.")){
         setVARIABLE("AUTOKQ_STATUS", "AutoKQ's Tasks have been Completed!");

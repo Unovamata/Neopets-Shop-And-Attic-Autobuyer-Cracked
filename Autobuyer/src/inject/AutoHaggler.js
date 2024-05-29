@@ -1,8 +1,21 @@
-HandleServerErrors();
+RunAutoHagglingProcess();
 
-DisplayAutoBuyerBanner();
+async function RunAutoHagglingProcess(){
+    var status = await getVARIABLE("UPDATE_STATUS_A");
 
-InjectAutoHaggler();
+    if(!status){
+        UpdateBannerAndDocument(updateAlert, updateBanner);
+        chrome.runtime.sendMessage({ action: "outdatedVersion" });
+        return;
+    } 
+
+    HandleServerErrors();
+
+    DisplayAutoBuyerBanner();
+
+    InjectAutoHaggler();
+}
+
 
 function InjectAutoHaggler() {
 

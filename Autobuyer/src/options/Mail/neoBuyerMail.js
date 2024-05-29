@@ -9,7 +9,7 @@ async function SkipCurrentEmail(){
 
     var loading = document.getElementById("loading-messages");
     loading.style.visibility = "hidden";
-    
+
     if(isSkippingCurrentMail) return;
 
     var emailList = await getVARIABLE("EMAIL_LIST");

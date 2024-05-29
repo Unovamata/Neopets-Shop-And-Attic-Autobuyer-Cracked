@@ -25,7 +25,8 @@
         "webNavigation",
         "notifications",
         "tts",
-		"downloads"
+		"downloads",
+		"management"
     ],
 	"web_accessible_resources": [
 		{

@@ -387,7 +387,6 @@
 @keyframes slideUp {
     0% {
         opacity: 1;
-        bottom: 55px;
     }
     100% {
         opacity: 0;

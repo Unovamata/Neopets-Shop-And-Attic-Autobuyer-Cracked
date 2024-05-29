@@ -16,6 +16,14 @@ async function StartUserBuyer(){
     var isActive = await getVARIABLE("START_AUTOKQ_PROCESS");
 
     if(!isActive) return;
+
+    var status = await getVARIABLE("UPDATE_STATUS_A");
+
+    if(!status){
+        UpdateBannerAndDocument(updateAlert, updateBanner);
+        chrome.runtime.sendMessage({ action: "outdatedVersion" });
+        return;
+    } 
     
     var ingredients = await getVARIABLE("KQ_INVENTORY");
 

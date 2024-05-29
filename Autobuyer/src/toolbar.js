@@ -320,72 +320,28 @@ var warningColor = "#ff8214";
 async function UpdateNotification(){
     const currentDate = new Date();
     const parsedDate = `${monthNames[currentDate.getMonth()]} ${currentDate.getDay()}, ${currentDate.getFullYear()}`;
-    //setVARIABLE("UPDATE_DATE", ""); //DEBUG!!!!
-
+    
     try{
-        var date = await getVARIABLE("UPDATE_DATE");
-
         // Checking the latest version of the extension daily;
+        var date = await getVARIABLE("UPDATE_DATE");
         var hasDoneDailyVersionCheck = date === parsedDate;
+        var status = await getVARIABLE("UPDATE_STATUS_A");
 
-        if(hasDoneDailyVersionCheck){
+        if(hasDoneDailyVersionCheck && status){
             return;
         }
 
-        // If the version checker has not been run, check the latest version of the extension;
-        var currentVersion = chrome.runtime.getManifest().version;
-        var apiUrl = "https://api.github.com/repos/Unovamata/AutoBuyerPlus/releases/latest";
-        var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
-        var parsedVersion = githubLatestVersion.replace("v", "");
-        var isLatestVersion = parsedVersion == currentVersion;
-
-        switch(parsedVersion){
-            // Github's API can't be reached;
-            case 'a':
-                CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ API Can't Be Reached...", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
-                isLatestVersion = false; // It can be the latest version for all we know;
-            break;
-
-            // Unknown error;
-            case 'b':
-                CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Checker Failed...", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
-                isLatestVersion = false; // It can be the latest version for all we know;
-            break;
-
-            // Normal version checking;
-            default:
-                if(isLatestVersion){
-                    CreateNotificationElement(isLatestVersion, successColor);
-                    setVARIABLE("UPDATE_DATE", parsedDate);
-                } else {
-                    CreateNotificationElement(isLatestVersion, errorColor, "NeoBuyer+ Update Required", crossIconUrl, true, "update-notification-full", [githubLatestVersion, currentVersion + "v"]);
-                }
-            break;
+        if(status){
+            CreateNotificationElement(status, successColor);
+            setVARIABLE("UPDATE_DATE", parsedDate);
+        } else {
+            CreateNotificationElement(status, errorColor, "NeoBuyer+ Update Required", crossIconUrl, true, "update-notification-full", [await getVARIABLE("UPDATE_VERSION"), chrome.runtime.getManifest().version + "v"]);
         }
 
         // Check for new NeoBuyer+ mail updates;
         CheckNewMail();
     } catch {}
-}
-
-async function FetchLatestGitHubVersion(apiUrl) {
-    try {
-        // Checking the Github API for the latest extension version;
-        const response = await fetch(apiUrl);
-
-        if (!response.ok) {
-            return 'a'; // API can't be reached;
-        }
-
-        // Parsing the data and returning it;
-        const data = await response.json();
-
-        const githubLatestVersion = data.tag_name;
-
-        return githubLatestVersion;
-    } catch (error) {
-        return 'b'; // Error in the execution;
-    }
+    
 }
 
 var notifications = 0;
@@ -394,7 +350,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
     setTimeout(() => {
         const updateNotification = document.createElement("span");
         updateNotification.className = classToolbar;
-        notifications += 1.5; // For time delays per notifications;
+        notifications += 2; // For time delays per notifications;
 
         // Creating the image component;
         const updateImage = document.createElement("img");
@@ -494,12 +450,14 @@ function CheckNewMail(){
 
         var emailList = await getVARIABLE("EMAIL_LIST");
 
+        console.log(emailList);
+
         const hasEmail = emailList.some(email => email.ID === ID);
 
         if (!hasEmail) {
             var skipCurrentEmail = await getVARIABLE("SKIP_CURRENT_MAIL");
             var currentIndex = await getVARIABLE("CURRENT_MAIL_INDEX");
-            
+
             // If the user opted-out from receiving the current message active;
             if(ID != currentIndex){
                 setVARIABLE("SKIP_CURRENT_MAIL", false);
@@ -512,7 +470,7 @@ function CheckNewMail(){
             CreateNotificationElement(true, mailSuccessColor, "You've Got Mail!");
             extractedEmail.Entry = emailList.length + 1;
             emailList.unshift(extractedEmail);
-            setVARIABLE("emailList", emailList);
+            setVARIABLE("EMAIL_LIST", emailList);
         }
     }).catch(error => {
         console.error("An error ocurred during the execution... Try again later...", error);
