@@ -332,10 +332,6 @@ function HighlightAtticItemWithColor(itemName, color) {
 var hasRefreshedTick = false;
 
 async function RefreshBanner(waitTime = -1, refreshed = false) {
-    var isBannerVisible = await getVARIABLE("SHOULD_SHOW_BANNER");
-
-    if(!isBannerVisible) return;
-
     const startTimeWindow = await getVARIABLE("ATTIC_NEXT_START_WINDOW");
     const endTimeWindow = await getVARIABLE("ATTIC_NEXT_END_WINDOW");
     const atticLastRefresh = await getVARIABLE("ATTIC_LAST_REFRESH_MS");
@@ -367,6 +363,10 @@ async function RefreshBanner(waitTime = -1, refreshed = false) {
     } else {
         setVARIABLE("ATTIC_HAS_REFRESHED", false);
     }
+
+    var isBannerVisible = await getVARIABLE("SHOULD_SHOW_BANNER");
+
+    if(!isBannerVisible) return;
 
     UpdateBannerStatus(message);
 }
