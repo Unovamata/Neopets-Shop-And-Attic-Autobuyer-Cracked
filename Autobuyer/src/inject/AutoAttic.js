@@ -126,11 +126,13 @@ function InjectAutoAttic() {
             
             if(now >= new Date(atticStartWindow) && now <= new Date(atticEndWindow)){
                 wait = GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
-
+                setVARIABLE("ATTIC_HAS_REFRESHED", true);
                 RefreshBanner(wait);
 
                 return wait;
             } else {
+                setVARIABLE("ATTIC_HAS_REFRESHED", false);
+
                 // Broken times;
                 if(wait > fourteenMinutes){
                     location.reload();
@@ -327,7 +329,7 @@ function HighlightAtticItemWithColor(itemName, color) {
     itemElement.style.backgroundColor = color;
 }
 
-var hasRefreshed = false;
+var hasRefreshedTick = false;
 
 async function RefreshBanner(waitTime = -1, refreshed = false) {
     var isBannerVisible = await getVARIABLE("SHOULD_SHOW_BANNER");
@@ -355,10 +357,15 @@ async function RefreshBanner(waitTime = -1, refreshed = false) {
         message += ` Last restock: ${lastRestockTime}...`;
     }
 
-    if(!hasRefreshed && (now >= startTime && now <= endTime)){
+    var hasRefreshedOnce = getVARIABLE("ATTIC_HAS_REFRESHED");
+
+    if(!hasRefreshedOnce && !hasRefreshedTick && (now >= startTime && now <= endTime)){
         location.reload();
-        hasRefreshed = true;
+        hasRefreshedTick = true;
         console.log((now >= startTime && now <= endTime));   
+        setVARIABLE("ATTIC_HAS_REFRESHED", true);
+    } else {
+        setVARIABLE("ATTIC_HAS_REFRESHED", false);
     }
 
     UpdateBannerStatus(message);
