@@ -373,7 +373,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
             updateImage.className = "update-image";
 
             updateStatus.appendChild(document.createElement("br"));
-            CreateMessage(`You are currently using an older version of NeoBuyer+. The latest version available is ${versions[0]}, whereas you are currently using version ${versions[0]}.`);
+            CreateMessage(`You are currently using an older version of NeoBuyer+. The latest version available is ${versions[0]}, whereas you are currently using version ${versions[1]}.`);
             CreateMessage(`We advise you to update to the latest version as soon as possible. These updates contain critical fixes or optimizations that allow NeoBuyer+ to become undetectable to TNT. `);
             CreateMessage(`Please take the necessary steps to update NeoBuyer+ to the latest version to continue enjoying its features seamlessly and securely. NeoBuyer+'s usage has been locked until said update occurs.`);
             CreateMessage(`Thank you for your attention to this matter.`);
