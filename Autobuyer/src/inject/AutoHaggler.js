@@ -30,6 +30,7 @@ function InjectAutoHaggler() {
         SHOULD_CLICK_NEOPET: !0,
         SHOULD_ANNOTATE_IMAGE: !0,
         SHOULD_ENTER_OFFER: !0,
+        SHOULD_MULTICLICK_CAPTCHA: false,
         MIN_FIVE_SECOND_RULE_REFRESH: 5000,
         MAX_FIVE_SECOND_RULE_REFRESH: 10000,
         MIN_OCR_PAGE: 750,
@@ -46,6 +47,7 @@ function InjectAutoHaggler() {
             SHOULD_CLICK_NEOPET: isClickingCaptcha,
             SHOULD_ANNOTATE_IMAGE: isAnnotatingImage,
             SHOULD_ENTER_OFFER: isEnteringOffer,
+            SHOULD_MULTICLICK_CAPTCHA: isMultiClickingCaptcha,
             MIN_FIVE_SECOND_RULE_REFRESH: minFiveSecondRuleRefresh,
             MAX_FIVE_SECOND_RULE_REFRESH: maxFiveSecondRuleRefresh,
             MIN_OCR_PAGE: minOCRDetectionInterval,
@@ -348,14 +350,16 @@ function InjectAutoHaggler() {
                                 clientY: clickY,
                             });
 
-                            ExecuteClickEvent();
+                            if(isMultiClickingCaptcha) ExecuteClickEvent();
+                            else captchaElement.dispatchEvent(clickEvent);
+                            
 
                             async function ExecuteClickEvent(){
-                                var clicksToExecuteSecond = GetRandomInt(2, 6);
+                                var clicksToExecuteSecond = GetRandomInt(2, 4);
 
                                 for(var i = 0; i < clicksToExecuteSecond; i++){
                                     // Calculating the time until the next click based on clicks per second;
-                                    var clicksPerSecond = GetRandomFloat(6, 10);
+                                    var clicksPerSecond = GetRandomFloat(5, 9);
                                     var waitDelay = 1 / (clicksPerSecond) * 1000;
 
                                     // Dispatch the click event

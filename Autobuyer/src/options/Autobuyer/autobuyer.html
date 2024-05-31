@@ -640,6 +640,20 @@
                             <td><input type="number" id="MAX_OCR_PAGE"></input><span class="notation">ms</span></td>
                         </tr>
                         <tr>
+                            <td><b>Multi-Click</b> Captcha Pet:
+                                <span class="dangertooltip tooltiptext">
+                                    If active, the AutoBuyer process will send multiple clicks to Neopets' servers in the haggling captcha page.
+                                    <br><br> Pet lag is caused by Neopets' servers to stop botting activities. If a user where to click multiple times the captcha pet image, the server will process this query faster.
+                                </span>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input id="SHOULD_MULTICLICK_CAPTCHA" type="checkbox">
+                                    <span class="slider slider-danger round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Annotate Captcha with Pet's Location:
                                 <span class="dangertooltip tooltiptext">
                                     If enabled, this feature will mark the pet's position within the captcha image with a red dot.

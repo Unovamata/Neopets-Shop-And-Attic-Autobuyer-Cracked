@@ -111,6 +111,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SHOULD_USE_CUSTOM_HAGGLE_MULTIPLIERS: false,
 			MIN_HAGGLE_POWER: 0.75,
 			MAX_HAGGLE_POWER: 0.85,
+			SHOULD_MULTICLICK_CAPTCHA: false,
 			SHOULD_CHANGE_DOCUMENT_DATA: false,
 			PAUSE_AFTER_BUY_MS: 18000,
 
