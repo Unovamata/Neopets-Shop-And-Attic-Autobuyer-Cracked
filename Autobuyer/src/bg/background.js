@@ -1,90 +1,5 @@
 importScripts("../../js/ExtPay.js");
 
-async function CheckVersionWhenBackgroundActive(){
-    chrome.storage.local.set({ "UPDATE_DATE": "" });
-
-    // If the version checker has not been run, check the latest version of the extension;
-    var currentVersion = chrome.runtime.getManifest().version;
-    var apiUrl = "https://api.github.com/repos/Unovamata/AutoBuyerPlus/releases/latest";
-    var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
-    var parsedVersion = githubLatestVersion.replace("v", "");
-    chrome.storage.local.set({ "UPDATE_VERSION": parsedVersion });
-    var isLatestVersion = parsedVersion == currentVersion;
-
-    console.log(isLatestVersion);
-
-    switch(parsedVersion){
-        // Github's API can't be reached;
-        case 'a':
-            chrome.storage.local.set({ "UPDATE_STATUS_A": false });
-        break;
-
-        // Unknown error;
-        case 'b':
-            chrome.storage.local.set({ "UPDATE_STATUS_A": false });
-        break;
-
-        // Normal version checking;
-        default:
-            chrome.storage.local.set({ "UPDATE_STATUS_A": isLatestVersion });
-        break;
-    }
-
-    if(isLatestVersion) ChangeIcon("../../icons/icon128.png");
-    else ChangeIcon("../../icons/redicon128.png");
-
-    async function FetchLatestGitHubVersion(apiUrl) {
-        try {
-            // Checking the Github API for the latest extension version;
-            const response = await fetch(apiUrl);
-
-            if (!response.ok) {
-                return 'a'; // API can't be reached;
-            }
-
-            // Parsing the data and returning it;
-            const data = await response.json();
-
-            const githubLatestVersion = data.tag_name;
-
-            return githubLatestVersion;
-        } catch (error) {
-            return 'b'; // Error in the execution;
-        }
-    }
-
-    // Function to change the icon
-    function ChangeIcon(iconPath) {
-        chrome.action.setIcon({ path: iconPath });
-    }
-}
-
-CheckVersionWhenBackgroundActive();
-
-
-var extpay = ExtPay("restock-highligher-autobuyer");
-
-// Crack user;
-extpay.startBackground();
-	
-// Attic Captcha Warning after 3 seconds;
-setTimeout(() => {
-	chrome.storage.local.get({WARNING_ACK: false, EXT_P_S: true}, data => {
-		if(!data.WARNING_ACK && data.EXT_P_S){
-			var storageObject = {};
-			storageObject["ATTIC_SHOULD_REFRESH"] = false;
-			chrome.storage.local.set(storageObject, function () {});
-
-			chrome.tabs.create({ url: "../../src/options/Warning/warning.html" });
-		}
-	});
-}, 3000)
-
-// Open index page when the extension icon is clicked;
-chrome.action.onClicked.addListener(() => {
-	chrome.tabs.create({ url: "../../src/options/Autobuyer/autobuyer.html" });
-});
-
 chrome.runtime.onInstalled.addListener(function(e) {
 	"install" == e.reason || e.reason
 
@@ -216,6 +131,95 @@ chrome.runtime.onInstalled.addListener(function(e) {
 		chrome.storage.local.set(autoPricerDefaultSettings, function (){});
 	}
 })
+
+async function CheckVersionWhenBackgroundActive(){
+    chrome.storage.local.set({ "UPDATE_DATE": "" });
+
+    // If the version checker has not been run, check the latest version of the extension;
+    var currentVersion = chrome.runtime.getManifest().version;
+    var apiUrl = "https://api.github.com/repos/Unovamata/AutoBuyerPlus/releases/latest";
+    var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
+    var parsedVersion = githubLatestVersion.replace("v", "");
+	setVARIABLE("UPDATE_VERSION", parsedVersion);
+    var isLatestVersion = parsedVersion == currentVersion;
+
+    switch(parsedVersion){
+        // Github's API can't be reached;
+        case 'a':
+			setVARIABLE("UPDATE_STATUS_A", false);            
+        break;
+
+        // Unknown error;
+        case 'b':
+            setVARIABLE("UPDATE_STATUS_A", false);
+        break;
+
+        // Normal version checking;
+        default:
+			setVARIABLE("UPDATE_STATUS_A", isLatestVersion);
+        break;
+    }
+
+    if(isLatestVersion) ChangeIcon("../../icons/icon128.png");
+    else ChangeIcon("../../icons/redicon128.png");
+
+	function setVARIABLE(propertyName, value) {
+		var storageObject = {};
+		storageObject[propertyName] = value;
+		chrome.storage.local.set(storageObject, function () {});
+	}
+
+    async function FetchLatestGitHubVersion(apiUrl) {
+        try {
+            // Checking the Github API for the latest extension version;
+            const response = await fetch(apiUrl);
+
+            if (!response.ok) {
+                return 'a'; // API can't be reached;
+            }
+
+            // Parsing the data and returning it;
+            const data = await response.json();
+
+            const githubLatestVersion = data.tag_name;
+
+            return githubLatestVersion;
+        } catch (error) {
+            return 'b'; // Error in the execution;
+        }
+    }
+
+    // Function to change the icon
+    function ChangeIcon(iconPath) {
+        chrome.action.setIcon({ path: iconPath });
+    }
+}
+
+CheckVersionWhenBackgroundActive();
+
+
+var extpay = ExtPay("restock-highligher-autobuyer");
+
+// Crack user;
+extpay.startBackground();
+	
+// Attic Captcha Warning after 3 seconds;
+setTimeout(() => {
+	chrome.storage.local.get({WARNING_ACK: false, EXT_P_S: true}, data => {
+		if(!data.WARNING_ACK && data.EXT_P_S){
+			var storageObject = {};
+			storageObject["ATTIC_SHOULD_REFRESH"] = false;
+			chrome.storage.local.set(storageObject, function () {});
+
+			chrome.tabs.create({ url: "../../src/options/Warning/warning.html" });
+		}
+	});
+}, 3000)
+
+// Open index page when the extension icon is clicked;
+chrome.action.onClicked.addListener(() => {
+	chrome.tabs.create({ url: "../../src/options/Autobuyer/autobuyer.html" });
+});
 
 chrome.runtime.onMessage.addListener((function(e, t, o) {
 	t.url.indexOf("neopets.com") < 0 || "NeoBuyer" === e.neobuyer && ("Notification" != e.type ? "OpenQuickstockPage" != e.type ? "Beep" != e.type ? console.error("Received message with unknown purpose:", JSON.stringify(e)) : chrome.storage.local.get({

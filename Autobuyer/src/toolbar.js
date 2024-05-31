@@ -335,6 +335,7 @@ async function UpdateNotification(){
             CreateNotificationElement(status, successColor);
             setVARIABLE("UPDATE_DATE", parsedDate);
         } else {
+            // If the version checker has not been run, check the latest version of the extension;
             CreateNotificationElement(status, errorColor, "NeoBuyer+ Update Required", crossIconUrl, true, "update-notification-full", [await getVARIABLE("UPDATE_VERSION"), chrome.runtime.getManifest().version + "v"]);
         }
 
