@@ -1,66 +1,62 @@
 importScripts("../../js/ExtPay.js");
 
 async function CheckVersionWhenBackgroundActive(){
-	setVARIABLE("UPDATE_DATE", "");
+    chrome.storage.local.set({ "UPDATE_DATE": "" });
 
-	// If the version checker has not been run, check the latest version of the extension;
-	var currentVersion = chrome.runtime.getManifest().version;
-	var apiUrl = "https://api.github.com/repos/Unovamata/AutoBuyerPlus/releases/latest";
-	var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
-	var parsedVersion = githubLatestVersion.replace("v", "");
-	setVARIABLE("UPDATE_VERSION", parsedVersion);
-	var isLatestVersion = parsedVersion == currentVersion;
+    // If the version checker has not been run, check the latest version of the extension;
+    var currentVersion = chrome.runtime.getManifest().version;
+    var apiUrl = "https://api.github.com/repos/Unovamata/AutoBuyerPlus/releases/latest";
+    var githubLatestVersion = await FetchLatestGitHubVersion(apiUrl);
+    var parsedVersion = githubLatestVersion.replace("v", "");
+    chrome.storage.local.set({ "UPDATE_VERSION": parsedVersion });
+    var isLatestVersion = parsedVersion == currentVersion;
 
-	switch(parsedVersion){
-		// Github's API can't be reached;
-		case 'a':
-			setVARIABLE("UPDATE_STATUS_A", false);
-		break;
+    console.log(isLatestVersion);
 
-		// Unknown error;
-		case 'b':
-			setVARIABLE("UPDATE_STATUS_A", false);
-		break;
+    switch(parsedVersion){
+        // Github's API can't be reached;
+        case 'a':
+            chrome.storage.local.set({ "UPDATE_STATUS_A": false });
+        break;
 
-		// Normal version checking;
-		default:
-			setVARIABLE("UPDATE_STATUS_A", isLatestVersion);
-		break;
-	}
+        // Unknown error;
+        case 'b':
+            chrome.storage.local.set({ "UPDATE_STATUS_A": false });
+        break;
 
-	if(isLatestVersion) ChangeIcon("../../icons/icon128.png");
-	else ChangeIcon("../../icons/redicon128.png");
+        // Normal version checking;
+        default:
+            chrome.storage.local.set({ "UPDATE_STATUS_A": isLatestVersion });
+        break;
+    }
 
-	function setVARIABLE(propertyName, value) {
-		var storageObject = {};
-		storageObject[propertyName] = value;
-		chrome.storage.local.set(storageObject, function () {});
-	}
+    if(isLatestVersion) ChangeIcon("../../icons/icon128.png");
+    else ChangeIcon("../../icons/redicon128.png");
 
-	async function FetchLatestGitHubVersion(apiUrl) {
-		try {
-			// Checking the Github API for the latest extension version;
-			const response = await fetch(apiUrl);
-	
-			if (!response.ok) {
-				return 'a'; // API can't be reached;
-			}
-	
-			// Parsing the data and returning it;
-			const data = await response.json();
-	
-			const githubLatestVersion = data.tag_name;
-	
-			return githubLatestVersion;
-		} catch (error) {
-			return 'b'; // Error in the execution;
-		}
-	}
+    async function FetchLatestGitHubVersion(apiUrl) {
+        try {
+            // Checking the Github API for the latest extension version;
+            const response = await fetch(apiUrl);
 
-	// Function to change the icon
-	function ChangeIcon(iconPath) {
-		chrome.action.setIcon({ path: iconPath });
-  	}
+            if (!response.ok) {
+                return 'a'; // API can't be reached;
+            }
+
+            // Parsing the data and returning it;
+            const data = await response.json();
+
+            const githubLatestVersion = data.tag_name;
+
+            return githubLatestVersion;
+        } catch (error) {
+            return 'b'; // Error in the execution;
+        }
+    }
+
+    // Function to change the icon
+    function ChangeIcon(iconPath) {
+        chrome.action.setIcon({ path: iconPath });
+    }
 }
 
 CheckVersionWhenBackgroundActive();
