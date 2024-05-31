@@ -28,6 +28,9 @@ async function CheckVersionWhenBackgroundActive(){
 		break;
 	}
 
+	if(isLatestVersion) ChangeIcon("../../icons/icon128.png");
+	else ChangeIcon("../../icons/redicon128.png");
+
 	function setVARIABLE(propertyName, value) {
 		var storageObject = {};
 		storageObject[propertyName] = value;
@@ -53,6 +56,11 @@ async function CheckVersionWhenBackgroundActive(){
 			return 'b'; // Error in the execution;
 		}
 	}
+
+	// Function to change the icon
+	function ChangeIcon(iconPath) {
+		chrome.action.setIcon({ path: iconPath });
+  	}
 }
 
 CheckVersionWhenBackgroundActive();

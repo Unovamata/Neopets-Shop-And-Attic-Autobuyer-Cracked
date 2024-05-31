@@ -126,7 +126,6 @@ function InjectAutoAttic() {
             
             if(now >= new Date(atticStartWindow) && now <= new Date(atticEndWindow)){
                 wait = GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
-                setVARIABLE("ATTIC_HAS_REFRESHED", true);
                 RefreshBanner(wait);
 
                 return wait;
@@ -242,6 +241,7 @@ function InjectAutoAttic() {
                         await setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
 
                         UpdateBannerAndDocument("Attic restocked", "Restock detected in Attic, updating last restock estimate.");
+                        setVARIABLE("ATTIC_HAS_REFRESHED", true);
 
                         await Sleep(atticWaitAfterAction);
                     }
@@ -359,7 +359,6 @@ async function RefreshBanner(waitTime = -1, refreshed = false) {
         location.reload();
         hasRefreshedTick = true;
         console.log((now >= startTime && now <= endTime));   
-        setVARIABLE("ATTIC_HAS_REFRESHED", true);
     } else {
         setVARIABLE("ATTIC_HAS_REFRESHED", false);
     }

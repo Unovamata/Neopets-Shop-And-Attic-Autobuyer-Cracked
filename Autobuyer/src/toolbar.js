@@ -378,17 +378,34 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
             CreateMessage(`Please take the necessary steps to update NeoBuyer+ to the latest version to continue enjoying its features seamlessly and securely. NeoBuyer+'s usage has been locked until said update occurs.`);
             CreateMessage(`Thank you for your attention to this matter.`);
             updateStatus.appendChild(document.createElement("br"));
+            updateStatus.appendChild(document.createElement("br"));
+            
+            const tutorialLink = document.createElement("a");
+            tutorialLink.href = "https://github.com/Unovamata/AutoBuyerPlus/wiki/FAQs#1-how-can-i-update-neobuyer-correctly";
+            tutorialLink.target = "_blank";
+            tutorialLink.textContent = "Click Here to Learn How to Update NeoBuyer+ Correctly";
+            tutorialLink.style.fontSize = "2.5vw";
+            updateStatus.appendChild(tutorialLink);
+            updateStatus.appendChild(document.createElement("br"));
+            
 
             updateStatus.appendChild(document.createElement("br"));
             const updateLink = document.createElement("a");
-            updateLink.href = "https://github.com/Unovamata/AutoBuyerPlus/releases/tag/0.7.20.27v";
+            updateLink.href = "https://github.com/Unovamata/AutoBuyerPlus/releases/latest";
+            updateLink.target = "_blank";
             updateLink.textContent = "Click Here to Update NeoBuyer+";
             updateLink.style.fontSize = "2.5vw";
             updateStatus.appendChild(updateLink);
+            updateStatus.appendChild(document.createElement("br"));
 
-            document.querySelector('.center').remove();
-            document.querySelector('.toolbar').remove();
-            document.querySelector('.toolbar-bottom').remove();          
+            ExtensionLock();
+
+            function ExtensionLock(){
+                document.querySelector('.center').remove();
+                document.querySelector('.toolbar').remove();
+                document.querySelector('.toolbar-bottom').remove();    
+                document.querySelector('.manual-container-bottom').remove();    
+            }           
         }
 
         updateNotification.appendChild(updateStatus);
@@ -449,8 +466,6 @@ function CheckNewMail(){
         var extractedEmail = new Email(0, ID, author, date, subject, title, contents, read);
 
         var emailList = await getVARIABLE("EMAIL_LIST");
-
-        console.log(emailList);
 
         const hasEmail = emailList.some(email => email.ID === ID);
 
