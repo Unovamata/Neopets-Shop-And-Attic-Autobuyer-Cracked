@@ -327,7 +327,6 @@ function InjectAutoHaggler() {
 
                 // Sending events to the captcha image; IIFE function <-- + ^
                 (captchaElement.src, (function(x, y) {
-
                     var imageLoadStartTime = performance.now(),
                     adjustedDelay = Math.max(Math.round(Math.random() * (maxHagglingTimeout - minHagglingTimeout) + minHagglingTimeout - Math.max(imageLoadStartTime - startGlobalTime, imageLoadStartTime - imageLoadingTime)), 0);
 
@@ -348,9 +347,24 @@ function InjectAutoHaggler() {
                                 clientX: clickX,
                                 clientY: clickY,
                             });
-                        
-                            // Dispatch the click event
-                            captchaElement.dispatchEvent(clickEvent);
+
+                            ExecuteClickEvent();
+
+                            async function ExecuteClickEvent(){
+                                var clicksToExecuteSecond = GetRandomInt(2, 6);
+
+                                for(var i = 0; i < clicksToExecuteSecond; i++){
+                                    // Calculating the time until the next click based on clicks per second;
+                                    var clicksPerSecond = GetRandomFloat(6, 10);
+                                    var waitDelay = 1 / (clicksPerSecond) * 1000;
+
+                                    // Dispatch the click event
+                                    captchaElement.dispatchEvent(clickEvent);
+
+                                    // Waiting the delay time;
+                                    await Sleep(90, waitDelay);
+                                }
+                            }
                         }
 
                         if (isAnnotatingImage) {

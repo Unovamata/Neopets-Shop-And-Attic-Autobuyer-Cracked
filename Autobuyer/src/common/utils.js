@@ -383,7 +383,8 @@ function HandleServerErrors() {
         "504 Gateway Time-out",
         "Loading site please wait...",
         "An error occurred while processing your request.",
-        "Internal Server Error"
+        "Internal Server Error",
+        "Oops, no stock ID"
         ];
     
         const pageText = document.body.innerText;

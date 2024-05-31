@@ -129,7 +129,7 @@ function InjectToolbar() {
         <div class = "toolbar-text">
             <div class="toolbar-category">
                 <a>
-                    <img class="toolbar-icon" src="${shopIconUrl}">
+                    <img class="toolbar-icon" src="${buyersIconUrl}">
                     AutoBuyers
                     <img  class = "dropdown-arrow" src="${dropdownIconUrl}">
                 </a>
@@ -137,7 +137,7 @@ function InjectToolbar() {
                     <ul>
                         <li>
                             <a href="${autobuyerUrl}" class = "toolbar-category dropdown-category">
-                                <img  class = "dropdown-icon" src="${buyersIconUrl}"> 
+                                <img  class = "dropdown-icon" src="${shopIconUrl}"> 
                             AutoBuyer </a>
                         </li>
                         <li><a href="${atticUrl}" class = "toolbar-category dropdown-category">
@@ -379,7 +379,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
             CreateMessage(`Thank you for your attention to this matter.`);
             updateStatus.appendChild(document.createElement("br"));
             updateStatus.appendChild(document.createElement("br"));
-            
+
             const tutorialLink = document.createElement("a");
             tutorialLink.href = "https://github.com/Unovamata/AutoBuyerPlus/wiki/FAQs#1-how-can-i-update-neobuyer-correctly";
             tutorialLink.target = "_blank";

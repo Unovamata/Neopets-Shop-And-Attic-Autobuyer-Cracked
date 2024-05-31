@@ -254,7 +254,7 @@ function InjectAutoPricer() {
         ReloadPageBasedOnConditions();
         
         
-        if (isClickingConfirm) {
+        if (isClickingConfirm && !isBypassingConfirm) {
             var isClicked = false;
             clearInterval(shopIntervals);
             shopIntervals = setInterval(() => {
