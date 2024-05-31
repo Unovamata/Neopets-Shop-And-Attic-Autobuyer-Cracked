@@ -348,7 +348,7 @@ async function UpdateNotification(){
 var notifications = 0;
 
 function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is up to Date!", imageSrc = checkIconUrl, isOutdated = false, classToolbar = "update-notification", versions = []){
-    setTimeout(() => {
+    setTimeout(async () => {
         const updateNotification = document.createElement("span");
         updateNotification.className = classToolbar;
         notifications += 2; // For time delays per notifications;
@@ -362,9 +362,17 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
         const updateStatus = document.createElement("a");
         updateStatus.className = "update-status";
 
+        const versionStatus = versions[0],
+            isVersionValid = versionStatus != 'a' && versionStatus != 'b',
+            isConnectivityIssue = versionStatus == 'a',
+            isUnknownError = versionStatus == 'b';
+
         const updateTitle = document.createElement("a");
         updateTitle.className = "update-title";
-        updateTitle.textContent = text;
+        if(isVersionValid) updateTitle.textContent = text;
+        else if(isConnectivityIssue) updateTitle.textContent = "Connectivity Issues";
+        else if(isUnknownError) updateTitle.textContent = "Unknown Error";
+
         updateStatus.appendChild(updateTitle);
 
         updateNotification.style.backgroundColor = color;
@@ -374,30 +382,34 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
             updateImage.className = "update-image";
 
             updateStatus.appendChild(document.createElement("br"));
-            CreateMessage(`You are currently using an older version of NeoBuyer+. The latest version available is ${versions[0]}, whereas you are currently using version ${versions[1]}.`);
-            CreateMessage(`We advise you to update to the latest version as soon as possible. These updates contain critical fixes or optimizations that allow NeoBuyer+ to become undetectable to TNT. `);
-            CreateMessage(`Please take the necessary steps to update NeoBuyer+ to the latest version to continue enjoying its features seamlessly and securely. NeoBuyer+'s usage has been locked until said update occurs.`);
-            CreateMessage(`Thank you for your attention to this matter.`);
-            updateStatus.appendChild(document.createElement("br"));
-            updateStatus.appendChild(document.createElement("br"));
 
-            const tutorialLink = document.createElement("a");
-            tutorialLink.href = "https://github.com/Unovamata/AutoBuyerPlus/wiki/FAQs#1-how-can-i-update-neobuyer-correctly";
-            tutorialLink.target = "_blank";
-            tutorialLink.textContent = "Click Here to Learn How to Update NeoBuyer+ Correctly";
-            tutorialLink.style.fontSize = "2.5vw";
-            updateStatus.appendChild(tutorialLink);
-            updateStatus.appendChild(document.createElement("br"));
+            if(isVersionValid){
+                CreateMessage(`You are currently using an older version of NeoBuyer+. The latest version available is ${versions[0]}, whereas you are currently using version ${versions[1]}.`);
+                CreateMessage(`We advise you to update to the latest version as soon as possible. These updates contain critical fixes or optimizations that allow NeoBuyer+ to become undetectable to TNT. `);
+                CreateMessage(`Please take the necessary steps to update NeoBuyer+ to the latest version to continue enjoying its features seamlessly and securely. NeoBuyer+'s usage has been locked until said update occurs.`);
+                CreateMessage(`Thank you for your attention to this matter.`);
+            } else if(isConnectivityIssue){
+                CreateMessage(`There was an issue trying to reach out to NeoBuyer+'s version check API servers.`);
+                CreateMessage(`Ensure you have a stable internet connection and refresh the extension data in the "Extensions" Chromium page. NeoBuyer+'s usage has been locked for your safety.`);
+                CreateMessage(``);
+                CreateMessage(`Thank you for your attention to this matter.`);
+            } else if(isUnknownError){
+                var error = await getVARIABLE("ERROR_STATUS");  
+
+                CreateMessage(`There was an issue while trying to initialize the extension. Please refresh the extension data in the "Extensions" Chromium page.`);
+                CreateMessage(`Please report a bug pasting this error:`);
+                CreateMessage(`${error}`);
+                CreateMessage(`Thank you for your attention to this matter.`);
+            }
             
+            updateStatus.appendChild(document.createElement("br"));
 
-            updateStatus.appendChild(document.createElement("br"));
-            const updateLink = document.createElement("a");
-            updateLink.href = "https://github.com/Unovamata/AutoBuyerPlus/releases/latest";
-            updateLink.target = "_blank";
-            updateLink.textContent = "Click Here to Update NeoBuyer+";
-            updateLink.style.fontSize = "2.5vw";
-            updateStatus.appendChild(updateLink);
-            updateStatus.appendChild(document.createElement("br"));
+            if(!isVersionValid) URLText("https://github.com/Unovamata/AutoBuyerPlus/issues", "Click Here to Report a Bug");
+
+            URLText("https://github.com/Unovamata/AutoBuyerPlus/wiki/FAQs#1-how-can-i-update-neobuyer-correctly", 
+            "Click Here to Learn How to Update NeoBuyer+ Correctly");
+
+            if(isVersionValid) URLText("https://github.com/Unovamata/AutoBuyerPlus/releases/latest", "Click Here to Update NeoBuyer+");
 
             ExtensionLock();
 
@@ -407,6 +419,17 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
                 document.querySelector('.toolbar-bottom').remove();    
                 document.querySelector('.manual-container-bottom').remove();    
             }           
+
+            function URLText(url, text){
+                updateStatus.appendChild(document.createElement("br"));
+                const link = document.createElement("a");
+                link.href = "url";
+                link.target = "_blank";
+                link.textContent = text;
+                link.style.fontSize = "2.5vw";
+                updateStatus.appendChild(link);
+                updateStatus.appendChild(document.createElement("br"));
+            }
         }
 
         updateNotification.appendChild(updateStatus);

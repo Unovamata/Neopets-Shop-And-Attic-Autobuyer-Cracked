@@ -146,7 +146,7 @@ async function CheckVersionWhenBackgroundActive(){
     switch(parsedVersion){
         // Github's API can't be reached;
         case 'a':
-			setVARIABLE("UPDATE_STATUS_A", false);            
+			setVARIABLE("UPDATE_STATUS_A", false);         
         break;
 
         // Unknown error;
@@ -185,6 +185,28 @@ async function CheckVersionWhenBackgroundActive(){
 
             return githubLatestVersion;
         } catch (error) {
+			var errorMessage = "";
+
+			var propertyNames = Object.getOwnPropertyNames(error);
+
+			propertyNames.forEach(function(property) {
+				var descriptor = Object.getOwnPropertyDescriptor(error, property);
+
+				errorMessage += property + ":" + error[property] + ":" + PropsToStr(descriptor);
+			});
+
+			setVARIABLE("ERROR_STATUS", errorMessage);  
+
+			function PropsToStr(obj) {
+				var str = '';
+
+				for (prop in obj) {
+					str += prop + "=" + obj[prop] + ",";
+				}
+
+				return str;
+			}
+
             return 'b'; // Error in the execution;
         }
     }
