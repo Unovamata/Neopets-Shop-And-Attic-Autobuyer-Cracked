@@ -384,7 +384,8 @@ function HandleServerErrors() {
         "Loading site please wait...",
         "An error occurred while processing your request.",
         "Internal Server Error",
-        "Oops, no stock ID"
+        "Oops, no stock ID",
+        "You have been directed to this page from the wrong place!"
         ];
     
         const pageText = document.body.innerText;
@@ -393,20 +394,30 @@ function HandleServerErrors() {
         if (errorMessages.some(message => pageText.includes(message))) {
             const indexOfMessage = errorMessages.findIndex(message => pageText.includes(message));
 
-            // Captcha;
-            if (indexOfMessage === 2) {
-                UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.", true);
-                return;
-            } else { // Refresh on page errors;
-                function RefreshWindow() {
-                    if (!errorRefreshed) {
-                        errorRefreshed = true;
-                        
-                        location.reload();
-                    }
-                }
+            
+            switch(indexOfMessage){
+                case 2:
+                    UpdateDocument("Captcha page detected", "Captcha page detected. Pausing.", true);
+                    return;
+                break;
 
-                setTimeout(RefreshWindow, GetRandomFloat(minPageReloadTime, maxPageReloadTime));
+                // Oops, no stock ID;
+                case 5:
+                case 6:
+                    window.location.href = "https://www.neopets.com/objects.phtml?type=shop&obj_type=1";
+                break;
+
+                default:
+                    function RefreshWindow() {
+                        if (!errorRefreshed) {
+                            errorRefreshed = true;
+                            
+                            location.reload();
+                        }
+                    }
+    
+                    setTimeout(RefreshWindow, GetRandomFloat(minPageReloadTime, maxPageReloadTime));
+                break;
             }
         }
         
