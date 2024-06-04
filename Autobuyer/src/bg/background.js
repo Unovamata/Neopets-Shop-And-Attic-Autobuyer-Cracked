@@ -132,6 +132,10 @@ chrome.runtime.onInstalled.addListener(function(e) {
 	}
 })
 
+chrome.runtime.onStartup.addListener(() => {
+    CheckVersionWhenBackgroundActive();
+});
+
 async function CheckVersionWhenBackgroundActive(){
     chrome.storage.local.set({ "UPDATE_DATE": "" });
 

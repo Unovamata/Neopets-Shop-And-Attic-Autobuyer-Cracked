@@ -15,3 +15,6 @@ better_quick_stock.user.js
 searchcode.bat
 *- Copy*
 *.rar
+Autobuyer/SDBExtractPrices.js
+Autobuyer/databaseCleaner.js
+Autobuyer/databaseDirty.js

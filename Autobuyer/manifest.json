@@ -67,14 +67,18 @@
             "src/inject/AutoHaggler.js"
         ]
     },
-	//{
-        //"matches": [
-        //    "*://www.neopets.com/safetydeposit*"
-        //],
-        //"js": [
-		//	"sdbduper.js"
-        //]
-    //},
+	{
+        "matches": [
+            "*://www.neopets.com/safetydeposit*"
+        ],
+        "js": [
+			"js/jquery.js"
+			//"sdbduper.js",
+			//"SDBExtractPrices.js"
+			//"databaseDirty.js",
+			//"databaseCleaner.js"
+        ]
+    },
 	//{
         //"matches": [
         //    "https://items.jellyneo.net/tools/sdb-price-checker/"
