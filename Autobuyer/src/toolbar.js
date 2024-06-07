@@ -427,7 +427,7 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
             function URLText(url, text){
                 updateStatus.appendChild(document.createElement("br"));
                 const link = document.createElement("a");
-                link.href = "url";
+                link.href = url;
                 link.target = "_blank";
                 link.textContent = text;
                 link.style.fontSize = "2.5vw";
