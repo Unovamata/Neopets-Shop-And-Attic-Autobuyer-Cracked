@@ -65,7 +65,9 @@ async function RunAutoKQ(){
         
         var blacklistKQ = await getVARIABLE("BLACKLIST_KQ");
         var questContainsBlacklistedItem = false;
-        questContainsBlacklistedItem = itemArray.some(element => blacklistKQ.includes(element));
+
+
+        try { questContainsBlacklistedItem = itemArray.some(element => blacklistKQ.includes(element)); } catch {}
 
         // If the quest asks for blacklisted items, halt the process;
         if(questContainsBlacklistedItem){
