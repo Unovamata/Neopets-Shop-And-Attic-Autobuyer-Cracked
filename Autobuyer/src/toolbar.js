@@ -349,6 +349,8 @@ var notifications = 0;
 
 function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is up to Date!", imageSrc = checkIconUrl, isOutdated = false, classToolbar = "update-notification", versions = []){
     setTimeout(async () => {
+        if(versions[0] == "") return;
+
         const updateNotification = document.createElement("span");
         updateNotification.className = classToolbar;
         notifications += 2; // For time delays per notifications;
@@ -372,6 +374,8 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
         if(isVersionValid) updateTitle.textContent = text;
         else if(isConnectivityIssue) updateTitle.textContent = "Connectivity Issues";
         else if(isUnknownError) updateTitle.textContent = "Unknown Error";
+
+        
 
         updateStatus.appendChild(updateTitle);
 
