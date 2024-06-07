@@ -327,7 +327,7 @@ async function UpdateNotification(){
         var hasDoneDailyVersionCheck = date === parsedDate;
         var status = await getVARIABLE("UPDATE_STATUS_A");
 
-        if(hasDoneDailyVersionCheck && status){
+        if(hasDoneDailyVersionCheck && status || location.href.includes("warning")){
             return;
         }
 
