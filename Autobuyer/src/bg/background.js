@@ -10,6 +10,7 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			UPDATE_DATE: "",
 			UPDATE_VERSION: "",
 			IS_UP_TO_DATE: false,
+			LATEST_DOWNLOAD_LINK: "",
 
 			// AutoBuyer;
 			RUN_AUTOBUYER_FROM_MS: 1712473200000,
@@ -137,7 +138,14 @@ chrome.runtime.onStartup.addListener(() => {
 });
 
 async function CheckVersionWhenBackgroundActive(){
+	function setVARIABLE(propertyName, value) {
+		var storageObject = {};
+		storageObject[propertyName] = value;
+		chrome.storage.local.set(storageObject, function () {});
+	}
+
     chrome.storage.local.set({ "UPDATE_DATE": "" });
+	chrome.storage.local.set({ "UPDATE_VERSION": "" });
 
     // If the version checker has not been run, check the latest version of the extension;
     var currentVersion = chrome.runtime.getManifest().version;
@@ -148,9 +156,15 @@ async function CheckVersionWhenBackgroundActive(){
     var isLatestVersion = parsedVersion == currentVersion;
 
     switch(parsedVersion){
-        // Github's API can't be reached;
+        // Github's API can't be reached or user is using a VPN;
         case 'a':
-			setVARIABLE("UPDATE_STATUS_A", false);         
+			var fetchedVersion = await FetchLatestGithubTag();
+
+			isLatestVersion = fetchedVersion == currentVersion;
+
+			// The version could not be parsed at all;
+			if(fetchedVersion != "a") setVARIABLE("UPDATE_VERSION", fetchedVersion);
+			setVARIABLE("UPDATE_STATUS_A", isLatestVersion);    
         break;
 
         // Unknown error;
@@ -167,12 +181,6 @@ async function CheckVersionWhenBackgroundActive(){
     if(isLatestVersion) ChangeIcon("../../icons/icon128.png");
     else ChangeIcon("../../icons/redicon128.png");
 
-	function setVARIABLE(propertyName, value) {
-		var storageObject = {};
-		storageObject[propertyName] = value;
-		chrome.storage.local.set(storageObject, function () {});
-	}
-
     async function FetchLatestGitHubVersion(apiUrl) {
         try {
             // Checking the Github API for the latest extension version;
@@ -185,35 +193,68 @@ async function CheckVersionWhenBackgroundActive(){
             // Parsing the data and returning it;
             const data = await response.json();
 
-            const githubLatestVersion = data.tag_name;
+            const githubLatestVersion = data.tag_name,
+				  githubLatestFiles = data.assets[0].browser_download_url;
+
+			setVARIABLE("LATEST_DOWNLOAD_LINK", githubLatestFiles);  
 
             return githubLatestVersion;
         } catch (error) {
-			var errorMessage = "";
-
-			var propertyNames = Object.getOwnPropertyNames(error);
-
-			propertyNames.forEach(function(property) {
-				var descriptor = Object.getOwnPropertyDescriptor(error, property);
-
-				errorMessage += property + ":" + error[property] + ":" + PropsToStr(descriptor);
-			});
-
-			setVARIABLE("ERROR_STATUS", errorMessage);  
-
-			function PropsToStr(obj) {
-				var str = '';
-
-				for (prop in obj) {
-					str += prop + "=" + obj[prop] + ",";
-				}
-
-				return str;
-			}
+			ErrorMessage(error);
 
             return 'b'; // Error in the execution;
         }
     }
+
+	function ErrorMessage(error){
+		var errorMessage = "";
+
+		var propertyNames = Object.getOwnPropertyNames(error);
+
+		propertyNames.forEach(function(property) {
+			var descriptor = Object.getOwnPropertyDescriptor(error, property);
+
+			errorMessage += property + ":" + error[property] + ":" + PropsToStr(descriptor);
+		});
+
+		setVARIABLE("ERROR_STATUS", errorMessage);  
+		setVARIABLE("LATEST_DOWNLOAD_LINK", "");  
+
+		function PropsToStr(obj) {
+			var str = '';
+
+			for (prop in obj) {
+				str += prop + "=" + obj[prop] + ",";
+			}
+
+			return str;
+		}
+	}
+
+	async function FetchLatestGithubTag() {
+		try {
+			const response = await fetch('https://github.com/Unovamata/AutoBuyerPlus/tags');
+			if (!response.ok) {
+				return 'a'; // API can't be reached;
+			}
+	
+			const html = await response.text();
+	
+			const classString = 'Link--primary Link">',
+				startPosition = html.indexOf(classString);
+			
+			if (startPosition === -1) {
+				return 'a'; // API can't be reached;
+			}
+
+			var processedVersion = html.substring(startPosition + classString.length);
+			processedVersion = processedVersion.split("v")[0];
+	
+			return processedVersion;
+		} catch (error) {
+			throw error;
+		}
+	}
 
     // Function to change the icon
     function ChangeIcon(iconPath) {
@@ -240,7 +281,7 @@ setTimeout(() => {
 			chrome.tabs.create({ url: "../../src/options/Warning/warning.html" });
 		}
 	});
-}, 3000)
+}, 1000)
 
 // Open index page when the extension icon is clicked;
 chrome.action.onClicked.addListener(() => {

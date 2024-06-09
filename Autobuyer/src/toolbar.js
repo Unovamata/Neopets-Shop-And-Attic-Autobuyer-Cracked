@@ -410,10 +410,22 @@ function CreateNotificationElement(isLatestVersion, color, text = "NeoBuyer+ is 
 
             if(!isVersionValid) URLText("https://github.com/Unovamata/AutoBuyerPlus/issues", "Click Here to Report a Bug");
 
+            if(isVersionValid){
+                var latestDownloadLink = await getVARIABLE("LATEST_DOWNLOAD_LINK");
+                var isLatestDownloadLinkValid = latestDownloadLink != undefined || latestDownloadLink != "";
+                
+                // Automatic download;
+                if(isLatestDownloadLinkValid){
+                    URLText(latestDownloadLink, "Click Here to Download the Latest Version");
+                } 
+                // Manual download;
+                else {
+                    URLText("https://github.com/Unovamata/AutoBuyerPlus/releases/latest", "Click Here to Update NeoBuyer+");
+                }
+            } 
+
             URLText("https://github.com/Unovamata/AutoBuyerPlus/wiki/FAQs#1-how-can-i-update-neobuyer-correctly", 
             "Click Here to Learn How to Update NeoBuyer+ Correctly");
-
-            if(isVersionValid) URLText("https://github.com/Unovamata/AutoBuyerPlus/releases/latest", "Click Here to Update NeoBuyer+");
 
             ExtensionLock();
 

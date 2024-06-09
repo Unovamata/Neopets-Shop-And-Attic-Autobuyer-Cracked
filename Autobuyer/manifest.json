@@ -28,6 +28,8 @@
 		"downloads",
 		"management"
     ],
+	"host_permissions": [
+		"https://github.com/Unovamata/AutoBuyerPlus/tags"],
 	"web_accessible_resources": [
 		{
 		  "resources": ["icons/circle.svg"],
