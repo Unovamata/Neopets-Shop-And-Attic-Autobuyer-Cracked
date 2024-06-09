@@ -7,6 +7,7 @@ InjectAutoAttic();
 
 //######################################################################################################################################
 
+
 function InjectAutoAttic() {
     chrome.storage.local.get({
         BUY_UNKNOWN_ITEMS_PROFIT: 1e5,
@@ -109,9 +110,9 @@ function InjectAutoAttic() {
     
             windowEndTime.setMinutes(lastRestockMinute + minutesInterval * windowsPassed + extraMinutes);
             windowEndTime.setSeconds(lastRestockTime.getSeconds() + secondsToAdd * windowsPassed + extraSeconds);
-            
-            var wait = 0;
 
+            var wait = 0;
+            
             if(now >= new Date(atticStartWindow) && now <= new Date(atticEndWindow)){
                 wait = GetRandomFloat(minRefreshIntervalAttic, maxRefreshIntervalAttic);
 
@@ -240,12 +241,12 @@ function InjectAutoAttic() {
             function IsTimeToAutoRefreshAttic() {
                 var now = new Date();
                 var currentHour = now.getHours();
-                return currentHour >= 0 && currentHour <= 23;
+                return currentHour >= atticRunBetweenHours[0] && currentHour <= atticRunBetweenHours[1];
             }
 
             // Update the stored number of items
             var numItems = GetAtticStockedItemNumber();
-            chrome.storage.local.set({ ATTIC_PREV_NUM_ITEMS: numItems }, function() {});
+            setVARIABLE("ATTIC_PREV_NUM_ITEMS", Number(ItemsStocked));
         }
 
         async function AutoRefreshAttic() {
@@ -317,6 +318,7 @@ function HighlightAtticItemWithColor(itemName, color) {
 }
 
 //######################################################################################################################################
+
 
 async function RefreshBanner(waitTime = -1){   
     const now = new Date(),
