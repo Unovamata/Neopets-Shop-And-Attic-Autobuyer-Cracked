@@ -234,19 +234,24 @@ function InjectAutoPricer() {
                 UpdateBannerAndDocument(`Paused until the scheduled time...`, "Waiting for scheduled time in main shop");
                 await Sleep(timeDifferenceFrom);
             }
-        
-            // If it's not, check if it's the current minute pause;
-            for (let i = 0; i < pauseBetweenMinutes.length; i += 2) {
-                const startMinute = pauseBetweenMinutes[i];
-                const endMinute = pauseBetweenMinutes[i + 1];
-        
-                // If it's time to pause, add a pause based on the leftover minutes between the end and current time;
-                if (minutes >= startMinute && minutes <= endMinute) {
-                    UpdateBannerAndDocument(`Paused until ${hours}:${(endMinute < 10 ? '0' : '') + endMinute}`, "Waiting for scheduled time in main shop");
+            
+            const now = new Date();
+            const minutes = now.getMinutes();
+            
+            if(pauseBetweenMinutes.length != 0){
+                // If it's not, check if it's the current minute pause;
+                for (let i = 0; i < pauseBetweenMinutes.length; i += 2) {
+                    const startMinute = pauseBetweenMinutes[i];
+                    const endMinute = pauseBetweenMinutes[i + 1];
+            
+                    // If it's time to pause, add a pause based on the leftover minutes between the end and current time;
+                    if (minutes >= startMinute && minutes <= endMinute) {
+                        UpdateBannerAndDocument(`Paused until ${hours}:${(endMinute < 10 ? '0' : '') + endMinute}`, "Waiting for scheduled time in main shop");
 
-                    const delayMinutes = (endMinute - minutes + 1) * 60000;
-                    
-                    await Sleep(delayMinutes);
+                        const delayMinutes = (endMinute - minutes + 1) * 60000;
+                        
+                        await Sleep(delayMinutes);
+                    }
                 }
             }
         }
