@@ -354,11 +354,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 CheckCurrentTime();
 
 async function CheckCurrentTime(){
-	var currentTime = Date.now();
-
 	var volunteerTime = await getVARIABLE("VOLUNTEER_TIME");
+	var isRunningTVWProcess = await getVARIABLE("IS_RUNNING_TVW_PROCESS");
 
-	if(currentTime >= volunteerTime && volunteerTime != null){
+	if(isRunningTVWProcess && currentTime >= volunteerTime && volunteerTime != null){
+		var currentTime = Date.now();
+
 		chrome.tabs.create({ url: 'https://www.neopets.com/hospital/volunteer.phtml' }, function(tab) {
 			setVARIABLE("TAB_ID", tab.id);
 		});
