@@ -49,7 +49,7 @@
     },
     {
         "matches": [
-            "*://www.neopets.com/objects.phtml*"
+            "*://www.neopets.com/objects.phtml?type=shop*"
         ],
         "js": [
 			"js/moment.js",
