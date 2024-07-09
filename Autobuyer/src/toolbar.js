@@ -25,9 +25,10 @@ const communityIconUrl = `${srcPath}/toolbar/communitycentral-icon.png`;
 const restockListIconUrl = `${srcPath}/toolbar/myalbums-icon.svg`;
 const manualIconUrl = `${srcPath}/toolbar/mymanual-icon.svg`;
 const buyersIconUrl = `${srcPath}/toolbar/myshop-icon.png`;
-const bugUrl = `${srcPath}/toolbar/wonderclaw-icon.png`;
-const suggestionsUrl = `${srcPath}/toolbar/quests-icon.svg`;
-const discordUrl = `${srcPath}/toolbar/discord-border.svg`;
+const bugIconUrl = `${srcPath}/toolbar/wonderclaw-icon.png`;
+const suggestionsIconUrl = `${srcPath}/toolbar/quests-icon.svg`;
+const discordIconUrl = `${srcPath}/toolbar/discord-border.svg`;
+const tvwIconUrl = `${srcPath}/toolbar/tvw.png`;
 
 // Styles
 const toolbarCSS = `${srcPath}/toolbar/toolbar.css`;
@@ -43,6 +44,7 @@ const databaseUrl = `${srcPath}/options/ItemDB/item_db.html`;
 const restockListUrl = `${srcPath}/options/Tools/restockListGen.html`;
 const infoUrl = `${srcPath}/options/Tools/info.html`;
 const mailUrl = `${srcPath}/options/Mail/mail.html`;
+const tvwUrl = `${srcPath}/options/TVW/tvw.html`;
 
 // Scripts
 const utilsScriptUrl = `${srcPath}/common/utils.js`
@@ -199,7 +201,7 @@ function InjectToolbar() {
                         </li>
                         <li>
                             <a href="${infoUrl}" class = "toolbar-category dropdown-category">
-                                <img  class = "dropdown-icon" src="${suggestionsUrl}"> 
+                                <img  class = "dropdown-icon" src="${suggestionsIconUrl}"> 
                                 Config Presets
                             </a>
                         </li>
@@ -211,11 +213,11 @@ function InjectToolbar() {
                                         FAQs 
                                     </a>
                                     <a href="https://github.com/Unovamata/AutoBuyerPlus/issues" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
-                                        <img  class = "dropdown-icon" src="${bugUrl}"> 
+                                        <img  class = "dropdown-icon" src="${bugIconUrl}"> 
                                         Bug Report 
                                     </a>
                                     <a href="https://github.com/Unovamata/AutoBuyerPlus/issues/1" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category"> 
-                                        <img  class = "dropdown-icon" src="${suggestionsUrl}"> 
+                                        <img  class = "dropdown-icon" src="${suggestionsIconUrl}"> 
                                         Suggestions
                                     </a>
                                     <a href="https://github.com/Unovamata/AutoBuyerPlus/wiki/Credits" rel="noopener noreferrer" target="_blank" class = "toolbar-category dropdown-category">
@@ -234,6 +236,11 @@ function InjectToolbar() {
                     </ul>
                 </div>
             </div>
+
+            <a href="${tvwUrl}" class = "toolbar-category">
+                <img class="toolbar-icon" src="${tvwIconUrl}">
+                <span class="notification-dot"></span>
+            TVW </a>
 
             <a href="${mailUrl}" class = "toolbar-category">
                 <img class="toolbar-icon" src="${mailIconUrl}">

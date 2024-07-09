@@ -906,6 +906,43 @@ $("#SHOULD_SHARE_NEOBUYER_MAILS").bind("input propertychange", (function() {
 }))
 
 
+// The Void Within
+
+async function TheVoidWithinData(){
+  var ownedPets = await getVARIABLE("OWNED_PETS");
+
+  if(ownedPets == undefined){
+    setVARIABLE("OWNED_PETS", []);
+    ownedPets = [];
+  }
+
+  const ownedPetsSelector = $("#OWNED_PETS");
+
+  if(ownedPets.length == 0){
+    var loadPetDataButton = $("#loadPetData").clone();
+    loadPetDataButton.find(':first-child').removeClass("autobuyerButton").addClass("volunteerButton");
+    ownedPetsSelector.parent().append(loadPetDataButton);
+    ownedPetsSelector.remove();
+
+    setInterval(async function(){
+      ownedPets = await getVARIABLE("OWNED_PETS");
+
+      if(ownedPets.length > 0){
+        location.reload();
+      }
+    }, 1000);
+  }
+
+  var minWaitTime = await getVARIABLE("OWNED_PETS");
+
+  $("#FIXED_PRICING_VALUE").bind("input propertychange", (function () {
+    setVARIABLE($("#FIXED_PRICING_VALUE").val())
+  }))
+}
+
+TheVoidWithinData();
+
+
 //######################################################################################################################################
 
 
@@ -1074,6 +1111,11 @@ resetButton.onclick = function (_) {
   SHOULD_SHARE_AUTOKQ_LOG: false,
   SHOULD_SHARE_NEOBUYER_MAILS: false,
 
+  // The Void Within
+
+  MIN_TVW_VISIT: 1800000,
+	MAX_TVW_VISIT: 3600000,
+
 }, (function (_) {
 
   $("#PAUSE_AFTER_BUY_MS").val(_.PAUSE_AFTER_BUY_MS);
@@ -1221,4 +1263,9 @@ resetButton.onclick = function (_) {
   $("#SHOULD_SHARE_NEOBUYER_MAILS").prop("checked", _.SHOULD_SHARE_NEOBUYER_MAILS);
 
   ShowOrHide();
+
+  // The Void Within
+
+  $("#MIN_TVW_VISIT").val(_.MIN_TVW_VISIT);
+  $("#MAX_TVW_VISIT").val(_.MAX_TVW_VISIT);
 }));

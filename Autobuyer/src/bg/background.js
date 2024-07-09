@@ -127,6 +127,17 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			SKIP_CURRENT_MAIL: false,
 			CURRENT_MAIL_INDEX: -1,
 			RETRIEVED_NEWEST_EMAIL: false,
+
+			// The Void Within;
+			TAB_ID: null,
+			OWNED_PETS: [],
+			VOLUNTEER_PET: "",
+			VOLUNTEER_TIME: null,
+			TVW_STATUS: "Inactive",
+			IS_LOADING_PETS: false,
+			IS_RUNNING_TVW_PROCESS: false,
+			MIN_TVW_VISIT: 1800000,
+			MAX_TVW_VISIT: 3600000,
 		};
 
 		chrome.storage.local.set(autoPricerDefaultSettings, function (){});
@@ -137,13 +148,23 @@ chrome.runtime.onStartup.addListener(() => {
     CheckVersionWhenBackgroundActive();
 });
 
-async function CheckVersionWhenBackgroundActive(){
-	function setVARIABLE(propertyName, value) {
-		var storageObject = {};
-		storageObject[propertyName] = value;
-		chrome.storage.local.set(storageObject, function () {});
-	}
+function setVARIABLE(propertyName, value) {
+	var storageObject = {};
+	storageObject[propertyName] = value;
+	chrome.storage.local.set(storageObject, function () {});
+}
 
+function getVARIABLE(variable) {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get([variable], function (result) {
+            var value = result[variable];
+
+            resolve(value);
+        });
+    });
+}
+
+async function CheckVersionWhenBackgroundActive(){
     chrome.storage.local.set({ "UPDATE_DATE": "" });
 	chrome.storage.local.set({ "UPDATE_VERSION": "" });
 
@@ -325,5 +346,39 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "outdatedVersion") {
         // Open a new window when message with action "openWindow" is received
         chrome.tabs.create({ url: "../src/options/Autobuyer/autobuyer.html" });
+    }
+});
+
+// The Void Within
+
+CheckCurrentTime();
+
+async function CheckCurrentTime(){
+	var currentTime = Date.now();
+
+	var volunteerTime = await getVARIABLE("VOLUNTEER_TIME");
+
+	if(currentTime >= volunteerTime && volunteerTime != null){
+		chrome.tabs.create({ url: 'https://www.neopets.com/hospital/volunteer.phtml' }, function(tab) {
+			setVARIABLE("TAB_ID", tab.id);
+		});
+
+		getVARIABLE("VOLUNTEER_TIME", null);
+	}
+}
+
+setInterval(CheckCurrentTime, 10000);
+
+chrome.runtime.onMessage.addListener(async function(message, sender, sendResponse) {
+    if (message.action === 'closeTab') {
+        try {
+            let tabId = await getVARIABLE("TAB_ID");
+            
+            chrome.tabs.remove(tabId, function() {
+                sendResponse({ result: 'success' });
+            });
+        } catch (error) {
+            sendResponse({ result: 'error', message: error.message });
+        }
     }
 });

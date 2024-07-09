@@ -26,7 +26,9 @@
         "notifications",
         "tts",
 		"downloads",
-		"management"
+		"management",
+		"tabs",
+        "activeTab"
     ],
 	"host_permissions": [
 		"https://github.com/Unovamata/AutoBuyerPlus/tags"],
@@ -147,6 +149,28 @@
         "js": [
 			"src/common/utils.js",
 			"src/inject/userbuyer.js"
+        ],
+        "run_at": "document_end"
+    },
+	{
+        "matches": [
+            "https://www.neopets.com/quickref.phtml"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+			"src/inject/TVW/quickref.js"
+        ],
+        "run_at": "document_end"
+    },
+    {
+        "matches": [
+            "https://www.neopets.com/hospital/volunteer.phtml"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+			"src/inject/TVW/volunteer.js"
         ],
         "run_at": "document_end"
     }

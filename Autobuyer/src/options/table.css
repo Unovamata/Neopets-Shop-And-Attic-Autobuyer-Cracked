@@ -113,6 +113,27 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
     padding: 0;
 }
 
+/* Common properties for .button and .reset */
+.volunteerButton {
+    width: 40%;
+    border-radius: 20px;
+    background: #2196F3;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-family: 'Cafeteria', sans-serif;
+    height: 40px;
+    font-size: 100%;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
+}
+
 .autobuyerButton a {
     visibility: hidden;
 }
