@@ -82,6 +82,11 @@ chrome.storage.local.get(null, function(items) {
 
         itemsCopy.UPDATE_DATE = "";
 
+        // TVW Data;
+        itemsCopy.OWNED_PETS = [];
+        itemsCopy.VOLUNTEER_PET = "";
+        itemsCopy.VOLUNTEER_TIME = null;
+
         const jsonString = JSON.stringify(itemsCopy);
         const encryptedJSONString = EncryptData(jsonString, key);
 

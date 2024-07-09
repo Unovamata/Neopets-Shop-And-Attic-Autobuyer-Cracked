@@ -134,6 +134,14 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
     padding: 0;
 }
 
+.cancelButton {
+    background: #f32121;
+}
+
+.tvwDatetime {
+    width: 60%;
+}
+
 .autobuyerButton a {
     visibility: hidden;
 }

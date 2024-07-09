@@ -42,6 +42,7 @@ async function StartVolunteerProcess(){
         case "Complete":
             BrightvaleIButton.click();
             window.location.reload();
+            return;
         break;
 
         case "Cancel":

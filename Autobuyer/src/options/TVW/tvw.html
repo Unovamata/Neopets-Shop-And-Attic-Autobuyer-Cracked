@@ -8,7 +8,7 @@
 
     <body>
         <div class="center">
-            <div class="enter-info">NeoBuyer+ AutoBuyer</div>
+            <div class="enter-info">NeoBuyer+ The Void Within</div>
             <div class="category-info">
                 The Void Within Settings
                 <div class="autosaved">
@@ -28,7 +28,7 @@
                 </a>
 
                 <a id="cancelVolunteerProcess">
-                    <button class="autobuyerButton">Cancel Volunteer Centre Process</button>
+                    <button class="autobuyerButton cancelButton">Cancel Volunteer Centre Process</button>
                 </a>
 
                 <a href="https://www.neopets.com/hospital/volunteer.phtml" target="_blank">
@@ -42,6 +42,16 @@
                         <thead>
                             <th></th><th></th>
                         </thead>
+                            <tr>
+                                <td>Volunteer Time <b>Completion</b>:
+                                    <span class="tooltiptext">
+                                        Completion time for the Volunteer Centre activities.
+                                    </span>
+                                </td>
+                                <td>
+                                    <input id="completionTime" class="tvwDatetime" disabled="true" type="datetime-local" name="datetime" step="1">
+                                </td>
+                            </tr>
                             <tr>
                                 <td>Pet Selected to <b>Volunteer</b>:
                                     <span class="tooltiptext">

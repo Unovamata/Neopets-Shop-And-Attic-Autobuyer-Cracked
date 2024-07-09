@@ -935,9 +935,13 @@ async function TheVoidWithinData(){
 
   var minWaitTime = await getVARIABLE("OWNED_PETS");
 
-  $("#FIXED_PRICING_VALUE").bind("input propertychange", (function () {
-    setVARIABLE($("#FIXED_PRICING_VALUE").val())
-  }))
+  $("#MIN_TVW_VISIT").bind("input propertychange", (function () {
+    setVARIABLE("MIN_TVW_VISIT", $("#MIN_TVW_VISIT").val());
+  }));
+  
+  $("#MAX_TVW_VISIT").bind("input propertychange", (function () {
+    setVARIABLE("MAX_TVW_VISIT", $("#MAX_TVW_VISIT").val());
+  }));
 }
 
 TheVoidWithinData();
@@ -1112,7 +1116,6 @@ resetButton.onclick = function (_) {
   SHOULD_SHARE_NEOBUYER_MAILS: false,
 
   // The Void Within
-
   MIN_TVW_VISIT: 1800000,
 	MAX_TVW_VISIT: 3600000,
 
