@@ -32,16 +32,22 @@ async function TimeLeftUpdate(){
     
     setVARIABLE("VOLUNTEER_TIME", endTime);
 
-    // Listen for messages from the background script or popup
     chrome.runtime.sendMessage({ action: 'closeTab' });
 }
 
 async function StartVolunteerProcess(){
     var isRunningVolunteerProcess = await getVARIABLE("IS_RUNNING_TVW_PROCESS");
 
-    if(BrightvaleIButton.textContent == "Cancel"){
-        TimeLeftUpdate();
-        return;
+    switch(BrightvaleIButton.textContent){
+        case "Complete":
+            BrightvaleIButton.click();
+            window.location.reload();
+        break;
+
+        case "Cancel":
+            TimeLeftUpdate();
+            return;
+        break;
     }
 
     if(isRunningVolunteerProcess){
