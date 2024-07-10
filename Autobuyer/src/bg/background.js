@@ -358,8 +358,9 @@ async function CheckCurrentTime(){
 	var isRunningTVWProcess = await getVARIABLE("IS_RUNNING_TVW_PROCESS");
 
 	var currentTime = Date.now();
+	let tabId = await getVARIABLE("TAB_ID");
 
-	if(isRunningTVWProcess && currentTime >= volunteerTime && volunteerTime != null){
+	if(isRunningTVWProcess && tabId == null && currentTime >= volunteerTime && volunteerTime != null){
 		chrome.tabs.create({ url: 'https://www.neopets.com/hospital/volunteer.phtml' }, function(tab) {
 			setVARIABLE("TAB_ID", tab.id);
 		});

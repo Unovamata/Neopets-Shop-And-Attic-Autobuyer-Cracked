@@ -33,7 +33,8 @@ async function TimeLeftUpdate(){
     endTime = endTime.getTime() + waitTime;
     
     setVARIABLE("VOLUNTEER_TIME", endTime);
-
+    setVARIABLE("TAB_ID", null);
+    
     chrome.runtime.sendMessage({ action: 'closeTab' });
 }
 
