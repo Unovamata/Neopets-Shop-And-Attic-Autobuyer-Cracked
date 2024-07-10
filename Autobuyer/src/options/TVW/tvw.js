@@ -64,8 +64,29 @@ async function ProcessVolunteerData() {
     const ownedPets = await getVARIABLE("OWNED_PETS");
     const volunteerPets = await getVARIABLE("VOLUNTEER_PETS");
 
-    //LoadVolunteerPets(); Load the volunteer pets data to the initial load GUI;
-    function LoadVolunteerPets() {
+    // LoadOwnedPets(); Loading the information in the pet select fields;
+    function LoadOwnedPets() {
+        // Loading the pet names in the pet select fields;
+        ownedPets.forEach(petName => {
+            const optionElement = document.createElement("option");
+            optionElement.value = petName;
+            optionElement.textContent = petName;
+            volunteerSelector.appendChild(optionElement);
+        });
+
+        LoadVolunteerPetsInSelectFields();
+
+        // Remove the base elements to place the script generated ones;
+        volunteerPetContainer.remove();
+        volunteerPetContainer = document.querySelector('.volunteerPet');
+        timerContainer.remove();
+        timerContainer = document.querySelector('.timeContainer');
+
+        ElementEventHandler();
+    }
+
+    //LoadVolunteerPetsInSelectFields(); Load the volunteer pets data to the initial load GUI;
+    function LoadVolunteerPetsInSelectFields() {
         volunteerPets.forEach(function(petName, index) {
             // Create the timers and pet select fields;
             const clonedVolunteerPet = volunteerPetContainer.cloneNode(true);
@@ -78,85 +99,82 @@ async function ProcessVolunteerData() {
         });
     }
 
-    // 
-    function LoadOwnedPets() {
-        ownedPets.forEach(petName => {
-            const optionElement = document.createElement("option");
-            optionElement.value = petName;
-            optionElement.textContent = petName;
-            volunteerSelector.appendChild(optionElement);
-        });
-
-        LoadVolunteerPets(); // Create initial volunteerPet elements
-        volunteerPetContainer.remove();
-        volunteerPetContainer = document.querySelector('.volunteerPet');
-        timerContainer.remove();
-        timerContainer = document.querySelector('.timeContainer');
-        ManageVolunteerTabs(); // Initialize event listeners
-    }
-
-    // Function to manage volunteer tabs and event listeners
-    function ManageVolunteerTabs() {
+    // ElementEventHandler(); Manages selection box creation & events;
+    function ElementEventHandler() {
+        // Create new pet select boxes;
         insertVolunteerButton.addEventListener("click", function() {
-            if (volunteerPets.length >= ownedPets.length) return; // Prevent adding more than ownedPets
+            // Limit the amount of select boxes based on the number of owned pets;
+            if (volunteerPets.length >= ownedPets.length) return;
 
+            // Cloning select boxes;
             const clonedVolunteerPet = volunteerPetContainer.cloneNode(true);
             volunteerPetContainer.parentElement.appendChild(clonedVolunteerPet);
 
+            // Cloning timers;
             const clonedTimer = timerContainer.cloneNode(true);
             clonedTimer.querySelector(".tvwDatetime").value = "";
             timerContainer.parentElement.appendChild(clonedTimer);
             
-            updateEventListeners(); // Update event listeners
+            UpdateEventListeners();
         });
 
+        // Delete existing pet select boxes;
         removeVolunteerButton.addEventListener("click", function() {
+            // Selectors;
             const volunteerPets = document.querySelectorAll('.volunteerPet'),
                   timers = document.querySelectorAll('.timeContainer'),
+
+                  // Timer selection;
                   index = volunteerPets.length - 1;
                   input = timers[index].querySelector(".tvwDatetime");
 
+            // If the user will not delete an important row; delete it;
             if (volunteerPets.length > 1 && input.value == "") {
                 volunteerPets[volunteerPets.length - 1].remove();
                 timers[volunteerPets.length - 1].remove();
             }
 
-            updateEventListeners(); // Update event listeners
+            UpdateEventListeners();
         });
 
-        updateEventListeners(); // Add listener to initial selects
+         // Add listener to initial select elements;
+        UpdateEventListeners();
     }
 
-    // Function to update change event listeners
-    function updateEventListeners() {
+    // UpdateEventListeners(); Manages the behavior of all select boxes;
+    function UpdateEventListeners() {
         const volunteers = Array.from(document.querySelectorAll(".volunteerPet"));
         volunteers.forEach(function(volunteer){
             const select = volunteer.querySelector("select");
+
+            // If the data of a select box changes, save the pet volunteer data;
             select.addEventListener('change', function() {
                 ExtractPetVolunteerData();
             });
         });
     }
 
-    // Function to extract and process volunteer data
+    // ExtractPetVolunteerData(); Save the volunteer data;
     function ExtractPetVolunteerData() {
         const petVolunteers = Array.from(document.querySelectorAll(".volunteerPet"));
         const pets = petVolunteers.map(element => element.querySelector("select").value);
         setVARIABLE("VOLUNTEER_PETS", pets);
     }
 
+    // Save the pet volunteer data on window close;
     window.addEventListener('beforeunload', function (event) {
         ExtractPetVolunteerData();
     });
 
-    // Initial function call to load owned pets and set up listeners
+    
     LoadOwnedPets();
 }
 
 
 //////////////////////////////////////////////////////////////////////////////
 
-// Setting up the Volunteering Process;
+
+// Starting the volunteering process;
 const startProcessButton = document.getElementById("startVolunteerProcess");
 startProcessButton.addEventListener('click', StartVolunteerProcess);
 
@@ -170,6 +188,10 @@ async function StartVolunteerProcess(){
     if(selectedPet != undefined) chrome.tabs.create({ url: `https://www.neopets.com/hospital/volunteer.phtml`, active: true });
 }
 
+
+//////////////////////////////////////////////////////////////////////////////
+
+
 // Cancelling up the Volunteering Process;
 const cancelProcessButton = document.getElementById("cancelVolunteerProcess");
 cancelProcessButton.addEventListener('click', CancelVolunteerProcess);
@@ -178,6 +200,71 @@ cancelProcessButton.addEventListener('click', CancelVolunteerProcess);
 function CancelVolunteerProcess(){
     setVARIABLE("IS_RUNNING_TVW_PROCESS", false);
     setVARIABLE("TVW_STATUS", "Inactive");
+}
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+
+// Bot status messages;
+StatusManagement();
+
+var timerContainer = document.querySelector('.timeContainer');
+
+// StatusManagement(); Change the "Status" text in the GUI;
+async function StatusManagement(){
+    var tvwStatus = await getVARIABLE("TVW_STATUS");
+
+    // Setting a base status;
+    if(tvwStatus == undefined){
+        tvwStatus = "Inactive";
+        setVARIABLE("TVW_STATUS", "Inactive");
+    }
+
+    const statusTag = document.getElementById("status-tag");
+
+    ShowOrHideLoading(tvwStatus);
+    statusTag.textContent = tvwStatus;
+
+    // Updates constantly the GUI information;
+    async function UpdateGUIData() {
+        ShowOrHideLoading(tvwStatus);
+        statusTag.textContent = tvwStatus;
+        tvwStatus = await getVARIABLE("TVW_STATUS");
+
+        var completionTime = await getVARIABLE("VOLUNTEER_TIME"),
+            timerContainer = document.querySelectorAll('.tvwDatetime');
+
+        // Updating/Resetting the timers if necessary;
+        timerContainer.forEach(async function(timer, index){
+            try { 
+                var time = completionTime[index];
+
+                if(time == undefined) throw "Error";
+
+                timer.value = FormatTime(new Date(time)); 
+            } catch {
+                timer.value = ""; 
+            }
+        });
+    }
+
+    // FormatTime(); Formatting the time for the input fields;
+    function FormatTime(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    }
+
+    // Update page data;
+    setInterval(function() {
+        ManageProcessButtons();
+        UpdateGUIData();
+    }, 100);
 }
 
 // ManageProcessButtons(); Manage GUI Elements;
@@ -196,64 +283,4 @@ async function ManageProcessButtons(){
         startProcessButton.hidden = false;
         cancelProcessButton.hidden = true;
     }
-}
-
-// Bot status messages;
-
-StatusManagement();
-
-var timerContainer = document.querySelector('.timeContainer');
-
-// StatusManagement(); Change the "Status" text in the GUI;
-async function StatusManagement(){
-    var tvwStatus = await getVARIABLE("TVW_STATUS");
-
-    if(tvwStatus == undefined){
-        tvwStatus = "Inactive";
-        setVARIABLE("TVW_STATUS", "Inactive");
-    }
-
-    const statusTag = document.getElementById("status-tag");
-
-    ShowOrHideLoading(tvwStatus);
-    statusTag.textContent = tvwStatus;
-
-    // Checks constantly if the inventory page needs to update;
-    async function UpdateGUIData() {
-        ShowOrHideLoading(tvwStatus);
-        statusTag.textContent = tvwStatus;
-        tvwStatus = await getVARIABLE("TVW_STATUS");
-
-        var completionTime = await getVARIABLE("VOLUNTEER_TIME");
-        
-        var timerContainer = document.querySelectorAll('.tvwDatetime');
-
-        timerContainer.forEach(async function(timer, index){
-            try { 
-                var time = completionTime[index];
-
-                if(time == undefined) throw "Error";
-
-                timer.value = FormatTime(new Date(time)); 
-            } catch {
-                timer.value = ""; 
-            }
-        });
-    }
-
-    function FormatTime(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        const seconds = String(date.getSeconds()).padStart(2, '0');
-        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-    }
-
-    // Update page data;
-    setInterval(function() {
-        ManageProcessButtons();
-        UpdateGUIData();
-    }, 100);
 }
