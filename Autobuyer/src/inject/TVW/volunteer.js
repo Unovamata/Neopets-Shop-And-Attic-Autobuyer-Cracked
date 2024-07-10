@@ -26,7 +26,9 @@ async function TimeLeftUpdate(){
         setVARIABLE("MAX_TVW_VISIT", 3600000);
     }
 
-    const waitTime = GetRandomInt(minVolunteerWait, maxVolunteerWait);
+    console.log(minVolunteerWait, maxVolunteerWait);
+
+    const waitTime = GetRandomInt(Number(minVolunteerWait), Number(maxVolunteerWait));
 
     endTime = endTime.getTime() + waitTime;
     
@@ -37,7 +39,7 @@ async function TimeLeftUpdate(){
 
 async function StartVolunteerProcess(){
     var isRunningVolunteerProcess = await getVARIABLE("IS_RUNNING_TVW_PROCESS");
-
+    
     switch(BrightvaleIButton.textContent){
         case "Complete":
             BrightvaleIButton.click();
@@ -53,6 +55,8 @@ async function StartVolunteerProcess(){
 
     if(isRunningVolunteerProcess){
         BrightvaleIButton.click();
+    } else {
+        return;
     }
 
     const ImReadyButton = await WaitForElement('button.button-default__2020.button-yellow__2020[onclick="showPets()"]');
