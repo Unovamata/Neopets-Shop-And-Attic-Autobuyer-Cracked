@@ -239,7 +239,6 @@ function InjectToolbar() {
 
             <a href="${tvwUrl}" class = "toolbar-category">
                 <img class="toolbar-icon" src="${tvwIconUrl}">
-                <span class="notification-dot"></span>
             TVW </a>
 
             <a href="${mailUrl}" class = "toolbar-category">
