@@ -49,17 +49,27 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <input id="completionTime" class="tvwDatetime" disabled="true" type="datetime-local" name="datetime" step="1">
+                                    <div class="timeContainer">
+                                        <input id="completionTime" class="tvwDatetime" disabled="true" type="datetime-local" name="datetime" step="1">
+                                    </div>
+                                    
                                 </td>
                             </tr>
                             <tr>
-                                <td>Pet Selected to <b>Volunteer</b>:
+                                <td>Pets Selected to <b>Volunteer</b>:
                                     <span class="tooltiptext">
                                         Select a pet for volunteering in the event, as a pet cannot battle and volunteer simultaneously.
                                     </span>
                                 </td>
                                 <td>
-                                    <select id="OWNED_PETS"></select>                                        
+                                    <div>
+                                        <button class="volunteerButton removeVolunteer" style="width: 15%;">-</button>
+                                        <button class="volunteerButton insertVolunteer" style="width: 15%;">+</button>
+                                    </div>
+
+                                    <div class="volunteerPet">
+                                        <select id="OWNED_PETS"></select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>

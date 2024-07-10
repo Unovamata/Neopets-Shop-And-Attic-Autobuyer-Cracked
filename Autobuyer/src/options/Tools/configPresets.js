@@ -84,7 +84,7 @@ chrome.storage.local.get(null, function(items) {
 
         // TVW Data;
         itemsCopy.OWNED_PETS = [];
-        itemsCopy.VOLUNTEER_PET = "";
+        itemsCopy.VOLUNTEER_PET = [];
         itemsCopy.VOLUNTEER_TIME = null;
 
         const jsonString = JSON.stringify(itemsCopy);

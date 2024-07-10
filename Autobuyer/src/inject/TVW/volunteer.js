@@ -1,17 +1,36 @@
 const BrightvaleIButton = document.getElementById("VolunteerButton3");
+const BrightvaleIIButton = document.getElementById("VolunteerButton4");
+const allFights = document.getElementsByClassName("vc-fight-details");
 
-StartVolunteerProcess();
+const fights = Array.from(allFights).filter(element => {
+    return !element.classList.contains('locked') && !element.classList.contains('coming-soon');
+});
 
-async function TimeLeftUpdate(){
-    var timeLeft = document.querySelector(".vc-fight-time");
-    timeLeft.removeChild(timeLeft.lastElementChild);
-    timeLeft = timeLeft.textContent.trim().split(":");
+const shiftsAvailable = [BrightvaleIButton, BrightvaleIIButton];
+
+fights.forEach(function(fight){
+    console.log(fight);
+
+    StartVolunteerProcess(fight);
+});
+
+async function TimeLeftUpdate(shiftButton){
+    var endTimes = [];
+
+    var timeLeftElements = shiftButton.querySelector(".vc-fight-time");
+
+    console.log(shiftButton);
+
+
+    var time = timeLeftElements.textContent;
+
     
+
     var endTime = new Date();
 
-    endTime.setHours(endTime.getHours() + Number(timeLeft[0]));
-    endTime.setMinutes(endTime.getHours() + Number(timeLeft[1]));
-    endTime.setSeconds(endTime.getSeconds() + Number(timeLeft[2]));
+    endTime.setHours(endTime.getHours() + Number(time[0]));
+    endTime.setMinutes(endTime.getHours() + Number(time[1]));
+    endTime.setSeconds(endTime.getSeconds() + Number(time[2]));
 
     var minVolunteerWait = await getVARIABLE("MIN_TVW_VISIT"),
     maxVolunteerWait = await getVARIABLE("MAX_TVW_VISIT");
@@ -26,24 +45,27 @@ async function TimeLeftUpdate(){
         setVARIABLE("MAX_TVW_VISIT", 3600000);
     }
 
-    console.log(minVolunteerWait, maxVolunteerWait);
-
     const waitTime = GetRandomInt(Number(minVolunteerWait), Number(maxVolunteerWait));
 
     endTime = endTime.getTime() + waitTime;
-    
-    setVARIABLE("VOLUNTEER_TIME", endTime);
-    setVARIABLE("TAB_ID", null);
+
+    console.log(endTime);
+
+    endTimes.push(endTime);
+
+    setVARIABLE("VOLUNTEER_TIME", endTimes);
     
     chrome.runtime.sendMessage({ action: 'closeTab' });
 }
 
-async function StartVolunteerProcess(){
-    var isRunningVolunteerProcess = await getVARIABLE("IS_RUNNING_TVW_PROCESS");
+async function StartVolunteerProcess(shiftButton){
+    var isRunningVolunteerProcess = true; //await getVARIABLE("IS_RUNNING_TVW_PROCESS");
+
+    if(!isRunningVolunteerProcess || !shiftButton) return;
     
-    switch(BrightvaleIButton.textContent){
-        case "Complete":
-            BrightvaleIButton.click();
+    switch(shiftButton.textContent){
+        /*case "Complete":
+            shiftButton.click();
             window.location.reload();
             return;
         break;
@@ -51,14 +73,15 @@ async function StartVolunteerProcess(){
         case "Cancel":
             TimeLeftUpdate();
             return;
+        break;*/
+
+        default:
+            TimeLeftUpdate(shiftButton.parentElement);
+            return;
         break;
     }
 
-    if(isRunningVolunteerProcess){
-        BrightvaleIButton.click();
-    } else {
-        return;
-    }
+    shiftButton.click();
 
     const ImReadyButton = await WaitForElement('button.button-default__2020.button-yellow__2020[onclick="showPets()"]');
 
@@ -104,7 +127,7 @@ async function StartVolunteerProcess(){
         joinVolunteerButton.click();
 
         const volunteerJoinedPopup = await WaitForElement('VolunteerJoinedPopup', 1),
-              closeButton = volunteerJoinedPopup.querySelector(".popup-exit-icon");
+            closeButton = volunteerJoinedPopup.querySelector(".popup-exit-icon");
 
         closeButton.click();
 
@@ -115,4 +138,3 @@ async function StartVolunteerProcess(){
         setVARIABLE("TVW_STATUS", "Inactive");
     }
 }
-

@@ -140,6 +140,7 @@ table:not(.ignore-alternate-rows) tr.checked-row td {
 
 .tvwDatetime {
     width: 60%;
+    margin-bottom: 10px;
 }
 
 .autobuyerButton a {

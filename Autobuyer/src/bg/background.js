@@ -131,8 +131,8 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			// The Void Within;
 			TAB_ID: null,
 			OWNED_PETS: [],
-			VOLUNTEER_PET: "",
-			VOLUNTEER_TIME: null,
+			VOLUNTEER_PETS: [],
+			VOLUNTEER_TIME: [],
 			TVW_STATUS: "Inactive",
 			IS_LOADING_PETS: false,
 			IS_RUNNING_TVW_PROCESS: false,
@@ -360,12 +360,18 @@ async function CheckCurrentTime(){
 	var currentTime = Date.now();
 	let tabId = await getVARIABLE("TAB_ID");
 
-	if(isRunningTVWProcess && tabId == null && currentTime >= volunteerTime && volunteerTime != null){
+	var passedWindows = [];
+
+	volunteerTime.forEach(function(window){
+		if(currentTime >= window){
+			passedWindows.push(window);
+		}
+	});
+
+	if(isRunningTVWProcess && tabId == null && passedWindows.length > 0 && volunteerTime != []){
 		chrome.tabs.create({ url: 'https://www.neopets.com/hospital/volunteer.phtml' }, function(tab) {
 			setVARIABLE("TAB_ID", tab.id);
 		});
-
-		getVARIABLE("VOLUNTEER_TIME", null);
 	}
 }
 
@@ -378,6 +384,7 @@ chrome.runtime.onMessage.addListener(async function(message, sender, sendRespons
             
             chrome.tabs.remove(tabId, function() {
                 sendResponse({ result: 'success' });
+				setVARIABLE("TAB_ID", null);
             });
         } catch (error) {
             sendResponse({ result: 'error', message: error.message });

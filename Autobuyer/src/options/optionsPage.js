@@ -909,32 +909,6 @@ $("#SHOULD_SHARE_NEOBUYER_MAILS").bind("input propertychange", (function() {
 // The Void Within
 
 async function TheVoidWithinData(){
-  var ownedPets = await getVARIABLE("OWNED_PETS");
-
-  if(ownedPets == undefined){
-    setVARIABLE("OWNED_PETS", []);
-    ownedPets = [];
-  }
-
-  const ownedPetsSelector = $("#OWNED_PETS");
-
-  if(ownedPets.length == 0){
-    var loadPetDataButton = $("#loadPetData").clone();
-    loadPetDataButton.find(':first-child').removeClass("autobuyerButton").addClass("volunteerButton");
-    ownedPetsSelector.parent().append(loadPetDataButton);
-    ownedPetsSelector.remove();
-
-    setInterval(async function(){
-      ownedPets = await getVARIABLE("OWNED_PETS");
-
-      if(ownedPets.length > 0){
-        location.reload();
-      }
-    }, 1000);
-  }
-
-  var minWaitTime = await getVARIABLE("OWNED_PETS");
-
   $("#MIN_TVW_VISIT").bind("input propertychange", (function () {
     setVARIABLE("MIN_TVW_VISIT", $("#MIN_TVW_VISIT").val());
   }));
