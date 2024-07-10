@@ -61,8 +61,8 @@ async function ProcessVolunteerData() {
     const removeVolunteerButton = document.querySelector('.removeVolunteer');
     const insertVolunteerButton = document.querySelector('.insertVolunteer');
 
-    const ownedPets = await getVARIABLE("OWNED_PETS");
-    const volunteerPets = await getVARIABLE("VOLUNTEER_PETS");
+    var ownedPets = await getVARIABLE("OWNED_PETS");
+    var volunteerPets = await getVARIABLE("VOLUNTEER_PETS");
 
     // LoadOwnedPets(); Loading the information in the pet select fields;
     function LoadOwnedPets() {
@@ -77,9 +77,12 @@ async function ProcessVolunteerData() {
         LoadVolunteerPetsInSelectFields();
 
         // Remove the base elements to place the script generated ones;
-        volunteerPetContainer.remove();
+        if(ownedPets.length > 0){
+            volunteerPetContainer.remove();
+            timerContainer.remove();
+        } 
+
         volunteerPetContainer = document.querySelector('.volunteerPet');
-        timerContainer.remove();
         timerContainer = document.querySelector('.timeContainer');
 
         ElementEventHandler();
@@ -87,6 +90,11 @@ async function ProcessVolunteerData() {
 
     //LoadVolunteerPetsInSelectFields(); Load the volunteer pets data to the initial load GUI;
     function LoadVolunteerPetsInSelectFields() {
+        if(volunteerPets.length == 0 && ownedPets.length > 0){
+            setVARIABLE("VOLUNTEER_PETS", [ownedPets[0]]);
+            window.location.reload();
+        }
+
         volunteerPets.forEach(function(petName, index) {
             // Create the timers and pet select fields;
             const clonedVolunteerPet = volunteerPetContainer.cloneNode(true);
@@ -102,7 +110,10 @@ async function ProcessVolunteerData() {
     // ElementEventHandler(); Manages selection box creation & events;
     function ElementEventHandler() {
         // Create new pet select boxes;
-        insertVolunteerButton.addEventListener("click", function() {
+        insertVolunteerButton.addEventListener("click", async function() {
+            volunteerPets = await getVARIABLE("VOLUNTEER_PETS");
+            ownedPets = await getVARIABLE("OWNED_PETS");
+
             // Limit the amount of select boxes based on the number of owned pets;
             if (volunteerPets.length >= ownedPets.length) return;
 
@@ -114,6 +125,10 @@ async function ProcessVolunteerData() {
             const clonedTimer = timerContainer.cloneNode(true);
             clonedTimer.querySelector(".tvwDatetime").value = "";
             timerContainer.parentElement.appendChild(clonedTimer);
+            
+            ExtractPetVolunteerData();
+
+            console.log(volunteerPets.length, ownedPets.length);
             
             UpdateEventListeners();
         });
@@ -134,6 +149,8 @@ async function ProcessVolunteerData() {
                 timers[volunteerPets.length - 1].remove();
             }
 
+            ExtractPetVolunteerData();
+
             UpdateEventListeners();
         });
 
@@ -144,14 +161,17 @@ async function ProcessVolunteerData() {
     // UpdateEventListeners(); Manages the behavior of all select boxes;
     function UpdateEventListeners() {
         const volunteers = Array.from(document.querySelectorAll(".volunteerPet"));
-        volunteers.forEach(function(volunteer){
-            const select = volunteer.querySelector("select");
 
-            // If the data of a select box changes, save the pet volunteer data;
-            select.addEventListener('change', function() {
-                ExtractPetVolunteerData();
+        try{
+            volunteers.forEach(function(volunteer){
+                const select = volunteer.querySelector("select");
+    
+                // If the data of a select box changes, save the pet volunteer data;
+                select.addEventListener('change', function() {
+                    ExtractPetVolunteerData();
+                });
             });
-        });
+        } catch {}
     }
 
     // ExtractPetVolunteerData(); Save the volunteer data;

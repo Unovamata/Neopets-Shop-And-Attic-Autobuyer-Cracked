@@ -358,6 +358,11 @@ async function CheckCurrentVolunteerTime(){
 		currentTime = Date.now(),
 		passedWindows = [];
 
+	if(volunteerTime == undefined){
+		await setVARIABLE("VOLUNTEER_TIME", []),
+		volunteerTime = [];	
+	} 
+
 	// Checks the volunteer times and adds them for confirmation;
 	volunteerTime.forEach(function(window){
 		if(currentTime >= window){
