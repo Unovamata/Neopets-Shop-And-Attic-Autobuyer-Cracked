@@ -1,5 +1,6 @@
 CheckIfUserLoadedPets();
 
+// CheckIfUserLoadedPets(); Loading pets & GUI Load Pets Button;
 async function CheckIfUserLoadedPets(){
     var ownedPets = await getVARIABLE("OWNED_PETS");
 
@@ -18,15 +19,19 @@ async function CheckIfUserLoadedPets(){
         loadPetDataButton.on('click', StartLoadOwnedPetsProcess);
 
         setInterval(async function(){
-        ownedPets = await getVARIABLE("OWNED_PETS");
+            ownedPets = await getVARIABLE("OWNED_PETS");
 
-        if(ownedPets.length > 0){
-            location.reload();
-        }
+            if(ownedPets.length > 0){
+                location.reload();
+            }
         }, 1000);
     }
 }
 
+//////////////////////////////////////////////////////////////////////////////
+
+
+// Navigating to Quickref Page for Pet Loading;
 const loadPetsButton = document.getElementById("loadPetData"),
       volunteerSelector = $("#OWNED_PETS");
 
@@ -40,8 +45,13 @@ async function StartLoadOwnedPetsProcess(){
     chrome.tabs.create({ url: `https://www.neopets.com/quickref.phtml`, active: true });
 }
 
+
+//////////////////////////////////////////////////////////////////////////////
+
+
 ProcessVolunteerData();
 
+// Handle the Volunteer information in the GUI to translate it to the Volunteer Centre page.
 async function ProcessVolunteerData() {
     // Selectors
     var timerContainer = document.querySelector('.timeContainer');
@@ -51,13 +61,13 @@ async function ProcessVolunteerData() {
     const removeVolunteerButton = document.querySelector('.removeVolunteer');
     const insertVolunteerButton = document.querySelector('.insertVolunteer');
 
-    // Load OWNED_PETS and VOLUNTEER_PETS from storage
     const ownedPets = await getVARIABLE("OWNED_PETS");
     const volunteerPets = await getVARIABLE("VOLUNTEER_PETS");
 
-    // Function to create initial volunteerPet elements based on VOLUNTEER_PETS
-    function createInitialVolunteerPets() {
+    //LoadVolunteerPets(); Load the volunteer pets data to the initial load GUI;
+    function LoadVolunteerPets() {
         volunteerPets.forEach(function(petName, index) {
+            // Create the timers and pet select fields;
             const clonedVolunteerPet = volunteerPetContainer.cloneNode(true);
             const select = clonedVolunteerPet.querySelector('select');
             select.value = petName;
@@ -68,8 +78,8 @@ async function ProcessVolunteerData() {
         });
     }
 
-    // Load owned pets and populate select options
-    function loadOwnedPets() {
+    // 
+    function LoadOwnedPets() {
         ownedPets.forEach(petName => {
             const optionElement = document.createElement("option");
             optionElement.value = petName;
@@ -77,9 +87,11 @@ async function ProcessVolunteerData() {
             volunteerSelector.appendChild(optionElement);
         });
 
-        createInitialVolunteerPets(); // Create initial volunteerPet elements
+        LoadVolunteerPets(); // Create initial volunteerPet elements
         volunteerPetContainer.remove();
         volunteerPetContainer = document.querySelector('.volunteerPet');
+        timerContainer.remove();
+        timerContainer = document.querySelector('.timeContainer');
         ManageVolunteerTabs(); // Initialize event listeners
     }
 
@@ -92,20 +104,21 @@ async function ProcessVolunteerData() {
             volunteerPetContainer.parentElement.appendChild(clonedVolunteerPet);
 
             const clonedTimer = timerContainer.cloneNode(true);
+            clonedTimer.querySelector(".tvwDatetime").value = "";
             timerContainer.parentElement.appendChild(clonedTimer);
-
+            
             updateEventListeners(); // Update event listeners
         });
 
         removeVolunteerButton.addEventListener("click", function() {
-            const volunteerPets = document.querySelectorAll('.volunteerPet');
-            const timers = document.querySelectorAll('.timeContainer');
+            const volunteerPets = document.querySelectorAll('.volunteerPet'),
+                  timers = document.querySelectorAll('.timeContainer'),
+                  index = volunteerPets.length - 1;
+                  input = timers[index].querySelector(".tvwDatetime");
 
-            console.log(timers);
-
-            if (volunteerPets.length > 1) {
+            if (volunteerPets.length > 1 && input.value == "") {
                 volunteerPets[volunteerPets.length - 1].remove();
-                timers[volunteerPets.length].remove();
+                timers[volunteerPets.length - 1].remove();
             }
 
             updateEventListeners(); // Update event listeners
@@ -129,11 +142,15 @@ async function ProcessVolunteerData() {
     function ExtractPetVolunteerData() {
         const petVolunteers = Array.from(document.querySelectorAll(".volunteerPet"));
         const pets = petVolunteers.map(element => element.querySelector("select").value);
-        console.log(pets);
+        setVARIABLE("VOLUNTEER_PETS", pets);
     }
 
+    window.addEventListener('beforeunload', function (event) {
+        ExtractPetVolunteerData();
+    });
+
     // Initial function call to load owned pets and set up listeners
-    loadOwnedPets();
+    LoadOwnedPets();
 }
 
 
@@ -211,7 +228,7 @@ async function StatusManagement(){
         
         var timerContainer = document.querySelectorAll('.tvwDatetime');
 
-        timerContainer.forEach(function(timer, index){
+        timerContainer.forEach(async function(timer, index){
             try { 
                 var time = completionTime[index];
 

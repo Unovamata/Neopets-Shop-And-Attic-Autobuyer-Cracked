@@ -350,37 +350,42 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 // The Void Within
+CheckCurrentVolunteerTime();
 
-CheckCurrentTime();
+// CheckCurrentVolunteerTime(); Checks if the Volunteer Shift windows have passed;
+async function CheckCurrentVolunteerTime(){
+	var volunteerTime = await getVARIABLE("VOLUNTEER_TIME"),
+		currentTime = Date.now(),
+		passedWindows = [];
 
-async function CheckCurrentTime(){
-	var volunteerTime = await getVARIABLE("VOLUNTEER_TIME");
-	var isRunningTVWProcess = await getVARIABLE("IS_RUNNING_TVW_PROCESS");
-
-	var currentTime = Date.now();
-	let tabId = await getVARIABLE("TAB_ID");
-
-	var passedWindows = [];
-
+	// Checks the volunteer times and adds them for confirmation;
 	volunteerTime.forEach(function(window){
 		if(currentTime >= window){
 			passedWindows.push(window);
 		}
 	});
 
-	if(isRunningTVWProcess && tabId == null && passedWindows.length > 0 && volunteerTime != []){
+	var tabId = await getVARIABLE("TAB_ID"),
+		isRunningTVWProcess = await getVARIABLE("IS_RUNNING_TVW_PROCESS"),
+		isShiftComplete = isRunningTVWProcess && tabId == null && passedWindows.length > 0 && volunteerTime != [];
+
+	// Creates a tab, saves its data, and removes the old shift data;
+	if(isShiftComplete){
 		chrome.tabs.create({ url: 'https://www.neopets.com/hospital/volunteer.phtml' }, function(tab) {
 			setVARIABLE("TAB_ID", tab.id);
+			setVARIABLE("VOLUNTEER_TIME", volunteerTime.filter(time => !passedWindows.includes(time)));
 		});
 	}
 }
 
-setInterval(CheckCurrentTime, 10000);
+// Check the shift times every 10 seconds;
+setInterval(CheckCurrentVolunteerTime, 10000);
 
+// Close the tab once the process has finished its duties;
 chrome.runtime.onMessage.addListener(async function(message, sender, sendResponse) {
     if (message.action === 'closeTab') {
         try {
-            let tabId = await getVARIABLE("TAB_ID");
+            var tabId = await getVARIABLE("TAB_ID");
             
             chrome.tabs.remove(tabId, function() {
                 sendResponse({ result: 'success' });
