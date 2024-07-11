@@ -5,6 +5,11 @@ async function AutoKitchenQuest(){
 
     const statusTag = document.getElementById("status-tag");
 
+    if(autoKQStatus == undefined){
+        autoKQStatus = "Inactive";
+        await setVARIABLE("AUTOKQ_STATUS", autoKQStatus);
+    }
+
     ShowOrHideLoading(autoKQStatus);
     statusTag.textContent = autoKQStatus;
 

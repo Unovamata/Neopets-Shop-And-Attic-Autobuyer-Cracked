@@ -30,41 +30,49 @@ function HandleVolunteerEvents(){
     });
 
     // TimeLeftUpdate(); Updates the schedules at which the extension should exit volunteering shifts;
-    async function TimeLeftUpdate(fightTime, index){
-        // Parsing the ending time;
-        var time = fightTime.textContent.split(":"),
-            endTime = new Date();
-
-        endTime.setHours(endTime.getHours() + Number(time[0]));
-        endTime.setMinutes(endTime.getHours() + Number(time[1]));
-        endTime.setSeconds(endTime.getSeconds() + Number(time[2]));
-
-        // Generating a random time to exit the shift to make it look more human;
-        var minVolunteerWait = await getVARIABLE("MIN_TVW_VISIT"),
-            maxVolunteerWait = await getVARIABLE("MAX_TVW_VISIT");
-
-        if(minVolunteerWait == undefined){
-            minVolunteerWait = 1800000;
-            setVARIABLE("MIN_TVW_VISIT", 1800000);
-        }
-
-        if(maxVolunteerWait == undefined){
-            maxVolunteerWait = 3600000;
-            setVARIABLE("MAX_TVW_VISIT", 3600000);
-        }
-
-        // Creating the final shift exit time;
-        const waitTime = GetRandomInt(Number(minVolunteerWait), Number(maxVolunteerWait));
-        endTime = endTime.getTime() + waitTime;
-        endTimes.push(endTime);
-
-        // If the bot has checked all the possible shifts, then update the exit shift times;
-        if(index == fights.length - 1){
-            setVARIABLE("VOLUNTEER_TIME", endTimes);
-
-            chrome.runtime.sendMessage({ action: 'closeTab' });
-        } 
-    }
+    async function TimeLeftUpdate(fightTime, index) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                // Parsing the ending time;
+                var time = fightTime.textContent.split(":"),
+                    endTime = new Date();
+    
+                endTime.setHours(endTime.getHours() + Number(time[0]));
+                endTime.setMinutes(endTime.getMinutes() + Number(time[1]));
+                endTime.setSeconds(endTime.getSeconds() + Number(time[2]));
+    
+                // Generating a random time to exit the shift to make it look more human;
+                var minVolunteerWait = await getVARIABLE("MIN_TVW_VISIT"),
+                    maxVolunteerWait = await getVARIABLE("MAX_TVW_VISIT");
+    
+                if (minVolunteerWait == undefined) {
+                    minVolunteerWait = 1800000;
+                    setVARIABLE("MIN_TVW_VISIT", 1800000);
+                }
+    
+                if (maxVolunteerWait == undefined) {
+                    maxVolunteerWait = 3600000;
+                    setVARIABLE("MAX_TVW_VISIT", 3600000);
+                }
+    
+                // Creating the final shift exit time;
+                const waitTime = GetRandomInt(Number(minVolunteerWait), Number(maxVolunteerWait));
+                endTime = endTime.getTime() + waitTime;
+                endTimes.push(endTime);
+    
+                // If the bot has checked all the possible shifts, then update the exit shift times;
+                if (index == fights.length - 1) {
+                    await setVARIABLE("VOLUNTEER_TIME", endTimes);
+                    chrome.runtime.sendMessage({ action: 'closeTab' });
+                }
+    
+                resolve();
+            } catch (error) {
+                window.location.reload();
+                reject(error)
+            }
+        });
+    }    
 
     // StartVolunteerProcess(); Read the data in the GUI and act accordingly;
     async function StartVolunteerProcess(fight, index){
@@ -78,14 +86,14 @@ function HandleVolunteerEvents(){
         // Shift status actions;
         switch(volunteerButton.textContent){
             case "Complete":
-                shiftButton.click();
+                volunteerButton.click();
                 window.location.reload();
                 return;
             break;
 
             case "Cancel":
                 fightTime.removeChild(fightTime.lastElementChild);
-                TimeLeftUpdate(fightTime, index);
+                await TimeLeftUpdate(fightTime, index);
                 return;
             break;
         }
