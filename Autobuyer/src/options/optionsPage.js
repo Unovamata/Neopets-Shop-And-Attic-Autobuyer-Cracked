@@ -1090,8 +1090,8 @@ resetButton.onclick = function (_) {
   SHOULD_SHARE_NEOBUYER_MAILS: false,
 
   // The Void Within
-  MIN_TVW_VISIT: 1800000,
-	MAX_TVW_VISIT: 3600000,
+  MIN_TVW_VISIT: 120000,
+	MAX_TVW_VISIT: 300000,
 
 }, (function (_) {
 

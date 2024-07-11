@@ -200,7 +200,7 @@ startProcessButton.addEventListener('click', StartVolunteerProcess);
 
 // StartVolunteerProcess(); Open the volunteering tab and start the bot;
 async function StartVolunteerProcess(){
-    setVARIABLE("TVW_STATUS", "Navigating to Quickref Page...");
+    setVARIABLE("TVW_STATUS", "Navigating to the Volunteer Centre Page...");
     setVARIABLE("IS_RUNNING_TVW_PROCESS", true);
 
     var selectedPet = await getVARIABLE("VOLUNTEER_PETS");

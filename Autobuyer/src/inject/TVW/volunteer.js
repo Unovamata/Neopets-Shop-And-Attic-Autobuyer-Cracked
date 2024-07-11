@@ -44,23 +44,24 @@ function HandleVolunteerEvents(){
                     maxVolunteerWait = await getVARIABLE("MAX_TVW_VISIT");
     
                 if (minVolunteerWait == undefined) {
-                    minVolunteerWait = 1800000;
-                    setVARIABLE("MIN_TVW_VISIT", 1800000);
+                    minVolunteerWait = 120000;
+                    setVARIABLE("MIN_TVW_VISIT", 120000);
                 }
     
                 if (maxVolunteerWait == undefined) {
-                    maxVolunteerWait = 3600000;
-                    setVARIABLE("MAX_TVW_VISIT", 3600000);
+                    maxVolunteerWait = 300000;
+                    setVARIABLE("MAX_TVW_VISIT", 300000);
                 }
     
                 // Creating the final shift exit time;
                 const waitTime = GetRandomInt(Number(minVolunteerWait), Number(maxVolunteerWait));
-                endTime = endTime.getTime() + waitTime;
+                endTime = endTime.getTime() + waitTime + (maxVolunteerWait * index);
                 endTimes.push(endTime);
     
                 // If the bot has checked all the possible shifts, then update the exit shift times;
                 if (index == fights.length - 1) {
                     await setVARIABLE("VOLUNTEER_TIME", endTimes);
+                    setVARIABLE("TVW_STATUS", "Waiting for Scheduled Times...");
                     chrome.runtime.sendMessage({ action: 'closeTab' });
                 }
     
@@ -80,17 +81,23 @@ function HandleVolunteerEvents(){
 
         const volunteerButton = fight.querySelector('[id*="VolunteerButton"]'),
             fightTime = fight.querySelector('.vc-fight-time');
+            setVARIABLE("TVW_STATUS", "Parsing TVW Data...");
 
         // Shift status actions;
         switch(volunteerButton.textContent){
             case "Complete":
                 volunteerButton.click();
+                setVARIABLE("TVW_STATUS", "Completing a Volunteer Shift...");
+
+                await Sleep(5000, 10000);
+
                 window.location.reload();
                 return;
             break;
 
             case "Cancel":
                 fightTime.removeChild(fightTime.lastElementChild);
+                setVARIABLE("TVW_STATUS", "Updating the Volunteer Shift Completion Times...");
                 await TimeLeftUpdate(fightTime, index);
                 return;
             break;
@@ -120,7 +127,7 @@ function HandleVolunteerEvents(){
         while(petTabs.length < 2) {
             petTabs = await WaitForElement('.vc-pet', 3);
 
-            await Sleep(100);
+            await Sleep(1000, 3000);
         }
 
         // Converting the pet tabs to an array and removing the first empty cell;
@@ -130,6 +137,7 @@ function HandleVolunteerEvents(){
         // Selecting a volunteer pet in the GUI;
         const volunteerPetList = await getVARIABLE("VOLUNTEER_PETS");
         const selectedPet = volunteerPetList[index];
+        setVARIABLE("TVW_STATUS", `Signing up ${selectedPet} for a Volunteer Shift...`);
 
         if(selectedPet != undefined){
             petTabs.forEach(tab => {
@@ -142,7 +150,7 @@ function HandleVolunteerEvents(){
 
             const joinVolunteerButton = document.getElementById("VolunteerJoinButton");
 
-            await Sleep(500, 5000);
+            await Sleep(5000, 10000);
 
             joinVolunteerButton.click();
 

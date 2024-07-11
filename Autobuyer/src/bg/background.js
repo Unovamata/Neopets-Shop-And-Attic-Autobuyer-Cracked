@@ -136,8 +136,8 @@ chrome.runtime.onInstalled.addListener(function(e) {
 			TVW_STATUS: "Inactive",
 			IS_LOADING_PETS: false,
 			IS_RUNNING_TVW_PROCESS: false,
-			MIN_TVW_VISIT: 1800000,
-			MAX_TVW_VISIT: 3600000,
+			MIN_TVW_VISIT: 120000,
+			MAX_TVW_VISIT: 300000,
 		};
 
 		chrome.storage.local.set(autoPricerDefaultSettings, function (){});
