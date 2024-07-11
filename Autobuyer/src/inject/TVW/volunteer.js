@@ -16,8 +16,6 @@ async function StartTVWBot(){
 
 // HandleVolunteerEvents(); TVW Volunteer Bot;
 function HandleVolunteerEvents(){
-    console.log("Volunteering!")
-
     // Reading all the available volunteer shifts;
     var availableFights = Array.from(document.querySelectorAll('[id*="VolunteerFight"]')),
     fights = availableFights.slice(2);
