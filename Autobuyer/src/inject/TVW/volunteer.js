@@ -18,6 +18,7 @@ async function StartTVWBot() {
     setInterval(function() {
         if (canCloseWindow) {
             chrome.runtime.sendMessage({ action: 'closeTab' });
+            canCloseWindow = false;
         }
     }, 5000);
 }
