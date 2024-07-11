@@ -60,6 +60,7 @@ a free project, with the mission of making restocking accessible to all Neopets 
 - Bypass "Confirm" pop-up when buying items from main shops.
 - Informative analytics about your AutoBuying and selling activities.
 - Human-like AutoAttic refresher.
+- The Void Within Neopets Volunteer Event Bot.
 
 ## Included Features
 
