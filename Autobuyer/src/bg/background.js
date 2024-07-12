@@ -359,7 +359,7 @@ async function CheckCurrentVolunteerTime(){
 		passedWindows = [];
 
 	if(volunteerTime == undefined){
-		await setVARIABLE("VOLUNTEER_TIME", []),
+		setVARIABLE("VOLUNTEER_TIME", []),
 		volunteerTime = [];	
 	} 
 

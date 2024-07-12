@@ -303,7 +303,14 @@ async function RunAutoPricer(){
             } 
         }
 
-        
+        var usernameElement, username;
+
+        function LoadUsernameData(){
+            try {
+                usernameElement = document.querySelector('a.text-muted');
+                username = usernameElement.textContent;
+            } catch {}
+        }
 
         if(isActive){
             /* If the user is inside the SW and the AutoPricing process is active, the extension will begin
@@ -342,8 +349,6 @@ async function RunAutoPricer(){
 
             setVARIABLE("AUTOPRICER_STATUS", "Navigating to SW...");
 
-            const usernameElement = document.querySelector('a.text-muted');
-            const username = usernameElement.textContent;
             var list = await getVARIABLE("AUTOPRICER_INVENTORY");
             var currentPricingIndex = await getVARIABLE("CURRENT_PRICING_INDEX");
 
@@ -460,7 +465,8 @@ async function RunAutoPricer(){
                 
                     throw new Error(`Failed to fetch data from ${ownerLink} after ${maxRetries} retries.`);
                 }
-                                        
+                
+                LoadUsernameData();
 
                 //Don't change the price if it's already the cheapest item in the list;
                 if(username == ownerName){
@@ -672,7 +678,7 @@ async function RunAutoPricer(){
 
                 await Sleep(sleepThroughSearchesMin, sleepThroughSearchesMax);
 
-                WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
+                await WaitForElement("#resubmitWizard", 0).then((resubmitButton) => {
                     resubmitButton.click();
                 });
             }
@@ -931,28 +937,44 @@ async function RunAutoPricer(){
 
             // Automatically buys an item if its below a certain price threshold;
             if(isKQRunning){
-                // Getting the lowest price;
-                await WaitForElement(".wizard-results-price", 0).then(async (searchResults) => {
-                    // Parsing the string to a number;
-                    var lowestPrice = ParseNPNumber(searchResults.textContent);
+                await WaitForElement('.wizard-results-grid li', 3).then(async (searchResults) => {
+                    // Removing the table head;
+                    searchResults = Array.from(searchResults);
+                    searchResults.shift();
+                    LoadUsernameData();
 
-                    // If the lowest price is greater than the amount the user wants to spend on kitchen quests, search again;
-                    if(lowestPrice >= maxSpendablePrice && isLastSearch){
-                        window.location.reload();
-                        return;
-                    }
-
-                    // If the price is lower than the insta buy threshold or ultimately the script has to choose a shop, go to the lowest priced shop;
-                    if(lowestPrice <= maxInstaBuyPrice || mustTriggerNavigation){
-                        GoToLowestPricedShop();
-                    }
-
-                    // Choose the 'a' tag to navigate to the shop;
-                    async function GoToLowestPricedShop(){
-                        setVARIABLE("AUTOKQ_STATUS", "Search Successful! Choosing Lowest Price...");
-                        var aElement = searchResults.parentElement.querySelector('a');
-
-                        aElement.click();
+                    RecursivelyProcessSearchResults(0);
+                    
+                    function RecursivelyProcessSearchResults(index) {
+                        // Exit the recursion in case no price is good;
+                        if (index >= searchResults.length) {
+                            if(isLastSearch) window.location.reload();
+                            return;
+                        }
+                    
+                        const result = searchResults[index];
+                        const ownerElement = result.querySelector("a");
+                        const priceElement = result.querySelector("div");
+                    
+                        const lowestPrice = ParseNPNumber(priceElement.textContent);
+                        const ownerName = ownerElement.textContent;
+                    
+                        // If the lowest price is greater than the price the user is willing to pay, search again;
+                        if (lowestPrice >= maxSpendablePrice && isLastSearch) {
+                            window.location.reload();
+                            setVARIABLE("AUTOKQ_STATUS", `Retrying Search as the Price ${lowestPrice} Goes Above the NP Limit...`);
+                            return;
+                        }
+                    
+                        // Buy an item if it's not from the user and is within the payable price;
+                        if ((lowestPrice <= maxInstaBuyPrice || mustTriggerNavigation) && (username != ownerName)) {
+                            ownerElement.click();
+                            setVARIABLE("AUTOKQ_STATUS", `Navigating to a Shop Owned by ${ownerName}...`);
+                            return;
+                        }
+                    
+                        // Check for the next item if necessary;
+                        RecursivelyProcessSearchResults(index + 1);
                     }
                 });
             }

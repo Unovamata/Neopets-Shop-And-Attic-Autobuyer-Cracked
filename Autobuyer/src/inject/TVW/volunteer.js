@@ -1,7 +1,5 @@
 StartTVWBot();
 
-var canCloseWindow = false;
-
 async function StartTVWBot() {
     var status = await getVARIABLE("UPDATE_STATUS_A");
 
@@ -14,13 +12,6 @@ async function StartTVWBot() {
     await HandleServerErrors();
 
     await HandleVolunteerEvents();
-
-    setInterval(function() {
-        if (canCloseWindow) {
-            chrome.runtime.sendMessage({ action: 'closeTab' });
-            canCloseWindow = false;
-        }
-    }, 5000);
 }
 
 // HandleVolunteerEvents(); TVW Volunteer Bot;
@@ -71,7 +62,7 @@ async function HandleVolunteerEvents() {
                 if (index == fights.length - 1) {
                     await setVARIABLE("VOLUNTEER_TIME", endTimes);
                     setVARIABLE("TVW_STATUS", "Waiting for Scheduled Times...");
-                    canCloseWindow = true;
+                    chrome.runtime.sendMessage({ action: 'closeTab' });
                 }
 
                 resolve();
