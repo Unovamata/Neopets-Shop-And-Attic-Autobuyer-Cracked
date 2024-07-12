@@ -577,8 +577,16 @@ async function RunAutoPricer(){
 
                 function RoundToNearestUnit(number, hasNines = false){
                     var zeroesToAdd = number.toString().length - 2;
-                    var unitString = "1" + "0".repeat(zeroesToAdd);
-                    var unit = Number(unitString);
+                    var unitString, unit;
+
+                    try {
+                        unitString = "1" + "0".repeat(zeroesToAdd);
+                        unit = Number(unitString);
+                    } catch {
+                        UpdateShopInventoryWithValue(itemToSearch, 0);
+
+                        return;
+                    }
 
                     if(hasNines) return CalculateThousand(number, unit, 1);
                     return CalculateThousand(number, unit);
