@@ -215,7 +215,7 @@ async function RunAutoPricer(){
             todayYear = now.getFullYear();
 
             // Processing all the history data into an array;
-            trElements.forEach(function(tr, index){
+            trElements.forEach(function(tr){
                 const tdElements = tr.querySelectorAll("td");
                 
                 // Parsing the data;
@@ -396,10 +396,21 @@ async function RunAutoPricer(){
             await PressResubmit();
 
             // Getting the lowest price;
-            WaitForElement(".wizard-results-grid-header", 0).then(async (searchResults) => {
+            await WaitForElement(".wizard-results-grid-header", 0).then(async (searchResults) => {
                 var ownerElements = searchResults.parentNode.querySelectorAll("li");
                 
                 var ownerName = '', bestPrice = 0;
+
+                LoadUsernameData();
+
+                //Don't change the price if it's already the cheapest item in the list;
+                function CheckIfUserIsLowestPrice(){
+                    if(username == ownerName){
+                        setVARIABLE("AUTOPRICER_STATUS", `${username} Already has the Lowest Price Available! Skipping...`);
+                        UpdateShopInventoryWithValue(itemToSearch, itemToSearch.Price);
+                        return true;
+                    }
+                }
 
                 // Checking if an owner is frozen;
                 for(var i = 1; i < ownerElements.length; i++){
@@ -419,19 +430,34 @@ async function RunAutoPricer(){
                         percentageDifference = CalculatePercentageDifference(currentOwnerPrice, nextOwnerPrice);
                     } catch { }
 
+                    ownerName = ownerElement.textContent;
+                    bestPrice = currentOwnerPrice;
+
+                    CheckIfUserIsLowestPrice();
+
                     // Sending and reading a request to know if the shop user is frozen;
-                    if(shouldCheckIfFrozenShop && percentageDifference > 20){
+                    if(shouldCheckIfFrozenShop && percentageDifference > 50){
                         var isFrozen = await CheckShopFrozenStatus(ownerLink);
 
                         if(!isFrozen){
-                            ownerName = ownerElement.textContent;
-                            bestPrice = currentOwnerPrice;
-                            break;
+                            UpdateBannerAndDocument(`Abnormally low priced ${nameToSearch} detected. NeoBuyer+ will not price this item.`, 
+                                                    "Abnormally priced item");
+    
+                            UpdateShopInventoryWithValue(itemToSearch, 0);
+
+                            return;
                         }
                     // If the user decided to not check if the user's shop is frozen, then return the first value;
                     } else {
-                        ownerName = ownerElement.textContent;
-                        bestPrice = currentOwnerPrice;
+                        if(percentageDifference > 50){
+                            UpdateBannerAndDocument(`Abnormally low priced ${nameToSearch} detected. NeoBuyer+ will not price this item.`, 
+                                                    "Abnormally priced item");
+
+                            UpdateShopInventoryWithValue(itemToSearch, 0);
+
+                            return;
+                        }
+
                         break;
                     }
                 }
@@ -464,15 +490,6 @@ async function RunAutoPricer(){
                     }
                 
                     throw new Error(`Failed to fetch data from ${ownerLink} after ${maxRetries} retries.`);
-                }
-                
-                LoadUsernameData();
-
-                //Don't change the price if it's already the cheapest item in the list;
-                if(username == ownerName){
-                    setVARIABLE("AUTOPRICER_STATUS", `${username} Already has the Lowest Price Available! Skipping...`);
-                    UpdateShopInventoryWithValue(itemToSearch, itemToSearch.Price);
-                    return;
                 }
 
                 var deductedPrice = 0;
@@ -580,7 +597,7 @@ async function RunAutoPricer(){
                 }
 
                 deductedPrice = Math.floor(deductedPrice);
-                autoPricingList[currentPricingIndex - 1].Price = deductedPrice;
+                autoPricingList[currentPricingIndex].Price = deductedPrice;
 
                 setVARIABLE("AUTOPRICER_INVENTORY", autoPricingList);
 
@@ -589,6 +606,10 @@ async function RunAutoPricer(){
                 setVARIABLE("AUTOPRICER_STATUS", `${nameToSearch} Best Price Found! Priced at ${bestPrice}...`);
             });
 
+            ContinueAutoPricing(currentPricingIndex);
+        }
+
+        async function ContinueAutoPricing(currentPricingIndex){
             // Increment currentIndex
             setVARIABLE("CURRENT_PRICING_INDEX", ++currentPricingIndex);
             await Sleep(sleepNewSearchMin, sleepNewSearchMax);
@@ -604,7 +625,6 @@ async function RunAutoPricer(){
                 } catch {
                     window.location.reload();
                 }
-                
             }
         }
 
@@ -633,7 +653,7 @@ async function RunAutoPricer(){
                     setVARIABLE("SHOP_INVENTORY", entireShopStock);
                     window.open('https://www.neopets.com/market.phtml?type=your', '_blank');
                 } else {
-                    UpdateBannerAndDocument("AutoPricing done! Return to NeoBuyer+ and press the 'Submit Prices' button.");
+                    UpdateBannerAndDocument("AutoPricing done! Return to NeoBuyer+ and press the 'Submit Prices' button.", "Process Complete!");
                 }
             }
         }
@@ -719,11 +739,9 @@ async function RunAutoPricer(){
         async function UpdateShopInventoryWithValue(itemToSearch, price){
             var shopList = await getVARIABLE("SHOP_INVENTORY");
 
-            var updatedShopList = shopList;
-
-            updatedShopList[itemToSearch.Index - 1].Price = price;
-            updatedShopList[itemToSearch.Index - 1].IsPricing = false;
-            setVARIABLE("SHOP_INVENTORY", updatedShopList);
+            shopList[itemToSearch.Index - 1].Price = price;
+            shopList[itemToSearch.Index - 1].IsPricing = false;
+            setVARIABLE("SHOP_INVENTORY", shopList);
             setVARIABLE("INVENTORY_UPDATED", true);
         }
 
