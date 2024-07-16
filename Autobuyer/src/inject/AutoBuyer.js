@@ -114,18 +114,23 @@ function InjectAutoPricer() {
             );
         }
 
-        var itemElements = Array.from(document.querySelectorAll(".item-img"));
+        var stockElements = Array.from(document.querySelectorAll(".item-img")),
+            blackMarketElements = Array.from(document.querySelectorAll(".item-obelisk")),
+            itemElements = [...blackMarketElements, ...stockElements];
 
         var items = itemElements.map(element => {
             var itemName = element.getAttribute("data-name");
             var itemPrice = parseInt(element.getAttribute("data-price").replaceAll(",", ""));
+
             return {
                 name: itemName,
                 price: itemPrice,
+                element: element,
             };
         });
-
+        
         var itemProfits = CalculateItemProfits(items.map((item) => item.name), items.map((item) => item.price), buyUnknownItemsIfProfitMargin, minDBRarityToBuy, isBlacklistActive, blacklistToNeverBuy);
+        var itemNames = new Set(items.map(item => item.name));
 
         if (isHighlightingItemsInShops) {
             if (buyWithItemDB) {
@@ -135,19 +140,24 @@ function InjectAutoPricer() {
                 if (bestItemName) {
                     for (var itemName of filteredItems) {
                         document.querySelector(`.item-img[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
+                        document.querySelector(`.item-obelisk[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
                     }
+
                     document.querySelector(`.item-img[data-name="${bestItemName}"]`).parentElement.style.backgroundColor = "orangered";
+                    document.querySelector(`.item-obelisk[data-name="${bestItemName}"]`).parentElement.style.backgroundColor = "orangered";
                 }
             } else {
-                var itemNames = new Set(Array.from(document.querySelectorAll(".item-img")).map((item) => item.getAttribute("data-name")));
                 var selectedName = restockList.find((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy));
                 var filteredNames = restockList.filter((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy));
         
                 if (selectedName) {
                     for (var itemName of filteredNames) {
                         document.querySelector(`.item-img[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
+                        document.querySelector(`.item-obelisk[data-name="${itemName}"]`).parentElement.style.backgroundColor = "lightgreen";
                     }
+
                     document.querySelector(`.item-img[data-name="${selectedName}"]`).parentElement.style.backgroundColor = "orangered";
+                    document.querySelector(`.item-obelisk[data-name="${itemName}"]`).parentElement.style.backgroundColor = "orangered";
                 }
             }
         }
@@ -189,12 +199,10 @@ function InjectAutoPricer() {
                 }
             } 
             
-            //If the user is not using the 
+            //If the user is not using the ItemDB
             else {
-                var itemElements = Array.from(document.querySelectorAll(".item-img")).map((element) => element.getAttribute("data-name"));
-
                 // Assuming restockList is an array with the desired order
-                filteredNames = restockList.filter((itemName) => itemElements.includes(itemName) && !IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy));
+                var filteredNames = restockList.filter((itemName) => itemNames.has(itemName) && !IsItemInBlacklist(itemName, isBlacklistActive, blacklistToNeverBuy));
 
                 // If there are items to buy, pick the first one
                 selectedName = PickSecondBestItem(filteredNames, isBuyingSecondMostProfitable);
@@ -211,7 +219,7 @@ function InjectAutoPricer() {
         if (itemToBuyExtracted) {
             // Clicking the selected item;
             if (isClickingItems) {
-                var itemToBuyElement = document.querySelector(`.item-img[data-name="${itemToBuyExtracted}"]`);
+                var itemToBuyElement = itemElements.find(element => element.getAttribute("data-name") === itemToBuyExtracted);
                 await Sleep(minClickImageInterval, maxClickImageInterval);
                 itemToBuyElement.click();
             }
