@@ -1,0 +1,178 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+    "name": "NeoBuyer+",
+    "version": "0.7.29.62",
+    "manifest_version": 3,
+    "description": "NeoBuyer+ Main Shop & Almost Abandoned Attic Autobuyer for Neopets.com",
+    "icons":
+    {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "action":
+    {
+        "default_title": "NeoBuyer+ Settings"
+    },
+    "default_locale": "en",
+    "background":{
+        "service_worker": "src/bg/background.js"
+    },
+    "options_page": "src/options/Autobuyer/autobuyer.html",
+    "permissions": [
+        "storage",
+        "webNavigation",
+        "notifications",
+        "tts",
+		"downloads",
+		"management",
+		"tabs",
+        "activeTab"
+    ],
+	"host_permissions": [
+		"https://github.com/Unovamata/AutoBuyerPlus/tags"],
+	"web_accessible_resources": [
+		{
+		  "resources": ["icons/circle.svg"],
+		  "matches": ["<all_urls>"]
+		}
+	  ],
+    "content_scripts": [
+	{
+        "matches": [
+            "*://www.neopets.com/quickstock.phtml*"
+        ],
+        "js": [
+			"js/jquery.js"
+        ]
+    },
+    {
+        "matches": [
+            "*://www.neopets.com/objects.phtml?*"
+        ],
+        "js": [
+			"js/moment.js",
+			"js/moment-timezone-with-data.js",
+            "src/common/default_items.js",
+            "src/common/item_db.js",
+			"src/common/utils.js",
+			"src/inject/AutoBuyer.js",
+			"src/inject/neopets-restock-timer.user.js"
+        ]
+    },
+	{
+        "matches": [
+            "*://www.neopets.com/haggle.phtml*"
+        ],
+        "js": [
+			"src/common/utils.js",
+			"src/inject/neopets-restock-timer.user.js",
+            "src/inject/AutoHaggler.js"
+        ]
+    },
+	{
+        "matches": [
+            "*://www.neopets.com/safetydeposit*"
+        ],
+        "js": [
+			"js/jquery.js"
+			//"sdbduper.js",
+			//"SDBExtractPrices.js"
+			//"databaseDirty.js",
+			//"databaseCleaner.js"
+        ]
+    },
+	//{
+        //"matches": [
+        //    "https://items.jellyneo.net/tools/sdb-price-checker/"
+        //],
+        //"js": [
+		//	"sdbpricer.js"
+        //]
+    //},
+	{
+        "matches": [
+            "*://www.neopets.com/halloween/garage.phtml*"
+        ],
+        "js": [
+			"js/moment.js",
+			"js/moment-timezone-with-data.js",
+            "src/common/default_items.js",
+            "src/common/item_db.js",
+			"src/common/utils.js",
+            "src/inject/AutoAttic.js"
+        ]
+    },
+    {
+        "matches": [
+            "*://www.neopets.com/shops/wizard.phtml*",
+            "*://www.neopets.com/shops/wizard.phtml*"
+        ],
+        "all_frames": true,
+        "js": [
+            "src/inject/neon.js",
+			"src/common/utils.js",
+            "src/inject/autopricer.js"
+        ],
+        "run_at": "document_end"
+    },
+	{
+        "matches": [
+            "*://www.neopets.com/market.phtml?type=your",
+			"*://www.neopets.com/market.phtml?*"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+            "src/inject/autopricer.js"
+        ],
+        "run_at": "document_end"
+    },
+	{
+        "matches": [
+            "*://www.neopets.com/island/kitchen.phtml*"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+            "src/inject/kq.js"
+        ],
+        "run_at": "document_end"
+    },
+	{
+        "matches": [
+            "*://www.neopets.com/browseshop.phtml?owner=*",
+			"*://www.neopets.com/buy_item.phtml*"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+			"src/inject/userbuyer.js"
+        ],
+        "run_at": "document_end"
+    },
+	{
+        "matches": [
+            "https://www.neopets.com/quickref.phtml"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+			"src/inject/TVW/quickref.js"
+        ],
+        "run_at": "document_end"
+    },
+    {
+        "matches": [
+            "https://www.neopets.com/hospital/volunteer.phtml"
+        ],
+        "all_frames": true,
+        "js": [
+			"src/common/utils.js",
+			"src/inject/TVW/volunteer.js"
+        ],
+        "run_at": "document_end"
+    }
+	]
+}
