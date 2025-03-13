@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Unovamata/Neopets-Shop-And-Attic-Autobuyer-Cracked/main/Autobuyer/icons/logo.png" />
+  <img src="Autobuyer/Logos/logo.png" />
 </p>
 
 # [NeoBuyer+ / Neopets Shop & Attic Highlighter & Autobuyer Crack](https://chrome.google.com/webstore/detail/neopets-shop-attic-highli/gcoedojijoejlngkneocccmnjkbbbfmd "Neopets Shop & Attic Highlighter & Autobuyer")
